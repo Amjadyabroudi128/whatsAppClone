@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/ColorHelper.dart';
 
 import '../../TextStyles.dart';
+import 'Widgets/welcome text.dart';
 import 'Widgets/whatsappImage.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -28,11 +29,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
           ),
           SizedBox(height: 50,),
-          Text("Welcome to WhatsApp", style: Textstyles.welcome,),
-
+          welcomeText(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+          )
         ],
       ),
     );
   }
 }
+
 
