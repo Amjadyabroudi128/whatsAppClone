@@ -20,7 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Center(
             child: CircleAvatar(
               radius: 90,
-              child: ,
+              backgroundImage: AssetImage("images/circular_crop.png"),
             ),
           )
         ],
