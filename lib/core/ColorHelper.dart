@@ -2,5 +2,5 @@
  import 'package:flutter/material.dart';
 
 class ColorHelper {
-  static Color BG = Colors.black54;
+  static Color BG = Colors.grey.shade300;
  }
