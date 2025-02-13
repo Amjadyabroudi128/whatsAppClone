@@ -8,7 +8,7 @@ class image extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: MediaQuery.of(context).size.height * 0.169,
+      radius: MediaQuery.of(context).size.width * 0.31,
       backgroundImage: AssetImage("images/circular_crop.png"),
     );
   }

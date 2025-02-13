@@ -26,8 +26,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: image(),
             ),
           ),
-          SizedBox(height: 14,),
-          Text("Welcome to WhatsApp")
+          SizedBox(height: 50,),
+          Text("Welcome to WhatsApp", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),)
         ],
       ),
     );
