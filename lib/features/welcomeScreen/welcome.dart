@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/ColorHelper.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key, required this.title});
@@ -13,9 +14,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.black54,
-      body: Column(
+    return  Scaffold(
+      backgroundColor: ColorHelper.BG,
+      body: const Column(
         children: [
           Padding(
             padding: EdgeInsets.only(top: 90),
