@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/ColorHelper.dart';
 
+import 'Widgets/whatsappImage.dart';
+
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key, required this.title});
 
@@ -21,10 +23,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Padding(
             padding: EdgeInsets.only(top: 90),
             child: Center(
-              child: CircleAvatar(
-                radius: 90,
-                backgroundImage: AssetImage("images/circular_crop.png"),
-              ),
+              child: image(),
             ),
           )
         ],
@@ -32,3 +31,4 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 }
+
