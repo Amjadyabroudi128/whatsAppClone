@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/ColorHelper.dart';
 
+import '../../TextStyles.dart';
 import 'Widgets/whatsappImage.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -18,16 +19,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: ColorHelper.BG,
-      body: const Column(
+      body:  Column(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 90),
             child: Center(
               child: image(),
             ),
           ),
           SizedBox(height: 50,),
-          Text("Welcome to WhatsApp", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),)
+          Text("Welcome to WhatsApp", style: Textstyles.welcome,),
+
         ],
       ),
     );
