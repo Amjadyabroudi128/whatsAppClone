@@ -13,14 +13,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
+      backgroundColor: Colors.black54,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: CircleAvatar(
-              radius: 90,
-              backgroundImage: AssetImage("images/circular_crop.png"),
+          Padding(
+            padding: EdgeInsets.only(top: 90),
+            child: Center(
+              child: CircleAvatar(
+                radius: 90,
+                backgroundImage: AssetImage("images/circular_crop.png"),
+              ),
             ),
           )
         ],
