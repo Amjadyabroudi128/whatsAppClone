@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/ColorHelper.dart';
 
-import '../../TextStyles.dart';
+import '../../components/TextStyles.dart';
 import 'Widgets/welcome text.dart';
 import 'Widgets/whatsappImage.dart';
 
