@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/ColorHelper.dart';
 
 import '../../components/TextStyles.dart';
+import 'Widgets/richText.dart';
 import 'Widgets/welcome text.dart';
 import 'Widgets/whatsappImage.dart';
 
@@ -33,18 +34,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           SizedBox(height: 19,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: 'Read our ',
-                style: TextStyle(fontSize: 20, color: Colors.grey),
-                children: <TextSpan>[
-                  TextSpan(text: 'Privacy Policy.', style: TextStyle(color: Colors.green)),
-                  TextSpan(text: 'Tap "Agree & continue to accept tge'),
-                  TextSpan(text: "Terms of Services", style: TextStyle(color: Colors.green))
-                ],
-              ),
-            )
+            child: richText(),
+
 
           )
         ],
@@ -52,5 +43,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 }
+
 
 
