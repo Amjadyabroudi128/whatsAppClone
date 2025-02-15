@@ -29,7 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           SizedBox(height: 50,),
           welcomeText(),
           SizedBox(height: 18,),
-          Text("Hey"),
+          Text("Hello"),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
             child: richText(),
