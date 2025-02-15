@@ -7,10 +7,7 @@ import 'Widgets/welcome text.dart';
 import 'Widgets/whatsappImage.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key, required this.title});
-
-  final String title;
-
+  const WelcomeScreen({super.key,});
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
