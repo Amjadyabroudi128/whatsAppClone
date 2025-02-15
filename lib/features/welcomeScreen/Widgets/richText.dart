@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/Strings.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 
 class richText extends StatelessWidget {
@@ -11,7 +12,7 @@ class richText extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'Read our ',
+        text: Strings.read,
         style: TextStyle(fontSize: 20, color: Colors.grey),
         children: <TextSpan>[
           TextSpan(text: 'Privacy Policy.', style: Textstyles.privacy),
