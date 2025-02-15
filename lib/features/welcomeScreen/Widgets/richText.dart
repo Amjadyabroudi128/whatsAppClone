@@ -13,7 +13,7 @@ class richText extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(
         text: Strings.read,
-        style: TextStyle(fontSize: 20, color: Colors.grey),
+        style: Textstyles.read,
         children: <TextSpan>[
           TextSpan(text: 'Privacy Policy.', style: Textstyles.privacy),
           TextSpan(text: 'Tap "Agree & continue to accept the'),
