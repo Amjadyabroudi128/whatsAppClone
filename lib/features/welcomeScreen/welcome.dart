@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/core/ColorHelper.dart';
 
 import '../../components/TextStyles.dart';
@@ -26,9 +27,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: image(),
             ),
           ),
-          SizedBox(height: 50,),
+          BoxSpacing(myHeight: 50,),
           welcomeText(),
-          SizedBox(height: 18,),
+          BoxSpacing(myHeight: 18,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
             child: richText(),
