@@ -15,7 +15,7 @@ class richText extends StatelessWidget {
         text: Strings.read,
         style: Textstyles.read,
         children: <TextSpan>[
-          TextSpan(text: 'Privacy Policy.', style: Textstyles.privacy),
+          TextSpan(text: Strings.privacy, style: Textstyles.privacy),
           TextSpan(text: 'Tap "Agree & continue to accept the'),
           TextSpan(text: "Terms of Services", style: Textstyles.privacy)
         ],
