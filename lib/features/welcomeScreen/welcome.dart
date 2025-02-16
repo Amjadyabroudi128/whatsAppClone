@@ -5,6 +5,7 @@ import 'package:whatsappclone/core/ColorHelper.dart';
 import '../../components/TextStyles.dart';
 import 'Widgets/ElevatedButton.dart';
 import 'Widgets/richText.dart';
+import 'Widgets/textFamily.dart';
 import 'Widgets/welcome text.dart';
 import 'Widgets/whatsappImage.dart';
 
@@ -31,7 +32,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           BoxSpacing(myHeight: 50,),
           welcomeText(),
           BoxSpacing(myHeight: 13,),
-          Text("You can Text, Family and friends", style: Textstyles.read,),
+          textFamily(),
           BoxSpacing(myHeight: 18,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
@@ -44,6 +45,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 }
+
 
 
 
