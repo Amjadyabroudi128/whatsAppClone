@@ -1,7 +1,6 @@
 
 
  import 'package:flutter/material.dart';
-import 'package:whatsappclone/core/ColorHelper.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
  class myTheme {
