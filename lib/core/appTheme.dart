@@ -1,6 +1,7 @@
 
 
  import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/ColorHelper.dart';
 
  class myTheme {
    static OutlinedBorder circular = RoundedRectangleBorder(
@@ -9,7 +10,7 @@
   static final ThemeData appTheme = ThemeData().copyWith(
        elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
-             backgroundColor: Colors.green,
+             backgroundColor: ColorHelper.TC,
              foregroundColor: Colors.white,
              textStyle: TextStyle(fontSize: 18),
            shape: circular
