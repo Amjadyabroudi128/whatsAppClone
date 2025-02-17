@@ -4,6 +4,7 @@
 import 'package:whatsappclone/core/ColorHelper.dart';
 
  class myTheme {
+   static Color fg = Colors.white;
    static OutlinedBorder circular = RoundedRectangleBorder(
      borderRadius: BorderRadius.circular(10)
    );
@@ -11,7 +12,7 @@ import 'package:whatsappclone/core/ColorHelper.dart';
        elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
              backgroundColor: ColorHelper.TC,
-             foregroundColor: Colors.white,
+             foregroundColor: fg,
              textStyle: TextStyle(fontSize: 18),
            shape: circular
          ),
