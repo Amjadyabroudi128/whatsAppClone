@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 
 class Signupscreen extends StatefulWidget {
   const Signupscreen({super.key});
@@ -13,8 +14,37 @@ class _SignupscreenState extends State<Signupscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("Welcome"),
+      appBar: AppBar(
+        title: Text("Sign up"),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: myEmail,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: "Email",
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.email),
+              ),
+            ),
+            SizedBox(height: 10,),
+            TextField(
+              controller: pass,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: "Password",
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.password),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
