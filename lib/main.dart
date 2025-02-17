@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/appTheme.dart';
 
 import 'features/welcomeScreen/welcome.dart';
 
@@ -15,8 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-      ),
+      theme: myTheme.appTheme,
       home: const WelcomeScreen(),
     );
   }
