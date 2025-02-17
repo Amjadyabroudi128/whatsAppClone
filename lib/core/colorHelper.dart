@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+
+ import 'package:flutter/material.dart';
 
 class ColorHelper {
   static Color BG = Colors.grey.shade300;
   static Color TC = Colors.green;
-  static Color GG = Colors.red;
-}
+  static Color GG = Colors.white;
+ }
