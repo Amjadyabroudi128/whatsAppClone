@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../components/icons.dart';
+
 class passField extends StatelessWidget {
   const passField({
     super.key,
@@ -16,7 +18,7 @@ class passField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: "Password",
         border: OutlineInputBorder(),
-        prefixIcon: Icon(Icons.password),
+        prefixIcon: icons.passIcon
       ),
     );
   }
