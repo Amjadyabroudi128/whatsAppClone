@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/SignUp/passField.dart';
 
@@ -28,7 +29,7 @@ class _SignupscreenState extends State<Signupscreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             emailField(myEmail: myEmail),
-            SizedBox(height: 10,),
+            BoxSpacing(myHeight: 20,),
             passField(pass: pass),
           ],
         ),
