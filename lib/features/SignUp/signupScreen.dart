@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
+import 'emailTextField.dart';
+
 class Signupscreen extends StatefulWidget {
   const Signupscreen({super.key});
 
@@ -24,15 +26,7 @@ class _SignupscreenState extends State<Signupscreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: myEmail,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: "Email",
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email),
-              ),
-            ),
+            emailField(myEmail: myEmail),
             SizedBox(height: 10,),
             TextField(
               controller: pass,
@@ -49,3 +43,4 @@ class _SignupscreenState extends State<Signupscreen> {
     );
   }
 }
+
