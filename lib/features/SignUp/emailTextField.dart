@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../components/icons.dart';
+
 class emailField extends StatelessWidget {
   const emailField({
     super.key,
@@ -16,7 +18,7 @@ class emailField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: "Email",
         border: OutlineInputBorder(),
-        prefixIcon: Icon(Icons.email),
+        prefixIcon: icons.emailIcon,
       ),
     );
   }
