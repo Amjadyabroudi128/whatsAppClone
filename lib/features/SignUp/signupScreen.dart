@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/features/SignUp/passField.dart';
 
 import 'emailTextField.dart';
 
@@ -28,19 +29,12 @@ class _SignupscreenState extends State<Signupscreen> {
           children: [
             emailField(myEmail: myEmail),
             SizedBox(height: 10,),
-            TextField(
-              controller: pass,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: "Password",
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.password),
-              ),
-            ),
+            passField(pass: pass),
           ],
         ),
       ),
     );
   }
 }
+
 
