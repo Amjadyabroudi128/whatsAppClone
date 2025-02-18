@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextField.dart';
 
 import '../../components/icons.dart';
 
@@ -12,14 +13,12 @@ class emailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: myEmail,
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        labelText: "Email",
-        border: OutlineInputBorder(),
-        prefixIcon: icons.emailIcon,
-      ),
+    return kTextField(
+      keyBoard: TextInputType.emailAddress,
+      myController: myEmail,
+      border: OutlineInputBorder(),
+      myIcon: icons.emailIcon,
+      label: Text("Email"),
     );
   }
 }
