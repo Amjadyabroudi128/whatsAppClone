@@ -17,21 +17,26 @@ class _SignupscreenState extends State<Signupscreen> {
   final TextEditingController pass = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign up"),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            emailField(myEmail: myEmail),
-            BoxSpacing(myHeight: 20,),
-            passField(pass: pass),
-          ],
+    return GestureDetector(
+      onTap: (){
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Sign up"),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              emailField(myEmail: myEmail),
+              BoxSpacing(myHeight: 20,),
+              passField(pass: pass),
+            ],
+          ),
         ),
       ),
     );
