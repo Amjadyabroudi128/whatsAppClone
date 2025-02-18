@@ -5,7 +5,8 @@ class kTextField extends StatelessWidget {
   final TextEditingController? myController;
   final Widget? myIcon;
   final bool obsecureText;
-  const kTextField({super.key, this.label, this.myController, this.myIcon, this.obsecureText = false});
+  final InputBorder? border;
+  const kTextField({super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class kTextField extends StatelessWidget {
       decoration: InputDecoration(
         label: label,
         prefixIcon: myIcon,
-
+        border: border,
       ),
     );
   }
