@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/TextField.dart';
 import '../../components/icons.dart';
 
 class passField extends StatelessWidget {
@@ -12,14 +13,11 @@ class passField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: pass,
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        labelText: "Password",
-        border: OutlineInputBorder(),
-        prefixIcon: icons.passIcon
-      ),
+    return kTextField(
+      myController: pass,
+      label: Text("Password"),
+      myIcon: icons.passIcon,
+      border: OutlineInputBorder(),
     );
   }
 }
