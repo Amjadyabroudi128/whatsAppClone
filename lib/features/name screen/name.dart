@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextField.dart';
+import 'package:whatsappclone/components/icons.dart';
 
 import '../SignUp/Widgets/signupBtn.dart';
 import '../testingScreen/Widgets/continueBtn.dart';
@@ -33,7 +34,7 @@ class _NameScreenState extends State<NameScreen> {
                 keyBoard: TextInputType.emailAddress,
                 myController: name,
                 border: OutlineInputBorder(),
-                myIcon: Icon(Icons.person),
+                myIcon: icons.name,
                 label: Text("Name"),
               ),
               continueBtn(name: name)
