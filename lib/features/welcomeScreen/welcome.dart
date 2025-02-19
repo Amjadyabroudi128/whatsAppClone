@@ -19,9 +19,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: myColors.BG,
-      body:  Column(
+      body:  const Column(
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(top: 99),
             child: Center(
               child: image(),
