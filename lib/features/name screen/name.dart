@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextField.dart';
 
+import '../SignUp/Widgets/signupBtn.dart';
+
 class NameScreen extends StatefulWidget {
   const NameScreen({super.key});
 
@@ -31,6 +33,12 @@ class _NameScreenState extends State<NameScreen> {
                 border: OutlineInputBorder(),
                 myIcon: Icon(Icons.person),
                 label: Text("Name"),
+              ),
+              ElevatedButton(
+                child: Text("Continue"),
+                onPressed: (){
+
+                },
               )
             ],
           ),
