@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/passField.dart';
+import 'Widgets/signupBtn.dart';
 
 class Signupscreen extends StatefulWidget {
   const Signupscreen({super.key});
@@ -50,20 +51,5 @@ class _SignupscreenState extends State<Signupscreen> {
   }
 }
 
-class signupBtn extends StatelessWidget {
-  const signupBtn({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: (){
-
-      },
-      child: Text("Sign Up"),
-    );
-  }
-}
 
 
