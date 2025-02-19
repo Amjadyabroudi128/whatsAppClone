@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
+import 'package:whatsappclone/features/name%20screen/name.dart';
 
 import 'features/welcomeScreen/welcome.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       theme: myTheme.appTheme,
       routes: {
         "sign up": (context) => const Signupscreen(),
+        "nameScreen": (context) => NameScreen(),
       },
       home: const WelcomeScreen(),
     );

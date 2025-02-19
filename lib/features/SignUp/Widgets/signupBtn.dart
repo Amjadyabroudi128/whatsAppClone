@@ -9,7 +9,7 @@ class signupBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: (){
-
+        Navigator.of(context).pushNamed("nameScreen");
       },
       child: Text("Sign Up"),
     );
