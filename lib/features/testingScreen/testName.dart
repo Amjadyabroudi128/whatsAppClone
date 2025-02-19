@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/icons.dart';
 import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 
 class Testname extends StatefulWidget {
@@ -25,7 +26,7 @@ class _TestnameState extends State<Testname> {
                 ),
               );
             },
-            icon: Icon(Icons.logout),
+            icon: icons.logout,
           )
         ],
       ),
