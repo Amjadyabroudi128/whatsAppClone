@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../components/TextField.dart';
-import '../../components/icons.dart';
+import '../../../components/TextField.dart';
+import '../../../components/icons.dart';
 
 class passField extends StatelessWidget {
   const passField({

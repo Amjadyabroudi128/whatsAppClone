@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextField.dart';
 
-import '../../components/icons.dart';
+import '../../../components/icons.dart';
+
 
 class emailField extends StatelessWidget {
   const emailField({
