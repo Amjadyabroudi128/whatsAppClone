@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/core/MyColors.dart';
-import 'package:whatsappclone/features/SignUp/passField.dart';
-
-import 'emailTextField.dart';
+import 'Widgets/emailTextField.dart';
+import 'Widgets/passField.dart';
 
 class Signupscreen extends StatefulWidget {
   const Signupscreen({super.key});
@@ -31,14 +29,39 @@ class _SignupscreenState extends State<Signupscreen> {
           padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
+              Padding(
+                padding: EdgeInsets.only(left: 25, ),
+                child: TextButton(onPressed: (){}, child: Text("Forgot Password ?", style: TextStyle(color: Colors.blueGrey),)),
+              ),
+              BoxSpacing(myHeight: 19,),
+              Center(
+                child: signupBtn(),
+              )
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class signupBtn extends StatelessWidget {
+  const signupBtn({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: (){
+
+      },
+      child: Text("Sign Up"),
     );
   }
 }
