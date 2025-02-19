@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/core/ColorHelper.dart';
-
-import '../../components/TextStyles.dart';
+import '../../core/MyColors.dart';
 import 'Widgets/ElevatedButton.dart';
 import 'Widgets/richText.dart';
 import 'Widgets/textFamily.dart';
@@ -20,7 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: ColorHelper.BG,
+      backgroundColor: myColors.BG,
       body:  Column(
         children: [
           const Padding(
