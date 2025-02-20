@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
 import '../testName.dart';
 
@@ -23,9 +24,7 @@ class continueBtn extends StatelessWidget {
             ),
           );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Please enter your name")),
-          );
+          showSnackbar(context, Text("Please Enter your name"));
         }
       },
 
