@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/scaffoldMessanger.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/passField.dart';
@@ -38,7 +39,9 @@ class _SignupscreenState extends State<Signupscreen> {
               passField(pass: pass),
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
-                child: TextButton(onPressed: (){}, child: Text("Forgot Password ?", style: TextStyle(color: Colors.blueGrey),)),
+                child: TextButton(onPressed: (){}, child:
+                Text("Forgot Password ?", style: Textstyles.forgotPass,)
+                ),
               ),
               BoxSpacing(myHeight: 19,),
               Center(
