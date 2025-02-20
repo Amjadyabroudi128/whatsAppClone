@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/icons.dart';
 import '../SignUp/Widgets/signupBtn.dart';
 import '../testingScreen/Widgets/continueBtn.dart';
 import '../testingScreen/testName.dart';
+import 'Widgets/nameTField.dart';
 
 class NameScreen extends StatefulWidget {
   const NameScreen({super.key});
@@ -30,13 +31,7 @@ class _NameScreenState extends State<NameScreen> {
             children: [
               Text("PLEASE PROVIDE YOUR NAME"),
               SizedBox(height: 20,),
-              kTextField(
-                keyBoard: TextInputType.emailAddress,
-                myController: name,
-                border: OutlineInputBorder(),
-                myIcon: icons.name,
-                label: Text("Name"),
-              ),
+              nameTextField(name: name),
               continueBtn(name: name)
             ],
           ),
@@ -45,4 +40,5 @@ class _NameScreenState extends State<NameScreen> {
     );
   }
 }
+
 
