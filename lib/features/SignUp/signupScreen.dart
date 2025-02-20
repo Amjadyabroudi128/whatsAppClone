@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/scaffoldMessanger.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/passField.dart';
 import 'Widgets/signupBtn.dart';
@@ -41,7 +42,7 @@ class _SignupscreenState extends State<Signupscreen> {
               ),
               BoxSpacing(myHeight: 19,),
               Center(
-                child: signupBtn(),
+                child: signUpBtn(myEmail: myEmail, pass: pass),
               )
             ],
           ),
@@ -50,6 +51,7 @@ class _SignupscreenState extends State<Signupscreen> {
     );
   }
 }
+
 
 
 

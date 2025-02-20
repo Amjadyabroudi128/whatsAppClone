@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 
-class signupBtn extends StatelessWidget {
-  const signupBtn({
+import '../../../components/scaffoldMessanger.dart';
+
+class signUpBtn extends StatelessWidget {
+  const signUpBtn({
     super.key,
+    required this.myEmail,
+    required this.pass,
   });
+
+  final TextEditingController myEmail;
+  final TextEditingController pass;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: (){
-        Navigator.of(context).pushNamed("nameScreen");
+        myEmail.text.isEmpty ? showSnackbar(context, Text("please provide email")) :
+        pass.text.isEmpty ? showSnackbar(context, Text("enter password"))
+            : Navigator.of(context).pushNamed("nameScreen");
       },
       child: Text("Sign Up"),
     );
   }
 }
+
