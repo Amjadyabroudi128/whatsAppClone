@@ -6,4 +6,5 @@ class Textstyles {
   static TextStyle privacy = TextStyle(color: Colors.green);
   static TextStyle read = TextStyle(fontSize: 20, color: myColors.familyText);
   static TextStyle forgotPass = TextStyle(color: myColors.forgotPass);
+  static TextStyle hintStyle = TextStyle(color: Colors.grey, fontSize: 16);
  }

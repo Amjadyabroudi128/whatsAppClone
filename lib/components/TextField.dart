@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 
 class kTextField extends StatelessWidget {
   final Widget? label;
@@ -18,7 +19,7 @@ class kTextField extends StatelessWidget {
       keyboardType: keyBoard,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
+        hintStyle: Textstyles.hintStyle,
         label: label,
         prefixIcon: myIcon,
         border: border,
