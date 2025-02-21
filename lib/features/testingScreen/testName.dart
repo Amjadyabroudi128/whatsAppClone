@@ -86,7 +86,7 @@ class _TestnameState extends State<Testname> {
                   onPressed: sendMessage,
                   icon: Icon(Icons.send),
                 ),
-                IconButton(onPressed: (){}, icon: Icon(Icons.image))
+                IconButton(onPressed: (){}, icon: icons.image)
               ],
             ),
           ),
