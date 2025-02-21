@@ -78,8 +78,6 @@ class _TestnameState extends State<Testname> {
                 Expanded(
                   child: kTextField(
                     myController: messageController,
-                    border: OutlineInputBorder(),
-
                   ),
                 ),
                 IconButton(
