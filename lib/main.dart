@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: myTheme.appTheme,
+      initialRoute: "nameScreen",
       routes: {
         "sign up": (context) => const Signupscreen(),
         "nameScreen": (context) => NameScreen(),
