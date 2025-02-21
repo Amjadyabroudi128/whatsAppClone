@@ -16,7 +16,6 @@ class nameTextField extends StatelessWidget {
     return kTextField(
       keyBoard: TextInputType.name,
       myController: name,
-      border: OutlineInputBorder(),
       myIcon: icons.name,
       label: Text("Name"),
     );
