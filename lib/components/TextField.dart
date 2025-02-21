@@ -18,6 +18,7 @@ class kTextField extends StatelessWidget {
       keyboardType: keyBoard,
       decoration: InputDecoration(
         hintText: hint,
+        hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
         label: label,
         prefixIcon: myIcon,
         border: border,
