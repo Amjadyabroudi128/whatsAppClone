@@ -61,7 +61,7 @@ class _TestnameState extends State<Testname> {
                         child: Container(
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            color: messages[index].isme ? myColors.myMessage : Colors.grey[300],
+                            color: messages[index].isme ? myColors.myMessage : myColors.message],
                             borderRadius: myTheme.CircularContainer
                           ),
                           child: Text(messages[index].text),
