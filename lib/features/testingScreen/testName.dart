@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/icons.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 import '../../components/TextField.dart';
@@ -60,7 +61,7 @@ class _TestnameState extends State<Testname> {
                         child: Container(
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            color: messages[index].isme ? Colors.green[400] : Colors.grey[300],
+                            color: messages[index].isme ? myColors.myMessage : Colors.grey[300],
                             borderRadius: myTheme.CircularContainer
                           ),
                           child: Text(messages[index].text),
