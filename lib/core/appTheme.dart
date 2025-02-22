@@ -11,6 +11,7 @@ import 'package:whatsappclone/core/MyColors.dart';
    static OutlinedBorder circular = RoundedRectangleBorder(
      borderRadius: BorderRadius.circular(10)
    );
+   static BorderRadiusGeometry CircularContainer = BorderRadius.circular(10);
   static final ThemeData appTheme = ThemeData().copyWith(
        elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
