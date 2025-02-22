@@ -9,4 +9,5 @@ class myColors {
    static  Color FG = Colors.white;
    static Color lol = Colors.yellow;
    static Color forgotPass = Colors.blueGrey;
+   static Color? myMessage = Colors.green[400];
  }
