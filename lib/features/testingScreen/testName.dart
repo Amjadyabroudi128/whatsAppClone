@@ -72,7 +72,7 @@ class _TestnameState extends State<Testname> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(9.0),
             child: Row(
               children: [
                 Expanded(
@@ -81,11 +81,12 @@ class _TestnameState extends State<Testname> {
                     hint: "add a message",
                   ),
                 ),
+                IconButton(onPressed: (){}, icon: icons.image),
                 IconButton(
                   onPressed: sendMessage,
                   icon: icons.send,
                 ),
-                IconButton(onPressed: (){}, icon: icons.image)
+
               ],
             ),
           ),
