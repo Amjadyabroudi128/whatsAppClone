@@ -1,6 +1,7 @@
 
 
  import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
  class myTheme {
@@ -26,7 +27,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       focusedBorder: fieldBorder,
       focusColor: Colors.black,
       labelStyle: TextStyle(color: Colors.black, fontSize: 17),
-      hintStyle: TextStyle(fontSize: 19, color: Colors.black),
+      hintStyle: Textstyles.hintStyle,
       floatingLabelStyle: TextStyle(fontSize: 25, color: Colors.grey)
     )
 

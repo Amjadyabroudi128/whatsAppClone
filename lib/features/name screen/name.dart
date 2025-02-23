@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import '../testingScreen/Widgets/continueBtn.dart';
 import 'Widgets/nameTField.dart';
 
@@ -25,8 +26,9 @@ class _NameScreenState extends State<NameScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("PLEASE PROVIDE YOUR NAME"),
-              SizedBox(height: 20,),
+              BoxSpacing(myHeight: 20,),
               nameTextField(name: name),
+              BoxSpacing(myHeight: 14,),
               continueBtn(name: name)
             ],
           ),
