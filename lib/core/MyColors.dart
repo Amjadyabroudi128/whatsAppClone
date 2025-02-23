@@ -10,4 +10,5 @@ class myColors {
    static Color forgotPass = Colors.blueGrey;
    static Color? myMessage = Colors.green[400];
    static Color? message = Colors.grey[300];
+   static Color labelClr = Colors.black;
  }
