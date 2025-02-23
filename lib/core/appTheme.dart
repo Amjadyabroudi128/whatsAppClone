@@ -28,7 +28,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       focusColor: Colors.black,
       labelStyle: Textstyles.label,
       hintStyle: Textstyles.hintStyle,
-      floatingLabelStyle: TextStyle(fontSize: 25, color: Colors.grey)
+      floatingLabelStyle: Textstyles.floating
     )
 
    );
