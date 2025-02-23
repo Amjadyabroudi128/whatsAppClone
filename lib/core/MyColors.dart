@@ -7,7 +7,6 @@ class myColors {
    static Color TC = Colors.green;
    static Color familyText = Colors.grey;
    static  Color FG = Colors.white;
-   static Color lol = Colors.yellow;
    static Color forgotPass = Colors.blueGrey;
    static Color? myMessage = Colors.green[400];
    static Color? message = Colors.grey[300];

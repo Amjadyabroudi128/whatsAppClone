@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "sign up": (context) => const Signupscreen(),
         "nameScreen": (context) => NameScreen(),
+        "welcome" : (context) => WelcomeScreen(),
       },
       home: const WelcomeScreen(),
     );
