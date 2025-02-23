@@ -7,4 +7,5 @@ class Textstyles {
   static TextStyle read = TextStyle(fontSize: 20, color: myColors.familyText);
   static TextStyle forgotPass = TextStyle(color: myColors.forgotPass);
   static TextStyle hintStyle = TextStyle(color: Colors.grey, fontSize: 16);
+  static TextStyle label = TextStyle(color: myColors.labelClr, fontSize: 15);
  }
