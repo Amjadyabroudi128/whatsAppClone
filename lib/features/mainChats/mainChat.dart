@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 class Mainchat extends StatefulWidget {
@@ -14,7 +15,7 @@ class _MainchatState extends State<Mainchat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chats ${widget.name}", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
+        title: Text("Chats ${widget.name}", style: Textstyles.appBar,),
         backgroundColor: myColors.TC,
         automaticallyImplyLeading: false,
       ),
