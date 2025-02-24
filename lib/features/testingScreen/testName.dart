@@ -55,7 +55,10 @@ class _TestnameState extends State<Testname> {
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(messages[index].isme ? "${widget.name}" :""),
+                      Align(
+                        child: Text(messages[index].isme ? "${widget.name}" :"User B"),
+                        alignment: messages[index].isme ? Alignment.centerRight : Alignment.centerLeft,
+                      ),
                       Align(
                         alignment: messages[index].isme ? Alignment.centerRight : Alignment.centerLeft,
                         child: Container(
@@ -83,7 +86,7 @@ class _TestnameState extends State<Testname> {
                     hint: "add a message",
                   ),
                 ),
-                IconButton(onPressed: (){}, icon: icons.image),
+                IconButton(onPressed: (){}, icon: icons.image, iconSize: 26,),
                 IconButton(
                   onPressed: sendMessage,
                   icon: icons.send,
