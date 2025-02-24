@@ -1,5 +1,6 @@
 
  import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 
 class icons {
   static Icon emailIcon = Icon(Icons.email);
@@ -7,6 +8,6 @@ class icons {
   static Icon name = Icon(Icons.person);
   static Icon logout = Icon(Icons.logout);
   static Icon image = Icon(Icons.image);
-  static Icon send = Icon(Icons.send,color: Colors.green,);
+  static Icon send = Icon(Icons.send,color: myColors.myMessage);
   static Icon arrow = Icon(Icons.arrow_back);
  }
