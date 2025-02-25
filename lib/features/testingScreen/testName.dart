@@ -5,7 +5,8 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 import '../../components/TextField.dart';
-import '../../messageClass/messageClass.dart'; // Ensure the correct path
+import '../../messageClass/messageClass.dart';
+import 'Widgets/signoutBtn.dart'; // Ensure the correct path
 
 class Testname extends StatefulWidget {
   final String? name;
@@ -33,17 +34,7 @@ class _TestnameState extends State<Testname> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
-          kIconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => WelcomeScreen(),
-                ),
-              );
-            },
-            myIcon: icons.logout,
-          )
+          signoutBtn()
         ],
       ),
       body: Column(
@@ -101,3 +92,4 @@ class _TestnameState extends State<Testname> {
     );
   }
 }
+
