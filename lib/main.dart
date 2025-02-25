@@ -1,11 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'package:whatsappclone/features/name%20screen/name.dart';
 
 import 'features/welcomeScreen/welcome.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: myTheme.appTheme,
-      initialRoute: "nameScreen",
+      // initialRoute: "nameScreen",
       routes: {
         "sign up": (context) => const Signupscreen(),
         "nameScreen": (context) => NameScreen(),
