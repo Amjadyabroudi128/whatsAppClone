@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../components/scaffoldMessanger.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 
 class signUpBtn extends StatelessWidget {
   const signUpBtn({
@@ -14,11 +13,11 @@ class signUpBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseService firebase =  FirebaseService();
     return ElevatedButton(
-      onPressed: (){
-        myEmail.text.isEmpty ? showSnackbar(context, Text("please provide email")) :
-        pass.text.isEmpty ? showSnackbar(context, Text("enter password"))
-            : Navigator.of(context).pushNamed("nameScreen");
+      onPressed: () async {
+        await firebase.createEmailPassword(myEmail.text, pass.text);
+        Navigator.of(context).pushNamed("nameScreen");
       },
       child: Text("Sign Up"),
     );
