@@ -33,7 +33,7 @@ class _TestnameState extends State<Testname> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(
+          kIconButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -42,7 +42,7 @@ class _TestnameState extends State<Testname> {
                 ),
               );
             },
-            icon: icons.logout,
+            myIcon: icons.logout,
           )
         ],
       ),
