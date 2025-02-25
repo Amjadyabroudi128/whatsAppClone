@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/appTheme.dart';
@@ -86,7 +87,7 @@ class _TestnameState extends State<Testname> {
                     hint: "add a message",
                   ),
                 ),
-                IconButton(onPressed: (){}, icon: icons.image, iconSize: 26,),
+                kIconButton(onPressed: (){}, myIcon: icons.image, iconSize: 26,),
                 IconButton(
                   onPressed: sendMessage,
                   icon: icons.send,
