@@ -88,9 +88,9 @@ class _TestnameState extends State<Testname> {
                   ),
                 ),
                 kIconButton(onPressed: (){}, myIcon: icons.image, iconSize: 26,),
-                IconButton(
+                kIconButton(
                   onPressed: sendMessage,
-                  icon: icons.send,
+                  myIcon: icons.send,
                 ),
 
               ],
