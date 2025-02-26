@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
 import '../../../components/iconButton.dart';
 import '../../../components/icons.dart';
@@ -11,14 +13,13 @@ class signoutBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseService firebase =  FirebaseService();
+
     return kIconButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WelcomeScreen(),
-          ),
-        );
+        firebase.SignOut();
+        Navigator.of(context).pushNamed("welcome");
+        showSnackbar(context, Text("Signed out"));
       },
       myIcon: icons.logout,
     );
