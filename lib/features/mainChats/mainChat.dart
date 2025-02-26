@@ -23,7 +23,6 @@ class _MainchatState extends State<Mainchat> {
         child: Text("Hello"),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.lightGreen,
         onPressed: (){},
         child: Icon(Icons.add),
       )
