@@ -18,7 +18,7 @@ import 'package:whatsappclone/core/MyColors.dart';
          style: ElevatedButton.styleFrom(
              backgroundColor: myColors.TC,
              foregroundColor: myColors.FG,
-             textStyle: TextStyle(fontSize: 18),
+             textStyle: Textstyles.Ebtn,
            shape: circular
          ),
        ),

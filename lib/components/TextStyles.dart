@@ -10,4 +10,5 @@ class Textstyles {
   static TextStyle label = TextStyle(color: myColors.labelClr, fontSize: 15);
   static TextStyle floating = TextStyle(fontSize: 25, color: myColors.floating);
   static TextStyle appBar = TextStyle(color: Colors.white, fontWeight: FontWeight.w500);
+  static TextStyle Ebtn =  TextStyle(fontSize: 18);
  }
