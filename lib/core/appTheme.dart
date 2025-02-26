@@ -31,7 +31,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       floatingLabelStyle: Textstyles.floating
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.lightGreen,
+      backgroundColor: myColors.FAB
     ),
    );
  }
