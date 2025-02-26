@@ -25,7 +25,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: fieldBorder,
       focusedBorder: fieldBorder,
-      focusColor: Colors.black,
+      focusColor: myColors.labelClr,
       labelStyle: Textstyles.label,
       hintStyle: Textstyles.hintStyle,
       floatingLabelStyle: Textstyles.floating
