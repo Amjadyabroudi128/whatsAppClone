@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 class Mainchat extends StatefulWidget {
@@ -24,7 +25,7 @@ class _MainchatState extends State<Mainchat> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){},
-        child: Icon(Icons.add),
+        child: icons.add,
       )
     );
   }

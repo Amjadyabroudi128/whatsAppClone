@@ -10,4 +10,5 @@ class icons {
   static Icon image = Icon(Icons.image);
   static Icon send = Icon(Icons.send,color: myColors.myMessage);
   static Icon arrow = Icon(Icons.arrow_back);
+  static Icon add = Icon(Icons.add);
  }
