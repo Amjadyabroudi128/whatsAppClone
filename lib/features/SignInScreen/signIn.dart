@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/components/scaffoldMessanger.dart';
-import 'package:whatsappclone/features/SignInScreen/signIn.dart';
-import 'Widgets/emailTextField.dart';
-import 'Widgets/passField.dart';
-import 'Widgets/signupBtn.dart';
+import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 
-class Signupscreen extends StatefulWidget {
-  const Signupscreen({super.key});
+import '../../Firebase/FirebaseAuth.dart';
+import '../SignUp/Widgets/emailTextField.dart';
+import '../SignUp/Widgets/passField.dart';
+
+class SignInscreen extends StatefulWidget {
+  const SignInscreen({super.key});
 
   @override
-  State<Signupscreen> createState() => _SignupscreenState();
+  State<SignInscreen> createState() => _SignInscreenState();
 }
 
-class _SignupscreenState extends State<Signupscreen> {
+class _SignInscreenState extends State<SignInscreen> {
   final TextEditingController myEmail = TextEditingController();
   final TextEditingController pass = TextEditingController();
+  FirebaseService firebase =  FirebaseService();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -26,7 +27,7 @@ class _SignupscreenState extends State<Signupscreen> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("Sign up"),
+          title: Text("Sign in"),
           centerTitle: true,
           backgroundColor: Colors.transparent,
         ),
@@ -39,19 +40,26 @@ class _SignupscreenState extends State<Signupscreen> {
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
+
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: TextButton(onPressed: (){
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => SignInscreen())
+                      MaterialPageRoute(builder: (context) => Signupscreen())
                   );
-                  },
-                    child: Text("have an account?", style: Textstyles.forgotPass,)
+                }, child:
+                Text("Not Registered?", style: Textstyles.forgotPass,)
                 ),
               ),
               BoxSpacing(myHeight: 19,),
               Center(
-                child: signUpBtn(myEmail: myEmail, pass: pass),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    await firebase.SigninUser(myEmail.text, pass.text);
+                    Navigator.of(context).pushNamed("nameScreen");
+                  },
+                  child: Text("Sign in"),
+                ),
               )
             ],
           ),
