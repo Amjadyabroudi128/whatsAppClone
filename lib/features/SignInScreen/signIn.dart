@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
@@ -18,6 +19,7 @@ class _SignInscreenState extends State<SignInscreen> {
   final TextEditingController myEmail = TextEditingController();
   final TextEditingController pass = TextEditingController();
   FirebaseService firebase =  FirebaseService();
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -56,7 +58,8 @@ class _SignInscreenState extends State<SignInscreen> {
                 child: ElevatedButton(
                   onPressed: () async {
                     await firebase.SigninUser(myEmail.text, pass.text);
-                    Navigator.of(context).pushNamed("nameScreen");
+                    print(user?.email);
+                    // Navigator.of(context).pushNamed("nameScreen");
                   },
                   child: Text("Sign in"),
                 ),
