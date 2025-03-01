@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 
 import '../../Firebase/FirebaseAuth.dart';
+import '../../components/TextButton.dart';
 import '../SignUp/Widgets/emailTextField.dart';
 import '../SignUp/Widgets/passField.dart';
 
@@ -45,7 +46,8 @@ class _SignInscreenState extends State<SignInscreen> {
 
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
-                child: TextButton(onPressed: (){
+                child: kTextButton(
+                    onPressed: (){
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => Signupscreen())
                   );
