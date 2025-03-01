@@ -4,6 +4,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../SignUp/Widgets/emailTextField.dart';
 import '../SignUp/Widgets/passField.dart';
+import 'Widgets/SignInBttn.dart';
 import 'Widgets/notRegistered.dart';
 
 class SignInscreen extends StatefulWidget {
@@ -47,14 +48,7 @@ class _SignInscreenState extends State<SignInscreen> {
               ),
               BoxSpacing(myHeight: 19,),
               Center(
-                child: ElevatedButton(
-                  onPressed: () async {
-                    await firebase.SigninUser(myEmail.text, pass.text);
-                    print(user?.email);
-                    // Navigator.of(context).pushNamed("nameScreen");
-                  },
-                  child: Text("Sign in"),
-                ),
+                child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user),
               )
             ],
           ),
@@ -63,6 +57,7 @@ class _SignInscreenState extends State<SignInscreen> {
     );
   }
 }
+
 
 
 
