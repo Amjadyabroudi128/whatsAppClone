@@ -8,6 +8,7 @@ import '../../Firebase/FirebaseAuth.dart';
 import '../../components/TextButton.dart';
 import '../SignUp/Widgets/emailTextField.dart';
 import '../SignUp/Widgets/passField.dart';
+import 'Widgets/notRegistered.dart';
 
 class SignInscreen extends StatefulWidget {
   const SignInscreen({super.key});
@@ -46,14 +47,7 @@ class _SignInscreenState extends State<SignInscreen> {
 
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
-                child: kTextButton(
-                    onPressed: (){
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Signupscreen())
-                  );
-                }, child:
-                Text("Not Registered?", style: Textstyles.forgotPass,)
-                ),
+                child: NotRegisterd(),
               ),
               BoxSpacing(myHeight: 19,),
               Center(
@@ -73,6 +67,7 @@ class _SignInscreenState extends State<SignInscreen> {
     );
   }
 }
+
 
 
 
