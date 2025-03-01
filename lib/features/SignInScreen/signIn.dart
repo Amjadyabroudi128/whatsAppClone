@@ -1,11 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/features/SignUp/signupScreen.dart';
-
 import '../../Firebase/FirebaseAuth.dart';
-import '../../components/TextButton.dart';
 import '../SignUp/Widgets/emailTextField.dart';
 import '../SignUp/Widgets/passField.dart';
 import 'Widgets/notRegistered.dart';
