@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 
@@ -23,6 +24,10 @@ class siginIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
+        if (myEmail.text.isEmpty || pass.text.isEmpty || name.text.isEmpty) {
+          showSnackbar(context, "please fill all the fields");
+          return;
+        }
         await firebase.SigninUser(myEmail.text, pass.text);
         print(user?.email);
         // Navigator.of(context).pushNamed("nameScreen");
