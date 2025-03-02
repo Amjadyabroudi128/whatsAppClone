@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
-import '../testName.dart';
+import '../../testingScreen/testName.dart';
 
 class continueBtn extends StatelessWidget {
   const continueBtn({

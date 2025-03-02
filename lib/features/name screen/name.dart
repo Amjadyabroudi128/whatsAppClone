@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import '../testingScreen/Widgets/continueBtn.dart';
+import 'Widgets/continueBtn.dart';
 import 'Widgets/nameTField.dart';
 
 class NameScreen extends StatefulWidget {
