@@ -19,7 +19,7 @@ class signoutBtn extends StatelessWidget {
       onPressed: () {
         firebase.SignOut();
         Navigator.of(context).pushNamed("welcome");
-        showSnackbar(context, Text("Signed out"));
+        showSnackbar(context, "Signed out");
       },
       myIcon: icons.logout,
     );
