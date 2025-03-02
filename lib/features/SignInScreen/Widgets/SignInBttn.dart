@@ -10,11 +10,13 @@ class siginIn extends StatelessWidget {
     required this.myEmail,
     required this.pass,
     required this.user,
+    required this.name
   });
 
   final FirebaseService firebase;
   final TextEditingController myEmail;
   final TextEditingController pass;
+  final TextEditingController name;
   final User? user;
 
   @override
