@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/features/name%20screen/Widgets/nameTField.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../SignUp/Widgets/emailTextField.dart';
 import '../SignUp/Widgets/passField.dart';
@@ -17,6 +18,7 @@ class SignInscreen extends StatefulWidget {
 class _SignInscreenState extends State<SignInscreen> {
   final TextEditingController myEmail = TextEditingController();
   final TextEditingController pass = TextEditingController();
+  final TextEditingController name = TextEditingController();
   FirebaseService firebase =  FirebaseService();
   User? user = FirebaseAuth.instance.currentUser;
   @override
@@ -41,14 +43,15 @@ class _SignInscreenState extends State<SignInscreen> {
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
-
+              BoxSpacing(myHeight: 15,),
+              nameTextField(name: name),
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: NotRegisterd(),
               ),
               BoxSpacing(myHeight: 19,),
               Center(
-                child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user),
+                child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user, name: name,),
               )
             ],
           ),
