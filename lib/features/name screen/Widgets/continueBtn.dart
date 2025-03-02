@@ -24,7 +24,7 @@ class continueBtn extends StatelessWidget {
             ),
           );
         } else {
-          showSnackbar(context, Text("Please Enter your name"));
+          showSnackbar(context,"Please Enter your name");
         }
       },
 
