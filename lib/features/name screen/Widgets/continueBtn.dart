@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
 import '../../testingScreen/testName.dart';
@@ -13,7 +14,7 @@ class continueBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return kElevatedBtn(
       child: Text("Continue"),
       onPressed: (){
         if (name.text.isNotEmpty) {
