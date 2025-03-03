@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
@@ -22,7 +23,7 @@ class siginIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return kElevatedBtn(
       onPressed: () async {
         if (myEmail.text.isEmpty || pass.text.isEmpty || name.text.isEmpty) {
           showSnackbar(context, "please fill all the fields");
