@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
    Future<void> createEmailPassword(String email, String password) async {
@@ -14,14 +15,7 @@ import 'package:fluttertoast/fluttertoast.dart';
        } else if (e.code == 'email-already-in-use') {
          message = 'An account already exists with that email.';
        }
-       Fluttertoast.showToast(
-         msg: message,
-         toastLength: Toast.LENGTH_LONG,
-         gravity: ToastGravity.SNACKBAR,
-         backgroundColor: Colors.black54,
-         textColor: Colors.white,
-         fontSize: 17.0,
-       );
+       myToast(message);
      }
      catch (e){}
 
@@ -36,14 +30,7 @@ import 'package:fluttertoast/fluttertoast.dart';
        } else if (e.code == 'invalid-credential') {
          message = 'Wrong password provided for that user.';
        }
-       Fluttertoast.showToast(
-         msg: message,
-         toastLength: Toast.LENGTH_LONG,
-         gravity: ToastGravity.SNACKBAR,
-         backgroundColor: Colors.black54,
-         textColor: Colors.white,
-         fontSize: 17.0,
-       );
+       myToast(message);
      }
      catch (e){}
    }
