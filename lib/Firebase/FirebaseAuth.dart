@@ -7,22 +7,10 @@ import 'package:whatsappclone/components/scaffoldMessanger.dart';
      auth.createUserWithEmailAndPassword(email: email, password: password);
   }
    Future<void> SigninUser(BuildContext context, String email, String password) async {
-     try {
-       await auth.signInWithEmailAndPassword(email: email, password: password);
-       showSnackbar(context, "Sign-in successful!");
-     } on FirebaseAuthException catch (e) {
-       if (e.code == "user-not-found") {
-         showSnackbar(context, "User not registered. Please sign up.");
-       } else if (e.code == "wrong-password") {
-         showSnackbar(context, "Incorrect password. Try again.");
-       } else if (e.code == "invalid-email") {
-         showSnackbar(context, "Invalid email format.");
-       } else {
-         showSnackbar(context, "Error: ${e.message}");
-       }
-     }
+     await auth.signInWithEmailAndPassword(email: email, password: password);
    }
-  Future<void> SignOut ()async {
+
+   Future<void> SignOut ()async {
      auth.signOut();
   }
  }

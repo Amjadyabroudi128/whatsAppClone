@@ -16,8 +16,8 @@ class signUpBtn extends StatelessWidget {
     FirebaseService firebase =  FirebaseService();
     return ElevatedButton(
       onPressed: () async {
-        await firebase.createEmailPassword(myEmail.text, pass.text);
-        Navigator.of(context).pushNamed("nameScreen");
+        await firebase.createEmailPassword( myEmail.text, pass.text);
+        // Navigator.of(context).pushNamed("nameScreen");
       },
       child: Text("Sign Up"),
     );
