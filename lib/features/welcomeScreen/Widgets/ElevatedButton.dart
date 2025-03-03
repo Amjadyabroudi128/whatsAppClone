@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/ElevatedBtn.dart';
 
 class elevatedBtn extends StatelessWidget {
   const elevatedBtn({
@@ -7,7 +8,7 @@ class elevatedBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return kElevatedBtn(
       onPressed: (){
         Navigator.of(context).pushNamed("sign up");
       },
