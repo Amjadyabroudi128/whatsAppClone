@@ -27,7 +27,25 @@ import 'package:fluttertoast/fluttertoast.dart';
 
    }
    Future<void> SigninUser(BuildContext context, String email, String password) async {
-     await auth.signInWithEmailAndPassword(email: email, password: password);
+     try {
+       await auth.signInWithEmailAndPassword(email: email, password: password);
+     } on FirebaseAuthException catch (e) {
+       String message = '';
+       if (e.code == 'user-not-found') {
+         message = 'No user found for that email.';
+       } else if (e.code == 'invalid-credential') {
+         message = 'Wrong password provided for that user.';
+       }
+       Fluttertoast.showToast(
+         msg: message,
+         toastLength: Toast.LENGTH_LONG,
+         gravity: ToastGravity.SNACKBAR,
+         backgroundColor: Colors.black54,
+         textColor: Colors.white,
+         fontSize: 17.0,
+       );
+     }
+     catch (e){}
    }
 
    Future<void> SignOut ()async {
