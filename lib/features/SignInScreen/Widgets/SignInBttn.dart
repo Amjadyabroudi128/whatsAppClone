@@ -28,8 +28,7 @@ class siginIn extends StatelessWidget {
           showSnackbar(context, "please fill all the fields");
           return;
         }
-        await firebase.SigninUser(myEmail.text, pass.text);
-        print(user?.email);
+        await firebase.SigninUser(context,myEmail.text, pass.text);
         // Navigator.of(context).pushNamed("nameScreen");
       },
       child: Text("Sign in"),
