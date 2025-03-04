@@ -14,5 +14,6 @@ class myColors {
    static Color floating = Colors.grey;
    static Color FAB = Colors.lightGreen;
    static Color toastMessage = Colors.white;
+   static Color toastBackGround = Colors.black54;
 
  }
