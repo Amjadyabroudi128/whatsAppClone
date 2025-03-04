@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
+import 'package:whatsappclone/features/Wrapper/wrapperWidget.dart';
 import 'package:whatsappclone/features/name%20screen/name.dart';
 
 import 'features/welcomeScreen/welcome.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         "nameScreen": (context) => NameScreen(),
         "welcome" : (context) => WelcomeScreen(),
       },
-      home: const WelcomeScreen(),
+      home: Wrapper(),
     );
   }
 }
