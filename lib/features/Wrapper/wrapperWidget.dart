@@ -22,7 +22,8 @@ class Wrapper extends StatelessWidget {
             if(snapshot.data == null) {
               return WelcomeScreen();
             } else {
-              return Testname();
+              User? user = FirebaseAuth.instance.currentUser;
+              return Testname(user);
             }
           }
         },

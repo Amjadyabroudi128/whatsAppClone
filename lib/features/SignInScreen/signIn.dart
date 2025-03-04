@@ -18,7 +18,6 @@ class SignInscreen extends StatefulWidget {
 class _SignInscreenState extends State<SignInscreen> {
   final TextEditingController myEmail = TextEditingController();
   final TextEditingController pass = TextEditingController();
-  final TextEditingController name = TextEditingController();
   FirebaseService firebase =  FirebaseService();
   User? user = FirebaseAuth.instance.currentUser;
   @override
@@ -44,14 +43,13 @@ class _SignInscreenState extends State<SignInscreen> {
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
               BoxSpacing(myHeight: 15,),
-              nameTextField(name: name),
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: NotRegisterd(),
               ),
               BoxSpacing(myHeight: 19,),
               Center(
-                child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user, name: name,),
+                child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user,),
               )
             ],
           ),

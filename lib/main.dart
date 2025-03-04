@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       // initialRoute: "nameScreen",
       routes: {
         "sign up": (context) => const Signupscreen(),
-        "nameScreen": (context) => NameScreen(),
+        // "nameScreen": (context) => NameScreen(),
         "welcome" : (context) => WelcomeScreen(),
       },
       home: Wrapper(),

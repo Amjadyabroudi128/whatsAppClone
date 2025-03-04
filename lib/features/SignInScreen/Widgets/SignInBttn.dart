@@ -12,20 +12,18 @@ class siginIn extends StatelessWidget {
     required this.myEmail,
     required this.pass,
     required this.user,
-    required this.name
   });
 
   final FirebaseService firebase;
   final TextEditingController myEmail;
   final TextEditingController pass;
-  final TextEditingController name;
   final User? user;
 
   @override
   Widget build(BuildContext context) {
     return kElevatedBtn(
       onPressed: () async {
-        if (myEmail.text.isEmpty || pass.text.isEmpty || name.text.isEmpty) {
+        if (myEmail.text.isEmpty || pass.text.isEmpty) {
           showSnackbar(context, "please fill all the fields");
           return;
         }

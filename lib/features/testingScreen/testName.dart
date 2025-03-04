@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/icons.dart';
@@ -10,7 +11,7 @@ import 'Widgets/signoutBtn.dart'; // Ensure the correct path
 
 class Testname extends StatefulWidget {
   final String? name;
-  const Testname({super.key, this.name});
+  const Testname(User? user, {super.key, this.name});
 
   @override
   State<Testname> createState() => _TestnameState();

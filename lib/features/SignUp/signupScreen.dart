@@ -3,6 +3,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/scaffoldMessanger.dart';
 import 'package:whatsappclone/features/SignInScreen/signIn.dart';
+import '../name screen/Widgets/nameTField.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/passField.dart';
 import 'Widgets/signupBtn.dart';
@@ -17,6 +18,8 @@ class Signupscreen extends StatefulWidget {
 class _SignupscreenState extends State<Signupscreen> {
   final TextEditingController myEmail = TextEditingController();
   final TextEditingController pass = TextEditingController();
+  final TextEditingController name = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -39,6 +42,7 @@ class _SignupscreenState extends State<Signupscreen> {
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
+              BoxSpacing(myHeight: 20,),
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: TextButton(onPressed: (){
@@ -49,6 +53,7 @@ class _SignupscreenState extends State<Signupscreen> {
                     child: Text("have an account?", style: Textstyles.forgotPass,)
                 ),
               ),
+
               BoxSpacing(myHeight: 19,),
               Center(
                 child: signUpBtn(myEmail: myEmail, pass: pass),
