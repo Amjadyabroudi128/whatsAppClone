@@ -13,4 +13,6 @@ class myColors {
    static Color labelClr = Colors.black;
    static Color floating = Colors.grey;
    static Color FAB = Colors.lightGreen;
+   static Color toastMessage = Colors.white;
+
  }
