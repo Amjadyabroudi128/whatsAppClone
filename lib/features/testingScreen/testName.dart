@@ -10,8 +10,7 @@ import '../../messageClass/messageClass.dart';
 import 'Widgets/signoutBtn.dart'; // Ensure the correct path
 
 class Testname extends StatefulWidget {
-  final String? name;
-  const Testname(User? user, {super.key, this.name});
+  const Testname({super.key}); // Fixed the syntax error
 
   @override
   State<Testname> createState() => _TestnameState();
@@ -19,6 +18,9 @@ class Testname extends StatefulWidget {
 
 class _TestnameState extends State<Testname> {
   final TextEditingController messageController = TextEditingController();
+
+  // Get current user
+  User? user = FirebaseAuth.instance.currentUser;
 
   void sendMessage() {
     if (messageController.text.isNotEmpty) {
@@ -34,8 +36,9 @@ class _TestnameState extends State<Testname> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        title: Text("chats"), // Display user email
         actions: [
-          signoutBtn()
+          signoutBtn(),
         ],
       ),
       body: Column(
@@ -49,16 +52,25 @@ class _TestnameState extends State<Testname> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Align(
-                        child: Text(messages[index].isme ? "${widget.name}" :"User B"),
-                        alignment: messages[index].isme ? Alignment.centerRight : Alignment.centerLeft,
+                        child: Text(messages[index].isme
+                            ? "${user?.email ?? 'Unknown'}" // Show user email
+                            : "User B"
+                        ),
+                        alignment: messages[index].isme
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
                       ),
                       Align(
-                        alignment: messages[index].isme ? Alignment.centerRight : Alignment.centerLeft,
+                        alignment: messages[index].isme
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
                         child: Container(
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            color: messages[index].isme ? myColors.myMessage : myColors.message,
-                            borderRadius: myTheme.CircularContainer
+                            color: messages[index].isme
+                                ? myColors.myMessage
+                                : myColors.message,
+                            borderRadius: myTheme.CircularContainer,
                           ),
                           child: Text(messages[index].text),
                         ),
@@ -76,15 +88,14 @@ class _TestnameState extends State<Testname> {
                 Expanded(
                   child: kTextField(
                     myController: messageController,
-                    hint: "add a message",
+                    hint: "Add a message",
                   ),
                 ),
-                kIconButton(onPressed: (){}, myIcon: icons.image, iconSize: 26,),
+                kIconButton(onPressed: () {}, myIcon: icons.image, iconSize: 26),
                 kIconButton(
                   onPressed: sendMessage,
                   myIcon: icons.send,
                 ),
-
               ],
             ),
           ),
@@ -93,4 +104,3 @@ class _TestnameState extends State<Testname> {
     );
   }
 }
-
