@@ -30,7 +30,6 @@ class siginIn extends StatelessWidget {
           return;
         }
         await firebase.SigninUser(context,myEmail.text, pass.text);
-        // Navigator.of(context).pushNamed("nameScreen");
       },
       child: Text("Sign in"),
     );
