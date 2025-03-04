@@ -5,6 +5,7 @@ import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'package:whatsappclone/features/Wrapper/wrapperWidget.dart';
 import 'package:whatsappclone/features/name%20screen/name.dart';
 
+import 'features/testingScreen/testName.dart';
 import 'features/welcomeScreen/welcome.dart';
 import 'firebase_options.dart';
 
@@ -29,8 +30,10 @@ class MyApp extends StatelessWidget {
       // initialRoute: "nameScreen",
       routes: {
         "sign up": (context) => const Signupscreen(),
+        "test": (context) => Testname(),
         // "nameScreen": (context) => NameScreen(),
         "welcome" : (context) => WelcomeScreen(),
+        "wrapper" : (context) => Wrapper(),
       },
       home: Wrapper(),
     );
