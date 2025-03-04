@@ -17,7 +17,7 @@ class Wrapper extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            return Text("something is wrong ");
+            return  Text("something is wrong ");
           } else {
             if(snapshot.data == null) {
               return WelcomeScreen();
