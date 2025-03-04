@@ -4,10 +4,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
-   Future<void> createEmailPassword(String email, String password) async {
+   Future<void> createEmailPassword(BuildContext context,String email, String password) async {
      try {
        await auth.createUserWithEmailAndPassword(email: email, password: password);
-
+       await auth.currentUser?.reload();
+       User? updatedUser = auth.currentUser;
+       if (updatedUser != null) {
+         Navigator.pushReplacementNamed(context, 'wrapper'); // Ensure '/home' routes to Wrapper
+       }
      } on FirebaseAuthException catch (e) {
        String message = '';
        if (e.code == 'weak-password') {
@@ -23,6 +27,11 @@ import 'package:whatsappclone/components/flutterToast.dart';
    Future<void> SigninUser(BuildContext context, String email, String password) async {
      try {
        await auth.signInWithEmailAndPassword(email: email, password: password);
+       await auth.currentUser?.reload();
+       User? updatedUser = auth.currentUser;
+       if (updatedUser != null) {
+         Navigator.pushReplacementNamed(context, 'wrapper'); // Ensure '/home' routes to Wrapper
+       }
      } on FirebaseAuthException catch (e) {
        String message = '';
        if (e.code == 'user-not-found') {
