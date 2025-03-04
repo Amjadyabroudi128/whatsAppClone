@@ -18,7 +18,6 @@ class signUpBtn extends StatelessWidget {
     return kElevatedBtn(
       onPressed: () async {
         await firebase.createEmailPassword( myEmail.text, pass.text);
-        // Navigator.of(context).pushNamed("nameScreen");
       },
       child: Text("Sign Up"),
     );
