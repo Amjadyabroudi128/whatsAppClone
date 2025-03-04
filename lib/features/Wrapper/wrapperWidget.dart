@@ -9,22 +9,24 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.idTokenChanges(), // Change here
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            return  Text("something is wrong ");
+            return const Center(
+              child: Text("Something went wrong", style: TextStyle(fontSize: 16)),
+            );
+          }
+
+          // Check if user is signed in or not
+          if (snapshot.data == null) {
+            return const WelcomeScreen();
           } else {
-            if(snapshot.data == null) {
-              return WelcomeScreen();
-            } else {
-              User? user = FirebaseAuth.instance.currentUser;
-              return Testname(user);
-            }
+            return const Testname();
           }
         },
       ),
