@@ -17,7 +17,7 @@ class signUpBtn extends StatelessWidget {
     FirebaseService firebase =  FirebaseService();
     return kElevatedBtn(
       onPressed: () async {
-        await firebase.createEmailPassword( myEmail.text, pass.text);
+        await firebase.createEmailPassword( context ,myEmail.text, pass.text);
       },
       child: Text("Sign Up"),
     );
