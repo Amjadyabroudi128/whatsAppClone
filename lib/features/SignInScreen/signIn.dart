@@ -42,7 +42,6 @@ class _SignInscreenState extends State<SignInscreen> {
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
-              BoxSpacing(myHeight: 15,),
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: NotRegisterd(),

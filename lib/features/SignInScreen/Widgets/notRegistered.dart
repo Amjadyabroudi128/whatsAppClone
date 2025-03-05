@@ -17,7 +17,7 @@ class NotRegisterd extends StatelessWidget {
               MaterialPageRoute(builder: (context) => Signupscreen())
           );
         }, child:
-    Text("Not Registered?", style: Textstyles.forgotPass,)
+    Text("Not Registered?", style: Textstyles.haveAccount,)
     );
   }
 }
