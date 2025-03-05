@@ -42,7 +42,6 @@ class _SignupscreenState extends State<Signupscreen> {
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
-              BoxSpacing(myHeight: 20,),
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: TextButton(onPressed: (){
@@ -50,7 +49,7 @@ class _SignupscreenState extends State<Signupscreen> {
                       MaterialPageRoute(builder: (context) => SignInscreen())
                   );
                   },
-                    child: Text("have an account?", style: Textstyles.forgotPass,)
+                    child: Text("have an account?", style: Textstyles.haveAccount,)
                 ),
               ),
 
