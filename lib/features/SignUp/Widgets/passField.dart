@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/iconButton.dart';
 
 import '../../../components/TextField.dart';
 import '../../../components/icons.dart';
@@ -16,17 +17,17 @@ class passField extends StatefulWidget {
 }
 
 class _passFieldState extends State<passField> {
-  bool passwordVisible = false;
+  bool passwordVisible = true;
  @override
   void initState() {
-    // TODO: implement initState
-    passwordVisible = true;
+    super.initState();
+    passwordVisible = false;
   }
   @override
   Widget build(BuildContext context) {
     return kTextField(
-      icon: IconButton(
-        icon: Icon(passwordVisible ? Icons.visibility_off : Icons.visibility ),
+      icon: kIconButton(
+        myIcon: Icon(passwordVisible ? Icons.visibility_off : Icons.visibility ),
         onPressed: (){
           setState(() {
             passwordVisible = !passwordVisible;
