@@ -19,26 +19,28 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: myColors.BG,
-      body:  const Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 99),
-            child: Center(
-              child: image(),
+      body:  const SingleChildScrollView(
+        child:  Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 99),
+              child: Center(
+                child: image(),
+              ),
             ),
-          ),
-          BoxSpacing(myHeight: 50,),
-          welcomeText(),
-          BoxSpacing(myHeight: 13,),
-          textFamily(),
-          BoxSpacing(myHeight: 18,),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: richText(),
-          ),
-          BoxSpacing(myHeight: 50,),
-          elevatedBtn()
-        ],
+            BoxSpacing(myHeight: 50,),
+            welcomeText(),
+            BoxSpacing(myHeight: 13,),
+            textFamily(),
+            BoxSpacing(myHeight: 18,),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: richText(),
+            ),
+            BoxSpacing(myHeight: 50,),
+            elevatedBtn()
+          ],
+        ),
       ),
     );
   }
