@@ -1,30 +1,25 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:whatsappclone/main.dart';
-
+import 'package:whatsappclone/components/Strings.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/features/SignInScreen/signIn.dart';
+import 'package:whatsappclone/features/SignUp/signupScreen.dart';
+import 'package:whatsappclone/features/welcomeScreen/Widgets/welcome%20text.dart';
+import 'package:firebase_core/firebase_core.dart';
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  });
+  testWidgets('welcomeText displays correct text', (WidgetTester tester) async {
+    // Build the widget
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(
+        body: welcomeText(),
+      ),
+    ));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the text widget contains the expected welcome text
+    expect(find.text(Strings.Welcome), findsOneWidget);
   });
 }
