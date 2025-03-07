@@ -10,6 +10,6 @@ class Textstyles {
   static TextStyle hintStyle = TextStyle(color: myColors.floating, fontSize: 16);
   static TextStyle label = TextStyle(color: myColors.labelClr, fontSize: 15);
   static TextStyle floating = TextStyle(fontSize: 25, color: myColors.floating);
-  static TextStyle appBar = TextStyle(color: myColors.FG, fontWeight: FontWeight.w500);
+  static TextStyle appBar = TextStyle(color: myColors.FG, fontWeight: fontWeightHelper.appBar);
   static TextStyle Ebtn =  TextStyle(fontSize: 18);
  }
