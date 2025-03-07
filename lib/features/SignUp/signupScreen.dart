@@ -6,6 +6,7 @@ import 'package:whatsappclone/components/scaffoldMessanger.dart';
 import 'package:whatsappclone/features/SignInScreen/signIn.dart';
 import '../name screen/Widgets/nameTField.dart';
 import 'Widgets/emailTextField.dart';
+import 'Widgets/haveAnAccount.dart';
 import 'Widgets/passField.dart';
 import 'Widgets/signupBtn.dart';
 
@@ -45,13 +46,7 @@ class _SignupscreenState extends State<Signupscreen> {
               passField(pass: pass),
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
-                child: kTextButton(onPressed: (){
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => SignInscreen())
-                  );
-                  },
-                    child: Text("have an account?",)
-                ),
+                child: haveAnAccount(),
               ),
 
               BoxSpacing(myHeight: 19,),
@@ -65,6 +60,7 @@ class _SignupscreenState extends State<Signupscreen> {
     );
   }
 }
+
 
 
 
