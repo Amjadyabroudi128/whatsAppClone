@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ElevatedBtn.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
@@ -24,7 +25,7 @@ class siginIn extends StatelessWidget {
     return kElevatedBtn(
       onPressed: () async {
         if (myEmail.text.isEmpty || pass.text.isEmpty) {
-          showSnackbar(context, "please fill all the fields");
+          myToast("please fill all the fields");
           return;
         }
         await firebase.SigninUser(context,myEmail.text, pass.text);
