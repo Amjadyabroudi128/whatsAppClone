@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextButton.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/components/scaffoldMessanger.dart';
-import 'package:whatsappclone/features/SignInScreen/signIn.dart';
-import '../name screen/Widgets/nameTField.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/haveAnAccount.dart';
 import 'Widgets/passField.dart';
