@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/fontWeightHelper.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 class Textstyles {
-  static TextStyle welcome = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
+  static TextStyle welcome = TextStyle(fontSize: 22, fontWeight: fontWeightHelper.bold);
   static TextStyle privacy = TextStyle(color: myColors.TC);
   static TextStyle read = TextStyle(fontSize: 20, color: myColors.familyText);
   static TextStyle haveAccount = TextStyle(color: myColors.forgotPass,);
