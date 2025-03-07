@@ -50,7 +50,7 @@ class _SignupscreenState extends State<Signupscreen> {
                       MaterialPageRoute(builder: (context) => SignInscreen())
                   );
                   },
-                    child: Text("have an account?", style: Textstyles.haveAccount,)
+                    child: Text("have an account?",)
                 ),
               ),
 
