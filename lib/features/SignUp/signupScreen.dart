@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/scaffoldMessanger.dart';
 import 'package:whatsappclone/features/SignInScreen/signIn.dart';
@@ -44,7 +45,7 @@ class _SignupscreenState extends State<Signupscreen> {
               passField(pass: pass),
               Padding(
                 padding: EdgeInsets.only(left: 25, ),
-                child: TextButton(onPressed: (){
+                child: kTextButton(onPressed: (){
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => SignInscreen())
                   );
