@@ -36,7 +36,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         textStyle: Textstyles.haveAccount,
-        foregroundColor: myColors.forgotPass,
+        foregroundColor: myColors.textBtn
 
       )
     )
