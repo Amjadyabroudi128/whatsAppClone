@@ -7,7 +7,6 @@ class myColors {
    static Color TC = Colors.green;
    static Color familyText = Colors.grey;
    static  Color FG = Colors.white;
-   static Color forgotPass = Colors.blueGrey;
    static Color? myMessage = Colors.green[400];
    static Color? message = Colors.grey[300];
    static Color labelClr = Colors.black;
@@ -15,5 +14,6 @@ class myColors {
    static Color FAB = Colors.lightGreen;
    static Color toastMessage = Colors.white;
    static Color toastBackGround = Colors.black54;
+   static Color? textBtn = Colors.lightBlue[800];
 
  }
