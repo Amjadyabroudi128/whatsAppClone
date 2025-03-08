@@ -5,9 +5,8 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
  class myTheme {
-   static OutlineInputBorder fieldBorder = OutlineInputBorder(
-     borderRadius: BorderRadius.circular(8),
-     borderSide: BorderSide(width: 1,)
+   static OutlineInputBorder fieldBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+     borderSide: BorderSide()
    );
    static OutlinedBorder circular = RoundedRectangleBorder(
      borderRadius: BorderRadius.circular(10)
