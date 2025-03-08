@@ -17,7 +17,6 @@ class emailField extends StatelessWidget {
     return kTextField(
       keyBoard: TextInputType.emailAddress,
       myController: myEmail,
-      border: OutlineInputBorder(),
       myIcon: icons.emailIcon,
       label: Text("Email"),
     );
