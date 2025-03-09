@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/features/testingScreen/testName.dart';
 import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 
-import '../mainChats/mainChat.dart';
-
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
 
@@ -28,7 +26,7 @@ class Wrapper extends StatelessWidget {
           if (snapshot.data == null) {
             return const WelcomeScreen();
           } else {
-            return const Mainchat();
+            return const Testname();
           }
         },
       ),

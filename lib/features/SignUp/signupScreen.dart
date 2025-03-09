@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import '../../Firebase/FirebaseAuth.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/haveAnAccount.dart';
 import 'Widgets/passField.dart';
@@ -17,7 +16,6 @@ class _SignupscreenState extends State<Signupscreen> {
   final TextEditingController myEmail = TextEditingController();
   final TextEditingController pass = TextEditingController();
   final TextEditingController name = TextEditingController();
-  FirebaseService firebase =  FirebaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +46,7 @@ class _SignupscreenState extends State<Signupscreen> {
 
               BoxSpacing(myHeight: 19,),
               Center(
-                child: signUpBtn(myEmail: myEmail, pass: pass, firebase: firebase,),
+                child: signUpBtn(myEmail: myEmail, pass: pass),
               )
             ],
           ),
