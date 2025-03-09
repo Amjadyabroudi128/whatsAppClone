@@ -21,7 +21,7 @@ class signUpBtn extends StatelessWidget {
       onPressed: () async {
         if(myEmail.text.isEmpty || pass.text.isEmpty) {
           myToast("please fill all the fields");
-          firebase.createEmailPassword(context, myEmail.text, pass.text)
+          firebase.createEmailPassword(context, myEmail.text, pass.text);
         }
       },
       child: Text("Sign Up"),
