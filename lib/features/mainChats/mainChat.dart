@@ -13,56 +13,51 @@ class Mainchat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final User currentUser = FirebaseAuth.instance.currentUser!;
-    final usersdb = FirebaseFirestore.instance.collection("users");
-
+    final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(onPressed: (){
-            FirebaseAuth.instance.signOut();
-          }, icon: Icon(Icons.logout))
-        ],
-        title: Text("Chats", style: Textstyles.appBar,),
-        backgroundColor: myColors.TC,
-        automaticallyImplyLeading: false,
-      ),
-      body: StreamBuilder(
-        stream: usersdb.snapshots(),
+      appBar: AppBar(title: Text('Chats')),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('users').snapshots(),
         builder: (context, snapshot) {
-          if(!snapshot.hasData)
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          var users = snapshot.data!.docs.where((doc) => doc['uid'] != currentUser.uid).toList();
-          if (users.isEmpty) return Center(child: Text("No other users found"));
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Center(child: Text('No other users found'));
+          }
+
+          // Get user docs excluding current user
+          final users = snapshot.data!.docs.where((doc) => doc.id != currentUserId).toList();
+
+          if (users.isEmpty) {
+            return Center(child: Text('No other users found'));
+          }
+
           return ListView.builder(
             itemCount: users.length,
             itemBuilder: (context, index) {
-              var userData = users[index];
+              final user = users[index];
+              final userEmail = user['email'];
+              final isOnline = user['isOnline'];
+
               return ListTile(
-                leading: Icon(Icons.account_circle, size: 35,),
-                title: Text(userData["email"]),
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => PrivateChatScreen(
-                        receiverId: userData['uid'],
-                        receiverEmail: userData['email'],
-                      ),
-                    ),
-                  );
+                title: Text(userEmail),
+                subtitle: Text(isOnline ? 'Online' : 'Offline'),
+                leading: CircleAvatar(
+                  child: Icon(Icons.person),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, 'privateChatScreen', arguments: {
+                    'receiverId': user['uid'],
+                    'receiverEmail': userEmail,
+                  });
                 },
               );
             },
           );
         },
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: (){},
-      //   child: icons.add,
-      // )
     );
   }
 }
