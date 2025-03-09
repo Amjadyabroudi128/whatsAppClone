@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/features/mainChats/mainChat.dart';
 import 'package:whatsappclone/features/testingScreen/testName.dart';
 import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
+
+import '../mainChats/mainChat.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
