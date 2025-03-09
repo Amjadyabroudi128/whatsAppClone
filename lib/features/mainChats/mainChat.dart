@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 import '../privateChatScreen/chatScreen.dart';
+import '../testingScreen/Widgets/signoutBtn.dart';
 
 class Mainchat extends StatelessWidget {
   final String? name;
@@ -17,6 +18,11 @@ class Mainchat extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            FirebaseAuth.instance.signOut();
+          }, icon: Icon(Icons.logout))
+        ],
         title: Text("Chats", style: Textstyles.appBar,),
         backgroundColor: myColors.TC,
         automaticallyImplyLeading: false,
@@ -34,7 +40,6 @@ class Mainchat extends StatelessWidget {
             itemCount: users.length,
             itemBuilder: (context, index) {
               var userData = users[index];
-              bool isOnline = userData['online'] ?? false;
               return ListTile(
                 leading: Icon(Icons.account_circle, size: 35,),
                 title: Text(userData["email"]),
