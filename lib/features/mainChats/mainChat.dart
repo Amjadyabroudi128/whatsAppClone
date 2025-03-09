@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/components/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 import '../privateChatScreen/chatScreen.dart';
