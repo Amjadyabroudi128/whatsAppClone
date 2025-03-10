@@ -29,17 +29,17 @@ class _MainchatState extends State<Mainchat> {
         backgroundColor: myColors.TC,
         automaticallyImplyLeading: false,
       ),
-      body: userList(),
+      // body: userList(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){},
         child: icons.add,
       )
     );
   }
-  Widget userList(DocumentSnapshot document){
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection("users"),
-      builder: ,
-    );
-  }
+  // Widget userList(DocumentSnapshot document){
+  //   return StreamBuilder<QuerySnapshot>(
+  //     stream: FirebaseFirestore.instance.collection("users"),
+  //     builder: ,
+  //   );
+  // }
 }

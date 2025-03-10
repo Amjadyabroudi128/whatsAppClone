@@ -41,7 +41,7 @@ import 'package:whatsappclone/components/flutterToast.dart';
        await auth.currentUser?.reload();
        User? updatedUser = auth.currentUser;
        if (updatedUser != null) {
-         Navigator.pushReplacementNamed(context, 'wrapper'); // Ensure '/home' routes to Wrapper
+         Navigator.pushReplacementNamed(context, 'wrapper');
        }
      } on FirebaseAuthException catch (e) {
        String message = '';

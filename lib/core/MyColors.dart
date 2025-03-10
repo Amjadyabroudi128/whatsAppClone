@@ -15,5 +15,6 @@ class myColors {
    static Color toastMessage = Colors.white;
    static Color toastBackGround = Colors.black54;
    static Color? textBtn = Colors.lightBlue[800];
+   static Color transparent = Colors.transparent;
 
  }
