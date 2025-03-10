@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/haveAnAccount.dart';
 import 'Widgets/passField.dart';
@@ -28,7 +29,7 @@ class _SignupscreenState extends State<Signupscreen> {
           automaticallyImplyLeading: false,
           title: Text("Sign up"),
           centerTitle: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: myColors.transparent,
         ),
         body: Padding(
           padding: EdgeInsets.all(20),
