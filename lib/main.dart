@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'package:whatsappclone/features/Wrapper/wrapperWidget.dart';
-import 'package:whatsappclone/features/name%20screen/name.dart';
-
 import 'features/testingScreen/testName.dart';
 import 'features/welcomeScreen/welcome.dart';
 import 'firebase_options.dart';
