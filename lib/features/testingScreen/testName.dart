@@ -4,7 +4,6 @@ import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/appTheme.dart';
-import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 import '../../components/TextField.dart';
 import '../../messageClass/messageClass.dart';
 import 'Widgets/signoutBtn.dart'; // Ensure the correct path
