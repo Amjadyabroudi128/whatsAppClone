@@ -30,7 +30,10 @@ import 'package:whatsappclone/core/MyColors.dart';
       floatingLabelStyle: Textstyles.floating
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: myColors.FAB
+      backgroundColor: myColors.FAB,
+      foregroundColor: Colors.white,
+      iconSize: 32,
+      elevation: 0
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -38,6 +41,7 @@ import 'package:whatsappclone/core/MyColors.dart';
         foregroundColor: myColors.textBtn,
 
       )
-    )
+    ),
+
    );
  }
