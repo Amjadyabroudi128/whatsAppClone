@@ -12,4 +12,5 @@ class icons {
   static Icon arrow = Icon(Icons.arrow_back);
   static Icon add = Icon(Icons.add);
   static Icon visibility = Icon(Icons.visibility);
+  static Icon visibility_off = Icon(Icons.visibility_off);
  }
