@@ -27,7 +27,7 @@ class _passFieldState extends State<passField> {
   Widget build(BuildContext context) {
     return kTextField(
       icon: kIconButton(
-        myIcon: Icon(passwordVisible ? Icons.visibility_off : Icons.visibility ),
+        myIcon: passwordVisible ? icons.visibility,
         onPressed: (){
           setState(() {
             passwordVisible = !passwordVisible;
