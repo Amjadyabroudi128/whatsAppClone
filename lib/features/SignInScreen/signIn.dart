@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../SignUp/Widgets/emailTextField.dart';
@@ -33,7 +34,7 @@ class _SignInscreenState extends State<SignInscreen> {
           centerTitle: true,
           backgroundColor: myColors.transparent,
         ),
-        body: Padding(
+        body: myPadding(
           padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +43,7 @@ class _SignInscreenState extends State<SignInscreen> {
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
-              Padding(
+              myPadding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: NotRegisterd(),
               ),
