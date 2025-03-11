@@ -31,7 +31,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: myColors.FAB,
-      foregroundColor: Colors.white,
+      foregroundColor: Colors.white60,
       iconSize: 32,
       elevation: 0
     ),
