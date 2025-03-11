@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/haveAnAccount.dart';
@@ -31,7 +32,7 @@ class _SignupscreenState extends State<Signupscreen> {
           centerTitle: true,
           backgroundColor: myColors.transparent,
         ),
-        body: Padding(
+        body: myPadding(
           padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -40,7 +41,7 @@ class _SignupscreenState extends State<Signupscreen> {
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
-              Padding(
+              myPadding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: haveAnAccount(),
               ),
