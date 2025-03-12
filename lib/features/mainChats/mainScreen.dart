@@ -5,17 +5,18 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
+import '../BottomNavBar/BottomNavBar.dart';
 import '../testingScreen/Widgets/signoutBtn.dart';
 
-class Mainchat extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   final String? name;
-  const Mainchat({super.key, this.name});
+  const MainScreen({super.key, this.name});
 
   @override
-  State<Mainchat> createState() => _MainchatState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainchatState extends State<Mainchat> {
+class _MainScreenState extends State<MainScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   final FirebaseAuth auth = FirebaseAuth.instance;
   @override
@@ -29,6 +30,7 @@ class _MainchatState extends State<Mainchat> {
         backgroundColor: myColors.TC,
         automaticallyImplyLeading: false,
       ),
+      bottomNavigationBar: Bottomnavbar(),
       // body: userList(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){},
