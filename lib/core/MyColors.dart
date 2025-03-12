@@ -16,5 +16,6 @@ class myColors {
    static Color toastBackGround = Colors.black54;
    static Color? textBtn = Colors.lightBlue[800];
    static Color transparent = Colors.transparent;
+   static Color? selecteditem = Colors.green[800];
 
  }
