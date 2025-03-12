@@ -16,5 +16,6 @@ class icons {
   static Icon visibility_off = Icon(Icons.visibility_off);
   static Icon contacts = Icon(CupertinoIcons.person);
   static Icon chats = Icon(Icons.chat);
+  static Icon settings = Icon(Icons.settings);
 
 }

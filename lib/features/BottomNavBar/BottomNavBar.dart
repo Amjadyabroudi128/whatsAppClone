@@ -41,7 +41,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
               label: 'Chats',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
+              icon: icons.settings,
               label: 'Settings',
             ),
           ],
