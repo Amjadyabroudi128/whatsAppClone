@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/features/contacts/contacts.dart';
 
 class Bottomnavbar extends StatefulWidget {
   const Bottomnavbar({super.key});
@@ -10,7 +12,7 @@ class Bottomnavbar extends StatefulWidget {
 class _BottomnavbarState extends State<Bottomnavbar> {
   int _selectedIndex = 0;
   final _widgetOptions = [
-    Text("Contacts "),
+    Contacts(),
     Text("chats"),
     Text('Search Page'),
   ];
@@ -43,7 +45,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue[800],
+          selectedItemColor: myColors.selecteditem,
           onTap: _onItemTapped,
         ),
       ),
