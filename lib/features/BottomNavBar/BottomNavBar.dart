@@ -37,7 +37,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
               label: 'Contacts',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
+              icon: icons.chats,
               label: 'Chats',
             ),
             BottomNavigationBarItem(
