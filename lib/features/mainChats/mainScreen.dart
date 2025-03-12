@@ -26,16 +26,9 @@ class _MainScreenState extends State<MainScreen> {
         actions: [
           signoutBtn(),
         ],
-        title: Text("Chats", style: Textstyles.appBar,),
-        backgroundColor: myColors.TC,
-        automaticallyImplyLeading: false,
       ),
       bottomNavigationBar: Bottomnavbar(),
       // body: userList(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        child: icons.add,
-      )
     );
   }
   // Widget userList(DocumentSnapshot document){
