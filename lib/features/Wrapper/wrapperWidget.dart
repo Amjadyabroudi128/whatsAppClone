@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/features/mainChats/mainChat.dart';
+import 'package:whatsappclone/features/mainChats/mainScreen.dart';
 import 'package:whatsappclone/features/testingScreen/testName.dart';
 import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 
@@ -27,7 +27,7 @@ class Wrapper extends StatelessWidget {
           if (snapshot.data == null) {
             return const WelcomeScreen();
           } else {
-            return const Mainchat();
+            return const MainScreen();
           }
         },
       ),
