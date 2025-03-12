@@ -1,5 +1,6 @@
 
- import 'package:flutter/material.dart';
+ import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 class icons {
@@ -13,4 +14,6 @@ class icons {
   static Icon add = Icon(Icons.add);
   static Icon visibility = Icon(Icons.visibility);
   static Icon visibility_off = Icon(Icons.visibility_off);
- }
+  static Icon contacts = Icon(CupertinoIcons.person);
+
+}
