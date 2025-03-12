@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
 
@@ -30,9 +31,9 @@ class _BottomnavbarState extends State<Bottomnavbar> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+          items:  <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.contacts),
+              icon: icons.contacts,
               label: 'Contacts',
             ),
             BottomNavigationBarItem(
