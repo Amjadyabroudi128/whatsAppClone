@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
+import '../chatScreen/chatScreen.dart';
 import '../testingScreen/Widgets/signoutBtn.dart';
 class Contacts extends StatefulWidget {
   const Contacts({super.key});
@@ -33,9 +34,44 @@ class _ContactsState extends State<Contacts> {
           backgroundColor: myColors.TC,
           automaticallyImplyLeading: false,
         ),
-        body: Center(
-          child: Text("SALAM"),
-        ),
+        body: userList(),
     );
+  }
+  Widget userList(){
+    final currentUserId = user?.uid ?? '';
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection("users").snapshots(),
+      builder: (context, snapshot) {
+        if(snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator(),);
+        } if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Center(child: Text("No users found"));
+        }
+        final users = snapshot.data!.docs.where((doc) => doc.id != currentUserId).toList();
+        if (users.isEmpty) {
+          return Center(child: Text("No other users available"));
+        }
+        return ListView.builder(
+          itemCount: users.length,
+          itemBuilder: (context, index) {
+            final userDoc = users[index];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                color: Colors.grey,
+                child: ListTile(
+                      title: Text(userDoc["email"]),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder:(context) => Testname()));
+                      },
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+
   }
 }
