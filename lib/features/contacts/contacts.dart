@@ -7,6 +7,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 
 import '../chatScreen/chatScreen.dart';
 import '../testingScreen/Widgets/signoutBtn.dart';
+import 'iconPerson.dart';
 class Contacts extends StatefulWidget {
   const Contacts({super.key});
 
@@ -62,7 +63,7 @@ class _ContactsState extends State<Contacts> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.person, size: 30),
+                      person(),
                       SizedBox(width: 10),
                       Expanded(
                         child: ListTile(
@@ -92,3 +93,5 @@ class _ContactsState extends State<Contacts> {
 
   }
 }
+
+
