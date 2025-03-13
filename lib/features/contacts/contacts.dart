@@ -55,17 +55,32 @@ class _ContactsState extends State<Contacts> {
           itemCount: users.length,
           itemBuilder: (context, index) {
             final userDoc = users[index];
+
             return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                color: Colors.grey,
-                child: ListTile(
-                      title: Text(userDoc["email"]),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder:(context) => Testname()));
-                      },
-                ),
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.person, size: 30),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: ListTile(
+                          title: Text(userDoc["email"] ?? "Unknown Email"),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Testname(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                ],
               ),
             );
           },
