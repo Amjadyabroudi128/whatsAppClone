@@ -17,5 +17,6 @@ class icons {
   static Icon contacts = Icon(CupertinoIcons.person);
   static Icon chats = Icon(Icons.chat);
   static Icon settings = Icon(Icons.settings);
+  static Icon person = Icon(Icons.person, size: 30,);
 
 }

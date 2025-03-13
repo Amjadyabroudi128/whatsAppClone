@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/icons.dart';
 
 class person extends StatelessWidget {
   const person({
@@ -7,6 +8,6 @@ class person extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(Icons.person, size: 30);
+    return icons.person;
   }
 }
