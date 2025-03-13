@@ -28,13 +28,6 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       bottomNavigationBar: Bottomnavbar(),
-      // body: userList(),
     );
   }
-  // Widget userList(DocumentSnapshot document){
-  //   return StreamBuilder<QuerySnapshot>(
-  //     stream: FirebaseFirestore.instance.collection("users"),
-  //     builder: ,
-  //   );
-  // }
 }
