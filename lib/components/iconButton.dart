@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'icons.dart';
+import '../core/icons.dart';
 
 class kIconButton extends StatelessWidget {
   final Widget? myIcon;

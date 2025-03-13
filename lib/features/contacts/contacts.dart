@@ -7,7 +7,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 
 import '../chatScreen/chatScreen.dart';
 import '../testingScreen/Widgets/signoutBtn.dart';
-import 'iconPerson.dart';
+import 'Widgets/iconPerson.dart';
 class Contacts extends StatefulWidget {
   const Contacts({super.key});
 

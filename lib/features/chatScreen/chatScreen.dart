@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/iconButton.dart';
-import 'package:whatsappclone/components/icons.dart';
+import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import '../../components/TextField.dart';

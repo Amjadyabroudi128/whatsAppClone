@@ -3,7 +3,7 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
 import '../../../components/iconButton.dart';
-import '../../../components/icons.dart';
+import '../../../core/icons.dart';
 import '../../welcomeScreen/welcome.dart';
 
 class signoutBtn extends StatelessWidget {
