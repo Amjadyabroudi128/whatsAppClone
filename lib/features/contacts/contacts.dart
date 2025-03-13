@@ -79,7 +79,9 @@ class _ContactsState extends State<Contacts> {
                       ),
                     ],
                   ),
-                  Divider(),
+                  Divider(
+                    indent: 30,
+                  ),
                 ],
               ),
             );
