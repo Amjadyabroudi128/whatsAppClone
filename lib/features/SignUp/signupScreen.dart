@@ -53,7 +53,7 @@ class _SignupscreenState extends State<Signupscreen> {
 
               BoxSpacing(myHeight: 19,),
               Center(
-                child: signUpBtn(myEmail: myEmail, pass: pass),
+                child: signUpBtn(myEmail: myEmail, pass: pass, name: name,),
               )
             ],
           ),

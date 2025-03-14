@@ -7,11 +7,12 @@ class signUpBtn extends StatelessWidget {
   const signUpBtn({
     super.key,
     required this.myEmail,
-    required this.pass,
+    required this.pass, required this.name,
   });
 
   final TextEditingController myEmail;
   final TextEditingController pass;
+  final TextEditingController name;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class signUpBtn extends StatelessWidget {
           myToast("please fill all the fields");
           return;
         }
-          await firebase.createEmailPassword(context, myEmail.text, pass.text);
+          await firebase.createEmailPassword(context, myEmail.text, pass.text,name.text );
       },
       child: Text("Sign Up"),
     );
