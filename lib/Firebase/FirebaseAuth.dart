@@ -6,12 +6,13 @@ import 'package:whatsappclone/components/flutterToast.dart';
    final FirebaseAuth auth = FirebaseAuth.instance;
    FirebaseFirestore users = FirebaseFirestore.instance;
 
-   Future<void> createEmailPassword(BuildContext context,String email, String password) async {
+   Future<void> createEmailPassword(BuildContext context,String email, String password, String name) async {
      try {
        await auth.createUserWithEmailAndPassword(email: email, password: password);
        users.collection("users").doc(auth.currentUser!.uid).set({
          'email': email,
          'uid': auth.currentUser!.uid,
+         "name" : name,
        });
        await auth.currentUser?.reload();
        User? updatedUser = auth.currentUser;
@@ -30,12 +31,13 @@ import 'package:whatsappclone/components/flutterToast.dart';
      catch (e){}
 
    }
-   Future<void> SigninUser(BuildContext context, String email, String password) async {
+   Future<void> SigninUser(BuildContext context, String email, String password, String name) async {
      try {
        await auth.signInWithEmailAndPassword(email: email, password: password);
        users.collection("users").doc(auth.currentUser!.uid).set({
          'email': email,
          'uid': auth.currentUser!.uid,
+         "name" : name
        });
        users.collection("users").get();
        await auth.currentUser?.reload();
