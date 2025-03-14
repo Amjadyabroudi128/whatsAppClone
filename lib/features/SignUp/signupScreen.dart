@@ -33,7 +33,7 @@ class _SignupscreenState extends State<Signupscreen> {
           backgroundColor: myColors.transparent,
         ),
         body: myPadding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
