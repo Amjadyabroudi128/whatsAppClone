@@ -9,6 +9,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import '../chatScreen/chatScreen.dart';
 import '../testingScreen/Widgets/signoutBtn.dart';
 import 'Widgets/iconPerson.dart';
+import 'Widgets/userListTile.dart';
 class Contacts extends StatefulWidget {
   const Contacts({super.key});
 
@@ -68,17 +69,7 @@ class _ContactsState extends State<Contacts> {
                       person(),
                       BoxSpacing(mWidth: 10),
                       Expanded(
-                        child: ListTile(
-                          title: Text(userDoc["name"] ?? "Unknown Email"),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Testname(),
-                              ),
-                            );
-                          },
-                        ),
+                        child: listTile(userDoc: userDoc),
                       ),
                     ],
                   ),
