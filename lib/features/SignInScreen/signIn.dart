@@ -55,7 +55,7 @@ class _SignInscreenState extends State<SignInscreen> {
               ),
               BoxSpacing(myHeight: 19,),
               Center(
-                child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user,),
+                child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user, name: name,),
               )
             ],
           ),
