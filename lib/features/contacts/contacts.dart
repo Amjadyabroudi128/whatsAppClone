@@ -18,6 +18,7 @@ class Contacts extends StatefulWidget {
 class _ContactsState extends State<Contacts> {
   User? user = FirebaseAuth.instance.currentUser;
   final FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +68,7 @@ class _ContactsState extends State<Contacts> {
                       SizedBox(width: 10),
                       Expanded(
                         child: ListTile(
-                          title: Text(userDoc["email"] ?? "Unknown Email"),
+                          title: Text(userDoc["name"] ?? "Unknown Email"),
                           onTap: () {
                             Navigator.push(
                               context,
