@@ -39,9 +39,11 @@ import 'package:whatsappclone/core/MyColors.dart';
       style: TextButton.styleFrom(
         textStyle: Textstyles.haveAccount,
         foregroundColor: myColors.textBtn,
-
-      )
+      ),
     ),
-
+    dividerTheme: DividerThemeData(
+      color: Colors.grey[400],
+      indent: 30
+    )
    );
  }
