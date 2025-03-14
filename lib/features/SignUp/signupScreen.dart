@@ -6,6 +6,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import '../../core/icons.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/haveAnAccount.dart';
+import 'Widgets/nameTextfield.dart';
 import 'Widgets/passField.dart';
 import 'Widgets/signupBtn.dart';
 
@@ -42,11 +43,7 @@ class _SignupscreenState extends State<Signupscreen> {
             children: [
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
-              kTextField(
-                myController: name,
-                label: Text("Name"),
-                myIcon: icons.person,
-              ),
+              nameField(name: name),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
               myPadding(
@@ -65,6 +62,7 @@ class _SignupscreenState extends State<Signupscreen> {
     );
   }
 }
+
 
 
 
