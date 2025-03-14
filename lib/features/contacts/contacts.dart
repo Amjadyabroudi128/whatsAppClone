@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
@@ -65,7 +66,7 @@ class _ContactsState extends State<Contacts> {
                   Row(
                     children: [
                       person(),
-                      SizedBox(width: 10),
+                      BoxSpacing(mWidth: 10),
                       Expanded(
                         child: ListTile(
                           title: Text(userDoc["name"] ?? "Unknown Email"),
