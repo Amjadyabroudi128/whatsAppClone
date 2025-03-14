@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../SignUp/Widgets/emailTextField.dart';
+import '../SignUp/Widgets/nameTextfield.dart';
 import '../SignUp/Widgets/passField.dart';
 import 'Widgets/SignInBttn.dart';
 import 'Widgets/notRegistered.dart';
@@ -19,6 +20,8 @@ class SignInscreen extends StatefulWidget {
 class _SignInscreenState extends State<SignInscreen> {
   final TextEditingController myEmail = TextEditingController();
   final TextEditingController pass = TextEditingController();
+  final TextEditingController name = TextEditingController();
+
   FirebaseService firebase =  FirebaseService();
   User? user = FirebaseAuth.instance.currentUser;
   @override
@@ -42,7 +45,10 @@ class _SignInscreenState extends State<SignInscreen> {
             children: [
               emailField(myEmail: myEmail),
               BoxSpacing(myHeight: 20,),
+              nameField(name: name),
+              BoxSpacing(myHeight: 20,),
               passField(pass: pass),
+
               myPadding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: NotRegisterd(),
