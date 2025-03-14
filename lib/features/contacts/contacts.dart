@@ -59,7 +59,7 @@ class _ContactsState extends State<Contacts> {
           itemBuilder: (context, index) {
             final userDoc = users[index];
 
-            return Padding(
+            return myPadding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
