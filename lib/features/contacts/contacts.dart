@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
+import '../../components/scaffoldMessanger.dart';
 import '../chatScreen/chatScreen.dart';
 import '../testingScreen/Widgets/signoutBtn.dart';
 import 'Widgets/iconPerson.dart';
@@ -35,6 +36,8 @@ class _ContactsState extends State<Contacts> {
               padding: const EdgeInsets.only(top: 17),
               child: IconButton(onPressed: (){
                 firebase.deleteAccount();
+                firebase.SignOut();
+                showSnackbar(context, "Signed out");
               }, icon: Icon(Icons.delete)),
             ),
           ],
