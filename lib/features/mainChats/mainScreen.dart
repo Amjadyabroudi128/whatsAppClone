@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 
 import '../BottomNavBar/BottomNavBar.dart';
 import '../testingScreen/Widgets/signoutBtn.dart';
