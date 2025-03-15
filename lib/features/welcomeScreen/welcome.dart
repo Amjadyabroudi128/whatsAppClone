@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/padding.dart';
 import '../../core/MyColors.dart';
 import 'Widgets/ElevatedButton.dart';
 import 'Widgets/richText.dart';
@@ -22,7 +23,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body:  const SingleChildScrollView(
         child:  Column(
           children: [
-            Padding(
+            myPadding(
               padding: EdgeInsets.only(top: 99),
               child: Center(
                 child: image(),
