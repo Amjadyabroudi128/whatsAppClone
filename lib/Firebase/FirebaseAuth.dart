@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
-   FirebaseFirestore users = FirebaseFirestore.instance;
-
+   final FirebaseFirestore users = FirebaseFirestore.instance;
    Future<void> createEmailPassword(BuildContext context,String email, String password, String name) async {
      try {
        await auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -59,5 +58,8 @@ import 'package:whatsappclone/components/flutterToast.dart';
 
    Future<void> SignOut ()async {
      auth.signOut();
+  }
+  Future<void> deleteAccount () async{
+     FirebaseAuth.instance.currentUser?.delete();
   }
  }
