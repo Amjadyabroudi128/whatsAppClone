@@ -60,6 +60,7 @@ import 'package:whatsappclone/components/flutterToast.dart';
      auth.signOut();
   }
   Future<void> deleteAccount () async{
-     FirebaseAuth.instance.currentUser?.delete();
+    await users.collection("users").doc(auth.currentUser!.uid).delete();
+    await FirebaseAuth.instance.currentUser?.delete();
   }
  }
