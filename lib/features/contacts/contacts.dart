@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
@@ -20,7 +21,7 @@ class Contacts extends StatefulWidget {
 class _ContactsState extends State<Contacts> {
   User? user = FirebaseAuth.instance.currentUser;
   final FirebaseAuth auth = FirebaseAuth.instance;
-
+  FirebaseService firebase =  FirebaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +30,12 @@ class _ContactsState extends State<Contacts> {
             myPadding(
               padding: const EdgeInsets.only(top: 17),
               child: signoutBtn(),
+            ),
+            myPadding(
+              padding: const EdgeInsets.only(top: 17),
+              child: IconButton(onPressed: (){
+                firebase.deleteAccount();
+              }, icon: Icon(Icons.delete)),
             ),
           ],
           title: myPadding(
