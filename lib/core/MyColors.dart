@@ -17,5 +17,6 @@ class myColors {
    static Color? textBtn = Colors.lightBlue[800];
    static Color transparent = Colors.transparent;
    static Color? selecteditem = Colors.green[800];
+   static Color logOut = Colors.white70;
 
  }
