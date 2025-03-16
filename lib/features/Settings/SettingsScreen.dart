@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/iconButton.dart';
 
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/components/padding.dart';
@@ -60,9 +61,28 @@ class _SettingScreenState extends State<SettingScreen> {
                 BoxSpacing(myHeight: 15,),
                 Card(
                   color: Colors.grey.shade100,
-                  child: ListTile(
-                    title: Text("Delete account"),
-                    leading: icons.person,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text("Sign out"),
+                        trailing: kIconButton(
+                          onPressed: (){} ,
+                          myIcon: icons.logout,
+                        )
+                      ),
+                      Divider(
+                        indent: 19,
+                        endIndent: 10,
+                        color: Colors.grey.shade400,
+                      ),
+                      ListTile(
+                          title: Text("Delete Account", style: TextStyle(fontSize: 19, color: Colors.red),),
+                          trailing: kIconButton(
+                            onPressed: (){} ,
+                            myIcon: Icon(Icons.remove)
+                          )
+                      ),
+                    ],
                   ),
                 ),
               ],
