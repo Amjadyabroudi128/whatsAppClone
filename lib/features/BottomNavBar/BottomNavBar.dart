@@ -3,6 +3,8 @@ import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
 
+import '../Settings/SettingsScreen.dart';
+
 class Bottomnavbar extends StatefulWidget {
   const Bottomnavbar({super.key});
 
@@ -11,11 +13,11 @@ class Bottomnavbar extends StatefulWidget {
 }
 
 class _BottomnavbarState extends State<Bottomnavbar> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   final _widgetOptions = [
     Contacts(),
     Text("chats"),
-    Text('Search Page'),
+    SettingScreen()
   ];
 
   void _onItemTapped(int index) {
