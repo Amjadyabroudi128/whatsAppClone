@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/components/padding.dart';
@@ -46,7 +47,7 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Column(
               children: [
                 AppBar(
-                  title: Text("Settings", style: TextStyle(fontSize: 20, fontWeight: fontWeightHelper.bold, letterSpacing: 1),),
+                  title: Text("Settings", style: Textstyles.settings,),
                 ),
                 BoxSpacing(myHeight: 20),
                 Card(
