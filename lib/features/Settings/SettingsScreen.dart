@@ -6,6 +6,8 @@ import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 
+import '../../components/fontWeightHelper.dart';
+
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
 
@@ -43,16 +45,23 @@ class _SettingScreenState extends State<SettingScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
+                AppBar(
+                  title: Text("Settings", style: TextStyle(fontSize: 20, fontWeight: fontWeightHelper.bold, letterSpacing: 1),),
+                ),
                 BoxSpacing(myHeight: 20),
                 Card(
                   color: Colors.grey.shade100,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(userName),
-                        leading: icons.person,
-                      ),
-                    ],
+                  child: ListTile(
+                    title: Text(userName),
+                    leading: icons.person,
+                  ),
+                ),
+                BoxSpacing(myHeight: 15,),
+                Card(
+                  color: Colors.grey.shade100,
+                  child: ListTile(
+                    title: Text("Delete account"),
+                    leading: icons.person,
                   ),
                 ),
               ],
