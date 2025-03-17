@@ -12,6 +12,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import '../../components/fontWeightHelper.dart';
 import '../testingScreen/Widgets/signoutBtn.dart';
 import 'Widget/nameCard.dart';
+import 'Widget/signout.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -60,10 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: myColors.CardColor,
                   child: Column(
                     children: [
-                      ListTile(
-                        title: Text("Sign out"),
-                        trailing: signoutBtn()
-                      ),
+                      signOut(),
                       Divider(
                         indent: 19,
                         endIndent: 10,
@@ -87,4 +85,5 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 }
+
 
