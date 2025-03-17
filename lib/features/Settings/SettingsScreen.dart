@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/components/padding.dart';
@@ -55,7 +56,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 nameCard(userName: userName),
                 BoxSpacing(myHeight: 15,),
                 Card(
-                  color: Colors.grey.shade100,
+                  color: myColors.CardColor,
                   child: Column(
                     children: [
                       ListTile(
