@@ -4,13 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
-
-import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-
-import '../../components/fontWeightHelper.dart';
-import '../testingScreen/Widgets/signoutBtn.dart';
 import 'Widget/nameCard.dart';
 import 'Widget/signout.dart';
 
