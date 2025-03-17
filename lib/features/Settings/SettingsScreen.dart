@@ -10,6 +10,7 @@ import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 
 import '../../components/fontWeightHelper.dart';
+import '../testingScreen/Widgets/signoutBtn.dart';
 import 'Widget/nameCard.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -61,10 +62,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     children: [
                       ListTile(
                         title: Text("Sign out"),
-                        trailing: kIconButton(
-                          onPressed: (){} ,
-                          myIcon: icons.logout,
-                        )
+                        trailing: signoutBtn()
                       ),
                       Divider(
                         indent: 19,
