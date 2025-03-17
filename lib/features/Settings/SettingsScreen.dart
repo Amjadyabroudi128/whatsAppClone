@@ -51,13 +51,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   title: Text("Settings", style: Textstyles.settings,),
                 ),
                 BoxSpacing(myHeight: 20),
-                Card(
-                  color: Colors.grey.shade100,
-                  child: ListTile(
-                    title: Text(userName),
-                    leading: icons.person,
-                  ),
-                ),
+                nameCard(userName: userName),
                 BoxSpacing(myHeight: 15,),
                 Card(
                   color: Colors.grey.shade100,
@@ -89,6 +83,26 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class nameCard extends StatelessWidget {
+  const nameCard({
+    super.key,
+    required this.userName,
+  });
+
+  final dynamic userName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.grey.shade100,
+      child: ListTile(
+        title: Text(userName),
+        leading: icons.person,
       ),
     );
   }
