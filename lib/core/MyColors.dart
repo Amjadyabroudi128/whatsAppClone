@@ -18,5 +18,6 @@ class myColors {
    static Color transparent = Colors.transparent;
    static Color? selecteditem = Colors.green[800];
    static Color logOut = Colors.white70;
+   static Color CardColor = Colors.grey.shade100;
 
  }
