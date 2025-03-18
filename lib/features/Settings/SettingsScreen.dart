@@ -6,6 +6,7 @@ import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'Widget/deleteAccount.dart';
 import 'Widget/nameCard.dart';
 import 'Widget/signout.dart';
 
@@ -75,21 +76,5 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 }
 
-class deleteAccount extends StatelessWidget {
-  const deleteAccount({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-        title: Text("Delete Account", style: TextStyle(fontSize: 19, color: Colors.red),),
-        trailing: kIconButton(
-          onPressed: (){} ,
-          myIcon: Icon(Icons.remove)
-        )
-    );
-  }
-}
 
 
