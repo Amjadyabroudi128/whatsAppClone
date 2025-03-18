@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 import '../../../components/iconButton.dart';
@@ -11,7 +12,7 @@ class deleteAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        title: Text("Delete Account", style: TextStyle(fontSize: 19, color: myColors.delete),),
+        title: Text("Delete Account", style: Textstyles.deleteStyle,),
         trailing: kIconButton(
             onPressed: (){} ,
             myIcon: Icon(Icons.remove)
