@@ -71,8 +71,13 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 Text("App Theme", style: TextStyle(color: Colors.grey[500]),),
                 Card(
+                  color: myColors.CardColor,
                   child: ListTile(
                     title: Text("Theme"),
+                    trailing: IconButton(
+                      onPressed: (){},
+                      icon: Icon(Icons.arrow_forward_ios, size: 15,),
+                    ),
                   ),
                 )
               ],
