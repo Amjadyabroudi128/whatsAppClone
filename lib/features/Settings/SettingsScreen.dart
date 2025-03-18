@@ -46,6 +46,7 @@ class _SettingScreenState extends State<SettingScreen> {
           return myPadding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppBar(
                   title: Text("Settings", style: Textstyles.settings,),
@@ -53,6 +54,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 BoxSpacing(myHeight: 20),
                 nameCard(userName: userName),
                 BoxSpacing(myHeight: 15,),
+                Text("Account", style: TextStyle(fontSize: 17, color: Colors.grey),),
                 Card(
                   color: myColors.CardColor,
                   child: Column(
@@ -67,6 +69,12 @@ class _SettingScreenState extends State<SettingScreen> {
                     ],
                   ),
                 ),
+                Text("App Theme", style: TextStyle(color: Colors.grey[500]),),
+                Card(
+                  child: ListTile(
+                    title: Text("Theme"),
+                  ),
+                )
               ],
             ),
           );
