@@ -13,4 +13,5 @@ class Textstyles {
   static TextStyle appBar = TextStyle(color: myColors.FG, fontWeight: fontWeightHelper.appBar);
   static TextStyle Ebtn =  TextStyle(fontSize: 18);
   static TextStyle settings = TextStyle(fontSize: 20, fontWeight: fontWeightHelper.bold, letterSpacing: 1);
+  static TextStyle deleteStyle = TextStyle(fontSize: 19, color: myColors.delete);
  }
