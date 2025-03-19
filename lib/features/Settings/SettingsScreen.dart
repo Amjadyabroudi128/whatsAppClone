@@ -69,6 +69,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     ],
                   ),
                 ),
+                BoxSpacing(myHeight: 10,),
                 Text("App Theme", style: TextStyle(color: Colors.grey[500]),),
                 Card(
                   color: myColors.CardColor,
