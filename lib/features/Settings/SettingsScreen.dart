@@ -3,9 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
+import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/enums/enums.dart';
 import 'Widget/deleteAccount.dart';
 import 'Widget/nameCard.dart';
 import 'Widget/signout.dart';
@@ -75,10 +77,28 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: myColors.CardColor,
                   child: ListTile(
                     title: Text("Theme"),
-                    trailing: IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.arrow_forward_ios, size: 15,),
-                    ),
+                    trailing: MyPopUpMenu(
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem<myPop>(
+                            value: myPop.off,
+                            child: Text(("Off")),
+                          ),
+                          PopupMenuItem<myPop>(
+                            value: myPop.darkTheme,
+                            child: Text(("Dark Theme")),
+                          ),
+                          PopupMenuItem<myPop>(
+                            value: myPop.system,
+                            child: Text(("System theme")),
+                          ),
+
+                        ];
+                      },
+                      onSelected: (selectedValue){
+
+                      },
+                    )
                   ),
                 )
               ],
