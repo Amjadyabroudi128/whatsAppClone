@@ -13,7 +13,8 @@ import 'Widget/nameCard.dart';
 import 'Widget/signout.dart';
 
 class SettingScreen extends StatefulWidget {
-  const SettingScreen({super.key});
+  final Function(myPop)onThemeChanged;
+  const SettingScreen({super.key, required this.onThemeChanged});
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -58,7 +59,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 BoxSpacing(myHeight: 15,),
                 Text("Account", style: TextStyle(fontSize: 17, color: Colors.grey),),
                 Card(
-                  color: myColors.CardColor,
                   child: Column(
                     children: [
                       signOut(),
@@ -74,7 +74,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 BoxSpacing(myHeight: 10,),
                 Text("App Theme", style: TextStyle(color: Colors.grey[500]),),
                 Card(
-                  color: myColors.CardColor,
                   child: ListTile(
                     title: Text("Theme"),
                     trailing: MyPopUpMenu(
@@ -96,7 +95,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ];
                       },
                       onSelected: (selectedValue){
-
+                        widget.onThemeChanged(selectedValue); // Call the passed function
                       },
                     )
                   ),
