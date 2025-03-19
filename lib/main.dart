@@ -30,7 +30,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      themeMode: ThemeMode.system, // theme depends on system
       theme: myTheme.appTheme,
+      darkTheme: myTheme.appTheme,
       // initialRoute: "nameScreen",
       routes: {
         "sign up": (context) => const Signupscreen(),
