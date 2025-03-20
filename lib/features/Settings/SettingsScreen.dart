@@ -96,11 +96,14 @@ class _SettingScreenState extends State<SettingScreen> {
                         ];
                       },
                       onSelected: (selectedValue){
-                        if (selectedValue == myPop.darkTheme) {
-                          myTheme.darkTheme;
-                        } else if (selectedValue == myPop.off) {
-                          myTheme.appTheme;
-                        }
+                        setState(() {
+                          if (selectedValue == myPop.darkTheme) {
+                            myTheme.darkTheme;
+                          } else if (selectedValue == myPop.off) {
+                            myTheme.appTheme;
+                          }
+                        });
+
                       },
                     )
                   ),
