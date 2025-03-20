@@ -13,6 +13,7 @@ import 'package:whatsappclone/core/MyColors.dart';
    );
    static BorderRadiusGeometry CircularContainer = BorderRadius.circular(10);
   static final ThemeData appTheme = ThemeData().copyWith(
+    cardColor: Colors.red,
        elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
              backgroundColor: myColors.TC,
@@ -44,7 +45,10 @@ import 'package:whatsappclone/core/MyColors.dart';
     dividerTheme: DividerThemeData(
       color: Colors.grey[400],
       indent: 30
-    )
+    ),
    );
+  static final ThemeData darkTheme = ThemeData().copyWith(
+    cardColor: Colors.orange
+  );
 
  }
