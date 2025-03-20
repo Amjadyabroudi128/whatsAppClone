@@ -81,16 +81,16 @@ class _SettingScreenState extends State<SettingScreen> {
                       icon: icons.arrowForward,
                       itemBuilder: (context) {
                         return [
-                          PopupMenuItem(
-                            value: myTheme.appTheme,
+                          PopupMenuItem<myPop>(
+                            value: myPop.off,
                             child: Text(("Off")),
                           ),
-                          PopupMenuItem(
-                            value: myTheme.darkTheme,
+                          PopupMenuItem<myPop>(
+                            value: myPop.darkTheme ,
                             child: Text(("Dark Theme")),
                           ),
-                          PopupMenuItem(
-                            value: myTheme(),
+                          PopupMenuItem<myPop>(
+                            value: myPop.system,
                             child: Text(("System theme")),
                           ),
 
