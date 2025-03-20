@@ -7,14 +7,14 @@ import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/enums/enums.dart';
 import 'Widget/deleteAccount.dart';
 import 'Widget/nameCard.dart';
 import 'Widget/signout.dart';
 
 class SettingScreen extends StatefulWidget {
-  final Function(myPop)onThemeChanged;
-  const SettingScreen({super.key, required this.onThemeChanged});
+  const SettingScreen({super.key,});
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -77,25 +77,26 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: ListTile(
                     title: Text("Theme"),
                     trailing: MyPopUpMenu(
+                      icon: Icon(Icons.arrow_forward_ios),
                       itemBuilder: (context) {
                         return [
-                          PopupMenuItem<myPop>(
-                            value: myPop.off,
+                          PopupMenuItem(
+                            value: myTheme.appTheme,
                             child: Text(("Off")),
                           ),
-                          PopupMenuItem<myPop>(
-                            value: myPop.darkTheme,
+                          PopupMenuItem(
+                            value: myTheme.darkTheme,
                             child: Text(("Dark Theme")),
                           ),
-                          PopupMenuItem<myPop>(
-                            value: myPop.system,
+                          PopupMenuItem(
+                            value: myTheme(),
                             child: Text(("System theme")),
                           ),
 
                         ];
                       },
                       onSelected: (selectedValue){
-                        widget.onThemeChanged(selectedValue); // Call the passed function
+                        myTheme.appTheme != myTheme.darkTheme; // Call the passed function
                       },
                     )
                   ),
