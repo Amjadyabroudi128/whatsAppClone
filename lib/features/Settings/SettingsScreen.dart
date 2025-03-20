@@ -73,7 +73,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
                 BoxSpacing(myHeight: 10,),
-                Text("App Theme", style: TextStyle(color: Colors.grey[500]),),
+                Text("App Theme", style: Textstyles.themeStyle),
                 Card(
                   child: ListTile(
                     title: Text("Theme"),
