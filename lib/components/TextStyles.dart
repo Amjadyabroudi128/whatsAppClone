@@ -14,4 +14,5 @@ class Textstyles {
   static TextStyle Ebtn =  TextStyle(fontSize: 18);
   static TextStyle settings = TextStyle(fontSize: 20, fontWeight: fontWeightHelper.bold, letterSpacing: 1);
   static TextStyle deleteStyle = TextStyle(fontSize: 19, color: myColors.delete);
+  static TextStyle themeStyle = TextStyle(color: Colors.grey[500], fontSize: 16);
  }
