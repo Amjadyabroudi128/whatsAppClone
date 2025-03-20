@@ -93,11 +93,14 @@ class _SettingScreenState extends State<SettingScreen> {
                             value: myPop.system,
                             child: Text(("System theme")),
                           ),
-
                         ];
                       },
                       onSelected: (selectedValue){
-
+                        if (selectedValue == myPop.darkTheme) {
+                          myTheme.darkTheme;
+                        } else if (selectedValue == myPop.off) {
+                          myTheme.appTheme;
+                        }
                       },
                     )
                   ),
