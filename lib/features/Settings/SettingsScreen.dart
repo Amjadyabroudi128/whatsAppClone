@@ -8,6 +8,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/core/appTheme.dart';
+import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/enums/enums.dart';
 import 'Widget/deleteAccount.dart';
 import 'Widget/nameCard.dart';
@@ -77,7 +78,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: ListTile(
                     title: Text("Theme"),
                     trailing: MyPopUpMenu(
-                      icon: Icon(Icons.arrow_forward_ios),
+                      icon: icons.arrowForward,
                       itemBuilder: (context) {
                         return [
                           PopupMenuItem(
@@ -96,7 +97,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ];
                       },
                       onSelected: (selectedValue){
-                        myTheme.appTheme != myTheme.darkTheme; // Call the passed function
+
                       },
                     )
                   ),
