@@ -53,7 +53,7 @@ import 'package:whatsappclone/core/MyColors.dart';
    );
   static final ThemeData darkTheme = ThemeData().copyWith(
     cardTheme: CardTheme(
-      color: Colors.yellow,
+      color: Colors.purple,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
