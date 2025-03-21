@@ -6,7 +6,8 @@ import 'package:whatsappclone/features/contacts/contacts.dart';
 import '../Settings/SettingsScreen.dart';
 
 class Bottomnavbar extends StatefulWidget {
-  const Bottomnavbar({super.key});
+  final Function(ThemeData)? onThemeChange; // Theme callback
+  const Bottomnavbar({super.key, this.onThemeChange});
 
   @override
   State<Bottomnavbar> createState() => _BottomnavbarState();
@@ -14,16 +15,28 @@ class Bottomnavbar extends StatefulWidget {
 
 class _BottomnavbarState extends State<Bottomnavbar> {
   int _selectedIndex = 2;
-  final _widgetOptions = [
-    Contacts(),
-    Text("chats"),
-    SettingScreen()
-  ];
+  final _widgetOptions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _widgetOptions.addAll([
+      Contacts(),
+      const Text("Chats"),
+      SettingScreen(onThemeChange: widget.onThemeChange),
+
+    ]);
+  }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+  @override
+  void dispose() {
+    // Clean up any listeners or references here.
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -55,3 +68,4 @@ class _BottomnavbarState extends State<Bottomnavbar> {
     );
   }
 }
+
