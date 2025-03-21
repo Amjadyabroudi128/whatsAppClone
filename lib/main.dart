@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
-import 'package:whatsappclone/features/Wrapper/wrapperWidget.dart';
+import 'features/BottomNavBar/BottomNavBar.dart';
 import 'features/testingScreen/testName.dart';
 import 'features/welcomeScreen/welcome.dart';
 import 'firebase_options.dart';
@@ -23,6 +23,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  ThemeData _theme = myTheme.appTheme;
+
+  void _updateTheme(ThemeData newTheme) {
+    if (mounted) {
+      setState(() {
+        _theme = newTheme;
+      });
+    }
+  }
 
   // This widget is the root of your application.
   @override
@@ -30,18 +39,19 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      themeMode: ThemeMode.system, // theme depends on system
-      theme: myTheme.appTheme,
-      darkTheme: myTheme.appTheme,
+      theme: _theme,
+      darkTheme: myTheme.darkTheme,
       // initialRoute: "nameScreen",
       routes: {
         "sign up": (context) => const Signupscreen(),
         "test": (context) => Testname(),
         // "nameScreen": (context) => NameScreen(),
         "welcome" : (context) => WelcomeScreen(),
-        "wrapper" : (context) => Wrapper(),
+        // "wrapper" : (context) => Wrapper(
+        //     onThemeChange: updateTheme
+        // ),
       },
-      home: Wrapper(),
+      home:  Bottomnavbar(onThemeChange: _updateTheme),
     );
   }
 }
