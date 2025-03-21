@@ -96,16 +96,17 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ];
                       },
-                      onSelected: (selectedValue){
-                      setState(() {
-                        if (selectedValue == myPop.darkTheme) {
-                          myTheme.darkTheme;
-                        } else if (selectedValue == myPop.off) {
-                          myTheme.appTheme;
-                        }
-                      });
+                        onSelected: (value) {
+                          if (!mounted) return; // Prevent operations if widget is not active
 
-                    },
+                          if (value == myPop.off) {
+                            widget.onThemeChange?.call(myTheme.appTheme);
+                          } else if (value == myPop.darkTheme) {
+                            widget.onThemeChange?.call(myTheme.darkTheme);
+                          }
+                        }
+
+
                     )
                   ),
                 )
