@@ -15,7 +15,8 @@ import 'Widget/nameCard.dart';
 import 'Widget/signout.dart';
 
 class SettingScreen extends StatefulWidget {
-  const SettingScreen({super.key,});
+  final Function(ThemeData)? onThemeChange;
+  const SettingScreen({super.key, this.onThemeChange,});
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -96,15 +97,15 @@ class _SettingScreenState extends State<SettingScreen> {
                         ];
                       },
                       onSelected: (selectedValue){
-                        setState(() {
-                          if (selectedValue == myPop.darkTheme) {
-                            myTheme.darkTheme;
-                          } else if (selectedValue == myPop.off) {
-                            myTheme.appTheme;
-                          }
-                        });
+                      setState(() {
+                        if (selectedValue == myPop.darkTheme) {
+                          myTheme.darkTheme;
+                        } else if (selectedValue == myPop.off) {
+                          myTheme.appTheme;
+                        }
+                      });
 
-                      },
+                    },
                     )
                   ),
                 )
