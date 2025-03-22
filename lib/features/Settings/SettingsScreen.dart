@@ -13,6 +13,7 @@ import 'package:whatsappclone/enums/enums.dart';
 import 'Widget/deleteAccount.dart';
 import 'Widget/nameCard.dart';
 import 'Widget/signout.dart';
+import 'Widget/themeCard.dart';
 
 class SettingScreen extends StatefulWidget {
   final Function(ThemeData)? onThemeChange;
@@ -75,43 +76,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 BoxSpacing(myHeight: 10,),
                 Text("App Theme", style: Textstyles.themeStyle),
-                Card(
-                  child: ListTile(
-                    title: Text("Theme"),
-                    trailing: MyPopUpMenu(
-                      icon: icons.arrowForward,
-                      itemBuilder: (context) {
-                        return [
-                          PopupMenuItem<myPop>(
-                            value: myPop.off,
-                            child: Text(("Off")),
-                          ),
-                          PopupMenuItem<myPop>(
-                            value: myPop.darkTheme ,
-                            child: Text(("Dark Theme")),
-                          ),
-                          PopupMenuItem<myPop>(
-                            value: myPop.system,
-                            child: Text(("System theme")),
-                          ),
-                        ];
-                      },
-                        onSelected: (value) {
-                          if (!mounted) return; // Prevent operations if widget is not active
-
-                          if (value == myPop.off) {
-                            widget.onThemeChange?.call(myTheme.appTheme);
-                          } else if (value == myPop.darkTheme) {
-                            widget.onThemeChange?.call(myTheme.darkTheme);
-                          } else {
-                            widget.onThemeChange?.call(ThemeData());
-                          }
-                        }
-
-
-                    )
-                  ),
-                )
+                themeCard(mounted: mounted, widget: widget)
               ],
             ),
           );
@@ -120,6 +85,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 }
+
 
 
 
