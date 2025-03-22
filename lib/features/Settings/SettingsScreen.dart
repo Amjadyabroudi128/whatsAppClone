@@ -103,6 +103,8 @@ class _SettingScreenState extends State<SettingScreen> {
                             widget.onThemeChange?.call(myTheme.appTheme);
                           } else if (value == myPop.darkTheme) {
                             widget.onThemeChange?.call(myTheme.darkTheme);
+                          } else {
+                            widget.onThemeChange?.call(ThemeData());
                           }
                         }
 

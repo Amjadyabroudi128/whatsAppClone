@@ -41,15 +41,12 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       theme: _theme,
       darkTheme: myTheme.darkTheme,
+      themeMode: ThemeMode.system,
       // initialRoute: "nameScreen",
       routes: {
         "sign up": (context) => const Signupscreen(),
         "test": (context) => Testname(),
-        // "nameScreen": (context) => NameScreen(),
         "welcome" : (context) => WelcomeScreen(),
-        // "wrapper" : (context) => Wrapper(
-        //     onThemeChange: updateTheme
-        // ),
       },
       home:  Bottomnavbar(onThemeChange: _updateTheme),
     );
