@@ -20,5 +20,6 @@ class myColors {
    static Color logOut = Colors.white70;
    static Color CardColor = Colors.grey.shade100;
    static Color delete = Colors.red;
+   static Color darkCard = Colors.black87;
 
  }

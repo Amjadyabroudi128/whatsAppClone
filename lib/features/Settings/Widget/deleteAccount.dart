@@ -12,7 +12,7 @@ class deleteAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        title: Text("Delete Account", style: Textstyles.deleteStyle,),
+        title: Text("Delete Account",),
         trailing: kIconButton(
             onPressed: (){} ,
             myIcon: Icon(Icons.remove)
