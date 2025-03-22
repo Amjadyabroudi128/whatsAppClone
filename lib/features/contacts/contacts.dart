@@ -27,20 +27,6 @@ class _ContactsState extends State<Contacts> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          actions: [
-            // myPadding(
-            //   padding: const EdgeInsets.only(top: 17),
-            //   child: signoutBtn(),
-            // ),
-            // myPadding(
-            //   padding: const EdgeInsets.only(top: 17),
-            //   child: IconButton(onPressed: (){
-            //     firebase.deleteAccount();
-            //     firebase.SignOut();
-            //     showSnackbar(context, "Signed out");
-            //   }, icon: Icon(Icons.delete)),
-            // ),
-          ],
           title: myPadding(
             padding: const EdgeInsets.only(top: 18),
             child: Text("Chats", style: Textstyles.appBar,),
