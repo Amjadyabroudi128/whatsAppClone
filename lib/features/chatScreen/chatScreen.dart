@@ -8,7 +8,8 @@ import '../../components/TextField.dart';
 import '../../messageClass/messageClass.dart';
 
 class Testname extends StatefulWidget {
-  const Testname({super.key}); // Fixed the syntax error
+  final String username;
+  const Testname({super.key, required this.username}); // Fixed the syntax error
 
   @override
   State<Testname> createState() => _TestnameState();
@@ -34,7 +35,7 @@ class _TestnameState extends State<Testname> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        title: Text("${user?.email}", style: TextStyle(fontSize: 16),), // Display user email
+        title: Text("${widget.username}", style: TextStyle(fontSize: 16),), // Display user email
       ),
       body: Column(
         children: [
@@ -48,7 +49,7 @@ class _TestnameState extends State<Testname> {
                     children: [
                       Align(
                         child: Text(messages[index].isme
-                            ? "${user?.email ?? 'Unknown'}" // Show user email
+                            ? "${widget.username ?? 'Unknown'}" // Show user email
                             : "User B"
                         ),
                         alignment: messages[index].isme
