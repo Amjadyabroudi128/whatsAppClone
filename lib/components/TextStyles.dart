@@ -7,7 +7,7 @@ class Textstyles {
   static TextStyle privacy = TextStyle(color: myColors.TC);
   static TextStyle read = TextStyle(fontSize: 20, color: myColors.familyText);
   static TextStyle haveAccount = TextStyle(fontSize: 15);
-  static TextStyle hintStyle = TextStyle(color: myColors.floating, fontSize: 16);
+  static TextStyle hintStyle = TextStyle(color: Colors.black87, fontSize: 16);
   static TextStyle label = TextStyle(color: myColors.labelClr, fontSize: 15);
   static TextStyle floating = TextStyle(fontSize: 25, color: myColors.floating);
   static TextStyle appBar = TextStyle(color: myColors.FG, fontWeight: fontWeightHelper.appBar);
