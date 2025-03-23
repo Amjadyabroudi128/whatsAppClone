@@ -29,7 +29,7 @@ class _TestnameState extends State<Testname> {
       });
     }
   }
-
+  Color scaffold = Colors.white;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
