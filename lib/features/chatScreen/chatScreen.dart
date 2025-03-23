@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/colorList/colorsList.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/iconButton.dart';
+import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import '../../components/TextField.dart';
+import '../../enums/enums.dart';
 import '../../messageClass/messageClass.dart';
 
 class Testname extends StatefulWidget {
@@ -33,9 +37,39 @@ class _TestnameState extends State<Testname> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: scaffold,
       appBar: AppBar(
+        backgroundColor: scaffold,
         automaticallyImplyLeading: true,
         title: Text("${widget.username}", style: TextStyle(fontSize: 16),), // Display user email
+        actions: [
+          PopupMenuButton<Color>(
+            icon: Icon(Icons.color_lens),
+            itemBuilder: (context) {
+              return colorNames.keys.map((Color color) {
+                return PopupMenuItem<Color>(
+                  value: color,
+                  child: Row(
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 10,
+                        backgroundColor: color,
+                      ),
+                      BoxSpacing(mWidth: 10,),
+                      Text(colorNames[color]!),
+                    ],
+                  ),
+                );
+              }).toList();
+            },
+            onSelected: (Color color) {
+              setState(() {
+                scaffold = color;
+              });
+            },
+          )
+
+        ],
       ),
       body: Column(
         children: [
