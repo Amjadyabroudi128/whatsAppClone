@@ -50,8 +50,6 @@ class themeCard extends StatelessWidget {
                   widget.onThemeChange?.call(ThemeData());
                 }
               }
-
-
           )
       ),
     );

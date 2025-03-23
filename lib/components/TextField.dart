@@ -10,7 +10,8 @@ class kTextField extends StatelessWidget {
   final TextInputType? keyBoard;
   final String? hint;
   final Widget? icon;
-  const kTextField({super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon});
+  final Widget? suffix;
+  const kTextField({super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon, this.suffix});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class kTextField extends StatelessWidget {
         hintStyle: Textstyles.hintStyle,
         label: label,
         prefixIcon: myIcon,
+        suffix: suffix,
         border: border,
       ),
     );
