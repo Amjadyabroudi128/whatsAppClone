@@ -60,7 +60,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 BoxSpacing(myHeight: 20),
                 nameCard(userName: userName),
                 BoxSpacing(myHeight: 15,),
-                Text("Account", style: TextStyle(fontSize: 17, color: Colors.grey),),
+                Text("Account", style: Textstyles.accountStyle,),
                 Card(
                   child: Column(
                     children: [

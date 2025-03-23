@@ -15,4 +15,5 @@ class Textstyles {
   static TextStyle settings = TextStyle(fontSize: 20, fontWeight: fontWeightHelper.bold, letterSpacing: 1);
   static TextStyle deleteStyle = TextStyle(fontSize: 19, color: myColors.delete);
   static TextStyle themeStyle = TextStyle(color: Colors.grey[500], fontSize: 16);
+  static TextStyle accountStyle = TextStyle(fontSize: 17, color: Colors.grey);
  }
