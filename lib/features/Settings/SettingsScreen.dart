@@ -11,6 +11,7 @@ import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/enums/enums.dart';
 import 'Widget/deleteAccount.dart';
+import 'Widget/dividerWidget.dart';
 import 'Widget/nameCard.dart';
 import 'Widget/signout.dart';
 import 'Widget/themeCard.dart';
@@ -65,11 +66,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: Column(
                     children: [
                       signOut(),
-                      Divider(
-                        indent: 19,
-                        endIndent: 10,
-                        color: Colors.grey.shade400,
-                      ),
+                      divider(),
                       deleteAccount(),
                     ],
                   ),
