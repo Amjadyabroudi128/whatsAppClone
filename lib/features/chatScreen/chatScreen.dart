@@ -43,7 +43,7 @@ class _TestnameState extends State<Testname> {
         automaticallyImplyLeading: true,
         title: Text("${widget.username}", style: TextStyle(fontSize: 16),), // Display user email
         actions: [
-          PopupMenuButton<Color>(
+          MyPopUpMenu<Color>(
             icon: Icon(Icons.color_lens),
             itemBuilder: (context) {
               return colorNames.keys.map((Color color) {
