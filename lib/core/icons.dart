@@ -19,5 +19,6 @@ class icons {
   static Icon settings = Icon(Icons.settings);
   static Icon person = Icon(Icons.person, size: 30,);
   static Icon arrowForward = Icon(Icons.arrow_forward_ios);
+  static Icon remove = Icon(Icons.remove_circle);
 
 }

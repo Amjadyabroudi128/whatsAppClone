@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/core/icons.dart';
 
 import '../../../components/iconButton.dart';
 
@@ -15,7 +16,7 @@ class deleteAccount extends StatelessWidget {
         title: Text("Delete Account",),
         trailing: kIconButton(
             onPressed: (){} ,
-            myIcon: Icon(Icons.remove)
+            myIcon: icons.remove
         )
     );
   }
