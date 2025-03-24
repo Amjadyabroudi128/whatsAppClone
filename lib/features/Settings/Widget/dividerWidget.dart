@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 
 class divider extends StatelessWidget {
   const divider({
@@ -10,7 +11,7 @@ class divider extends StatelessWidget {
     return Divider(
       indent: 19,
       endIndent: 10,
-      color: Colors.grey.shade400,
+      color:myColors.DividerClr,
     );
   }
 }
