@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../colorList/colorsList.dart';
+import 'colorsList.dart';
 
 class Colorpicking extends StatefulWidget {
   const Colorpicking({super.key});
