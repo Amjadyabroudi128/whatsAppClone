@@ -7,9 +7,10 @@ import '../../../components/popUpMenu.dart';
 import '../../../core/appTheme.dart';
 import '../../../core/icons.dart';
 import '../../../enums/enums.dart';
+import '../../../globalState.dart';
 import '../SettingsScreen.dart';
 
-class themeCard extends StatelessWidget {
+class themeCard extends StatefulWidget {
   const themeCard({
     super.key,
     required this.mounted,
@@ -19,6 +20,22 @@ class themeCard extends StatelessWidget {
   final bool mounted;
   final SettingScreen widget;
 
+  @override
+  State<themeCard> createState() => _themeCardState();
+}
+
+class _themeCardState extends State<themeCard> {
+  Color themeColor = Colors.white; // Default theme color
+
+  void openColorPicker() async {
+    final selectedColor = await Navigator.of(context).pushNamed("pickColor");
+
+    if (selectedColor != null && selectedColor is Color) {
+      setState(() {
+        themeColor = selectedColor; // Update the theme color dynamically
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -48,28 +65,33 @@ class themeCard extends StatelessWidget {
                     // if (!mounted) return; // Prevent operations if widget is not active
 
                     if (value == myPop.off) {
-                      widget.onThemeChange?.call(myTheme.appTheme);
+                      widget.widget.onThemeChange?.call(myTheme.appTheme);
                     } else if (value == myPop.darkTheme) {
-                      widget.onThemeChange?.call(myTheme.darkTheme);
+                      widget.widget.onThemeChange?.call(myTheme.darkTheme);
                     } else {
-                      widget.onThemeChange?.call(ThemeData());
+                      widget.widget.onThemeChange?.call(ThemeData());
                     }
                   }
               )
           ),
           divider(),
           GestureDetector(
-            onTap: (){
-              Navigator.of(context).pushNamed("pickColor");
+            onTap: () async {
+              final selectedColor = await Navigator.of(context).pushNamed("pickColor");
+              if (selectedColor != null && selectedColor is Color) {
+                // Update the global ValueNotifier
+                selectedThemeColor.value = selectedColor;
+              }
             },
             child: ListTile(
               title: Text("Chat Theme"),
-                trailing: kIconButton(
-                    onPressed: (){} ,
-                    myIcon: Icon(Icons.color_lens_outlined)
-                )
+              trailing: kIconButton(
+                onPressed: () {},
+                myIcon: Icon(Icons.color_lens_outlined),
+              ),
             ),
           )
+
         ],
       ),
     );
