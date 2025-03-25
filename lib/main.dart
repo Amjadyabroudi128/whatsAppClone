@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/colorPicker/ColorPicking.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
         "sign up": (context) => const Signupscreen(),
         "test": (context) => Testname(),
         "welcome" : (context) => WelcomeScreen(),
+        "pickColor": (context) => Colorpicking(),
       },
       home:  Bottomnavbar(onThemeChange: _updateTheme),
     );
