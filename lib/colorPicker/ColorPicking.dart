@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/icons.dart';
 import 'colorsList.dart';
 
 class Colorpicking extends StatefulWidget {
@@ -17,8 +18,8 @@ class _ColorpickingState extends State<Colorpicking> {
       backgroundColor: Colors.black54,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Select Chat Color", style: TextStyle(fontSize: 18, color: Colors.white)),
-        iconTheme: const IconThemeData(color: Colors.white),
+        title:  Text(" Chat Color", style: TextStyle(fontSize: 18, color: Colors.white)),
+        iconTheme:  IconThemeData(color: Colors.white),
         backgroundColor: Colors.black54,
       ),
       body: GridView.builder(
@@ -42,7 +43,7 @@ class _ColorpickingState extends State<Colorpicking> {
                   children: [
                     CircleAvatar(radius: 30, backgroundColor: color),
                     if (selectedIndex == index)
-                      const Icon(Icons.check, color: Colors.black, size: 40),
+                       icons.tick,
                   ],
                 ),
                 const SizedBox(height: 10),
