@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import '../core/icons.dart';
 import 'colorsList.dart';
@@ -47,7 +48,7 @@ class _ColorpickingState extends State<Colorpicking> {
                        icons.tick,
                   ],
                 ),
-                const SizedBox(height: 10),
+                const BoxSpacing(myHeight: 10),
                 Text(colorName, style: const TextStyle(color: Colors.white, fontSize: 16)),
               ],
             ),
