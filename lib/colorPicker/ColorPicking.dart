@@ -50,7 +50,7 @@ class _ColorpickingState extends State<Colorpicking> {
                   ],
                 ),
                 const BoxSpacing(myHeight: 10),
-                Text(colorName, style: const TextStyle(color: Colors.white, fontSize: 16)),
+                Text(colorName, style:  Textstyles.colorName),
               ],
             ),
           );
