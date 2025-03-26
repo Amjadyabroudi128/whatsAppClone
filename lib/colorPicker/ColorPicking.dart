@@ -43,7 +43,7 @@ class _ColorpickingState extends State<Colorpicking> {
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    CircleAvatar(radius: 30, backgroundColor: color),
+                    avatar(color: color),
                     if (selectedIndex == index)
                        icons.tick,
                   ],
@@ -58,3 +58,4 @@ class _ColorpickingState extends State<Colorpicking> {
     );
   }
 }
+
