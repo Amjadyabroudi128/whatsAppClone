@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import '../core/icons.dart';
 import 'colorsList.dart';
 
@@ -18,7 +19,7 @@ class _ColorpickingState extends State<Colorpicking> {
       backgroundColor: Colors.black54,
       appBar: AppBar(
         centerTitle: true,
-        title:  Text(" Chat Color", style: TextStyle(fontSize: 18, color: Colors.white)),
+        title:  Text(" Chat Color", style: Textstyles.selectClr),
         iconTheme:  IconThemeData(color: Colors.white),
         backgroundColor: Colors.black54,
       ),
