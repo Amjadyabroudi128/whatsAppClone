@@ -17,4 +17,5 @@ class Textstyles {
   static TextStyle themeStyle = TextStyle(color: Colors.grey[500], fontSize: 16);
   static TextStyle accountStyle = TextStyle(fontSize: 17, color: Colors.grey);
   static TextStyle selectClr = TextStyle(fontSize: 18, color: Colors.white);
+  static TextStyle colorName = TextStyle(color: Colors.white, fontSize: 16);
  }
