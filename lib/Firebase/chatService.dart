@@ -1,4 +1,5 @@
 
- class ChatService {
+
+class ChatService {
 
  }

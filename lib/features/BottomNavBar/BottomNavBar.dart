@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
+import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 
 import '../Settings/SettingsScreen.dart';
 
@@ -24,7 +25,6 @@ class _BottomnavbarState extends State<Bottomnavbar> {
       Contacts(),
       const Text("Chats"),
       SettingScreen(onThemeChange: widget.onThemeChange),
-
     ]);
   }
 
