@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/colorPicker/ColorPicking.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
+import 'package:whatsappclone/features/contacts/contacts.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
 import 'features/testingScreen/testName.dart';
 import 'features/welcomeScreen/welcome.dart';
@@ -49,6 +50,8 @@ class _MyAppState extends State<MyApp> {
         "test": (context) => Testname(),
         "welcome" : (context) => WelcomeScreen(),
         "pickColor": (context) => Colorpicking(),
+        "contacts": (context) => Contacts(),
+        "btm": (context) => Bottomnavbar()
       },
       home:  Bottomnavbar(onThemeChange: _updateTheme),
     );
