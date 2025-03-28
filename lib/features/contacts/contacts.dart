@@ -9,7 +9,6 @@ import 'package:whatsappclone/core/MyColors.dart';
 
 import '../../components/scaffoldMessanger.dart';
 import '../chatScreen/chatScreen.dart';
-import '../testingScreen/Widgets/signoutBtn.dart';
 import 'Widgets/iconPerson.dart';
 import 'Widgets/userListTile.dart';
 class Contacts extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../testingScreen/Widgets/signoutBtn.dart';
+import 'signoutBtn.dart';
 
 class signOut extends StatelessWidget {
   const signOut({
