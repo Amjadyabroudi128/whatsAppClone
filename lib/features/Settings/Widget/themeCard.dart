@@ -87,7 +87,7 @@ class _themeCardState extends State<themeCard> {
               title: Text("Chat Theme"),
               trailing: kIconButton(
                 onPressed: () {},
-                myIcon: Icon(Icons.color_lens_outlined),
+                myIcon: icons.colors,
               ),
             ),
           )

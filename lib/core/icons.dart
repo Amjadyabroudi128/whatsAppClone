@@ -21,5 +21,6 @@ class icons {
   static Icon arrowForward = Icon(Icons.arrow_forward_ios);
   static Icon remove = Icon(Icons.remove_circle);
   static Icon tick = Icon(Icons.check, color: Colors.black, size: 40);
+  static Icon colors = Icon(Icons.color_lens_outlined);
 
 }
