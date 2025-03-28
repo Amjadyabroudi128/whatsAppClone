@@ -5,7 +5,6 @@ import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
-import 'features/testingScreen/testName.dart';
 import 'features/welcomeScreen/welcome.dart';
 import 'firebase_options.dart';
 
@@ -47,7 +46,6 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "welcome",
       routes: {
         "sign up": (context) => const Signupscreen(),
-        "test": (context) => Testname(),
         "welcome" : (context) => WelcomeScreen(),
         "pickColor": (context) => Colorpicking(),
         "contacts": (context) => Contacts(),
