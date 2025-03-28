@@ -20,7 +20,7 @@ class icons {
   static Icon person = Icon(Icons.person, size: 30,);
   static Icon arrowForward = Icon(Icons.arrow_forward_ios);
   static Icon remove = Icon(Icons.remove_circle);
-  static Icon tick = Icon(Icons.check, color: Colors.black, size: 40);
+  static Icon tick = Icon(Icons.check, color: myColors.tick, size: 40);
   static Icon colors = Icon(Icons.color_lens_outlined);
 
 }
