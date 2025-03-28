@@ -63,4 +63,10 @@ import 'package:whatsappclone/components/flutterToast.dart';
     await users.collection("users").doc(auth.currentUser!.uid).delete();
     await FirebaseAuth.instance.currentUser?.delete();
   }
+  Future<void> addMessage ({required senderName, required receiverName,}) async {
+     users.collection("users").doc().collection("messages").add({
+       "senderName": senderName,
+       "receiverName": receiverName
+     });
+  }
  }
