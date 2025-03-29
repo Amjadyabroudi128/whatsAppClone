@@ -1,13 +1,18 @@
 
  class Messages {
   final String text;
-  final bool isme;
-  Messages({required this.text, required this.isme});
-
+  final String? receiverId;
+  final String? senderEmail;
+  final String? senderId;
+  final String? receiverEmail;
+  Messages({required this.text,  this.receiverEmail,  this.senderId,  this.receiverId, this.senderEmail});
+  Map<String, dynamic> toMap (){
+    return {
+      "senderId" : senderId,
+      "message": text,
+      "receiverId": receiverId,
+      "receiverEmail": receiverEmail,
+      "senderEmail": senderEmail
+    };
+  }
  }
-
- List<Messages> messages = [
-   Messages(text: "hello", isme: true),
-   Messages(text: "how are you", isme: false),
-   Messages(text: "good and you", isme: true),
- ];
