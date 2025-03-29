@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/Strings.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
+import 'package:whatsappclone/messageClass/messageClass.dart';
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
    final FirebaseFirestore users = FirebaseFirestore.instance;
@@ -63,10 +65,35 @@ import 'package:whatsappclone/components/flutterToast.dart';
     await users.collection("users").doc(auth.currentUser!.uid).delete();
     await FirebaseAuth.instance.currentUser?.delete();
   }
-  Future<void> addMessage ({required senderName, required receiverName,}) async {
-     users.collection("users").doc().collection("messages").add({
-       "senderName": senderName,
-       "receiverName": receiverName
+
+   Future<void> sendMessage(String receiverId, String receiverName, String message) async {
+     final String currentUser = auth.currentUser!.uid;
+     final String email = auth.currentUser!.email!;
+
+     Messages newMessage = Messages(
+       text: message,
+       senderId: currentUser,
+       receiverId: receiverId,
+       senderEmail: email,
+       receiverEmail: receiverName, // Store receiver's name
+     );
+
+     List<String> ids = [currentUser, receiverId];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     await users.collection("chat_rooms").doc(chatRoomID)
+         .collection("messages").add({
+       ...newMessage.toMap(),
+       "timestamp": FieldValue.serverTimestamp(),
      });
-  }
+   }
+
+   Stream <QuerySnapshot> getMessages(String userID, String otherUser) {
+     List<String> ids = [userID, otherUser];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+     return users.collection("chat_rooms").doc(chatRoomID).collection("messages").orderBy("timestamp", descending: false).snapshots();
+   }
+
  }
