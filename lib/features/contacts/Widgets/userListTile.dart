@@ -19,7 +19,10 @@ class listTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Testname(username: userDoc["name"],),
+            builder: (context) => Testname(
+              receiverId: userDoc["uid"],
+              receiverName: userDoc["name"] ?? "Unknown",
+            ),
           ),
         );
       },
