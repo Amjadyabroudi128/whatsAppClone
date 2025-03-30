@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../messageClass/messageClass.dart';
 import '../chatScreen.dart';
+import 'alignMessages.dart';
 
 class MessageStream extends StatelessWidget {
   const MessageStream({
