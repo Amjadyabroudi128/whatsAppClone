@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/consts.dart';
 
 import '../../../core/MyColors.dart';
 import '../../../core/appTheme.dart';
@@ -25,8 +26,8 @@ class messagesAlign extends StatelessWidget {
         return Align(
           alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            padding: const EdgeInsets.all(10),
+            margin:  EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            padding:  containerPadding,
             decoration: BoxDecoration(
               color: isMe ? myColors.myMessage : myColors.message,
               borderRadius: myTheme.CircularContainer,
