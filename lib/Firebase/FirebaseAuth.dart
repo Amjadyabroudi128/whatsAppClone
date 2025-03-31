@@ -95,5 +95,13 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
      String chatRoomID = ids.join("_");
      return users.collection("chat_rooms").doc(chatRoomID).collection("messages").orderBy("timestamp", descending: false).snapshots();
    }
+   Future<void> checkUserLoggedIn(BuildContext context) async {
+     User? user = auth.currentUser;
+     if (user != null) {
+       Navigator.pushReplacementNamed(context, "btm");
+     } else {
+       Navigator.pushReplacementNamed(context, "login");
+     }
+   }
 
  }
