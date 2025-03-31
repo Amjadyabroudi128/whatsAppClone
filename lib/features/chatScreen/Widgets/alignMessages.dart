@@ -26,7 +26,7 @@ class messagesAlign extends StatelessWidget {
         return Align(
           alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
-            margin:  EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            margin:  containermargin,
             padding:  containerPadding,
             decoration: BoxDecoration(
               color: isMe ? myColors.myMessage : myColors.message,
