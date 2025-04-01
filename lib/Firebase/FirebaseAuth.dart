@@ -69,8 +69,9 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
    Future<void> sendMessage(String receiverId, String receiverName, String message) async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
-
+     final Timestamp time = DateTime.now() as Timestamp;
      Messages newMessage = Messages(
+       time: time,
        text: message,
        senderId: currentUser,
        receiverId: receiverId,
