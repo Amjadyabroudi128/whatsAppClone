@@ -5,12 +5,15 @@ final Map<Color, String> colorNames = {
   Colors.green: "Green",
   Colors.green.shade700: "shade700",
   Colors.blue: "Blue",
-  Colors.orange: "Orange",
+  Colors.brown.shade600: "lightB",
+  Colors.brown: "brown",
   Colors.purple: "Purple",
   Colors.yellow: "Yellow",
   Colors.pink: "Pink",
   Colors.teal: "Teal",
   Colors.teal.shade800: "teal800",
+  Colors.blueGrey: "blueG",
+  Colors.blueGrey.shade700: "blue7",
   Colors.white: "white",
 };
 Color getTextColor(Color backgroundColor) {
