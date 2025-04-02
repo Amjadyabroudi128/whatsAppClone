@@ -39,7 +39,7 @@ class MessageStream extends StatelessWidget {
           time: doc["timestamp"]
         )).toList();
 
-        return messagesAlign(messages: messages, user: user);
+        return messagesAlign(messages: messages, user: user, widget: widget);
       },
     );
   }
