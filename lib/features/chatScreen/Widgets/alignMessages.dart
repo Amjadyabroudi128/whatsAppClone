@@ -55,7 +55,7 @@ class messagesAlign extends StatelessWidget {
                         context: context,
                         builder: (context) => AlertDialog(
                           title: Text("Delete Message"),
-                          content: Text("Are you sure you want to delete this message?"),
+                          content: Text("Are you sure you want to delete ${msg.text}"),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context),
@@ -63,7 +63,6 @@ class messagesAlign extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () async {
-                                await service.deleteMessage(msg.text);
                                 Navigator.pop(context); // Close the dialog after deletion
                               },
                               child: Text("Delete"),

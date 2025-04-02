@@ -104,7 +104,7 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
        Navigator.pushReplacementNamed(context, "login");
      }
    }
-   Future <void> deleteMessage(String text) async {
-     FirebaseFirestore.instance.collection("chat_rooms").doc().collection("messages").doc(text).delete();
-   }
+   // Future <void> deleteMessage(BuildContext context) async {
+   //   users.collection("chat_rooms")
+   // }
  }
