@@ -25,7 +25,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeData _theme = myTheme.appTheme;
+  ThemeData _theme = myTheme.appTheme; // Default to light theme
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void _updateTheme(ThemeData newTheme) {
@@ -36,25 +36,25 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: _theme,
-      darkTheme: myTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      initialRoute: _auth.currentUser != null ? "btm" : "login",
+      theme: _theme,  // Light theme
+      darkTheme: myTheme.darkTheme,  // Dark theme
+      themeMode: ThemeMode.system,  // System theme (can be overridden)
+      initialRoute: _auth.currentUser != null ? "btm" : "welcome",
       routes: {
         "sign up": (context) => const Signupscreen(),
-        "welcome" : (context) => WelcomeScreen(),
+        "welcome": (context) => WelcomeScreen(),
         "pickColor": (context) => Colorpicking(),
         "contacts": (context) => Contacts(),
-        "btm": (context) => Bottomnavbar()
+        "btm": (context) => Bottomnavbar(onThemeChange: _updateTheme),
       },
-      home:  Bottomnavbar(onThemeChange: _updateTheme),
+      home: Bottomnavbar(onThemeChange: _updateTheme),
     );
   }
 }
+
 

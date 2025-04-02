@@ -62,8 +62,7 @@ class _themeCardState extends State<themeCard> {
                     ];
                   },
                   onSelected: (value) {
-                    // if (!mounted) return; // Prevent operations if widget is not active
-
+                    if (!mounted) return; // Prevent operations if widget is not active
                     if (value == myPop.off) {
                       widget.widget.onThemeChange?.call(myTheme.appTheme);
                     } else if (value == myPop.darkTheme) {
