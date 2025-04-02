@@ -50,14 +50,14 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
     cardTheme: CardTheme(
       shape: cardShape,
+      color: Colors.blueGrey,
     )
    );
-  static final ThemeData darkTheme = ThemeData().copyWith(
-    cardTheme: CardTheme(
-      color: Colors.black,
-      shape: cardShape,
-    ),
-    scaffoldBackgroundColor: Colors.blue
+  static final ThemeData darkTheme = ThemeData(
+      cardTheme: CardTheme(
+        shape: cardShape,
+        color: Colors.yellow,
+      )
   );
 
  }
