@@ -16,7 +16,7 @@ class Messages {
       "receiverId": receiverId,
       "receiverEmail": receiverEmail,
       "senderEmail": senderEmail,
-      "time": time
+      "time": time,
     };
   }
  }

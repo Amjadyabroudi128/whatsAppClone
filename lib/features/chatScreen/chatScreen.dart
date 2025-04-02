@@ -28,7 +28,7 @@ class _TestnameState extends State<Testname> {
 
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
-      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text);
+      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text,);
       messageController.clear();
     }
   }

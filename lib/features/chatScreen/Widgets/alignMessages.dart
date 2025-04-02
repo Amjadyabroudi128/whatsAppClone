@@ -62,9 +62,9 @@ class messagesAlign extends StatelessWidget {
                               child: Text("Cancel"),
                             ),
                             TextButton(
-                              onPressed: () {
-                                // Perform deletion
-                                Navigator.pop(context);
+                              onPressed: () async {
+                                await service.deleteMessage(msg.text);
+                                Navigator.pop(context); // Close the dialog after deletion
                               },
                               child: Text("Delete"),
                             ),
