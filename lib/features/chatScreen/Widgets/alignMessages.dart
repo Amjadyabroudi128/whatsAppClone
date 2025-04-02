@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
@@ -21,6 +23,7 @@ class messagesAlign extends StatelessWidget {
   final Testname? widget;
   @override
   Widget build(BuildContext context) {
+    FirebaseService service = FirebaseService();
     return ListView.builder(
       itemCount: messages.length,
       itemBuilder: (context, index) {
@@ -45,23 +48,51 @@ class messagesAlign extends StatelessWidget {
               Text(day),
               Align(
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-                child: Container(
-                  margin:  containermargin,
-                  padding:  containerPadding,
-                  decoration: containerDecoration(
-                    color: isMe ? myColors.myMessage : myColors.message,
-                    borderRadius: myTheme.CircularContainer,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(msg.text),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 40,
+                child: GestureDetector(
+                  onLongPress: () {
+                    if (isMe) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text("Delete Message"),
+                          content: Text("Are you sure you want to delete this message?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("Cancel"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Perform deletion
+                                Navigator.pop(context);
+                              },
+                              child: Text("Delete"),
+                            ),
+                          ],
                         ),
-                        child: Text(formattedTime),
-                      )
-                    ],
+                      );
+                    } else {
+                      myToast("You can only delete your own messages");
+                    }
+                  },
+                  child: Container(
+                    margin:  containermargin,
+                    padding:  containerPadding,
+                    decoration: containerDecoration(
+                      color: isMe ? myColors.myMessage : myColors.message,
+                      borderRadius: myTheme.CircularContainer,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(msg.text),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 40,
+                          ),
+                          child: Text(formattedTime),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
