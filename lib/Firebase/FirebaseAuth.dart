@@ -87,6 +87,9 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
          .collection("messages").add({
        ...newMessage.toMap(),
        "timestamp": FieldValue.serverTimestamp(),
+     }).then((docRef) {
+       // Store document ID
+       docRef.update({"messageId": docRef.id});
      });
    }
 
@@ -104,7 +107,17 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
        Navigator.pushReplacementNamed(context, "login");
      }
    }
-   // Future <void> deleteMessage(BuildContext context) async {
-   //   users.collection("chat_rooms")
-   // }
+   Future<void> Deletemessage(String userID, String receiverId, String messageId) async {
+     List<String> ids = [userID, receiverId];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     await FirebaseFirestore.instance
+         .collection("chat_rooms")
+         .doc(chatRoomID)
+         .collection("messages")
+         .doc(messageId) // Use the provided messageId
+         .delete();
+   }
+
  }
