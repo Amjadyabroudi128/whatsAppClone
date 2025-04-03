@@ -63,6 +63,11 @@ class messagesAlign extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () async {
+                                await service.Deletemessage(
+                                    user!.uid,
+                                    widget!.receiverId,
+                                    msg.messageId!
+                                );
                                 Navigator.pop(context); // Close the dialog after deletion
                               },
                               child: Text("Delete"),
