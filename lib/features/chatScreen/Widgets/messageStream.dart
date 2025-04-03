@@ -37,6 +37,7 @@ class MessageStream extends StatelessWidget {
           senderEmail: doc["senderEmail"],
           receiverEmail: doc["receiverEmail"],
           time: doc["timestamp"],
+          messageId: doc.id,
         )).toList();
 
         return messagesAlign(messages: messages, user: user, widget: widget);
