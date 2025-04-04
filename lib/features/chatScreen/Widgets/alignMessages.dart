@@ -54,21 +54,55 @@ class messagesAlign extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text("Delete Message"),
-                          content: Text("Are you sure you want to delete ${msg.text}"),
+                          title: Text("Message Options"),
+                          content: Text("Do you want to edit or delete this message?"),
                           actions: [
                             TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: Text("Cancel"),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                TextEditingController _controller = TextEditingController(text: msg.text);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text("Edit Message"),
+                                    content: TextField(
+                                      controller: _controller,
+                                      decoration: InputDecoration(hintText: "Edit your message"),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: Text("Cancel"),
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          String newText = _controller.text.trim();
+                                          if (newText.isNotEmpty) {
+                                            await service.updateMessage(
+                                              msg.messageId!,
+                                              user!.uid,
+                                              widget!.receiverId,
+                                              newText,
+                                            );
+                                          }
+                                          Navigator.pop(context); // Close the edit dialog
+                                        },
+                                        child: Text("Save"),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              child: Text("Edit"),
                             ),
                             TextButton(
                               onPressed: () async {
                                 await service.Deletemessage(
-                                    user!.uid,
-                                    widget!.receiverId,
-                                    msg.messageId!
+                                  user!.uid,
+                                  widget!.receiverId,
+                                  msg.messageId!,
                                 );
-                                Navigator.pop(context); // Close the dialog after deletion
+                                Navigator.pop(context); // Close dialog after deleting
                               },
                               child: Text("Delete"),
                             ),
@@ -76,9 +110,10 @@ class messagesAlign extends StatelessWidget {
                         ),
                       );
                     } else {
-                      myToast("You can only delete your own messages");
+                      myToast("You can only modify your own messages");
                     }
                   },
+
                   child: Container(
                     margin:  containermargin,
                     padding:  containerPadding,

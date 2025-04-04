@@ -119,14 +119,14 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
          .doc(messageId) // Use the provided messageId
          .delete();
    }
-   Future <void> updateMessage (String messageId, String userID, String receiverId,) async {
+   Future <void> updateMessage (String messageId, String userID, String receiverId, String newMessage) async {
      List<String> ids = [userID, receiverId];
      ids.sort();
      String chatRoomID = ids.join("_");
      await FirebaseFirestore.instance.collection("chat_rooms")
          .doc(chatRoomID).collection("messages").doc(messageId).update(
          {
-           "message": messageId,
+           "message": newMessage,
          }
      );
    }
