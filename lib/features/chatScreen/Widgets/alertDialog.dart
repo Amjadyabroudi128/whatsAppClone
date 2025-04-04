@@ -61,7 +61,7 @@ class myDialog extends StatelessWidget {
               ),
             );
           },
-          child: Text("Edit"),
+          child: Text("Edit", style: TextStyle(fontSize: 19, color: Colors.grey.shade800),),
         ),
         TextButton(
           onPressed: () async {
@@ -72,7 +72,7 @@ class myDialog extends StatelessWidget {
             );
             Navigator.pop(context); // Close dialog after deleting
           },
-          child: Text("Delete"),
+          child: Text("Delete", style: TextStyle(fontSize: 18, color: Colors.red),),
         ),
       ],
     );
