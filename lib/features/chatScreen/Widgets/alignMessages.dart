@@ -10,6 +10,8 @@ import '../../../core/MyColors.dart';
 import '../../../core/appTheme.dart';
 import '../../../messageClass/messageClass.dart';
 import 'package:intl/intl.dart';
+
+import 'alertDialog.dart';
 class messagesAlign extends StatelessWidget {
   const messagesAlign({
     super.key,
@@ -53,61 +55,7 @@ class messagesAlign extends StatelessWidget {
                     if (isMe) {
                       showDialog(
                         context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text("Message Options"),
-                          content: Text("Do you want to edit or delete this message?"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                TextEditingController _controller = TextEditingController(text: msg.text);
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text("Edit Message"),
-                                    content: TextField(
-                                      controller: _controller,
-                                      decoration: InputDecoration(hintText: "Edit your message"),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: Text("Cancel"),
-                                      ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          String newText = _controller.text.trim();
-                                          if (newText.isNotEmpty) {
-                                            await service.updateMessage(
-                                              msg.messageId!,
-                                              user!.uid,
-                                              widget!.receiverId,
-                                              newText,
-                                            );
-                                          }
-                                          Navigator.pop(context); // Close the edit dialog
-                                        },
-                                        child: Text("Save"),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                              child: Text("Edit"),
-                            ),
-                            TextButton(
-                              onPressed: () async {
-                                await service.Deletemessage(
-                                  user!.uid,
-                                  widget!.receiverId,
-                                  msg.messageId!,
-                                );
-                                Navigator.pop(context); // Close dialog after deleting
-                              },
-                              child: Text("Delete"),
-                            ),
-                          ],
-                        ),
+                        builder: (context) => myDialog(msg: msg, service: service, user: user, widget: widget),
                       );
                     } else {
                       myToast("You can only modify your own messages");
@@ -126,7 +74,7 @@ class messagesAlign extends StatelessWidget {
                         Text(msg.text),
                         Padding(
                           padding: EdgeInsets.only(
-                            left: 40,
+                            left: 45,
                           ),
                           child: Text(formattedTime),
                         )
@@ -142,3 +90,4 @@ class messagesAlign extends StatelessWidget {
     );
   }
 }
+
