@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
+import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
@@ -51,7 +52,7 @@ class messagesAlign extends StatelessWidget {
               Align(
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
                 child: GestureDetector(
-                  onLongPress: () {
+                  onTap: () {
                     if (isMe) {
                       showDialog(
                         context: context,
