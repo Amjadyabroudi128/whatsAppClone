@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../messageClass/messageClass.dart';
@@ -72,7 +73,7 @@ class myDialog extends StatelessWidget {
             );
             Navigator.pop(context); // Close dialog after deleting
           },
-          child: Text("Delete", style: TextStyle(fontSize: 18, color: Colors.red),),
+          child: Text("Delete", style: Textstyles.deletemessage,),
         ),
       ],
     );
