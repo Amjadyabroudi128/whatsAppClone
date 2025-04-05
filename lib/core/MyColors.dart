@@ -24,5 +24,6 @@ class myColors {
    static Color DividerClr =  Colors.grey.shade400;
    static Color tick = Colors.black;
    static Color? editMessage = Colors.grey[800];
+   static Color redAccent = Colors.redAccent;
 
  }
