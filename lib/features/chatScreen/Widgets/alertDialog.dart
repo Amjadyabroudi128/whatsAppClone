@@ -62,7 +62,7 @@ class myDialog extends StatelessWidget {
               ),
             );
           },
-          child: Text("Edit", style: TextStyle(fontSize: 19, color: Colors.grey.shade800),),
+          child: Text("Edit", style: Textstyles.editText,),
         ),
         TextButton(
           onPressed: () async {
