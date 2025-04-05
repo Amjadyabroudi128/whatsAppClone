@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/consts.dart';
@@ -52,12 +53,63 @@ class messagesAlign extends StatelessWidget {
               Align(
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
                 child: GestureDetector(
-                  onTap: () {
+                  onTapDown: (detail) {
                     if (isMe) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => myDialog(msg: msg, service: service, user: user, widget: widget),
+                      showMenu(context: context,
+                      color: Colors.grey[350],
+                      position: RelativeRect.fromLTRB(
+                        detail.globalPosition.dx,
+                        detail.globalPosition.dy,
+                        0.0,
+                        0.0
+                      ),
+                      items: [
+                        PopupMenuItem(
+                            value: 'edit',
+                            child: TextButton(
+                              onPressed: (){},
+                              child: Row(
+                                children: [
+                                  Text("Edit",style: TextStyle(color: Colors.black),),
+                                  Spacer(),
+                                  Icon(Icons.edit, color: Colors.black,),
+                                ],
+                              ),
+                            )
+                        ),
+                        PopupMenuItem(
+                            value: 'delete',
+                            child: TextButton(
+                              onPressed: (){},
+                              child: Row(
+                                children: [
+                                  Text("Delete", style: TextStyle(color: Colors.redAccent)),
+                                  Spacer(),
+                                  Icon(Icons.delete, color: Colors.redAccent,),
+                                ],
+                              ),
+                            )
+                        ),
+                        PopupMenuItem(
+                            value: 'Copy',
+                            child: TextButton(
+                              onPressed: (){},
+                              child: Row(
+                                children: [
+                                  Text("Copy",style: TextStyle(color: Colors.black),),
+                                  Spacer(),
+                                  Icon(Icons.copy, color: Colors.black,),
+                                ],
+                              ),
+                            )
+                        ),
+                      ],
                       );
+
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (context) => myDialog(msg: msg, service: service, user: user, widget: widget),
+                      // );
                     } else {
                       myToast("You can only modify your own messages");
                     }
