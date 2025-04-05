@@ -19,4 +19,5 @@ class Textstyles {
   static TextStyle selectClr = TextStyle(fontSize: 18, color: Colors.white);
   static TextStyle colorName = TextStyle(color: Colors.white, fontSize: 16);
   static TextStyle deletemessage = TextStyle(fontSize: 18, color: Colors.red);
+  static TextStyle editText = TextStyle(fontSize: 19, color: Colors.grey.shade800);
  }
