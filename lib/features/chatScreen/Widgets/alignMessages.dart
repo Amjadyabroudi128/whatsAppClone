@@ -6,6 +6,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/consts.dart';
+import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
 import '../../../core/MyColors.dart';
@@ -83,9 +84,9 @@ class messagesAlign extends StatelessWidget {
                               onPressed: (){},
                               child: Row(
                                 children: [
-                                  Text("Delete", style: TextStyle(color: Colors.redAccent)),
+                                  Text("Delete", style: Textstyles.deletemessage),
                                   Spacer(),
-                                  Icon(Icons.delete, color: Colors.redAccent,),
+                                  icons.deleteIcon,
                                 ],
                               ),
                             )
