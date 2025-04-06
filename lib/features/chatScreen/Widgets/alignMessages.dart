@@ -56,10 +56,11 @@ class messagesAlign extends StatelessWidget {
                 child: GestureDetector(
                   onTapDown: (detail) {
                     if (isMe) {
-                      showMenu(context: context,
+                      showMenu <String>(
+                        context: context,
                       color: Colors.grey[350],
                       position: RelativeRect.fromLTRB(
-                        detail.globalPosition.dx,
+                        detail.globalPosition.dy,
                         detail.globalPosition.dy,
                         0.0,
                         0.0
@@ -78,19 +79,7 @@ class messagesAlign extends StatelessWidget {
                               ),
                             )
                         ),
-                        PopupMenuItem(
-                            value: 'delete',
-                            child: TextButton(
-                              onPressed: (){},
-                              child: Row(
-                                children: [
-                                  Text("Delete", style: Textstyles.deletemessage),
-                                  Spacer(),
-                                  icons.deleteIcon,
-                                ],
-                              ),
-                            )
-                        ),
+                        deleteMessage(context),
                         PopupMenuItem(
                             value: 'Copy',
                             child: TextButton(
@@ -141,6 +130,22 @@ class messagesAlign extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  PopupMenuItem<String> deleteMessage(BuildContext context) {
+    return PopupMenuItem<String>(
+        value: 'delete',
+        child: TextButton(
+          onPressed: (){},
+          child: Row(
+            children: [
+              Text("Delete", style: Textstyles.deletemessage),
+              Spacer(),
+              icons.deleteIcon,
+            ],
+          ),
+        )
     );
   }
 }

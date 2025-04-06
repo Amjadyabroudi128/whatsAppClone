@@ -22,6 +22,6 @@ class icons {
   static Icon remove = Icon(Icons.remove_circle);
   static Icon tick = Icon(Icons.check, color: myColors.tick, size: 40);
   static Icon colors = Icon(Icons.color_lens_outlined);
-  static Icon deleteIcon = Icon(Icons.delete, color: myColors.delete);
+  static Icon deleteIcon = Icon(CupertinoIcons.delete, color: myColors.delete);
 
 }
