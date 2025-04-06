@@ -15,6 +15,7 @@ import '../../../messageClass/messageClass.dart';
 import 'package:intl/intl.dart';
 
 import 'alertDialog.dart';
+import 'deleteMessage.dart';
 class messagesAlign extends StatelessWidget {
   const messagesAlign({
     super.key,
@@ -133,20 +134,5 @@ class messagesAlign extends StatelessWidget {
     );
   }
 
-  PopupMenuItem<String> deleteMessage(BuildContext context) {
-    return PopupMenuItem<String>(
-        value: 'delete',
-        child: TextButton(
-          onPressed: (){},
-          child: Row(
-            children: [
-              Text("Delete", style: Textstyles.deletemessage),
-              Spacer(),
-              icons.deleteIcon,
-            ],
-          ),
-        )
-    );
-  }
 }
 
