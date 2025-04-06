@@ -75,7 +75,7 @@ class messagesAlign extends StatelessWidget {
                                 children: [
                                   Text("Edit",style: TextStyle(color: Colors.black),),
                                   Spacer(),
-                                  Icon(Icons.edit, color: Colors.black,),
+                                  icons.edit,
                                 ],
                               ),
                             )
