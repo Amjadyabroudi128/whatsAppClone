@@ -89,7 +89,7 @@ class messagesAlign extends StatelessWidget {
                                 children: [
                                   Text("Copy",style: TextStyle(color: Colors.black),),
                                   Spacer(),
-                                  Icon(Icons.copy, color: Colors.black,),
+                                  icons.copy,
                                 ],
                               ),
                             )
