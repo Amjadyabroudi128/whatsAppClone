@@ -16,6 +16,7 @@ import 'package:intl/intl.dart';
 
 import 'alertDialog.dart';
 import 'deleteMessage.dart';
+import 'editMessage.dart';
 class messagesAlign extends StatelessWidget {
   const messagesAlign({
     super.key,
@@ -67,53 +68,7 @@ class messagesAlign extends StatelessWidget {
                         0.0
                       ),
                       items: [
-                        PopupMenuItem(
-                            value: 'edit',
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                TextEditingController _controller = TextEditingController(text: msg.text);
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text("Edit Message"),
-                                    content: TextField(
-                                      controller: _controller,
-                                      decoration: InputDecoration(hintText: "Edit your message"),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: Text("Cancel"),
-                                      ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          String newText = _controller.text.trim();
-                                          if (newText.isNotEmpty) {
-                                            await service.updateMessage(
-                                              msg.messageId!,
-                                              user!.uid,
-                                              widget!.receiverId,
-                                              newText,
-                                            );
-                                          }
-                                          Navigator.pop(context); // Close the edit dialog
-                                        },
-                                        child: Text("Save"),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  Text("Edit",style: TextStyle(color: Colors.black),),
-                                  Spacer(),
-                                  icons.edit,
-                                ],
-                              ),
-                            )
-                        ),
+                        editMessage(context, msg, service, widget, user),
                         deleteMessage(context),
                         PopupMenuItem(
                             value: 'Copy',
@@ -167,6 +122,7 @@ class messagesAlign extends StatelessWidget {
       },
     );
   }
+
 
 }
 
