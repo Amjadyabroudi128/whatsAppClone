@@ -69,7 +69,7 @@ class messagesAlign extends StatelessWidget {
                       ),
                       items: [
                         editMessage(context, msg, service, widget, user),
-                        deleteMessage(context),
+                        deleteMessage(context, msg, widget, user, service),
                         PopupMenuItem(
                             value: 'Copy',
                             child: TextButton(
