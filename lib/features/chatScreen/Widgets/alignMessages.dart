@@ -14,7 +14,6 @@ import '../../../core/appTheme.dart';
 import '../../../messageClass/messageClass.dart';
 import 'package:intl/intl.dart';
 
-import 'alertDialog.dart';
 import 'deleteMessage.dart';
 import 'editMessage.dart';
 class messagesAlign extends StatelessWidget {
