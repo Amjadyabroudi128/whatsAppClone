@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
+import '../../../components/TextStyles.dart';
 import '../../../core/icons.dart';
 import '../../../messageClass/messageClass.dart';
 
@@ -49,7 +50,7 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
         },
         child: Row(
           children: [
-            Text("Edit",style: TextStyle(color: Colors.black),),
+            Text("Edit",style: Textstyles.editText,),
             Spacer(),
             icons.edit,
           ],
