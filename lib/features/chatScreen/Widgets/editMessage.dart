@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
@@ -32,7 +33,10 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
                 kTextButton(
                   onPressed: () async {
                     String newText = _controller.text.trim();
-                    if (newText.isNotEmpty) {
+                    if  (newText.isEmpty || newText == msg.text.trim()) {
+                      myToast("please Edit this message");
+                      return;
+                    } else if (newText.isNotEmpty) {
                       await service.updateMessage(
                         msg.messageId!,
                         user!.uid,
@@ -40,6 +44,7 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
                         newText,
                       );
                     }
+
                     Navigator.pop(context); // Close the edit dialog
                   },
                   child: Text("Save"),
