@@ -84,11 +84,6 @@ class messagesAlign extends StatelessWidget {
                         ),
                       ],
                       );
-
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (context) => myDialog(msg: msg, service: service, user: user, widget: widget),
-                      // );
                     } else {
                       myToast("You can only modify your own messages");
                     }
