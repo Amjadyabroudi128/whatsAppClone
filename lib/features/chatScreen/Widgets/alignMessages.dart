@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
@@ -72,7 +73,11 @@ class messagesAlign extends StatelessWidget {
                         PopupMenuItem(
                             value: 'Copy',
                             child: TextButton(
-                              onPressed: (){},
+                              onPressed: (){
+                                final value = ClipboardData(text: msg.text);
+                                Clipboard.setData(value);
+                                print("copied${msg.text}");
+                              },
                               child: Row(
                                 children: [
                                   Text("Copy",style: TextStyle(color: Colors.black),),
