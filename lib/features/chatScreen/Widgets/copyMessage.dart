@@ -15,7 +15,7 @@ PopupMenuItem<String> copyMessage(Messages msg, BuildContext context) {
           final value = ClipboardData(text: msg.text);
           Clipboard.setData(value);
           Navigator.pop(context);
-          myToast("message Copied ");
+          myToast("✅ Message Copied");
         },
         child: Row(
           children: [
