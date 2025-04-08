@@ -45,7 +45,7 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
                       );
                     }
 
-                    Navigator.pop(context); // Close the edit dialog
+                    Navigator.pop(context);
                   },
                   child: Text("Save"),
                 ),

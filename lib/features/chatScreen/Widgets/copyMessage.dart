@@ -7,13 +7,14 @@ import '../../../components/TextButton.dart';
 import '../../../core/icons.dart';
 import '../../../messageClass/messageClass.dart';
 
-PopupMenuItem<String> copyMessage(Messages msg) {
+PopupMenuItem<String> copyMessage(Messages msg, BuildContext context) {
   return PopupMenuItem(
       value: 'Copy',
       child: kTextButton(
         onPressed: (){
           final value = ClipboardData(text: msg.text);
           Clipboard.setData(value);
+          Navigator.pop(context);
           myToast("message Copied ");
         },
         child: Row(

@@ -71,7 +71,7 @@ class messagesAlign extends StatelessWidget {
                       items: [
                         editMessage(context, msg, service, widget, user),
                         deleteMessage(context, msg, widget, user, service),
-                        copyMessage(msg),
+                        copyMessage(msg, context),
                       ],
                       );
                     } else {
