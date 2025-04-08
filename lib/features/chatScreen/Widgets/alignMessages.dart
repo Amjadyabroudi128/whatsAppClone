@@ -15,6 +15,7 @@ import '../../../core/appTheme.dart';
 import '../../../messageClass/messageClass.dart';
 import 'package:intl/intl.dart';
 
+import 'copyMessage.dart';
 import 'deleteMessage.dart';
 import 'editMessage.dart';
 class messagesAlign extends StatelessWidget {
@@ -70,23 +71,7 @@ class messagesAlign extends StatelessWidget {
                       items: [
                         editMessage(context, msg, service, widget, user),
                         deleteMessage(context, msg, widget, user, service),
-                        PopupMenuItem(
-                            value: 'Copy',
-                            child: TextButton(
-                              onPressed: (){
-                                final value = ClipboardData(text: msg.text);
-                                Clipboard.setData(value);
-                                print("copied${msg.text}");
-                              },
-                              child: Row(
-                                children: [
-                                  Text("Copy",style: TextStyle(color: Colors.black),),
-                                  Spacer(),
-                                  icons.copy,
-                                ],
-                              ),
-                            )
-                        ),
+                        copyMessage(msg),
                       ],
                       );
                     } else {
