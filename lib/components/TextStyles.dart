@@ -18,6 +18,7 @@ class Textstyles {
   static TextStyle accountStyle = TextStyle(fontSize: 17, color: Colors.grey);
   static TextStyle selectClr = TextStyle(fontSize: 18, color: Colors.white);
   static TextStyle colorName = TextStyle(color: Colors.white, fontSize: 16);
-  static TextStyle deletemessage = TextStyle(fontSize: 18, color: myColors.redAccent);
-  static TextStyle editText = TextStyle(fontSize: 19, color: myColors.editMessage);
+  static TextStyle deletemessage = TextStyle(fontSize: 17, color: myColors.redAccent);
+  static TextStyle editText = TextStyle(fontSize: 17, color: myColors.editMessage);
+  static TextStyle copyMessage = TextStyle(color: myColors.editMessage, fontSize: 17);
  }

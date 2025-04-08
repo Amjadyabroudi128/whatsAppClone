@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 
 import '../../../components/TextButton.dart';
@@ -17,7 +18,7 @@ PopupMenuItem<String> copyMessage(Messages msg) {
         },
         child: Row(
           children: [
-            Text("Copy",style: TextStyle(color: Colors.black),),
+            Text("Copy",style: Textstyles.copyMessage,),
             Spacer(),
             icons.copy,
           ],
