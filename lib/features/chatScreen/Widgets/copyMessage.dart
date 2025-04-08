@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 
 import '../../../components/TextButton.dart';
 import '../../../core/icons.dart';
@@ -12,7 +13,7 @@ PopupMenuItem<String> copyMessage(Messages msg) {
         onPressed: (){
           final value = ClipboardData(text: msg.text);
           Clipboard.setData(value);
-          print("copied${msg.text}");
+          myToast("message Copied ");
         },
         child: Row(
           children: [
