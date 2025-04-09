@@ -58,26 +58,32 @@ class messagesAlign extends StatelessWidget {
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
                 child: GestureDetector(
                   onTapDown: (detail) {
-                    if (isMe) {
-                      showMenu <String>(
-                        context: context,
+                    final position = isMe
+                        ? RelativeRect.fromLTRB(
+                      detail.globalPosition.dx,
+                      detail.globalPosition.dy,
+                      0.0,
+                      0.0,
+                    )
+                        : RelativeRect.fromLTRB(
+                      detail.globalPosition.dx,
+                      detail.globalPosition.dy ,
+                      MediaQuery.of(context).size.width / 4,
+                      0.0,
+                    );
+
+                    showMenu<String>(
+                      context: context,
                       color: Colors.grey[350],
-                      position: RelativeRect.fromLTRB(
-                        detail.globalPosition.dy,
-                        detail.globalPosition.dy,
-                        0.0,
-                        0.0
-                      ),
+                      position: position,
                       items: [
-                        editMessage(context, msg, service, widget, user),
+                        if (isMe) editMessage(context, msg, service, widget, user),
                         deleteMessage(context, msg, widget, user, service),
                         copyMessage(msg, context),
                       ],
-                      );
-                    } else {
-                      myToast("You can only modify your own messages");
-                    }
+                    );
                   },
+
 
                   child: Container(
                     margin:  containermargin,
