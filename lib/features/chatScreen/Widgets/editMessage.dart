@@ -33,19 +33,29 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
                 kTextButton(
                   onPressed: () async {
                     String newText = _controller.text.trim();
-                    if  (newText.isEmpty || newText == msg.text.trim()) {
+                    if (newText.isEmpty) {
+                      myToast("message can't be empty");
+                    } else if (newText == msg.text.trim()) {
                       myToast("please Edit this message");
                       return;
-                    } else if (newText.isNotEmpty) {
-                      await service.updateMessage(
-                        msg.messageId!,
-                        user!.uid,
-                        widget!.receiverId,
-                        newText,
-                      );
-                    }
+                    } else {
+                        await service.updateMessage(
+                          msg.messageId!,
+                          user!.uid,
+                          widget!.receiverId,
+                          newText,
 
-                    Navigator.pop(context);
+                        );
+                        Navigator.pop(context);
+                    }
+                    // if  (newText.isEmpty || newText == msg.text.trim()) {
+                    //   myToast("please Edit this message");
+                    //   return;
+                    // } else if (newText.isNotEmpty) {
+
+                    // }
+
+
                   },
                   child: Text("Save"),
                 ),
