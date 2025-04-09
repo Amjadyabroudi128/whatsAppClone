@@ -48,14 +48,6 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
                         );
                         Navigator.pop(context);
                     }
-                    // if  (newText.isEmpty || newText == msg.text.trim()) {
-                    //   myToast("please Edit this message");
-                    //   return;
-                    // } else if (newText.isNotEmpty) {
-
-                    // }
-
-
                   },
                   child: Text("Save"),
                 ),
