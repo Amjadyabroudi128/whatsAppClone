@@ -43,23 +43,6 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
                       ),
                       Navigator.pop(context)
                     };
-
-
-                    // if (newText.isEmpty) {
-                    //   myToast("message can't be empty");
-                    // } else if (newText == msg.text.trim()) {
-                    //   myToast("please Edit this message");
-                    //   return;
-                    // } else {
-                    //     await service.updateMessage(
-                    //       msg.messageId!,
-                    //       user!.uid,
-                    //       widget!.receiverId,
-                    //       newText,
-                    //
-                    //     );
-                    //     Navigator.pop(context);
-                    // }
                   },
                   child: Text("Save"),
                 ),
