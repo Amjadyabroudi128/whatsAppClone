@@ -29,7 +29,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
                       widget!.receiverId,
                       msg.messageId!,
                     );
-                    Navigator.pop(context); // Close dialog after deleting
+                    Navigator.pop(context);
                   },
                   child: Text("Delete", style: Textstyles.deleteStyle,),
                 ),
