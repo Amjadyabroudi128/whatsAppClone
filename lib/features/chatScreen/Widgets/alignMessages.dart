@@ -77,9 +77,9 @@ class messagesAlign extends StatelessWidget {
                       color: Colors.grey[350],
                       position: position,
                       items: [
+                        copyMessage(msg, context),
                         if (isMe) editMessage(context, msg, service, widget, user),
                         deleteMessage(context, msg, widget, user, service),
-                        copyMessage(msg, context),
                       ],
                     );
                   },
