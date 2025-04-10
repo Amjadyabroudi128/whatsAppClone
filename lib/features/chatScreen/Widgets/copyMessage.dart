@@ -12,8 +12,10 @@ PopupMenuItem<String> copyMessage(Messages msg, BuildContext context) {
       value: 'Copy',
       child: kTextButton(
         onPressed: (){
+          if (!context.mounted) return;
           final value = ClipboardData(text: msg.text);
           Clipboard.setData(value);
+          if (!context.mounted) return;
           Navigator.pop(context);
           myToast("✅ Message Copied");
         },

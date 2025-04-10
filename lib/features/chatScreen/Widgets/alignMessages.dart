@@ -83,8 +83,6 @@ class messagesAlign extends StatelessWidget {
                       ],
                     );
                   },
-
-
                   child: Container(
                     margin:  containermargin,
                     padding:  containerPadding,
