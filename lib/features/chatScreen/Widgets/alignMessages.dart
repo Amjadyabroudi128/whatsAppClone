@@ -74,7 +74,7 @@ class messagesAlign extends StatelessWidget {
 
                     showMenu<String>(
                       context: context,
-                      color: Colors.grey[350],
+                      color: myColors.menuColor,
                       position: position,
                       items: [
                         copyMessage(msg, context),

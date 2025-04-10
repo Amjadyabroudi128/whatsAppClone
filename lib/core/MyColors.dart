@@ -25,5 +25,6 @@ class myColors {
    static Color tick = Colors.black;
    static Color? editMessage = Colors.grey[800];
    static Color redAccent = Colors.redAccent;
+   static Color? menuColor = Colors.grey[350];
 
  }
