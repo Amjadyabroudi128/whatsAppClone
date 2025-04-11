@@ -40,7 +40,9 @@ class _EditBioState extends State<EditBio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black38,
       appBar: AppBar(
+        backgroundColor: Colors.grey,
         centerTitle: true,
         title: Text("Edit Your Bio", style: TextStyle(color: Colors.black)),
         actions: [
@@ -53,6 +55,8 @@ class _EditBioState extends State<EditBio> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: kTextField(
+          filled: true,
+          fillColor: Colors.grey,
           myController: bioController,
           maxLines: 9,
           hint: "Edit your Bio",
