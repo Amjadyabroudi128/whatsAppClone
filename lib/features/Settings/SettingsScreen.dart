@@ -46,29 +46,31 @@ class _SettingScreenState extends State<SettingScreen> {
 
           return myPadding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppBar(
-                  title: Text("Settings", style: Textstyles.settings,),
-                ),
-                BoxSpacing(myHeight: 20),
-                nameCard(userName: userName),
-                BoxSpacing(myHeight: 15,),
-                Text("Account", style: Textstyles.accountStyle,),
-                Card(
-                  child: Column(
-                    children: [
-                      signOut(),
-                      divider(),
-                      deleteAccount(),
-                    ],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppBar(
+                    title: Text("Settings", style: Textstyles.settings,),
                   ),
-                ),
-                BoxSpacing(myHeight: 10,),
-                Text("App Theme", style: Textstyles.themeStyle),
-                themeCard(mounted: mounted, widget: widget)
-              ],
+                  BoxSpacing(myHeight: 20),
+                  nameCard(userName: userName),
+                  BoxSpacing(myHeight: 15,),
+                  Text("Account", style: Textstyles.accountStyle,),
+                  Card(
+                    child: Column(
+                      children: [
+                        signOut(),
+                        divider(),
+                        deleteAccount(),
+                      ],
+                    ),
+                  ),
+                  BoxSpacing(myHeight: 10,),
+                  Text("App Theme", style: Textstyles.themeStyle),
+                  themeCard(mounted: mounted, widget: widget)
+                ],
+              ),
             ),
           );
         },
