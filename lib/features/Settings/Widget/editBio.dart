@@ -40,7 +40,7 @@ class _EditBioState extends State<EditBio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
+      backgroundColor: Colors.grey[850],
       appBar: AppBar(
         backgroundColor: Colors.grey,
         centerTitle: true,
