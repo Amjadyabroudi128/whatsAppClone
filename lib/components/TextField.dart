@@ -12,16 +12,21 @@ class kTextField extends StatelessWidget {
   final Widget? icon;
   final Widget? suffix;
   final int? maxLines;
-  const kTextField({super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon, this.suffix, this.maxLines});
+  final Color? fillColor;
+  final bool? filled;
+  const kTextField({super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon, this.suffix, this.maxLines, this.fillColor, this.filled});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+
       controller: myController,
       obscureText: obsecureText,
       keyboardType: keyBoard,
       maxLines: maxLines,
       decoration: InputDecoration(
+        fillColor: fillColor,
+        filled: filled,
         suffixIcon: icon,
         hintText: hint,
         hintStyle: Textstyles.hintStyle,
