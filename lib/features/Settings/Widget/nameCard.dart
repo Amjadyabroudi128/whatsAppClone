@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextField.dart';
@@ -19,14 +21,32 @@ class nameCard extends StatefulWidget {
 }
 
 class _nameCardState extends State<nameCard> {
-  final TextEditingController bioController = TextEditingController();
+  String userBio = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserBio();
+  }
+
+  Future<void> _loadUserBio() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      final doc = await FirebaseFirestore.instance.collection("users").doc(uid).get();
+      setState(() {
+        userBio = doc.data()?["bio"] ?? "No bio yet";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           Card(
-            child: Image.network("https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            child: Image.network(
+              "https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
               fit: BoxFit.cover,
               height: 200,
             ),
@@ -38,31 +58,21 @@ class _nameCardState extends State<nameCard> {
             child: ListTile(
               title: Text(widget.userName),
               subtitle: ListTile(
-                title: Text("your bio"),
-                trailing: IconButton(onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditBio(),
-                    ),
-                  );
-                }, icon: Icon(Icons.edit)),
+                title: Text(userBio),
+                trailing: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EditBio()),
+                    ).then((_) => _loadUserBio()); // reload after editing
+                  },
+                  icon: Icon(Icons.edit),
+                ),
               ),
-              // subtitle: kTextField(
-              //   hint: "your bio",
-              //   myController: bioController,
-              // ),
-        ),
-      )
+            ),
+          ),
         ],
       ),
     );
-    // return Card(
-    //   color: myColors.CardColor,
-    //   child: ListTile(
-    //     title: Text(userName),
-    //     leading: icons.person,
-    //   ),
-    // );
   }
 }
