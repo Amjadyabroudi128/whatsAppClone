@@ -14,6 +14,7 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
          'email': email,
          'uid': auth.currentUser!.uid,
          "name" : name,
+         'bio': ''
        });
        await auth.currentUser?.reload();
        User? updatedUser = auth.currentUser;
@@ -38,7 +39,8 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
        users.collection("users").doc(auth.currentUser!.uid).set({
          'email': email,
          'uid': auth.currentUser!.uid,
-         "name" : name
+         "name" : name,
+         "bio": ""
        });
        users.collection("users").get();
        await auth.currentUser?.reload();
