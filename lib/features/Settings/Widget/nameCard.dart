@@ -55,20 +55,28 @@ class _nameCardState extends State<nameCard> {
           ),
           Card(
             color: myColors.CardColor,
-            child: ListTile(
-              title: Text(widget.userName),
-              subtitle: ListTile(
-                title: Text(userBio),
-                trailing: IconButton(
-                  onPressed: () {
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(widget.userName),
+                ),
+                Divider(
+                  endIndent: 40,
+                ),
+                GestureDetector(
+                  onTap: (){
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => EditBio()),
-                    ).then((_) => _loadUserBio()); // reload after editing
+                    ).then((_) => _loadUserBio());
                   },
-                  icon: Icon(Icons.edit),
-                ),
-              ),
+                  child: ListTile(
+                    dense: true,
+                    title: Text(userBio, style: TextStyle(fontSize: 17),),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                )
+              ],
             ),
           ),
         ],
