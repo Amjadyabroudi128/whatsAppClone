@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextField.dart';
@@ -66,13 +67,13 @@ class _nameCardState extends State<nameCard> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EditBio()),
+                      CupertinoPageRoute(builder: (context) => EditBio()),
                     ).then((_) => _loadUserBio());
                   },
                   child: ListTile(
                     dense: true,
                     title: Text(userBio, style: TextStyle(fontSize: 17),),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    trailing: icons.arrowForward,
                   ),
                 )
               ],
