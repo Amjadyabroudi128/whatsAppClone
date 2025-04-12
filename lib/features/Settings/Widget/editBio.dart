@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
 
 class EditBio extends StatefulWidget {
@@ -12,30 +13,31 @@ class EditBio extends StatefulWidget {
 
 class _EditBioState extends State<EditBio> {
   final TextEditingController bioController = TextEditingController();
-
+  final uid = FirebaseAuth.instance.currentUser?.uid;
+  final users = FirebaseFirestore.instance.collection("users");
   @override
   void initState() {
     super.initState();
-    _loadCurrentBio();
+    // _loadCurrentBio();
   }
 
-  Future<void> _loadCurrentBio() async {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid != null) {
-      final doc = await FirebaseFirestore.instance.collection("users").doc(uid).get();
-      bioController.text = doc.data()?["bio"] ?? "";
-    }
-  }
-
-  Future<void> _saveBio() async {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid != null) {
-      await FirebaseFirestore.instance.collection("users").doc(uid).update({
-        "bio": bioController.text.trim(),
-      });
-      Navigator.pop(context); // Go back after saving
-    }
-  }
+  // Future<void> _loadCurrentBio() async {
+  //
+  //   if (uid != null) {
+  //     final doc = await FirebaseFirestore.instance.collection("users").doc(uid).get();
+  //     bioController.text = doc.data()?["bio"] ?? "";
+  //   }
+  // }
+  //
+  // Future<void> _saveBio() async {
+  //   final uid = FirebaseAuth.instance.currentUser?.uid;
+  //   if (uid != null) {
+  //     await FirebaseFirestore.instance.collection("users").doc(uid).update({
+  //       "bio": bioController.text.trim(),
+  //     });
+  //     Navigator.pop(context); // Go back after saving
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +48,8 @@ class _EditBioState extends State<EditBio> {
         centerTitle: true,
         title: Text("Edit Your Bio", style: TextStyle(color: Colors.black)),
         actions: [
-          TextButton(
-            onPressed: _saveBio,
+          kTextButton(
+            onPressed: (){},
             child: Text("Save", style: TextStyle(color: Colors.black, fontSize: 20)),
           ),
         ],
