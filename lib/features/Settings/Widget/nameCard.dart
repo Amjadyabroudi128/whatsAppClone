@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/editBio.dart';
 
 import '../../../core/icons.dart';
@@ -60,9 +61,7 @@ class _nameCardState extends State<nameCard> {
                 ListTile(
                   title: Text(widget.userName),
                 ),
-                Divider(
-                  endIndent: 40,
-                ),
+                divider(),
                 GestureDetector(
                   onTap: (){
                     Navigator.push(
