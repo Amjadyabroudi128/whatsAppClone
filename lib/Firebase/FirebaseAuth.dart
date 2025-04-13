@@ -142,4 +142,12 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
        );
      }
    }
+   Future<String?> getBio() async {
+     if (uid != null) {
+       DocumentSnapshot doc =
+       await users.collection("users").doc(uid).get();
+       return doc['bio'] ?? "";
+     }
+     return null;
+   }
  }
