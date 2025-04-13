@@ -65,11 +65,14 @@ class _nameCardState extends State<nameCard> {
                 divider(),
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(builder: (context) => EditBio()),
-                    ).then((_) => _loadUserBio());
+                    ShowSheet();
                   },
+                  // onTap: (){
+                  //   Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(builder: (context) => EditBio()),
+                  //   ).then((_) => _loadUserBio());
+                  // },
                   child: ListTile(
                     dense: true,
                     title: Text(userBio, style: TextStyle(fontSize: 17),),
@@ -82,5 +85,18 @@ class _nameCardState extends State<nameCard> {
         ],
       ),
     );
+  }
+  void ShowSheet () {
+     showModalBottomSheet(context: context,
+         isScrollControlled: true,
+         builder: (context) {
+       return FractionallySizedBox(
+         heightFactor: 0.94,
+         child: Container(
+             child: EditBio()
+         ),
+       );
+         }
+     );
   }
 }
