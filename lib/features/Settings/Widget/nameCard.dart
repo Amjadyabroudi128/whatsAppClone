@@ -63,6 +63,7 @@ class _nameCardState extends State<nameCard> {
                 GestureDetector(
                   onTap: (){
                     ShowSheet(context);
+                    loadBio();
                   },
                   child: ListTile(
                     dense: true,
