@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 
 import 'editBio.dart';
 
 void ShowSheet (BuildContext context) {
+  FirebaseService service = FirebaseService();
   showModalBottomSheet(context: context,
       isScrollControlled: true,
       builder: (context) {
@@ -11,6 +13,7 @@ void ShowSheet (BuildContext context) {
           child: Container(
               child: EditBio()
           ),
+
         );
       }
   );
