@@ -18,27 +18,17 @@ class _EditBioState extends State<EditBio> {
   @override
   void initState() {
     super.initState();
-    // _loadCurrentBio();
+    service.getBio();
+    loadBio();
   }
-
-  // Future<void> _loadCurrentBio() async {
-  //
-  //   if (uid != null) {
-  //     final doc = await FirebaseFirestore.instance.collection("users").doc(uid).get();
-  //     bioController.text = doc.data()?["bio"] ?? "";
-  //   }
-  // }
-  //
-  // Future<void> _saveBio() async {
-  //   final uid = FirebaseAuth.instance.currentUser?.uid;
-  //   if (uid != null) {
-  //     await FirebaseFirestore.instance.collection("users").doc(uid).update({
-  //       "bio": bioController.text.trim(),
-  //     });
-  //     Navigator.pop(context); // Go back after saving
-  //   }
-  // }
-
+  void loadBio() async {
+    String? bio = await service.getBio();
+    if (bio != null) {
+      setState(() {
+        bioController.text = bio;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
