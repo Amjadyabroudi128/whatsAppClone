@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
 
@@ -13,8 +14,7 @@ class EditBio extends StatefulWidget {
 
 class _EditBioState extends State<EditBio> {
   final TextEditingController bioController = TextEditingController();
-  final uid = FirebaseAuth.instance.currentUser?.uid;
-  final users = FirebaseFirestore.instance.collection("users");
+  FirebaseService service = FirebaseService();
   @override
   void initState() {
     super.initState();
@@ -52,7 +52,10 @@ class _EditBioState extends State<EditBio> {
         title: Text("Edit Your Bio", style: TextStyle(color: Colors.white)),
         actions: [
           kTextButton(
-            onPressed: (){},
+            onPressed: (){
+              service.updateBio(bioController.text.trim());
+              Navigator.of(context).pop();
+            },
             child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 20)),
           ),
         ],
