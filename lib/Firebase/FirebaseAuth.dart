@@ -7,6 +7,7 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
    final FirebaseFirestore users = FirebaseFirestore.instance;
+   final uid = FirebaseAuth.instance.currentUser?.uid;
    Future<void> createEmailPassword(BuildContext context,String email, String password, String name) async {
      try {
        await auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -132,5 +133,13 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
          }
      );
    }
-
+   Future<void> updateBio(newBio) async {
+     if(uid != null) {
+       await users.collection("users").doc(uid).update(
+        {
+          "bio": newBio,
+        }
+       );
+     }
+   }
  }
