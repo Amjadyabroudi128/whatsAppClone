@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/editBio.dart';
+import 'package:whatsappclone/features/Settings/Widget/showSheet.dart';
 
 import '../../../core/icons.dart';
 
@@ -65,7 +66,7 @@ class _nameCardState extends State<nameCard> {
                 divider(),
                 GestureDetector(
                   onTap: (){
-                    ShowSheet();
+                    ShowSheet(context);
                   },
                   // onTap: (){
                   //   Navigator.push(
@@ -86,17 +87,5 @@ class _nameCardState extends State<nameCard> {
       ),
     );
   }
-  void ShowSheet () {
-     showModalBottomSheet(context: context,
-         isScrollControlled: true,
-         builder: (context) {
-       return FractionallySizedBox(
-         heightFactor: 0.94,
-         child: Container(
-             child: EditBio()
-         ),
-       );
-         }
-     );
-  }
+
 }
