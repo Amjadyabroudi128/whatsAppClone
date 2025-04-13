@@ -9,6 +9,7 @@ import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/editBio.dart';
 import 'package:whatsappclone/features/Settings/Widget/showSheet.dart';
 
+import '../../../Firebase/FirebaseAuth.dart';
 import '../../../core/icons.dart';
 
 class nameCard extends StatefulWidget {
@@ -29,19 +30,14 @@ class _nameCardState extends State<nameCard> {
   @override
   void initState() {
     super.initState();
-    _loadUserBio();
+    loadBio();
   }
-
-  Future<void> _loadUserBio() async {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid != null) {
-      final doc = await FirebaseFirestore.instance.collection("users").doc(uid).get();
-      setState(() {
-        userBio = doc.data()?["bio"] ?? "No bio yet";
-      });
-    }
+  void loadBio() async {
+    String? fetchedBio = await FirebaseService().getBio();
+    setState(() {
+      userBio = fetchedBio ?? "";
+    });
   }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -68,12 +64,6 @@ class _nameCardState extends State<nameCard> {
                   onTap: (){
                     ShowSheet(context);
                   },
-                  // onTap: (){
-                  //   Navigator.push(
-                  //     context,
-                  //     CupertinoPageRoute(builder: (context) => EditBio()),
-                  //   ).then((_) => _loadUserBio());
-                  // },
                   child: ListTile(
                     dense: true,
                     title: Text(userBio, style: TextStyle(fontSize: 17),),
