@@ -44,13 +44,16 @@ class _EditBioState extends State<EditBio> {
     return Scaffold(
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
         backgroundColor: Colors.grey,
         centerTitle: true,
-        title: Text("Edit Your Bio", style: TextStyle(color: Colors.black)),
+        title: Text("Edit Your Bio", style: TextStyle(color: Colors.white)),
         actions: [
           kTextButton(
             onPressed: (){},
-            child: Text("Save", style: TextStyle(color: Colors.black, fontSize: 20)),
+            child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 20)),
           ),
         ],
       ),
