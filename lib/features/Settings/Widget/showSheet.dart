@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
-
 import 'editBio.dart';
 
 Future <void> ShowSheet (BuildContext context) async {

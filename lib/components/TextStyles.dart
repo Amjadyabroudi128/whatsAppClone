@@ -21,4 +21,5 @@ class Textstyles {
   static TextStyle deletemessage = TextStyle(fontSize: 17, color: myColors.redAccent);
   static TextStyle editText = TextStyle(fontSize: 17, color: myColors.editMessage);
   static TextStyle copyMessage = TextStyle(color: myColors.editMessage, fontSize: 17);
+  static TextStyle bioStyle = TextStyle(fontSize: 16);
  }
