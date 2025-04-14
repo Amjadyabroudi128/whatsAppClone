@@ -26,5 +26,6 @@ class myColors {
    static Color? editMessage = Colors.grey[800];
    static Color redAccent = Colors.redAccent;
    static Color? menuColor = Colors.grey[350];
+   static Color? btmSheet = Colors.grey[850];
 
  }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 
 class EditBio extends StatefulWidget {
   const EditBio({super.key});
@@ -32,7 +33,7 @@ class _EditBioState extends State<EditBio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[850],
+      backgroundColor: myColors.btmSheet,
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: Colors.white
