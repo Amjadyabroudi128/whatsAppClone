@@ -3,9 +3,8 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 
 import 'editBio.dart';
 
-void ShowSheet (BuildContext context) {
-  FirebaseService service = FirebaseService();
-  showModalBottomSheet(context: context,
+Future <void> ShowSheet (BuildContext context) async {
+  await showModalBottomSheet(context: context,
       isScrollControlled: true,
       builder: (context) {
         return FractionallySizedBox(
