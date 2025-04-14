@@ -7,7 +7,7 @@ class icons {
   static Icon emailIcon = Icon(Icons.email);
   static Icon passIcon = Icon(Icons.password);
   static Icon name = Icon(Icons.person);
-  static Icon logout = Icon(Icons.logout,color: Colors.red,);
+  static Icon logout = Icon(Icons.logout,color: myColors.delete,);
   static Icon image = Icon(Icons.image);
   static Icon send = Icon(Icons.send,color: myColors.myMessage);
   static Icon arrow = Icon(Icons.arrow_back);
@@ -24,6 +24,6 @@ class icons {
   static Icon colors = Icon(Icons.color_lens_outlined);
   static Icon deleteIcon = Icon(CupertinoIcons.delete, color: myColors.delete);
   static Icon copy = Icon(Icons.copy,color: myColors.labelClr,);
-  static Icon edit = Icon(CupertinoIcons.pencil, color: Colors.black, size: 27,);
+  static Icon edit = Icon(CupertinoIcons.pencil, color: myColors.tick, size: 27,);
 
 }
