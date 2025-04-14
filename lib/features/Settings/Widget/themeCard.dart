@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
 
@@ -41,7 +42,7 @@ class _themeCardState extends State<themeCard> {
     return Card(
       child: Column(
         children: [
-          ListTile(
+          kListTile(
               title: Text("Theme"),
               trailing: MyPopUpMenu(
                   icon: icons.arrowForward,
@@ -82,7 +83,7 @@ class _themeCardState extends State<themeCard> {
                 selectedThemeColor.value = selectedColor;
               }
             },
-            child: ListTile(
+            child: kListTile(
               title: Text("Chat Theme"),
               trailing: kIconButton(
                 onPressed: () {},

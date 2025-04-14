@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
@@ -57,7 +58,7 @@ class _nameCardState extends State<nameCard> {
             color: myColors.CardColor,
             child: Column(
               children: [
-                ListTile(
+                kListTile(
                   title: Text(widget.userName),
                 ),
                 divider(),
@@ -67,7 +68,7 @@ class _nameCardState extends State<nameCard> {
                     loadBio();
                   },
 
-                  child: ListTile(
+                  child: kListTile(
                     title: Text(userBio.isNotEmpty? userBio : "Edit Your Bio", style: Textstyles.bioStyle,),
                     trailing: icons.arrowForward,
                   ),
