@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextField.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/editBio.dart';
@@ -67,7 +68,7 @@ class _nameCardState extends State<nameCard> {
                   },
 
                   child: ListTile(
-                    title: Text(userBio.isNotEmpty? userBio : "Edit Your Bio", style: TextStyle(fontSize: 17),),
+                    title: Text(userBio.isNotEmpty? userBio : "Edit Your Bio", style: Textstyles.bioStyle,),
                     trailing: icons.arrowForward,
                   ),
                 )
