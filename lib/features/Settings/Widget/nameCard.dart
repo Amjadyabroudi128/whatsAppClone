@@ -61,13 +61,13 @@ class _nameCardState extends State<nameCard> {
                 ),
                 divider(),
                 GestureDetector(
-                  onTap: (){
-                    ShowSheet(context);
+                  onTap: () async {
+                    await ShowSheet(context);
                     loadBio();
                   },
+
                   child: ListTile(
-                    dense: true,
-                    title: Text(userBio, style: TextStyle(fontSize: 17),),
+                    title: Text(userBio.isNotEmpty? userBio : "Edit Your Bio", style: TextStyle(fontSize: 17),),
                     trailing: icons.arrowForward,
                   ),
                 )
