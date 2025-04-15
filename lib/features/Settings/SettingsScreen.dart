@@ -1,9 +1,14 @@
+
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/utils/pickImage.dart';
 import 'Widget/deleteAccount.dart';
 import 'Widget/dividerWidget.dart';
 import 'Widget/nameCard.dart';
@@ -20,7 +25,13 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   final User? user = FirebaseAuth.instance.currentUser;
-
+  late Uint8List image;
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+    setState(() {
+      image = img;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
