@@ -1,18 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:typed_data'; // ✅ Correct import for Uint8List
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
-import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
-import 'package:whatsappclone/features/Settings/Widget/editBio.dart';
 import 'package:whatsappclone/features/Settings/Widget/showSheet.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../core/icons.dart';
+import '../../../utils/pickImage.dart';
 
 class nameCard extends StatefulWidget {
   const nameCard({
@@ -40,19 +38,31 @@ class _nameCardState extends State<nameCard> {
       userBio = fetchedBio ?? "";
     });
   }
+   Uint8List? image;
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+    setState(() {
+      image = img;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Card(
-            child: Image.network(
-              "https://media.licdn.com/dms/image/v2/C5603AQGWALNlfWBXcA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1634729409931?e=1749686400&v=beta&t=uE3GxROfoynmR_1PjjxcMbumU-JgwfruBzZBTlrDkPA",
-              fit: BoxFit.cover,
-              height: 200,
+          GestureDetector(
+            onTap: (){
+
+            },
+            child: Card(
+              child: Image.network(
+                "https://media.licdn.com/dms/image/v2/C5603AQGWALNlfWBXcA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1634729409931?e=1749686400&v=beta&t=uE3GxROfoynmR_1PjjxcMbumU-JgwfruBzZBTlrDkPA",
+                fit: BoxFit.cover,
+                height: 200,
+              ),
+              shape: CircleBorder(),
+              clipBehavior: Clip.antiAlias,
             ),
-            shape: CircleBorder(),
-            clipBehavior: Clip.antiAlias,
           ),
           Card(
             color: myColors.CardColor,
