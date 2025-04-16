@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 class EditBio extends StatefulWidget {
@@ -47,7 +48,7 @@ class _EditBioState extends State<EditBio> {
               service.updateBio(bioController.text.trim());
               Navigator.of(context).pop();
             },
-            child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 20)),
+            child: Text("Save", style: Textstyles.saveBio),
           ),
         ],
       ),
