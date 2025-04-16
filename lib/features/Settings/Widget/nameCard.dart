@@ -58,31 +58,31 @@ class _nameCardState extends State<nameCard> {
     }
   }
 
-  Future uploadImage() async {
-    if (imageFile == null) {
-      myToast("No image selected");
-      return;
-    }
-
-    final fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    final path = "profile_images/$fileName.jpg";
-
-    try {
-      await supabase.storage.from("usersprofile").upload(path, imageFile!);
-
-      // Get the public URL of the uploaded image
-      final imageUrl = supabase.storage.from("usersprofile").getPublicUrl(path);
-
-      myToast("Uploaded image");
-
-      // Display the image from the URL
-      setState(() {
-        uploadedImageUrl = imageUrl;
-      });
-    } catch (e) {
-      myToast("Failed to upload the image: $e");
-    }
-  }
+  // Future uploadImage() async {
+  //   if (imageFile == null) {
+  //     myToast("No image selected");
+  //     return;
+  //   }
+  //
+  //   final fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   final path = "profile_images/$fileName.jpg";
+  //
+  //   try {
+  //     await supabase.storage.from("usersprofile").upload(path, imageFile!);
+  //
+  //     // Get the public URL of the uploaded image
+  //     final imageUrl = supabase.storage.from("usersprofile").getPublicUrl(path);
+  //
+  //     myToast("Uploaded image");
+  //
+  //     // Display the image from the URL
+  //     setState(() {
+  //       uploadedImageUrl = imageUrl;
+  //     });
+  //   } catch (e) {
+  //     myToast("Failed to upload the image: $e");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +111,9 @@ class _nameCardState extends State<nameCard> {
                   Icons.add,
                   size: 29,
                 ),
-                onPressed: () {
+                onPressed: ()  {
                   pickImage();
+                  // uploadImage();
                 },
               ),
             )
