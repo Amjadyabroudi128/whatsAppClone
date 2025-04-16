@@ -25,13 +25,6 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   final User? user = FirebaseAuth.instance.currentUser;
-  late Uint8List image;
-  void selectImage() async {
-    Uint8List img = await pickImage(ImageSource.gallery);
-    setState(() {
-      image = img;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
