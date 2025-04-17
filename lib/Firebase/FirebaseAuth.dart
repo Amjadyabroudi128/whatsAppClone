@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/components/Strings.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
+import 'package:whatsappclone/utils/pickImage.dart' as url;
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
    final FirebaseFirestore users = FirebaseFirestore.instance;
@@ -15,7 +15,8 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
          'email': email,
          'uid': auth.currentUser!.uid,
          "name" : name,
-         'bio': ''
+         'bio': '',
+         "userImage": url.url
        });
        await auth.currentUser?.reload();
        User? updatedUser = auth.currentUser;
@@ -41,7 +42,8 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
          'email': email,
          'uid': auth.currentUser!.uid,
          "name" : name,
-         "bio": ""
+         "bio": "",
+         "userImage": url.url
        });
        users.collection("users").get();
        await auth.currentUser?.reload();
