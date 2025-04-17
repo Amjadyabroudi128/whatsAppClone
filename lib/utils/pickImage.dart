@@ -1,9 +1,17 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-// pickImage(ImageSource source) async {
-// final ImagePicker picker = ImagePicker();
-// XFile? file = await picker.pickImage(source: source);
-// if (file != null) {
-//   return await file.readAsBytes();
-// }
-// }
+import 'package:path/path.dart';
+File? file;
+String? url;
+Future pickImage() async {
+  final ImagePicker picker = ImagePicker();
+  final XFile? imageCamera = await picker.pickImage(source: ImageSource.gallery);
+  if (imageCamera != null) {
+    file = File(imageCamera.path);
+    var imagename = basename(imageCamera.path);
+    var refStorage = FirebaseStorage.instance.ref(imagename);
+    await refStorage.putFile(file!);
+    url = await refStorage.getDownloadURL();
+  }
+}
