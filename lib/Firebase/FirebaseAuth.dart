@@ -16,7 +16,6 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          'uid': auth.currentUser!.uid,
          "name" : name,
          'bio': '',
-         "userImage": url.url
        });
        await auth.currentUser?.reload();
        User? updatedUser = auth.currentUser;
@@ -43,7 +42,6 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          'uid': auth.currentUser!.uid,
          "name" : name,
          "bio": "",
-         "userImage": url.url
        });
        users.collection("users").get();
        await auth.currentUser?.reload();
