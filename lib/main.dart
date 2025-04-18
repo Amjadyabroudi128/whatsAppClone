@@ -14,10 +14,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await Supabase.initialize(
-    url: "https://txtytzywyezmkwtsfxcy.supabase.co",
-    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4dHl0enl3eWV6bWt3dHNmeGN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3MjUxMTgsImV4cCI6MjA2MDMwMTExOH0.Cn2bSE6ERAadltR4SGFlpZCV5-EJHPXrBKU7mk9w2Wk"
-  );
   runApp(const MyApp());
 }
 
