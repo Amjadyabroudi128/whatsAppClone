@@ -59,10 +59,7 @@ class _nameCardState extends State<nameCard> {
               bottom: 0,
               right: -17,
               child: kIconButton(
-                myIcon: Icon(
-                  Icons.add,
-                  size: 29,
-                ),
+                myIcon: icons.camera,
                 onPressed: () async {
                   await url.pickImage();
                   addtoFireStore();
