@@ -1,9 +1,6 @@
-import 'dart:io';
-import 'dart:typed_data'; // ✅ Correct import for Uint8List
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
@@ -29,9 +26,7 @@ class nameCard extends StatefulWidget {
 
 class _nameCardState extends State<nameCard> {
   String userBio = "";
-  String? uploadedImageUrl;
 
-  final supabase = Supabase.instance.client;
   @override
   void initState() {
     super.initState();
@@ -44,7 +39,6 @@ class _nameCardState extends State<nameCard> {
       userBio = fetchedBio ?? "";
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -68,9 +62,9 @@ class _nameCardState extends State<nameCard> {
                   Icons.add,
                   size: 29,
                 ),
-                onPressed: ()  {
-                  // pickImage();
-                  // uploadImage();
+                onPressed: () async {
+                  await url.pickImage();
+                  addtoFireStore();
                 },
               ),
             )
@@ -105,5 +99,10 @@ class _nameCardState extends State<nameCard> {
         ],
       ),
     );
+  }
+  addtoFireStore() {
+    FirebaseFirestore.instance.collection("users").doc().set({
+      "image": url.url
+    });
   }
 }
