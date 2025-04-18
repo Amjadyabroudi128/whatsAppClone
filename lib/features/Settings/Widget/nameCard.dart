@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/showSheet.dart';
@@ -57,8 +58,8 @@ class _nameCardState extends State<nameCard> {
             Positioned(
               bottom: 0,
               right: -17,
-              child: IconButton(
-                icon: Icon(
+              child: kIconButton(
+                myIcon: Icon(
                   Icons.add,
                   size: 29,
                 ),
