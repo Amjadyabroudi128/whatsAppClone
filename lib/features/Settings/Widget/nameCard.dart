@@ -10,6 +10,7 @@ import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/showSheet.dart';
+import '../../../Firebase/FirebaseCollections.dart';
 import '../../../core/icons.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
@@ -30,7 +31,6 @@ class nameCard extends StatefulWidget {
 class _nameCardState extends State<nameCard> {
   String userBio = "";
   final User? user = FirebaseAuth.instance.currentUser;
-  final userC = FirebaseFirestore.instance.collection("users");
   String? imageUrl;
 
   @override
@@ -58,7 +58,7 @@ class _nameCardState extends State<nameCard> {
   }
 
   void addToFireStore(String imagePath) async {
-    await FirebaseFirestore.instance.collection("users").doc(user!.uid).set({
+    await userC.doc(user!.uid).set({
       "image": imagePath,
     }, SetOptions(merge: true));
     setState(() {
