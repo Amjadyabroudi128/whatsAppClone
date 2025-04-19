@@ -13,6 +13,8 @@ import 'package:whatsappclone/features/Settings/Widget/showSheet.dart';
 import '../../../core/icons.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
+import 'imageWidget.dart';
+
 class nameCard extends StatefulWidget {
   const nameCard({
     super.key,
@@ -74,14 +76,7 @@ class _nameCardState extends State<nameCard> {
               Card(
                 shape: const CircleBorder(),
                 clipBehavior: Clip.antiAlias,
-                child: Image.network(
-                  imageUrl == null || imageUrl!.isEmpty
-                      ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
-                      : imageUrl!,
-                  fit: BoxFit.cover,
-                  height: 200,
-                  width: 200,
-                ),
+                child: imageWidget(imageUrl: imageUrl),
               ),
               Positioned(
                 bottom: 0,
@@ -128,3 +123,4 @@ class _nameCardState extends State<nameCard> {
     );
   }
 }
+
