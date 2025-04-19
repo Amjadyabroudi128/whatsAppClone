@@ -30,6 +30,7 @@ class nameCard extends StatefulWidget {
 class _nameCardState extends State<nameCard> {
   String userBio = "";
   final User? user = FirebaseAuth.instance.currentUser;
+  final userC = FirebaseFirestore.instance.collection("users");
   String? imageUrl;
 
   @override
@@ -47,8 +48,7 @@ class _nameCardState extends State<nameCard> {
   }
 
   void loadImage() async {
-    DocumentSnapshot userDoc = await FirebaseFirestore.instance
-        .collection("users")
+    DocumentSnapshot userDoc = await userC
         .doc(user!.uid)
         .get();
 
