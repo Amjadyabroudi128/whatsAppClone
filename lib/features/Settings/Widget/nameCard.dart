@@ -37,7 +37,6 @@ class _nameCardState extends State<nameCard> {
   void initState() {
     super.initState();
     loadBio();
-    loadImage();
   }
 
   void loadBio() async {
@@ -47,15 +46,6 @@ class _nameCardState extends State<nameCard> {
     });
   }
 
-  void loadImage() async {
-    DocumentSnapshot userDoc = await userC
-        .doc(user!.uid)
-        .get();
-
-    setState(() {
-      imageUrl = userDoc.get("image") ?? "";
-    });
-  }
 
   void addToFireStore(String imagePath) async {
     await userC.doc(user!.uid).set({
@@ -73,10 +63,31 @@ class _nameCardState extends State<nameCard> {
         children: [
           Stack(
             children: [
-              Card(
-                shape: const CircleBorder(),
-                clipBehavior: Clip.antiAlias,
-                child: imageWidget(imageUrl: imageUrl),
+              StreamBuilder<DocumentSnapshot>(
+                stream: userC.doc(user!.uid).snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.grey,
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError || !snapshot.hasData || !snapshot.data!.exists) {
+                    return const CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.grey,
+                      child: Icon(Icons.error),
+                    );
+                  }
+                  final data = snapshot.data!;
+                  final imageUrl = data.get("image") ?? "";
+                  return Card(
+                    shape: const CircleBorder(),
+                    clipBehavior: Clip.antiAlias,
+                    child: imageWidget(imageUrl: imageUrl),
+                  );
+                },
               ),
               Positioned(
                 bottom: 0,
@@ -84,7 +95,7 @@ class _nameCardState extends State<nameCard> {
                 child: kIconButton(
                   myIcon: icons.camera,
                   onPressed: () async {
-                    await url.pickImage(); // this should set url.url
+                    await url.pickImage();
                     if (url.url != null && url.url!.isNotEmpty) {
                       addToFireStore(url.url!);
                     }
