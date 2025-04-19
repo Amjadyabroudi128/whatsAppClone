@@ -57,7 +57,7 @@ class _nameCardState extends State<nameCard> {
             ),
             Positioned(
               bottom: 0,
-              right: -17,
+              right: -14,
               child: kIconButton(
                 myIcon: icons.camera,
                 onPressed: () async {

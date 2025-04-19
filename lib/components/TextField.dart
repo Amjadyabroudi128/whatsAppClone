@@ -14,16 +14,18 @@ class kTextField extends StatelessWidget {
   final int? maxLines;
   final Color? fillColor;
   final bool? filled;
-  const kTextField({super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon, this.suffix, this.maxLines, this.fillColor, this.filled});
+
+  const kTextField(
+      {super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon, this.suffix, this.maxLines, this.fillColor, this.filled});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-
       controller: myController,
       obscureText: obsecureText,
       keyboardType: keyBoard,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
+      // Default to 1 if not provided
       decoration: InputDecoration(
         fillColor: fillColor,
         filled: filled,
