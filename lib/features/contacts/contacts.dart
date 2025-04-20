@@ -7,10 +7,8 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
-
-import '../../components/scaffoldMessanger.dart';
+import '../../Firebase/FirebaseCollections.dart';
 import '../../core/icons.dart';
-import '../chatScreen/chatScreen.dart';
 import 'Widgets/iconPerson.dart';
 import 'Widgets/userListTile.dart';
 class Contacts extends StatefulWidget {
@@ -50,7 +48,7 @@ class _ContactsState extends State<Contacts> {
   Widget userList(){
     final currentUserId = user?.uid ?? '';
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection("users").snapshots(),
+      stream: userC.snapshots(),
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator(),);
