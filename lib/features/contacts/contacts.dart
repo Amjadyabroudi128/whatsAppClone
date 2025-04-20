@@ -4,10 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 import '../../components/scaffoldMessanger.dart';
+import '../../core/icons.dart';
 import '../chatScreen/chatScreen.dart';
 import 'Widgets/iconPerson.dart';
 import 'Widgets/userListTile.dart';
@@ -26,6 +28,15 @@ class _ContactsState extends State<Contacts> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            kIconButton(
+              myIcon: icons.logout,
+              onPressed: (){
+                firebase.SignOut();
+                Navigator.of(context).pushNamed("welcome");
+              },
+            )
+          ],
           title: myPadding(
             padding: const EdgeInsets.only(top: 18),
             child: Text("Chats", style: Textstyles.appBar,),
