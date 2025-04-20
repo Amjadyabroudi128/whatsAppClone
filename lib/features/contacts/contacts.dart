@@ -10,6 +10,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import '../../Firebase/FirebaseCollections.dart';
 import '../../core/icons.dart';
 import 'Widgets/iconPerson.dart';
+import 'Widgets/streamUser.dart';
 import 'Widgets/userListTile.dart';
 class Contacts extends StatefulWidget {
   const Contacts({super.key});
@@ -44,48 +45,6 @@ class _ContactsState extends State<Contacts> {
         ),
         body: userList(),
     );
-  }
-  Widget userList(){
-    final currentUserId = user?.uid ?? '';
-    return StreamBuilder<QuerySnapshot>(
-      stream: userC.snapshots(),
-      builder: (context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator(),);
-        } if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(child: Text("No users found"));
-        }
-        final users = snapshot.data!.docs.where((doc) => doc.id != currentUserId).toList();
-        if (users.isEmpty) {
-          return Center(child: Text("No other users available"));
-        }
-        return ListView.builder(
-          itemCount: users.length,
-          itemBuilder: (context, index) {
-            final userDoc = users[index];
-
-            return myPadding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      person(),
-                      BoxSpacing(mWidth: 10),
-                      Expanded(
-                        child: listTile(userDoc: userDoc),
-                      ),
-                    ],
-                  ),
-                  Divider(),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-
   }
 }
 
