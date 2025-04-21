@@ -35,26 +35,6 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
             },
             child: Text("Edit", style: TextStyle(fontSize: 20),),
           )
-          // PopupMenuButton<String>(
-          //   icon: Icon(Icons.edit, color: Colors.white),
-          //   onSelected: (value) {
-          //     if (value == 'change') {
-          //       // Trigger change photo logic
-          //     } else if (value == 'delete') {
-          //       // Trigger delete photo logic
-          //     }
-          //   },
-          //   itemBuilder: (BuildContext context) => [
-          //     const PopupMenuItem(
-          //       value: 'change',
-          //       child: Text('Change Photo'),
-          //     ),
-          //     const PopupMenuItem(
-          //       value: 'delete',
-          //       child: Text('Delete Photo'),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
       body: Center(
