@@ -83,10 +83,10 @@ class _nameCardState extends State<nameCard> {
                     );
                   }
                   if (snapshot.hasError || !snapshot.hasData || !snapshot.data!.exists) {
-                    return const CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Colors.grey,
-                      child: Icon(Icons.error),
+                    return Image.network("https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg",
+                      fit: BoxFit.cover,
+                      height: 200,
+                      width: 200,
                     );
                   }
                   final data = snapshot.data!;
@@ -109,19 +109,6 @@ class _nameCardState extends State<nameCard> {
                   );
                 },
               ),
-              // Positioned(
-              //   bottom: 0,
-              //   right: -5,
-              //   child: kIconButton(
-              //     myIcon: icons.camera,
-              //     onPressed: () async {
-              //       await url.pickImage();
-              //       if (url.url != null && url.url!.isNotEmpty) {
-              //         addToFireStore(url.url!);
-              //       }
-              //     },
-              //   ),
-              // ),
             ],
           ),
           BoxSpacing(myHeight: 5),
