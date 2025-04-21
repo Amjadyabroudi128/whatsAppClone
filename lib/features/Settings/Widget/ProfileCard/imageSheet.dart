@@ -2,9 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 
 import '../../../../core/icons.dart';
+import '../dividerWidget.dart';
 
 Future<void> showImage(BuildContext context) async {
   await showModalBottomSheet(
@@ -27,25 +30,27 @@ Future<void> showImage(BuildContext context) async {
                   Spacer(),
                   Text("Edit Profile photo", style: TextStyle(fontSize: 18, color: Colors.white),),
                   Spacer(),
-                  Icon(Icons.cancel, color: Colors.white,)
+                  Icon(Icons.cancel_outlined, color: Colors.white,)
                 ],
               ),
               BoxSpacing(myHeight: 9,),
               Card(
-                color: Colors.grey,
+                color: Colors.grey[800],
                 child: Column(
                   children: [
                     kListTile(
-                      title: Text("Choose Photo"),
-                      trailing: icons.image,
+                      title: Text("Take Photo", style: Textstyles.saveBio,),
+                      trailing: icons.camera,
                     ),
+                    divider(),
                     kListTile(
-                      title: Text("Choose Photo"),
-                      trailing: icons.image,
+                      title: Text("Choose Photo", style: Textstyles.saveBio,),
+                      trailing: icons.whiteImage,
                     ),
+                    divider(),
                     kListTile(
-                      title: Text("Choose Photo"),
-                      trailing: icons.image,
+                      title: Text("Delete Photo", style: TextStyle(fontSize: 17, color: myColors.redAccent),),
+                      trailing: icons.deleteIcon,
                     ),
                   ],
                 ),
