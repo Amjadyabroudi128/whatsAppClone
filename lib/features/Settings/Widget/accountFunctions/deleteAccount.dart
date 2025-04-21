@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/core/icons.dart';
-import '../../../components/iconButton.dart';
+import '../../../../components/iconButton.dart';
 
 class deleteAccount extends StatelessWidget {
   const deleteAccount({

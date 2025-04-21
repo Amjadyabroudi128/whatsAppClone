@@ -9,9 +9,9 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
-import 'package:whatsappclone/features/Settings/Widget/showSheet.dart';
-import '../../../Firebase/FirebaseCollections.dart';
-import '../../../core/icons.dart';
+import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
+import '../../../../Firebase/FirebaseCollections.dart';
+import '../../../../core/icons.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
 import 'ImageFullScreen.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/features/Settings/Widget/accountFunctions/signoutBtn.dart';
 
-import 'signoutBtn.dart';
 
 class signOut extends StatelessWidget {
   const signOut({

@@ -9,11 +9,11 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
-import 'Widget/deleteAccount.dart';
+import 'Widget/accountFunctions/deleteAccount.dart';
 import 'Widget/dividerWidget.dart';
-import 'Widget/nameCard.dart';
-import 'Widget/signout.dart';
-import 'Widget/themeCard.dart';
+import 'Widget/ProfileCard/nameCard.dart';
+import 'Widget/accountFunctions/signout.dart';
+import 'Widget/themeCard/themeCard.dart';
 
 class SettingScreen extends StatefulWidget {
   final Function(ThemeData)? onThemeChange;

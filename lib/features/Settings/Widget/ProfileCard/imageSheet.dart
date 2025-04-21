@@ -4,7 +4,7 @@ import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 
-import '../../../core/icons.dart';
+import '../../../../core/icons.dart';
 
 Future<void> showImage(BuildContext context) async {
   await showModalBottomSheet(

@@ -3,13 +3,13 @@ import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
 
-import '../../../components/iconButton.dart';
-import '../../../components/popUpMenu.dart';
-import '../../../core/appTheme.dart';
-import '../../../core/icons.dart';
-import '../../../enums/enums.dart';
-import '../../../globalState.dart';
-import '../SettingsScreen.dart';
+import '../../../../components/iconButton.dart';
+import '../../../../components/popUpMenu.dart';
+import '../../../../core/appTheme.dart';
+import '../../../../core/icons.dart';
+import '../../../../enums/enums.dart';
+import '../../../../globalState.dart';
+import '../../SettingsScreen.dart';
 
 class themeCard extends StatefulWidget {
   const themeCard({
