@@ -10,7 +10,7 @@ import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
 import 'Widget/accountFunctions/deleteAccount.dart';
-import 'Widget/dividerWidget.dart';
+import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
 import 'Widget/accountFunctions/signout.dart';
 import 'Widget/themeCard/themeCard.dart';

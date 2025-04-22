@@ -7,7 +7,7 @@ import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 import '../../../../core/icons.dart';
-import '../dividerWidget.dart';
+import '../../../../components/dividerWidget.dart';
 
 Future<void> showImage(BuildContext context) async {
   await showModalBottomSheet(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/features/Settings/Widget/dividerWidget.dart';
+import 'package:whatsappclone/components/dividerWidget.dart';
 
 import '../../../../components/iconButton.dart';
 import '../../../../components/popUpMenu.dart';
