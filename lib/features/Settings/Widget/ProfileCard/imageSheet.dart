@@ -32,7 +32,6 @@ Future<void> showImage(BuildContext context) async {
                       },
                     myIcon: Icon(Icons.cancel_outlined, color: Colors.white),
                   )
-                  // Icon(Icons.cancel_outlined, color: Colors.white,)
                 ],
               ),
               BoxSpacing(myHeight: 9,),
@@ -48,6 +47,9 @@ Future<void> showImage(BuildContext context) async {
                     kListTile(
                       title: Text("Choose Photo", style: Textstyles.saveBio,),
                       trailing: icons.whiteImage,
+                      onTap: (){
+
+                      },
                     ),
                     divider(),
                     kListTile(

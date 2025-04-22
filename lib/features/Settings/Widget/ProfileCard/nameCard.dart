@@ -11,10 +11,12 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
 import '../../../../Firebase/FirebaseCollections.dart';
+import '../../../../components/TextButton.dart';
 import '../../../../core/icons.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
 import 'ImageFullScreen.dart';
+import 'imageSheet.dart';
 import 'imageWidget.dart';
 
 class nameCard extends StatefulWidget {
@@ -140,5 +142,5 @@ class _nameCardState extends State<nameCard> {
       ),
     );
   }
-}
 
+}

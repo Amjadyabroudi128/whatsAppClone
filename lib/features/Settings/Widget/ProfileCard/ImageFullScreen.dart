@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextButton.dart';
-import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
-
 import 'imageSheet.dart';
 
 class FullScreenImageScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:whatsappclone/colorPicker/ColorPicking.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
@@ -13,6 +13,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.debug, // Use Debug for testing
+    appleProvider: AppleProvider.debug,
   );
   runApp(const MyApp());
 }
