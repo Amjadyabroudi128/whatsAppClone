@@ -23,14 +23,16 @@ Future<void> showImage(BuildContext context) async {
             children: [
               Row(
                 children: [
-                  kIconButton(onPressed: (){
-                    Navigator.of(context).pop();},
-                    myIcon: Icon(Icons.arrow_back),
-                  ),
                   Spacer(),
                   Text("Edit Profile photo", style: TextStyle(fontSize: 18, color: Colors.white),),
                   Spacer(),
-                  Icon(Icons.cancel_outlined, color: Colors.white,)
+                  kIconButton(
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                      },
+                    myIcon: Icon(Icons.cancel_outlined, color: Colors.white),
+                  )
+                  // Icon(Icons.cancel_outlined, color: Colors.white,)
                 ],
               ),
               BoxSpacing(myHeight: 9,),
