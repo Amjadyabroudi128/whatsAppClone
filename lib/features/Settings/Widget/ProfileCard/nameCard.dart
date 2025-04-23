@@ -96,7 +96,9 @@ class _nameCardState extends State<nameCard> {
                   final imageUrl = userData["image"] ?? "";
                   return GestureDetector(
                     onTap: (){
-                      Navigator.push(
+                     if(imageUrl.isEmpty || imageUrl == null) {
+                       showImage(context);
+                     } else Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) => FullScreenImageScreen(imageUrl: imageUrl),
