@@ -30,7 +30,7 @@ Future<void> showImage(BuildContext context) async {
                     onPressed: (){
                       Navigator.of(context).pop();
                       },
-                    myIcon: Icon(Icons.cancel_outlined, color: Colors.white),
+                    myIcon: icons.cancel
                   )
                 ],
               ),
