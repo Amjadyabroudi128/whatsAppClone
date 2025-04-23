@@ -7,11 +7,11 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
-
+import 'package:whatsappclone/utils/pickImage.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
-
-Future<void> showImage(BuildContext context) async {
+import "package:whatsappclone/utils/pickImage.dart" as url;
+Future<void> showImage(BuildContext context, {Future<void> Function()? addToFirebase}) async {
   await showModalBottomSheet(
     context: context,
       backgroundColor: Colors.black,
@@ -22,6 +22,7 @@ Future<void> showImage(BuildContext context) async {
       return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 children: [
@@ -49,8 +50,10 @@ Future<void> showImage(BuildContext context) async {
                     kListTile(
                       title: Text("Choose Photo", style: Textstyles.saveBio,),
                       trailing: icons.whiteImage,
-                      onTap: (){
-
+                      onTap: () async {
+                        if (addToFirebase != null) {
+                          await addToFirebase();
+                        }
                       },
                     ),
                     divider(),
