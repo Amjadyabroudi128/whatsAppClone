@@ -40,9 +40,7 @@ class _nameCardState extends State<nameCard> {
   void initState() {
     super.initState();
     loadBio();
-    loadImage();
   }
-
   void loadBio() async {
     String? fetchedBio = await FirebaseService().getBio();
     setState(() {
@@ -50,15 +48,7 @@ class _nameCardState extends State<nameCard> {
     });
   }
 
-  void loadImage() async {
-    DocumentSnapshot userDoc = await userC.doc(user!.uid).get();
-    final data = userDoc.data() as Map<String, dynamic>?;
-
-    setState(() {
-      imageUrl = data != null && data.containsKey("image") ? data["image"] : "";
-    });
-  }
-  void addToFireStore(String imagePath) async {
+  Future addToFireStore(String imagePath) async {
     await userC.doc(user!.uid).set({
       "image": imagePath,
     }, SetOptions(merge: true));
@@ -95,15 +85,21 @@ class _nameCardState extends State<nameCard> {
                   final Map<String, dynamic> userData = data.data() as Map<String, dynamic>;
                   final imageUrl = userData["image"] ?? "";
                   return GestureDetector(
-                    onTap: (){
-                     if(imageUrl.isEmpty || imageUrl == null) {
-                       showImage(context);
-                     } else Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => FullScreenImageScreen(imageUrl: imageUrl),
-                        ),
-                      );
+                    onTap: () async {
+                      if (imageUrl != null && imageUrl.isNotEmpty)
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => FullScreenImageScreen(imageUrl: imageUrl),
+                                ),
+                              );
+                      else await showImage(context, addToFirebase: () async {
+                        String path = await url.pickImage(); // Pick here
+                        if (path.isNotEmpty) {
+                          await addToFireStore(path);        // Upload here
+                        }
+                      });
+
                     },
                     child: Card(
                       shape: const CircleBorder(),
