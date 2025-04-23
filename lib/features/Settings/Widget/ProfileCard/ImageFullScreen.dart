@@ -22,7 +22,7 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
           color: Colors.white
         ),
         backgroundColor: Colors.transparent,
-        title: Text("Profile Photo", style: TextStyle(color: Colors.white),),
+        title: Text("Profile Photo", style: Textstyles.editProfile,),
         centerTitle: true,
         actions: [
           kTextButton(
