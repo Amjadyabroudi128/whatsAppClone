@@ -11,7 +11,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
 
-Future<void> showImage(BuildContext context, {required String imageUrl}) async {
+Future<void> showImage(BuildContext context) async {
   await showModalBottomSheet(
     context: context,
       backgroundColor: Colors.black,

@@ -30,7 +30,7 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
               foregroundColor: WidgetStatePropertyAll(Colors.white)
             ),
             onPressed: () async {
-              await showImage(context, imageUrl: widget.imageUrl);
+              await showImage(context, );
             },
             child: Text("Edit", style: Textstyles.editProfile,),
           )
