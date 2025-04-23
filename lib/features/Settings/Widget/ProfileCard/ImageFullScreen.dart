@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'imageSheet.dart';
 
 class FullScreenImageScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
             onPressed: () async {
               await showImage(context);
             },
-            child: Text("Edit", style: TextStyle(fontSize: 20),),
+            child: Text("Edit", style: Textstyles.editProfile,),
           )
         ],
       ),

@@ -23,4 +23,5 @@ class Textstyles {
   static TextStyle copyMessage = TextStyle(color: myColors.editMessage, fontSize: 17);
   static TextStyle bioStyle = TextStyle(fontSize: 16);
   static TextStyle saveBio = TextStyle(fontSize: 18, color: Colors.white);
+  static TextStyle editProfile = TextStyle(fontSize: 20);
  }
