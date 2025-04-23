@@ -27,5 +27,5 @@ class icons {
   static Icon copy = Icon(Icons.copy,color: myColors.labelClr,);
   static Icon edit = Icon(CupertinoIcons.pencil, color: myColors.tick, size: 27,);
   static Icon camera = Icon(Icons.camera_alt_outlined, size: 29, color: myColors.MIcons);
-
+  static Icon cancel = Icon(Icons.cancel_outlined, color: myColors.MIcons);
 }
