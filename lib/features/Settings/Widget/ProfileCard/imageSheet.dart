@@ -1,4 +1,6 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
@@ -9,7 +11,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
 
-Future<void> showImage(BuildContext context) async {
+Future<void> showImage(BuildContext context, {required String imageUrl}) async {
   await showModalBottomSheet(
     context: context,
       backgroundColor: Colors.black,
@@ -55,6 +57,12 @@ Future<void> showImage(BuildContext context) async {
                     kListTile(
                       title: Text("Delete Photo", style: TextStyle(fontSize: 17, color: myColors.redAccent),),
                       trailing: icons.deleteIcon,
+                      onTap: (){
+                        FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({
+                          "image": FieldValue.delete()
+                        });
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ],
                 ),
