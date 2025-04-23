@@ -14,5 +14,7 @@ Future pickImage() async {
     var refStorage = FirebaseStorage.instance.ref(imagename);
     await refStorage.putFile(file!);
     url = await refStorage.getDownloadURL();
+    return url;
   }
+  return null;
 }
