@@ -10,13 +10,20 @@ class imageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      imageUrl == null || imageUrl!.isEmpty
-          ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
-          : imageUrl!,
-      fit: BoxFit.cover,
-      height: 200,
-      width: 200,
-    );
+    return imageUrl == null || imageUrl!.isEmpty ? Card(
+      shape: const CircleBorder(),
+      clipBehavior: Clip.antiAlias,
+      child: SizedBox(
+        width: 100, // set a size to make the card visible
+        height: 100,
+        child: Center(
+          child: Text(
+            "Add Photo",
+            style: TextStyle(fontSize: 18, color: Colors.black),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    ) : Image.network(imageUrl!, fit: BoxFit.cover, height: 200, width: 200,);
   }
 }
