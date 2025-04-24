@@ -1,20 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
 import '../../../../Firebase/FirebaseCollections.dart';
-import '../../../../components/TextButton.dart';
 import '../../../../core/icons.dart';
-import 'package:whatsappclone/utils/pickImage.dart' as url;
-
 import 'ImageFullScreen.dart';
 import 'imageSheet.dart';
 import 'imageWidget.dart';

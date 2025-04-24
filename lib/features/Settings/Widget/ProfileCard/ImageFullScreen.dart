@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/utils/pickImage.dart' as url;
 import 'imageSheet.dart';
 
 class FullScreenImageScreen extends StatefulWidget {

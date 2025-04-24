@@ -7,7 +7,6 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
-import 'package:whatsappclone/utils/pickImage.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
 import "package:whatsappclone/utils/pickImage.dart" as url;
