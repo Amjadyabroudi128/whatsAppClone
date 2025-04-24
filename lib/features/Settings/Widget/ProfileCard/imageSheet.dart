@@ -11,68 +11,84 @@ import 'package:whatsappclone/utils/pickImage.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
 import "package:whatsappclone/utils/pickImage.dart" as url;
-Future<void> showImage(BuildContext context, {Future<void> Function()? addToFirebase}) async {
+Future<void> showImage(BuildContext context, {Future<void> Function(String imageUrl)? addToFirebase}) async {
   await showModalBottomSheet(
     context: context,
-      backgroundColor: Colors.black,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
+    backgroundColor: Colors.black,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
     builder: (context) {
       return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                const Spacer(),
+                const Text(
+                  "Edit Profile photo",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+                const Spacer(),
+                kIconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  myIcon: icons.cancel,
+                ),
+              ],
+            ),
+            BoxSpacing(myHeight: 9),
+            Card(
+              color: Colors.grey[800],
+              child: Column(
                 children: [
-                  Spacer(),
-                  Text("Edit Profile photo", style: TextStyle(fontSize: 18, color: Colors.white),),
-                  Spacer(),
-                  kIconButton(
-                    onPressed: (){
+                  kListTile(
+                    title: Text("Take Photo", style: Textstyles.saveBio),
+                    trailing: icons.camera,
+                    onTap: () async {
+                      String? imageUrl = await url.takeImage();
+                      if (imageUrl != null && addToFirebase != null) {
+                        await addToFirebase(imageUrl);
+                        Navigator.of(context).pop();
+                      }
+                    },
+                  ),
+                  divider(),
+                  kListTile(
+                    title: Text("Choose Photo", style: Textstyles.saveBio),
+                    trailing: icons.whiteImage,
+                    onTap: () async {
+                      String? imageUrl = await url.pickImage();
+                      if (imageUrl != null && addToFirebase != null) {
+                        await addToFirebase(imageUrl);
+                        Navigator.of(context).pop();
+                      }
+                    },
+                  ),
+                  divider(),
+                  kListTile(
+                    title: Text(
+                      "Delete Photo",
+                      style: TextStyle(fontSize: 17, color: myColors.redAccent),
+                    ),
+                    trailing: icons.deleteIcon,
+                    onTap: () {
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .update({"image": FieldValue.delete()});
                       Navigator.of(context).pop();
-                      },
-                    myIcon: icons.cancel
-                  )
+                    },
+                  ),
                 ],
               ),
-              BoxSpacing(myHeight: 9,),
-              Card(
-                color: Colors.grey[800],
-                child: Column(
-                  children: [
-                    kListTile(
-                      title: Text("Take Photo", style: Textstyles.saveBio,),
-                      trailing: icons.camera,
-                    ),
-                    divider(),
-                    kListTile(
-                      title: Text("Choose Photo", style: Textstyles.saveBio,),
-                      trailing: icons.whiteImage,
-                      onTap: () async {
-                        if (addToFirebase != null) {
-                          await addToFirebase();
-                        }
-                      },
-                    ),
-                    divider(),
-                    kListTile(
-                      title: Text("Delete Photo", style: TextStyle(fontSize: 17, color: myColors.redAccent),),
-                      trailing: icons.deleteIcon,
-                      onTap: (){
-                        FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({
-                          "image": FieldValue.delete()
-                        });
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        );
-    }
+            )
+          ],
+        ),
+      );
+    },
   );
 }
