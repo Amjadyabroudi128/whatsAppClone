@@ -69,13 +69,6 @@ class _nameCardState extends State<nameCard> {
                       child: CircularProgressIndicator(),
                     );
                   }
-                  if (snapshot.hasError || !snapshot.hasData || !snapshot.data!.exists) {
-                    return Image.network("https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg",
-                      fit: BoxFit.cover,
-                      height: 200,
-                      width: 200,
-                    );
-                  }
                   final data = snapshot.data!;
                   final Map<String, dynamic> userData = data.data() as Map<String, dynamic>;
                   final imageUrl = userData["image"] ?? "";
