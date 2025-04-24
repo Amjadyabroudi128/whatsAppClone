@@ -18,3 +18,16 @@ Future pickImage() async {
   }
   return null;
 }
+Future takeImage() async  {
+  final ImagePicker picker = ImagePicker();
+  final XFile? imageCamera = await picker.pickImage(source: ImageSource.camera);
+  if (imageCamera != null) {
+    file = File(imageCamera.path);
+    var imagename = basename(imageCamera.path);
+    var refStorage = FirebaseStorage.instance.ref(imagename);
+    await refStorage.putFile(file!);
+    url = await refStorage.getDownloadURL();
+    return url;
+  }
+  return null;
+}
