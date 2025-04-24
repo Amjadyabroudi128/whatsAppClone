@@ -35,14 +35,11 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
             onPressed: () async {
               await showImage(
                 context,
-                addToFirebase: () async {
-                  String path = await url.pickImage();
-                  if (path.isNotEmpty) {
-                    await FirebaseFirestore.instance
-                        .collection("users")
-                        .doc(user!.uid)
-                        .update({"image": path});
-                  }
+                addToFirebase: (String path) async {
+                  await FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(user!.uid)
+                      .update({"image": path});
                 },
               );
             },
