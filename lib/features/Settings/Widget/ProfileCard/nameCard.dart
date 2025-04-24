@@ -93,12 +93,14 @@ class _nameCardState extends State<nameCard> {
                                   builder: (_) => FullScreenImageScreen(imageUrl: imageUrl),
                                 ),
                               );
-                      else await showImage(context, addToFirebase: () async {
-                        String path = await url.pickImage(); // Pick here
-                        if (path.isNotEmpty) {
-                          await addToFireStore(path);        // Upload here
-                        }
-                      });
+                      else {
+                        await showImage(
+                          context,
+                          addToFirebase: (String path) async {
+                            await addToFireStore(path);
+                          },
+                        );
+                      }
 
                     },
                     child: Card(
