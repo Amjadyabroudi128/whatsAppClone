@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/kCard.dart';
 
 class imageWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class imageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imageUrl == null || imageUrl!.isEmpty ? const kCard(
+    return imageUrl == null || imageUrl!.isEmpty ?  kCard(
       shape: CircleBorder(),
       clipBehavior: Clip.antiAlias,
       child: SizedBox(
@@ -20,7 +21,7 @@ class imageWidget extends StatelessWidget {
         child: Center(
           child: Text(
             "Add Photo",
-            style: TextStyle(fontSize: 18, color: Colors.black),
+            style: Textstyles.addPhoto,
             textAlign: TextAlign.center,
           ),
         ),
