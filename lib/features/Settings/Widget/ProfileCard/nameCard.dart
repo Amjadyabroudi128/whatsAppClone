@@ -5,6 +5,7 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
@@ -91,7 +92,7 @@ class _nameCardState extends State<nameCard> {
                       }
 
                     },
-                    child: Card(
+                    child: kCard(
                       shape: const CircleBorder(),
                       clipBehavior: Clip.antiAlias,
                       child: imageWidget(imageUrl: imageUrl),
@@ -102,7 +103,7 @@ class _nameCardState extends State<nameCard> {
             ],
           ),
           BoxSpacing(myHeight: 5),
-          Card(
+          kCard(
             color: myColors.CardColor,
             child: Column(
               children: [
