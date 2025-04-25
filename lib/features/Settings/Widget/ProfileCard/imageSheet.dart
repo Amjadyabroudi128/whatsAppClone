@@ -71,7 +71,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                   kListTile(
                     title: Text(
                       "Delete Photo",
-                      style: TextStyle(fontSize: 17, color: myColors.redAccent),
+                      style: Textstyles.deletemessage,
                     ),
                     trailing: icons.deleteIcon,
                     onTap: () {
