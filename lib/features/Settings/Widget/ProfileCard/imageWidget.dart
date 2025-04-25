@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/kCard.dart';
 
 class imageWidget extends StatelessWidget {
   const imageWidget({
@@ -10,8 +11,8 @@ class imageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imageUrl == null || imageUrl!.isEmpty ? Card(
-      shape: const CircleBorder(),
+    return imageUrl == null || imageUrl!.isEmpty ? const kCard(
+      shape: CircleBorder(),
       clipBehavior: Clip.antiAlias,
       child: SizedBox(
         width: 100, // set a size to make the card visible
