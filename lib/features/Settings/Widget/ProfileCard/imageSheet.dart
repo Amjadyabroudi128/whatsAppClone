@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import '../../../../Firebase/FirebaseCollections.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
 import "package:whatsappclone/utils/pickImage.dart" as url;
@@ -75,9 +76,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                     ),
                     trailing: icons.deleteIcon,
                     onTap: () {
-                      FirebaseFirestore.instance
-                          .collection("users")
-                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                      userC.doc(FirebaseAuth.instance.currentUser!.uid)
                           .update({"image": FieldValue.delete()});
                       Navigator.of(context).pop();
                     },
