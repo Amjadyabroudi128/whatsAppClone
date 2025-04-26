@@ -9,6 +9,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
+import '../../Firebase/FirebaseCollections.dart';
 import 'Widget/accountFunctions/deleteAccount.dart';
 import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
@@ -31,8 +32,7 @@ class _SettingScreenState extends State<SettingScreen> {
       body: user == null
           ? const Center(child: Text("No user logged in"))
           : FutureBuilder<DocumentSnapshot>(
-        future: FirebaseFirestore.instance
-            .collection("users")
+        future: userC
             .doc(user!.uid)
             .get(),
         builder: (context, snapshot) {
