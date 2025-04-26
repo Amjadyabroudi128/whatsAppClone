@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
@@ -61,7 +62,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   nameCard(userName: userName),
                   BoxSpacing(myHeight: 15,),
                   Text("Account", style: Textstyles.accountStyle,),
-                  Card(
+                  kCard(
                     child: Column(
                       children: [
                         signOut(),
