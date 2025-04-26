@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/icons.dart';
 
@@ -78,21 +79,23 @@ class _TestnameState extends State<Testname> {
                                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(height: 10),
-                                    ListTile(
+                                    kListTile(
                                       leading: icons.image,
                                       title: Text('Photo'),
                                       onTap: () {
+                                        url.pickImage();
                                         Navigator.pop(context);
                                       },
                                     ),
-                                    ListTile(
+                                    kListTile(
                                       leading: icons.dCam,
                                       title: Text('Camera'),
                                       onTap: () {
+                                        url.takeImage();
                                         Navigator.pop(context);
                                       },
                                     ),
-                                    ListTile(
+                                    kListTile(
                                       leading: Icon(Icons.file_copy_outlined),
                                       title: Text('File'),
                                       onTap: () {
