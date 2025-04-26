@@ -16,6 +16,7 @@ class FullScreenImageScreen extends StatefulWidget {
 
 class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
   final user = FirebaseAuth.instance.currentUser;
+  final userC = FirebaseFirestore.instance.collection("users");
 
   @override
   Widget build(BuildContext context) {

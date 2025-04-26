@@ -26,10 +26,18 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
           children: [
             Row(
               children: [
-                const Spacer(),
-                const Text(
-                  "Edit Profile photo",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 27),
+                      child: ImageStream(),
+                    ),
+                     BoxSpacing(mWidth: 18,),
+                     Text(
+                      "Edit Profile photo",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ],
                 ),
                 const Spacer(),
                 kIconButton(
@@ -85,6 +93,37 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
               ),
             )
           ],
+        ),
+      );
+    },
+  );
+}
+Widget ImageStream() {
+  User? user = FirebaseAuth.instance.currentUser;
+  return StreamBuilder(
+    stream: userC
+        .doc(user!.uid)
+        .snapshots(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData || !snapshot.data!.exists) {
+        return const CircleAvatar(
+          radius: 18,
+          backgroundColor: Colors.grey,
+        );
+      }
+
+      final data = snapshot.data!.data() as Map<String, dynamic>;
+      final imageUrl = data["image"] ?? "";
+
+       return Container(
+        width: 60,
+        height: 54,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12), // Rounded corners
+          image: DecorationImage(
+            image: NetworkImage(imageUrl),
+            fit: BoxFit.cover,
+          ),
         ),
       );
     },
