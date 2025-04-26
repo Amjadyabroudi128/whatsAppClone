@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/features/Settings/Widget/ProfileCard/imageStream.dart';
 import '../../../../Firebase/FirebaseCollections.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
@@ -30,7 +31,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 27),
-                      child: ImageStream(),
+                      child: ProfileStream(),
                     ),
                      BoxSpacing(mWidth: 18,),
                      Text(
@@ -93,37 +94,6 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
               ),
             )
           ],
-        ),
-      );
-    },
-  );
-}
-Widget ImageStream() {
-  User? user = FirebaseAuth.instance.currentUser;
-  return StreamBuilder(
-    stream: userC
-        .doc(user!.uid)
-        .snapshots(),
-    builder: (context, snapshot) {
-      if (!snapshot.hasData || !snapshot.data!.exists) {
-        return const CircleAvatar(
-          radius: 18,
-          backgroundColor: Colors.grey,
-        );
-      }
-
-      final data = snapshot.data!.data() as Map<String, dynamic>;
-      final imageUrl = data["image"] ?? "";
-
-       return Container(
-        width: 60,
-        height: 54,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12), // Rounded corners
-          image: DecorationImage(
-            image: NetworkImage(imageUrl),
-            fit: BoxFit.cover,
-          ),
         ),
       );
     },
