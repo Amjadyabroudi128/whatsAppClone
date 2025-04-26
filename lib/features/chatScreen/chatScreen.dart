@@ -1,15 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/icons.dart';
-import 'package:whatsappclone/core/MyColors.dart';
-import 'package:whatsappclone/core/appTheme.dart';
+
 import '../../components/TextField.dart';
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
 import 'Widgets/messageStream.dart';
+import 'package:whatsappclone/utils/pickImage.dart' as url;
 
 class Testname extends StatefulWidget {
   final receiverName;
@@ -60,7 +59,59 @@ class _TestnameState extends State<Testname> {
                         hint: "Add a message",
                       ),
                     ),
-                    kIconButton(onPressed: () {}, myIcon: icons.image, iconSize: 26),
+                    kIconButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                          ),
+                          builder: (BuildContext context) {
+                            return SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Choose an option",
+                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    ListTile(
+                                      leading: icons.image,
+                                      title: Text('Photo'),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: icons.dCam,
+                                      title: Text('Camera'),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(Icons.file_copy_outlined),
+                                      title: Text('File'),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+
+                      },
+                      myIcon: Icon(Icons.add),
+                    ),
+                    // kIconButton(onPressed: () {
+                    //
+                    // }, myIcon: icons.image, iconSize: 26),
                     kIconButton(
                       onPressed: sendMessage,
                       myIcon: icons.send,
