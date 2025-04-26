@@ -36,7 +36,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                      BoxSpacing(mWidth: 18,),
                      Text(
                       "Edit Profile photo",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: Textstyles.editProfile,
                     ),
                   ],
                 ),
