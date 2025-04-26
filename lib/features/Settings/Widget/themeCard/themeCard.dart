@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
+import 'package:whatsappclone/components/kCard.dart';
 
 import '../../../../components/iconButton.dart';
 import '../../../../components/popUpMenu.dart';
@@ -39,7 +40,7 @@ class _themeCardState extends State<themeCard> {
   }
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return kCard(
       child: Column(
         children: [
           kListTile(
