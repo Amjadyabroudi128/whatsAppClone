@@ -28,4 +28,5 @@ class icons {
   static Icon edit = Icon(CupertinoIcons.pencil, color: myColors.tick, size: 27,);
   static Icon camera = Icon(CupertinoIcons.camera, color: myColors.MIcons);
   static Icon cancel = Icon(Icons.cancel_outlined, color: myColors.MIcons);
+  static Icon dCam = Icon(Icons.camera_alt_outlined);
 }
