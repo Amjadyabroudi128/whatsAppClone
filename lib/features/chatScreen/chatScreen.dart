@@ -29,7 +29,7 @@ class _TestnameState extends State<Testname> {
 
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
-      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text,);
+      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null);
       messageController.clear();
     }
   }
@@ -83,17 +83,23 @@ class _TestnameState extends State<Testname> {
                                     kListTile(
                                       leading: icons.image,
                                       title: Text('Photo'),
-                                      onTap: () {
-                                        url.pickImage();
-                                        Navigator.pop(context);
+                                      onTap: () async {
+                                        Navigator.pop(context); // close the bottom sheet
+                                        final imageUrl = await url.pickImage();
+                                        if (imageUrl != null) {
+                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                        }
                                       },
                                     ),
                                     kListTile(
                                       leading: icons.dCam,
                                       title: Text('Camera'),
-                                      onTap: () {
-                                        url.takeImage();
+                                      onTap: () async {
                                         Navigator.pop(context);
+                                        final imageUrl = await url.takeImage();
+                                        if (imageUrl != null) {
+                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                        }
                                       },
                                     ),
                                     kListTile(
@@ -113,9 +119,6 @@ class _TestnameState extends State<Testname> {
                       },
                       myIcon: Icon(Icons.add),
                     ),
-                    // kIconButton(onPressed: () {
-                    //
-                    // }, myIcon: icons.image, iconSize: 26),
                     kIconButton(
                       onPressed: sendMessage,
                       myIcon: icons.send,
