@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/icons.dart';
 
@@ -76,7 +77,7 @@ class _TestnameState extends State<Testname> {
                                   children: [
                                     Text(
                                       "Choose an option",
-                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                      style: Textstyles.option,
                                     ),
                                     const SizedBox(height: 10),
                                     kListTile(
