@@ -8,6 +8,7 @@ class Messages {
   final String? receiverEmail;
   final Timestamp? time;
   final String? messageId; // Add this
+  final String? image;
 
   Messages({
     required this.text,
@@ -17,6 +18,7 @@ class Messages {
     this.senderEmail,
     this.time,
     this.messageId, // Include it in the constructor
+    this.image
   });
 
   Map<String, dynamic> toMap() {
@@ -27,6 +29,7 @@ class Messages {
       "receiverEmail": receiverEmail,
       "senderEmail": senderEmail,
       "time": time,
+      "image": image
     };
   }
 }
