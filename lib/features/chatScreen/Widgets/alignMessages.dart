@@ -98,7 +98,21 @@ class messagesAlign extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          Text(msg.text),
+                          if (msg.image != null && msg.image!.isNotEmpty)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                msg.image!,
+                                height: 200,
+                                width: 200,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          else
+                            Text(
+                              msg.text,
+                              style: TextStyle(fontSize: 16),
+                            ),
                           Padding(
                             padding: EdgeInsets.only(
                               left: 45,
