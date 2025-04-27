@@ -69,11 +69,12 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
     await FirebaseAuth.instance.currentUser?.delete();
   }
 
-   Future<void> sendMessage(String receiverId, String receiverName, String message) async {
+   Future<void> sendMessage(String receiverId, String receiverName, String message, String? image) async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
      final Timestamp time = Timestamp.fromDate(DateTime.now());
      Messages newMessage = Messages(
+       image: image,
        time: time,
        text: message,
        senderId: currentUser,
