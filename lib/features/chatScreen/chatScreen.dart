@@ -8,7 +8,6 @@ import 'package:whatsappclone/core/icons.dart';
 
 import '../../components/TextField.dart';
 import '../../globalState.dart';
-import '../../messageClass/messageClass.dart';
 import 'Widgets/messageStream.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
