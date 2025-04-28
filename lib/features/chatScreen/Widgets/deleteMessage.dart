@@ -25,9 +25,6 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
                   BoxSpacing(),
                   kimageNet(
                     src: msg.image!,
-                    height: 200,
-                    width: 200,
-                    fit: BoxFit.cover,
                   ),
                 ],
               ) :Text("You are about to delete ${msg.text}"),
