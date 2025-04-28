@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/core/icons.dart';
@@ -101,8 +102,8 @@ class messagesAlign extends StatelessWidget {
                           if (msg.image != null && msg.image!.isNotEmpty)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                msg.image!,
+                              child: kimageNet(
+                                src: msg.image!,
                                 height: 200,
                                 width: 200,
                                 fit: BoxFit.cover,
