@@ -78,17 +78,27 @@ class messagesAlign extends StatelessWidget {
                         MediaQuery.of(context).size.width / 4,
                         0.0,
                       );
-
-                      showMenu<String>(
+                      if(msg.image != null && msg.image!.isNotEmpty) {
+                        showMenu<String>(
                         context: context,
                         color: myColors.menuColor,
                         position: position,
                         items: [
-                          copyMessage(msg, context),
-                          if (isMe) editMessage(context, msg, service, widget, user),
+
                           deleteMessage(context, msg, widget, user, service),
                         ],
                       );
+                      } else {
+                        showMenu(context: context,
+                          color: myColors.menuColor,
+                          position: position,
+                          items: [
+                            copyMessage(msg, context),
+                            if (isMe) editMessage(context, msg, service, widget, user),
+                            deleteMessage(context, msg, widget, user, service),
+                          ]
+                        );
+                      }
                     },
                     child: Container(
                       margin:  containermargin,
