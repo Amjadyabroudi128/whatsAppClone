@@ -44,7 +44,7 @@ class _TestnameState extends State<Testname> {
           backgroundColor: color,
           appBar: AppBar(
             backgroundColor: color,
-            title: Text(widget.receiverName, style: const TextStyle(fontSize: 16)),
+            title: Text(widget.receiverName, style: Textstyles.bioStyle),
           ),
           body: Column(
             children: [
