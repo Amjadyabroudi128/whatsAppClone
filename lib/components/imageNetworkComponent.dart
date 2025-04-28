@@ -11,9 +11,9 @@ class kimageNet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       src,
-      fit: fit,
-      height: height,
-      width: width,
+      height: 200,
+      width: 200,
+      fit: BoxFit.cover,
     );
   }
 }
