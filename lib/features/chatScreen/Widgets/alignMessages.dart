@@ -84,7 +84,6 @@ class messagesAlign extends StatelessWidget {
                         color: myColors.menuColor,
                         position: position,
                         items: [
-
                           deleteMessage(context, msg, widget, user, service),
                         ],
                       );
@@ -114,9 +113,6 @@ class messagesAlign extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                               child: kimageNet(
                                 src: msg.image!,
-                                height: 200,
-                                width: 200,
-                                fit: BoxFit.cover,
                               ),
                             )
                           else
