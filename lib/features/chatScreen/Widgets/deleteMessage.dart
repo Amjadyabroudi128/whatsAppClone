@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 
 import '../../../components/TextStyles.dart';
+import '../../../components/imageNetworkComponent.dart';
 import '../../../core/icons.dart';
 
 PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname? widget, User? user, FirebaseService service) {
@@ -15,7 +17,20 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
         onPressed: (){
           showDialog(context: context,
             builder: (context) => AlertDialog(
-              title: Text("you are about to delete ${msg.text}"),
+              title: msg.image != null && msg.image!.isNotEmpty ?
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("You are about to delete"),
+                  BoxSpacing(),
+                  kimageNet(
+                    src: msg.image!,
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              ) :Text("You are about to delete ${msg.text}"),
               content: Text("Are you sure? "),
               actions: [
                 kTextButton(
