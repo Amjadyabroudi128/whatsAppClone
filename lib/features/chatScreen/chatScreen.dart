@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/icons.dart';
@@ -78,35 +79,24 @@ class _TestnameState extends State<Testname> {
                                       "Choose an option",
                                       style: Textstyles.option,
                                     ),
-                                    const SizedBox(height: 10),
-                                    kListTile(
-                                      leading: icons.image,
-                                      title: Text('Photo'),
-                                      onTap: () async {
-                                        Navigator.pop(context); // close the bottom sheet
-                                        final imageUrl = await url.pickImage();
-                                        if (imageUrl != null) {
-                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
-                                        }
-                                      },
-                                    ),
-                                    kListTile(
-                                      leading: icons.dCam,
-                                      title: Text('Camera'),
-                                      onTap: () async {
-                                        Navigator.pop(context);
-                                        final imageUrl = await url.takeImage();
-                                        if (imageUrl != null) {
-                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
-                                        }
-                                      },
-                                    ),
-                                    kListTile(
-                                      leading: icons.file,
-                                      title: Text('File'),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
+                                    const BoxSpacing(myHeight: 10),
+                                    Options(context, icons.image, Text("photo"), () async {
+                                      Navigator.pop(context); // close the bottom sheet
+                                      final imageUrl = await url.pickImage();
+                                      if (imageUrl != null) {
+                                        await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                      }
+                                    }),
+                                    Options(context, icons.dCam, Text("Camera"), () async {
+                                      Navigator.pop(context);
+                                      final imageUrl = await url.takeImage();
+                                      if (imageUrl != null) {
+                                        await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                      }
+                                    }),
+
+                                    Options(context, icons.file, Text("File"), (){
+                                    }
                                     ),
                                   ],
                                 ),
@@ -130,6 +120,13 @@ class _TestnameState extends State<Testname> {
         );
       },
     );
+  }
+  Options(BuildContext context, Icon icon, Widget label, VoidCallback onTap) {
+    return kListTile(
+      onTap: onTap,
+     leading: icon,
+     title: label,
+      );
   }
 }
 
