@@ -73,59 +73,63 @@ class _nameCardState extends State<nameCard> {
                   final data = snapshot.data!;
                   final Map<String, dynamic> userData = data.data() as Map<String, dynamic>;
                   final imageUrl = userData["image"] ?? "";
-                  return GestureDetector(
-                    onTap: () async {
-                      if (imageUrl != null && imageUrl.isNotEmpty)
-                        Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => FullScreenImageScreen(imageUrl: imageUrl),
-                                ),
-                              );
-                      else {
-                        await showImage(
-                          context,
-                          addToFirebase: (String path) async {
-                            await addToFireStore(path);
-                          },
-                        );
-                      }
+                  return Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          if (imageUrl != null && imageUrl.isNotEmpty)
+                            Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => FullScreenImageScreen(imageUrl: imageUrl),
+                                    ),
+                                  );
+                          else {
+                            await showImage(
+                              context,
+                              addToFirebase: (String path) async {
+                                await addToFireStore(path);
+                              },
+                            );
+                          }
 
-                    },
-                    child: kCard(
-                      shape: const CircleBorder(),
-                      clipBehavior: Clip.antiAlias,
-                      child: imageWidget(imageUrl: imageUrl),
-                    ),
+                        },
+                        child: kCard(
+                          shape: const CircleBorder(),
+                          clipBehavior: Clip.antiAlias,
+                          child: imageWidget(imageUrl: imageUrl),
+                        ),
+                      ),
+                      BoxSpacing(myHeight: 5),
+                      kCard(
+                        color: myColors.CardColor,
+                        child: Column(
+                          children: [
+                            kListTile(
+                              title: Text(widget.userName),
+                            ),
+                            divider(),
+                            GestureDetector(
+                              onTap: () async {
+                                await ShowSheet(context);
+                                loadBio();
+                              },
+                              child: kListTile(
+                                title: Text(
+                                  userBio.isNotEmpty ? userBio : "Edit Your Bio",
+                                  style: Textstyles.bioStyle,
+                                ),
+                                trailing: icons.arrowForward,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),
             ],
-          ),
-          BoxSpacing(myHeight: 5),
-          kCard(
-            color: myColors.CardColor,
-            child: Column(
-              children: [
-                kListTile(
-                  title: Text(widget.userName),
-                ),
-                divider(),
-                GestureDetector(
-                  onTap: () async {
-                    await ShowSheet(context);
-                    loadBio();
-                  },
-                  child: kListTile(
-                    title: Text(
-                      userBio.isNotEmpty ? userBio : "Edit Your Bio",
-                      style: Textstyles.bioStyle,
-                    ),
-                    trailing: icons.arrowForward,
-                  ),
-                ),
-              ],
-            ),
           ),
         ],
       ),
