@@ -8,6 +8,7 @@ import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/icons.dart';
 
 import '../../components/TextField.dart';
+import '../../components/listTilesOptions.dart';
 import '../../globalState.dart';
 import 'Widgets/messageStream.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
@@ -120,13 +121,6 @@ class _TestnameState extends State<Testname> {
         );
       },
     );
-  }
-  Options(BuildContext context, Icon icon, Widget label, VoidCallback onTap) {
-    return kListTile(
-      onTap: onTap,
-     leading: icon,
-     title: label,
-      );
   }
 }
 
