@@ -6,6 +6,7 @@ import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/kCard.dart';
+import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
@@ -104,18 +105,14 @@ class _nameCardState extends State<nameCard> {
                               title: Text(widget.userName),
                             ),
                             divider(),
-                            GestureDetector(
+                            Options(
+                              context: context,
+                              trailing: icons.arrowForward,
+                              label: Text(bio.isNotEmpty ? bio : "Edit Your Bio"),
                               onTap: () async {
                                 await ShowSheet(context);
                               },
-                              child: kListTile(
-                                title: Text(
-                                  bio.isNotEmpty ? bio : "Edit Your Bio",
-                                  style: Textstyles.bioStyle,
-                                ),
-                                trailing: icons.arrowForward,
-                              ),
-                            ),
+                            )
                           ],
                         ),
                       ),
