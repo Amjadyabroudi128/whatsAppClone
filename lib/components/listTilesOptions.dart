@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'ListTiles.dart';
 
-Options(BuildContext context, Icon icon, Widget label, VoidCallback onTap) {
+Widget Options({
+  required BuildContext context, Icon? leading, Icon? trailing, Widget? label, VoidCallback? onTap,}) {
   return kListTile(
     onTap: onTap,
-    leading: icon,
-    trailing: icon,
+    leading: leading,
+    trailing: trailing,
     title: label,
   );
 }
