@@ -28,20 +28,12 @@ class nameCard extends StatefulWidget {
 }
 
 class _nameCardState extends State<nameCard> {
-  String userBio = "";
   final User? user = FirebaseAuth.instance.currentUser;
   String? imageUrl;
 
   @override
   void initState() {
     super.initState();
-    loadBio();
-  }
-  void loadBio() async {
-    String? fetchedBio = await FirebaseService().getBio();
-    setState(() {
-      userBio = fetchedBio ?? "";
-    });
   }
 
   Future addToFireStore(String imagePath) async {
@@ -70,9 +62,12 @@ class _nameCardState extends State<nameCard> {
                       child: CircularProgressIndicator(),
                     );
                   }
+                  if (!snapshot.hasData || !snapshot.data!.exists) {
+                    return const Center(child: Text("No user data available"));
+                  }
                   final data = snapshot.data!;
-                  final Map<String, dynamic> userData = data.data() as Map<String, dynamic>;
-                  final imageUrl = userData["image"] ?? "";
+                  final imageUrl = data["image"] ?? "";
+                  final bio = data["bio"] ?? "";
                   return Column(
                     children: [
                       GestureDetector(
@@ -112,11 +107,10 @@ class _nameCardState extends State<nameCard> {
                             GestureDetector(
                               onTap: () async {
                                 await ShowSheet(context);
-                                loadBio();
                               },
                               child: kListTile(
                                 title: Text(
-                                  userBio.isNotEmpty ? userBio : "Edit Your Bio",
+                                  bio.isNotEmpty ? bio : "Edit Your Bio",
                                   style: Textstyles.bioStyle,
                                 ),
                                 trailing: icons.arrowForward,
