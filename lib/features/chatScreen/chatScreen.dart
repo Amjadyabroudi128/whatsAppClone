@@ -81,24 +81,32 @@ class _TestnameState extends State<Testname> {
                                       style: Textstyles.option,
                                     ),
                                     const BoxSpacing(myHeight: 10),
-                                    Options(context, icons.image, Text("photo"), () async {
-                                      Navigator.pop(context); // close the bottom sheet
-                                      final imageUrl = await url.pickImage();
-                                      if (imageUrl != null) {
-                                        await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                    Options(context: context,
+                                      leading: icons.image,
+                                      label: Text("Photo"),
+                                      onTap: ()async {
+                                        Navigator.pop(context);
+                                        final imageUrl = await url.pickImage();
+                                        if (imageUrl != null) {
+                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                        }
                                       }
-                                    }),
-                                    Options(context, icons.dCam, Text("Camera"), () async {
-                                      Navigator.pop(context);
-                                      final imageUrl = await url.takeImage();
-                                      if (imageUrl != null) {
-                                        await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
-                                      }
-                                    }),
-
-                                    Options(context, icons.file, Text("File"), (){
-                                    }
                                     ),
+                                    Options(
+                                      context: context,
+                                      leading: icons.dCam,
+                                      label: Text("Camera"),
+                                      onTap: () async {
+                                        Navigator.pop(context);
+                                        final imageUrl = await url.takeImage();
+                                        if (imageUrl != null) {
+                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                        }
+                                      }
+                                    ),
+                                    Options(context: context, leading: icons.file, label: Text("File"), onTap: () {
+
+                                    })
                                   ],
                                 ),
                               ),
