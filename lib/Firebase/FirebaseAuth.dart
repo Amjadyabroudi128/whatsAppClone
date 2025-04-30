@@ -42,6 +42,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          'uid': auth.currentUser!.uid,
          "name" : name,
          "bio": "",
+
        });
        users.collection("users").get();
        await auth.currentUser?.reload();
@@ -69,12 +70,13 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
     await FirebaseAuth.instance.currentUser?.delete();
   }
 
-   Future<void> sendMessage(String receiverId, String receiverName, String message, String? image) async {
+   Future<void> sendMessage(String receiverId, String receiverName, String message, String? image, String? file) async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
      final Timestamp time = Timestamp.fromDate(DateTime.now());
      Messages newMessage = Messages(
        image: image,
+       file: file,
        time: time,
        text: message,
        senderId: currentUser,
