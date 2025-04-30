@@ -30,7 +30,7 @@ class _TestnameState extends State<Testname> {
 
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
-      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null );
+      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null);
       messageController.clear();
     }
   }
@@ -110,6 +110,7 @@ class _TestnameState extends State<Testname> {
                                           final fileLink = await url.pickFile(); // Import this function
                                           if (fileLink != null) {
                                             await service.sendMessage(widget.receiverId, widget.receiverName, "", null, fileLink);
+
                                           }
                                         }),
                                   ],

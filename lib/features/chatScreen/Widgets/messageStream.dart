@@ -38,6 +38,7 @@ class MessageStream extends StatelessWidget {
           receiverEmail: doc["receiverEmail"],
           time: doc["timestamp"],
           image: doc.data().toString().contains('image') ? doc["image"] : null,
+          file: doc.data().toString().contains("file") ? doc["file"] : null,
           messageId: doc.id,
         )).toList();
 
