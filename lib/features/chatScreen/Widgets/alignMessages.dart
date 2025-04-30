@@ -111,9 +111,7 @@ class messagesAlign extends StatelessWidget {
                           if (msg.image != null && msg.image!.isNotEmpty)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
-                              child: kimageNet(
-                                src: msg.image!,
-                              ),
+                              child: kimageNet(src: msg.image!),
                             )
                           else
                             Text(
