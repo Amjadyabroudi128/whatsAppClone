@@ -30,7 +30,7 @@ class _TestnameState extends State<Testname> {
 
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
-      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null);
+      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null );
       messageController.clear();
     }
   }
@@ -88,7 +88,7 @@ class _TestnameState extends State<Testname> {
                                         Navigator.pop(context);
                                         final imageUrl = await url.pickImage();
                                         if (imageUrl != null) {
-                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null );
                                         }
                                       }
                                     ),
@@ -100,13 +100,18 @@ class _TestnameState extends State<Testname> {
                                         Navigator.pop(context);
                                         final imageUrl = await url.takeImage();
                                         if (imageUrl != null) {
-                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl);
+                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null);
                                         }
                                       }
                                     ),
-                                    Options(context: context, leading: icons.file, label: Text("File"), onTap: () {
-
-                                    })
+                                    Options(context: context, leading: icons.file, label: Text("File"),
+                                        onTap: () async {
+                                          Navigator.pop(context);
+                                          final fileLink = await url.pickFile(); // Import this function
+                                          if (fileLink != null) {
+                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", null, fileLink);
+                                          }
+                                        }),
                                   ],
                                 ),
                               ),
