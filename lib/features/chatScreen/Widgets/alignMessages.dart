@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
@@ -87,7 +88,25 @@ class messagesAlign extends StatelessWidget {
                           deleteMessage(context, msg, widget, user, service),
                         ],
                       );
-                      } else {
+                      } else if (msg.file != null && msg.file!.isNotEmpty) {
+                        showMenu<String>(
+                          context: context,
+                          color: myColors.menuColor,
+                          position: position,
+                          items: [
+                            PopupMenuItem<String>(
+                              value: 'open',
+                              child: const Text('Open File'),
+                              onTap: () async {
+                                await launchUrl(Uri.parse(
+                                    '${msg.file}'));
+                              },
+                            ),
+                            deleteMessage(context, msg, widget, user, service),
+                          ],
+                        );
+                      }
+                      else {
                         showMenu(context: context,
                           color: myColors.menuColor,
                           position: position,
@@ -113,11 +132,26 @@ class messagesAlign extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                               child: kimageNet(src: msg.image!),
                             )
+                          else if (msg.file != null && msg.file!.isNotEmpty)
+                            Row(
+                              children: [
+                                Icon(Icons.insert_drive_file, color: Colors.blue),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    msg.file!.split('/').last,
+                                    style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            )
                           else
                             Text(
                               msg.text,
                               style: TextStyle(fontSize: 16),
                             ),
+
                           Padding(
                             padding: EdgeInsets.only(
                               left: 45,
