@@ -9,7 +9,7 @@ class Messages {
   final Timestamp? time;
   final String? messageId; // Add this
   final String? image;
-
+  final String? file;
   Messages({
     required this.text,
     this.receiverEmail,
@@ -18,7 +18,8 @@ class Messages {
     this.senderEmail,
     this.time,
     this.messageId, // Include it in the constructor
-    this.image
+    this.image,
+    this.file
   });
 
   Map<String, dynamic> toMap() {
@@ -29,7 +30,8 @@ class Messages {
       "receiverEmail": receiverEmail,
       "senderEmail": senderEmail,
       "time": time,
-      "image": image
+      "image": image,
+      "file": file
     };
   }
 }
