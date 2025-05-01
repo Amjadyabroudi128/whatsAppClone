@@ -1,4 +1,3 @@
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
@@ -26,9 +25,7 @@ class Testname extends StatefulWidget {
 
 class _TestnameState extends State<Testname> {
   final TextEditingController messageController = TextEditingController();
-  final ScrollController cont = ScrollController();
   final FirebaseService service = FirebaseService();
-  bool emojiShowing = false;
   User? user = FirebaseAuth.instance.currentUser;
 
   void sendMessage() async {
@@ -55,14 +52,12 @@ class _TestnameState extends State<Testname> {
               Expanded(
                 child: MessageStream(service: service, user: user, widget: widget),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Expanded(
                       child: kTextField(
-                        maxLines: null,
                         myController: messageController,
                         hint: "Add a message",
                       ),
@@ -138,7 +133,7 @@ class _TestnameState extends State<Testname> {
             ],
           ),
         );
-},
+      },
     );
   }
 }

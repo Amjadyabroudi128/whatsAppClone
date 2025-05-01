@@ -15,6 +15,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
       value: 'delete',
       child: kTextButton(
         onPressed: (){
+          Navigator.pop(context);
           showDialog(context: context,
             builder: (context) => AlertDialog(
               title: msg.image != null && msg.image!.isNotEmpty ?
@@ -31,7 +32,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
               content: Text("Are you sure? "),
               actions: [
                 kTextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () =>  Navigator.pop(context),
                   child: Text("Cancel"),
                 ),
                 kTextButton(
