@@ -7,6 +7,7 @@ import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 
 import '../../../components/TextStyles.dart';
+import '../../../components/flutterToast.dart';
 import '../../../components/imageNetworkComponent.dart';
 import '../../../core/icons.dart';
 
@@ -43,6 +44,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
                       msg.messageId!,
                     );
                     Navigator.pop(context); // Close dialog after deleting
+                    myToast("Message Successfully Deleted");
                   },
                   child: Text("Delete", style: Textstyles.deleteStyle,),
                 ),
