@@ -14,13 +14,16 @@ class kTextField extends StatelessWidget {
   final int? maxLines;
   final Color? fillColor;
   final bool? filled;
-
+  final VoidCallback? onTap;
+  final ScrollController? scroll;
   const kTextField(
-      {super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon, this.suffix, this.maxLines, this.fillColor, this.filled});
+      {super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      scrollController: scroll,
+      onTap: onTap,
       controller: myController,
       obscureText: obsecureText,
       keyboardType: keyBoard,
