@@ -18,6 +18,7 @@ import '../../../messageClass/messageClass.dart';
 import 'package:intl/intl.dart';
 
 import 'copyMessage.dart';
+import 'dateText.dart';
 import 'deleteMessage.dart';
 import 'editMessage.dart';
 class messagesAlign extends StatelessWidget {
@@ -151,13 +152,7 @@ class messagesAlign extends StatelessWidget {
                               msg.text,
                               style: TextStyle(fontSize: 16),
                             ),
-
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 45,
-                            ),
-                            child: Text(formattedTime),
-                          )
+                          fomattedDateText(formattedTime: formattedTime,)
                         ],
                       ),
                     ),
