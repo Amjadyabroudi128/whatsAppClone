@@ -5,6 +5,7 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/icons.dart';
 
@@ -73,9 +74,7 @@ class _TestnameState extends State<Testname> {
                     ),
                   );
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("User not found")),
-                  );
+                  myToast("there is no user ");
                 }
               },
 
