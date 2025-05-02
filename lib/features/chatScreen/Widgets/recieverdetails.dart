@@ -11,7 +11,7 @@ class userDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Users details"),
+        title: Text("${name}"),
         centerTitle: true,
       ),
       body: Center(

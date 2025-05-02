@@ -52,7 +52,9 @@ class _TestnameState extends State<Testname> {
               onTap: (){
                   Navigator.push(context,
                     MaterialPageRoute(
-                      builder: (_) => userDetails()
+                      builder: (_) => userDetails(
+                        name: widget.receiverName,
+                      )
                     )
                   );
               },
