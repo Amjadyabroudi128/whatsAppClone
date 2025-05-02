@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
@@ -49,15 +50,35 @@ class _TestnameState extends State<Testname> {
             backgroundColor: color,
             title: GestureDetector(
                 child: Text(widget.receiverName, style: Textstyles.bioStyle),
-              onTap: (){
-                  Navigator.push(context,
+              onTap: () async {
+                final snapshot = await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(widget.receiverId)
+                    .get();
+
+                if (snapshot.exists) {
+                  final data = snapshot.data();
+                  final name = data?['name'] ?? 'No Name';
+                  final email = data?['email'] ?? 'No Email';
+                  final image = data?['image'] ?? 'https://via.placeholder.com/150';
+
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(
                       builder: (_) => userDetails(
-                        name: widget.receiverName,
-                      )
-                    )
+                        name: name,
+                        email: email,
+                        imageUrl: image,
+                      ),
+                    ),
                   );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("User not found")),
+                  );
+                }
               },
+
             ),
           ),
           body: Column(
