@@ -13,6 +13,8 @@ import '../../globalState.dart';
 import 'Widgets/messageStream.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
+import 'Widgets/recieverdetails.dart';
+
 class Testname extends StatefulWidget {
   final receiverName;
   final  receiverId;
@@ -48,7 +50,11 @@ class _TestnameState extends State<Testname> {
             title: GestureDetector(
                 child: Text(widget.receiverName, style: Textstyles.bioStyle),
               onTap: (){
-
+                  Navigator.push(context,
+                    MaterialPageRoute(
+                      builder: (_) => userDetails()
+                    )
+                  );
               },
             ),
           ),
