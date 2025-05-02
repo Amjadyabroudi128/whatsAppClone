@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
 
 class userDetails extends StatelessWidget {
   final String? name;
@@ -19,14 +20,11 @@ class userDetails extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            imageUrl == null || imageUrl!.isEmpty ? Container(
-              height: 200,
-              width: 200,
-              child: Image.network(
-                fit: BoxFit.cover,
-                "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"
-              ),
-            ): Image.network(imageUrl!),
+            imageUrl == null || imageUrl!.isEmpty ?
+                kimageNet(
+                  src:"https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
+                )
+                : kimageNet(src: imageUrl!,),
             BoxSpacing(myHeight: 9,),
             Text("${name}", style: Textstyles.recieverName,)
           ],
