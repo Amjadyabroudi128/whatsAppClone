@@ -61,7 +61,7 @@ class _TestnameState extends State<Testname> {
                   final data = snapshot.data();
                   final name = data?['name'] ?? 'No Name';
                   final email = data?['email'] ?? 'No Email';
-                  final image = data?['image'] ?? 'https://via.placeholder.com/150';
+                  final image = data?['image'] ?? "";
 
                   Navigator.push(
                     context,
