@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 
 class userDetails extends StatelessWidget {
   final String? name;
@@ -27,7 +28,7 @@ class userDetails extends StatelessWidget {
               ),
             ): Image.network(imageUrl!),
             BoxSpacing(myHeight: 9,),
-            Text("${name}", style: TextStyle(fontSize: 25),)
+            Text("${name}", style: Textstyles.recieverName,)
           ],
         ),
       ),

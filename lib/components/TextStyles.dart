@@ -26,4 +26,5 @@ class Textstyles {
   static TextStyle editProfile = TextStyle(fontSize: 20, color: Colors.white);
   static TextStyle addPhoto = TextStyle(fontSize: 18, color: Colors.black);
   static TextStyle option = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+  static TextStyle recieverName = TextStyle(fontSize: 25);
  }
