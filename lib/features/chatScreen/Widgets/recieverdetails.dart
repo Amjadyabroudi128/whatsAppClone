@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 
 class userDetails extends StatelessWidget {
   final String? name;
@@ -25,6 +26,8 @@ class userDetails extends StatelessWidget {
                 "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"
               ),
             ): Image.network(imageUrl!),
+            BoxSpacing(myHeight: 9,),
+            Text("${name}", style: TextStyle(fontSize: 25),)
           ],
         ),
       ),
