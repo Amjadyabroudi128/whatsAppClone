@@ -17,7 +17,7 @@ class userDetails extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Image.network(imageUrl)
+            imageUrl == null || imageUrl!.isEmpty ? Text("This user has no image") : Image.network(imageUrl!)
           ],
         ),
       ),
