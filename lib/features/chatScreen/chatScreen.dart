@@ -45,7 +45,12 @@ class _TestnameState extends State<Testname> {
           backgroundColor: color,
           appBar: AppBar(
             backgroundColor: color,
-            title: Text(widget.receiverName, style: Textstyles.bioStyle),
+            title: GestureDetector(
+                child: Text(widget.receiverName, style: Textstyles.bioStyle),
+              onTap: (){
+
+              },
+            ),
           ),
           body: Column(
             children: [
