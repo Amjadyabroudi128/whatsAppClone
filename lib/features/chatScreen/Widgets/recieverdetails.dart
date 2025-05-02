@@ -15,7 +15,11 @@ class userDetails extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Text("Welcome"),
+        child: Column(
+          children: [
+            Image.network(imageUrl)
+          ],
+        ),
       ),
     );
   }
