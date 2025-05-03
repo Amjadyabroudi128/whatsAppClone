@@ -34,7 +34,7 @@ class userDetails extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: SizedBox.shrink()
             ) : kCard(
-              child: Text("${bio}"),
+              child: Text("${bio}", style: Textstyles.bioStyle,),
             )
           ],
         ),
