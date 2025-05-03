@@ -26,7 +26,9 @@ class userDetails extends StatelessWidget {
                 )
                 : kimageNet(src: imageUrl!,),
             BoxSpacing(myHeight: 9,),
-            Text("${name}", style: Textstyles.recieverName,)
+            Text("${name}", style: Textstyles.recieverName,),
+            BoxSpacing(myHeight: 7,),
+            Text("$email")
           ],
         ),
       ),
