@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
+import 'package:whatsappclone/components/kCard.dart';
 
 class userDetails extends StatelessWidget {
   final String? name;
   final String? email;
   final String? imageUrl;
   final String? bio;
-  const userDetails({super.key, this.name, this.email, this.imageUrl, required bio, this.bio});
+  const userDetails({super.key, this.name, this.email, this.imageUrl, this.bio});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,13 @@ class userDetails extends StatelessWidget {
             BoxSpacing(myHeight: 9,),
             Text("${name}", style: Textstyles.recieverName,),
             BoxSpacing(myHeight: 7,),
-            Text("$email", style: Textstyles.recieverEmail,)
+            Text("$email", style: Textstyles.recieverEmail,),
+            bio!.isEmpty ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox.shrink()
+            ) : kCard(
+              child: Text("${bio}"),
+            )
           ],
         ),
       ),
