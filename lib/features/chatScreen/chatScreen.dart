@@ -63,7 +63,7 @@ class _TestnameState extends State<Testname> {
                   final name = data?['name'] ?? 'No Name';
                   final email = data?['email'] ?? 'No Email';
                   final image = data?['image'] ?? "";
-                  final bio = data?["bio"] ?? kCard(child: Text("No Bio"),);
+                  final bio = data?["bio"] ?? "";
 
                   Navigator.push(
                     context,
