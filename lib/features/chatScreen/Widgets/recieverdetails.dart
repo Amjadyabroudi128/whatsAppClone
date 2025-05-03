@@ -28,7 +28,7 @@ class userDetails extends StatelessWidget {
             BoxSpacing(myHeight: 9,),
             Text("${name}", style: Textstyles.recieverName,),
             BoxSpacing(myHeight: 7,),
-            Text("$email", style: TextStyle(fontSize: 24),)
+            Text("$email", style: Textstyles.recieverEmail,)
           ],
         ),
       ),
