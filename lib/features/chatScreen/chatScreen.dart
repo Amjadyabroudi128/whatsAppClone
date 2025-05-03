@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/iconButton.dart';
+import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/core/icons.dart';
 
 import '../../components/TextField.dart';
@@ -62,6 +63,7 @@ class _TestnameState extends State<Testname> {
                   final name = data?['name'] ?? 'No Name';
                   final email = data?['email'] ?? 'No Email';
                   final image = data?['image'] ?? "";
+                  final bio = data?["bio"] ?? kCard(child: Text("No Bio"),);
 
                   Navigator.push(
                     context,
@@ -70,6 +72,7 @@ class _TestnameState extends State<Testname> {
                         name: name,
                         email: email,
                         imageUrl: image,
+                        bio: bio
                       ),
                     ),
                   );
