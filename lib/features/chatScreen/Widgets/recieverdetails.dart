@@ -7,8 +7,8 @@ class userDetails extends StatelessWidget {
   final String? name;
   final String? email;
   final String? imageUrl;
-
-  const userDetails({super.key, this.name, this.email, this.imageUrl});
+  final String? bio;
+  const userDetails({super.key, this.name, this.email, this.imageUrl, required bio, this.bio});
 
   @override
   Widget build(BuildContext context) {
