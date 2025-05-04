@@ -4,6 +4,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
+import 'package:whatsappclone/features/chatScreen/userDetails/StarredMessages.dart';
 
 import '../../../core/MyColors.dart';
 import '../../../core/icons.dart';
@@ -53,7 +54,12 @@ class userDetails extends StatelessWidget {
                   label: Text("Starred messages"),
                   trailing: icons.arrowForward,
                   onTap: (){
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Starredmessages()
+                      ),
+                    );
                   }
                 ),
               )
