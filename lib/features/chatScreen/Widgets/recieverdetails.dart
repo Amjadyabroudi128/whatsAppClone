@@ -49,7 +49,7 @@ class userDetails extends StatelessWidget {
                 color: Colors.grey,
                 child: Options(
                   context: context,
-                  leading: Icon(Icons.star_border_outlined),
+                  leading: icons.star,
                   label: Text("Starred messages"),
                   trailing: icons.arrowForward,
                   onTap: (){
