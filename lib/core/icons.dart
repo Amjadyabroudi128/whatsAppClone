@@ -31,4 +31,5 @@ class icons {
   static Icon dCam = Icon(Icons.camera_alt_outlined);
   static Icon file = Icon(Icons.file_copy_outlined);
   static Icon star = Icon(Icons.star_border_outlined);
+  static Icon noStar = Icon(Icons.stars, color: Colors.green, size: 90,);
 }
