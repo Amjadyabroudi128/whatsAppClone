@@ -28,5 +28,6 @@ class myColors {
    static Color? menuColor = Colors.grey[350];
    static Color? btmSheet = Colors.grey[850];
    static Color MIcons = Colors.white;
+   static Color starColor = Colors.green;
 
  }
