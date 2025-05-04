@@ -46,7 +46,7 @@ class userDetails extends StatelessWidget {
               ),
               BoxSpacing(myHeight: 5,),
               kCard(
-                color: Colors.grey,
+                color: myColors.familyText,
                 child: Options(
                   context: context,
                   leading: icons.star,
