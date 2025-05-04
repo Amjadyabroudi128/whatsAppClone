@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 
 import '../../../core/icons.dart';
 
@@ -24,7 +25,7 @@ class _StarredmessagesState extends State<Starredmessages> {
           children: [
             icons.noStar,
             BoxSpacing(myHeight: 9,),
-            Text("No Starred Messages", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            Text("No Starred Messages", style: Textstyles.noStarMessage,),
             Text("Tap and hold on a message to Star it, to Find it later ", style: TextStyle(fontSize: 16, ),)
           ],
         ),
