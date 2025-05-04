@@ -30,6 +30,6 @@ class icons {
   static Icon cancel = Icon(Icons.cancel_outlined, color: myColors.MIcons);
   static Icon dCam = Icon(Icons.camera_alt_outlined);
   static Icon file = Icon(Icons.file_copy_outlined);
-  static Icon star = Icon(Icons.star_border_outlined);
+  static Icon star = Icon(Icons.star_border_outlined, color: myColors.labelClr,);
   static Icon noStar = Icon(Icons.stars, color: myColors.starColor, size: 90,);
 }

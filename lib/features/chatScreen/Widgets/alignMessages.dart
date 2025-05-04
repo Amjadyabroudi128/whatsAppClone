@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
@@ -115,6 +116,19 @@ class messagesAlign extends StatelessWidget {
                             copyMessage(msg, context),
                             if (isMe) editMessage(context, msg, service, widget, user),
                             deleteMessage(context, msg, widget, user, service),
+                            PopupMenuItem(
+                              value: "Star",
+                              child: kTextButton(
+                                child: Row(
+                                  children: [
+                                    Text("Star",style: Textstyles.copyMessage,),
+                                    Spacer(),
+                                    icons.star,
+                                  ],
+                                ),
+                                onPressed: (){},
+                              ),
+                            )
                           ]
                         );
                       }
