@@ -16,7 +16,7 @@ import '../../globalState.dart';
 import 'Widgets/messageStream.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
-import 'Widgets/recieverdetails.dart';
+import 'userDetails/recieverdetails.dart';
 
 class Testname extends StatefulWidget {
   final receiverName;
