@@ -116,19 +116,7 @@ class messagesAlign extends StatelessWidget {
                             copyMessage(msg, context),
                             if (isMe) editMessage(context, msg, service, widget, user),
                             deleteMessage(context, msg, widget, user, service),
-                            PopupMenuItem(
-                              value: "Star",
-                              child: kTextButton(
-                                child: Row(
-                                  children: [
-                                    Text("Star",style: Textstyles.copyMessage,),
-                                    Spacer(),
-                                    icons.star,
-                                  ],
-                                ),
-                                onPressed: (){},
-                              ),
-                            )
+                            starMessage(context)
                           ]
                         );
                       }
@@ -179,6 +167,7 @@ class messagesAlign extends StatelessWidget {
       ),
     );
   }
+
 
 
 }
