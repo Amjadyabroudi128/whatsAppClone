@@ -153,4 +153,11 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      }
      return null;
    }
+   Future addToStar(messages) async {
+     return await FirebaseFirestore.instance.collection("starred-messages").doc(auth.currentUser!.email).collection("messages").doc().set(
+       {
+       "message": messages
+       }
+     );
+   }
  }
