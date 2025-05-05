@@ -34,7 +34,14 @@ class messagesAlign extends StatefulWidget {
   final List<Messages> messages;
   final User? user;
   final Testname? widget;
-
+  Stream<List<String>> getStarredMessageIdsStream(String userEmail) {
+    return FirebaseFirestore.instance
+        .collection("starred-messages")
+        .doc(userEmail)
+        .collection("messages")
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.id).toList());
+  }
   @override
   State<messagesAlign> createState() => _messagesAlignState();
 }
@@ -48,7 +55,6 @@ class _messagesAlignState extends State<messagesAlign> {
     return GestureDetector(
       onTap: (){
          FocusScope.of(context).unfocus();
-
       },
       child: ListView.builder(
         itemCount: widget.messages.length,
@@ -125,7 +131,31 @@ class _messagesAlignState extends State<messagesAlign> {
                             copyMessage(msg, context),
                             if (isMe) editMessage(context, msg, service, widget.widget, widget.user),
                             deleteMessage(context, msg, widget.widget, widget.user, service),
-                            starMessage(context, msg, widget.user)
+                            PopupMenuItem(
+                              value: "Star",
+                              child: kTextButton(
+                                child: Row(
+                                  children: [
+                                    Text(isStarred ? "Unstar" : "Star", style: Textstyles.copyMessage),
+                                    Spacer(),
+                                    isStarred ? Icon(Icons.star, color: Colors.amber) : icons.star,
+                                  ],
+                                ),
+                                onPressed: () async {
+                                  if (isStarred) {
+                                    await service.DeleteStar(msg.text);
+                                    myToast("Message unstarred");
+                                  } else {
+                                    await service.addToStar(msg.text);
+                                    myToast("Message starred");
+                                  }
+                                  setState(()  {
+                                    isStarred = !isStarred;
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
                           ]
                         );
                       }
@@ -163,7 +193,13 @@ class _messagesAlignState extends State<messagesAlign> {
                               msg.text,
                               style: TextStyle(fontSize: 16),
                             ),
-                          fomattedDateText(formattedTime: formattedTime,)
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              fomattedDateText(formattedTime: formattedTime,),
+
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -176,5 +212,6 @@ class _messagesAlignState extends State<messagesAlign> {
       ),
     );
   }
+
 }
 
