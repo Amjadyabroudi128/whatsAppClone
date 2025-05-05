@@ -157,7 +157,12 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      return await FirebaseFirestore.instance.collection("starred-messages").doc(auth.currentUser!.email).collection("messages").doc().set(
        {
        "message": messages
-       }
+       },
+
      );
+
+   }
+   Future DeleteStar (messages) async {
+   return await FirebaseFirestore.instance.collection("starred-messages").doc(auth.currentUser!.email).collection("messages").doc(messages).delete();
    }
  }
