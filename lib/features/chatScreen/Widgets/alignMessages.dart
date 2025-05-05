@@ -23,7 +23,7 @@ import 'copyMessage.dart';
 import 'dateText.dart';
 import 'deleteMessage.dart';
 import 'editMessage.dart';
-class messagesAlign extends StatelessWidget {
+class messagesAlign extends StatefulWidget {
   const messagesAlign({
     super.key,
     required this.messages,
@@ -34,6 +34,14 @@ class messagesAlign extends StatelessWidget {
   final List<Messages> messages;
   final User? user;
   final Testname? widget;
+
+  @override
+  State<messagesAlign> createState() => _messagesAlignState();
+}
+
+class _messagesAlignState extends State<messagesAlign> {
+  bool isStarred = false;
+
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
@@ -43,10 +51,10 @@ class messagesAlign extends StatelessWidget {
 
       },
       child: ListView.builder(
-        itemCount: messages.length,
+        itemCount: widget.messages.length,
         itemBuilder: (context, index) {
-          final msg = messages[index];
-          bool isMe = msg.senderId == user!.uid;
+          final msg = widget.messages[index];
+          bool isMe = msg.senderId == widget.user!.uid;
           final timestamp = msg.time;
           DateTime? dateTime;
 
@@ -88,7 +96,7 @@ class messagesAlign extends StatelessWidget {
                         color: myColors.menuColor,
                         position: position,
                         items: [
-                          deleteMessage(context, msg, widget, user, service),
+                          deleteMessage(context, msg, widget.widget, widget.user, service),
                         ],
                       );
                       } else if (msg.file != null && msg.file!.isNotEmpty) {
@@ -105,7 +113,7 @@ class messagesAlign extends StatelessWidget {
                                     '${msg.file}'));
                               },
                             ),
-                            deleteMessage(context, msg, widget, user, service),
+                            deleteMessage(context, msg, widget.widget, widget.user, service),
                           ],
                         );
                       }
@@ -115,9 +123,9 @@ class messagesAlign extends StatelessWidget {
                           position: position,
                           items: [
                             copyMessage(msg, context),
-                            if (isMe) editMessage(context, msg, service, widget, user),
-                            deleteMessage(context, msg, widget, user, service),
-                            starMessage(context)
+                            if (isMe) editMessage(context, msg, service, widget.widget, widget.user),
+                            deleteMessage(context, msg, widget.widget, widget.user, service),
+                            starMessage(context, msg, widget.user)
                           ]
                         );
                       }
@@ -168,8 +176,5 @@ class messagesAlign extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
 
