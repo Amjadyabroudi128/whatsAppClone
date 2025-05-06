@@ -10,6 +10,7 @@ class Messages {
   final String? messageId; // Add this
   final String? image;
   final String? file;
+  final bool? isStarred;
   Messages({
     required this.text,
     this.receiverEmail,
@@ -19,7 +20,8 @@ class Messages {
     this.time,
     this.messageId, // Include it in the constructor
     this.image,
-    this.file
+    this.file,
+    this.isStarred
   });
 
   Map<String, dynamic> toMap() {
@@ -31,7 +33,8 @@ class Messages {
       "senderEmail": senderEmail,
       "time": time,
       "image": image,
-      "file": file
+      "file": file,
+      "isStarred": isStarred
     };
   }
 }
