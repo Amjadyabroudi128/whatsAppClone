@@ -83,6 +83,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        receiverId: receiverId,
        senderEmail: email,
        receiverEmail: receiverName, // Store receiver's name
+       isStarred: false
      );
 
      List<String> ids = [currentUser, receiverId];
@@ -153,16 +154,60 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      }
      return null;
    }
-   Future addToStar(messages) async {
-     return await FirebaseFirestore.instance.collection("starred-messages").doc(auth.currentUser!.email).collection("messages").doc().set(
-       {
-       "message": messages
-       },
+   Future addToStar(Messages msg) async {
+     String email = auth.currentUser!.email!;
+     String messageId = msg.messageId!;
 
-     );
+     // Add to "starred-messages"
+     await FirebaseFirestore.instance
+         .collection("starred-messages")
+         .doc(email)
+         .collection("messages")
+         .doc(messageId)
+         .set({
+       "message": msg.text,
+       "timestamp": msg.time,
+       "senderId": msg.senderId,
+       "receiverId": msg.receiverId,
+       "messageId": messageId,
+     });
 
+     // Also update isStarred in chat room
+     List<String> ids = [msg.senderId!, msg.receiverId!];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     await FirebaseFirestore.instance
+         .collection("chat_rooms")
+         .doc(chatRoomID)
+         .collection("messages")
+         .doc(messageId)
+         .update({"isStarred": true});
    }
-   Future DeleteStar (messages) async {
-   return await FirebaseFirestore.instance.collection("starred-messages").doc(auth.currentUser!.email).collection("messages").doc(messages).delete();
+
+   Future deleteStar(Messages msg) async {
+     String email = auth.currentUser!.email!;
+     String messageId = msg.messageId!;
+
+     // Remove from "starred-messages"
+     await FirebaseFirestore.instance
+         .collection("starred-messages")
+         .doc(email)
+         .collection("messages")
+         .doc(messageId)
+         .delete();
+
+     // Also update isStarred in chat room
+     List<String> ids = [msg.senderId!, msg.receiverId!];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     await FirebaseFirestore.instance
+         .collection("chat_rooms")
+         .doc(chatRoomID)
+         .collection("messages")
+         .doc(messageId)
+         .update({"isStarred": false});
    }
+
  }
