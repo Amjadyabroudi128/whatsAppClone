@@ -136,21 +136,32 @@ class _messagesAlignState extends State<messagesAlign> {
                               child: kTextButton(
                                 child: Row(
                                   children: [
-                                    Text(isStarred ? "Unstar" : "Star", style: Textstyles.copyMessage),
+                                    Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
                                     Spacer(),
-                                    isStarred ? Icon(Icons.star, color: Colors.amber) : icons.star,
+                                    (msg.isStarred == true ? Icon(Icons.star, color: Colors.amber) : icons.star),
                                   ],
                                 ),
                                 onPressed: () async {
-                                  if (isStarred) {
-                                    await service.DeleteStar(msg.text);
+                                  if (msg.isStarred == true) {
+                                    await service.deleteStar(msg);
                                     myToast("Message unstarred");
                                   } else {
-                                    await service.addToStar(msg.text);
+                                    await service.addToStar(msg);
                                     myToast("Message starred");
                                   }
-                                  setState(()  {
-                                    isStarred = !isStarred;
+                                  setState(() {
+                                    widget.messages[index] = Messages(
+                                      text: msg.text,
+                                      senderId: msg.senderId,
+                                      receiverId: msg.receiverId,
+                                      senderEmail: msg.senderEmail,
+                                      receiverEmail: msg.receiverEmail,
+                                      time: msg.time,
+                                      messageId: msg.messageId,
+                                      image: msg.image,
+                                      file: msg.file,
+                                      isStarred: !(msg.isStarred ?? false),
+                                    );
                                   });
                                   Navigator.pop(context);
                                 },
@@ -196,6 +207,7 @@ class _messagesAlignState extends State<messagesAlign> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              if(msg.isStarred == true) icons.star,
                               fomattedDateText(formattedTime: formattedTime,),
 
                             ],
