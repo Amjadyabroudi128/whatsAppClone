@@ -91,11 +91,21 @@ class _StarredmessagesState extends State<Starredmessages> {
                       ),
                       kCard(
                         color: Colors.grey,
-                        child: Column(
-                          children: [
-                            Text(message),
-                            Text(formattedTime)
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(message),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.star, color: Colors.white,size: 18,),
+                                  BoxSpacing(mWidth: 4,),
+                                  Text(formattedTime),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       divider()
