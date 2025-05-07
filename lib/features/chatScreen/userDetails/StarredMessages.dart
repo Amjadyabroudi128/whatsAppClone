@@ -90,7 +90,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                         ],
                       ),
                       kCard(
-                        color: Colors.grey,
+                        color: user == auth.currentUser!.email ? Colors.green : Colors.grey,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -99,7 +99,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.star, color: Colors.white,size: 18,),
+                                  icons.wStar,
                                   BoxSpacing(mWidth: 4,),
                                   Text(formattedTime),
                                 ],
