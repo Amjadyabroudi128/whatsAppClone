@@ -2,11 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
+import 'package:whatsappclone/messageClass/messageClass.dart';
 
+import '../../../components/TextButton.dart';
+import '../../../components/flutterToast.dart';
 import '../../../core/icons.dart';
 
 class Starredmessages extends StatefulWidget {
@@ -18,7 +22,7 @@ class Starredmessages extends StatefulWidget {
 
 class _StarredmessagesState extends State<Starredmessages> {
   final auth = FirebaseAuth.instance;
-
+  FirebaseService service = FirebaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,24 +63,19 @@ class _StarredmessagesState extends State<Starredmessages> {
                 ),
               );
             }
-
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (_, index) {
                 final data = snapshot.data!.docs[index];
-                final message = data["message"] ?? "[No content]";
-                final timestamp = data["timestamp"];
-                final user = data["senderEmail"];
-                DateTime? dateTime;
-                if (timestamp is Timestamp) {
-                  dateTime = timestamp.toDate();
-                } else if (timestamp is DateTime) {
-                  dateTime = timestamp;
-                } else {
-                  dateTime = DateTime.now();
-                }
-                String formattedTime = DateFormat.Hm().format(dateTime!);
-                String day = DateFormat.yMd().format(dateTime);
+                final msg = Messages(
+                  text: data["message"],
+                  time:  data["timestamp"],
+                  senderEmail: data["senderEmail"],
+                  messageId: data.id,
+                );
+                final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
+                final formattedTime = DateFormat.Hm().format(dateTime);
+                final day = DateFormat.yMd().format(dateTime);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -84,27 +83,54 @@ class _StarredmessagesState extends State<Starredmessages> {
                     children: [
                       Row(
                         children: [
-                          Text(user == auth.currentUser!.email ? "You" : user, style: TextStyle(fontSize: 15),),
+                          Text(
+                            msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail ?? "",
+                            style: TextStyle(fontSize: 15),
+                          ),
                           Spacer(),
                           Text(day)
                         ],
                       ),
-                      kCard(
-                        color: user == auth.currentUser!.email ? Colors.green : Colors.grey,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Text(message),
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  icons.wStar,
-                                  BoxSpacing(mWidth: 4,),
-                                  Text(formattedTime),
+                      GestureDetector(
+                        onTap: (){
+                          showDialog(context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text("you are about to unstar ${msg.text}"),
+                                content: Text("Are you sure? "),
+                                actions: [
+                                  kTextButton(
+                                    onPressed: () =>  Navigator.pop(context),
+                                    child: Text("Cancel"),
+                                  ),
+                                  kTextButton(
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      myToast("Message Successfully Deleted");
+                                     await service.deleteStar(msg);
+                                    },
+                                    child: Text("Delete", style: Textstyles.deleteStyle,),
+                                  ),
                                 ],
-                              ),
-                            ],
+                              )
+                          );
+                        },
+                        child: kCard(
+                          color: msg.senderEmail == auth.currentUser!.email ? Colors.green : Colors.grey,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(msg.text),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    icons.wStar,
+                                    BoxSpacing(mWidth: 4,),
+                                    Text(formattedTime),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
