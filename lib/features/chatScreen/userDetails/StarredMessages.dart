@@ -111,20 +111,6 @@ class _StarredmessagesState extends State<Starredmessages> {
                       divider()
                     ],
                   ),
-                  // child: kCard(
-                  //   color: Colors.grey,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(8.0),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(user),
-                  //         Text(formattedTime),
-                  //         Text(message)
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                 );
               },
             );
