@@ -167,7 +167,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          .set({
        "message": msg.text,
        "timestamp": msg.time,
-       "senderId": msg.senderId,
+       "senderEmail": msg.senderEmail,
        "receiverId": msg.receiverId,
        "messageId": messageId,
      });
