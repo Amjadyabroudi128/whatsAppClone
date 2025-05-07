@@ -84,7 +84,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                     children: [
                       Row(
                         children: [
-                          Text(user),
+                          Text(user == auth.currentUser!.email ? "You" : user, style: TextStyle(fontSize: 15),),
                           Spacer(),
                           Text(day)
                         ],
