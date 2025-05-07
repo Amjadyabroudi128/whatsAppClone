@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
 
 import '../../../core/icons.dart';
@@ -75,22 +76,45 @@ class _StarredmessagesState extends State<Starredmessages> {
                   dateTime = DateTime.now();
                 }
                 String formattedTime = DateFormat.Hm().format(dateTime!);
+                String day = DateFormat.yMd().format(dateTime);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: kCard(
-                    color: Colors.grey,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
                           Text(user),
-                          Text(formattedTime),
-                          Text(message)
+                          Spacer(),
+                          Text(day)
                         ],
                       ),
-                    ),
+                      kCard(
+                        color: Colors.grey,
+                        child: Column(
+                          children: [
+                            Text(message),
+                            Text(formattedTime)
+                          ],
+                        ),
+                      ),
+                      divider()
+                    ],
                   ),
+                  // child: kCard(
+                  //   color: Colors.grey,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(8.0),
+                  //     child: Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Text(user),
+                  //         Text(formattedTime),
+                  //         Text(message)
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 );
               },
             );
