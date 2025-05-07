@@ -65,8 +65,8 @@ class _StarredmessagesState extends State<Starredmessages> {
                 final data = snapshot.data!.docs[index];
                 final message = data["message"] ?? "[No content]";
                 final timestamp = data["timestamp"];
+                final user = data["senderEmail"];
                 DateTime? dateTime;
-
                 if (timestamp is Timestamp) {
                   dateTime = timestamp.toDate();
                 } else if (timestamp is DateTime) {
@@ -84,6 +84,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(user),
                           Text(formattedTime),
                           Text(message)
                         ],
