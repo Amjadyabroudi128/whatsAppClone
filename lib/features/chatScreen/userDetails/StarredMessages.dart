@@ -6,6 +6,7 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
+import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 
@@ -23,12 +24,28 @@ class Starredmessages extends StatefulWidget {
 class _StarredmessagesState extends State<Starredmessages> {
   final auth = FirebaseAuth.instance;
   FirebaseService service = FirebaseService();
+  bool isEditing = false;
+  Set<String> selectedMessages = {};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Starred messages"),
         centerTitle: true,
+        actions: [
+          kTextButton(
+            onPressed: () {
+              setState(() {
+                isEditing = !isEditing;
+                selectedMessages.clear(); // Optional: clear selections when toggling
+              });
+            },
+            child: Text(isEditing ? "Cancel" : "Edit",
+                style: TextStyle(color: Colors.black, fontSize: 19)),
+          )
+        ],
+
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
@@ -114,24 +131,31 @@ class _StarredmessagesState extends State<Starredmessages> {
                               )
                           );
                         },
-                        child: kCard(
-                          color: msg.senderEmail == auth.currentUser!.email ? Colors.green : Colors.grey,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Text(msg.text),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (isEditing)
+                              completed(msg),
+                            kCard(
+                              color: msg.senderEmail == auth.currentUser!.email ? Colors.green : Colors.grey,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
                                   children: [
-                                    icons.wStar,
-                                    BoxSpacing(mWidth: 4,),
-                                    Text(formattedTime),
+                                    Text(msg.text),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        icons.wStar,
+                                        BoxSpacing(mWidth: 4,),
+                                        Text(formattedTime),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                       divider()
@@ -143,6 +167,47 @@ class _StarredmessagesState extends State<Starredmessages> {
           },
         ),
       ),
+      bottomNavigationBar: isEditing && selectedMessages.isNotEmpty
+          ? Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            kIconButton(
+              onPressed: (){},
+              myIcon: icons.deleteIcon,
+            ),
+            kIconButton(
+              onPressed: (){
+
+              },
+              myIcon: icons.star,
+            ),
+            kIconButton(
+              onPressed: (){
+
+              },
+              myIcon: icons.copy,
+            )
+          ],
+        ),
+      )
+          : null,
+    );
+  }
+
+  Checkbox completed(Messages msg) {
+    return Checkbox(
+      value: selectedMessages.contains(msg.messageId),
+      onChanged: (value) {
+        setState(() {
+          if (value == true) {
+            selectedMessages.add(msg.messageId!);
+          } else {
+            selectedMessages.remove(msg.messageId);
+          }
+        });
+        },
     );
   }
 }
