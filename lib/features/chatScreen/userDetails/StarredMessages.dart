@@ -42,8 +42,7 @@ class _StarredmessagesState extends State<Starredmessages> {
               });
             },
             child: Text(isEditing ? "Cancel" : "Edit",
-                style: Textstyles.editBar
-            ),
+                style: TextStyle(color: Colors.black, fontSize: 19)),
           )
         ],
 
@@ -136,7 +135,24 @@ class _StarredmessagesState extends State<Starredmessages> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             if (isEditing)
-                              completed(msg),
+                              Transform.scale(
+                                scale: 1.2,
+                                child: Checkbox(
+                                  visualDensity: VisualDensity.compact,
+                                  checkColor: Colors.white,
+                                  shape: CircleBorder(),
+                                  value: selectedMessages.contains(msg.messageId),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (value == true) {
+                                        selectedMessages.add(msg.messageId!);
+                                      } else {
+                                        selectedMessages.remove(msg.messageId);
+                                      }
+                                    });
+                                  },
+                                ),
+                              ),
                             kCard(
                               color: msg.senderEmail == auth.currentUser!.email ? Colors.green : Colors.grey,
                               child: Padding(
@@ -168,47 +184,6 @@ class _StarredmessagesState extends State<Starredmessages> {
           },
         ),
       ),
-      bottomNavigationBar: isEditing && selectedMessages.isNotEmpty
-          ? Padding(
-        padding: EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            kIconButton(
-              onPressed: (){},
-              myIcon: icons.deleteIcon,
-            ),
-            kIconButton(
-              onPressed: (){
-
-              },
-              myIcon: icons.star,
-            ),
-            kIconButton(
-              onPressed: (){
-
-              },
-              myIcon: icons.copy,
-            )
-          ],
-        ),
-      )
-          : null,
-    );
-  }
-
-  Checkbox completed(Messages msg) {
-    return Checkbox(
-      value: selectedMessages.contains(msg.messageId),
-      onChanged: (value) {
-        setState(() {
-          if (value == true) {
-            selectedMessages.add(msg.messageId!);
-          } else {
-            selectedMessages.remove(msg.messageId);
-          }
-        });
-        },
     );
   }
 }
