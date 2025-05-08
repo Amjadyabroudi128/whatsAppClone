@@ -80,106 +80,129 @@ class _StarredmessagesState extends State<Starredmessages> {
                 ),
               );
             }
-            return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (_, index) {
-                final data = snapshot.data!.docs[index];
-                final msg = Messages(
-                  text: data["message"],
-                  time:  data["timestamp"],
-                  senderEmail: data["senderEmail"],
-                  messageId: data.id,
-                );
-                final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
-                final formattedTime = DateFormat.Hm().format(dateTime);
-                final day = DateFormat.yMd().format(dateTime);
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail ?? "",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          Spacer(),
-                          Text(day)
-                        ],
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          showDialog(context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text("you are about to unstar ${msg.text}"),
-                                content: Text("Are you sure? "),
-                                actions: [
-                                  kTextButton(
-                                    onPressed: () =>  Navigator.pop(context),
-                                    child: Text("Cancel"),
-                                  ),
-                                  kTextButton(
-                                    onPressed: () async {
-                                      Navigator.pop(context);
-                                      myToast("Message Successfully Deleted");
-                                     await service.deleteStar(msg);
-                                    },
-                                    child: Text("Delete", style: Textstyles.deleteStyle,),
-                                  ),
-                                ],
-                              )
-                          );
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
+            return Stack(
+              children:[ ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (_, index) {
+                  final data = snapshot.data!.docs[index];
+                  final msg = Messages(
+                    text: data["message"],
+                    time:  data["timestamp"],
+                    senderEmail: data["senderEmail"],
+                    messageId: data.id,
+                  );
+                  final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
+                  final formattedTime = DateFormat.Hm().format(dateTime);
+                  final day = DateFormat.yMd().format(dateTime);
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            if (isEditing)
-                              Transform.scale(
-                                scale: 1.2,
-                                child: Checkbox(
-                                  visualDensity: VisualDensity.compact,
-                                  checkColor: Colors.white,
-                                  shape: CircleBorder(),
-                                  value: selectedMessages.contains(msg.messageId),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      if (value == true) {
-                                        selectedMessages.add(msg.messageId!);
-                                      } else {
-                                        selectedMessages.remove(msg.messageId);
-                                      }
-                                    });
-                                  },
-                                ),
-                              ),
-                            kCard(
-                              color: msg.senderEmail == auth.currentUser!.email ? Colors.green : Colors.grey,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    Text(msg.text),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        icons.wStar,
-                                        BoxSpacing(mWidth: 4,),
-                                        Text(formattedTime),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            Text(
+                              msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail ?? "",
+                              style: TextStyle(fontSize: 15),
                             ),
+                            Spacer(),
+                            Text(day)
                           ],
                         ),
+                        GestureDetector(
+                          onTap: (){
+                            showDialog(context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text("you are about to unstar ${msg.text}"),
+                                  content: Text("Are you sure? "),
+                                  actions: [
+                                    kTextButton(
+                                      onPressed: () =>  Navigator.pop(context),
+                                      child: Text("Cancel"),
+                                    ),
+                                    kTextButton(
+                                      onPressed: () async {
+                                        Navigator.pop(context);
+                                        myToast("Message Successfully Deleted");
+                                       await service.deleteStar(msg);
+                                      },
+                                      child: Text("Delete", style: Textstyles.deleteStyle,),
+                                    ),
+                                  ],
+                                )
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (isEditing)
+                                Transform.scale(
+                                  scale: 1.2,
+                                  child: Checkbox(
+                                    visualDensity: VisualDensity.compact,
+                                    checkColor: Colors.white,
+                                    shape: CircleBorder(),
+                                    value: selectedMessages.contains(msg.messageId),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        if (value == true) {
+                                          selectedMessages.add(msg.messageId!);
+                                        } else {
+                                          selectedMessages.remove(msg.messageId);
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ),
+                              kCard(
+                                color: msg.senderEmail == auth.currentUser!.email ? Colors.green : Colors.grey,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Text(msg.text),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          icons.wStar,
+                                          BoxSpacing(mWidth: 4,),
+                                          Text(formattedTime),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        divider(),
+                      ],
+                    ),
+                  );
+                },
+              ),
+                isEditing && selectedMessages.isNotEmpty ?
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      kIconButton(
+                        myIcon: icons.copy,
                       ),
-                      divider()
+                      kIconButton(
+                        myIcon: icons.slash,
+                      ),
+                      kIconButton(
+                        myIcon: icons.deleteIcon,
+                      ),
                     ],
                   ),
-                );
-              },
+                ) : SizedBox.shrink()
+            ]
             );
           },
         ),
