@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
@@ -191,6 +192,25 @@ class _StarredmessagesState extends State<Starredmessages> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       kIconButton(
+                        onPressed: () async {
+                          for (var doc in snapshot.data!.docs) {
+                            if (selectedMessages.contains(doc.id)) {
+                              final msg = Messages(
+                                text: doc["message"],
+                                time: doc["timestamp"],
+                                senderEmail: doc["senderEmail"],
+                                messageId: doc.id,
+                              );
+                              final value = ClipboardData(text: msg.text);
+                              await Clipboard.setData(value);
+                              myToast("✅ Message Copied");
+                              setState(() {
+                                isEditing = !isEditing;
+                                selectedMessages.clear();
+                              });
+                            }
+                          }
+                        },
                         myIcon: icons.copy,
                       ),
                       kIconButton(
