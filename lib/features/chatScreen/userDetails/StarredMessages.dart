@@ -42,7 +42,8 @@ class _StarredmessagesState extends State<Starredmessages> {
               });
             },
             child: Text(isEditing ? "Cancel" : "Edit",
-                style: TextStyle(color: Colors.black, fontSize: 19)),
+                style: Textstyles.editBar
+            ),
           )
         ],
 
