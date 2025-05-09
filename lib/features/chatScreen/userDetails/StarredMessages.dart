@@ -215,6 +215,27 @@ class _StarredmessagesState extends State<Starredmessages> {
                       ),
                       kIconButton(
                         myIcon: icons.slash,
+                        onPressed: () async {
+                          for (var doc in snapshot.data!.docs) {
+                            if (selectedMessages.contains(doc.id)) {
+                              final msg = Messages(
+                                text: doc["message"],
+                                time: doc["timestamp"],
+                                senderEmail: doc["senderEmail"],
+                                messageId: doc.id,
+                              );
+                              await service.deleteStar(msg);
+                              myToast("Message unstarred");
+
+                            }
+                          }
+
+                          setState(() {
+                            isEditing = !isEditing;
+                            selectedMessages.clear();
+                          });
+                        },
+
                       ),
                       kIconButton(
                         myIcon: icons.deleteIcon,
