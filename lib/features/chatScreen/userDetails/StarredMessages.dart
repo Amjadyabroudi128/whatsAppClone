@@ -191,28 +191,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      kIconButton(
-                        onPressed: () async {
-                          for (var doc in snapshot.data!.docs) {
-                            if (selectedMessages.contains(doc.id)) {
-                              final msg = Messages(
-                                text: doc["message"],
-                                time: doc["timestamp"],
-                                senderEmail: doc["senderEmail"],
-                                messageId: doc.id,
-                              );
-                              final value = ClipboardData(text: msg.text);
-                              await Clipboard.setData(value);
-                              myToast("✅ Message Copied");
-                              setState(() {
-                                isEditing = !isEditing;
-                                selectedMessages.clear();
-                              });
-                            }
-                          }
-                        },
-                        myIcon: icons.copy,
-                      ),
+                      copyIcon(snapshot),
                       kIconButton(
                         myIcon: icons.slash,
                         onPressed: () async {
@@ -246,6 +225,31 @@ class _StarredmessagesState extends State<Starredmessages> {
           },
         ),
       ),
+    );
+  }
+
+  kIconButton copyIcon(AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+    return kIconButton(
+      onPressed: () async {
+        for (var doc in snapshot.data!.docs) {
+          if (selectedMessages.contains(doc.id)) {
+            final msg = Messages(
+              text: doc["message"],
+              time: doc["timestamp"],
+              senderEmail: doc["senderEmail"],
+              messageId: doc.id,
+            );
+            final value = ClipboardData(text: msg.text);
+            await Clipboard.setData(value);
+            myToast("✅ Message Copied");
+            setState(() {
+              isEditing = !isEditing;
+              selectedMessages.clear();
+            });
+          }
+        }
+      },
+      myIcon: icons.copy,
     );
   }
 }
