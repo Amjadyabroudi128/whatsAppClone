@@ -43,7 +43,9 @@ class _StarredmessagesState extends State<Starredmessages> {
                 selectedMessages.clear(); // Optional: clear selections when toggling
               });
             },
-            child: Text(isEditing ? (selectedMessages.isNotEmpty ? "Done" : "Cancel") : "Edit", style: TextStyle(color: Colors.black, fontSize: 19)),
+            child: Text(isEditing ? (selectedMessages.isNotEmpty ? "Done" : "Cancel") : "Edit",
+                style: Textstyles.editBar
+            ),
           )
         ],
 
