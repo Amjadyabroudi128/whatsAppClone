@@ -112,73 +112,49 @@ class _StarredmessagesState extends State<Starredmessages> {
                             Text(day)
                           ],
                         ),
-                        GestureDetector(
-                          onTap: (){
-                            showDialog(context: context,
-                                builder: (context) => AlertDialog(
-                                  title: Text("you are about to unstar ${msg.text}"),
-                                  content: Text("Are you sure? "),
-                                  actions: [
-                                    kTextButton(
-                                      onPressed: () =>  Navigator.pop(context),
-                                      child: Text("Cancel"),
-                                    ),
-                                    kTextButton(
-                                      onPressed: () async {
-                                        Navigator.pop(context);
-                                        myToast("Message Successfully Deleted");
-                                       await service.deleteStar(msg);
-                                      },
-                                      child: Text("Delete", style: Textstyles.deleteStyle,),
-                                    ),
-                                  ],
-                                )
-                            );
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (isEditing)
-                                Transform.scale(
-                                  scale: 1.2,
-                                  child: Checkbox(
-                                    visualDensity: VisualDensity.compact,
-                                    checkColor: myColors.FG,
-                                    shape: CircleBorder(),
-                                    value: selectedMessages.contains(msg.messageId),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        if (value == true) {
-                                          selectedMessages.add(msg.messageId!);
-                                        } else {
-                                          selectedMessages.remove(msg.messageId);
-                                        }
-                                      });
-                                    },
-                                  ),
-                                ),
-                              kCard(
-                                color: msg.senderEmail == auth.currentUser!.email ?
-                                myColors.starColor : myColors.familyText,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Text(msg.text),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          icons.wStar,
-                                          BoxSpacing(mWidth: 4,),
-                                          Text(formattedTime),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (isEditing)
+                              Transform.scale(
+                                scale: 1.2,
+                                child: Checkbox(
+                                  visualDensity: VisualDensity.compact,
+                                  checkColor: myColors.FG,
+                                  shape: CircleBorder(),
+                                  value: selectedMessages.contains(msg.messageId),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (value == true) {
+                                        selectedMessages.add(msg.messageId!);
+                                      } else {
+                                        selectedMessages.remove(msg.messageId);
+                                      }
+                                    });
+                                  },
                                 ),
                               ),
-                            ],
-                          ),
+                            kCard(
+                              color: msg.senderEmail == auth.currentUser!.email ?
+                              myColors.starColor : myColors.familyText,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Text(msg.text),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        icons.wStar,
+                                        BoxSpacing(mWidth: 4,),
+                                        Text(formattedTime),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         divider(),
                       ],
