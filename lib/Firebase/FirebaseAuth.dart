@@ -114,7 +114,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        Navigator.pushReplacementNamed(context, "login");
      }
    }
-   Future<void> Deletemessage(String userID, String receiverId, String messageId) async {
+   Future<void> Deletemessage( userID, String receiverId, String messageId) async {
      List<String> ids = [userID, receiverId];
      ids.sort();
      String chatRoomID = ids.join("_");
