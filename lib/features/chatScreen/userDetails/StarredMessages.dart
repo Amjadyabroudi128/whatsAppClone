@@ -163,7 +163,6 @@ class _StarredmessagesState extends State<Starredmessages> {
                   );
                 },
               ),
-                isEditing && selectedMessages.isNotEmpty ?
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -204,11 +203,12 @@ class _StarredmessagesState extends State<Starredmessages> {
                                 receiverId: doc["receiverId"]
                               );
                               await service.Deletemessage(user!.uid, msg.receiverId ?? "", msg.messageId ?? "");
+                              myToast("Selected messages deleted");
                               setState(() {
-                                isEditing = false;
+                                isEditing = !isEditing;
                                 selectedMessages.clear();
                               });
-                              myToast("Selected messages deleted successfully.");
+                              await service.deleteStar(msg);
                             }
                           }
                         },
@@ -216,7 +216,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                       ),
                     ],
                   ),
-                ) : SizedBox.shrink()
+                )
             ]
             );
           },
