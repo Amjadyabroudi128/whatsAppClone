@@ -29,6 +29,7 @@ class _StarredmessagesState extends State<Starredmessages> {
   FirebaseService service = FirebaseService();
   bool isEditing = false;
   Set<String> selectedMessages = {};
+   User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +195,23 @@ class _StarredmessagesState extends State<Starredmessages> {
 
                       ),
                       kIconButton(
+                        onPressed: () async {
+                          for( var doc in snapshot.data!.docs ) {
+                            if (selectedMessages.contains(doc.id)) {
+                              final msg = Messages(
+                                messageId: doc.id,
+                                text: doc["message"],
+                                receiverId: doc["receiverId"]
+                              );
+                              await service.Deletemessage(user!.uid, msg.receiverId ?? "", msg.messageId ?? "");
+                              setState(() {
+                                isEditing = false;
+                                selectedMessages.clear();
+                              });
+                              myToast("Selected messages deleted successfully.");
+                            }
+                          }
+                        },
                         myIcon: icons.deleteIcon,
                       ),
                     ],
