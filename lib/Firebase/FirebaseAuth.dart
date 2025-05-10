@@ -118,7 +118,6 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      List<String> ids = [userID, receiverId];
      ids.sort();
      String chatRoomID = ids.join("_");
-
      await FirebaseFirestore.instance
          .collection("chat_rooms")
          .doc(chatRoomID)
@@ -188,7 +187,6 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
    Future deleteStar(Messages msg) async {
      String email = auth.currentUser!.email!;
      String messageId = msg.messageId!;
-
      // Remove from "starred-messages"
      await FirebaseFirestore.instance
          .collection("starred-messages")
@@ -198,16 +196,18 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          .delete();
 
      // Also update isStarred in chat room
-     List<String> ids = [msg.senderId!, msg.receiverId!];
+     List<String> ids = [msg.senderId ?? "", msg.receiverId ?? ""];
      ids.sort();
      String chatRoomID = ids.join("_");
+     final docRef = FirebaseFirestore.instance.collection("chat_rooms")
+         .doc(chatRoomID).collection("messages").doc(messageId);
+     final docSnap = await docRef.get();
+     if (docSnap.exists) {
+       await docRef.update({"isStarred": false});
+     }
+     else {
 
-     await FirebaseFirestore.instance
-         .collection("chat_rooms")
-         .doc(chatRoomID)
-         .collection("messages")
-         .doc(messageId)
-         .update({"isStarred": false});
+     }
    }
 
  }

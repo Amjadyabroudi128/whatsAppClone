@@ -174,6 +174,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                       kIconButton(
                         myIcon: icons.slash,
                         onPressed: () async {
+                          myToast("⭐ Message unstarred ");
                           for (var doc in snapshot.data!.docs) {
                             if (selectedMessages.contains(doc.id)) {
                               final msg = Messages(
@@ -183,14 +184,12 @@ class _StarredmessagesState extends State<Starredmessages> {
                                 messageId: doc.id,
                               );
                               await service.deleteStar(msg);
-                              myToast("Unstar messages ");
-                              setState(() {
-                                isEditing = !isEditing;
-                                selectedMessages.clear();
-                              });
                             }
                           }
-
+                          setState(() {
+                            isEditing = !isEditing;
+                            selectedMessages.clear();
+                          });
                         },
 
                       ),
