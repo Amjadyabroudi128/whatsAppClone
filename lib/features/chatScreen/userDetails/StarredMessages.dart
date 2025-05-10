@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/Firebase/FirebaseCollections.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
@@ -52,8 +53,7 @@ class _StarredmessagesState extends State<Starredmessages> {
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection("starred-messages")
+          stream: stars
               .doc(auth.currentUser!.email)
               .collection("messages")
               .orderBy("timestamp", descending: true)
