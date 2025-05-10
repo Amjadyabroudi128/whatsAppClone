@@ -13,6 +13,7 @@ import 'package:whatsappclone/messageClass/messageClass.dart';
 
 import '../../../components/TextButton.dart';
 import '../../../components/flutterToast.dart';
+import '../../../core/MyColors.dart';
 import '../../../core/icons.dart';
 
 class Starredmessages extends StatefulWidget {
@@ -141,7 +142,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                                   scale: 1.2,
                                   child: Checkbox(
                                     visualDensity: VisualDensity.compact,
-                                    checkColor: Colors.white,
+                                    checkColor: myColors.FG,
                                     shape: CircleBorder(),
                                     value: selectedMessages.contains(msg.messageId),
                                     onChanged: (value) {
