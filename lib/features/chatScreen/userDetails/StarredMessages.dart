@@ -157,7 +157,8 @@ class _StarredmessagesState extends State<Starredmessages> {
                                   ),
                                 ),
                               kCard(
-                                color: msg.senderEmail == auth.currentUser!.email ? Colors.green : Colors.grey,
+                                color: msg.senderEmail == auth.currentUser!.email ?
+                                myColors.starColor : myColors.familyText,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
