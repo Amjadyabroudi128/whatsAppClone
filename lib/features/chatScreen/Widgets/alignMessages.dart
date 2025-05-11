@@ -138,7 +138,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                   children: [
                                     Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
                                     Spacer(),
-                                    (msg.isStarred == true ? Icon(Icons.star, color: Colors.amber) : icons.star),
+                                    (msg.isStarred == true ? icons.amberStar : icons.star),
                                   ],
                                 ),
                                 onPressed: () async {
