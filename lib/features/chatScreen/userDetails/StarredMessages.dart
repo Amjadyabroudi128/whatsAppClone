@@ -197,7 +197,6 @@ class _StarredmessagesState extends State<Starredmessages> {
                       ),
                       kIconButton(
                         onPressed: () async {
-                          myToast("Selected messages deleted");
                           for( var doc in snapshot.data!.docs ) {
                             if (selectedMessages.contains(doc.id)) {
                               final msg = Messages(
@@ -205,8 +204,28 @@ class _StarredmessagesState extends State<Starredmessages> {
                                 text: doc["message"],
                                 receiverId: doc["receiverId"]
                               );
-                              await service.Deletemessage(user!.uid, msg.receiverId ?? "", msg.messageId ?? "");
-                              await service.deleteStar(msg);
+                              await showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text("You are about to delete ${msg.text}"),
+                                  content: Text("Are you sure? "),
+                                  actions: [
+                                    kTextButton(
+                                      onPressed: () =>  Navigator.pop(context),
+                                      child: Text("Cancel"),
+                                    ),
+                                    kTextButton(
+                                      onPressed: () async {
+                                        await service.Deletemessage(user!.uid, msg.receiverId ?? "", msg.messageId ?? "");
+                                        await service.deleteStar(msg);
+                                        Navigator.pop(context);
+                                        myToast("Selected messages deleted");
+                                      },
+                                      child: Text("Delete", style: Textstyles.deletemessage,),
+                                    )
+                                  ],
+                                )
+                              );
                               setState(() {
                                 isEditing = !isEditing;
                                 selectedMessages.clear();
