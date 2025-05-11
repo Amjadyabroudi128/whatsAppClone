@@ -64,7 +64,6 @@ class _TestnameState extends State<Testname> {
                   final email = data?['email'] ?? 'No Email';
                   final image = data?['image'] ?? "";
                   final bio = data?["bio"] ?? "";
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -72,7 +71,8 @@ class _TestnameState extends State<Testname> {
                         name: name,
                         email: email,
                         imageUrl: image,
-                        bio: bio
+                        bio: bio,
+
                       ),
                     ),
                   );

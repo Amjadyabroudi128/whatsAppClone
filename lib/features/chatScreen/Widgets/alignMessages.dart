@@ -11,7 +11,6 @@ import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/core/icons.dart';
-import 'package:whatsappclone/features/chatScreen/Widgets/starrMessage.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
 import '../../../core/MyColors.dart';

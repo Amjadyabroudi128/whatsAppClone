@@ -18,7 +18,7 @@ class Messages {
     this.receiverId,
     this.senderEmail,
     this.time,
-    this.messageId, // Include it in the constructor
+    this.messageId,
     this.image,
     this.file,
     this.isStarred
