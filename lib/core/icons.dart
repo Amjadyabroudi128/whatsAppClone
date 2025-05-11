@@ -34,5 +34,5 @@ class icons {
   static Icon noStar = Icon(Icons.stars, color: myColors.starColor, size: 90,);
   static Icon wStar = Icon(Icons.star, color: Colors.white,size: 18,);
   static Icon slash = Icon(CupertinoIcons.star_slash_fill, size: 30,);
-  static Icon amberStar = Icon(Icons.star, color: Colors.amber);
+  static Icon amberStar = Icon(Icons.star, color: myColors.amberStar);
 }
