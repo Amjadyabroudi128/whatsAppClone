@@ -149,6 +149,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                                         icons.wStar,
                                         BoxSpacing(mWidth: 4,),
                                         Text(formattedTime),
+
                                       ],
                                     ),
                                   ],
@@ -163,6 +164,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                   );
                 },
               ),
+                isEditing && selectedMessages.isNotEmpty ?
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -172,7 +174,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                     children: [
                       copyIcon(snapshot),
                       kIconButton(
-                        myIcon: icons.slash,
+
                         onPressed: () async {
                           myToast("⭐ Message unstarred ");
                           for (var doc in snapshot.data!.docs) {
@@ -191,10 +193,11 @@ class _StarredmessagesState extends State<Starredmessages> {
                             selectedMessages.clear();
                           });
                         },
-
+                        myIcon: icons.slash,
                       ),
                       kIconButton(
                         onPressed: () async {
+                          myToast("Selected messages deleted");
                           for( var doc in snapshot.data!.docs ) {
                             if (selectedMessages.contains(doc.id)) {
                               final msg = Messages(
@@ -203,12 +206,12 @@ class _StarredmessagesState extends State<Starredmessages> {
                                 receiverId: doc["receiverId"]
                               );
                               await service.Deletemessage(user!.uid, msg.receiverId ?? "", msg.messageId ?? "");
-                              myToast("Selected messages deleted");
+                              await service.deleteStar(msg);
                               setState(() {
                                 isEditing = !isEditing;
                                 selectedMessages.clear();
                               });
-                              await service.deleteStar(msg);
+
                             }
                           }
                         },
@@ -216,7 +219,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                       ),
                     ],
                   ),
-                )
+                ) : SizedBox.shrink()
             ]
             );
           },
@@ -249,4 +252,5 @@ class _StarredmessagesState extends State<Starredmessages> {
       myIcon: icons.copy,
     );
   }
+
 }
