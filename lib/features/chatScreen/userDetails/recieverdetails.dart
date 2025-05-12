@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
+import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/StarredMessages.dart';
 
 import '../../../core/MyColors.dart';
@@ -21,6 +23,7 @@ class userDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int count= 0 ;
+    int imageCount = 0;
     return Scaffold(
       backgroundColor: myColors.BG,
       appBar: AppBar(
@@ -59,14 +62,65 @@ class userDetails extends StatelessWidget {
                   if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                     return kCard(
                       color: myColors.familyText,
-                      child: Options(
+                      child: Column(
+                        children: [
+                          Options(
+                              context: context,
+                              leading: icons.star,
+                              label: Row(
+                                children: [
+                                  Text("Starred messages"),
+                                  Spacer(),
+                                  Text("None")
+                                ],
+                              ),
+                              trailing: icons.arrowForward,
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => Starredmessages()
+                                  ),
+                                );
+                              }
+                          ),
+                          divider(),
+                          Options(
+                            context: context,
+                            leading: icons.image,
+                            label: Row(
+                              children: [
+                                Text("Media"),
+                                Spacer(),
+                                Text("None"),
+                              ],
+                            ),
+                            trailing: icons.whiteImage,
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => myMedia()
+                                ),
+                              );
+                            }
+                          )
+                        ],
+                      ),
+                    );
+                  }
+                  return kCard(
+                    color: myColors.familyText,
+                    child: Column(
+                      children: [
+                        Options(
                           context: context,
                           leading: icons.star,
                           label: Row(
                             children: [
                               Text("Starred messages"),
                               Spacer(),
-                              Text("None")
+                              Text("${count.toString()}")
                             ],
                           ),
                           trailing: icons.arrowForward,
@@ -74,34 +128,33 @@ class userDetails extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => Starredmessages()
+                                builder: (_) => Starredmessages()
                               ),
                             );
                           }
-                      ),
-                    );
-                  }
-                  return kCard(
-                    color: myColors.familyText,
-                    child: Options(
-                      context: context,
-                      leading: icons.star,
-                      label: Row(
-                        children: [
-                          Text("Starred messages"),
-                          Spacer(),
-                          Text("${count.toString()}")
-                        ],
-                      ),
-                      trailing: icons.arrowForward,
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => Starredmessages()
-                          ),
-                        );
-                      }
+                        ),
+                        divider(),
+                        Options(
+                            context: context,
+                            leading: icons.image,
+                            label: Row(
+                              children: [
+                                Text("Media"),
+                                Spacer(),
+                                Text("${imageCount}"),
+                              ],
+                            ),
+                            trailing: icons.arrowForward,
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => myMedia()
+                                ),
+                              );
+                            }
+                        )
+                      ],
                     ),
                   );
                 }
