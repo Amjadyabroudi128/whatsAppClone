@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
@@ -47,22 +48,63 @@ class userDetails extends StatelessWidget {
                 child: Text("${bio}", style: Textstyles.bioStyle,),
               ),
               BoxSpacing(myHeight: 5,),
-              kCard(
-                color: myColors.familyText,
-                child: Options(
-                  context: context,
-                  leading: icons.star,
-                  label: Text("Starred messages"),
-                  trailing: icons.arrowForward,
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Starredmessages()
+              StreamBuilder(
+                stream: FirebaseFirestore.instance.collection("starred-messages")
+                    .doc(FirebaseAuth.instance.currentUser!.email).collection("messages").snapshots(),
+                builder: (context, snapshot) {
+                  int count= 0 ;
+                  if (snapshot.hasData) {
+                    count = snapshot.data!.docs.length;
+                  }
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return kCard(
+                      color: myColors.familyText,
+                      child: Options(
+                          context: context,
+                          leading: icons.star,
+                          label: Row(
+                            children: [
+                              Text("Starred messages"),
+                              Spacer(),
+                              Text("None")
+                            ],
+                          ),
+                          trailing: icons.arrowForward,
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => Starredmessages()
+                              ),
+                            );
+                          }
                       ),
                     );
                   }
-                ),
+                  return kCard(
+                    color: myColors.familyText,
+                    child: Options(
+                      context: context,
+                      leading: icons.star,
+                      label: Row(
+                        children: [
+                          Text("Starred messages"),
+                          Spacer(),
+                          Text("${count.toString()}")
+                        ],
+                      ),
+                      trailing: icons.arrowForward,
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Starredmessages()
+                          ),
+                        );
+                      }
+                    ),
+                  );
+                }
               )
             ],
           ),
