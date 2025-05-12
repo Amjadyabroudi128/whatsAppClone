@@ -20,6 +20,7 @@ class userDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int count= 0 ;
     return Scaffold(
       backgroundColor: myColors.BG,
       appBar: AppBar(
@@ -52,7 +53,6 @@ class userDetails extends StatelessWidget {
                 stream: FirebaseFirestore.instance.collection("starred-messages")
                     .doc(FirebaseAuth.instance.currentUser!.email).collection("messages").snapshots(),
                 builder: (context, snapshot) {
-                  int count= 0 ;
                   if (snapshot.hasData) {
                     count = snapshot.data!.docs.length;
                   }
