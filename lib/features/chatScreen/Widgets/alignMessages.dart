@@ -101,42 +101,42 @@ class _messagesAlignState extends State<messagesAlign> {
                         color: myColors.menuColor,
                         position: position,
                         items: [
-                          PopupMenuItem(
-                            value: "Star",
-                            child: kTextButton(
-                              child: Row(
-                                children: [
-                                  Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
-                                  Spacer(),
-                                  (msg.isStarred == true ? icons.amberStar : icons.star),
-                                ],
-                              ),
-                              onPressed: () async {
-                                if (msg.isStarred == true) {
-                                  await service.deleteStar(msg);
-                                  myToast("Message unstarred");
-                                } else {
-                                  await service.addToStar(msg);
-                                  myToast("Message starred");
-                                }
-                                setState(() {
-                                  widget.messages[index] = Messages(
-                                    text: msg.text,
-                                    senderId: msg.senderId,
-                                    receiverId: msg.receiverId,
-                                    senderEmail: msg.senderEmail,
-                                    receiverEmail: msg.receiverEmail,
-                                    time: msg.time,
-                                    messageId: msg.messageId,
-                                    image: msg.image,
-                                    file: msg.file,
-                                    isStarred: !(msg.isStarred ?? false),
-                                  );
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
+                          // PopupMenuItem(
+                          //   value: "Star",
+                          //   child: kTextButton(
+                          //     child: Row(
+                          //       children: [
+                          //         Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
+                          //         Spacer(),
+                          //         (msg.isStarred == true ? icons.amberStar : icons.star),
+                          //       ],
+                          //     ),
+                          //     onPressed: () async {
+                          //       if (msg.isStarred == true) {
+                          //         await service.deleteStar(msg);
+                          //         myToast("Message unstarred");
+                          //       } else {
+                          //         await service.addToStar(msg);
+                          //         myToast("Message starred");
+                          //       }
+                          //       setState(() {
+                          //         widget.messages[index] = Messages(
+                          //           text: msg.text,
+                          //           senderId: msg.senderId,
+                          //           receiverId: msg.receiverId,
+                          //           senderEmail: msg.senderEmail,
+                          //           receiverEmail: msg.receiverEmail,
+                          //           time: msg.time,
+                          //           messageId: msg.messageId,
+                          //           image: msg.image,
+                          //           file: msg.file,
+                          //           isStarred: !(msg.isStarred ?? false),
+                          //         );
+                          //       });
+                          //       Navigator.pop(context);
+                          //     },
+                          //   ),
+                          // ),
                           deleteMessage(context, msg, widget.widget, widget.user, service),
                         ],
                       );
