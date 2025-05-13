@@ -52,26 +52,77 @@ class userDetails extends StatelessWidget {
                 child: Text("${bio}", style: Textstyles.bioStyle,),
               ),
               BoxSpacing(myHeight: 5,),
-              StreamBuilder(
-                stream: FirebaseFirestore.instance.collection("starred-messages")
-                    .doc(FirebaseAuth.instance.currentUser!.email).collection("messages").snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    count = snapshot.data!.docs.length;
-                  }
-                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                    return kCard(
-                      color: myColors.familyText,
-                      child: Column(
-                        children: [
-                          Options(
+              Column(
+                children: [
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection("starred-messages")
+                        .doc(FirebaseAuth.instance.currentUser!.email).collection("messages").snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        count = snapshot.data!.docs.length;
+                      }
+                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                        return kCard(
+                          color: myColors.familyText,
+                          child: Column(
+                            children: [
+                              Options(
+                                  context: context,
+                                  leading: icons.star,
+                                  label: Row(
+                                    children: [
+                                      Text("Starred messages"),
+                                      Spacer(),
+                                      Text("None")
+                                    ],
+                                  ),
+                                  trailing: icons.arrowForward,
+                                  onTap: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => Starredmessages()
+                                      ),
+                                    );
+                                  }
+                              ),
+                              divider(),
+                              Options(
+                                context: context,
+                                leading: icons.image,
+                                label: Row(
+                                  children: [
+                                    Text("Media"),
+                                    Spacer(),
+                                    Text("None"),
+                                  ],
+                                ),
+                                trailing: icons.whiteImage,
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => MyMedia()
+                                    ),
+                                  );
+                                }
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                      return kCard(
+                        color: myColors.familyText,
+                        child: Column(
+                          children: [
+                            Options(
                               context: context,
                               leading: icons.star,
                               label: Row(
                                 children: [
                                   Text("Starred messages"),
                                   Spacer(),
-                                  Text("None")
+                                  Text("${count.toString()}")
                                 ],
                               ),
                               trailing: icons.arrowForward,
@@ -79,85 +130,50 @@ class userDetails extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => Starredmessages()
+                                    builder: (_) => Starredmessages()
                                   ),
                                 );
                               }
-                          ),
-                          divider(),
-                          Options(
-                            context: context,
-                            leading: icons.image,
-                            label: Row(
-                              children: [
-                                Text("Media"),
-                                Spacer(),
-                                Text("None"),
-                              ],
                             ),
-                            trailing: icons.whiteImage,
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => myMedia()
-                                ),
-                              );
-                            }
-                          )
-                        ],
-                      ),
-                    );
-                  }
-                  return kCard(
-                    color: myColors.familyText,
-                    child: Column(
-                      children: [
-                        Options(
-                          context: context,
-                          leading: icons.star,
-                          label: Row(
-                            children: [
-                              Text("Starred messages"),
-                              Spacer(),
-                              Text("${count.toString()}")
-                            ],
-                          ),
-                          trailing: icons.arrowForward,
-                          onTap: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => Starredmessages()
-                              ),
-                            );
-                          }
+                            divider(),
+                            StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection("media")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .collection("messages")
+                                    .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  imageCount = snapshot.data!.docs.length;
+                                }
+                                return Options(
+                                    context: context,
+                                    leading: icons.image,
+                                    label: Row(
+                                      children: [
+                                        Text("Media"),
+                                        Spacer(),
+                                        Text("${imageCount.toString()}"),
+                                      ],
+                                    ),
+                                    trailing: icons.arrowForward,
+                                    onTap: (){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => MyMedia()
+                                        ),
+                                      );
+                                    }
+                                );
+                              }
+                            )
+                          ],
                         ),
-                        divider(),
-                        Options(
-                            context: context,
-                            leading: icons.image,
-                            label: Row(
-                              children: [
-                                Text("Media"),
-                                Spacer(),
-                                Text("${imageCount}"),
-                              ],
-                            ),
-                            trailing: icons.arrowForward,
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => myMedia()
-                                ),
-                              );
-                            }
-                        )
-                      ],
-                    ),
-                  );
-                }
+                      );
+                    }
+                  ),
+                ],
               )
             ],
           ),
