@@ -70,10 +70,17 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
     await FirebaseAuth.instance.currentUser?.delete();
   }
 
-   Future<void> sendMessage(String receiverId, String receiverName, String message, String? image, String? file) async {
+   Future<void> sendMessage(
+       String receiverId,
+       String receiverName,
+       String message,
+       String? image,
+       String? file,)
+   async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
      final Timestamp time = Timestamp.fromDate(DateTime.now());
+
      Messages newMessage = Messages(
        image: image,
        file: file,
@@ -83,21 +90,36 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        receiverId: receiverId,
        senderEmail: email,
        receiverEmail: receiverName, // Store receiver's name
-       isStarred: false
+       isStarred: false,
      );
 
      List<String> ids = [currentUser, receiverId];
      ids.sort();
      String chatRoomID = ids.join("_");
-
-     await users.collection("chat_rooms").doc(chatRoomID)
-         .collection("messages").add({
+     final docRef = await users
+         .collection("chat_rooms")
+         .doc(chatRoomID)
+         .collection("messages")
+         .add({
        ...newMessage.toMap(),
        "timestamp": FieldValue.serverTimestamp(),
-     }).then((docRef) {
-       // Store document ID
-       docRef.update({"messageId": docRef.id});
      });
+
+     await docRef.update({"messageId": docRef.id});
+
+     if (image != null) {
+       await FirebaseFirestore.instance
+           .collection("media")
+           .doc(currentUser)
+           .collection("messages")
+           .doc(docRef.id) // set document ID = messageId
+           .set({
+         ...newMessage.toMap(),
+         "timestamp": FieldValue.serverTimestamp(),
+         "messageId": docRef.id,
+       });
+
+     }
    }
 
    Stream <QuerySnapshot> getMessages(String userID, String otherUser) {
@@ -124,6 +146,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          .collection("messages")
          .doc(messageId) // Use the provided messageId
          .delete();
+     await FirebaseFirestore.instance.collection("media").doc(userID).collection("messages").doc(messageId).delete();
    }
    Future <void> updateMessage (String messageId, String userID, String receiverId, String newMessage) async {
      List<String> ids = [userID, receiverId];
