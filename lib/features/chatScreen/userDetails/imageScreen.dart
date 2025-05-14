@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 
@@ -13,6 +14,8 @@ class Imagescreen extends StatefulWidget {
 
 class _ImagescreenState extends State<Imagescreen> {
   final TextStyle dates = TextStyle(fontSize: 13);
+  final auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +23,10 @@ class _ImagescreenState extends State<Imagescreen> {
         centerTitle: true,
         title: Column(
           children: [
-            Text("${widget.senderName}", style: dates,),
+            Text(
+              widget.senderName == auth.currentUser!.email ? "You" : widget.senderName ?? "",
+              style: TextStyle(fontSize: 15),
+            ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
