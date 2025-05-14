@@ -25,7 +25,7 @@ class _ImagescreenState extends State<Imagescreen> {
           children: [
             Text(
               widget.senderName == auth.currentUser!.email ? "You" : widget.senderName ?? "",
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 19),
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
