@@ -101,7 +101,7 @@ class MyMedia extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           child: msg.image != null
                               ? kimageNet(src: msg.image!)
-                              : const Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
+                              :  icons.supportedImage
                         ),
                       ),
                     ),
