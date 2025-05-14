@@ -7,6 +7,8 @@ import '../../../messageClass/messageClass.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 
+import 'imageScreen.dart';
+
 class MyMedia extends StatelessWidget {
   const MyMedia({super.key});
 
@@ -77,6 +79,7 @@ class MyMedia extends StatelessWidget {
                   image: data["image"],
                   senderId: data["senderId"],
                   receiverId: data["receiverId"],
+                  senderEmail: data["senderEmail"]
                 );
                 final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
                 final formattedTime = DateFormat.Hm().format(dateTime);
@@ -85,11 +88,21 @@ class MyMedia extends StatelessWidget {
                   children: [
                     Text(day, style: const TextStyle(fontSize: 12)),
                     Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: msg.image != null
-                            ? kimageNet(src: msg.image!)
-                            : const Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => Imagescreen(date: day, senderName: msg.senderEmail, time: formattedTime,),
+                            ),
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: msg.image != null
+                              ? kimageNet(src: msg.image!)
+                              : const Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
+                        ),
                       ),
                     ),
                   ],
