@@ -7,6 +7,7 @@ import '../../../messageClass/messageClass.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 
+import 'Widgets/noMediaText.dart';
 import 'imageScreen.dart';
 
 class MyMedia extends StatelessWidget {
@@ -50,11 +51,7 @@ class MyMedia extends StatelessWidget {
                     ),
                   ),
                   BoxSpacing(myHeight: 9),
-                  const Text(
-                    'Tap "+" in a Chat to share photos and videos\nwith this Contact',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 17, color: Colors.grey),
-                  ),
+                  noMedia(),
                 ],
               ),
             );
@@ -115,3 +112,4 @@ class MyMedia extends StatelessWidget {
     );
   }
 }
+
