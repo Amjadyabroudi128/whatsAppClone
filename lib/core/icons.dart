@@ -36,4 +36,5 @@ class icons {
   static Icon slash = Icon(CupertinoIcons.star_slash_fill, size: 30,);
   static Icon amberStar = Icon(Icons.star, color: myColors.amberStar);
   static Icon noImages = Icon(CupertinoIcons.photo, size: 50,);
+  static Icon supportedImage = Icon(Icons.image_not_supported, size: 50, color: Colors.grey);
 }
