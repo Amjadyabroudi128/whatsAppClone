@@ -34,7 +34,6 @@ class _SignInscreenState extends State<SignInscreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text("Sign in"),
-          centerTitle: true,
           backgroundColor: myColors.transparent,
         ),
         body: myPadding(
