@@ -40,7 +40,6 @@ class _EditBioState extends State<EditBio> {
           color: Colors.white
         ),
         backgroundColor: Colors.grey,
-        centerTitle: true,
         title: Text("Edit Your Bio", style: TextStyle(color: Colors.white)),
         actions: [
           kTextButton(
