@@ -16,6 +16,9 @@ import 'package:whatsappclone/core/MyColors.dart';
      borderRadius: BorderRadius.circular(10.0),
    );
   static final ThemeData appTheme = ThemeData().copyWith(
+    appBarTheme: AppBarTheme(
+      centerTitle: true
+    ),
        elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
              backgroundColor: myColors.TC,
@@ -51,8 +54,9 @@ import 'package:whatsappclone/core/MyColors.dart';
     cardTheme: CardTheme(
       shape: cardShape,
       color: Colors.blueGrey,
-    )
+    ),
    );
+
   static final ThemeData darkTheme = ThemeData(
       cardTheme: CardTheme(
         shape: cardShape,
