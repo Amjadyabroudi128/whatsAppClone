@@ -49,6 +49,7 @@ class _TestnameState extends State<Testname> {
         return Scaffold(
           backgroundColor: color,
           appBar: AppBar(
+            centerTitle: false,
             backgroundColor: color,
             title: GestureDetector(
                 child: Text(widget.receiverName, style: Textstyles.bioStyle),

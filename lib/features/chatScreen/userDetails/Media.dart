@@ -90,7 +90,7 @@ class MyMedia extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => Imagescreen(date: day, senderName: msg.senderEmail, time: formattedTime,),
+                              builder: (_) => Imagescreen(image: msg.image, date: day, senderName: msg.senderEmail, time: formattedTime,),
                             ),
                           );
                         },

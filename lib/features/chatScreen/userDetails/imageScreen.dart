@@ -6,7 +6,8 @@ class Imagescreen extends StatefulWidget {
   final String date;
   final senderName;
   final String time;
-  const Imagescreen({super.key, required this.date, required this.senderName, required this.time});
+  final String? image;
+  const Imagescreen({super.key, required this.date, required this.senderName, required this.time, this.image});
 
   @override
   State<Imagescreen> createState() => _ImagescreenState();
