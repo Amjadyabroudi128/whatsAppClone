@@ -42,6 +42,7 @@ class _ContactsState extends State<Contacts> {
           ),
           backgroundColor: myColors.TC,
           automaticallyImplyLeading: false,
+          centerTitle: false,
         ),
         body: userList(),
     );
