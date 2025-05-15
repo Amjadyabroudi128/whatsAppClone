@@ -26,7 +26,6 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         title: Text("Profile Photo", style: Textstyles.editProfile),
-        centerTitle: true,
         actions: [
           kTextButton(
             style: const ButtonStyle(
