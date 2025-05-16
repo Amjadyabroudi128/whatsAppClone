@@ -21,7 +21,6 @@ class _ImagescreenState extends State<Imagescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Column(
           children: [
             Text(
