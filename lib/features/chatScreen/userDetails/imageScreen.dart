@@ -1,6 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
+
+import '../../../core/icons.dart';
 
 class Imagescreen extends StatefulWidget {
   final String date;
@@ -22,20 +27,58 @@ class _ImagescreenState extends State<Imagescreen> {
     return Scaffold(
       appBar: AppBar(
         title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.senderName == auth.currentUser!.email ? "You" : widget.senderName ?? "",
+              widget.senderName == auth.currentUser!.email ? "You" : widget
+                  .senderName ?? "",
               style: TextStyle(fontSize: 19),
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(widget.date, style: dates,),
-                BoxSpacing(mWidth: 7,),
-                Text(widget.time, style: dates,)
+                Text(widget.date, style: dates),
+                BoxSpacing(mWidth: 7),
+                Text(widget.time, style: dates)
               ],
-            )
-            // Text(widget.date, style: TextStyle(fontSize: 13),),
+            ),
+          ],
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(2),
+          child: Image.network(
+            widget.image!,
+            fit: BoxFit.contain,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: icons.deleteIcon,
+              onPressed: () {
+              },
+            ),
+            // BoxSpacing(mWidth: 14,),
+            IconButton(
+              icon: icons.star,
+              onPressed: () {
+
+              },
+            ),
+            // BoxSpacing(mWidth: 14,),
+            IconButton(
+              icon: Icon(CupertinoIcons.share),
+              onPressed: () {
+
+              },
+            ),
           ],
         ),
       ),
