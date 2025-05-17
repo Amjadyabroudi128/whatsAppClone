@@ -5,7 +5,7 @@ import '../../../../components/kCard.dart';
 import '../../../../components/listTilesOptions.dart';
 import '../../../../core/MyColors.dart';
 
-Future showBtmSheet(BuildContext context) {
+Future showBtmSheet(BuildContext context, String? image, senderName) {
   return showModalBottomSheet(
     backgroundColor: Colors.grey,
     context: context,
