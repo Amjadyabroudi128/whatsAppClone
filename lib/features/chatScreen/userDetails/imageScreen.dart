@@ -1,21 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
-import 'package:whatsappclone/features/chatScreen/Widgets/deleteMessage.dart';
-
-import '../../../Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/core/icons.dart';
+import 'package:whatsappclone/messageClass/messageClass.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import '../../../components/TextStyles.dart';
 import '../../../components/flutterToast.dart';
-import '../../../core/MyColors.dart';
-import '../../../core/icons.dart';
-import '../../../messageClass/messageClass.dart';
+import 'package:whatsappclone/features/chatScreen/Widgets/deleteMessage.dart';
 
 class Imagescreen extends StatefulWidget {
   final String date;
@@ -24,8 +21,16 @@ class Imagescreen extends StatefulWidget {
   final String? image;
   final String? messageId;
   final String? receiverId;
-  const Imagescreen({super.key, required this.date,  this.senderName, required this.time, this.image,
-     this.messageId, this.receiverId});
+
+  const Imagescreen({
+    super.key,
+    required this.date,
+    required this.senderName,
+    required this.time,
+    this.image,
+    this.messageId,
+    this.receiverId,
+  });
 
   @override
   State<Imagescreen> createState() => _ImagescreenState();
@@ -39,6 +44,8 @@ class _ImagescreenState extends State<Imagescreen> {
   @override
   Widget build(BuildContext context) {
     final user = auth.currentUser;
+
+    // Creating a dummy Messages object for deletion
     final Messages msg = Messages(
       messageId: widget.messageId,
       image: widget.image,
@@ -47,14 +54,14 @@ class _ImagescreenState extends State<Imagescreen> {
       receiverId: widget.receiverId,
       text: "", // Empty, not needed for image delete
     );
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.senderName == auth.currentUser!.email ? "You" : widget
-                  .senderName ?? "",
+              widget.senderName == auth.currentUser!.email ? "You" : widget.senderName ?? "",
               style: TextStyle(fontSize: 19),
             ),
             Row(
@@ -89,9 +96,6 @@ class _ImagescreenState extends State<Imagescreen> {
                 await showModalBottomSheet(
                   backgroundColor: Colors.grey,
                   context: context,
-                  // shape: RoundedRectangleBorder(
-                  //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                  // ),
                   builder: (context) => Container(
                     height: 160,
                     padding: EdgeInsets.symmetric(horizontal: 16),
@@ -109,11 +113,10 @@ class _ImagescreenState extends State<Imagescreen> {
                             Spacer(),
                             kIconButton(
                               myIcon: Icon(Icons.close),
-                              onPressed: (){
+                              onPressed: () {
                                 Navigator.pop(context);
-
                               },
-                            )
+                            ),
                           ],
                         ),
                         SizedBox(height: 20),
@@ -121,15 +124,19 @@ class _ImagescreenState extends State<Imagescreen> {
                           color: Colors.grey[350],
                           child: Options(
                             onTap: () async {
+                              Navigator.pop(context); // Close bottom sheet
                               await service.Deletemessage(
-                                widget.receiverId,
-                                widget.messageId!,
                                 user!.uid,
+                                widget.receiverId!,
+                                widget.messageId!,
                               );
-                              myToast("Message deleted");
-                              Navigator.pop(context);
+                              myToast("Message Successfully Deleted");
+                              Navigator.pop(context); // Close image screen
                             },
-                            label: Text("Delete for Everyone", style: TextStyle(color: myColors.redAccent),),
+                            label: Text(
+                              "Delete for Everyone",
+                              style: TextStyle(color: myColors.redAccent),
+                            ),
                             context: context,
                           ),
                         ),
@@ -138,20 +145,17 @@ class _ImagescreenState extends State<Imagescreen> {
                   ),
                 );
               },
-
             ),
-            // BoxSpacing(mWidth: 14,),
             IconButton(
               icon: icons.star,
               onPressed: () {
-
+                // Add star logic if needed
               },
             ),
-            // BoxSpacing(mWidth: 14,),
             IconButton(
               icon: Icon(CupertinoIcons.share),
               onPressed: () {
-
+                // Add share logic if needed
               },
             ),
           ],
