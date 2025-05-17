@@ -40,7 +40,12 @@ class userDetails extends StatelessWidget {
                   kimageNet(
                     src:"https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
                   )
-                  : kimageNet(src: imageUrl!,),
+              : kCard(
+                shape: CircleBorder(),
+                clipBehavior: Clip.antiAlias,
+                child: kimageNet(src: imageUrl!),
+              ), 
+              // : kimageNet(src: imageUrl!,),
               BoxSpacing(myHeight: 9,),
               Text("${name}", style: Textstyles.recieverName,),
               BoxSpacing(myHeight: 7,),
