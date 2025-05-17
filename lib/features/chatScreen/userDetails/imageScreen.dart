@@ -13,6 +13,7 @@ import '../../../components/TextStyles.dart';
 import '../../../components/flutterToast.dart';
 import '../../../core/MyColors.dart';
 import '../../../core/icons.dart';
+import 'Widgets/btmSheet.dart';
 
 class Imagescreen extends StatefulWidget {
   final String date;
@@ -67,56 +68,11 @@ class _ImagescreenState extends State<Imagescreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconButton(
-              icon: icons.deleteIcon,
+            kIconButton(
+              myIcon: icons.deleteIcon,
               onPressed: () async {
-                await showModalBottomSheet(
-                  backgroundColor: Colors.grey,
-                  context: context,
-                  // shape: RoundedRectangleBorder(
-                  //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                  // ),
-                  builder: (context) => Container(
-                    height: 160,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Delete message?",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            Spacer(),
-                            kIconButton(
-                              myIcon: Icon(Icons.close),
-                              onPressed: (){
-                                Navigator.pop(context);
-
-                              },
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        kCard(
-                          color: Colors.grey[350],
-                          child: Options(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            label: Text("Delete for Everyone", style: TextStyle(color: myColors.redAccent),),
-                            context: context,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                await showBtmSheet(context);
               },
-
             ),
             // BoxSpacing(mWidth: 14,),
             IconButton(
