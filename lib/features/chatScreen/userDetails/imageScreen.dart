@@ -1,17 +1,31 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/iconButton.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
+import 'package:whatsappclone/components/kCard.dart';
+import 'package:whatsappclone/components/listTilesOptions.dart';
+import 'package:whatsappclone/features/chatScreen/Widgets/deleteMessage.dart';
+
+import '../../../Firebase/FirebaseAuth.dart';
+import '../../../components/TextStyles.dart';
+import '../../../components/flutterToast.dart';
+import '../../../core/MyColors.dart';
 import '../../../core/icons.dart';
-import 'Widgets/btmSheet.dart';
+import '../../../messageClass/messageClass.dart';
 
 class Imagescreen extends StatefulWidget {
   final String date;
-  final senderName;
+  final String? senderName;
   final String time;
   final String? image;
-  const Imagescreen({super.key, required this.date, required this.senderName, required this.time, this.image});
+  final String? messageId;
+  final String? receiverId;
+  const Imagescreen({super.key, required this.date,  this.senderName, required this.time, this.image,
+     this.messageId, this.receiverId});
 
   @override
   State<Imagescreen> createState() => _ImagescreenState();
@@ -20,9 +34,19 @@ class Imagescreen extends StatefulWidget {
 class _ImagescreenState extends State<Imagescreen> {
   final TextStyle dates = TextStyle(fontSize: 13);
   final auth = FirebaseAuth.instance;
+  final FirebaseService service = FirebaseService();
 
   @override
   Widget build(BuildContext context) {
+    final user = auth.currentUser;
+    final Messages msg = Messages(
+      messageId: widget.messageId,
+      image: widget.image,
+      senderEmail: user?.email,
+      senderId: user?.uid,
+      receiverId: widget.receiverId,
+      text: "", // Empty, not needed for image delete
+    );
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -59,11 +83,62 @@ class _ImagescreenState extends State<Imagescreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            kIconButton(
-              myIcon: icons.deleteIcon,
+            IconButton(
+              icon: icons.deleteIcon,
               onPressed: () async {
-                await showBtmSheet(context, widget.image, widget.senderName);
+                await showModalBottomSheet(
+                  backgroundColor: Colors.grey,
+                  context: context,
+                  // shape: RoundedRectangleBorder(
+                  //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                  // ),
+                  builder: (context) => Container(
+                    height: 160,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Delete message?",
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Spacer(),
+                            kIconButton(
+                              myIcon: Icon(Icons.close),
+                              onPressed: (){
+                                Navigator.pop(context);
+
+                              },
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        kCard(
+                          color: Colors.grey[350],
+                          child: Options(
+                            onTap: () async {
+                              await service.Deletemessage(
+                                widget.receiverId,
+                                widget.messageId!,
+                                user!.uid,
+                              );
+                              myToast("Message deleted");
+                              Navigator.pop(context);
+                            },
+                            label: Text("Delete for Everyone", style: TextStyle(color: myColors.redAccent),),
+                            context: context,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               },
+
             ),
             // BoxSpacing(mWidth: 14,),
             IconButton(

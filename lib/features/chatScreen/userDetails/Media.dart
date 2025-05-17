@@ -11,12 +11,13 @@ import 'Widgets/noMediaText.dart';
 import 'imageScreen.dart';
 
 class MyMedia extends StatelessWidget {
+
   const MyMedia({super.key});
 
   @override
   Widget build(BuildContext context) {
     final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
-
+    final User? user;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Media"),
@@ -90,7 +91,13 @@ class MyMedia extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => Imagescreen(image: msg.image, date: day, senderName: msg.senderEmail, time: formattedTime,),
+                              builder: (_) => Imagescreen(
+                                  image: msg.image, date: day,
+                                senderName: msg.senderEmail,
+                                time: formattedTime,
+                                messageId: msg.messageId,
+                                receiverId: msg.receiverId,
+                              ),
                             ),
                           );
                         },
