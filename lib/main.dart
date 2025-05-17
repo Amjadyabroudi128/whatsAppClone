@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/colorPicker/ColorPicking.dart';
 import 'package:whatsappclone/core/appTheme.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
+import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
 import 'features/welcomeScreen/welcome.dart';
@@ -55,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         "pickColor": (context) => Colorpicking(),
         "contacts": (context) => Contacts(),
         "btm": (context) => Bottomnavbar(onThemeChange: _updateTheme),
+        "mediaScreen": (context) => MyMedia()
       },
       home: Bottomnavbar(onThemeChange: _updateTheme),
     );
