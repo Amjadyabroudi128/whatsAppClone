@@ -58,6 +58,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   AppBar(
                     title: Text("Settings", style: Textstyles.settings,),
                     centerTitle: false,
+                    automaticallyImplyLeading: false,
                   ),
                   BoxSpacing(myHeight: 20),
                   nameCard(userName: userName),
