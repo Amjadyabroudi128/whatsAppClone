@@ -125,13 +125,13 @@ class _ImagescreenState extends State<Imagescreen> {
                           child: Options(
                             onTap: () async {
                               Navigator.pop(context); // Close bottom sheet
+                              Navigator.pop(context, 'deleted'); // Pass back a result
                               await service.Deletemessage(
                                 user!.uid,
                                 widget.receiverId!,
                                 widget.messageId!,
                               );
                               myToast("Message Successfully Deleted");
-                              Navigator.pop(context); // Close image screen
                             },
                             label: Text(
                               "Delete for Everyone",
