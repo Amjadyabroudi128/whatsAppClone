@@ -49,7 +49,12 @@ class userDetails extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox.shrink()
               ) : kCard(
-                child: Text("${bio}", style: Textstyles.bioStyle,),
+                color: myColors.FG,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("${bio}", style: Textstyles.bioStyle,),
+                ),
+                // child: kL("${bio}", style: Textstyles.bioStyle,),
               ),
               BoxSpacing(myHeight: 5,),
               Column(
