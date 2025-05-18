@@ -132,6 +132,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                 widget.messageId!,
                               );
                               myToast("Message Successfully Deleted");
+                              service.deleteStar(msg);
                             },
                             label: Text(
                               "Delete for Everyone",
@@ -148,8 +149,9 @@ class _ImagescreenState extends State<Imagescreen> {
             ),
             IconButton(
               icon: icons.star,
-              onPressed: () {
-                // Add star logic if needed
+              onPressed: () async {
+             await service.addToStar(msg);
+             myToast("Image starred");
               },
             ),
             IconButton(
