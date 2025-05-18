@@ -93,6 +93,9 @@ class _StarredmessagesState extends State<Starredmessages> {
                     time:  data["timestamp"],
                     senderEmail: data["senderEmail"],
                     messageId: data.id,
+                    image: data.data().toString().contains("image")
+                        ? data["image"]
+                        : null,
                   );
                   final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
                   final formattedTime = DateFormat.Hm().format(dateTime);
@@ -141,7 +144,15 @@ class _StarredmessagesState extends State<Starredmessages> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
-                                    Text(msg.text),
+                                    msg.image != null
+                                        ? Image.network(
+                                      msg.image!,
+                                      height: 150,
+                                      width: 150,
+                                      fit: BoxFit.cover,
+                                    )
+                                        : Text(msg.text),
+
                                     Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
