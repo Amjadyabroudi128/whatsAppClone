@@ -194,6 +194,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        "senderEmail": msg.senderEmail,
        "receiverId": msg.receiverId,
        "messageId": messageId,
+       if (msg.image != null) "image": msg.image
      });
 
      // Also update isStarred in chat room
