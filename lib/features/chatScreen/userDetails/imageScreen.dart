@@ -148,7 +148,7 @@ class _ImagescreenState extends State<Imagescreen> {
               },
             ),
             IconButton(
-              icon: icons.star,
+              icon: icons.stary,
               onPressed: () async {
              await service.addToStar(msg);
              myToast("Image starred");
