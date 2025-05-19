@@ -101,42 +101,7 @@ class _messagesAlignState extends State<messagesAlign> {
                         color: myColors.menuColor,
                         position: position,
                         items: [
-                          PopupMenuItem(
-                            value: "Star",
-                            child: kTextButton(
-                              child: Row(
-                                children: [
-                                  Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
-                                  Spacer(),
-                                  (msg.isStarred == true ? icons.amberStar : icons.star),
-                                ],
-                              ),
-                              onPressed: () async {
-                                if (msg.isStarred == true) {
-                                  await service.deleteStar(msg);
-                                  myToast("Message unstarred");
-                                } else {
-                                  await service.addToStar(msg);
-                                  myToast("Message starred");
-                                }
-                                setState(() {
-                                  widget.messages[index] = Messages(
-                                    text: msg.text,
-                                    senderId: msg.senderId,
-                                    receiverId: msg.receiverId,
-                                    senderEmail: msg.senderEmail,
-                                    receiverEmail: msg.receiverEmail,
-                                    time: msg.time,
-                                    messageId: msg.messageId,
-                                    image: msg.image,
-                                    file: msg.file,
-                                    isStarred: !(msg.isStarred ?? false),
-                                  );
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
+                          starMessage(msg, service, index, context),
                           deleteMessage(context, msg, widget.widget, widget.user, service),
                         ],
                       );
@@ -166,42 +131,7 @@ class _messagesAlignState extends State<messagesAlign> {
                             copyMessage(msg, context),
                             if (isMe) editMessage(context, msg, service, widget.widget, widget.user),
                             deleteMessage(context, msg, widget.widget, widget.user, service),
-                            PopupMenuItem(
-                              value: "Star",
-                              child: kTextButton(
-                                child: Row(
-                                  children: [
-                                    Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
-                                    Spacer(),
-                                    (msg.isStarred == true ? icons.amberStar : icons.star),
-                                  ],
-                                ),
-                                onPressed: () async {
-                                  if (msg.isStarred == true) {
-                                    await service.deleteStar(msg);
-                                    myToast("Message unstarred");
-                                  } else {
-                                    await service.addToStar(msg);
-                                    myToast("Message starred");
-                                  }
-                                  setState(() {
-                                    widget.messages[index] = Messages(
-                                      text: msg.text,
-                                      senderId: msg.senderId,
-                                      receiverId: msg.receiverId,
-                                      senderEmail: msg.senderEmail,
-                                      receiverEmail: msg.receiverEmail,
-                                      time: msg.time,
-                                      messageId: msg.messageId,
-                                      image: msg.image,
-                                      file: msg.file,
-                                      isStarred: !(msg.isStarred ?? false),
-                                    );
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            )
+                            starMessage(msg, service, index, context)
                           ]
                         );
                       }
@@ -258,6 +188,45 @@ class _messagesAlignState extends State<messagesAlign> {
         },
       ),
     );
+  }
+
+  PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int index, BuildContext context) {
+    return PopupMenuItem(
+                          value: "Star",
+                          child: kTextButton(
+                            child: Row(
+                              children: [
+                                Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
+                                Spacer(),
+                                (msg.isStarred == true ? icons.amberStar : icons.star),
+                              ],
+                            ),
+                            onPressed: () async {
+                              if (msg.isStarred == true) {
+                                await service.deleteStar(msg);
+                                myToast("Message unstarred");
+                              } else {
+                                await service.addToStar(msg);
+                                myToast("Message starred");
+                              }
+                              setState(() {
+                                widget.messages[index] = Messages(
+                                  text: msg.text,
+                                  senderId: msg.senderId,
+                                  receiverId: msg.receiverId,
+                                  senderEmail: msg.senderEmail,
+                                  receiverEmail: msg.receiverEmail,
+                                  time: msg.time,
+                                  messageId: msg.messageId,
+                                  image: msg.image,
+                                  file: msg.file,
+                                  isStarred: !(msg.isStarred ?? false),
+                                );
+                              });
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
   }
 
 }
