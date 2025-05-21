@@ -18,6 +18,7 @@ import '../../../core/appTheme.dart';
 import '../../../messageClass/messageClass.dart';
 import 'package:intl/intl.dart';
 
+import '../userDetails/imageScreen.dart';
 import 'copyMessage.dart';
 import 'dateText.dart';
 import 'deleteMessage.dart';
@@ -96,50 +97,18 @@ class _messagesAlignState extends State<messagesAlign> {
                         0.0,
                       );
                       if(msg.image != null && msg.image!.isNotEmpty) {
-                        showMenu<String>(
-                        context: context,
-                        color: myColors.menuColor,
-                        position: position,
-                        items: [
-                          PopupMenuItem(
-                            value: "Star",
-                            child: kTextButton(
-                              child: Row(
-                                children: [
-                                  Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
-                                  Spacer(),
-                                  (msg.isStarred == true ? icons.amberStar : icons.star),
-                                ],
-                              ),
-                              onPressed: () async {
-                                if (msg.isStarred == true) {
-                                  await service.deleteStar(msg);
-                                  myToast("Message unstarred");
-                                } else {
-                                  await service.addToStar(msg);
-                                  myToast("Message starred");
-                                }
-                                setState(() {
-                                  widget.messages[index] = Messages(
-                                    text: msg.text,
-                                    senderId: msg.senderId,
-                                    receiverId: msg.receiverId,
-                                    senderEmail: msg.senderEmail,
-                                    receiverEmail: msg.receiverEmail,
-                                    time: msg.time,
-                                    messageId: msg.messageId,
-                                    image: msg.image,
-                                    file: msg.file,
-                                    isStarred: !(msg.isStarred ?? false),
-                                  );
-                                });
-                                Navigator.pop(context);
-                              },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Imagescreen(
+                              image: msg.image, date: day,
+                              senderName: msg.senderEmail,
+                              time: formattedTime,
+                              messageId: msg.messageId,
+                              receiverId: msg.receiverId,
                             ),
                           ),
-                          deleteMessage(context, msg, widget.widget, widget.user, service),
-                        ],
-                      );
+                        );
                       } else if (msg.file != null && msg.file!.isNotEmpty) {
                         showMenu<String>(
                           context: context,
