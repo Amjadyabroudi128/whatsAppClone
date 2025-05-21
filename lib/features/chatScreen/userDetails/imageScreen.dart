@@ -22,6 +22,7 @@ class Imagescreen extends StatefulWidget {
   final String? image;
   final String? messageId;
   final String? receiverId;
+  final bool? isStarred;
 
   const Imagescreen({
     super.key,
@@ -31,6 +32,7 @@ class Imagescreen extends StatefulWidget {
     this.image,
     this.messageId,
     this.receiverId,
+    this.isStarred,
   });
 
   @override
@@ -41,6 +43,13 @@ class _ImagescreenState extends State<Imagescreen> {
   final TextStyle dates = TextStyle(fontSize: 13);
   final auth = FirebaseAuth.instance;
   final FirebaseService service = FirebaseService();
+  bool _isStarred = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _isStarred = widget.isStarred ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +63,7 @@ class _ImagescreenState extends State<Imagescreen> {
       senderId: user?.uid,
       receiverId: widget.receiverId,
       text: "", // Empty, not needed for image delete
+      isStarred: _isStarred
     );
 
     return Scaffold(
@@ -148,11 +158,19 @@ class _ImagescreenState extends State<Imagescreen> {
                 );
               },
             ),
-            IconButton(
-              icon: icons.stary,
+            kIconButton(
+              myIcon: _isStarred ? icons.slash : icons.stary,
               onPressed: () async {
-             await service.addToStar(msg);
-             myToast("Image starred");
+                if (_isStarred) {
+                  await service.deleteStar(msg);
+                  myToast("Message unstarred");
+                } else {
+                  await service.addToStar(msg);
+                  myToast("Message starred");
+                }
+                setState(() {
+                  _isStarred = !_isStarred;
+                });
               },
             ),
             IconButton(
