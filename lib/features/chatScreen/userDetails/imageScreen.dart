@@ -173,8 +173,8 @@ class _ImagescreenState extends State<Imagescreen> {
                 });
               },
             ),
-            IconButton(
-              icon: Icon(CupertinoIcons.share),
+            kIconButton(
+              myIcon: Icon(CupertinoIcons.share),
               onPressed: ()  async {
                 await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
                 // Add share logic if needed
