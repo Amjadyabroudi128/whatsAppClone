@@ -13,6 +13,7 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import '../../../components/TextStyles.dart';
 import '../../../components/flutterToast.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/deleteMessage.dart';
+import 'package:media_gallery_saver/media_gallery_saver.dart';
 
 class Imagescreen extends StatefulWidget {
   final String date;
@@ -156,7 +157,8 @@ class _ImagescreenState extends State<Imagescreen> {
             ),
             IconButton(
               icon: Icon(CupertinoIcons.share),
-              onPressed: () {
+              onPressed: ()  async {
+                await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
                 // Add share logic if needed
               },
             ),

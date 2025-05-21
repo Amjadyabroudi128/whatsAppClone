@@ -1,0 +1,2 @@
+C:/Users/Amjad Yabroudi/whatsAppClone/android/app/.cxx/Debug/2n4f6l45/x86/CMakeFiles/edit_cache.dir
+C:/Users/Amjad Yabroudi/whatsAppClone/android/app/.cxx/Debug/2n4f6l45/x86/CMakeFiles/rebuild_cache.dir
