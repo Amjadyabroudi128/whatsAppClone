@@ -145,7 +145,7 @@ class _ImagescreenState extends State<Imagescreen> {
                               children: [
                                 Text(
                                   "${user?.email}",
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  style: Textstyles.btmSheet,
                                 ),
                                 Spacer(),
                                 kIconButton(

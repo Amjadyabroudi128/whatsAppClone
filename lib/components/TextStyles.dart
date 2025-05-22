@@ -30,4 +30,5 @@ class Textstyles {
   static TextStyle recieverEmail = TextStyle(fontSize: 18, letterSpacing: 2);
   static TextStyle noStarMessage = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   static TextStyle editBar =  TextStyle(fontSize: 19, color: Colors.black);
+  static TextStyle btmSheet = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
  }

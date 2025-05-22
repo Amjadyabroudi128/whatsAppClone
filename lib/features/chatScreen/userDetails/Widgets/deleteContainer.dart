@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/flutterToast.dart';
@@ -38,7 +39,7 @@ class deleteContainer extends StatelessWidget {
             children: [
               Text(
                 "Delete message?",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: Textstyles.btmSheet,
               ),
               Spacer(),
               kIconButton(
