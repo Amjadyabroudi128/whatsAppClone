@@ -149,7 +149,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                 ),
                                 Spacer(),
                                 kIconButton(
-                                  myIcon: Icon(Icons.close),
+                                  myIcon: icons.close,
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },

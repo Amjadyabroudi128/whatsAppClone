@@ -39,4 +39,5 @@ class icons {
   static Icon noImages = Icon(CupertinoIcons.photo, size: 50,);
   static Icon supportedImage = Icon(Icons.image_not_supported, size: 50, color: Colors.grey);
   static Icon share =Icon(CupertinoIcons.share);
+  static Icon close = Icon(Icons.close);
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/icons.dart';
 
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/flutterToast.dart';
@@ -43,7 +44,7 @@ class deleteContainer extends StatelessWidget {
               ),
               Spacer(),
               kIconButton(
-                myIcon: Icon(Icons.close),
+                myIcon: icons.close,
                 onPressed: () {
                   Navigator.pop(context);
                 },
