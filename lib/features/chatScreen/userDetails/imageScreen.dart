@@ -15,6 +15,8 @@ import '../../../components/flutterToast.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/deleteMessage.dart';
 import 'package:media_gallery_saver/media_gallery_saver.dart';
 
+import 'Widgets/deleteContainer.dart';
+
 class Imagescreen extends StatefulWidget {
   final String date;
   final String? senderName;
@@ -105,56 +107,10 @@ class _ImagescreenState extends State<Imagescreen> {
               icon: icons.deleteIcon,
               onPressed: () async {
                 await showModalBottomSheet(
-                  backgroundColor: Colors.grey,
+                  backgroundColor: myColors.familyText,
                   context: context,
-                  builder: (context) => Container(
-                    height: 160,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Delete message?",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            Spacer(),
-                            kIconButton(
-                              myIcon: Icon(Icons.close),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        kCard(
-                          color: Colors.grey[350],
-                          child: Options(
-                            onTap: () async {
-                              Navigator.pop(context); // Close bottom sheet
-                              Navigator.pop(context, 'deleted'); // Pass back a result
-                              await service.Deletemessage(
-                                user!.uid,
-                                widget.receiverId!,
-                                widget.messageId!,
-                              );
-                              myToast("Message Successfully Deleted");
-                              service.deleteStar(msg);
-                            },
-                            label: Text(
-                              "Delete for Everyone",
-                              style: TextStyle(color: myColors.redAccent),
-                            ),
-                            context: context,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  builder: (context) =>
+                      deleteContainer(service: service, user: user, widget: widget, msg: msg),
                 );
               },
             ),
@@ -186,3 +142,4 @@ class _ImagescreenState extends State<Imagescreen> {
     );
   }
 }
+
