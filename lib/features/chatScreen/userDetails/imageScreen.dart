@@ -139,6 +139,7 @@ class _ImagescreenState extends State<Imagescreen> {
                   context: context,
                   builder: (context) {
                    return  Container(
+                     padding: EdgeInsets.symmetric(horizontal: 16),
                       child: IntrinsicHeight(
                         child: Column(
                           children: [
@@ -146,9 +147,24 @@ class _ImagescreenState extends State<Imagescreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  "${user?.email}",
-                                  style: Textstyles.btmSheet,
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "${user?.email}",
+                                          style: Textstyles.btmSheet,
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(widget.date, style: dates),
+                                        BoxSpacing(mWidth: 7),
+                                        Text(widget.time, style: dates)
+                                      ],
+                                    )
+                                  ],
                                 ),
                                 Spacer(),
                                 kIconButton(

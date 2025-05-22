@@ -67,7 +67,7 @@ class _nameCardState extends State<nameCard> {
                     return const Center(child: Text("No user data available"));
                   }
                   final data = snapshot.data!;
-                  final imageUrl = data["image"] ?? "";
+                  final imageUrl = data.data().toString().contains("image") ? data["image"] : "";
                   final bio = data["bio"] ?? "";
                   return Column(
                     children: [
