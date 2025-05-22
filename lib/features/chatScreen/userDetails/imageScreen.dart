@@ -131,10 +131,41 @@ class _ImagescreenState extends State<Imagescreen> {
             ),
             kIconButton(
               myIcon: icons.share,
-              onPressed: ()  async {
-                await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
-                // Add share logic if needed
+              onPressed: ()async {
+                await showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                   return  Container(
+                      child: IntrinsicHeight(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${user?.email}",
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                                Spacer(),
+                                kIconButton(
+                                  myIcon: Icon(Icons.close),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                );
               },
+              // onPressed: ()  async {
+              //   await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
+              // },
             ),
           ],
         ),
