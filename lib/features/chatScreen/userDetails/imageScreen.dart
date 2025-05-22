@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import '../../../Firebase/FirebaseCollections.dart';
 import '../../../components/TextStyles.dart';
 import '../../../components/flutterToast.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/deleteMessage.dart';
@@ -70,7 +72,15 @@ class _ImagescreenState extends State<Imagescreen> {
       isStarred: _isStarred,
 
     );
-
+    Future addToFireStore(String imagePath) async {
+      String? imageUrl;
+      await userC.doc(user!.uid).set({
+        "image": imagePath,
+      }, SetOptions(merge: true));
+      setState(() {
+        imageUrl = imagePath;
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -145,7 +155,17 @@ class _ImagescreenState extends State<Imagescreen> {
                           children: [
                             Row(
                               children: [
-                                Image.network(msg.image!, height: 40, width: 40,),
+                                Container(
+                                  height: 49, width: 49,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                      image: DecorationImage(
+                                        image: NetworkImage(msg.image!),
+                                        fit: BoxFit.cover,
+                                      )
+                                  ),
+                                ),
+                                // Image.network(msg.image!, ),
                                 BoxSpacing(mWidth: 10,),
                                 Column(
                                   children: [
@@ -173,12 +193,22 @@ class _ImagescreenState extends State<Imagescreen> {
                                   Options(
                                     context: context,
                                     label: Text("Set as Profile photo"),
-                                    trailing: icons.person
+                                    trailing: icons.person,
+                                    onTap: () async {
+                                      await addToFireStore(widget.image!);
+                                      myToast("image is updated ");
+                                      Navigator.of(context).pop();
+                                    }
                                   ),
                                   Options(
                                       context: context,
                                       label: Text("Save to Gallery"),
-                                      trailing: icons.share
+                                      trailing: icons.share,
+                                    onTap: () async {
+                                      await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
+                                      myToast("Image Saved");
+                                      Navigator.of(context).pop();
+                                    }
                                   ),
                                 ],
                               ),
@@ -191,7 +221,7 @@ class _ImagescreenState extends State<Imagescreen> {
                 );
               },
               // onPressed: ()  async {
-              //   await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
+              //
               // },
             ),
           ],
