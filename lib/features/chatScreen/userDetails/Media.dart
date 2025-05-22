@@ -92,11 +92,13 @@ class MyMedia extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (_) => Imagescreen(
-                                  image: msg.image, date: day,
+                                  image: msg.image,
+                                date: day,
                                 senderName: msg.senderEmail,
                                 time: formattedTime,
                                 messageId: msg.messageId,
                                 receiverId: msg.receiverId,
+
                               ),
                             ),
                           );

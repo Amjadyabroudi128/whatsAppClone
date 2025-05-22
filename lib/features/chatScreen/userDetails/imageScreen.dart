@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
@@ -25,7 +26,7 @@ class Imagescreen extends StatefulWidget {
   final String? messageId;
   final String? receiverId;
   final bool? isStarred;
-
+  final String? day;
   const Imagescreen({
     super.key,
     required this.date,
@@ -35,6 +36,7 @@ class Imagescreen extends StatefulWidget {
     this.messageId,
     this.receiverId,
     this.isStarred,
+    this.day
   });
 
   @override
@@ -65,7 +67,8 @@ class _ImagescreenState extends State<Imagescreen> {
       senderId: user?.uid,
       receiverId: widget.receiverId,
       text: "", // Empty, not needed for image delete
-      isStarred: _isStarred
+      isStarred: _isStarred,
+
     );
 
     return Scaffold(
@@ -156,6 +159,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                 ),
                               ],
                             ),
+
                           ],
                         ),
                       ),
