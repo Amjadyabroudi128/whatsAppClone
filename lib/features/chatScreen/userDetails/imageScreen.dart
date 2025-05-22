@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/iconButton.dart';
-import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
@@ -13,9 +10,7 @@ import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import '../../../Firebase/FirebaseCollections.dart';
-import '../../../components/TextStyles.dart';
 import '../../../components/flutterToast.dart';
-import 'package:whatsappclone/features/chatScreen/Widgets/deleteMessage.dart';
 import 'package:media_gallery_saver/media_gallery_saver.dart';
 
 import 'Widgets/deleteContainer.dart';
@@ -165,7 +160,6 @@ class _ImagescreenState extends State<Imagescreen> {
                                       )
                                   ),
                                 ),
-                                // Image.network(msg.image!, ),
                                 BoxSpacing(mWidth: 10,),
                                 Column(
                                   children: [
