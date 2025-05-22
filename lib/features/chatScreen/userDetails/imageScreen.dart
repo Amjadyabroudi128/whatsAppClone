@@ -144,38 +144,45 @@ class _ImagescreenState extends State<Imagescreen> {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                Image.network(msg.image!, height: 40, width: 40,),
+                                BoxSpacing(mWidth: 10,),
                                 Column(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "${user?.email}",
-                                          style: Textstyles.btmSheet,
-                                        ),
-                                      ],
-                                    ),
+                                    Text("${user?.email}"),
                                     Row(
                                       children: [
                                         Text(widget.date, style: dates),
-                                        BoxSpacing(mWidth: 7),
+                                        BoxSpacing(mWidth: 7,),
                                         Text(widget.time, style: dates)
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
                                 Spacer(),
                                 kIconButton(
+                                  onPressed: (){},
                                   myIcon: icons.close,
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
+                                )
                               ],
                             ),
-
+                            kCard(
+                              color: Colors.grey,
+                              child: Column(
+                                children: [
+                                  Options(
+                                    context: context,
+                                    label: Text("Set as Profile photo"),
+                                    trailing: icons.person
+                                  ),
+                                  Options(
+                                      context: context,
+                                      label: Text("Save to Gallery"),
+                                      trailing: icons.share
+                                  ),
+                                ],
+                              ),
+                            )
                           ],
                         ),
                       ),
