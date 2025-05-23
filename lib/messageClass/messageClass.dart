@@ -11,6 +11,7 @@ class Messages {
   final String? image;
   final String? file;
   final bool? isStarred;
+  final bool? isReply;
   Messages({
     required this.text,
     this.receiverEmail,
@@ -21,7 +22,8 @@ class Messages {
     this.messageId,
     this.image,
     this.file,
-    this.isStarred
+    this.isStarred,
+    this.isReply
   });
 
   Map<String, dynamic> toMap() {
@@ -34,7 +36,8 @@ class Messages {
       "time": time,
       "image": image,
       "file": file,
-      "isStarred": isStarred
+      "isStarred": isStarred,
+      "isReply": isReply
     };
   }
 }
