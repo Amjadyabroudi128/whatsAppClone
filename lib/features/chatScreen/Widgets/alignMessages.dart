@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
+import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/core/icons.dart';
@@ -29,11 +31,13 @@ class messagesAlign extends StatefulWidget {
     required this.messages,
     required this.user,
      this.widget,
+    this.onReply
   });
 
   final List<Messages> messages;
   final User? user;
   final Testname? widget;
+  final void Function(Messages)? onReply;
   Stream<List<String>> getStarredMessageIdsStream(String userEmail) {
     return FirebaseFirestore.instance
         .collection("starred-messages")
@@ -48,7 +52,7 @@ class messagesAlign extends StatefulWidget {
 
 class _messagesAlignState extends State<messagesAlign> {
   bool isStarred = false;
-
+  bool isReply = false;
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
@@ -132,6 +136,7 @@ class _messagesAlignState extends State<messagesAlign> {
                           color: myColors.menuColor,
                           position: position,
                           items: [
+
                             copyMessage(msg, context),
                             if (isMe) editMessage(context, msg, service, widget.widget, widget.user),
                             deleteMessage(context, msg, widget.widget, widget.user, service),
@@ -170,6 +175,25 @@ class _messagesAlignState extends State<messagesAlign> {
                                   Navigator.pop(context);
                                 },
                               ),
+                            ),
+                            PopupMenuItem(
+                              value: "reply",
+                              child:kTextButton(
+                                onPressed: () {
+                                  Navigator.pop(context); // Close the popup
+                                  if (widget.onReply != null) {
+                                    widget.onReply!(msg); // Call the reply handler
+                                  }
+                                },
+
+                                child: Row(
+                                  children: [
+                                    Text("Reply",style: Textstyles.copyMessage,),
+                                    Spacer(),
+                                    Icon(Icons.reply, color: myColors.labelClr,)
+                                  ],
+                                ),
+                              )
                             )
                           ]
                         );
@@ -184,6 +208,28 @@ class _messagesAlignState extends State<messagesAlign> {
                       ),
                       child: Column(
                         children: [
+                          if (msg.replyTo != null)
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              margin: const EdgeInsets.only(bottom: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Column(
+                                children: [
+                                  Text("${msg.replyTo!.senderEmail}"),
+                                  BoxSpacing(myHeight: 10,),
+                                  Text("${msg.replyTo!.text}")
+                                ],
+                              ),
+                              // child: Text(
+                              //   style: const TextStyle(
+                              //     fontStyle: FontStyle.italic,
+                              //     fontSize: 13,
+                              //   ),
+                              // ),
+                            ),
                           if (msg.image != null && msg.image!.isNotEmpty)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
