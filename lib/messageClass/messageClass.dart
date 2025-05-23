@@ -12,6 +12,8 @@ class Messages {
   final String? file;
   final bool? isStarred;
   final bool? isReply;
+  final Messages? replyTo;
+
   Messages({
     required this.text,
     this.receiverEmail,
@@ -23,21 +25,39 @@ class Messages {
     this.image,
     this.file,
     this.isStarred,
-    this.isReply
+    this.isReply = false,
+    this.replyTo,
   });
+  factory Messages.fromMap(Map<String, dynamic> map) {
+    return Messages(
+      text: map['message'],
+      senderId: map['senderId'],
+      receiverId: map['receiverId'],
+      senderEmail: map['senderEmail'],
+      receiverEmail: map['receiverEmail'],
+      time: map['timestamp'],
+      image: map['image'],
+      file: map['file'],
+      messageId: map['messageId'],
+      isReply: map['isReply'] ?? false,
+      replyTo: map['replyTo'] != null ? Messages.fromMap(Map<String, dynamic>.from(map['replyTo'])) : null,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
-      "senderId": senderId,
-      "message": text,
-      "receiverId": receiverId,
-      "receiverEmail": receiverEmail,
-      "senderEmail": senderEmail,
-      "time": time,
-      "image": image,
-      "file": file,
-      "isStarred": isStarred,
-      "isReply": isReply
+      'messageId': messageId,
+      'message': text,
+      'senderId': senderId,
+      'receiverId': receiverId,
+      'senderEmail': senderEmail,
+      'receiverEmail': receiverEmail,
+      'time': time,
+      'image': image,
+      'file': file,
+      'isStarred': isStarred,
+      'isReply': isReply,
+      'replyTo': replyTo?.toMap(),
     };
   }
 }
