@@ -98,6 +98,7 @@ class _TestnameState extends State<Testname> {
                   myToast("there is no user ");
                 }
               },
+
             ),
           ),
           body: Column(
@@ -134,7 +135,7 @@ class _TestnameState extends State<Testname> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.close, color: Colors.white,),
+                        icon: icons.Wclose,
                         onPressed: () {
                           setState(() {
                             _replyMessage = null;
@@ -181,7 +182,7 @@ class _TestnameState extends State<Testname> {
                                           Navigator.pop(context);
                                           final imageUrl = await url.pickImage();
                                           if (imageUrl != null) {
-                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null );
+                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null, null);
                                           }
                                         }
                                     ),
@@ -193,7 +194,7 @@ class _TestnameState extends State<Testname> {
                                           Navigator.pop(context);
                                           final imageUrl = await url.takeImage();
                                           if (imageUrl != null) {
-                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null);
+                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null, null);
                                           }
                                         }
                                     ),
@@ -202,7 +203,7 @@ class _TestnameState extends State<Testname> {
                                           Navigator.pop(context);
                                           final fileLink = await url.pickFile(); // Import this function
                                           if (fileLink != null) {
-                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", null, fileLink);
+                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", null, fileLink, null);
 
                                           }
                                         }),
@@ -213,7 +214,7 @@ class _TestnameState extends State<Testname> {
                           },
                         );
 
-                        },
+                      },
                       myIcon: icons.add,
                     ),
                     kIconButton(
