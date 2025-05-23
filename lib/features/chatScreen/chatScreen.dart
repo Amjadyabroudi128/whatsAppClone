@@ -13,6 +13,7 @@ import 'package:whatsappclone/core/icons.dart';
 import '../../components/TextField.dart';
 import '../../components/listTilesOptions.dart';
 import '../../globalState.dart';
+import '../../messageClass/messageClass.dart';
 import 'Widgets/messageStream.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
@@ -32,14 +33,30 @@ class _TestnameState extends State<Testname> {
   final TextEditingController messageController = TextEditingController();
   final FirebaseService service = FirebaseService();
   User? user = FirebaseAuth.instance.currentUser;
+  Messages? _replyMessage;
 
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
-      await service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null);
+      await service.sendMessage(
+        widget.receiverId,
+        widget.receiverName,
+        messageController.text,
+        null,
+        null,
+        _replyMessage  // Pass reply message info here
+      );
       messageController.clear();
+      setState(() {
+        _replyMessage = null; // Clear reply message after sending
+      });
     }
   }
 
+  void setReplyMessage(Messages message) {
+    setState(() {
+      _replyMessage = message;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +69,7 @@ class _TestnameState extends State<Testname> {
             centerTitle: false,
             backgroundColor: color,
             title: GestureDetector(
-                child: Text(widget.receiverName, style: Textstyles.bioStyle),
+              child: Text(widget.receiverName, style: Textstyles.bioStyle),
               onTap: () async {
                 final snapshot = await FirebaseFirestore.instance
                     .collection('users')
@@ -81,14 +98,53 @@ class _TestnameState extends State<Testname> {
                   myToast("there is no user ");
                 }
               },
-
             ),
           ),
           body: Column(
             children: [
               Expanded(
-                child: MessageStream(service: service, user: user, widget: widget),
+                child: MessageStream(
+                  service: service,
+                  user: user,
+                  widget: widget,
+                  onReply: setReplyMessage,
+                ),
               ),
+
+              // Show reply preview above the input field, if replying
+              if (_replyMessage != null)
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${_replyMessage!.senderEmail}\n${_replyMessage!.text}',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.white,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.close, color: Colors.white,),
+                        onPressed: () {
+                          setState(() {
+                            _replyMessage = null;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -119,27 +175,27 @@ class _TestnameState extends State<Testname> {
                                     ),
                                     const BoxSpacing(myHeight: 10),
                                     Options(context: context,
-                                      leading: icons.image,
-                                      label: Text("Photo"),
-                                      onTap: ()async {
-                                        Navigator.pop(context);
-                                        final imageUrl = await url.pickImage();
-                                        if (imageUrl != null) {
-                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null );
+                                        leading: icons.image,
+                                        label: Text("Photo"),
+                                        onTap: ()async {
+                                          Navigator.pop(context);
+                                          final imageUrl = await url.pickImage();
+                                          if (imageUrl != null) {
+                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null );
+                                          }
                                         }
-                                      }
                                     ),
                                     Options(
-                                      context: context,
-                                      leading: icons.dCam,
-                                      label: Text("Camera"),
-                                      onTap: () async {
-                                        Navigator.pop(context);
-                                        final imageUrl = await url.takeImage();
-                                        if (imageUrl != null) {
-                                          await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null);
+                                        context: context,
+                                        leading: icons.dCam,
+                                        label: Text("Camera"),
+                                        onTap: () async {
+                                          Navigator.pop(context);
+                                          final imageUrl = await url.takeImage();
+                                          if (imageUrl != null) {
+                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null);
+                                          }
                                         }
-                                      }
                                     ),
                                     Options(context: context, leading: icons.file, label: Text("File"),
                                         onTap: () async {
@@ -157,7 +213,7 @@ class _TestnameState extends State<Testname> {
                           },
                         );
 
-                      },
+                        },
                       myIcon: icons.add,
                     ),
                     kIconButton(
