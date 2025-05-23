@@ -12,12 +12,13 @@ class MessageStream extends StatelessWidget {
     super.key,
     required this.service,
     required this.user,
-    required this.widget,
+    required this.widget, this.onReply
   });
 
   final FirebaseService service;
   final User? user;
   final Testname widget;
+  final void Function(Messages message)? onReply; // <-- Add this line
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +31,28 @@ class MessageStream extends StatelessWidget {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return const Center(child: Text("No messages yet"));
         }
-        var messages = snapshot.data!.docs.map((doc) => Messages(
-          text: doc["message"],
-          senderId: doc["senderId"],
-          receiverId: doc["receiverId"],
-          senderEmail: doc["senderEmail"],
-          receiverEmail: doc["receiverEmail"],
-          time: doc["timestamp"],
-          image: doc.data().toString().contains('image') ? doc["image"] : null,
-          file: doc.data().toString().contains("file") ? doc["file"] : null,
-          messageId: doc.id,
-        )).toList();
+        var messages = snapshot.data!.docs.map((doc) {
+          final data = doc.data() as Map<String, dynamic>;
 
-        return messagesAlign(messages: messages, user: user, widget: widget);
+          return Messages(
+            text: data["message"],
+            senderId: data["senderId"],
+            receiverId: data["receiverId"],
+            senderEmail: data["senderEmail"],
+            receiverEmail: data["receiverEmail"],
+            time: data["timestamp"],
+            image: data.containsKey('image') ? data["image"] : null,
+            file: data.containsKey("file") ? data["file"] : null,
+            messageId: doc.id,
+            isReply: data.containsKey("isReply") ? data["isReply"] : false,
+            replyTo: data.containsKey("replyTo") && data["replyTo"] != null
+                ? Messages.fromMap(Map<String, dynamic>.from(data["replyTo"]))
+                : null,
+          );
+        }).toList();
+
+
+        return messagesAlign(messages: messages, user: user, widget: widget, onReply: onReply,);
       },
     );
   }
