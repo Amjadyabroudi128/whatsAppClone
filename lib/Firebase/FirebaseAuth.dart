@@ -77,7 +77,9 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        String receiverName,
        String message,
        String? image,
-       String? file,)
+       String? file,
+       Messages? replyTo
+       )
    async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
@@ -93,6 +95,8 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        senderEmail: email,
        receiverEmail: receiverName, // Store receiver's name
        isStarred: false,
+       isReply: replyTo !=null,
+       replyTo : replyTo
      );
 
      List<String> ids = [currentUser, receiverId];
