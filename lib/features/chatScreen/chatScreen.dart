@@ -123,10 +123,7 @@ class _TestnameState extends State<Testname> {
                       Expanded(
                         child: Text(
                           '${_replyMessage!.senderEmail}\n${_replyMessage!.text}',
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            color: Colors.white,
-                          ),
+                          style: Textstyles.reply,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
