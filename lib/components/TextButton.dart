@@ -9,7 +9,9 @@ class kTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: style ,
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black
+      ) ,
       onPressed: onPressed,
       child: child,
     );
