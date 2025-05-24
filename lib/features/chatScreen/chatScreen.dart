@@ -128,8 +128,8 @@ class _TestnameState extends State<Testname> {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      IconButton(
-                        icon: icons.Wclose,
+                      kIconButton(
+                        myIcon: icons.Wclose,
                         onPressed: () {
                           setState(() {
                             _replyMessage = null;
