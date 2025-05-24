@@ -192,19 +192,23 @@ class _ImagescreenState extends State<Imagescreen> {
                                     context: context,
                                     label: Text("Set as Profile photo"),
                                     trailing: icons.person,
-                                      onTap: () {
-                                        showModalBottomSheet(
+                                      onTap: () async  {
+                                      Navigator.of(context).pop();
+                                       await showModalBottomSheet(
                                           context: context,
-                                          isScrollControlled: true, // important if you want more height
+                                          isScrollControlled: true,
                                           builder: (context) {
                                             return FractionallySizedBox(
-                                              heightFactor: 0.7, // 90% height of screen
-                                              // widthFactor: 0.5,  // 50% width of screen
+                                              heightFactor: 0.7,
                                               child: Container(
                                                 padding: EdgeInsets.all(16),
                                                 child: Column(
                                                   children: [
-                                                    Image.network(msg.image!,),
+                                                    CircleAvatar(
+                                                      radius: 200,
+                                                      backgroundImage: NetworkImage(msg.image!),
+                                                    ),
+
                                                     Spacer(),
                                                     Row(
                                                       children: [
@@ -233,12 +237,6 @@ class _ImagescreenState extends State<Imagescreen> {
                                           },
                                         );
                                       }
-
-                                    // onTap: () async {
-                                    //   await addToFireStore(widget.image!);
-                                    //   myToast("image is updated ");
-                                    //
-                                    // }
                                   ),
                                   Options(
                                       context: context,
