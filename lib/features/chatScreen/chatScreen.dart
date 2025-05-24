@@ -15,8 +15,8 @@ import '../../components/listTilesOptions.dart';
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
 import 'Widgets/messageStream.dart';
-import 'package:whatsappclone/utils/pickImage.dart' as url;
 
+import 'Widgets/optionsBtmSheet.dart';
 import 'userDetails/recieverdetails.dart';
 
 class Testname extends StatefulWidget {
@@ -156,67 +156,7 @@ class _TestnameState extends State<Testname> {
                         hint: "Add a message",
                       ),
                     ),
-                    kIconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                          ),
-                          builder: (BuildContext context) {
-                            return SingleChildScrollView(
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Choose an option",
-                                      style: Textstyles.option,
-                                    ),
-                                    const BoxSpacing(myHeight: 10),
-                                    Options(context: context,
-                                        leading: icons.image,
-                                        label: Text("Photo"),
-                                        onTap: ()async {
-                                          Navigator.pop(context);
-                                          final imageUrl = await url.pickImage();
-                                          if (imageUrl != null) {
-                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null, null);
-                                          }
-                                        }
-                                    ),
-                                    Options(
-                                        context: context,
-                                        leading: icons.dCam,
-                                        label: Text("Camera"),
-                                        onTap: () async {
-                                          Navigator.pop(context);
-                                          final imageUrl = await url.takeImage();
-                                          if (imageUrl != null) {
-                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null, null);
-                                          }
-                                        }
-                                    ),
-                                    Options(context: context, leading: icons.file, label: Text("File"),
-                                        onTap: () async {
-                                          Navigator.pop(context);
-                                          final fileLink = await url.pickFile(); // Import this function
-                                          if (fileLink != null) {
-                                            await service.sendMessage(widget.receiverId, widget.receiverName, "", null, fileLink, null);
-
-                                          }
-                                        }),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-
-                      },
-                      myIcon: icons.add,
-                    ),
+                    photoBtmSheet(service: service, widget: widget),
                     kIconButton(
                       onPressed: sendMessage,
                       myIcon: icons.send,
@@ -231,5 +171,6 @@ class _TestnameState extends State<Testname> {
     );
   }
 }
+
 
 
