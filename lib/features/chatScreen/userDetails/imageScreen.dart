@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/iconButton.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
@@ -175,7 +177,9 @@ class _ImagescreenState extends State<Imagescreen> {
                                 ),
                                 Spacer(),
                                 kIconButton(
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    Navigator.of(context).pop();
+                                  },
                                   myIcon: icons.close,
                                 )
                               ],
@@ -188,11 +192,53 @@ class _ImagescreenState extends State<Imagescreen> {
                                     context: context,
                                     label: Text("Set as Profile photo"),
                                     trailing: icons.person,
-                                    onTap: () async {
-                                      await addToFireStore(widget.image!);
-                                      myToast("image is updated ");
-                                      Navigator.of(context).pop();
-                                    }
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true, // important if you want more height
+                                          builder: (context) {
+                                            return FractionallySizedBox(
+                                              heightFactor: 0.7, // 90% height of screen
+                                              // widthFactor: 0.5,  // 50% width of screen
+                                              child: Container(
+                                                padding: EdgeInsets.all(16),
+                                                child: Column(
+                                                  children: [
+                                                    Image.network(msg.image!,),
+                                                    Spacer(),
+                                                    Row(
+                                                      children: [
+                                                        kTextButton(
+                                                          onPressed: () {
+                                                            Navigator.of(context).pop();
+                                                          },
+                                                          child: Text("Cancel"),
+                                                        ),
+                                                        Spacer(),
+                                                        kTextButton(
+                                                          onPressed: () async {
+                                                            await addToFireStore(widget.image!);
+                                                            myToast("image is Updated");
+                                                            Navigator.of(context).pop();
+                                                          },
+                                                          child: Text("Choose"),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    // Add more widgets here
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      }
+
+                                    // onTap: () async {
+                                    //   await addToFireStore(widget.image!);
+                                    //   myToast("image is updated ");
+                                    //
+                                    // }
                                   ),
                                   Options(
                                       context: context,
