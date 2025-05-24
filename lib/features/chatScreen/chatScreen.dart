@@ -2,16 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
-import 'package:whatsappclone/components/ListTiles.dart';
-import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/iconButton.dart';
-import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/core/icons.dart';
-
 import '../../components/TextField.dart';
-import '../../components/listTilesOptions.dart';
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
 import 'Widgets/messageStream.dart';
@@ -65,40 +60,42 @@ class _TestnameState extends State<Testname> {
       builder: (context, color, child) {
         return Scaffold(
           backgroundColor: color,
-          appBar: AppBar(
-            centerTitle: false,
-            backgroundColor: color,
-            title: GestureDetector(
-              child: Text(widget.receiverName, style: Textstyles.bioStyle),
-              onTap: () async {
-                final snapshot = await FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(widget.receiverId)
-                    .get();
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: GestureDetector(
+                onTap: () async {
+                  final snapshot = await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(widget.receiverId)
+                      .get();
 
-                if (snapshot.exists) {
-                  final data = snapshot.data();
-                  final name = data?['name'] ?? 'No Name';
-                  final email = data?['email'] ?? 'No Email';
-                  final image = data?['image'] ?? "";
-                  final bio = data?["bio"] ?? "";
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => userDetails(
-                        name: name,
-                        email: email,
-                        imageUrl: image,
-                        bio: bio,
+                  if (snapshot.exists) {
+                    final data = snapshot.data();
+                    final name = data?['name'] ?? 'No Name';
+                    final email = data?['email'] ?? 'No Email';
+                    final image = data?['image'] ?? "";
+                    final bio = data?["bio"] ?? "";
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => userDetails(
+                          name: name,
+                          email: email,
+                          imageUrl: image,
+                          bio: bio,
 
+                        ),
                       ),
-                    ),
-                  );
-                } else {
-                  myToast("there is no user ");
-                }
-              },
-
+                    );
+                  } else {
+                    myToast("there is no user ");
+                  }
+                },
+              child: AppBar(
+                centerTitle: false,
+                backgroundColor: color,
+                title: Text(widget.receiverName, style: Textstyles.bioStyle,)
+              ),
             ),
           ),
           body: Column(
