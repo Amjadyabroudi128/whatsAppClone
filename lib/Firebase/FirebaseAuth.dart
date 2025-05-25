@@ -95,6 +95,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        senderEmail: email,
        receiverEmail: receiverName, // Store receiver's name
        isStarred: false,
+       isEdited: false,
        isReply: replyTo !=null,
        replyTo : replyTo
      );
@@ -162,6 +163,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          .doc(chatRoomID).collection("messages").doc(messageId).update(
          {
            "message": newMessage,
+           "isEdited": true
          }
      );
    }
