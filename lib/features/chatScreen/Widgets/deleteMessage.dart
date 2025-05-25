@@ -43,6 +43,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
                       widget!.receiverId,
                       msg.messageId!,
                     );
+                    await service.deleteStar(msg);
                     Navigator.pop(context); // Close dialog after deleting
                     myToast("Message Successfully Deleted");
                   },
