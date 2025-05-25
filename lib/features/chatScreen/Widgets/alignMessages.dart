@@ -53,6 +53,7 @@ class messagesAlign extends StatefulWidget {
 class _messagesAlignState extends State<messagesAlign> {
   bool isStarred = false;
   bool isReply = false;
+  bool isEdited = false;
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
@@ -170,6 +171,9 @@ class _messagesAlignState extends State<messagesAlign> {
                                       image: msg.image,
                                       file: msg.file,
                                       isStarred: !(msg.isStarred ?? false),
+                                      isEdited: msg.isEdited,
+                                      isReply: msg.isReply,
+                                      replyTo: msg.replyTo,
                                     );
                                   });
                                   Navigator.pop(context);
@@ -223,12 +227,6 @@ class _messagesAlignState extends State<messagesAlign> {
                                   Text("${msg.replyTo!.text}")
                                 ],
                               ),
-                              // child: Text(
-                              //   style: const TextStyle(
-                              //     fontStyle: FontStyle.italic,
-                              //     fontSize: 13,
-                              //   ),
-                              // ),
                             ),
                           if (msg.image != null && msg.image!.isNotEmpty)
                             ClipRRect(
@@ -257,11 +255,24 @@ class _messagesAlignState extends State<messagesAlign> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              if(msg.isStarred == true) icons.star,
-                              fomattedDateText(formattedTime: formattedTime,),
-
+                              if (msg.isStarred == true)
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 6.0),
+                                  child: icons.wStar,
+                                ),
+                              if (msg.isEdited == true)
+                                Text(
+                                  "Edited",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.grey.shade800,
+                                  ),
+                                ),
+                              fomattedDateText(formattedTime: formattedTime),
                             ],
                           )
+
                         ],
                       ),
                     ),
