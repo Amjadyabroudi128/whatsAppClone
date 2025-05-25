@@ -63,6 +63,7 @@ class deleteContainer extends StatelessWidget {
                   widget.receiverId!,
                   widget.messageId!,
                 );
+                await service.deleteStar(msg);
                 myToast("Message Successfully Deleted");
                 service.deleteStar(msg);
               },
