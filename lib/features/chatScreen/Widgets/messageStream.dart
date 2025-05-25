@@ -44,6 +44,8 @@ class MessageStream extends StatelessWidget {
             image: data.containsKey('image') ? data["image"] : null,
             file: data.containsKey("file") ? data["file"] : null,
             messageId: doc.id,
+            isEdited: data.containsKey("isEdited") ? data["isEdited"] as bool : false,
+            isStarred: data.containsKey("isStarred") ? data["isStarred"] as bool : false,
             isReply: data.containsKey("isReply") ? data["isReply"] : false,
             replyTo: data.containsKey("replyTo") && data["replyTo"] != null
                 ? Messages.fromMap(Map<String, dynamic>.from(data["replyTo"]))
