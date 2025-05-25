@@ -13,7 +13,7 @@ class Messages {
   final bool? isStarred;
   final bool? isReply;
   final Messages? replyTo;
-
+  final bool? isEdited;
   Messages({
     required this.text,
     this.receiverEmail,
@@ -27,6 +27,7 @@ class Messages {
     this.isStarred,
     this.isReply = false,
     this.replyTo,
+    this.isEdited,
   });
   factory Messages.fromMap(Map<String, dynamic> map) {
     return Messages(
@@ -58,6 +59,7 @@ class Messages {
       'isStarred': isStarred,
       'isReply': isReply,
       'replyTo': replyTo?.toMap(),
+      "isEdited": isEdited
     };
   }
 }
