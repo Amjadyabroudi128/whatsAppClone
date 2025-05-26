@@ -41,4 +41,5 @@ class icons {
   static Icon share =Icon(CupertinoIcons.share);
   static Icon close = Icon(Icons.close);
   static Icon Wclose = Icon(Icons.close, color: Colors.white,);
+  static Icon reply = Icon(Icons.reply, color: myColors.labelClr,);
 }

@@ -91,7 +91,7 @@ class _messagesAlignState extends State<messagesAlign> {
                     background: Container(
                       color: Colors.transparent,
                       alignment: Alignment.center,
-                      child: Icon(Icons.reply, color: Colors.grey),
+                      child: icons.reply,
                     ),
                     confirmDismiss: (direction) async {
                       if (direction == DismissDirection.endToStart) {
@@ -210,7 +210,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                     children: [
                                       Text("Reply",style: Textstyles.copyMessage,),
                                       Spacer(),
-                                      Icon(Icons.reply, color: myColors.labelClr,)
+                                      icons.reply
                                     ],
                                   ),
                                 )
