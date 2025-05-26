@@ -1,6 +1,7 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/colorPicker/ColorPicking.dart';
 import 'package:whatsappclone/core/appTheme.dart';
@@ -19,6 +20,8 @@ void main() async {
     androidProvider: AndroidProvider.debug, // Use Debug for testing
     appleProvider: AppleProvider.debug,
   );
+  await FirebaseMessaging.instance.subscribeToTopic("messages");
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
   runApp(const MyApp());
 }
 
