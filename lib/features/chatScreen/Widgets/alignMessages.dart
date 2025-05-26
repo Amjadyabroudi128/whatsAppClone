@@ -98,7 +98,7 @@ class _messagesAlignState extends State<messagesAlign> {
                         if (widget.onReply != null) {
                           widget.onReply!(msg);
                         }
-                        return false; // Prevent the widget from actually being dismissed
+                        return false;
                       }
                       return false;
                     },
