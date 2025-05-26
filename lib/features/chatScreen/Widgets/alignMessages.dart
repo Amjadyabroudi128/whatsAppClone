@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -91,7 +92,7 @@ class _messagesAlignState extends State<messagesAlign> {
                     background: Container(
                       color: Colors.transparent,
                       alignment: Alignment.center,
-                      child: icons.reply,
+                      child: Icon(Icons.reply),
                     ),
                     confirmDismiss: (direction) async {
                       if (direction == DismissDirection.endToStart) {
@@ -210,7 +211,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                     children: [
                                       Text("Reply",style: Textstyles.copyMessage,),
                                       Spacer(),
-                                      icons.reply
+                                      Icon(Icons.reply)
                                     ],
                                   ),
                                 )
@@ -227,20 +228,46 @@ class _messagesAlignState extends State<messagesAlign> {
                           borderRadius: myTheme.CircularContainer,
                         ),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             if (msg.replyTo != null)
                               Container(
                                 padding: const EdgeInsets.all(8),
                                 margin: const EdgeInsets.only(bottom: 4),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey,
+                                  color: isMe ? Colors.green[200] : myColors.message,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text("${msg.replyTo!.senderEmail}"),
-                                    BoxSpacing(myHeight: 10,),
-                                    Text("${msg.replyTo!.text}")
+                                    if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(CupertinoIcons.photo, size: 20,color: Colors.white,),
+                                              BoxSpacing(mWidth: 10,),
+                                              Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey),),
+                                              BoxSpacing(mWidth: 40,),
+                                              ClipRRect(
+                                                child: Image.network("${msg.replyTo!.image}", height: 60,),
+                                                borderRadius: BorderRadius.circular(8),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    Text(
+                                      msg.replyTo!.text,
+                                      style: TextStyle(color: Colors.black87),
+                                    ),
                                   ],
                                 ),
                               ),
