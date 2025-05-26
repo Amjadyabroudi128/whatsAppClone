@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/core/icons.dart';
 import '../../components/TextField.dart';
+import '../../components/imageNetworkComponent.dart';
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
 import 'Widgets/messageStream.dart';
@@ -128,6 +129,8 @@ class _TestnameState extends State<Testname> {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      if (_replyMessage!.image != null && _replyMessage!.image!.isNotEmpty)
+                        Image.network("${_replyMessage!.image}",height: 50, width: 60,),
                       kIconButton(
                         myIcon: icons.Wclose,
                         onPressed: () {
