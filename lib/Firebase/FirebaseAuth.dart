@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
@@ -113,6 +114,20 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      });
 
      await docRef.update({"messageId": docRef.id});
+     await users.collection("chat_rooms").doc(chatRoomID).set({
+       "participants": [currentUser, receiverId],
+       "lastMessage": message.isNotEmpty
+           ? message
+           : image != null
+           ? "[Image]"
+           : file != null
+           ? "[File]"
+           : "",
+       "lastMessageTime": time,
+       "lastMessageSender": currentUser,
+       "receiverName": receiverName,
+       "lastMessageType": image != null ? "image" : file != null ? "file" : "text",
+     }, SetOptions(merge: true));
 
      if (image != null) {
        await FirebaseFirestore.instance
@@ -154,6 +169,8 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          .doc(messageId) // Use the provided messageId
          .delete();
      await FirebaseFirestore.instance.collection("media").doc(userID).collection("messages").doc(messageId).delete();
+     await FirebaseFirestore.instance.collection('chat_rooms')
+         .doc(chatRoomID).delete();
    }
    Future <void> updateMessage (String messageId, String userID, String receiverId, String newMessage) async {
      List<String> ids = [userID, receiverId];
@@ -240,6 +257,13 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      else {
 
      }
+   }
+   Stream<QuerySnapshot> getRecentChats(String userId) {
+     return FirebaseFirestore.instance
+         .collection("chat_rooms")
+         .where("participants", arrayContains: userId)
+         .orderBy("lastMessageTime", descending: true)
+         .snapshots();
    }
 
  }
