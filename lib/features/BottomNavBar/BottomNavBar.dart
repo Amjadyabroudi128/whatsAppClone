@@ -24,7 +24,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
     super.initState();
     _widgetOptions.addAll([
       Contacts(),
-      recentChat(),
+      RecentChatsScreen(),
       SettingScreen(onThemeChange: widget.onThemeChange),
     ]);
   }
