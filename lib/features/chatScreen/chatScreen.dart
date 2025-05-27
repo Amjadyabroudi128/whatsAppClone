@@ -31,27 +31,11 @@ class _TestnameState extends State<Testname> {
   User? user = FirebaseAuth.instance.currentUser;
   Messages? _replyMessage;
 
-  void sendMessage() async {
-    if (messageController.text.isNotEmpty) {
-      await service.sendMessage(
-        widget.receiverId,
-        widget.receiverName,
-        messageController.text,
-        null,
-        null,
-        _replyMessage  // Pass reply message info here
-      );
-      messageController.clear();
-      setState(() {
-        _replyMessage = null; // Clear reply message after sending
-      });
-    }
-  }
-
   void setReplyMessage(Messages message) {
     setState(() {
       _replyMessage = message;
     });
+    // Optionally, scroll to bottom so user sees the input and reply preview
   }
 
   @override
@@ -84,7 +68,6 @@ class _TestnameState extends State<Testname> {
                           email: email,
                           imageUrl: image,
                           bio: bio,
-
                         ),
                       ),
                     );
@@ -155,7 +138,10 @@ class _TestnameState extends State<Testname> {
                     ),
                     photoBtmSheet(service: service, widget: widget),
                     kIconButton(
-                      onPressed: sendMessage,
+                      onPressed: (){
+                        service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null, _replyMessage);
+                        messageController.clear();
+                      },
                       myIcon: icons.send,
                     ),
                   ],

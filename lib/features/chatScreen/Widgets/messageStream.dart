@@ -12,7 +12,7 @@ class MessageStream extends StatelessWidget {
     super.key,
     required this.service,
     required this.user,
-    required this.widget, this.onReply
+    required this.widget, this.onReply,
   });
 
   final FirebaseService service;
