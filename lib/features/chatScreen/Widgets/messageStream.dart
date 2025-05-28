@@ -7,33 +7,35 @@ import '../../../messageClass/messageClass.dart';
 import '../chatScreen.dart';
 import 'alignMessages.dart';
 
-class MessageStream extends StatelessWidget {
+class MessageStream extends StatefulWidget {
   const MessageStream({
     super.key,
     required this.service,
     required this.user,
-    required this.widget, this.onReply,
+    required this.widget, this.onReply,   this.scrollController
   });
 
   final FirebaseService service;
   final User? user;
   final Testname widget;
-  final void Function(Messages message)? onReply; // <-- Add this line
+  final ScrollController? scrollController;
+  final void Function(Messages message)? onReply;
+  @override
+  State<MessageStream> createState() => _MessageStreamState();
+}
+
+class _MessageStreamState extends State<MessageStream> {
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: service.getMessages(user!.uid, widget.receiverId),
+      stream: widget.service.getMessages(widget.user!.uid, widget.widget.receiverId),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return const Center(child: Text("No messages yet"));
         }
         var messages = snapshot.data!.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
-
           return Messages(
             text: data["message"],
             senderId: data["senderId"],
@@ -54,7 +56,7 @@ class MessageStream extends StatelessWidget {
         }).toList();
 
 
-        return messagesAlign(messages: messages, user: user, widget: widget, onReply: onReply,);
+        return messagesAlign(messages: messages, user: widget.user, widget: widget.widget, onReply: widget.onReply,);
       },
     );
   }

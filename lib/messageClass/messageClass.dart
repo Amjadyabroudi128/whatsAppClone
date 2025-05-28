@@ -7,13 +7,14 @@ class Messages {
   final String? senderId;
   final String? receiverEmail;
   final Timestamp? time;
-  final String? messageId; // Add this
+  final String? messageId;
   final String? image;
   final String? file;
   final bool? isStarred;
   final bool? isReply;
   final Messages? replyTo;
   final bool? isEdited;
+
   Messages({
     required this.text,
     this.receiverEmail,
@@ -29,6 +30,7 @@ class Messages {
     this.replyTo,
     this.isEdited,
   });
+
   factory Messages.fromMap(Map<String, dynamic> map) {
     return Messages(
       text: map['message'],
@@ -40,8 +42,12 @@ class Messages {
       image: map['image'],
       file: map['file'],
       messageId: map['messageId'],
+      isStarred: map['isStarred'],
       isReply: map['isReply'] ?? false,
-      replyTo: map['replyTo'] != null ? Messages.fromMap(Map<String, dynamic>.from(map['replyTo'])) : null,
+      replyTo: map['replyTo'] != null
+          ? Messages.fromMap(Map<String, dynamic>.from(map['replyTo']))
+          : null,
+      isEdited: map['isEdited'] ?? false,
     );
   }
 
@@ -59,7 +65,40 @@ class Messages {
       'isStarred': isStarred,
       'isReply': isReply,
       'replyTo': replyTo?.toMap(),
-      "isEdited": isEdited
+      'isEdited': isEdited,
     };
+  }
+
+  // copyWith method to immutably update fields
+  Messages copyWith({
+    String? text,
+    String? receiverId,
+    String? senderEmail,
+    String? senderId,
+    String? receiverEmail,
+    Timestamp? time,
+    String? messageId,
+    String? image,
+    String? file,
+    bool? isStarred,
+    bool? isReply,
+    Messages? replyTo,
+    bool? isEdited,
+  }) {
+    return Messages(
+      text: text ?? this.text,
+      receiverId: receiverId ?? this.receiverId,
+      senderEmail: senderEmail ?? this.senderEmail,
+      senderId: senderId ?? this.senderId,
+      receiverEmail: receiverEmail ?? this.receiverEmail,
+      time: time ?? this.time,
+      messageId: messageId ?? this.messageId,
+      image: image ?? this.image,
+      file: file ?? this.file,
+      isStarred: isStarred ?? this.isStarred,
+      isReply: isReply ?? this.isReply,
+      replyTo: replyTo ?? this.replyTo,
+      isEdited: isEdited ?? this.isEdited,
+    );
   }
 }
