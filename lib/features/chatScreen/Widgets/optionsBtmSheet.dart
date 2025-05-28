@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/SizedBox.dart';
+import '../../../components/TextButton.dart';
 import '../../../components/TextStyles.dart';
 import '../../../components/iconButton.dart';
 import '../../../components/listTilesOptions.dart';
@@ -43,7 +44,9 @@ class photoBtmSheet extends StatelessWidget {
                     Options(context: context,
                         leading: icons.image,
                         label: Text("Photo"),
-                        onTap: ()async {
+                        onTap: () async {
+                          final parentContext = context; // save valid parent context
+                          if (!parentContext.mounted) return; // prevent crash
                           Navigator.pop(context);
                           final imageUrl = await url.pickImage();
                           if (imageUrl != null) {
