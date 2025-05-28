@@ -158,7 +158,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        Navigator.pushReplacementNamed(context, "login");
      }
    }
-   Future<void> Deletemessage( userID, String receiverId, String messageId) async {
+   Future<void> Deletemessage( userID, String receiverId, String messageId, BuildContext context) async {
      List<String> ids = [userID, receiverId];
      ids.sort();
      String chatRoomID = ids.join("_");
@@ -171,6 +171,8 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      await FirebaseFirestore.instance.collection("media").doc(userID).collection("messages").doc(messageId).delete();
      await FirebaseFirestore.instance.collection('chat_rooms')
          .doc(chatRoomID).delete();
+     FocusScope.of(context).unfocus();
+
    }
    Future <void> updateMessage (String messageId, String userID, String receiverId, String newMessage) async {
      List<String> ids = [userID, receiverId];

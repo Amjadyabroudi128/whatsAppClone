@@ -60,9 +60,6 @@ class _StarredmessagesState extends State<Starredmessages> {
               .orderBy("timestamp", descending: true)
               .snapshots(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
               return Center(
                 child: Column(
@@ -225,7 +222,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                                     ),
                                     kTextButton(
                                       onPressed: () async {
-                                        await service.Deletemessage(user!.uid, msg.receiverId ?? "", msg.messageId ?? "");
+                                        await service.Deletemessage(user!.uid, msg.receiverId ?? "", msg.messageId ?? "", context);
                                         await service.deleteStar(msg);
                                         Navigator.pop(context);
                                         myToast("Selected messages deleted");
