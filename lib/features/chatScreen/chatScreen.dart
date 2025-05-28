@@ -118,6 +118,8 @@ class _TestnameState extends State<Testname> {
                         onPressed: (){
                           setState(() {
                             _replyMessage = null;
+                            FocusScope.of(context).unfocus();
+
                           });
                         }
                       ),
@@ -141,6 +143,9 @@ class _TestnameState extends State<Testname> {
                         service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null, _replyMessage);
                         messageController.clear();
                         FocusScope.of(context).unfocus();
+                        setState(() {
+                          _replyMessage = null;
+                        });
                       },
                       myIcon: icons.send,
                     ),
