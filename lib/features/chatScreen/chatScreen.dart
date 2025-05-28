@@ -26,10 +26,16 @@ class Testname extends StatefulWidget {
 }
 
 class _TestnameState extends State<Testname> {
-  final TextEditingController messageController = TextEditingController();
+  late final TextEditingController messageController = TextEditingController()
+    ..addListener(() {
+      setState(() {
+        isTextEmpty = messageController.text.trim().isEmpty;
+      });
+    });
   final FirebaseService service = FirebaseService();
   User? user = FirebaseAuth.instance.currentUser;
   Messages? _replyMessage;
+  bool isTextEmpty = true;
 
   void setReplyMessage(Messages message) {
     setState(() {
@@ -119,7 +125,6 @@ class _TestnameState extends State<Testname> {
                           setState(() {
                             _replyMessage = null;
                             FocusScope.of(context).unfocus();
-
                           });
                         }
                       ),
@@ -138,17 +143,16 @@ class _TestnameState extends State<Testname> {
                       ),
                     ),
                     photoBtmSheet(service: service, widget: widget),
-                    kIconButton(
-                      onPressed: (){
-                        service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null, _replyMessage);
-                        messageController.clear();
-                        FocusScope.of(context).unfocus();
-                        setState(() {
+                    if (!isTextEmpty)
+                      kIconButton(
+                        onPressed: () {
+                          service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null, _replyMessage);
+                          messageController.clear();
+                          FocusScope.of(context).unfocus();
                           _replyMessage = null;
-                        });
-                      },
-                      myIcon: icons.send,
-                    ),
+                        },
+                        myIcon: icons.send,
+                      ),
                   ],
                 ),
               ),
