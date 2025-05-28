@@ -34,10 +34,9 @@ class _TestnameState extends State<Testname> {
   void setReplyMessage(Messages message) {
     setState(() {
       _replyMessage = message;
+      messageController.clear();
     });
-    // Optionally, scroll to bottom so user sees the input and reply preview
   }
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Color>(
@@ -116,11 +115,11 @@ class _TestnameState extends State<Testname> {
                         Image.network("${_replyMessage!.image}",height: 50, width: 60,),
                       kIconButton(
                         myIcon: icons.Wclose,
-                        onPressed: () {
+                        onPressed: (){
                           setState(() {
                             _replyMessage = null;
                           });
-                        },
+                        }
                       ),
                     ],
                   ),
@@ -141,6 +140,7 @@ class _TestnameState extends State<Testname> {
                       onPressed: (){
                         service.sendMessage(widget.receiverId, widget.receiverName, messageController.text, null, null, _replyMessage);
                         messageController.clear();
+                        FocusScope.of(context).unfocus();
                       },
                       myIcon: icons.send,
                     ),
