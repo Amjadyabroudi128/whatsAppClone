@@ -141,10 +141,12 @@ class _messagesAlignState extends State<messagesAlign> {
                               ),
                               onPressed: () async {
                                 if (msg.isStarred == true) {
+                                  FocusScope.of(context).unfocus();
                                   await service.deleteStar(msg);
                                   myToast("Message unstarred");
                                 } else {
                                   await service.addToStar(msg);
+                                  FocusScope.of(context).unfocus();
                                   myToast("Message starred");
                                 }
                                 setState(() {
@@ -163,6 +165,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                     isReply: msg.isReply,
                                     replyTo: msg.replyTo,
                                   );
+                                  FocusScope.of(context).unfocus();
                                 });
                                 Navigator.pop(context);
                               },
@@ -177,7 +180,6 @@ class _messagesAlignState extends State<messagesAlign> {
                                   widget.onReply!(msg); // Call the reply handler
                                 }
                               },
-
                               child: Row(
                                 children: [
                                   Text("Reply",style: Textstyles.copyMessage,),
