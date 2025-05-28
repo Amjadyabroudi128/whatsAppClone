@@ -33,17 +33,23 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
               content: Text("Are you sure? "),
               actions: [
                 kTextButton(
-                  onPressed: () =>  Navigator.pop(context),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                    FocusScope.of(context).unfocus();
+                  },
                   child: Text("Cancel"),
                 ),
                 kTextButton(
                   onPressed: () async {
+                    FocusScope.of(context).unfocus();
                     await service.Deletemessage(
                       user!.uid,
                       widget!.receiverId,
                       msg.messageId!,
+                      context
                     );
                     await service.deleteStar(msg);
+                    FocusScope.of(context).unfocus();
                     Navigator.pop(context); // Close dialog after deleting
                     myToast("Message Successfully Deleted");
                   },

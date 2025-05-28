@@ -56,12 +56,14 @@ class deleteContainer extends StatelessWidget {
             color: Colors.grey[350],
             child: Options(
               onTap: () async {
+                FocusScope.of(context).unfocus();
                 Navigator.pop(context); // Close bottom sheet
                 Navigator.pop(context, 'deleted'); // Pass back a result
                 await service.Deletemessage(
                   user!.uid,
                   widget.receiverId!,
                   widget.messageId!,
+                  context
                 );
                 await service.deleteStar(msg);
                 myToast("Message Successfully Deleted");
