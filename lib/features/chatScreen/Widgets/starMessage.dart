@@ -20,9 +20,11 @@ PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int ind
       ),
       onPressed: () async {
         if (msg.isStarred == true) {
+          FocusScope.of(context).unfocus();
           await service.deleteStar(msg);
           myToast("Message unstarred");
         } else {
+          FocusScope.of(context).unfocus();
           await service.addToStar(msg);
           myToast("Message starred");
         }
@@ -38,7 +40,7 @@ PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int ind
             file: msg.file,
             isStarred: !(msg.isStarred ?? false),
           );
-
+        FocusScope.of(context).unfocus();
         Navigator.pop(context);
       },
     ),
