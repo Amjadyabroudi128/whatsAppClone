@@ -193,102 +193,118 @@ class _messagesAlignState extends State<messagesAlign> {
                       );
                     }
                   },
-                  child: Container(
-                    margin:  containermargin,
-                    padding:  containerPadding,
-                    decoration: containerDecoration(
-                      color: isMe ? myColors.myMessage : myColors.message,
-                      borderRadius: myTheme.CircularContainer,
+                  child: Dismissible(
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      child: Icon(Icons.reply),
+                      alignment: Alignment.center,
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (msg.replyTo != null)
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            margin: const EdgeInsets.only(bottom: 4),
-                            decoration: BoxDecoration(
-                              color: isMe ? Colors.green[200] : myColors.message,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${msg.replyTo!.senderEmail}"),
-                                if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(CupertinoIcons.photo, size: 20,color: Colors.white,),
-                                          BoxSpacing(mWidth: 10,),
-                                          Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey),),
-                                          BoxSpacing(mWidth: 40,),
-                                          ClipRRect(
-                                            child: Image.network("${msg.replyTo!.image}", height: 60,),
-                                            borderRadius: BorderRadius.circular(8),
-                                          )
-                                        ],
-                                      ),
-                                    ],
+                    confirmDismiss: (direction) async {
+                      if (direction == DismissDirection.endToStart) {
+                        if (widget.onReply != null) {
+                          widget.onReply!(msg);
+                        }
+                      }
+                      return null;
+                    },
+                    key: ValueKey(msg.messageId),
+                    child: Container(
+                      margin:  containermargin,
+                      padding:  containerPadding,
+                      decoration: containerDecoration(
+                        color: isMe ? myColors.myMessage : myColors.message,
+                        borderRadius: myTheme.CircularContainer,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (msg.replyTo != null)
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              margin: const EdgeInsets.only(bottom: 4),
+                              decoration: BoxDecoration(
+                                color: isMe ? Colors.green[200] : myColors.message,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("${msg.replyTo!.senderEmail}"),
+                                  if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(CupertinoIcons.photo, size: 20,color: Colors.white,),
+                                            BoxSpacing(mWidth: 10,),
+                                            Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey),),
+                                            BoxSpacing(mWidth: 40,),
+                                            ClipRRect(
+                                              child: Image.network("${msg.replyTo!.image}", height: 60,),
+                                              borderRadius: BorderRadius.circular(8),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  Text(
+                                    msg.replyTo!.text,
+                                    style: TextStyle(color: Colors.black87),
                                   ),
-                                Text(
-                                  msg.replyTo!.text,
-                                  style: TextStyle(color: Colors.black87),
+                                ],
+                              ),
+                            ),
+                          if (msg.image != null && msg.image!.isNotEmpty)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: kimageNet(src: msg.image!),
+                            )
+                          else if (msg.file != null && msg.file!.isNotEmpty)
+                            Row(
+                              children: [
+                                Icon(Icons.insert_drive_file, color: Colors.blue),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    msg.file!.split('/').last,
+                                    style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ],
+                            )
+                          else
+                            Text(
+                              msg.text,
+                              style: TextStyle(fontSize: 16),
                             ),
-                          ),
-                        if (msg.image != null && msg.image!.isNotEmpty)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: kimageNet(src: msg.image!),
-                          )
-                        else if (msg.file != null && msg.file!.isNotEmpty)
                           Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.insert_drive_file, color: Colors.blue),
-                              SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  msg.file!.split('/').last,
-                                  style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
-                                  overflow: TextOverflow.ellipsis,
+                              if (msg.isStarred == true)
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 6.0),
+                                  child: icons.wStar,
                                 ),
-                              ),
+                              if (msg.isEdited == true)
+                                Text(
+                                  "Edited",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.grey.shade800,
+                                  ),
+                                ),
+                              fomattedDateText(formattedTime: formattedTime),
                             ],
                           )
-                        else
-                          Text(
-                            msg.text,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (msg.isStarred == true)
-                              Padding(
-                                padding: const EdgeInsets.only(right: 6.0),
-                                child: icons.wStar,
-                              ),
-                            if (msg.isEdited == true)
-                              Text(
-                                "Edited",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.grey.shade800,
-                                ),
-                              ),
-                            fomattedDateText(formattedTime: formattedTime),
-                          ],
-                        )
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
