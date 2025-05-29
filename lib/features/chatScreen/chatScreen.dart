@@ -95,6 +95,7 @@ class _TestnameState extends State<Testname> {
                   user: user,
                   widget: widget,
                   onReply: setReplyMessage,
+                  controller: messageController
                 ),
               ),
 

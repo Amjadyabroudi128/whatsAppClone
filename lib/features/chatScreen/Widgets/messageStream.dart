@@ -12,13 +12,13 @@ class MessageStream extends StatefulWidget {
     super.key,
     required this.service,
     required this.user,
-    required this.widget, this.onReply,   this.scrollController
+    required this.widget, this.onReply,  this.controller
   });
 
   final FirebaseService service;
   final User? user;
   final Testname widget;
-  final ScrollController? scrollController;
+  final TextEditingController? controller;
   final void Function(Messages message)? onReply;
   @override
   State<MessageStream> createState() => _MessageStreamState();
