@@ -152,6 +152,7 @@ class _messagesAlignState extends State<messagesAlign> {
                         ]
                       );
                     }
+                    FocusScope.of(context).unfocus();
                   },
                   child: Dismissible(
                     direction: DismissDirection.endToStart,
