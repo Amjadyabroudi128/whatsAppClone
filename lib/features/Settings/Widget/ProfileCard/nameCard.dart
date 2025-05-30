@@ -11,8 +11,11 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
 import '../../../../Firebase/FirebaseCollections.dart';
+import '../../../../components/TextButton.dart';
+import '../../../../components/TextField.dart';
 import '../../../../core/icons.dart';
 import 'ImageFullScreen.dart';
+import 'editName.dart';
 import 'imageSheet.dart';
 import 'imageWidget.dart';
 
@@ -30,11 +33,14 @@ class nameCard extends StatefulWidget {
 
 class _nameCardState extends State<nameCard> {
   final User? user = FirebaseAuth.instance.currentUser;
+  final TextEditingController nameController = TextEditingController();
   String? imageUrl;
+  FirebaseService service = FirebaseService();
 
   @override
   void initState() {
     super.initState();
+    nameController.text = widget.userName;
   }
 
   Future addToFireStore(String imagePath) async {
@@ -69,6 +75,7 @@ class _nameCardState extends State<nameCard> {
                   final data = snapshot.data!;
                   final imageUrl = data.data().toString().contains("image") ? data["image"] : "";
                   final bio = data["bio"] ?? "";
+                  final name = data["name"] ?? "";
                   return Column(
                     children: [
                       GestureDetector(
@@ -104,14 +111,18 @@ class _nameCardState extends State<nameCard> {
                             Options(
                               context: context,
                               trailing: icons.arrowForward,
-                              label: Text(widget.userName),
+                              label: Text(name.isNotEmpty ? name : "Edit Your Name"),
                               onTap: () async {
+                                await showModalBottomSheet(context: context,
+                                  isScrollControlled: true,
+                                  builder: (context){
+                                  return editName(service: service, nameController: nameController);
+                                  }
+                                );
                                 // await ShowSheet(context);
                               },
                             ),
-                            // kListTile(
-                            //   title: Text(widget.userName),
-                            // ),
+
                             divider(),
                             Options(
                               context: context,
@@ -136,3 +147,4 @@ class _nameCardState extends State<nameCard> {
   }
 
 }
+
