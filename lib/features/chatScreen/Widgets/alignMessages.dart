@@ -155,13 +155,13 @@ class _messagesAlignState extends State<messagesAlign> {
                     FocusScope.of(context).unfocus();
                   },
                   child: Dismissible(
-                    direction: DismissDirection.endToStart,
+                    direction: isMe ? DismissDirection.endToStart : DismissDirection.startToEnd,
                     background: Container(
                       child: icons.reply,
-                      alignment: Alignment.center,
+                      alignment: isMe ? Alignment.centerLeft : Alignment.centerRight,
                     ),
                     confirmDismiss: (direction) async {
-                      if (direction == DismissDirection.endToStart) {
+                      if (direction == direction) {
                         if (widget.onReply != null) {
                           widget.onReply!(msg);
                         }
