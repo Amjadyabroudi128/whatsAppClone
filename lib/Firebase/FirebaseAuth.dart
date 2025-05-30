@@ -195,13 +195,14 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        );
      }
    }
-   Future<String?> getBio() async {
-     if (uid != null) {
-       DocumentSnapshot doc =
-       await users.collection("users").doc(uid).get();
-       return doc['bio'] ?? "";
+   Future<void> updateName(newName) async {
+     if(uid != null) {
+       await users.collection("users").doc(uid).update(
+         {
+         "name": newName
+         }
+       );
      }
-     return null;
    }
    Future addToStar(Messages msg) async {
      String email = auth.currentUser!.email!;
