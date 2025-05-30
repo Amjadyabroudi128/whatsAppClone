@@ -8,7 +8,8 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 class EditBio extends StatefulWidget {
-  const EditBio({super.key});
+  final String? bio;
+  const EditBio({super.key, required this.bio});
 
   @override
   State<EditBio> createState() => _EditBioState();
@@ -20,16 +21,7 @@ class _EditBioState extends State<EditBio> {
   @override
   void initState() {
     super.initState();
-    service.getBio();
-    loadBio();
-  }
-  void loadBio() async {
-    String? bio = await service.getBio();
-    if (bio != null) {
-      setState(() {
-        bioController.text = bio;
-      });
-    }
+    bioController.text = widget.bio ?? '';
   }
   @override
   Widget build(BuildContext context) {
