@@ -101,16 +101,24 @@ class _nameCardState extends State<nameCard> {
                         color: myColors.CardColor,
                         child: Column(
                           children: [
-                            kListTile(
-                              title: Text(widget.userName),
+                            Options(
+                              context: context,
+                              trailing: icons.arrowForward,
+                              label: Text(widget.userName),
+                              onTap: () async {
+                                // await ShowSheet(context);
+                              },
                             ),
+                            // kListTile(
+                            //   title: Text(widget.userName),
+                            // ),
                             divider(),
                             Options(
                               context: context,
                               trailing: icons.arrowForward,
                               label: Text(bio.isNotEmpty ? bio : "Edit Your Bio"),
                               onTap: () async {
-                                await ShowSheet(context);
+                                await ShowSheet(context, bio: bio);
                               },
                             )
                           ],
