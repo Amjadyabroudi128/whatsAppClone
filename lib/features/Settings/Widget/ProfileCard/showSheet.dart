@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'editBio.dart';
 
-Future <void> ShowSheet (BuildContext context) async {
+Future <void> ShowSheet (BuildContext context, {required bio}) async {
   await showModalBottomSheet(context: context,
       isScrollControlled: true,
       builder: (context) {
         return FractionallySizedBox(
           heightFactor: 0.94,
           child: Container(
-              child: EditBio()
+              child: EditBio(bio: bio)
           ),
 
         );
