@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/btmSheet.dart';
 import 'editBio.dart';
 
 Future <void> ShowSheet (BuildContext context, {required bio}) async {
-  await showModalBottomSheet(context: context,
+  await btmSheet(context: context,
       isScrollControlled: true,
       builder: (context) {
         return FractionallySizedBox(
