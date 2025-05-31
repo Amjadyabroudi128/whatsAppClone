@@ -1,8 +1,20 @@
+import 'package:flutter/material.dart';
 
- import 'package:flutter/material.dart';
-
-Future btmSheet({required BuildContext context,
- required WidgetBuilder builder,Color? backgroundColor,
- bool isScrollControlled = false,   bool isDismissible = true,}) {
-  return showModalBottomSheet(context: context, builder: builder, backgroundColor: backgroundColor,);
+Future<T?> btmSheet<T>({
+ required BuildContext context,
+ required WidgetBuilder builder,
+ Color? backgroundColor,
+ bool isScrollControlled = false,
+ bool isDismissible = true,
+}) {
+ return showModalBottomSheet<T>(
+  context: context,
+  isScrollControlled: isScrollControlled,
+  isDismissible: isDismissible,
+  backgroundColor: backgroundColor ?? Colors.transparent,
+  builder: builder,
+  shape:  RoundedRectangleBorder(
+   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  ),
+ );
 }
