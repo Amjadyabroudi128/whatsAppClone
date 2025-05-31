@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/btmSheet.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/SizedBox.dart';
@@ -24,11 +25,8 @@ class photoBtmSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return kIconButton(
       onPressed: () {
-        showModalBottomSheet(
+        btmSheet(
           context: context,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
           builder: (BuildContext context) {
             return SingleChildScrollView(
               child: Padding(

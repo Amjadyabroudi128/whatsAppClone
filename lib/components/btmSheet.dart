@@ -11,7 +11,7 @@ Future<T?> btmSheet<T>({
   context: context,
   isScrollControlled: isScrollControlled,
   isDismissible: isDismissible,
-  backgroundColor: backgroundColor ?? Colors.transparent,
+  backgroundColor: backgroundColor,
   builder: builder,
   shape:  RoundedRectangleBorder(
    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
