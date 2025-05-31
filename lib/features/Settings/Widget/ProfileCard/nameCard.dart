@@ -5,6 +5,7 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
@@ -113,12 +114,17 @@ class _nameCardState extends State<nameCard> {
                               trailing: icons.arrowForward,
                               label: Text(name.isNotEmpty ? name : "Edit Your Name"),
                               onTap: () async {
-                                await showModalBottomSheet(context: context,
+                                await btmSheet(
+                                  context: context,
                                   isScrollControlled: true,
-                                  builder: (context){
-                                  return editName(service: service, nameController: nameController);
-                                  }
+                                  builder: (context) {
+                                    return editName(
+                                      service: service,
+                                      nameController: nameController,
+                                    );
+                                  },
                                 );
+
                                 // await ShowSheet(context);
                               },
                             ),
