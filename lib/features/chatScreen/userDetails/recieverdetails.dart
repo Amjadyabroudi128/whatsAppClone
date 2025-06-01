@@ -124,7 +124,7 @@ class userDetails extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (_) => MyMedia(
-                                            // receiverId: receiverId
+                                            receiverId: receiverId
                                         )
                                     ),
                                   );
@@ -192,7 +192,7 @@ class userDetails extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) => MyMedia(
-
+                                                receiverId: receiverId
                                             )
                                         ),
                                       );

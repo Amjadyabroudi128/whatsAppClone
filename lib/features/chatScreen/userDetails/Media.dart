@@ -10,14 +10,25 @@ import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'Widgets/noMediaText.dart';
 import 'imageScreen.dart';
 
-class MyMedia extends StatelessWidget {
-
-  const MyMedia({super.key});
+class MyMedia extends StatefulWidget {
+ final String? receiverId;
+  const MyMedia({super.key,this.receiverId});
 
   @override
+  State<MyMedia> createState() => _MyMediaState();
+}
+
+class _MyMediaState extends State<MyMedia> {
+  User? user = FirebaseAuth.instance.currentUser;
+  String getChatRoomId(String id1, String id2) {
+    List<String> ids = [id1, id2];
+    ids.sort();
+    return ids.join("_");
+  }
+  @override
   Widget build(BuildContext context) {
-    final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
-    final User? user;
+    // final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
+    String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Media"),
@@ -25,8 +36,8 @@ class MyMedia extends StatelessWidget {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection("media")
-            .doc(currentUserId)
+            .collection("chat_rooms")
+            .doc(chatRoomId)
             .collection("messages")
             .where("image", isNotEqualTo: null)
             .orderBy("timestamp", descending: true)
@@ -79,6 +90,7 @@ class MyMedia extends StatelessWidget {
                   receiverId: data["receiverId"],
                   senderEmail: data["senderEmail"]
                 );
+                if (msg.image == null) return const SizedBox.shrink();
                 final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
                 final formattedTime = DateFormat.Hm().format(dateTime);
                 final day = DateFormat.yMd().format(dateTime);
@@ -98,7 +110,6 @@ class MyMedia extends StatelessWidget {
                                 time: formattedTime,
                                 messageId: msg.messageId,
                                 receiverId: msg.receiverId,
-
                               ),
                             ),
                           );
