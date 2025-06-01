@@ -73,6 +73,7 @@ class _TestnameState extends State<Testname> {
                           email: email,
                           imageUrl: image,
                           bio: bio,
+                          receiverId: widget.receiverId
                         ),
                       ),
                     );

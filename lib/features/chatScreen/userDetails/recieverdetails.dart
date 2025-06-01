@@ -18,7 +18,8 @@ class userDetails extends StatelessWidget {
   final String? email;
   final String? imageUrl;
   final String? bio;
-  const userDetails({super.key, this.name, this.email, this.imageUrl, this.bio});
+  final String? receiverId;
+  const userDetails({super.key, this.name, this.email, this.imageUrl, this.bio, this.receiverId});
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +66,18 @@ class userDetails extends StatelessWidget {
               Column(
                 children: [
                   StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection("starred-messages")
-                        .doc(FirebaseAuth.instance.currentUser!.email).collection("messages").snapshots(),
+                      stream: (() {
+                        String currentUserId = FirebaseAuth.instance.currentUser!.uid;
+                        List<String> ids = [currentUserId, receiverId ?? ""];
+                        ids.sort();
+                        String chatRoomId = ids.join("_");
+                        return FirebaseFirestore.instance
+                            .collection("chat_rooms")
+                            .doc(chatRoomId)
+                            .collection("messages")
+                            .where("isStarred", isEqualTo: true)
+                            .snapshots();
+                      })(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         count = snapshot.data!.docs.length;
@@ -83,7 +94,6 @@ class userDetails extends StatelessWidget {
                                     children: [
                                       Text("Starred messages"),
                                       Spacer(),
-                                      Text("None")
                                     ],
                                   ),
                                   trailing: icons.arrowForward,
@@ -91,7 +101,9 @@ class userDetails extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => Starredmessages()
+                                          builder: (_) => Starredmessages(
+                                            receiverId: receiverId
+                                          )
                                       ),
                                     );
                                   }
@@ -104,7 +116,6 @@ class userDetails extends StatelessWidget {
                                   children: [
                                     Text("Media"),
                                     Spacer(),
-                                    Text("None"),
                                   ],
                                 ),
                                 trailing: icons.whiteImage,
@@ -112,7 +123,9 @@ class userDetails extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => MyMedia()
+                                        builder: (_) => MyMedia(
+                                            // receiverId: receiverId
+                                        )
                                     ),
                                   );
                                 }
@@ -132,7 +145,6 @@ class userDetails extends StatelessWidget {
                                 children: [
                                   Text("Starred messages"),
                                   Spacer(),
-                                  Text("${count.toString()}")
                                 ],
                               ),
                               trailing: icons.arrowForward,
@@ -140,18 +152,27 @@ class userDetails extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => Starredmessages()
+                                    builder: (_) => Starredmessages(
+                                        receiverId: receiverId
+                                    )
                                   ),
                                 );
                               }
                             ),
                             divider(),
                             StreamBuilder(
-                                stream: FirebaseFirestore.instance
-                                    .collection("media")
-                                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                                    .collection("messages")
-                                    .snapshots(),
+                                stream: (() {
+                                  String currentUserId = FirebaseAuth.instance.currentUser!.uid;
+                                  List<String> ids = [currentUserId, receiverId ?? ""];
+                                  ids.sort();
+                                  String chatRoomId = ids.join("_");
+                                  return FirebaseFirestore.instance
+                                      .collection("chat_rooms")
+                                      .doc(chatRoomId)
+                                      .collection("messages")
+                                      .where("image", isNotEqualTo: null)
+                                      .snapshots();
+                                })(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   imageCount = snapshot.data!.docs.length;
@@ -163,7 +184,6 @@ class userDetails extends StatelessWidget {
                                       children: [
                                         Text("Media"),
                                         Spacer(),
-                                        Text("${imageCount.toString()}"),
                                       ],
                                     ),
                                     trailing: icons.arrowForward,
@@ -171,7 +191,9 @@ class userDetails extends StatelessWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) => MyMedia()
+                                            builder: (_) => MyMedia(
+
+                                            )
                                         ),
                                       );
                                     }

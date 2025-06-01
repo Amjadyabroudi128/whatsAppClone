@@ -18,7 +18,9 @@ import '../../../core/MyColors.dart';
 import '../../../core/icons.dart';
 
 class Starredmessages extends StatefulWidget {
-  const Starredmessages({super.key});
+  final String? receiverId;
+  final String? chatRoomId;
+  const Starredmessages({super.key, this.receiverId, this.chatRoomId});
 
   @override
   State<Starredmessages> createState() => _StarredmessagesState();
@@ -30,9 +32,14 @@ class _StarredmessagesState extends State<Starredmessages> {
   bool isEditing = false;
   Set<String> selectedMessages = {};
    User? user = FirebaseAuth.instance.currentUser;
-
+  String getChatRoomId(String id1, String id2) {
+    List<String> ids = [id1, id2];
+    ids.sort();
+    return ids.join("_");
+  }
   @override
   Widget build(BuildContext context) {
+    String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
     return Scaffold(
       appBar: AppBar(
         title: Text("Starred messages"),
@@ -54,11 +61,8 @@ class _StarredmessagesState extends State<Starredmessages> {
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-          stream: stars
-              .doc(auth.currentUser!.email)
-              .collection("messages")
-              .orderBy("timestamp", descending: true)
-              .snapshots(),
+          stream: FirebaseFirestore.instance.collection("chat_rooms").doc(chatRoomId).collection("messages")
+              .where("isStarred", isEqualTo: true).orderBy("timestamp", descending: true).snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
               return Center(
@@ -190,6 +194,8 @@ class _StarredmessagesState extends State<Starredmessages> {
                                 time: doc["timestamp"],
                                 senderEmail: doc["senderEmail"],
                                 messageId: doc.id,
+                                senderId: doc["senderId"],
+                                receiverId: doc["receiverId"],
                               );
                               await service.deleteStar(msg);
                             }
