@@ -224,6 +224,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        "senderEmail": msg.senderEmail,
        "receiverId": msg.receiverId,
        "messageId": messageId,
+       "senderId": msg.senderId,
        if (msg.image != null) "image": msg.image
      });
 
@@ -242,7 +243,6 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
 
      String email = auth.currentUser!.email!;
      String messageId = msg.messageId!;
-
      await FirebaseFirestore.instance
          .collection("starred-messages")
          .doc(email)
