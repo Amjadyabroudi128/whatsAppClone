@@ -20,33 +20,18 @@ class MyMedia extends StatefulWidget {
 
 class _MyMediaState extends State<MyMedia> {
   User? user = FirebaseAuth.instance.currentUser;
-  String getChatRoomId(String id1, String id2) {
-    List<String> ids = [id1, id2];
-    ids.sort();
-    return ids.join("_");
-  }
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    // final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
-    String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Media"),
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection("chat_rooms")
-            .doc(chatRoomId)
-            .collection("messages")
-            .where("image", isNotEqualTo: null)
-            .orderBy("timestamp", descending: true)
-            .snapshots(),
+        stream: FirebaseFirestore.instance.collection("media").doc(auth.currentUser!.uid)
+            .collection("messages").where("receiverId", isEqualTo: widget.receiverId).where("image", isNotEqualTo: null).snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
               child: Column(
@@ -88,7 +73,7 @@ class _MyMediaState extends State<MyMedia> {
                   image: data["image"],
                   senderId: data["senderId"],
                   receiverId: data["receiverId"],
-                  senderEmail: data["senderEmail"]
+                  senderEmail: data["senderEmail"],
                 );
                 if (msg.image == null) return const SizedBox.shrink();
                 final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
