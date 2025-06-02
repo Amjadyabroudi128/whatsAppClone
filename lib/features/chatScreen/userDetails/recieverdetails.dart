@@ -66,65 +66,14 @@ class userDetails extends StatelessWidget {
               Column(
                 children: [
                   StreamBuilder(
-                      stream: FirebaseFirestore.instance.collection("starred-messages").doc(auth.currentUser!.email).collection("messages")
-                          .where("receiverId", isEqualTo: receiverId).snapshots(),
+                    stream: FirebaseFirestore.instance
+                        .collection("starred-messages")
+                        .doc(auth.currentUser!.email)
+                        .collection("messages")
+                        .where("receiverId", isEqualTo: receiverId)
+                        .snapshots(),
                     builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        count = snapshot.data!.docs.length;
-                      }
-                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                        return kCard(
-                          color: myColors.familyText,
-                          child: Column(
-                            children: [
-                              Options(
-                                  context: context,
-                                  leading: icons.star,
-                                  label: Row(
-                                    children: [
-                                      Text("Starred messages"),
-                                      Spacer(),
-
-                                    ],
-                                  ),
-                                  trailing: icons.arrowForward,
-                                  onTap: (){
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => Starredmessages(
-                                            receiverId: receiverId
-                                          )
-                                      ),
-                                    );
-                                  }
-                              ),
-                              divider(),
-                              Options(
-                                context: context,
-                                leading: icons.image,
-                                label: Row(
-                                  children: [
-                                    Text("Media"),
-                                    Spacer(),
-                                  ],
-                                ),
-                                trailing: icons.whiteImage,
-                                onTap: (){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => MyMedia(
-                                            receiverId: receiverId
-                                        )
-                                    ),
-                                  );
-                                }
-                              )
-                            ],
-                          ),
-                        );
-                      }
+                      count = snapshot.data!.docs.length;
                       return kCard(
                         color: myColors.familyText,
                         child: Column(
@@ -140,53 +89,60 @@ class userDetails extends StatelessWidget {
                                 ],
                               ),
                               trailing: icons.arrowForward,
-                              onTap: (){
+                              onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => Starredmessages(
-                                        receiverId: receiverId
-                                    )
+                                    builder: (_) => Starredmessages(receiverId: receiverId),
                                   ),
                                 );
-                              }
+                              },
                             ),
-                            divider(),
-                            StreamBuilder(
-                                stream: FirebaseFirestore.instance.collection("media").doc(auth.currentUser!.uid)
-                                    .collection("messages").where("receiverId", isEqualTo: receiverId).where("image", isNotEqualTo: null).snapshots(),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  imageCount = snapshot.data!.docs.length;
-                                }
-                                return Options(
-                                    context: context,
-                                    leading: icons.image,
-                                    label: Row(
-                                      children: [
-                                        Text("Media"),
-                                        Spacer(),
-                                        Text("${imageCount.toString()}")
-                                      ],
-                                    ),
-                                    trailing: icons.arrowForward,
-                                    onTap: (){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => MyMedia(
-                                                receiverId: receiverId
-                                            )
-                                        ),
-                                      );
-                                    }
-                                );
-                              }
-                            )
+                            // Media StreamBuilder is now outside the above one
                           ],
                         ),
                       );
-                    }
+                    },
+                  ),
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("media")
+                        .doc(auth.currentUser!.uid)
+                        .collection("messages")
+                        .where("receiverId", isEqualTo: receiverId)
+                        .where("image", isNotEqualTo: null)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      int imageCount = snapshot.hasData ? snapshot.data!.docs.length : 0;
+
+                      return kCard(
+                        color: myColors.familyText,
+                        child: Column(
+                          children: [
+                            Options(
+                              context: context,
+                              leading: icons.image,
+                              label: Row(
+                                children: [
+                                  Text("Media"),
+                                  Spacer(),
+                                 Text("${imageCount.toString()}")
+                                ],
+                              ),
+                              trailing: icons.arrowForward,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => MyMedia(receiverId: receiverId),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ],
               )
