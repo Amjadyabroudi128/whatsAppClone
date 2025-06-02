@@ -32,14 +32,9 @@ class _StarredmessagesState extends State<Starredmessages> {
   bool isEditing = false;
   Set<String> selectedMessages = {};
    User? user = FirebaseAuth.instance.currentUser;
-  String getChatRoomId(String id1, String id2) {
-    List<String> ids = [id1, id2];
-    ids.sort();
-    return ids.join("_");
-  }
+
   @override
   Widget build(BuildContext context) {
-    String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
     return Scaffold(
       appBar: AppBar(
         title: Text("Starred messages"),
@@ -61,8 +56,8 @@ class _StarredmessagesState extends State<Starredmessages> {
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection("chat_rooms").doc(chatRoomId).collection("messages")
-              .where("isStarred", isEqualTo: true).orderBy("timestamp", descending: true).snapshots(),
+          stream: FirebaseFirestore.instance.collection("starred-messages").doc(auth.currentUser!.email).collection("messages")
+              .where("receiverId", isEqualTo: widget.receiverId).snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
               return Center(
@@ -93,6 +88,8 @@ class _StarredmessagesState extends State<Starredmessages> {
                     text: data["message"],
                     time:  data["timestamp"],
                     senderEmail: data["senderEmail"],
+                    senderId: data["senderId"],
+                    receiverId: data["receiverId"],
                     messageId: data.id,
                     image: data.data().toString().contains("image")
                         ? data["image"]
@@ -214,7 +211,9 @@ class _StarredmessagesState extends State<Starredmessages> {
                               final msg = Messages(
                                 messageId: doc.id,
                                 text: doc["message"],
-                                receiverId: doc["receiverId"]
+                                receiverId: doc["receiverId"],
+                                senderEmail: doc["senderEmail"],
+                                senderId: doc["senderId"]
                               );
                               await showDialog(
                                 context: context,
