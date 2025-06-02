@@ -23,6 +23,7 @@ class userDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = FirebaseAuth.instance;
     int count= 0 ;
     int imageCount = 0;
     return Scaffold(
@@ -60,24 +61,13 @@ class userDetails extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text("${bio}", style: Textstyles.bioStyle,),
                 ),
-                // child: kL("${bio}", style: Textstyles.bioStyle,),
               ),
               BoxSpacing(myHeight: 5,),
               Column(
                 children: [
                   StreamBuilder(
-                      stream: (() {
-                        String currentUserId = FirebaseAuth.instance.currentUser!.uid;
-                        List<String> ids = [currentUserId, receiverId ?? ""];
-                        ids.sort();
-                        String chatRoomId = ids.join("_");
-                        return FirebaseFirestore.instance
-                            .collection("chat_rooms")
-                            .doc(chatRoomId)
-                            .collection("messages")
-                            .where("isStarred", isEqualTo: true)
-                            .snapshots();
-                      })(),
+                      stream: FirebaseFirestore.instance.collection("starred-messages").doc(auth.currentUser!.email).collection("messages")
+                          .where("receiverId", isEqualTo: receiverId).snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         count = snapshot.data!.docs.length;
@@ -94,6 +84,7 @@ class userDetails extends StatelessWidget {
                                     children: [
                                       Text("Starred messages"),
                                       Spacer(),
+
                                     ],
                                   ),
                                   trailing: icons.arrowForward,
@@ -145,6 +136,7 @@ class userDetails extends StatelessWidget {
                                 children: [
                                   Text("Starred messages"),
                                   Spacer(),
+                                  Text("${count.toString()}")
                                 ],
                               ),
                               trailing: icons.arrowForward,
@@ -161,18 +153,8 @@ class userDetails extends StatelessWidget {
                             ),
                             divider(),
                             StreamBuilder(
-                                stream: (() {
-                                  String currentUserId = FirebaseAuth.instance.currentUser!.uid;
-                                  List<String> ids = [currentUserId, receiverId ?? ""];
-                                  ids.sort();
-                                  String chatRoomId = ids.join("_");
-                                  return FirebaseFirestore.instance
-                                      .collection("chat_rooms")
-                                      .doc(chatRoomId)
-                                      .collection("messages")
-                                      .where("image", isNotEqualTo: null)
-                                      .snapshots();
-                                })(),
+                                stream: FirebaseFirestore.instance.collection("media").doc(auth.currentUser!.uid)
+                                    .collection("messages").where("receiverId", isEqualTo: receiverId).where("image", isNotEqualTo: null).snapshots(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   imageCount = snapshot.data!.docs.length;
@@ -184,6 +166,7 @@ class userDetails extends StatelessWidget {
                                       children: [
                                         Text("Media"),
                                         Spacer(),
+                                        Text("${imageCount.toString()}")
                                       ],
                                     ),
                                     trailing: icons.arrowForward,
