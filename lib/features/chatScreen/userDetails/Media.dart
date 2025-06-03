@@ -21,16 +21,23 @@ class MyMedia extends StatefulWidget {
 class _MyMediaState extends State<MyMedia> {
   User? user = FirebaseAuth.instance.currentUser;
   final auth = FirebaseAuth.instance;
+  String getChatRoomId(String id1, String id2) {
+    List<String> ids = [id1, id2];
+    ids.sort();
+    return ids.join("_");
+  }
   @override
   Widget build(BuildContext context) {
+    String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Media"),
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("media").doc(auth.currentUser!.uid)
-            .collection("messages").where("receiverId", isEqualTo: widget.receiverId).where("image", isNotEqualTo: null).snapshots(),
+        stream: FirebaseFirestore.instance.collection("chat_rooms").doc(chatRoomId).collection("messages")
+            .where("image", isNotEqualTo: null).orderBy("timestamp", descending: true).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
@@ -82,6 +89,10 @@ class _MyMediaState extends State<MyMedia> {
                 return Column(
                   children: [
                     Text(day, style: const TextStyle(fontSize: 12)),
+                    Text(
+                      msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail ?? "",
+                      style: TextStyle(fontSize: 15),
+                    ),
                     Expanded(
                       child: GestureDetector(
                         onTap: (){
