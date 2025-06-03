@@ -207,12 +207,11 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
    Future addToStar(Messages msg) async {
      String email = auth.currentUser!.email!;
      String messageId = msg.messageId!;
-// Also update isStarred in chat room
      List<String> ids = [msg.senderId!, msg.receiverId!];
      ids.sort();
      String chatRoomID = ids.join("_");
 
-     // Add to "starred-messages"
+     // Add to personal starred collection ONLY
      await FirebaseFirestore.instance
          .collection("starred-messages")
          .doc(email)
@@ -225,7 +224,8 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        "receiverId": msg.receiverId,
        "messageId": messageId,
        "senderId": msg.senderId,
-       if (msg.image != null) "image": msg.image
+       "image": msg.image ?? "",
+       "isStarred": true
      });
 
      await FirebaseFirestore.instance
@@ -236,13 +236,13 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          .update({"isStarred": true});
    }
 
+
    Future deleteStar(Messages msg) async {
+     String email = auth.currentUser!.email!;
+     String messageId = msg.messageId!;
      List<String> ids = [msg.senderId!, msg.receiverId!];
      ids.sort();
      String chatRoomID = ids.join("_");
-
-     String email = auth.currentUser!.email!;
-     String messageId = msg.messageId!;
      await FirebaseFirestore.instance
          .collection("starred-messages")
          .doc(email)
@@ -250,17 +250,14 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          .doc(messageId)
          .delete();
 
-     final docRef = FirebaseFirestore.instance
+     await FirebaseFirestore.instance
          .collection("chat_rooms")
          .doc(chatRoomID)
          .collection("messages")
-         .doc(messageId);
-
-     final docSnap = await docRef.get();
-     if (docSnap.exists) {
-       await docRef.update({"isStarred": false});
-     }
+         .doc(messageId)
+         .update({"isStarred": false});
    }
+
 
    Stream<QuerySnapshot> getRecentChats(String userId) {
      return FirebaseFirestore.instance
