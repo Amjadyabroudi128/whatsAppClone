@@ -13,7 +13,7 @@ import 'package:whatsappclone/features/chatScreen/userDetails/StarredMessages.da
 import '../../../core/MyColors.dart';
 import '../../../core/icons.dart';
 
-class userDetails extends StatelessWidget {
+class userDetails extends StatefulWidget {
   final String? name;
   final String? email;
   final String? imageUrl;
@@ -22,10 +22,23 @@ class userDetails extends StatelessWidget {
   const userDetails({super.key, this.name, this.email, this.imageUrl, this.bio, this.receiverId});
 
   @override
+  State<userDetails> createState() => _userDetailsState();
+}
+
+class _userDetailsState extends State<userDetails> {
+  String getChatRoomId(String id1, String id2) {
+    List<String> ids = [id1, id2];
+    ids.sort();
+    return ids.join("_");
+  }
+  User? user = FirebaseAuth.instance.currentUser;
+
+  @override
+  @override
   Widget build(BuildContext context) {
     final auth = FirebaseAuth.instance;
-    int count= 0 ;
-    int imageCount = 0;
+    String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
+
     return Scaffold(
       backgroundColor: myColors.BG,
       appBar: AppBar(
@@ -33,119 +46,104 @@ class userDetails extends StatelessWidget {
         title: Text("Contact Details"),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Center(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(10.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              imageUrl == null || imageUrl!.isEmpty ?
-                  kimageNet(
-                    src:"https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
-                  )
-              : kCard(
+              widget.imageUrl == null || widget.imageUrl!.isEmpty
+                  ? kimageNet(
+                src: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
+              )
+                  : kCard(
                 shape: CircleBorder(),
                 clipBehavior: Clip.antiAlias,
-                child: kimageNet(src: imageUrl!),
-              ), 
-              // : kimageNet(src: imageUrl!,),
-              BoxSpacing(myHeight: 9,),
-              Text("${name}", style: Textstyles.recieverName,),
-              BoxSpacing(myHeight: 7,),
-              Text("$email", style: Textstyles.recieverEmail,),
-              bio!.isEmpty ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox.shrink()
-              ) : kCard(
-                color: myColors.FG,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("${bio}", style: Textstyles.bioStyle,),
-                ),
+                child: kimageNet(src: widget.imageUrl!),
               ),
-              BoxSpacing(myHeight: 5,),
-              Column(
-                children: [
-                  StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection("starred-messages")
-                        .doc(auth.currentUser!.email)
-                        .collection("messages")
-                        .where("receiverId", isEqualTo: receiverId)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      count = snapshot.data!.docs.length;
-                      return kCard(
-                        color: myColors.familyText,
-                        child: Column(
-                          children: [
-                            Options(
-                              context: context,
-                              leading: icons.star,
-                              label: Row(
-                                children: [
-                                  Text("Starred messages"),
-                                  Spacer(),
-                                  Text("${count.toString()}")
-                                ],
-                              ),
-                              trailing: icons.arrowForward,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => Starredmessages(receiverId: receiverId),
-                                  ),
-                                );
-                              },
-                            ),
-                            // Media StreamBuilder is now outside the above one
-                          ],
-                        ),
-                      );
-                    },
+              BoxSpacing(myHeight: 9),
+              Text(widget.name ?? '', style: Textstyles.recieverName),
+              BoxSpacing(myHeight: 7),
+              Text(widget.email ?? '', style: Textstyles.recieverEmail),
+              if (widget.bio != null && widget.bio!.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: kCard(
+                    color: myColors.FG,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(widget.bio!, style: Textstyles.bioStyle),
+                    ),
                   ),
-                  StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection("media")
-                        .doc(auth.currentUser!.uid)
-                        .collection("messages")
-                        .where("receiverId", isEqualTo: receiverId)
-                        .where("image", isNotEqualTo: null)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      int imageCount = snapshot.hasData ? snapshot.data!.docs.length : 0;
+                ),
+              BoxSpacing(myHeight: 5),
 
-                      return kCard(
-                        color: myColors.familyText,
-                        child: Column(
-                          children: [
-                            Options(
-                              context: context,
-                              leading: icons.image,
-                              label: Row(
-                                children: [
-                                  Text("Media"),
-                                  Spacer(),
-                                 Text("${imageCount.toString()}")
-                                ],
-                              ),
-                              trailing: icons.arrowForward,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => MyMedia(receiverId: receiverId),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              )
+              // Starred Messages
+              StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("starred-messages")
+                    .doc(auth.currentUser!.email)
+                    .collection("messages")
+                    .orderBy("timestamp", descending: true)
+                    .snapshots(),
+
+                builder: (context, snapshot) {
+                  final count = snapshot.hasData ? snapshot.data!.docs.length : 0;
+                  return kCard(
+                    color: myColors.familyText,
+                    child: Options(
+                      context: context,
+                      leading: icons.star,
+                      label: Row(
+                        children: [
+                          Text("Starred messages"),
+                          Spacer(),
+                          Text(count.toString()),
+                        ],
+                      ),
+                      trailing: icons.arrowForward,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Starredmessages(receiverId: widget.receiverId),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+
+              // Media
+              StreamBuilder(
+                stream: FirebaseFirestore.instance.collection("chat_rooms").doc(chatRoomId).collection("messages")
+                    .where("image", isNotEqualTo: null).orderBy("timestamp", descending: true).snapshots(),
+                builder: (context, snapshot) {
+                  return kCard(
+                    color: myColors.familyText,
+                    child: Options(
+                      context: context,
+                      leading: icons.image,
+                      label: Row(
+                        children: [
+                          Text("Media"),
+                          Spacer(),
+                        ],
+                      ),
+                      trailing: icons.arrowForward,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => MyMedia(receiverId: widget.receiverId),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
