@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
@@ -59,15 +60,9 @@ class deleteContainer extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 Navigator.pop(context); // Close bottom sheet
                 Navigator.pop(context, 'deleted'); // Pass back a result
-                await service.Deletemessage(
-                  user!.uid,
-                  widget.receiverId!,
-                  widget.messageId!,
-                  context
-                );
-                await service.deleteStar(msg);
+                service.Deletemessage(msg.senderId!, msg.receiverId!, msg.messageId!,);
                 myToast("Message Successfully Deleted");
-                service.deleteStar(msg);
+                await service.deleteStar(msg);
               },
               label: Text(
                 "Delete for Everyone",
