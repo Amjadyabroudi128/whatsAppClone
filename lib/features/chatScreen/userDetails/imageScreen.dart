@@ -26,6 +26,9 @@ class Imagescreen extends StatefulWidget {
   final String? receiverId;
   final bool? isStarred;
   final String? day;
+  final String? senderId;
+  final String? senderEmail;
+  final String? receiverEmail;
   const Imagescreen({
     super.key,
     required this.date,
@@ -35,7 +38,10 @@ class Imagescreen extends StatefulWidget {
     this.messageId,
     this.receiverId,
     this.isStarred,
-    this.day
+    this.day,
+    this.senderId,
+    this.receiverEmail,
+    this.senderEmail
   });
 
   @override
@@ -57,17 +63,15 @@ class _ImagescreenState extends State<Imagescreen> {
   @override
   Widget build(BuildContext context) {
     final user = auth.currentUser;
-
-    // Creating a dummy Messages object for deletion
-    final Messages msg = Messages(
+   final msg = Messages(
+      text: "",
+      senderId: widget.senderId,
+      receiverId: widget.receiverId,
+      senderEmail: widget.senderEmail,
+      receiverEmail: widget.receiverEmail,
       messageId: widget.messageId,
       image: widget.image,
-      senderEmail: user?.email,
-      senderId: user?.uid,
-      receiverId: widget.receiverId,
-      text: "", // Empty, not needed for image delete
-      isStarred: _isStarred,
-
+      isStarred: !_isStarred,
     );
     Future addToFireStore(String imagePath) async {
       String? imageUrl;
@@ -78,6 +82,13 @@ class _ImagescreenState extends State<Imagescreen> {
         imageUrl = imagePath;
       });
     }
+    String getChatRoomId(String id1, String id2) {
+      List<String> ids = [id1, id2];
+      ids.sort();
+      return ids.join("_");
+    }
+    String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -128,15 +139,19 @@ class _ImagescreenState extends State<Imagescreen> {
               myIcon: _isStarred ? icons.slash : icons.stary,
               onPressed: () async {
                 if (_isStarred) {
+                  FocusScope.of(context).unfocus();
                   await service.deleteStar(msg);
                   myToast("Message unstarred");
                 } else {
+                  FocusScope.of(context).unfocus();
                   await service.addToStar(msg);
                   myToast("Message starred");
                 }
                 setState(() {
                   _isStarred = !_isStarred;
                 });
+                FocusScope.of(context).unfocus();
+                // Navigator.pop(context);
               },
             ),
             kIconButton(
@@ -165,7 +180,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                 BoxSpacing(mWidth: 10,),
                                 Column(
                                   children: [
-                                    Text("${user?.email}"),
+                                    Text("${user.email}"),
                                     Row(
                                       children: [
                                         Text(widget.date, style: dates),
