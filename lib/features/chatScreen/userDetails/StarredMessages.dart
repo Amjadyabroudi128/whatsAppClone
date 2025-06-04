@@ -117,7 +117,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                         Row(
                           children: [
                             Text(
-                              msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail ?? "",
+                              msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail!,
                               style: TextStyle(fontSize: 15),
                             ),
                             Spacer(),
@@ -225,7 +225,6 @@ class _StarredmessagesState extends State<Starredmessages> {
                                 receiverId: doc["receiverId"],
                                 senderEmail: doc["senderEmail"],
                                 senderId: doc["senderId"],
-
                               );
                               await showDialog(
                                 context: context,
@@ -239,7 +238,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                                     ),
                                     kTextButton(
                                       onPressed: () async {
-                                        await service.Deletemessage(user!.uid, msg.receiverId ?? "", msg.messageId ?? "", context);
+                                        await service.Deletemessage(msg.senderId ?? "", msg.receiverId ?? "", msg.messageId ?? "");
                                         await service.deleteStar(msg);
                                         Navigator.pop(context);
                                         myToast("Selected messages deleted");
