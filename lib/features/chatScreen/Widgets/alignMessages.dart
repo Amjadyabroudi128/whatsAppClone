@@ -250,11 +250,6 @@ class _messagesAlignState extends State<messagesAlign> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              if (msg.isStarred == true)
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 6.0),
-                                  child: icons.wStar,
-                                ),
                               if (msg.isEdited == true)
                                 Text(
                                   "Edited",
