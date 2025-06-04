@@ -86,7 +86,6 @@ class _userDetailsState extends State<userDetails> {
                     .collection("messages")
                     .orderBy("timestamp", descending: true)
                     .snapshots(),
-
                 builder: (context, snapshot) {
                   final count = snapshot.hasData ? snapshot.data!.docs.length : 0;
                   return kCard(
