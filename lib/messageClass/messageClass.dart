@@ -10,7 +10,6 @@ class Messages {
   final String? messageId;
   final String? image;
   final String? file;
-  final bool? isStarred;
   final bool? isReply;
   final Messages? replyTo;
   final bool? isEdited;
@@ -25,7 +24,6 @@ class Messages {
     this.messageId,
     this.image,
     this.file,
-    this.isStarred,
     this.isReply = false,
     this.replyTo,
     this.isEdited,
@@ -42,7 +40,6 @@ class Messages {
       image: map['image'],
       file: map['file'],
       messageId: map['messageId'],
-      isStarred: map['isStarred'],
       isReply: map['isReply'] ?? false,
       replyTo: map['replyTo'] != null
           ? Messages.fromMap(Map<String, dynamic>.from(map['replyTo']))
@@ -62,7 +59,6 @@ class Messages {
       'time': time,
       'image': image,
       'file': file,
-      'isStarred': isStarred,
       'isReply': isReply,
       'replyTo': replyTo?.toMap(),
       'isEdited': isEdited,
@@ -95,7 +91,6 @@ class Messages {
       messageId: messageId ?? this.messageId,
       image: image ?? this.image,
       file: file ?? this.file,
-      isStarred: isStarred ?? this.isStarred,
       isReply: isReply ?? this.isReply,
       replyTo: replyTo ?? this.replyTo,
       isEdited: isEdited ?? this.isEdited,

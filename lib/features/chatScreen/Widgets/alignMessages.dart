@@ -45,6 +45,7 @@ class messagesAlign extends StatefulWidget {
 }
 
 class _messagesAlignState extends State<messagesAlign> {
+  final bool isStarred = false;
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();

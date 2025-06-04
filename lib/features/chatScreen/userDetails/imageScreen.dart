@@ -71,7 +71,6 @@ class _ImagescreenState extends State<Imagescreen> {
       receiverEmail: widget.receiverEmail,
       messageId: widget.messageId,
       image: widget.image,
-      isStarred: !_isStarred,
     );
     Future addToFireStore(String imagePath) async {
       String? imageUrl;

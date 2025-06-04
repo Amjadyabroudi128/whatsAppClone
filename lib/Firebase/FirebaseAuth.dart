@@ -87,7 +87,6 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        receiverId: receiverId,
        senderEmail: email,
        receiverEmail: receiverName, // Store receiver's name
-       isStarred: false,
        isEdited: false,
        isReply: replyTo !=null,
        replyTo : replyTo
@@ -211,12 +210,11 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        "isStarred": true
      });
 
-     await FirebaseFirestore.instance
-         .collection("chat_rooms")
-         .doc(chatRoomID)
-         .collection("messages")
-         .doc(messageId)
-         .update({"isStarred": true});
+     // await FirebaseFirestore.instance
+     //     .collection("chat_rooms")
+     //     .doc(chatRoomID)
+     //     .collection("messages")
+     //     .doc(messageId);
    }
    Future deleteStar(Messages msg) async {
      String email = auth.currentUser!.email!;
@@ -231,12 +229,12 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          .doc(messageId)
          .delete();
 
-     await FirebaseFirestore.instance
-         .collection("chat_rooms")
-         .doc(chatRoomID)
-         .collection("messages")
-         .doc(messageId)
-         .update({"isStarred": false});
+     // await FirebaseFirestore.instance
+     //     .collection("chat_rooms")
+     //     .doc(chatRoomID)
+     //     .collection("messages")
+     //     .doc(messageId);
+
    }
 
 

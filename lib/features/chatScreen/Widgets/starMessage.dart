@@ -7,27 +7,33 @@ import '../../../components/flutterToast.dart';
 import '../../../core/icons.dart';
 import '../../../messageClass/messageClass.dart';
 
-PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int index, BuildContext context) {
+PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int index, BuildContext context,) {
   return PopupMenuItem(
     value: "Star",
     child: kTextButton(
       child: Row(
         children: [
-          Text(msg.isStarred == true ? "Unstar" : "Star", style: Textstyles.copyMessage),
+          Text("Star", style: Textstyles.copyMessage),
           Spacer(),
-          (msg.isStarred == true ? icons.amberStar : icons.star),
+          icons.star,
         ],
       ),
       onPressed: () async {
-        if (msg.isStarred == true) {
-          FocusScope.of(context).unfocus();
-          await service.deleteStar(msg);
-          myToast("Message unstarred");
-        } else {
-          FocusScope.of(context).unfocus();
-          await service.addToStar(msg);
-          myToast("Message starred");
-        }
+        FocusScope.of(context).unfocus();
+        Navigator.of(context).pop();
+        await service.addToStar(msg);
+        FocusScope.of(context).unfocus();
+        myToast("Message starred");
+        // FocusScope.of(context).unfocus();
+        // if (isStarred) {
+        //
+        //   await service.deleteStar(msg);
+        //
+        // } else {
+        //   await service.addToStar(msg);
+        //   myToast("Message starred");
+        //   FocusScope.of(context).unfocus();
+        // }
           msg = Messages(
             text: msg.text,
             senderId: msg.senderId,
@@ -38,10 +44,7 @@ PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int ind
             messageId: msg.messageId,
             image: msg.image,
             file: msg.file,
-            isStarred: !(msg.isStarred ?? false),
           );
-        FocusScope.of(context).unfocus();
-        Navigator.pop(context);
       },
     ),
   );
