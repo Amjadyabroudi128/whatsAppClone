@@ -96,11 +96,15 @@ class _messagesAlignState extends State<messagesAlign> {
                         context,
                         MaterialPageRoute(
                           builder: (_) => Imagescreen(
-                            image: msg.image, date: day,
+                            image: msg.image,
+                              date: day,
                             senderName: msg.senderEmail,
                             time: formattedTime,
                             messageId: msg.messageId,
                             receiverId: msg.receiverId,
+                            senderId: msg.senderId,
+                            senderEmail: msg.senderEmail,
+                            receiverEmail: msg.receiverEmail,
                           ),
                         ),
                       );
