@@ -43,10 +43,9 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
                   onPressed: () async {
                     FocusScope.of(context).unfocus();
                     await service.Deletemessage(
-                      user!.uid,
-                      widget!.receiverId,
+                      msg.senderId!,
+                      msg.receiverId!,
                       msg.messageId!,
-                      context
                     );
                     await service.deleteStar(msg);
                     FocusScope.of(context).unfocus();
