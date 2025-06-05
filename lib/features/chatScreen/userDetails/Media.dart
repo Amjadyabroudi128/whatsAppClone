@@ -36,8 +36,15 @@ class _MyMediaState extends State<MyMedia> {
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("chat_rooms").doc(chatRoomId).collection("messages")
-            .where("image", isNotEqualTo: null).orderBy("timestamp", descending: true).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection("chat_rooms")
+            .doc(chatRoomId)
+            .collection("messages")
+            .where("image", isGreaterThan: "")
+            .orderBy("image")
+            .orderBy("timestamp", descending: true)
+            .snapshots(),
+
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
