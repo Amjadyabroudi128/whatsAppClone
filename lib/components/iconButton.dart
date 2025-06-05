@@ -6,7 +6,8 @@ class kIconButton extends StatelessWidget {
   final Widget? myIcon;
   final VoidCallback? onPressed;
   final double? iconSize;
-  const kIconButton({super.key, this.myIcon, this.onPressed, this.iconSize});
+  final Color? color;
+  const kIconButton({super.key, this.myIcon, this.onPressed, this.iconSize, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class kIconButton extends StatelessWidget {
       onPressed:  onPressed,
       icon: myIcon ?? icons.arrow,
       iconSize: iconSize ,
+      color: color,
     );
   }
 }
