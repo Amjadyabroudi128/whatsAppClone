@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/SizedBox.dart';
@@ -133,6 +134,7 @@ class _allStarredState extends State<allStarred> {
                                     },
                                   ),
                                 ),
+
                               kCard(
                                 color: msg.senderEmail == auth.currentUser!.email ?
                                 myColors.starColor : myColors.familyText,
@@ -148,7 +150,6 @@ class _allStarredState extends State<allStarred> {
                                         fit: BoxFit.cover,
                                       )
                                           : Text(msg.text),
-
                                       Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
@@ -162,9 +163,18 @@ class _allStarredState extends State<allStarred> {
                                   ),
                                 ),
                               ),
+                              Spacer(),
+                              kIconButton(
+                                onPressed: (){
+
+                                },
+                                myIcon: icons.arrowForward,
+                              ),
+
                             ],
                           ),
                           divider(),
+
                         ],
                       ),
                     );
