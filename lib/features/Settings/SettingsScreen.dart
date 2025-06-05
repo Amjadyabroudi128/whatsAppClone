@@ -7,10 +7,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/kCard.dart';
+import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
 import '../../Firebase/FirebaseCollections.dart';
+import '../../core/icons.dart';
+import '../chatScreen/userDetails/StarredMessages.dart';
 import 'Widget/accountFunctions/deleteAccount.dart';
 import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
@@ -71,6 +74,21 @@ class _SettingScreenState extends State<SettingScreen> {
                         divider(),
                         deleteAccount(),
                       ],
+                    ),
+                  ),
+                  kCard(
+                    child: Options(
+                      context: context,
+                      label: Text("Starred"),
+                      trailing: icons.star,
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Starredmessages(receiverId: user!.email),
+                          ),
+                        );
+                      }
                     ),
                   ),
                   BoxSpacing(myHeight: 10,),
