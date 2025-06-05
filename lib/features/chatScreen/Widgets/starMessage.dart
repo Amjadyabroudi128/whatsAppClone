@@ -24,16 +24,6 @@ PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int ind
         await service.addToStar(msg);
         FocusScope.of(context).unfocus();
         myToast("Message starred");
-        // FocusScope.of(context).unfocus();
-        // if (isStarred) {
-        //
-        //   await service.deleteStar(msg);
-        //
-        // } else {
-        //   await service.addToStar(msg);
-        //   myToast("Message starred");
-        //   FocusScope.of(context).unfocus();
-        // }
           msg = Messages(
             text: msg.text,
             senderId: msg.senderId,
