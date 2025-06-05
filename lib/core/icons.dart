@@ -42,4 +42,5 @@ class icons {
   static Icon close = Icon(Icons.close);
   static Icon Wclose = Icon(Icons.close, color: Colors.white,);
   static Icon reply = Icon(Icons.reply, color: myColors.labelClr,);
+  static Icon Wphoto = Icon(CupertinoIcons.photo, size: 20,color: Colors.white,);
 }

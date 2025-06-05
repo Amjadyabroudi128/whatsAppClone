@@ -205,7 +205,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Icon(CupertinoIcons.photo, size: 20,color: Colors.white,),
+                                            icons.Wphoto,
                                             BoxSpacing(mWidth: 10,),
                                             Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey),),
                                             BoxSpacing(mWidth: 40,),
