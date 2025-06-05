@@ -88,6 +88,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        senderEmail: email,
        receiverEmail: receiverName, // Store receiver's name
        isEdited: false,
+       isStarred: false,
        isReply: replyTo !=null,
        replyTo : replyTo
      );

@@ -34,6 +34,7 @@ PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int ind
             messageId: msg.messageId,
             image: msg.image,
             file: msg.file,
+            isStarred: msg.isStarred
           );
       },
     ),
