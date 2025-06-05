@@ -119,20 +119,6 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        "receiverName": receiverName,
        "lastMessageType": image != null ? "image" : file != null ? "file" : "text",
      }, SetOptions(merge: true));
-
-     // if (image != null) {
-     //   await FirebaseFirestore.instance
-     //       .collection("media")
-     //       .doc(currentUser)
-     //       .collection("messages")
-     //       .doc(docRef.id) // set document ID = messageId
-     //       .set({
-     //     ...newMessage.toMap(),
-     //     "timestamp": FieldValue.serverTimestamp(),
-     //     "messageId": docRef.id,
-     //   });
-     //
-     // }
    }
 
    Stream <QuerySnapshot> getMessages(String userID, String otherUser) {
