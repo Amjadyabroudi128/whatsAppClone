@@ -81,12 +81,7 @@ class _ImagescreenState extends State<Imagescreen> {
         imageUrl = imagePath;
       });
     }
-    String getChatRoomId(String id1, String id2) {
-      List<String> ids = [id1, id2];
-      ids.sort();
-      return ids.join("_");
-    }
-    String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -178,8 +173,12 @@ class _ImagescreenState extends State<Imagescreen> {
                                 ),
                                 BoxSpacing(mWidth: 10,),
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("${user.email}"),
+                                    Text(
+                                      "${user!.email == auth.currentUser!.email ? "You" : user.email}",
+                                      style: TextStyle(fontSize: 15),
+                                    ),
                                     Row(
                                       children: [
                                         Text(widget.date, style: dates),
