@@ -16,8 +16,11 @@ class kTextField extends StatelessWidget {
   final bool? filled;
   final VoidCallback? onTap;
   final ScrollController? scroll;
+  final TextStyle? hintStyle;
   const kTextField(
-      {super.key, this.label, this.myController, this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint, this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll});
+      {super.key, this.label, this.myController,
+        this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint,
+        this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +37,11 @@ class kTextField extends StatelessWidget {
         filled: filled,
         suffixIcon: icon,
         hintText: hint,
-        hintStyle: Textstyles.hintStyle,
         label: label,
         prefixIcon: myIcon,
         suffix: suffix,
         border: border,
+        hintStyle: hintStyle
       ),
     );
   }
