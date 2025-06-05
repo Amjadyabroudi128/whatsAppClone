@@ -10,6 +10,7 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/features/Settings/Widget/allStars.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
 import '../../Firebase/FirebaseCollections.dart';
 import '../../core/icons.dart';
@@ -85,7 +86,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => Starredmessages(receiverId: user!.email),
+                            builder: (_) => allStarred(receiverId: user!.email),
                           ),
                         );
                       }
