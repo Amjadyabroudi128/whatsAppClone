@@ -34,12 +34,14 @@ class messagesAlign extends StatefulWidget {
     required this.user,
      this.widget,
     this.onReply,
+    this.textColor
   });
 
   final List<Messages> messages;
   final User? user;
   final Testname? widget;
   final void Function(Messages)? onReply;
+  final Color? textColor;
   @override
   State<messagesAlign> createState() => _messagesAlignState();
 }
@@ -73,7 +75,7 @@ class _messagesAlignState extends State<messagesAlign> {
           String day = DateFormat.yMd().format(dateTime);
           return Column(
             children: [
-              Text(day),
+              Text(day, style: TextStyle(color: widget.textColor),),
               Align(
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
                 child: GestureDetector(

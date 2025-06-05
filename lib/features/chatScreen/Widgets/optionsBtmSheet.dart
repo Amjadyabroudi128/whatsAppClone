@@ -16,14 +16,16 @@ class photoBtmSheet extends StatelessWidget {
     super.key,
     required this.service,
     required this.widget,
+    this.textColor
   });
 
   final FirebaseService service;
   final Testname widget;
-
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return kIconButton(
+      color: textColor,
       onPressed: () {
         btmSheet(
           context: context,

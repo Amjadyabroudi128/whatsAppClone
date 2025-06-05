@@ -12,7 +12,7 @@ class MessageStream extends StatefulWidget {
     super.key,
     required this.service,
     required this.user,
-    required this.widget, this.onReply,  this.controller
+    required this.widget, this.onReply,  this.controller, this.textColor
   });
 
   final FirebaseService service;
@@ -20,6 +20,7 @@ class MessageStream extends StatefulWidget {
   final Testname widget;
   final TextEditingController? controller;
   final void Function(Messages message)? onReply;
+  final Color? textColor;
   @override
   State<MessageStream> createState() => _MessageStreamState();
 }
@@ -32,7 +33,7 @@ class _MessageStreamState extends State<MessageStream> {
       stream: widget.service.getMessages(widget.user!.uid, widget.widget.receiverId),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return const Center(child: Text("No messages yet"));
+          return Center(child: Text("No messages yet", style: TextStyle(color: widget.textColor),));
         }
         var messages = snapshot.data!.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
@@ -55,7 +56,7 @@ class _MessageStreamState extends State<MessageStream> {
         }).toList();
 
 
-        return messagesAlign(messages: messages, user: widget.user, widget: widget.widget, onReply: widget.onReply,);
+        return messagesAlign(messages: messages, user: widget.user, widget: widget.widget, onReply: widget.onReply, textColor: widget.textColor);
       },
     );
   }

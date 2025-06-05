@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/colorPicker/colorsList.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/iconButton.dart';
@@ -48,8 +49,8 @@ class _TestnameState extends State<Testname> {
     return ValueListenableBuilder<Color>(
       valueListenable: selectedThemeColor,
       builder: (context, color, child) {
+        final textColor = getTextColor(color);
         return Scaffold(
-
           backgroundColor: color,
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
@@ -94,6 +95,7 @@ class _TestnameState extends State<Testname> {
               Expanded(
                 child: MessageStream(
                   service: service,
+                  textColor: textColor,
                   user: user,
                   widget: widget,
                   onReply: setReplyMessage,
@@ -136,16 +138,17 @@ class _TestnameState extends State<Testname> {
                 ),
 
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:  EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Expanded(
                       child: kTextField(
                         myController: messageController,
                         hint: "Add a message",
+                        hintStyle: TextStyle(color: textColor, fontSize: 15.7)
                       ),
                     ),
-                    photoBtmSheet(service: service, widget: widget),
+                    photoBtmSheet(service: service, widget: widget, textColor: textColor),
                     if (!isTextEmpty)
                       kIconButton(
                         onPressed: () {
