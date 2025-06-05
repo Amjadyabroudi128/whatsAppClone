@@ -81,9 +81,10 @@ class _userDetailsState extends State<userDetails> {
               // Starred Messages
               StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection("starred-messages")
-                    .doc(auth.currentUser!.email)
+                    .collection("chat_rooms")
+                    .doc(chatRoomId)
                     .collection("messages")
+                    .where("isStarred", isEqualTo: true)
                     .orderBy("timestamp", descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
@@ -97,7 +98,7 @@ class _userDetailsState extends State<userDetails> {
                         children: [
                           Text("Starred messages"),
                           Spacer(),
-                          Text(count.toString()),
+                          if (count > 0) Text(count.toString()),
                         ],
                       ),
                       trailing: icons.arrowForward,

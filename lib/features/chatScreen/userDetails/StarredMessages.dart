@@ -64,9 +64,10 @@ class _StarredmessagesState extends State<Starredmessages> {
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
-              .collection("starred-messages")
-              .doc(auth.currentUser!.email)
+              .collection("chat_rooms")
+              .doc(chatRoomId)
               .collection("messages")
+              .where("isStarred", isEqualTo: true)
               .orderBy("timestamp", descending: true)
               .snapshots(),
           builder: (context, snapshot) {
