@@ -11,7 +11,7 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/features/Settings/Widget/allStars.dart';
+import 'package:whatsappclone/features/Settings/Widget/starCard/allStars.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
 import '../../Firebase/FirebaseCollections.dart';
 import '../../core/icons.dart';
@@ -20,6 +20,7 @@ import 'Widget/accountFunctions/deleteAccount.dart';
 import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
 import 'Widget/accountFunctions/signout.dart';
+import 'Widget/starCard/starCard.dart';
 import 'Widget/themeCard/themeCard.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -78,22 +79,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       ],
                     ),
                   ),
-                  kCard(
-                    child: Options(
-                      context: context,
-                      label: Text("Starred"),
-                      trailing: icons.arrowForward,
-                      leading: icons.star,
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => allStarred(receiverId: user!.email),
-                          ),
-                        );
-                      }
-                    ),
-                  ),
+                  starCard(user: user),
                   BoxSpacing(myHeight: 10,),
                   Text("App Theme", style: Textstyles.themeStyle),
                   themeCard(mounted: mounted, widget: widget)
@@ -106,6 +92,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 }
+
 
 
 
