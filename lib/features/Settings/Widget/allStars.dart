@@ -28,9 +28,21 @@ class _allStarredState extends State<allStarred> {
   FirebaseService service = FirebaseService();
   bool isEditing = false;
   Set<String> selectedMessages = {};
+  late final User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    user = FirebaseAuth.instance.currentUser;  // Safely assign current user
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (user == null) {
+      // Handle case when user is not available
+      return Center(child: Text("User not logged in"));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Starred messages"),
@@ -78,6 +90,7 @@ class _allStarredState extends State<allStarred> {
                 ),
               );
             }
+
             return Stack(
                 children:[ ListView.builder(
                   itemCount: snapshot.data!.docs.length,
@@ -134,7 +147,6 @@ class _allStarredState extends State<allStarred> {
                                     },
                                   ),
                                 ),
-
                               kCard(
                                 color: msg.senderEmail == auth.currentUser!.email ?
                                 myColors.starColor : myColors.familyText,
@@ -156,7 +168,6 @@ class _allStarredState extends State<allStarred> {
                                           icons.wStar,
                                           BoxSpacing(mWidth: 4,),
                                           Text(formattedTime),
-
                                         ],
                                       ),
                                     ],
@@ -165,16 +176,35 @@ class _allStarredState extends State<allStarred> {
                               ),
                               Spacer(),
                               kIconButton(
-                                onPressed: (){
+                                onPressed: () async {
+                                  final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+                                  final isSentByMe = msg.senderId == currentUserId;
+                                  final receiverId = isSentByMe ? msg.receiverId : msg.senderId;
+                                  // Fetch the receiver's name from Firestore
+                                  final receiverSnapshot = await FirebaseFirestore.instance.collection('users').doc(receiverId).get();
+                                  if (receiverSnapshot.exists) {
+                                    final receiverName = receiverSnapshot.data()?['name'] ?? 'Unknown';
 
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Testname(
+                                          receiverId: receiverId!,
+                                          receiverName: receiverName,
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    // Handle the case where receiver data is not found
+                                    myToast("Receiver data not found.");
+                                  }
                                 },
                                 myIcon: icons.arrowForward,
-                              ),
+                              )
 
                             ],
                           ),
                           divider(),
-
                         ],
                       ),
                     );
@@ -249,7 +279,6 @@ class _allStarredState extends State<allStarred> {
                                   isEditing = !isEditing;
                                   selectedMessages.clear();
                                 });
-
                               }
                             }
                           },
