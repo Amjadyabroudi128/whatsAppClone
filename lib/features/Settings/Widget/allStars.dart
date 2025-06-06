@@ -28,20 +28,8 @@ class _allStarredState extends State<allStarred> {
   FirebaseService service = FirebaseService();
   bool isEditing = false;
   Set<String> selectedMessages = {};
-  late final User? user;
-
-  @override
-  void initState() {
-    super.initState();
-    user = FirebaseAuth.instance.currentUser;  // Safely assign current user
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (user == null) {
-      // Handle case when user is not available
-      return Center(child: Text("User not logged in"));
-    }
 
     return Scaffold(
       appBar: AppBar(
