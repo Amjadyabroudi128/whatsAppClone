@@ -1,6 +1,7 @@
 
 import 'dart:typed_data';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -81,7 +82,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     child: Options(
                       context: context,
                       label: Text("Starred"),
-                      trailing: icons.star,
+                      trailing: icons.arrowForward,
+                      leading: icons.star,
                       onTap: (){
                         Navigator.push(
                           context,
