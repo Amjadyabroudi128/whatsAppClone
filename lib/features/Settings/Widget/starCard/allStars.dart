@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
 import '../../../../Firebase/FirebaseAuth.dart';
@@ -143,12 +144,7 @@ class _allStarredState extends State<allStarred> {
                                   child: Column(
                                     children: [
                                       msg.image != null && msg.image!.isNotEmpty
-                                          ? Image.network(
-                                        msg.image!,
-                                        height: 150,
-                                        width: 150,
-                                        fit: BoxFit.cover,
-                                      )
+                                          ? kimageNet(src: msg.image!)
                                           : Text(msg.text),
                                       Row(
                                         mainAxisSize: MainAxisSize.min,
@@ -168,11 +164,9 @@ class _allStarredState extends State<allStarred> {
                                   final currentUserId = FirebaseAuth.instance.currentUser!.uid;
                                   final isSentByMe = msg.senderId == currentUserId;
                                   final receiverId = isSentByMe ? msg.receiverId : msg.senderId;
-                                  // Fetch the receiver's name from Firestore
                                   final receiverSnapshot = await FirebaseFirestore.instance.collection('users').doc(receiverId).get();
                                   if (receiverSnapshot.exists) {
                                     final receiverName = receiverSnapshot.data()?['name'] ?? 'Unknown';
-
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
