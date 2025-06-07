@@ -121,6 +121,7 @@ class _allStarredState extends State<allStarred> {
                                 Transform.scale(
                                   scale: 1.2,
                                   child: Checkbox(
+                                    activeColor: Colors.green,
                                     visualDensity: VisualDensity.compact,
                                     checkColor: myColors.FG,
                                     shape: CircleBorder(),
