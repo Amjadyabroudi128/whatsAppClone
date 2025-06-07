@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,24 +14,37 @@ class starCard extends StatelessWidget {
   });
 
   final User? user;
-
   @override
   Widget build(BuildContext context) {
-    return kCard(
-      child: Options(
-          context: context,
-          label: Text("Starred"),
-          trailing: icons.arrowForward,
-          leading: icons.star,
-          onTap: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => allStarred(receiverId: user!.email),
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection("starred-messages").doc(user!.email).collection
+        ("messages").orderBy("timestamp", descending: true).snapshots(),
+      builder: (context, snapshot){
+        final count = snapshot.hasData ? snapshot.data!.docs.length : 0;
+        return kCard(
+          child: Options(
+              context: context,
+              label: Row(
+                children: [
+                  Text("Starred"),
+                  Spacer(),
+                  if (count > 0) Text(count.toString()),
+                ],
               ),
-            );
-          }
-      ),
+              trailing: icons.arrowForward,
+              leading: icons.star,
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => allStarred(receiverId: user!.email),
+                  ),
+                );
+              }
+          ),
+        );
+      },
     );
+
   }
 }
