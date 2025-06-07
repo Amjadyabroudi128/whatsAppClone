@@ -1,16 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/icons.dart';
+import 'package:whatsappclone/messageClass/messageClass.dart';
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextButton.dart';
 import '../../../../components/TextStyles.dart';
 import '../../../../components/iconButton.dart';
 
 class deleteAccount extends StatelessWidget {
+  final String? messageId;
+
   const deleteAccount({
-    super.key,
+    super.key, this.messageId,
   });
 
   @override
