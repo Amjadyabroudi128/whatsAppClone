@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Firebase/FirebaseCollections.dart';
 import '../../../../components/kCard.dart';
 import '../../../../components/listTilesOptions.dart';
 import '../../../../core/icons.dart';
@@ -17,7 +18,7 @@ class starCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("starred-messages").doc(user!.email).collection
+      stream: stars.doc(user!.email).collection
         ("messages").orderBy("timestamp", descending: true).snapshots(),
       builder: (context, snapshot){
         final count = snapshot.hasData ? snapshot.data!.docs.length : 0;
