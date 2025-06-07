@@ -69,8 +69,12 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      auth.signOut();
   }
   Future<void> deleteAccount () async{
-    await users.collection("users").doc(auth.currentUser!.uid).delete();
-    await FirebaseAuth.instance.currentUser?.delete();
+    try{
+      await users.collection("users").doc(uid).delete();
+      await FirebaseAuth.instance.currentUser!.delete();
+    } catch (e) {
+      print("Error deleting account: $e");
+    }
   }
 
    Future<void> sendMessage(String receiverId, String receiverName, String message, String? image, String? file, Messages? replyTo) async {
