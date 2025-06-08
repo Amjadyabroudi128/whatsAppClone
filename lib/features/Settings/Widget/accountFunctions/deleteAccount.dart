@@ -44,6 +44,7 @@ class deleteAccount extends StatelessWidget {
                     Navigator.of(context).pushNamed("welcome");
                     await service.deleteAccount();
                     myToast("account deleted");
+                    print(FirebaseAuth.instance.currentUser!.email);
                   },
                   child: Text("Delete", style: Textstyles.deleteStyle,),
                 ),
