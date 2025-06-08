@@ -68,14 +68,41 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
    Future<void> SignOut ()async {
      auth.signOut();
   }
-  Future<void> deleteAccount () async{
-    try{
-      await users.collection("users").doc(uid).delete();
-      await FirebaseAuth.instance.currentUser!.delete();
-    } catch (e) {
-      print("Error deleting account: $e");
-    }
-  }
+   Future<void> deleteAccount() async {
+     final user = FirebaseAuth.instance.currentUser;
+     if (user == null) return;
+     final uid = user.uid;
+     final email = user.email;
+
+     if (email == null) return;
+
+     final firestore = FirebaseFirestore.instance;
+
+     await firestore.collection("users").doc(uid).delete();
+     final chatRoomsSnapshot = await firestore.collection("chat_rooms").get();
+     for (var chatRoom in chatRoomsSnapshot.docs) {
+       final messagesRef = chatRoom.reference.collection("messages");
+       final messagesSnapshot =
+       await messagesRef.where("senderEmail", isEqualTo: email).get();
+
+       for (var msgDoc in messagesSnapshot.docs) {
+         await msgDoc.reference.delete();
+       }
+     }
+     final starredMessagesRef =
+     firestore.collection("starred-messages").doc(email);
+
+     final starredMessagesSnapshot =
+     await starredMessagesRef.collection("messages").get();
+
+     for (var doc in starredMessagesSnapshot.docs) {
+       await doc.reference.delete();
+     }
+
+     await starredMessagesRef.delete();
+     await user.delete();
+   }
+
 
    Future<void> sendMessage(String receiverId, String receiverName, String message, String? image, String? file, Messages? replyTo) async {
      final String currentUser = auth.currentUser!.uid;
