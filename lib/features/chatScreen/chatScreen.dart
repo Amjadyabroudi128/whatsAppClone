@@ -141,7 +141,6 @@ class _TestnameState extends State<Testname> {
                       ),
                     ),
                     photoBtmSheet(service: service, widget: widget, textColor: textColor),
-                    if (!isTextEmpty)
                       kIconButton(
                         onPressed: () {
                           service.sendMessage(
