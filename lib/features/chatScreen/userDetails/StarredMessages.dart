@@ -132,6 +132,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                               Transform.scale(
                                 scale: 1.2,
                                 child: Checkbox(
+                                  activeColor: myColors.starColor,
                                   visualDensity: VisualDensity.compact,
                                   checkColor: myColors.FG,
                                   shape: CircleBorder(),
