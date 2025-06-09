@@ -82,6 +82,7 @@ class _TestnameState extends State<Testname> {
               child: AppBar(
                 backgroundColor: color,
                 title: Text(widget.receiverName, style: Textstyles.bioStyle),
+                centerTitle: false,
               ),
             ),
           ),
