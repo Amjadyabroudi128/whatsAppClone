@@ -174,6 +174,7 @@ class _allStarredState extends State<allStarred> {
                                         builder: (context) => Testname(
                                           receiverId: receiverId!,
                                           receiverName: receiverName,
+                                          msg: msg.messageId,
                                         ),
                                       ),
                                     );
