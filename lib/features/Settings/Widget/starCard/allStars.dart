@@ -105,6 +105,7 @@ class _allStarredState extends State<allStarred> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
                                 msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail!,
@@ -137,25 +138,27 @@ class _allStarredState extends State<allStarred> {
                                     },
                                   ),
                                 ),
-                              kCard(
-                                color: msg.senderEmail == auth.currentUser!.email ?
-                                myColors.starColor : myColors.familyText,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      msg.image != null && msg.image!.isNotEmpty
-                                          ? kimageNet(src: msg.image!)
-                                          : Text(msg.text),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          icons.wStar,
-                                          BoxSpacing(mWidth: 4,),
-                                          Text(formattedTime),
-                                        ],
-                                      ),
-                                    ],
+                              Flexible(
+                                child: kCard(
+                                  color: msg.senderEmail == auth.currentUser!.email ?
+                                  myColors.starColor : myColors.familyText,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        msg.image != null && msg.image!.isNotEmpty
+                                            ? kimageNet(src: msg.image!)
+                                            : Text(msg.text, overflow: TextOverflow.ellipsis, maxLines: msg.text.length,),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            icons.wStar,
+                                            BoxSpacing(mWidth: 4,),
+                                            Text(formattedTime),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
