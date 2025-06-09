@@ -17,7 +17,7 @@ class signOut extends StatelessWidget {
     FirebaseService firebase =  FirebaseService();
     return Options(
       context: context,
-      label: Text("SignOut"),
+      label: Text("Sign Out"),
       trailing: icons.logout,
       onTap: (){
         firebase.SignOut();
