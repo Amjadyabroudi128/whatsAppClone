@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/features/Settings/Widget/accountFunctions/signoutBtn.dart';
 import '../../Firebase/FirebaseCollections.dart';
 import '../../core/icons.dart';
 import 'Widgets/iconPerson.dart';
@@ -28,13 +29,7 @@ class _ContactsState extends State<Contacts> {
     return Scaffold(
         appBar: AppBar(
           actions: [
-            kIconButton(
-              myIcon: icons.logout,
-              onPressed: (){
-                firebase.SignOut();
-                Navigator.of(context).pushNamed("welcome");
-              },
-            )
+           signoutBtn()
           ],
           title: myPadding(
             padding: const EdgeInsets.only(top: 18),
