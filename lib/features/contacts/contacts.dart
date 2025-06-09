@@ -9,6 +9,7 @@ import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/signoutBtn.dart';
 import '../../Firebase/FirebaseCollections.dart';
+import '../../components/TextField.dart';
 import '../../core/icons.dart';
 import 'Widgets/iconPerson.dart';
 import 'Widgets/streamUser.dart';
@@ -24,6 +25,26 @@ class _ContactsState extends State<Contacts> {
   User? user = FirebaseAuth.instance.currentUser;
   final FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseService firebase =  FirebaseService();
+  TextEditingController userController = TextEditingController();
+  String searchQuery = "";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userController.addListener(_onSearched);
+  }
+  void _onSearched() {
+    setState(() {
+      searchQuery = userController.text;
+    });
+  }
+   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    userController.dispose();
+    userController.removeListener(_onSearched);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +60,18 @@ class _ContactsState extends State<Contacts> {
           automaticallyImplyLeading: false,
           centerTitle: false,
         ),
-        body: userList(),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: kTextField(
+                hint: "Search user",
+                myController: userController,
+              ),
+            ),
+            userList(searchQuery),
+          ],
+        ),
     );
   }
 }
