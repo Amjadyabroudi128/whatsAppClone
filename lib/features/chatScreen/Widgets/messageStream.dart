@@ -12,7 +12,8 @@ class MessageStream extends StatefulWidget {
     super.key,
     required this.service,
     required this.user,
-    required this.widget, this.onReply,  this.controller, this.textColor
+    required this.widget, this.onReply,  this.controller, this.textColor,
+    this.controllerScroll, this.targetMessageId
   });
 
   final FirebaseService service;
@@ -20,12 +21,16 @@ class MessageStream extends StatefulWidget {
   final Testname widget;
   final TextEditingController? controller;
   final void Function(Messages message)? onReply;
+  final ScrollController? controllerScroll;
+  final String? targetMessageId;
   final Color? textColor;
   @override
   State<MessageStream> createState() => _MessageStreamState();
 }
 
 class _MessageStreamState extends State<MessageStream> {
+  final Map<String, GlobalKey> messageKeys = {};
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +40,10 @@ class _MessageStreamState extends State<MessageStream> {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return Center(child: Text("No messages yet", style: TextStyle(color: widget.textColor),));
         }
+        messageKeys.clear();
         var messages = snapshot.data!.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
-          return Messages(
+          final message = Messages(
             text: data["message"],
             senderId: data["senderId"],
             receiverId: data["receiverId"],
@@ -54,10 +60,27 @@ class _MessageStreamState extends State<MessageStream> {
                 ? Messages.fromMap(Map<String, dynamic>.from(data["replyTo"]))
                 : null,
           );
+          messageKeys[doc.id] = GlobalKey();
+
+          return message;
         }).toList();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          final id = widget.targetMessageId;
+          if (id != null && messageKeys.containsKey(id)) {
+            final keyContext = messageKeys[id]!.currentContext;
+            if (keyContext != null) {
+              Scrollable.ensureVisible(
+                keyContext,
+                duration: const Duration(milliseconds: 500),
+                alignment: 0.5,
+              );
+            }
+          }
+        });
 
-
-        return messagesAlign(messages: messages, user: widget.user, widget: widget.widget, onReply: widget.onReply, textColor: widget.textColor);
+        return messagesAlign(messages: messages, user: widget.user,
+            widget: widget.widget, onReply: widget.onReply,
+            textColor: widget.textColor, messageKeys: messageKeys);
       },
     );
   }
