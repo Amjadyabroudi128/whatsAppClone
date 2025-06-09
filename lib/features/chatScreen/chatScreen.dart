@@ -96,6 +96,7 @@ class _TestnameState extends State<Testname> {
                   widget: widget,
                   onReply: setReplyMessage,
                   controller: messageController,
+                  targetMessageId: widget.msg,
                 ),
               ),
               if (_replyMessage != null)
