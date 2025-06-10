@@ -2,12 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/features/contacts/Widgets/userListTile.dart';
+
 import '../../../Firebase/FirebaseCollections.dart';
 import '../../../components/SizedBox.dart';
+import '../../../components/listTilesOptions.dart';
 import '../../../components/padding.dart';
 import '../../../core/icons.dart';
+import '../../chatScreen/chatScreen.dart';
 
-Widget userList(String searchQuery) {
+Widget userList(String searchQuery, {required TextEditingController controller}) {
   User? user = FirebaseAuth.instance.currentUser;
   final currentUserId = user?.uid ?? '';
 
@@ -40,20 +43,27 @@ Widget userList(String searchQuery) {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      image != null && image.isNotEmpty ?
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(image),
-                        radius: 26.0,
-                      ) : icons.person,
-                      BoxSpacing(mWidth: 10),
-                      Expanded(
-                        child: listTile(userDoc: userDoc),
-                      ),
-                    ],
+                  Options(
+                    context: context,
+                    label: Text(userDoc["name"]),
+                    leading: image != null && image.isNotEmpty ? CircleAvatar(
+                      backgroundImage: NetworkImage(image),
+                      radius: 24,
+                    ) : icons.person,
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Testname(
+                            receiverId: userDoc["uid"],
+                            receiverName: userDoc["name"] ?? "Unknown",
+                          ),
+                        ),
+                      );
+                      controller.clear();
+                    }
                   ),
-                  Divider(),
+                   Divider(),
                 ],
               ),
             );
