@@ -48,7 +48,7 @@ Widget userList(String searchQuery, {required TextEditingController controller})
                     label: Text(userDoc["name"]),
                     leading: image != null && image.isNotEmpty ? CircleAvatar(
                       backgroundImage: NetworkImage(image),
-                      radius: 24,
+                      radius: 20,
                     ) : icons.person,
                     onTap: (){
                       Navigator.push(

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
+import '../../../../core/MyColors.dart';
 import 'imageSheet.dart';
 
 class FullScreenImageScreen extends StatefulWidget {
@@ -59,11 +60,10 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
 
             final data = snapshot.data!.data() as Map<String, dynamic>;
             final updatedImage = data["image"] ?? "";
-
             if (updatedImage.isEmpty) {
-              return const Text(
+              return Text(
                 "No image available",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: myColors.FG),
               );
             }
 
