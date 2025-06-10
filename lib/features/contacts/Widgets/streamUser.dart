@@ -10,7 +10,7 @@ import '../../../components/padding.dart';
 import '../../../core/icons.dart';
 import '../../chatScreen/chatScreen.dart';
 
-Widget userList(String searchQuery, {required TextEditingController controller}) {
+Widget userList(String searchQuery,) {
   User? user = FirebaseAuth.instance.currentUser;
   final currentUserId = user?.uid ?? '';
 
