@@ -1,16 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/components/TextField.dart';
-import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/features/contacts/Widgets/userListTile.dart';
-import 'package:whatsappclone/features/welcomeScreen/Widgets/whatsappImage.dart';
-
 import '../../../Firebase/FirebaseCollections.dart';
 import '../../../components/SizedBox.dart';
 import '../../../components/padding.dart';
 import '../../../core/icons.dart';
-import 'iconPerson.dart';
 
 Widget userList(String searchQuery) {
   User? user = FirebaseAuth.instance.currentUser;

@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
-import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/signoutBtn.dart';
-import '../../Firebase/FirebaseCollections.dart';
 import '../../components/TextField.dart';
-import '../../core/icons.dart';
-import 'Widgets/iconPerson.dart';
 import 'Widgets/streamUser.dart';
-import 'Widgets/userListTile.dart';
 class Contacts extends StatefulWidget {
   const Contacts({super.key});
 
