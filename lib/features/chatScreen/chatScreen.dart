@@ -71,6 +71,7 @@ class _TestnameState extends State<Testname> {
                         email: data?['email'] ?? '',
                         imageUrl: data?['image'] ?? '',
                         bio: data?["bio"] ?? '',
+                        link: data?["link"] ?? "", // Default value if "link" is missing
                         receiverId: widget.receiverId,
                       ),
                     ),
