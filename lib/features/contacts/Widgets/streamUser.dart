@@ -2,11 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextField.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/features/contacts/Widgets/userListTile.dart';
+import 'package:whatsappclone/features/welcomeScreen/Widgets/whatsappImage.dart';
 
 import '../../../Firebase/FirebaseCollections.dart';
 import '../../../components/SizedBox.dart';
 import '../../../components/padding.dart';
+import '../../../core/icons.dart';
 import 'iconPerson.dart';
 
 Widget userList(String searchQuery) {
@@ -37,13 +40,18 @@ Widget userList(String searchQuery) {
           itemCount: users.length,
           itemBuilder: (context, index) {
             final userDoc = users[index];
+            final image = userDoc['image']; // Assuming 'image' is the field name for the user's image
             return myPadding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      person(),
+                      image != null && image.isNotEmpty ?
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(image),
+                        radius: 26.0,
+                      ) : icons.person,
                       BoxSpacing(mWidth: 10),
                       Expanded(
                         child: listTile(userDoc: userDoc),
