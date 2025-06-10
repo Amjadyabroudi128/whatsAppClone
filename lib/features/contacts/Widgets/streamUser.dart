@@ -63,6 +63,19 @@ Widget userList(String searchQuery, {required TextEditingController controller})
                       controller.clear();
                     }
                   ),
+                  // Row(
+                  //   children: [
+                  //     image != null && image.isNotEmpty ?
+                  //     CircleAvatar(
+                  //       backgroundImage: NetworkImage(image),
+                  //       radius: 26.0,
+                  //     ) : icons.person,
+                  //     BoxSpacing(mWidth: 10),
+                  //     Expanded(
+                  //       child: Text(userDoc["name"] ?? "Unknown Email"),
+                  //     )
+                  //   ],
+                  // ),
                    Divider(),
                 ],
               ),
