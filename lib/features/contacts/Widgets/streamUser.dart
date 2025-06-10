@@ -60,7 +60,6 @@ Widget userList(String searchQuery, {required TextEditingController controller})
                           ),
                         ),
                       );
-                      controller.clear();
                     }
                   ),
                    Divider(),
