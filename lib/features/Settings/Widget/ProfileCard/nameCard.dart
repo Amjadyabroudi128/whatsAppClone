@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
@@ -35,6 +37,8 @@ class nameCard extends StatefulWidget {
 class _nameCardState extends State<nameCard> {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController nameController = TextEditingController();
+  TextEditingController linkController = TextEditingController();
+
   String? imageUrl;
   FirebaseService service = FirebaseService();
 
@@ -77,6 +81,7 @@ class _nameCardState extends State<nameCard> {
                   final imageUrl = data.data().toString().contains("image") ? data["image"] : "";
                   final bio = data["bio"] ?? "";
                   final name = data["name"] ?? "";
+                  final link = data.data().toString().contains("link") ? data["link"] : "";
                   return Column(
                     children: [
                       GestureDetector(
@@ -128,7 +133,6 @@ class _nameCardState extends State<nameCard> {
                                 // await ShowSheet(context);
                               },
                             ),
-
                             divider(),
                             Options(
                               context: context,
@@ -136,6 +140,25 @@ class _nameCardState extends State<nameCard> {
                               label: Text(bio.isNotEmpty ? bio : "Edit Your Bio"),
                               onTap: () async {
                                 await ShowSheet(context, bio: bio);
+                              },
+                            ),
+                            divider(),
+                            Options(
+                              context: context,
+                              trailing: Icon(
+                                FontAwesomeIcons.instagram,
+                              ),
+                              label: Text(link.isNotEmpty ? link : "Links"),
+                              onTap: () async {
+                                await btmSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (context) {
+                                    return LinksScreen(linkController: linkController,link: link);
+                                  },
+                                );
+
+                                // await ShowSheet(context);
                               },
                             )
                           ],
@@ -152,5 +175,55 @@ class _nameCardState extends State<nameCard> {
     );
   }
 
+}
+
+class LinksScreen extends StatelessWidget {
+  final TextEditingController linkController;
+
+  const LinksScreen({super.key, required this.linkController, required link});
+
+  @override
+  Widget build(BuildContext context) {
+    return FractionallySizedBox(
+      heightFactor: 0.94,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Add link"),
+          actions: [
+            kTextButton(
+              child: Text("Save"),
+              onPressed: ()async {
+                await FirebaseFirestore.instance.collection('users')
+                    .doc(FirebaseAuth.instance.currentUser!.uid).update({
+                  'link': FieldValue.serverTimestamp(), // If "link" is missing, you can add a default or null value.
+                });
+
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Instagram UserName"),
+              BoxSpacing(myHeight: 10,),
+              kTextField(
+                filled: true,
+                fillColor: Colors.grey,
+                myController: linkController,
+                maxLines: 1,
+                hint: "@ add a link",
+              ),
+              BoxSpacing(myHeight: 10,),
+              Text("adding isntagram to your profile will make it visible", style: TextStyle(fontSize: 13, color: CupertinoColors.systemGrey),)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
