@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
@@ -19,7 +20,8 @@ class userDetails extends StatefulWidget {
   final String? imageUrl;
   final String? bio;
   final String? receiverId;
-  const userDetails({super.key, this.name, this.email, this.imageUrl, this.bio, this.receiverId});
+  final String? link;
+  const userDetails({super.key, this.name, this.email, this.imageUrl, this.bio, this.receiverId, this.link});
 
   @override
   State<userDetails> createState() => _userDetailsState();
@@ -63,6 +65,14 @@ class _userDetailsState extends State<userDetails> {
               ),
               BoxSpacing(myHeight: 9),
               Text(widget.name ?? '', style: Textstyles.recieverName),
+              GestureDetector(
+                onTap: () async {
+                  await launchUrl(Uri.parse(
+                      '${widget.link}'));
+                },
+                child: Text(widget.link ?? "", style: TextStyle(fontSize: 18, decoration: TextDecoration.underline ),),
+              ),
+              // Text(widget.link ?? "",),
               BoxSpacing(myHeight: 7),
               Text(widget.email ?? '', style: Textstyles.recieverEmail),
               if (widget.bio != null && widget.bio!.isNotEmpty)
