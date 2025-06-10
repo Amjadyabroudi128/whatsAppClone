@@ -62,7 +62,7 @@ class _ContactsState extends State<Contacts> {
                 myController: userController,
               ),
             ),
-            userList(searchQuery),
+            userList(searchQuery, controller: userController),
           ],
         ),
     );
