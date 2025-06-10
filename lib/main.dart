@@ -21,8 +21,8 @@ void main() async {
     androidProvider: AndroidProvider.debug, // Use Debug for testing
     appleProvider: AppleProvider.debug,
   );
-  await FirebaseMessaging.instance.subscribeToTopic("messages");
-  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  // await FirebaseMessaging.instance.subscribeToTopic("messages");
+  // await FirebaseMessaging.instance.setAutoInitEnabled(true);
   runApp(const MyApp());
 }
 
