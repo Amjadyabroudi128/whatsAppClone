@@ -54,6 +54,7 @@ class _SettingScreenState extends State<SettingScreen> {
           final userData = snapshot.data!.data() as Map<String, dynamic>?;
 
           final userName = userData?['name'] ?? 'No name found';
+          final link = userData?['link'] ?? 'No name found';
 
           return myPadding(
             padding: const EdgeInsets.all(16.0),
@@ -67,7 +68,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     automaticallyImplyLeading: false,
                   ),
                   BoxSpacing(myHeight: 20),
-                  nameCard(userName: userName),
+                  nameCard(userName: userName, link: link),
                   BoxSpacing(myHeight: 15,),
                   Text("Account", style: Textstyles.accountStyle,),
                   kCard(

@@ -25,11 +25,11 @@ import 'imageWidget.dart';
 class nameCard extends StatefulWidget {
   const nameCard({
     super.key,
-    required this.userName,
+    required this.userName, this.link,
   });
 
   final dynamic userName;
-
+  final dynamic link;
   @override
   State<nameCard> createState() => _nameCardState();
 }
@@ -40,12 +40,12 @@ class _nameCardState extends State<nameCard> {
   TextEditingController linkController = TextEditingController();
 
   String? imageUrl;
-  FirebaseService service = FirebaseService();
 
   @override
   void initState() {
     super.initState();
     nameController.text = widget.userName;
+    linkController.text = widget.link;
   }
 
   Future addToFireStore(String imagePath) async {
@@ -59,6 +59,7 @@ class _nameCardState extends State<nameCard> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseService service = FirebaseService();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -81,7 +82,7 @@ class _nameCardState extends State<nameCard> {
                   final imageUrl = data.data().toString().contains("image") ? data["image"] : "";
                   final bio = data["bio"] ?? "";
                   final name = data["name"] ?? "";
-                  final link = data.data().toString().contains("link") ? data["link"] : "";
+                  final link = data["link"] ?? "";
                   return Column(
                     children: [
                       GestureDetector(
@@ -148,7 +149,7 @@ class _nameCardState extends State<nameCard> {
                               trailing: Icon(
                                 FontAwesomeIcons.instagram,
                               ),
-                              label: Text(link.isNotEmpty ? link : "Links"),
+                              label: Text("Link"),
                               onTap: () async {
                                 await btmSheet(
                                   context: context,
@@ -184,6 +185,7 @@ class LinksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseService service = FirebaseService();
     return FractionallySizedBox(
       heightFactor: 0.94,
       child: Scaffold(
@@ -193,11 +195,7 @@ class LinksScreen extends StatelessWidget {
             kTextButton(
               child: Text("Save"),
               onPressed: ()async {
-                await FirebaseFirestore.instance.collection('users')
-                    .doc(FirebaseAuth.instance.currentUser!.uid).update({
-                  'link': FieldValue.serverTimestamp(), // If "link" is missing, you can add a default or null value.
-                });
-
+                await service.addLink(linkController.text.trim());
                 Navigator.of(context).pop();
               },
             )
@@ -215,7 +213,7 @@ class LinksScreen extends StatelessWidget {
                 fillColor: Colors.grey,
                 myController: linkController,
                 maxLines: 1,
-                hint: "@ add a link",
+                hint: "${linkController.text.isEmpty ? "Link" : linkController}",
               ),
               BoxSpacing(myHeight: 10,),
               Text("adding isntagram to your profile will make it visible", style: TextStyle(fontSize: 13, color: CupertinoColors.systemGrey),)
