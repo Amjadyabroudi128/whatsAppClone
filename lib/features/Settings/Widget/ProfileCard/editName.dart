@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextButton.dart';
@@ -9,11 +10,11 @@ import '../../../../core/MyColors.dart';
 class editName extends StatelessWidget {
   final FirebaseService service;
   final TextEditingController nameController;
-
+  final String name;
   const editName({
     Key? key,
     required this.service,
-    required this.nameController,
+    required this.nameController, required this.name,
   }) : super(key: key);
 
   @override
@@ -28,9 +29,17 @@ class editName extends StatelessWidget {
           title: const Text("Edit Your Name", style: TextStyle(color: Colors.white)),
           actions: [
             kTextButton(
-              onPressed: () {
-                service.updateName(nameController.text.trim());
-                Navigator.of(context).pop();
+              onPressed: () async {
+                String newName = nameController.text.trim();
+
+                if(newName.isEmpty){
+                  myToast("Your name is empty ");
+                } else if (newName == name ){
+                  myToast("Change something");
+                } else {
+                  await service.updateName(nameController.text.trim());
+                  Navigator.of(context).pop();
+                }
               },
               child: Text("Save", style: Textstyles.saveBio),
             ),
@@ -40,7 +49,7 @@ class editName extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: kTextField(
             filled: true,
-            fillColor: Colors.grey,
+            fillColor: myColors.familyText,
             myController: nameController,
             maxLines: 9,
             hint: "Edit your name",

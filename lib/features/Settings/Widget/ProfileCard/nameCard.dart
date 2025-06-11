@@ -127,6 +127,7 @@ class _nameCardState extends State<nameCard> {
                                     return editName(
                                       service: service,
                                       nameController: nameController,
+                                      name: name
                                     );
                                   },
                                 );
