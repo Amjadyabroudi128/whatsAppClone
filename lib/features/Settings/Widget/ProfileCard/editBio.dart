@@ -25,9 +25,6 @@ class _EditBioState extends State<EditBio> {
     return Scaffold(
       backgroundColor: myColors.btmSheet,
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white
-        ),
         backgroundColor: Colors.grey,
         title: Text("Edit Your Bio", style: TextStyle(color: Colors.white)),
         actions: [

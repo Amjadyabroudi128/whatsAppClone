@@ -24,7 +24,6 @@ class editName extends StatelessWidget {
       child: Scaffold(
         backgroundColor: myColors.btmSheet,
         appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: myColors.familyText,
           title: const Text("Edit Your Name", style: TextStyle(color: Colors.white)),
           actions: [
