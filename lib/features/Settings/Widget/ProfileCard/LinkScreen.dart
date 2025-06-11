@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextStyles.dart';
 
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/SizedBox.dart';
@@ -24,7 +25,7 @@ class LinksScreen extends StatelessWidget {
           title: Text("Add link"),
           actions: [
             kTextButton(
-              child: Text("Save"),
+              child: Text("Save", style: Textstyles.saveBio,),
               onPressed: ()async {
                 await service.addLink(linkController.text.trim());
                 Navigator.of(context).pop();
