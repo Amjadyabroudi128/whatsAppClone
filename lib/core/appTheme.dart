@@ -19,7 +19,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     appBarTheme: AppBarTheme(
       centerTitle: true,
       iconTheme: IconThemeData(
-          color: Colors.white
+          color: Colors.black
       )
     ),
        elevatedButtonTheme: ElevatedButtonThemeData(
