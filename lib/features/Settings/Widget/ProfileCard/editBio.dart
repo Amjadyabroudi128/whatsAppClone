@@ -7,6 +7,8 @@ import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
+import '../../../../components/flutterToast.dart';
+
 class EditBio extends StatefulWidget {
   final String? bio;
   const EditBio({super.key, required this.bio});
@@ -35,9 +37,13 @@ class _EditBioState extends State<EditBio> {
         title: Text("Edit Your Bio", style: TextStyle(color: Colors.white)),
         actions: [
           kTextButton(
-            onPressed: (){
-              service.updateBio(bioController.text.trim());
-              Navigator.of(context).pop();
+            onPressed: () async {
+              String newBio = bioController.text.trim();
+              newBio.isEmpty ? myToast("add something to your bio") :
+                  await service.updateBio(newBio);
+              // await
+              // service.updateBio(bioController.text.trim());
+              // Navigator.of(context).pop();
             },
             child: Text("Save", style: Textstyles.saveBio),
           ),
