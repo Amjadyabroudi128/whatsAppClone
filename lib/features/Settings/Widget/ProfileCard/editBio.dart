@@ -39,11 +39,14 @@ class _EditBioState extends State<EditBio> {
           kTextButton(
             onPressed: () async {
               String newBio = bioController.text.trim();
-              newBio.isEmpty ? myToast("add something to your bio") :
-                  await service.updateBio(newBio);
-              // await
-              // service.updateBio(bioController.text.trim());
-              // Navigator.of(context).pop();
+              if(newBio.isEmpty) {
+                myToast("add someThing to your bio");
+              } else if (newBio == (widget.bio ?? '')) {
+                myToast("Nothing changed in the bio");
+              } else {
+                await service.updateBio(newBio);
+                Navigator.of(context).pop();
+              }
             },
             child: Text("Save", style: Textstyles.saveBio),
           ),
