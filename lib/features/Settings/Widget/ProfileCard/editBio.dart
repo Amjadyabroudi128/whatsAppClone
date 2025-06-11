@@ -53,7 +53,7 @@ class _EditBioState extends State<EditBio> {
         padding: const EdgeInsets.all(8.0),
         child: kTextField(
           filled: true,
-          fillColor: Colors.grey,
+          fillColor: myColors.familyText,
           myController: bioController,
           maxLines: 9,
           hint: "Edit your Bio",
