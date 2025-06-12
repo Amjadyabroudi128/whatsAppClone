@@ -13,6 +13,9 @@ class MessageStream extends StatefulWidget {
     required this.service,
     required this.user,
     required this.widget, this.onReply,  this.controller, this.textColor,
+    required this.selectedMessages,
+    required this.isEditing,
+
   });
 
   final FirebaseService service;
@@ -21,6 +24,8 @@ class MessageStream extends StatefulWidget {
   final TextEditingController? controller;
   final void Function(Messages message)? onReply;
   final Color? textColor;
+  final Set<String> selectedMessages;
+  final bool isEditing;
   @override
   State<MessageStream> createState() => _MessageStreamState();
 }
@@ -61,7 +66,7 @@ class _MessageStreamState extends State<MessageStream> {
 
         return messagesAlign(messages: messages, user: widget.user,
             widget: widget.widget, onReply: widget.onReply,
-            textColor: widget.textColor,);
+            textColor: widget.textColor, isEditing : widget.isEditing, selectedMessages: widget.selectedMessages);
       },
     );
   }
