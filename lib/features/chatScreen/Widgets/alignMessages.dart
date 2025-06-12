@@ -35,7 +35,6 @@ class messagesAlign extends StatefulWidget {
      this.widget,
     this.onReply,
     this.textColor,
-    required this.messageKeys, // ✅ Add this
 
   });
 
@@ -44,7 +43,6 @@ class messagesAlign extends StatefulWidget {
   final Testname? widget;
   final void Function(Messages)? onReply;
   final Color? textColor;
-  final Map<String, GlobalKey<State<StatefulWidget>>> messageKeys; // ✅ Store here
 
   @override
   State<messagesAlign> createState() => _messagesAlignState();
@@ -78,7 +76,6 @@ class _messagesAlignState extends State<messagesAlign> {
           String formattedTime = DateFormat.Hm().format(dateTime!);
           String day = DateFormat.yMd().format(dateTime);
           return Column(
-            key: widget.messageKeys[msg.messageId],
             children: [
               Text(day, style: TextStyle(color: widget.textColor),),
               Align(
