@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextButton.dart';
 
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
@@ -36,7 +37,8 @@ class _TestnameState extends State<Testname> {
   final User? user = FirebaseAuth.instance.currentUser;
   Messages? _replyMessage;
   bool isTextEmpty = true;
-
+  bool isEditing = false;
+  Set<String> selectedMessages = {};
   void setReplyMessage(Messages message) {
     setState(() {
       _replyMessage = message;
@@ -82,7 +84,23 @@ class _TestnameState extends State<Testname> {
               },
               child: AppBar(
                 backgroundColor: color,
-                title: Text(widget.receiverName, style: Textstyles.bioStyle),
+                title: Row(
+                  children: [
+                    Text(widget.receiverName, style: Textstyles.bioStyle),
+                    Spacer(),
+                    kTextButton(
+                      onPressed: () {
+                        setState(() {
+                          isEditing = !isEditing;
+                          selectedMessages.clear(); // Optional: clear selections when toggling
+                        });
+                      },
+                      child: Text(isEditing ? (selectedMessages.isNotEmpty ? "Done" : "Cancel") : "Edit",
+                          style: Textstyles.editBar
+                      ),
+                    )
+                  ],
+                ),
                 centerTitle: false,
               ),
             ),
@@ -97,6 +115,8 @@ class _TestnameState extends State<Testname> {
                   widget: widget,
                   onReply: setReplyMessage,
                   controller: messageController,
+                  isEditing: isEditing,
+                  selectedMessages: selectedMessages
                 ),
               ),
               if (_replyMessage != null)
@@ -131,6 +151,18 @@ class _TestnameState extends State<Testname> {
                     ],
                   ),
                 ),
+              isEditing?
+              kIconButton(
+                onPressed: (){
+                  setState(() {
+                    service.Deletemessage("${widget.senderId}", "${widget.receiverId}", "${widget.msg}");
+                    selectedMessages.remove(widget.msg);
+                    selectedMessages.clear();
+                    isEditing = false;
+                  });
+                },
+                myIcon: icons.deleteIcon,
+              ) :
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
