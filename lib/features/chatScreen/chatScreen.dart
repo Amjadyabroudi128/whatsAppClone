@@ -152,16 +152,23 @@ class _TestnameState extends State<Testname> {
                   ),
                 ),
               isEditing?
-              kIconButton(
-                onPressed: (){
-                  setState(() {
-                    service.Deletemessage("${widget.senderId}", "${widget.receiverId}", "${widget.msg}");
-                    selectedMessages.remove(widget.msg);
-                    selectedMessages.clear();
-                    isEditing = false;
-                  });
-                },
-                myIcon: icons.deleteIcon,
+              Row(
+                children: [
+                  kIconButton(
+                    onPressed: (){
+                      setState(() async {
+
+                        // service.Deletemessage("${widget.senderId}", "${widget.receiverId}", "${widget.msg}");
+                        selectedMessages.remove(widget.msg);
+                        selectedMessages.clear();
+                        isEditing = false;
+                      });
+                    },
+                    myIcon: icons.deleteIcon,
+                  ),
+                  Spacer(),
+                  Text("${selectedMessages.length} messages ")
+                ],
               ) :
               Padding(
                 padding: const EdgeInsets.all(8.0),
