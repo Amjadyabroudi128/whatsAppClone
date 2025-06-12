@@ -101,4 +101,17 @@ class Messages {
       isEdited: isEdited ?? this.isEdited,
     );
   }
+  factory Messages.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return Messages(
+      messageId: doc.id,
+      text: data['message'],
+      senderId: data['senderId'],
+      receiverId: data['receiverId'],
+      senderEmail: data['senderEmail'],
+      image: data['image'] ?? '',
+      time: data['time']?.toDate(),
+    );
+  }
+
 }
