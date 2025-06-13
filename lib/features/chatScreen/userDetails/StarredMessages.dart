@@ -234,7 +234,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                               await showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  title: Text("You are about to delete ${msg.text}"),
+                                  title: Text("You are about to delete ${selectedMessages.length} messages "),
                                   content: Text("Are you sure? "),
                                   actions: [
                                     kTextButton(
