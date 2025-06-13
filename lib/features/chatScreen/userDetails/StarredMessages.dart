@@ -222,59 +222,48 @@ class _StarredmessagesState extends State<Starredmessages> {
                       ),
                       kIconButton(
                         onPressed: () async {
-                          if (selectedMessages.isNotEmpty) {
-                            await service.deleteSelectedMessages(
-                              senderId: user!.uid,
-                              receiverId: widget.receiverId!,
-                              messageIds: selectedMessages,
-                            );
-                            setState(() {
-                              selectedMessages.clear();
-                              isEditing = false;
-                              myToast("messages Deleted");
-                            });
+                          for( var doc in snapshot.data!.docs ) {
+                            if (selectedMessages.contains(doc.id)) {
+                              final msg = Messages(
+                                messageId: doc.id,
+                                text: doc["message"],
+                                receiverId: doc["receiverId"],
+                                senderEmail: doc["senderEmail"],
+                                senderId: doc["senderId"],
+                              );
+                              await showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text("You are about to delete ${msg.text}"),
+                                  content: Text("Are you sure? "),
+                                  actions: [
+                                    kTextButton(
+                                      onPressed: () =>  Navigator.pop(context),
+                                      child: Text("Cancel"),
+                                    ),
+                                    kTextButton(
+                                      onPressed: () async {
+                                        await service.deleteSelectedMessages(
+                                            senderId: msg.senderId ?? "",
+                                            receiverId: msg.receiverId ?? "",
+                                            messageIds: selectedMessages);
+                                        await service.deleteStar(msg);
+                                        Navigator.pop(context);
+                                        myToast("Selected messages deleted");
+                                      },
+                                      child: Text("Delete", style: Textstyles.deletemessage,),
+                                    )
+                                  ],
+                                )
+                              );
+                              setState(() {
+                                isEditing = !isEditing;
+                                selectedMessages.clear();
+                              });
+
+                            }
                           }
                         },
-                        // onPressed: () async {
-                        //   for( var doc in snapshot.data!.docs ) {
-                        //     if (selectedMessages.contains(doc.id)) {
-                        //       final msg = Messages(
-                        //         messageId: doc.id,
-                        //         text: doc["message"],
-                        //         receiverId: doc["receiverId"],
-                        //         senderEmail: doc["senderEmail"],
-                        //         senderId: doc["senderId"],
-                        //       );
-                        //       await showDialog(
-                        //         context: context,
-                        //         builder: (context) => AlertDialog(
-                        //           title: Text("You are about to delete ${msg.text}"),
-                        //           content: Text("Are you sure? "),
-                        //           actions: [
-                        //             kTextButton(
-                        //               onPressed: () =>  Navigator.pop(context),
-                        //               child: Text("Cancel"),
-                        //             ),
-                        //             kTextButton(
-                        //               onPressed: () async {
-                        //                 await service.Deletemessage(msg.senderId ?? "", msg.receiverId ?? "", msg.messageId ?? "");
-                        //                 await service.deleteStar(msg);
-                        //                 Navigator.pop(context);
-                        //                 myToast("Selected messages deleted");
-                        //               },
-                        //               child: Text("Delete", style: Textstyles.deletemessage,),
-                        //             )
-                        //           ],
-                        //         )
-                        //       );
-                        //       setState(() {
-                        //         isEditing = !isEditing;
-                        //         selectedMessages.clear();
-                        //       });
-                        //
-                        //     }
-                        //   }
-                        // },
                         myIcon: icons.deleteIcon,
                       ),
                     ],
