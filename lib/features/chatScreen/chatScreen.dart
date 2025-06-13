@@ -158,15 +158,37 @@ class _TestnameState extends State<Testname> {
                   kIconButton(
                     onPressed: () async {
                       if (selectedMessages.isNotEmpty) {
-                        await service.deleteSelectedMessages(
-                          senderId: currentUser,
-                          receiverId: widget.receiverId,
-                          messageIds: selectedMessages,
+                        await showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: selectedMessages.length > 1 ?
+                              Text("You are about to Delete ${selectedMessages.length} Messages") :
+                              Text("You are about to Delete ${widget.msg}"),
+                              content: Text("Are you sure? "),
+                              actions: [
+                                kTextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Cancel"),
+                                ),
+                                kTextButton(
+                                  onPressed: () async {
+                                    await service.deleteSelectedMessages(
+                                        senderId: widget.senderId!,
+                                        receiverId: widget.receiverId,
+                                        messageIds: selectedMessages);
+                                    Navigator.pop(context);
+                                    myToast("Selected messages deleted");
+                                  },
+                                  child: Text("Delete", style: Textstyles.deletemessage,),
+                                )
+                              ],
+                            )
                         );
                         setState(() {
                           selectedMessages.clear();
                           isEditing = false;
-                          myToast("messages Deleted");
                         });
                       }
                     },
