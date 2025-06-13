@@ -35,6 +35,7 @@ class _TestnameState extends State<Testname> {
   final TextEditingController messageController = TextEditingController();
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
+  final currentUser = FirebaseAuth.instance.currentUser!.uid;
   Messages? _replyMessage;
   bool isTextEmpty = true;
   bool isEditing = false;
@@ -155,17 +156,23 @@ class _TestnameState extends State<Testname> {
               Row(
                 children: [
                   kIconButton(
-                    onPressed: (){
-                      setState(() async {
-
-                        // service.Deletemessage("${widget.senderId}", "${widget.receiverId}", "${widget.msg}");
-                        selectedMessages.remove(widget.msg);
-                        selectedMessages.clear();
-                        isEditing = false;
-                      });
+                    onPressed: () async {
+                      if (selectedMessages.isNotEmpty) {
+                        await service.deleteSelectedMessages(
+                          senderId: currentUser,
+                          receiverId: widget.receiverId,
+                          messageIds: selectedMessages,
+                        );
+                        setState(() {
+                          selectedMessages.clear();
+                          isEditing = false;
+                          myToast("messages Deleted");
+                        });
+                      }
                     },
                     myIcon: icons.deleteIcon,
                   ),
+
                   Spacer(),
                   Text("${selectedMessages.length} messages ")
                 ],
