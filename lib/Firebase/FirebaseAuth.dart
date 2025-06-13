@@ -176,6 +176,36 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      await FirebaseFirestore.instance.collection("starred-messages")
          .doc(auth.currentUser!.email).collection("messages").doc(messageId).delete();
    }
+   Future<void> deleteSelectedMessages({
+     required String senderId,
+     required String receiverId,
+     required Set<String> messageIds,
+   }) async {
+     final batch = FirebaseFirestore.instance.batch();
+     List<String> ids = [senderId, receiverId];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     for (String messageId in messageIds) {
+       // Delete from chat messages
+       final msgRef = FirebaseFirestore.instance
+           .collection("chat_rooms")
+           .doc(chatRoomID)
+           .collection("messages")
+           .doc(messageId);
+
+       batch.delete(msgRef);
+       // Delete from starred messages
+       final starredRef = FirebaseFirestore.instance
+           .collection("starred-messages")
+           .doc(FirebaseAuth.instance.currentUser!.email)
+           .collection("messages")
+           .doc(messageId);
+       batch.delete(starredRef);
+     }
+     await batch.commit();
+   }
+
    Future <void> updateMessage (String messageId, String userID, String receiverId, String newMessage) async {
      List<String> ids = [userID, receiverId];
      ids.sort();
