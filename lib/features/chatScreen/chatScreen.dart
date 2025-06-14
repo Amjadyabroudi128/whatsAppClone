@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 
 import '../../globalState.dart';
@@ -87,8 +88,22 @@ class _TestnameState extends State<Testname> {
                 backgroundColor: color,
                 title: Row(
                   children: [
-                    Text(widget.receiverName, style: Textstyles.bioStyle),
+                    isEditing ? Row(
+                      children: [
+                        Text("${selectedMessages.length} selected"),
+                        BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.33,),
+                        kTextButton(onPressed: (){
+                          setState(() {
+                            FocusScope.of(context).unfocus();
+                            selectedMessages.clear();
+                            isEditing = !isEditing;
+                          });
+                        },
+                            child: Text("Cancel"))
+                      ],
+                    ) : Text(widget.receiverName, style: Textstyles.bioStyle),
                     Spacer(),
+                    
                   ],
                 ),
                 centerTitle: false,
@@ -106,7 +121,13 @@ class _TestnameState extends State<Testname> {
                   onReply: setReplyMessage,
                   controller: messageController,
                   isEditing: isEditing,
-                  selectedMessages: selectedMessages
+                  selectedMessages: selectedMessages,
+                  onToggleEdit: () {
+                    setState(() {
+                      isEditing = !isEditing;
+                      selectedMessages.clear();
+                    });
+                  },
                 ),
               ),
               if (_replyMessage != null)
@@ -141,6 +162,26 @@ class _TestnameState extends State<Testname> {
                     ],
                   ),
                 ),
+              isEditing || selectedMessages.isNotEmpty ?
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      kIconButton(
+                        onPressed: () async {
+                          await service.deleteSelectedMessages(
+                              senderId: FirebaseAuth.instance.currentUser!.uid,
+                              receiverId: widget.receiverId,
+                              messageIds: selectedMessages);
+                          setState(() {
+                            isEditing = false;
+                            selectedMessages.clear();
+                          });
+                        },
+                        myIcon: icons.deleteIcon,
+                      ),
+
+                    ],
+                  ) :
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
