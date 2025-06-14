@@ -141,7 +141,7 @@ class _messagesAlignState extends State<messagesAlign> {
                         items: [
                           copyMessage(msg, context),
                           if (isMe) editMessage(context, msg, service, widget.widget, widget.user),
-                          deleteMessage(context, msg, widget.widget, widget.user, service),
+                          deleteMessage(context, msg, widget.widget, widget.user, service,),
                           starMessage(msg, service, index, context, ),
                           PopupMenuItem(
                             value: "reply",

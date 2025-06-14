@@ -89,17 +89,6 @@ class _TestnameState extends State<Testname> {
                   children: [
                     Text(widget.receiverName, style: Textstyles.bioStyle),
                     Spacer(),
-                    kTextButton(
-                      onPressed: () {
-                        setState(() {
-                          isEditing = !isEditing;
-                          selectedMessages.clear(); // Optional: clear selections when toggling
-                        });
-                      },
-                      child: Text(isEditing ? (selectedMessages.isNotEmpty ? "Done" : "Cancel") : "Edit",
-                          style: Textstyles.editBar
-                      ),
-                    )
                   ],
                 ),
                 centerTitle: false,
@@ -152,53 +141,6 @@ class _TestnameState extends State<Testname> {
                     ],
                   ),
                 ),
-              isEditing?
-              Row(
-                children: [
-                  kIconButton(
-                    onPressed: () async {
-                      if (selectedMessages.isNotEmpty) {
-                        await showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: selectedMessages.length > 1 ?
-                              Text("You are about to Delete ${selectedMessages.length} Messages") :
-                              Text("You are about to Delete ${widget.msg}"),
-                              content: Text("Are you sure? "),
-                              actions: [
-                                kTextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Cancel"),
-                                ),
-                                kTextButton(
-                                  onPressed: () async {
-                                    await service.deleteSelectedMessages(
-                                        senderId: widget.senderId!,
-                                        receiverId: widget.receiverId,
-                                        messageIds: selectedMessages);
-                                    Navigator.pop(context);
-                                    myToast("Selected messages deleted");
-                                  },
-                                  child: Text("Delete", style: Textstyles.deletemessage,),
-                                )
-                              ],
-                            )
-                        );
-                        setState(() {
-                          selectedMessages.clear();
-                          isEditing = false;
-                        });
-                      }
-                    },
-                    myIcon: icons.deleteIcon,
-                  ),
-
-                  Spacer(),
-                  Text("${selectedMessages.length} messages ")
-                ],
-              ) :
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
