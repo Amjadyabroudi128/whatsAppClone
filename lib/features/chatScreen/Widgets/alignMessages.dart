@@ -8,15 +8,11 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
-import 'package:whatsappclone/components/listTilesOptions.dart';
-import 'package:whatsappclone/components/popUpMenu.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/starMessage.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
-
 import '../../../core/MyColors.dart';
 import '../../../core/appTheme.dart';
 import '../../../messageClass/messageClass.dart';
@@ -28,7 +24,7 @@ import 'dateText.dart';
 import 'deleteMessage.dart';
 import 'editMessage.dart';
 class messagesAlign extends StatefulWidget {
-  const messagesAlign({
+   messagesAlign({
     super.key,
     required this.messages,
     required this.user,
@@ -37,22 +33,37 @@ class messagesAlign extends StatefulWidget {
     this.textColor,
     required this.isEditing,
     required this.selectedMessages,
-
-  });
+     required this.onToggleEdit,
+     this.msg
+   });
 
   final List<Messages> messages;
+  final Messages? msg;
   final User? user;
   final Testname? widget;
   final void Function(Messages)? onReply;
   final Color? textColor;
-  final bool isEditing;
+  late bool isEditing;
   final Set<String> selectedMessages;
-  @override
+   final VoidCallback? onToggleEdit;
+
+   @override
   State<messagesAlign> createState() => _messagesAlignState();
 }
 
 class _messagesAlignState extends State<messagesAlign> {
   final bool isStarred = false;
+  bool isEditing = false;
+  void _handleSelectMessage() {
+    setState(() {
+      if (widget.selectedMessages.contains(widget.msg!.messageId)) {
+        widget.selectedMessages.remove(widget.msg!.messageId);
+      } else {
+        widget.selectedMessages.add(widget.msg!.messageId!);
+        widget.onToggleEdit?.call();
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
@@ -147,7 +158,7 @@ class _messagesAlignState extends State<messagesAlign> {
                             value: "reply",
                             child:kTextButton(
                               onPressed: () {
-                                Navigator.pop(context); // Close the popup
+                                Navigator.pop(context);
                                 if (widget.onReply != null) {
                                   widget.onReply!(msg); // Call the reply handler
                                 }
@@ -160,6 +171,31 @@ class _messagesAlignState extends State<messagesAlign> {
                                 ],
                               ),
                             )
+                          ),
+                          PopupMenuItem(
+                              value: "select",
+                              child:kTextButton(
+                                child: Row(
+                                  children: [
+                                    Text("select",style: Textstyles.copyMessage,),
+                                    Spacer(),
+                                    Icon(Icons.check_circle_outline)
+                                  ],
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    if (!widget.isEditing) {
+                                      widget.onToggleEdit?.call();
+                                    }
+                                    if (widget.selectedMessages.contains(msg.messageId)) {
+                                      widget.selectedMessages.remove(msg.messageId);
+                                    } else {
+                                      widget.selectedMessages.add(msg.messageId!);
+                                    }
+                                  });
+                                },
+                              )
                           )
                         ]
                       );
