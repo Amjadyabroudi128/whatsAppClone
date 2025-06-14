@@ -41,6 +41,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
                 ),
                 kTextButton(
                   onPressed: () async {
+                    myToast("Message Successfully Deleted");
                     FocusScope.of(context).unfocus();
                     Navigator.pop(context); // Close dialog after deleting
                     await service.Deletemessage(
@@ -51,7 +52,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
                     Navigator.pop(context); // Close dialog after deleting
                     await service.deleteStar(msg);
                     FocusScope.of(context).unfocus();
-                    myToast("Message Successfully Deleted");
+
                   },
                   child: Text("Delete", style: Textstyles.deleteStyle,),
                 ),
