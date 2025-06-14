@@ -227,6 +227,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                               final msg = Messages(
                                 messageId: doc.id,
                                 text: doc["message"],
+                                time: doc["timestamp"],
                                 receiverId: doc["receiverId"],
                                 senderEmail: doc["senderEmail"],
                                 senderId: doc["senderId"],
@@ -245,13 +246,14 @@ class _StarredmessagesState extends State<Starredmessages> {
                                     ),
                                     kTextButton(
                                       onPressed: () async {
+                                        Navigator.pop(context);
+                                        myToast("Selected messages deleted");
                                         await service.deleteSelectedMessages(
                                             senderId: msg.senderId ?? "",
                                             receiverId: msg.receiverId ?? "",
                                             messageIds: selectedMessages);
                                         await service.deleteStar(msg);
                                         Navigator.pop(context);
-                                        myToast("Selected messages deleted");
                                       },
                                       child: Text("Delete", style: Textstyles.deletemessage,),
                                     )
