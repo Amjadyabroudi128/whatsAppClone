@@ -192,11 +192,12 @@ class _StarredmessagesState extends State<Starredmessages> {
                 Positioned(
                   bottom: 0,
                   left: 0,
-                  right: 0,
+                  right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.2 : 0,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: selectedMessages.length > 1 ?
+                    MainAxisAlignment.spaceAround : MainAxisAlignment.spaceEvenly,
                     children: [
-                      copyIcon(snapshot),
+                      selectedMessages.length > 1 ? SizedBox.shrink() : copyIcon(snapshot),
                       kIconButton(
                         onPressed: () async {
                           myToast("⭐ Message unstarred ");
