@@ -11,6 +11,7 @@ import 'package:whatsappclone/components/TextStyles.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/core/icons.dart';
+import 'package:whatsappclone/features/chatScreen/Widgets/selectMessage.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/starMessage.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import '../../../core/MyColors.dart';
@@ -172,31 +173,18 @@ class _messagesAlignState extends State<messagesAlign> {
                               ),
                             )
                           ),
-                          PopupMenuItem(
-                              value: "select",
-                              child:kTextButton(
-                                child: Row(
-                                  children: [
-                                    Text("select",style: Textstyles.copyMessage,),
-                                    Spacer(),
-                                    Icon(Icons.check_circle_outline)
-                                  ],
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  setState(() {
-                                    if (!widget.isEditing) {
-                                      widget.onToggleEdit?.call();
-                                    }
-                                    if (widget.selectedMessages.contains(msg.messageId)) {
-                                      widget.selectedMessages.remove(msg.messageId);
-                                    } else {
-                                      widget.selectedMessages.add(msg.messageId!);
-                                    }
-                                  });
-                                },
-                              )
-                          )
+                          selectMessage(context, msg, widget.isEditing, widget.onToggleEdit, widget.selectedMessages, () {
+                            setState(() {
+                                if (!widget.isEditing) {
+                                  widget.onToggleEdit?.call();
+                                }
+                                if (widget.selectedMessages.contains(msg.messageId)) {
+                                  widget.selectedMessages.remove(msg.messageId);
+                                } else {
+                                  widget.selectedMessages.add(msg.messageId!);
+                                }
+                            });
+                          })
                         ]
                       );
                     }
@@ -347,6 +335,34 @@ class _messagesAlignState extends State<messagesAlign> {
       ),
     );
   }
+
+  // PopupMenuItem<String> selectMessage(BuildContext context, Messages msg) {
+  //   return PopupMenuItem(
+  //                           value: "select",
+  //                           child:kTextButton(
+  //                             child: Row(
+  //                               children: [
+  //                                 Text("Select",style: Textstyles.copyMessage,),
+  //                                 Spacer(),
+  //                                 icons.selectIcon
+  //                               ],
+  //                             ),
+  //                             onPressed: () {
+  //                               Navigator.pop(context);
+  //                               setState(() {
+  //                                 if (!widget.isEditing) {
+  //                                   widget.onToggleEdit?.call();
+  //                                 }
+  //                                 if (widget.selectedMessages.contains(msg.messageId)) {
+  //                                   widget.selectedMessages.remove(msg.messageId);
+  //                                 } else {
+  //                                   widget.selectedMessages.add(msg.messageId!);
+  //                                 }
+  //                               });
+  //                             },
+  //                           )
+  //                       );
+  // }
 
 }
 
