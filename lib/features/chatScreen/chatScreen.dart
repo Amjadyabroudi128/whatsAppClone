@@ -90,8 +90,8 @@ class _TestnameState extends State<Testname> {
                   children: [
                     isEditing ? Row(
                       children: [
-                        Text("${selectedMessages.length} Selected"),
-                        BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.33,),
+                        Text("Selected"),
+                        BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.39,),
                         kTextButton(onPressed: (){
                           setState(() {
                             FocusScope.of(context).unfocus();

@@ -207,7 +207,7 @@ class _messagesAlignState extends State<messagesAlign> {
                     key: ValueKey(msg.messageId),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         if (widget.isEditing)
                           Transform.scale(
@@ -229,7 +229,6 @@ class _messagesAlignState extends State<messagesAlign> {
                               },
                             ),
                           ),
-
                         Container(
                           margin:  containermargin,
                           padding:  containerPadding,
