@@ -90,7 +90,7 @@ class _TestnameState extends State<Testname> {
                   children: [
                     isEditing ? Row(
                       children: [
-                        Text("${selectedMessages.length} selected"),
+                        Text("${selectedMessages.length} Selected"),
                         BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.33,),
                         kTextButton(onPressed: (){
                           setState(() {
