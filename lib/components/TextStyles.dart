@@ -26,8 +26,8 @@ class Textstyles {
   static TextStyle editProfile = TextStyle(fontSize: 20, color: Colors.white);
   static TextStyle addPhoto = TextStyle(fontSize: 18, color: myColors.tick);
   static TextStyle option = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-  static TextStyle recieverName = TextStyle(fontSize: 25);
-  static TextStyle recieverEmail = TextStyle(fontSize: 18, letterSpacing: 2);
+  static TextStyle recieverName = TextStyle(fontSize: 25,color: Colors.black);
+  static TextStyle recieverEmail = TextStyle(fontSize: 18, letterSpacing: 2, color: Colors.black);
   static TextStyle noStarMessage = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   static TextStyle editBar =  TextStyle(fontSize: 19);
   static TextStyle btmSheet = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);

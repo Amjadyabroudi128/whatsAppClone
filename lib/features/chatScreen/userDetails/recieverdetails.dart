@@ -45,7 +45,7 @@ class _userDetailsState extends State<userDetails> {
       backgroundColor: myColors.BG,
       appBar: AppBar(
         backgroundColor: myColors.BG,
-        title: Text("Contact Details"),
+        title: Text("Contact Details", style: TextStyle(color: Colors.black),),
         centerTitle: true,
       ),
       body: SafeArea(
