@@ -302,7 +302,7 @@ class _messagesAlignState extends State<messagesAlign> {
 
                                 Text(
                                   msg.text,
-                                  style: TextStyle(fontSize: 16),
+                                  style: TextStyle(fontSize: 16, color: Colors.black),
                                 ),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -316,7 +316,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         color: Colors.grey.shade800,
                                       ),
                                     ),
-                                  fomattedDateText(formattedTime: formattedTime),
+                                  fomattedDateText(formattedTime: formattedTime,),
                                 ],
                               )
 
