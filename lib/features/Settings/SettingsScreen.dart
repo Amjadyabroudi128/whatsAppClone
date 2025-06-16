@@ -63,7 +63,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppBar(
-                    title: Text("Settings", style: Textstyles.settings,),
+                    title: Text("Settings",),
                     centerTitle: false,
                     automaticallyImplyLeading: false,
                   ),
