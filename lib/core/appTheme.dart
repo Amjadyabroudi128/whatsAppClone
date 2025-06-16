@@ -63,8 +63,31 @@ import 'package:whatsappclone/core/MyColors.dart';
   static final ThemeData darkTheme = ThemeData(
       cardTheme: CardTheme(
         shape: cardShape,
-        color: Colors.yellow,
-      )
+        color: Colors.grey[700],
+      ),
+      appBarTheme: AppBarTheme(
+        color: myColors.darkCard,
+        foregroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+            foregroundColor: Colors.white
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: fieldBorder,
+          focusedBorder: fieldBorder,
+          focusColor: myColors.labelClr,
+          labelStyle: Textstyles.label,
+          hintStyle: Textstyles.hintStyle,
+          floatingLabelStyle: Textstyles.floating
+      ),
+    listTileTheme: ListTileThemeData(
+      textColor: Colors.white
+    ),
+    scaffoldBackgroundColor: myColors.darkCard,
   );
-
  }
