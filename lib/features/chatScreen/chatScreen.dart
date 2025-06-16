@@ -85,14 +85,15 @@ class _TestnameState extends State<Testname> {
                 }
               },
               child: AppBar(
-                backgroundColor: color,
+                // backgroundColor: color,
                 title: Row(
                   children: [
                     isEditing ? Row(
                       children: [
                         Text("Selected"),
                         BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.39,),
-                        kTextButton(onPressed: (){
+                        kTextButton(
+                            onPressed: (){
                           setState(() {
                             FocusScope.of(context).unfocus();
                             selectedMessages.clear();
@@ -101,9 +102,8 @@ class _TestnameState extends State<Testname> {
                         },
                             child: Text("Cancel"))
                       ],
-                    ) : Text(widget.receiverName, style: Textstyles.bioStyle),
+                    ) : Text(widget.receiverName,),
                     Spacer(),
-                    
                   ],
                 ),
                 centerTitle: false,
