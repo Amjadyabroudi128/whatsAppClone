@@ -88,6 +88,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     listTileTheme: ListTileThemeData(
       textColor: Colors.white
     ),
+
     scaffoldBackgroundColor: myColors.darkCard,
   );
  }

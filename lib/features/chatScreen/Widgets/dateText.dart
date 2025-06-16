@@ -14,7 +14,7 @@ class fomattedDateText extends StatelessWidget {
       padding: EdgeInsets.only(
         left: 45,
       ),
-      child: Text(formattedTime),
+      child: Text(formattedTime, style: TextStyle(color: Colors.black),),
     );
   }
 }
