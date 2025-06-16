@@ -58,8 +58,8 @@ import 'package:whatsappclone/core/MyColors.dart';
       shape: cardShape,
       color: Colors.blueGrey,
     ),
-   );
 
+   );
   static final ThemeData darkTheme = ThemeData(
       cardTheme: CardTheme(
         shape: cardShape,
@@ -88,7 +88,11 @@ import 'package:whatsappclone/core/MyColors.dart';
     listTileTheme: ListTileThemeData(
       textColor: Colors.white
     ),
-
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        foregroundColor: Colors.white,
+      )
+    ),
     scaffoldBackgroundColor: myColors.darkCard,
   );
  }
