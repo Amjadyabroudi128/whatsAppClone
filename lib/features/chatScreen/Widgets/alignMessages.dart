@@ -229,98 +229,102 @@ class _messagesAlignState extends State<messagesAlign> {
                               },
                             ),
                           ),
-                        Container(
-                          margin:  containermargin,
-                          padding:  containerPadding,
-                          decoration: containerDecoration(
-                            color: isMe ? myColors.myMessage : myColors.message,
-                            borderRadius: myTheme.CircularContainer,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (msg.replyTo != null)
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  margin: const EdgeInsets.only(bottom: 4),
-                                  decoration: BoxDecoration(
-                                    color: isMe ? Colors.green[200] : myColors.message,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("${msg.replyTo!.senderEmail}"),
-                                      if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
-                                        Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                icons.Wphoto,
-                                                BoxSpacing(mWidth: 10,),
-                                                Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey),),
-                                                BoxSpacing(mWidth: 40,),
-                                                ClipRRect(
-                                                  child: Image.network("${msg.replyTo!.image}", height: 60,),
-                                                  borderRadius: BorderRadius.circular(8),
-                                                )
-                                              ],
-                                            ),
-                                          ],
+                        Flexible(
+                          child: Container(
+                            margin:  containermargin,
+                            padding:  containerPadding,
+                            decoration: containerDecoration(
+                              color: isMe ? myColors.myMessage : myColors.message,
+                              borderRadius: myTheme.CircularContainer,
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (msg.replyTo != null)
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    margin: const EdgeInsets.only(bottom: 4),
+                                    decoration: BoxDecoration(
+                                      color: isMe ? Colors.green[200] : myColors.message,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("${msg.replyTo!.senderEmail}"),
+                                        if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  icons.Wphoto,
+                                                  BoxSpacing(mWidth: 10,),
+                                                  Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey),),
+                                                  BoxSpacing(mWidth: 40,),
+                                                  ClipRRect(
+                                                    child: Image.network("${msg.replyTo!.image}", height: 60,),
+                                                    borderRadius: BorderRadius.circular(8),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        Text(
+                                          msg.replyTo!.text,
+                                          style: TextStyle(color: Colors.black87),
                                         ),
-                                      Text(
-                                        msg.replyTo!.text,
-                                        style: TextStyle(color: Colors.black87),
+                                      ],
+                                    ),
+                                  ),
+                                if (msg.image != null && msg.image!.isNotEmpty)
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: kimageNet(src: msg.image!),
+                                  )
+                                else if (msg.file != null && msg.file!.isNotEmpty)
+                                  Row(
+                                    children: [
+                                      Icon(Icons.insert_drive_file, color: Colors.blue),
+                                      SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          msg.file!.split('/').last,
+                                          style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
                                     ],
+                                  )
+                                else
+
+                                  Text(
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    msg.text,
+                                    style: TextStyle(fontSize: 16, color: Colors.black),
                                   ),
-                                ),
-                              if (msg.image != null && msg.image!.isNotEmpty)
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: kimageNet(src: msg.image!),
-                                )
-                              else if (msg.file != null && msg.file!.isNotEmpty)
                                 Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.insert_drive_file, color: Colors.blue),
-                                    SizedBox(width: 8),
-                                    Expanded(
-                                      child: Text(
-                                        msg.file!.split('/').last,
-                                        style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
-                                        overflow: TextOverflow.ellipsis,
+                                    if (msg.isEdited == true)
+                                      Text(
+                                        "Edited",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic,
+                                          color: Colors.grey.shade800,
+                                        ),
                                       ),
-                                    ),
+                                    fomattedDateText(formattedTime: formattedTime,),
                                   ],
                                 )
-                              else
 
-                                Text(
-                                  msg.text,
-                                  style: TextStyle(fontSize: 16, color: Colors.black),
-                                ),
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (msg.isEdited == true)
-                                    Text(
-                                      "Edited",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic,
-                                        color: Colors.grey.shade800,
-                                      ),
-                                    ),
-                                  fomattedDateText(formattedTime: formattedTime,),
-                                ],
-                              )
-
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -334,34 +338,6 @@ class _messagesAlignState extends State<messagesAlign> {
       ),
     );
   }
-
-  // PopupMenuItem<String> selectMessage(BuildContext context, Messages msg) {
-  //   return PopupMenuItem(
-  //                           value: "select",
-  //                           child:kTextButton(
-  //                             child: Row(
-  //                               children: [
-  //                                 Text("Select",style: Textstyles.copyMessage,),
-  //                                 Spacer(),
-  //                                 icons.selectIcon
-  //                               ],
-  //                             ),
-  //                             onPressed: () {
-  //                               Navigator.pop(context);
-  //                               setState(() {
-  //                                 if (!widget.isEditing) {
-  //                                   widget.onToggleEdit?.call();
-  //                                 }
-  //                                 if (widget.selectedMessages.contains(msg.messageId)) {
-  //                                   widget.selectedMessages.remove(msg.messageId);
-  //                                 } else {
-  //                                   widget.selectedMessages.add(msg.messageId!);
-  //                                 }
-  //                               });
-  //                             },
-  //                           )
-  //                       );
-  // }
 
 }
 
