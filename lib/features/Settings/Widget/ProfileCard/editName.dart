@@ -30,7 +30,6 @@ class editName extends StatelessWidget {
             kTextButton(
               onPressed: () async {
                 String newName = nameController.text.trim();
-
                 if(newName.isEmpty){
                   myToast("Your name is empty ");
                 } else if (newName == name ){

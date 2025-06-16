@@ -113,7 +113,6 @@ class _nameCardState extends State<nameCard> {
                       ),
                       BoxSpacing(myHeight: 5),
                       kCard(
-                        color: myColors.CardColor,
                         child: Column(
                           children: [
                             Options(
