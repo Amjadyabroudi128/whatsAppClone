@@ -20,13 +20,16 @@ class kTextField extends StatelessWidget {
   final ScrollController? scroll;
   final TextStyle? hintStyle;
   final TextStyle? style;
+  final Color? textColor;
   const kTextField(
       {super.key, this.label, this.myController,
         this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint,
-        this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable, this.focused});
+        this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable, this.focused, this.textColor});
 
   @override
   Widget build(BuildContext context) {
+    final color = textColor ?? Theme.of(context).textTheme.bodyMedium?.color;
+
     return TextField(
       scrollController: scroll,
       onTap: onTap,
@@ -34,7 +37,8 @@ class kTextField extends StatelessWidget {
       obscureText: obsecureText,
       keyboardType: keyBoard,
       maxLines: maxLines ?? 1,
-      style: style,
+      style: TextStyle(color: color), // <-- Set text color here
+
       // Default to 1 if not provided
       decoration: InputDecoration(
         fillColor: fillColor,
