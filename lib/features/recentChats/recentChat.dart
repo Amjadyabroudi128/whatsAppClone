@@ -17,7 +17,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Recent Chats")),
+      appBar: AppBar(title: const Text("Recent Chats"),automaticallyImplyLeading: false,),
       body: StreamBuilder<QuerySnapshot>(
         stream: service.getRecentChats(user!.uid),
         builder: (context, snapshot) {
