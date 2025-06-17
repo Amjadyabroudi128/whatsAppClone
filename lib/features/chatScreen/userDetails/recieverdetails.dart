@@ -83,7 +83,7 @@ class _userDetailsState extends State<userDetails> {
                     color: myColors.FG,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(widget.bio!, style: Textstyles.bioStyle),
+                      child: Text(widget.bio!, style: TextStyle(color: Colors.black)),
                     ),
                   ),
                 ),

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
@@ -69,4 +70,3 @@ class _BottomnavbarState extends State<Bottomnavbar> {
     );
   }
 }
-
