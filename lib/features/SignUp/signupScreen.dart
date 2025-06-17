@@ -29,7 +29,9 @@ class _SignupscreenState extends State<Signupscreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        backgroundColor: Colors.grey[600],
         appBar: AppBar(
+          backgroundColor: Colors.grey[800],
           automaticallyImplyLeading: false,
           title: Text("Sign up"),
         ),
