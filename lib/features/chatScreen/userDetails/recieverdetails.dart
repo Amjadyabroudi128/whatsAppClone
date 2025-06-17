@@ -44,6 +44,7 @@ class _userDetailsState extends State<userDetails> {
     return Scaffold(
       backgroundColor: myColors.BG,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: myColors.BG,
         title: Text("Contact Details", style: TextStyle(color: Colors.black),),
         centerTitle: true,
@@ -76,8 +77,8 @@ class _userDetailsState extends State<userDetails> {
               BoxSpacing(myHeight: 7),
               Text(widget.email ?? '', style: Textstyles.recieverEmail),
               if (widget.bio != null && widget.bio!.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                Container(
+                  width: MediaQuery.of(context).size.width,
                   child: kCard(
                     color: myColors.FG,
                     child: Padding(
