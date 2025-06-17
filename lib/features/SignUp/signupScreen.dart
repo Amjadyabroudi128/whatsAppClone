@@ -32,7 +32,6 @@ class _SignupscreenState extends State<Signupscreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text("Sign up"),
-          backgroundColor: myColors.transparent,
         ),
         body: myPadding(
           padding: EdgeInsets.all(10),

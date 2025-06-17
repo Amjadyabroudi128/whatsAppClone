@@ -1,5 +1,4 @@
 
-import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +54,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
           final userName = userData?['name'] ?? 'No name found';
           final link = userData?['link'] ?? 'No name found';
-
+          final imageUrl = userData?['image'] ?? '';
           return myPadding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -67,11 +66,11 @@ class _SettingScreenState extends State<SettingScreen> {
                     centerTitle: false,
                     automaticallyImplyLeading: false,
                   ),
-                  BoxSpacing(myHeight: 20),
-                  nameCard(userName: userName, link: link),
-                  BoxSpacing(myHeight: 15,),
-                  Text("Account", style: Textstyles.accountStyle,),
-                  kCard(
+                   BoxSpacing(myHeight: 20),
+                   nameCard(userName: userName, link: link),
+                   BoxSpacing(myHeight: 15,),
+                   Text("Account", style: Textstyles.accountStyle,),
+                   kCard(
                     child: Column(
                       children: [
                         signOut(),
@@ -80,10 +79,10 @@ class _SettingScreenState extends State<SettingScreen> {
                       ],
                     ),
                   ),
-                  starCard(user: user),
-                  BoxSpacing(myHeight: 10,),
-                  Text("App Theme", style: Textstyles.themeStyle),
-                  themeCard(mounted: mounted, widget: widget)
+                   starCard(user: user),
+                   BoxSpacing(myHeight: 10,),
+                   Text("App Theme", style: Textstyles.themeStyle),
+                   themeCard(mounted: mounted, widget: widget)
                 ],
               ),
             ),
