@@ -7,6 +7,8 @@ class kTextField extends StatelessWidget {
   final Widget? myIcon;
   final bool obsecureText;
   final InputBorder? border;
+  final InputBorder? enable;
+  final InputBorder? focused;
   final TextInputType? keyBoard;
   final String? hint;
   final Widget? icon;
@@ -17,10 +19,11 @@ class kTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final ScrollController? scroll;
   final TextStyle? hintStyle;
+  final TextStyle? style;
   const kTextField(
       {super.key, this.label, this.myController,
         this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint,
-        this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle});
+        this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable, this.focused});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,12 @@ class kTextField extends StatelessWidget {
       obscureText: obsecureText,
       keyboardType: keyBoard,
       maxLines: maxLines ?? 1,
+      style: style,
       // Default to 1 if not provided
       decoration: InputDecoration(
         fillColor: fillColor,
+        enabledBorder: enable,
+        focusedBorder: focused,
         filled: filled,
         suffixIcon: icon,
         hintText: hint,
