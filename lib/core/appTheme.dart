@@ -8,6 +8,11 @@ import 'package:whatsappclone/core/MyColors.dart';
    static OutlineInputBorder fieldBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
      borderSide: BorderSide()
    );
+   static OutlineInputBorder darkBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+       borderSide: BorderSide(
+           color: Colors.white
+       )
+   );
    static OutlinedBorder circular = RoundedRectangleBorder(
      borderRadius: BorderRadius.circular(10)
    );
@@ -72,18 +77,21 @@ import 'package:whatsappclone/core/MyColors.dart';
           color: Colors.white
         ),
       ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-            foregroundColor: Colors.white
-        ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+          backgroundColor: myColors.TC,
+          foregroundColor: myColors.FG,
+          textStyle: Textstyles.Ebtn,
+          shape: circular
+      ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-          enabledBorder: fieldBorder,
-          focusedBorder: fieldBorder,
-          focusColor: myColors.labelClr,
-          labelStyle: Textstyles.label,
-          hintStyle: Textstyles.hintStyle,
-          floatingLabelStyle: Textstyles.floating
+        enabledBorder: darkBorder,
+          focusedBorder: darkBorder,
+          focusColor: Colors.white,
+          labelStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.white),
+          floatingLabelStyle: TextStyle(color: Colors.white)
       ),
     listTileTheme: ListTileThemeData(
       textColor: Colors.white
