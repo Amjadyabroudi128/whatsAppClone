@@ -8,7 +8,7 @@ import 'package:whatsappclone/core/MyColors.dart';
    static OutlineInputBorder fieldBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
      borderSide: BorderSide()
    );
-   static OutlineInputBorder darkBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+   static OutlineInputBorder darkBoder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
        borderSide: BorderSide(
            color: Colors.white
        )
@@ -65,18 +65,18 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
 
    );
-  static final ThemeData darkTheme = ThemeData(
-      cardTheme: CardTheme(
-        shape: cardShape,
-        color: Colors.grey[700],
-      ),
-      appBarTheme: AppBarTheme(
-        color: myColors.darkCard,
-        foregroundColor: Colors.white,
-        iconTheme: IconThemeData(
+  static final ThemeData darkTheme = ThemeData().copyWith(
+    cardTheme: CardTheme(
+      shape: cardShape,
+      color: Colors.grey[700],
+    ),
+    appBarTheme: AppBarTheme(
+      color: myColors.darkCard,
+      foregroundColor: Colors.white,
+      iconTheme: IconThemeData(
           color: Colors.white
-        ),
       ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           backgroundColor: myColors.TC,
@@ -84,22 +84,35 @@ import 'package:whatsappclone/core/MyColors.dart';
           textStyle: Textstyles.Ebtn,
           shape: circular
       ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        enabledBorder: darkBorder,
-          focusedBorder: darkBorder,
-          focusColor: Colors.white,
-          labelStyle: TextStyle(color: Colors.white),
-          hintStyle: TextStyle(color: Colors.white),
-          floatingLabelStyle: TextStyle(color: Colors.white)
-      ),
-    listTileTheme: ListTileThemeData(
-      textColor: Colors.white
     ),
-    iconButtonTheme: IconButtonThemeData(
-      style: IconButton.styleFrom(
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        textStyle: Textstyles.haveAccount,
         foregroundColor: Colors.white,
       )
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+              color: Colors.white
+          )
+      ),
+      focusedBorder: darkBoder,
+      errorBorder: darkBoder,
+      // enabledBorder: fieldBorder,
+      // focusedBorder: fieldBorder,
+      focusColor: Colors.white,
+      labelStyle: TextStyle(color: Colors.white),
+      hintStyle: TextStyle(color: Colors.white),
+      floatingLabelStyle: TextStyle(color: Colors.white),
+    ),
+    listTileTheme: ListTileThemeData(
+        textColor: Colors.white
+    ),
+    iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          foregroundColor: Colors.white,
+        )
     ),
     scaffoldBackgroundColor: myColors.darkCard,
   );
