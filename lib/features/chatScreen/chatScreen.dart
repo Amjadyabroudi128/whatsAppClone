@@ -188,6 +188,7 @@ class _TestnameState extends State<Testname> {
                   children: [
                     Expanded(
                       child: kTextField(
+                        textColor: Colors.black,
                         enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
                                 color: Colors.black
@@ -200,7 +201,7 @@ class _TestnameState extends State<Testname> {
                         ),
                         myController: messageController,
                         hint: "Add a message",
-                        hintStyle: TextStyle(color: textColor, fontSize: 15.7),
+                        hintStyle: TextStyle(color: Colors.black, fontSize: 15.7),
                       ),
                     ),
                     photoBtmSheet(service: service, widget: widget, textColor: textColor),
