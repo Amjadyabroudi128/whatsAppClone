@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
@@ -130,7 +131,7 @@ class _ImagescreenState extends State<Imagescreen> {
               },
             ),
             kIconButton(
-              myIcon: _isStarred ? icons.slash : icons.stary,
+              myIcon: _isStarred ? icons.slash : Icon(CupertinoIcons.star, size: 30,color: Colors.black,),
               onPressed: () async {
                 if (_isStarred) {
                   FocusScope.of(context).unfocus();
