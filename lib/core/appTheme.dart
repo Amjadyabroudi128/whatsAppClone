@@ -115,6 +115,9 @@ import 'package:whatsappclone/core/MyColors.dart';
           foregroundColor: Colors.white,
         )
     ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.black
+    ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.white),
       displayMedium: TextStyle(color: Colors.white),
