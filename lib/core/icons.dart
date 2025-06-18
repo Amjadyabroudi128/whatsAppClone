@@ -39,7 +39,7 @@ class icons {
   static Icon amberStar = Icon(Icons.star, color: myColors.amberStar);
   static Icon noImages = Icon(CupertinoIcons.photo, size: 50,);
   static Icon supportedImage = Icon(Icons.image_not_supported, size: 50, color: Colors.grey);
-  static Icon share =Icon(CupertinoIcons.share);
+  static Icon share =Icon(CupertinoIcons.share, color: Colors.black,);
   static Icon close = Icon(Icons.close);
   static Icon Wclose = Icon(Icons.close, color: Colors.white,);
   static Icon reply = Icon(Icons.reply, color: myColors.labelClr,);
