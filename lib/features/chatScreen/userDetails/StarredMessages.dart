@@ -303,7 +303,7 @@ class _StarredmessagesState extends State<Starredmessages> {
           }
         }
       },
-      myIcon: icons.copy,
+      myIcon: Icon(Icons.copy),
     );
   }
 
