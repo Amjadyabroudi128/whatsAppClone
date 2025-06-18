@@ -37,11 +37,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   ThemeData _theme = myTheme.appTheme; // Default to light theme
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  ThemeMode _themeMode = ThemeMode.system; // default
 
-  void _updateTheme(ThemeData newTheme) {
+  void _updateTheme(ThemeData newTheme, ThemeMode newMode) {
     if (mounted) {
       setState(() {
         _theme = newTheme;
+        _themeMode = newMode;
       });
     }
   }
@@ -53,7 +55,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       theme: _theme,  // Light theme
       darkTheme: myTheme.darkTheme,  // Dark theme
-      themeMode: ThemeMode.system,  // System theme (can be overridden)
+      themeMode: _themeMode, // Now controlled manually
       initialRoute: _auth.currentUser != null ? "btm" : "welcome",
       routes: {
         "sign up": (context) => const Signupscreen(),

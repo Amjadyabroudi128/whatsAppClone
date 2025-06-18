@@ -9,7 +9,7 @@ import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 import '../Settings/SettingsScreen.dart';
 
 class Bottomnavbar extends StatefulWidget {
-  final Function(ThemeData)? onThemeChange; // Theme callback
+  final void Function(ThemeData, ThemeMode)? onThemeChange;
   const Bottomnavbar({super.key, this.onThemeChange});
 
   @override

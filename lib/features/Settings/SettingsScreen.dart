@@ -24,7 +24,7 @@ import 'Widget/starCard/starCard.dart';
 import 'Widget/themeCard/themeCard.dart';
 
 class SettingScreen extends StatefulWidget {
-  final Function(ThemeData)? onThemeChange;
+  final void Function(ThemeData, ThemeMode)? onThemeChange;
   const SettingScreen({super.key, this.onThemeChange,});
 
   @override
