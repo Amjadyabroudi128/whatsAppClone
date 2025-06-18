@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
@@ -59,6 +58,10 @@ class _themeCardState extends State<themeCard> {
                         value: myPop.darkTheme ,
                         child: Text(("Dark Theme")),
                       ),
+                      PopupMenuItem<myPop>(
+                        value: myPop.system ,
+                        child: Text(("System")),
+                      ),
                     ];
                   },
                   onSelected: (value) {
@@ -67,6 +70,8 @@ class _themeCardState extends State<themeCard> {
                       widget.widget.onThemeChange?.call(myTheme.appTheme, ThemeMode.light);
                     } else if (value == myPop.darkTheme) {
                       widget.widget.onThemeChange?.call(myTheme.darkTheme, ThemeMode.dark);
+                    } else{
+                      widget.widget.onThemeChange?.call(myTheme.appTheme, ThemeMode.system);
                     }
                   }
               )
