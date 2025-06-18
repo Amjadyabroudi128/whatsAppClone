@@ -107,12 +107,15 @@ class _MyMediaState extends State<MyMedia> {
                             context,
                             MaterialPageRoute(
                               builder: (_) => Imagescreen(
-                                  image: msg.image,
+                                image: msg.image,
                                 date: day,
                                 senderName: msg.senderEmail,
                                 time: formattedTime,
                                 messageId: msg.messageId,
                                 receiverId: msg.receiverId,
+                                senderId: msg.senderId,
+                                senderEmail: msg.senderEmail,
+                                receiverEmail: msg.receiverEmail,
                               ),
                             ),
                           );
