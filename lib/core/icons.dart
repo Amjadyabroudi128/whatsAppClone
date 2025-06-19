@@ -9,7 +9,7 @@ class icons {
   static Icon name = Icon(Icons.person);
   static Icon logout = Icon(Icons.logout,color: myColors.delete,);
   static Icon image = Icon(Icons.image);
-  static Icon whiteImage = Icon(CupertinoIcons.photo, color: myColors.MIcons);
+  static Icon whiteImage = Icon(CupertinoIcons.photo,);
   static Icon send = Icon(Icons.send,color: myColors.myMessage);
   static Icon arrow = Icon(Icons.arrow_back);
   static Icon add = Icon(Icons.add);
@@ -27,7 +27,7 @@ class icons {
   static Icon copy = Icon(Icons.copy, color: Colors.black,);
   static Icon wcopy = Icon(Icons.copy, color: Colors.white,);
   static Icon edit = Icon(CupertinoIcons.pencil, color: myColors.tick, size: 27,);
-  static Icon camera = Icon(CupertinoIcons.camera, color: myColors.MIcons);
+  static Icon camera = Icon(CupertinoIcons.camera,);
   static Icon cancel = Icon(Icons.cancel_outlined, color: myColors.MIcons);
   static Icon dCam = Icon(Icons.camera_alt_outlined);
   static Icon file = Icon(Icons.file_copy_outlined);
