@@ -64,7 +64,29 @@ import 'package:whatsappclone/core/MyColors.dart';
       shape: cardShape,
       color: Colors.white60,
     ),
-
+    bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+    ),
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(color: Colors.black),
+      displayMedium: TextStyle(color: Colors.black),
+      displaySmall: TextStyle(color: Colors.black),
+      bodyLarge: TextStyle(color: Colors.black),
+      bodyMedium:TextStyle(color: Colors.black),
+      bodySmall: TextStyle(color: Colors.black),
+      headlineLarge: TextStyle(color: Colors.black),
+      headlineMedium: TextStyle(color: Colors.black),
+      headlineSmall: TextStyle(color: Colors.black),
+      titleLarge: TextStyle(color: Colors.black),
+      titleMedium:TextStyle(color: Colors.black) ,
+      titleSmall: TextStyle(color: Colors.black),
+      labelLarge: TextStyle(color: Colors.black),
+      labelMedium:TextStyle(color: Colors.black) ,
+      labelSmall: TextStyle(color: Colors.black),
+    ),
    );
   static final ThemeData darkTheme = ThemeData().copyWith(
     cardTheme: CardTheme(
@@ -115,11 +137,17 @@ import 'package:whatsappclone/core/MyColors.dart';
           foregroundColor: Colors.white,
         )
     ),
-    bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: Colors.black
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Colors.black,
+      shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
     ),
     dialogTheme: DialogTheme(
       backgroundColor: Colors.black,
+    ),
+    iconTheme: IconThemeData(
+      color: Colors.black
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.white),
