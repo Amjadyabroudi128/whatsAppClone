@@ -87,6 +87,11 @@ import 'package:whatsappclone/core/MyColors.dart';
       labelMedium:TextStyle(color: Colors.black) ,
       labelSmall: TextStyle(color: Colors.black),
     ),
+    iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          foregroundColor: Colors.black,
+        )
+    )
    );
   static final ThemeData darkTheme = ThemeData().copyWith(
     cardTheme: CardTheme(
