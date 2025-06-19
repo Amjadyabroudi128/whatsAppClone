@@ -23,10 +23,10 @@ class _EditBioState extends State<EditBio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: myColors.btmSheet,
+      // backgroundColor: myColors.btmSheet,
       appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: Text("Edit Your Bio", style: TextStyle(color: Colors.white)),
+        // backgroundColor: Colors.grey,
+        title: Text("Edit Your Bio",),
         actions: [
           editButton()
         ],
@@ -34,8 +34,17 @@ class _EditBioState extends State<EditBio> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: kTextField(
+          enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                  color: Colors.transparent
+              )
+          ),
+          focused: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                  color: Colors.transparent
+              )
+          ),
           filled: true,
-          fillColor: myColors.familyText,
           myController: bioController,
           maxLines: 9,
           hint: "Edit your Bio",
@@ -56,7 +65,7 @@ class _EditBioState extends State<EditBio> {
           Navigator.of(context).pop();
         }
       },
-      child: Text("Save", style: Textstyles.saveBio),
+      child: Text("Save",),
     );
   }
 }
