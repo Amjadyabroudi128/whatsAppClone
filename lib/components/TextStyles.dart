@@ -22,8 +22,8 @@ class Textstyles {
   static TextStyle editText = TextStyle(fontSize: 17, color: myColors.editMessage);
   static TextStyle copyMessage = TextStyle(color: myColors.editMessage, fontSize: 17);
   static TextStyle bioStyle = TextStyle(fontSize: 16);
-  static TextStyle saveBio = TextStyle(fontSize: 18, color: Colors.white);
-  static TextStyle editProfile = TextStyle(fontSize: 20, color: Colors.white);
+  static TextStyle saveBio = TextStyle(fontSize: 18,);
+  static TextStyle editProfile = TextStyle(fontSize: 20);
   static TextStyle addPhoto = TextStyle(fontSize: 18, color: myColors.tick);
   static TextStyle option = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   static TextStyle recieverName = TextStyle(fontSize: 25,color: Colors.black);
