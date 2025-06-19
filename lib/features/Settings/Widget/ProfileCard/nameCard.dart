@@ -12,6 +12,7 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
+import 'package:whatsappclone/features/Settings/Widget/ProfileCard/editBio.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
 import '../../../../Firebase/FirebaseCollections.dart';
 import '../../../../components/TextButton.dart';
@@ -26,11 +27,12 @@ import 'imageWidget.dart';
 class nameCard extends StatefulWidget {
   const nameCard({
     super.key,
-    required this.userName, this.link,
+    required this.userName, this.link, this.bio,
   });
 
   final dynamic userName;
   final dynamic link;
+  final dynamic bio;
   @override
   State<nameCard> createState() => _nameCardState();
 }
@@ -38,6 +40,7 @@ class nameCard extends StatefulWidget {
 class _nameCardState extends State<nameCard> {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController bioController = TextEditingController();
   TextEditingController linkController = TextEditingController();
 
   String? imageUrl;
@@ -47,6 +50,8 @@ class _nameCardState extends State<nameCard> {
     super.initState();
     nameController.text = widget.userName;
     linkController.text = widget.link;
+    bioController.text = widget.bio;
+
   }
 
   Future addToFireStore(String imagePath) async {
@@ -141,7 +146,16 @@ class _nameCardState extends State<nameCard> {
                               trailing: icons.arrowForward,
                               label: Text(bio.isNotEmpty ? bio : "Edit Your Bio"),
                               onTap: () async {
-                                await ShowSheet(context, bio: bio);
+                                await btmSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (context) {
+                                    return Editbio(
+                                        bio: bio,
+                                        bioController: bioController,
+                                        service: service);
+                                  }
+                                );
                               },
                             ),
                             divider(),
