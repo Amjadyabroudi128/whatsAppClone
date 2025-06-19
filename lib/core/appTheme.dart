@@ -53,7 +53,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         textStyle: Textstyles.haveAccount,
-        foregroundColor: myColors.textBtn,
+        foregroundColor: Colors.black,
       ),
     ),
     dividerTheme: DividerThemeData(
