@@ -56,6 +56,7 @@ class _SettingScreenState extends State<SettingScreen> {
           final userName = userData?['name'] ?? 'No name found';
           final link = userData?['link'] ?? 'No name found';
           final imageUrl = userData?['image'] ?? '';
+          final bio = userData?["bio"] ?? "";
           return myPadding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -68,7 +69,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     automaticallyImplyLeading: false,
                   ),
                   BoxSpacing(myHeight: 20),
-                  nameCard(userName: userName, link: link),
+                  nameCard(userName: userName, link: link, bio: bio),
                   BoxSpacing(myHeight: 15,),
                   Text("Account", style: Textstyles.accountStyle,),
                   kCard(
