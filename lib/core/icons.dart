@@ -30,7 +30,7 @@ class icons {
   static Icon wcopy = Icon(Icons.copy, color: Colors.white,);
   static Icon edit = Icon(CupertinoIcons.pencil, color: myColors.tick, size: 27,);
   static Icon camera = Icon(CupertinoIcons.camera,);
-  static Icon cancel = Icon(Icons.cancel_outlined, color: myColors.MIcons);
+  static Icon cancel = Icon(Icons.cancel_outlined,);
   static Icon dCam = Icon(Icons.camera_alt_outlined);
   static Icon file = Icon(Icons.file_copy_outlined);
   static Icon star = Icon(Icons.star_border_outlined, color: myColors.labelClr,);
