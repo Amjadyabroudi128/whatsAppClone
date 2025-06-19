@@ -62,7 +62,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
     cardTheme: CardTheme(
       shape: cardShape,
-      color: Colors.blueGrey,
+      color: Colors.white60,
     ),
 
    );
