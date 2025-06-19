@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
+import 'appTheme.dart';
+
 class icons {
   static Icon emailIcon = Icon(Icons.email);
   static Icon passIcon = Icon(Icons.password);
@@ -24,7 +26,7 @@ class icons {
   static Icon tick = Icon(Icons.check, color: myColors.tick, size: 40);
   static Icon colors = Icon(Icons.color_lens_outlined);
   static Icon deleteIcon = Icon(CupertinoIcons.delete, color: myColors.delete);
-  static Icon copy = Icon(Icons.copy, color: Colors.black,);
+  static Icon copy = Icon(Icons.copy,color: myTheme.appTheme == true ? Colors.white : Colors.black,);
   static Icon wcopy = Icon(Icons.copy, color: Colors.white,);
   static Icon edit = Icon(CupertinoIcons.pencil, color: myColors.tick, size: 27,);
   static Icon camera = Icon(CupertinoIcons.camera,);

@@ -15,6 +15,7 @@ import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/StarredMessages.dart';
 
 import '../../../core/MyColors.dart';
+import '../../../core/appTheme.dart';
 import '../../../core/icons.dart';
 
 class userDetails extends StatefulWidget {
@@ -100,10 +101,9 @@ class _userDetailsState extends State<userDetails> {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       child: kCard(
-                        color: myColors.FG,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(widget.bio!, style: TextStyle(color: Colors.black)),
+                          child: Text(widget.bio!),
                         ),
                       ),
                     ),
@@ -113,14 +113,15 @@ class _userDetailsState extends State<userDetails> {
                      padding: const EdgeInsets.only(left: 260),
                      child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                          // decoration: BoxDecoration(
-                          //   color: Colors.black,
-                          //   borderRadius: BorderRadius.circular(8),
-                          // ),
+                          decoration: BoxDecoration(
+                            // color: Colors.black,
+                            color: myTheme.appTheme == true ? Colors.black : Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                           child: kTextButton(
-                            onPressed: (){
-                              setState(() async  {
-                                await _onTapBio();
+                            onPressed: () async {
+                              await _onTapBio();
+                              setState(() {
                                 _showCopyLabel = false;
                                 myToast("Bio Copied");
                               });
@@ -130,7 +131,10 @@ class _userDetailsState extends State<userDetails> {
                               children: [
                                 icons.copy,
                                 BoxSpacing(mWidth: 10,),
-                                Text("Copy ")
+                                Text("Copy", style: TextStyle(
+                                  color: myTheme.appTheme == true ? Colors.white : Colors.black,
+                                ),
+                                )
                               ],
                             ),
                           )
