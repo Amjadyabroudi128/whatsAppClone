@@ -13,7 +13,6 @@ import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/editBio.dart';
-import 'package:whatsappclone/features/Settings/Widget/ProfileCard/showSheet.dart';
 import '../../../../Firebase/FirebaseCollections.dart';
 import '../../../../components/TextButton.dart';
 import '../../../../components/TextField.dart';
