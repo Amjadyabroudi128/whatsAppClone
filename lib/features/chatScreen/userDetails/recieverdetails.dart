@@ -113,23 +113,22 @@ class _userDetailsState extends State<userDetails> {
                      padding: const EdgeInsets.only(left: 260),
                      child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                          // decoration: BoxDecoration(
+                          //   color: Colors.black,
+                          //   borderRadius: BorderRadius.circular(8),
+                          // ),
                           child: kTextButton(
                             onPressed: (){
                               setState(() async  {
                                 await _onTapBio();
                                 _showCopyLabel = false;
                                 myToast("Bio Copied");
-
                               });
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                icons.wcopy,
+                                icons.copy,
                                 BoxSpacing(mWidth: 10,),
                                 Text("Copy ")
                               ],
