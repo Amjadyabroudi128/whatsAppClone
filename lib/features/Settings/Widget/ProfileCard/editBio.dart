@@ -1,71 +1,60 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
-import 'package:whatsappclone/components/TextButton.dart';
-import 'package:whatsappclone/components/TextField.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
-import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 
-import '../../../../components/flutterToast.dart';
+import '../../../../Firebase/FirebaseAuth.dart';
+import '../../../../components/TextButton.dart';
+import '../../../../components/TextField.dart';
+import '../../../../components/TextStyles.dart';
+import '../../../../core/MyColors.dart';
 
-class EditBio extends StatefulWidget {
-  final String? bio;
-  const EditBio({super.key, required this.bio});
+class Editbio extends StatelessWidget {
+  final FirebaseService service;
+  final TextEditingController bioController;
+  final String bio;
+  const Editbio({
+    Key? key,
+    required this.service,
+    required this.bioController, required this.bio,
+  }) : super(key: key);
 
-  @override
-  State<EditBio> createState() => _EditBioState();
-}
-
-class _EditBioState extends State<EditBio> {
-  final TextEditingController bioController = TextEditingController();
-  FirebaseService service = FirebaseService();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: myColors.btmSheet,
-      appBar: AppBar(
-        // backgroundColor: Colors.grey,
-        title: Text("Edit Your Bio",),
-        actions: [
-          editButton()
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: kTextField(
-          enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                  color: Colors.transparent
-              )
+    return FractionallySizedBox(
+      heightFactor: 0.94,
+      child: Scaffold(
+        backgroundColor: myColors.btmSheet,
+        appBar: AppBar(
+          backgroundColor: myColors.familyText,
+          title: const Text("Edit Your Bio",),
+          actions: [
+            kTextButton(
+              onPressed: () async {
+                String newBio = bioController.text.trim();
+                if(newBio.isEmpty){
+                  myToast("Your Bio is empty ");
+                } else if (newBio == bio ){
+                  myToast("Change something");
+                } else {
+                  await service.updateBio(bioController.text.trim());
+                  Navigator.of(context).pop();
+                }
+              },
+              child: Text("Save", style: Textstyles.saveBio),
+            ),
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: kTextField(
+            filled: true,
+            fillColor: myColors.familyText,
+            myController: bioController,
+            maxLines: 9,
+            hint: "Edit your Bio",
           ),
-          focused: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                  color: Colors.transparent
-              )
-          ),
-          filled: true,
-          myController: bioController,
-          maxLines: 9,
-          hint: "Edit your Bio",
         ),
       ),
     );
   }
-  editButton () {
-    return kTextButton(
-      onPressed: () async {
-        String newBio = bioController.text.trim();
-        if(newBio.isEmpty) {
-          myToast("add someThing to your bio");
-        } else if (newBio == (widget.bio ?? '')) {
-          myToast("Nothing changed in the bio");
-        } else {
-          await service.updateBio(newBio);
-          Navigator.of(context).pop();
-        }
-      },
-      child: Text("Save",),
-    );
-  }
 }
+
