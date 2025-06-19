@@ -21,43 +21,43 @@ class editName extends StatelessWidget {
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       heightFactor: 0.94,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Edit Your Name",),
-          actions: [
-            kTextButton(
-              onPressed: () async {
-                String newName = nameController.text.trim();
-                if(newName.isEmpty){
-                  myToast("Your name is empty ");
-                } else if (newName == name ){
-                  myToast("Change something");
-                } else {
-                  await service.updateName(nameController.text.trim());
-                  Navigator.of(context).pop();
-                }
-              },
-              child: Text("Save", style: Textstyles.saveBio),
+      child: GestureDetector(
+        onTap: (){
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Edit Your Name",),
+            actions: [
+              kTextButton(
+                onPressed: () async {
+                  String newName = nameController.text.trim();
+                  if(newName.isEmpty){
+                    myToast("Your name is empty ");
+                  } else if (newName == name ){
+                    myToast("Change something");
+                  } else {
+                    await service.updateName(nameController.text.trim());
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: Text("Save", style: Textstyles.saveBio),
+              ),
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: kTextField(
+              enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      color: Colors.transparent
+                  )
+              ),
+              filled: true,
+              myController: nameController,
+              maxLines: 9,
+              hint: "Edit your Bio",
             ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: kTextField(
-            enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                    color: Colors.transparent
-                )
-            ),
-            focused: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                    color: Colors.transparent
-                )
-            ),
-            filled: true,
-            myController: nameController,
-            maxLines: 9,
-            hint: "Edit your Bio",
           ),
         ),
       ),
