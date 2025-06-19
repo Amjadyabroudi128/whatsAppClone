@@ -22,10 +22,8 @@ class editName extends StatelessWidget {
     return FractionallySizedBox(
       heightFactor: 0.94,
       child: Scaffold(
-        backgroundColor: myColors.btmSheet,
         appBar: AppBar(
-          backgroundColor: myColors.familyText,
-          title: const Text("Edit Your Name", style: TextStyle(color: Colors.white)),
+          title: const Text("Edit Your Name",),
           actions: [
             kTextButton(
               onPressed: () async {
@@ -46,11 +44,20 @@ class editName extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: kTextField(
+            enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                    color: Colors.transparent
+                )
+            ),
+            focused: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                    color: Colors.transparent
+                )
+            ),
             filled: true,
-            fillColor: myColors.familyText,
             myController: nameController,
             maxLines: 9,
-            hint: "Edit your name",
+            hint: "Edit your Bio",
           ),
         ),
       ),
