@@ -14,6 +14,16 @@ Widget userList(String searchQuery,) {
   User? user = FirebaseAuth.instance.currentUser;
   final currentUserId = user?.uid ?? '';
 
+  if (searchQuery.trim().isEmpty) {
+    return const Flexible(
+      child: Center(
+        child: Text(
+          "Search for users\n to start a chat with them",
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
   return Flexible(
     child: StreamBuilder<QuerySnapshot>(
       stream: userC.snapshots(),
@@ -38,7 +48,7 @@ Widget userList(String searchQuery,) {
           itemCount: users.length,
           itemBuilder: (context, index) {
             final userDoc = users[index];
-            final image = userDoc['image']; // Assuming 'image' is the field name for the user's image
+            final image = userDoc['image'];
             return myPadding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
