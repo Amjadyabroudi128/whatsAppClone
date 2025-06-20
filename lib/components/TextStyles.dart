@@ -32,4 +32,5 @@ class Textstyles {
   static TextStyle editBar =  TextStyle(fontSize: 19);
   static TextStyle btmSheet = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   static TextStyle reply = TextStyle(fontStyle: FontStyle.italic, color: Colors.white,);
+  static TextStyle darkLabel =TextStyle(color: Colors.white);
  }

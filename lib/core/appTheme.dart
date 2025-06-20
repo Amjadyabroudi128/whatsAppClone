@@ -134,9 +134,9 @@ import 'package:whatsappclone/core/MyColors.dart';
       errorBorder: darkBoder,
       fillColor: Colors.grey,
       focusColor: Colors.white,
-      labelStyle: TextStyle(color: Colors.white),
-      hintStyle: TextStyle(color: Colors.white),
-      floatingLabelStyle: TextStyle(color: Colors.white),
+      labelStyle: Textstyles.darkLabel,
+      hintStyle: Textstyles.darkLabel,
+      floatingLabelStyle: Textstyles.darkLabel,
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: myColors.textSelection,
