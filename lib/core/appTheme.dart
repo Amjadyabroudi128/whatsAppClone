@@ -127,6 +127,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       ),
       focusedBorder: darkBoder,
       errorBorder: darkBoder,
+      fillColor: Colors.grey,
       // enabledBorder: fieldBorder,
       // focusedBorder: fieldBorder,
       focusColor: Colors.white,
