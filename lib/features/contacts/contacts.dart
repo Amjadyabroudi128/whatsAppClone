@@ -40,31 +40,36 @@ class _ContactsState extends State<Contacts> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          actions: [
-           signoutBtn()
-          ],
-          title: myPadding(
-            padding: const EdgeInsets.only(top: 18),
-            child: Text("Chats", style: Textstyles.appBar,),
-          ),
-          backgroundColor: myColors.TC,
-          automaticallyImplyLeading: false,
-          centerTitle: false,
-        ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: kTextField(
-                hint: "Search user",
-                myController: userController,
-              ),
+    return GestureDetector(
+      onTap: (){
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            actions: [
+             signoutBtn()
+            ],
+            title: myPadding(
+              padding: const EdgeInsets.only(top: 18),
+              child: Text("Chats", style: Textstyles.appBar,),
             ),
-            userList(searchQuery, ),
-          ],
-        ),
+            backgroundColor: myColors.TC,
+            automaticallyImplyLeading: false,
+            centerTitle: false,
+          ),
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: kTextField(
+                  hint: "Search user",
+                  myController: userController,
+                ),
+              ),
+              userList(searchQuery, ),
+            ],
+          ),
+      ),
     );
   }
 }
