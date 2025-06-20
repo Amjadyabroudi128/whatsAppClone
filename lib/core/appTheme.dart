@@ -93,10 +93,9 @@ import 'package:whatsappclone/core/MyColors.dart';
         )
     ),
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: Colors.green.shade300,
-      selectionHandleColor: Colors.green.shade300,
-      selectionColor: Colors.green.shade300,
-
+      cursorColor: myColors.textSelection,
+      selectionHandleColor: myColors.textSelection,
+      selectionColor: myColors.textSelection
     ),
    );
   static final ThemeData darkTheme = ThemeData().copyWith(
@@ -140,9 +139,9 @@ import 'package:whatsappclone/core/MyColors.dart';
       floatingLabelStyle: TextStyle(color: Colors.white),
     ),
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: Colors.green.shade300,
-      selectionHandleColor: Colors.green.shade300,
-      selectionColor: Colors.green.shade300,
+      cursorColor: myColors.textSelection,
+      selectionHandleColor: myColors.textSelection,
+      selectionColor: myColors.textSelection
     ),
     listTileTheme: ListTileThemeData(
         textColor: Colors.white
