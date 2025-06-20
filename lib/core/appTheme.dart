@@ -96,6 +96,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       cursorColor: Colors.green.shade300,
       selectionHandleColor: Colors.green.shade300,
       selectionColor: Colors.green.shade300,
+
     ),
    );
   static final ThemeData darkTheme = ThemeData().copyWith(
