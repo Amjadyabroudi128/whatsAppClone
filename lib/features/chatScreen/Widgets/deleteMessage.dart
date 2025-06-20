@@ -6,7 +6,7 @@ import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 
-import '../../../components/TextStyles.dart';
+import '../../../core/TextStyles.dart';
 import '../../../components/flutterToast.dart';
 import '../../../components/imageNetworkComponent.dart';
 import '../../../core/icons.dart';

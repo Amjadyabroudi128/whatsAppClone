@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/TextButton.dart';
-import '../../../components/TextStyles.dart';
+import '../../../core/TextStyles.dart';
 import '../../../components/flutterToast.dart';
 import '../../../core/icons.dart';
 import '../../../messageClass/messageClass.dart';

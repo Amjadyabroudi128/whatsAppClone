@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/TextButton.dart';
-import '../../../components/TextStyles.dart';
+import '../../../core/TextStyles.dart';
 import '../../../core/icons.dart';
 import '../../../messageClass/messageClass.dart';
 

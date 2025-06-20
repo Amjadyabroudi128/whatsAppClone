@@ -8,7 +8,7 @@ import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextButton.dart';
-import '../../../../components/TextStyles.dart';
+import '../../../../core/TextStyles.dart';
 import '../../../../components/iconButton.dart';
 
 class deleteAccount extends StatelessWidget {

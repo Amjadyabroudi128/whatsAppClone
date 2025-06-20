@@ -11,7 +11,7 @@ import '../../components/TextField.dart';
 import '../../components/flutterToast.dart';
 import '../../components/iconButton.dart';
 import '../../colorPicker/colorsList.dart';
-import '../../components/TextStyles.dart';
+import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 import 'Widgets/messageStream.dart';
 import 'userDetails/recieverdetails.dart';

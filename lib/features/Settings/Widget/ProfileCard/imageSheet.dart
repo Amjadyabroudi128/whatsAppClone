@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/core/MyColors.dart';

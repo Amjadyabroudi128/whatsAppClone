@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/TextButton.dart';
-import '../../../components/TextStyles.dart';
+import '../../../core/TextStyles.dart';
 import '../../SignUp/signupScreen.dart';
 
 class NotRegisterd extends StatelessWidget {

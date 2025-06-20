@@ -4,7 +4,7 @@ import 'package:whatsappclone/components/flutterToast.dart';
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextButton.dart';
 import '../../../../components/TextField.dart';
-import '../../../../components/TextStyles.dart';
+import '../../../../core/TextStyles.dart';
 import '../../../../core/MyColors.dart';
 
 class Editbio extends StatelessWidget {

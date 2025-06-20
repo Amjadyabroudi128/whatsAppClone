@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/signoutBtn.dart';

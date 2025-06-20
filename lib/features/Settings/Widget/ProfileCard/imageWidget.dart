@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/kCard.dart';
 
 class imageWidget extends StatelessWidget {

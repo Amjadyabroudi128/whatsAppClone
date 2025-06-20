@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/core/icons.dart';

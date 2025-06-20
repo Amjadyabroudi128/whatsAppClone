@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../components/TextStyles.dart';
+import '../../../core/TextStyles.dart';
 
 class textFamily extends StatelessWidget {
   const textFamily({

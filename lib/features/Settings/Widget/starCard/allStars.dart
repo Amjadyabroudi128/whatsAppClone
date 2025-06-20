@@ -8,7 +8,7 @@ import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/SizedBox.dart';
 import '../../../../components/TextButton.dart';
-import '../../../../components/TextStyles.dart';
+import '../../../../core/TextStyles.dart';
 import '../../../../components/dividerWidget.dart';
 import '../../../../components/flutterToast.dart';
 import '../../../../components/iconButton.dart';

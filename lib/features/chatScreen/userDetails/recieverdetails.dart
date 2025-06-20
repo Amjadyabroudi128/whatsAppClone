@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import '../core/icons.dart';
 import 'Widgets/circleAvatar.dart';
 import 'colorsList.dart';

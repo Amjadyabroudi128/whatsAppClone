@@ -6,7 +6,7 @@ import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
-import '../../../components/TextStyles.dart';
+import '../../../core/TextStyles.dart';
 import '../../../core/icons.dart';
 import '../../../messageClass/messageClass.dart';
 

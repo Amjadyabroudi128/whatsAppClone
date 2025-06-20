@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/Strings.dart';
 
-import '../../../components/TextStyles.dart';
+import '../../../core/TextStyles.dart';
 
 class welcomeText extends StatelessWidget {
   const welcomeText({

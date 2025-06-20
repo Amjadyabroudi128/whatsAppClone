@@ -4,7 +4,7 @@ import 'package:whatsappclone/components/btmSheet.dart';
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/SizedBox.dart';
 import '../../../components/TextButton.dart';
-import '../../../components/TextStyles.dart';
+import '../../../core/TextStyles.dart';
 import '../../../components/iconButton.dart';
 import '../../../components/listTilesOptions.dart';
 import '../../../core/icons.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/SizedBox.dart';

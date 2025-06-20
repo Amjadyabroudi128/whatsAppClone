@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/Firebase/FirebaseCollections.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/kCard.dart';

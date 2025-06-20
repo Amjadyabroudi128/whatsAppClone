@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextStyles.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
