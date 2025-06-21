@@ -7,6 +7,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/signoutBtn.dart';
 import '../../components/TextField.dart';
 import '../../core/icons.dart';
+import 'Widgets/searcTextField.dart';
 import 'Widgets/streamUser.dart';
 class Contacts extends StatefulWidget {
   const Contacts({super.key});
@@ -62,11 +63,7 @@ class _ContactsState extends State<Contacts> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: kTextField(
-                  myIcon: icons.search,
-                  hint: "Search user",
-                  myController: userController,
-                ),
+                child: searchTextField(userController: userController),
               ),
               userList(searchQuery, ),
             ],
@@ -75,5 +72,6 @@ class _ContactsState extends State<Contacts> {
     );
   }
 }
+
 
 
