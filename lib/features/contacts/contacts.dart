@@ -62,7 +62,7 @@ class _ContactsState extends State<Contacts> {
           body: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(12.0),
                 child: searchTextField(userController: userController),
               ),
               userList(searchQuery, ),
