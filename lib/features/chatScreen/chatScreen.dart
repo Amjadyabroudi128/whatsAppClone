@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
 
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
@@ -22,10 +23,11 @@ class Testname extends StatefulWidget {
   final String receiverName;
   final String? senderId;
   final String? msg;
+  final String? image;
   const Testname({
     Key? key,
     required this.receiverId,
-    required this.receiverName,  this.senderId, this.msg,
+    required this.receiverName,  this.senderId, this.msg, this.image,
   }) : super(key: key);
 
   @override
@@ -37,6 +39,7 @@ class _TestnameState extends State<Testname> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
   final currentUser = FirebaseAuth.instance.currentUser!.uid;
+
   Messages? _replyMessage;
   bool isTextEmpty = true;
   bool isEditing = false;
@@ -85,27 +88,42 @@ class _TestnameState extends State<Testname> {
                 }
               },
               child: AppBar(
-                // backgroundColor: color,
-                title: Row(
+                backgroundColor: color,
+                title: isEditing ? Row(
                   children: [
-                    isEditing ? Row(
-                      children: [
-                        Text("Selected"),
-                        BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.39,),
-                        kTextButton(
-                            onPressed: (){
+                    Text("Selected"),
+                    BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.39,),
+                    kTextButton(
+                        onPressed: (){
                           setState(() {
                             FocusScope.of(context).unfocus();
                             selectedMessages.clear();
                             isEditing = !isEditing;
                           });
                         },
-                            child: Text("Cancel"))
-                      ],
-                    ) : Text(widget.receiverName,),
-                    Spacer(),
+                        child: Text("Cancel"))
+                  ],
+                ) :Row(
+                  children: [
+                    if(widget.image != null && widget.image!.isNotEmpty) 
+                      CircleAvatar(
+                      backgroundImage: NetworkImage(widget.image!),
+                      radius: 20,
+                    ) else icons.person,
+                    SizedBox(width: 10,),
+                    Text(widget.receiverName)
                   ],
                 ),
+                // backgroundColor: color,
+                // title: Row(
+                //   children: [
+                //     isEditing ? Row(
+
+                //     ) :  Text(widget.receiverName,),
+                //     Spacer(),
+                //
+                //   ],
+                // ),
                 centerTitle: false,
               ),
             ),
