@@ -31,4 +31,5 @@ class myColors {
    static Color starColor = Colors.green;
    static Color amberStar = Colors.amber;
    static Color textSelection = Colors.green.shade300;
+   static Color bDialog = Colors.black;
  }

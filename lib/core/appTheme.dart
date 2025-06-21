@@ -158,7 +158,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       ),
     ),
     dialogTheme: DialogTheme(
-      backgroundColor: Colors.black,
+      backgroundColor: myColors.bDialog
     ),
     iconTheme: IconThemeData(
       color: Colors.black
