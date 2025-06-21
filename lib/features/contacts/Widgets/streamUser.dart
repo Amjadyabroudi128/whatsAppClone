@@ -67,6 +67,7 @@ Widget userList(String searchQuery,) {
                           builder: (context) => Testname(
                             receiverId: userDoc["uid"],
                             receiverName: userDoc["name"] ?? "Unknown",
+                            image: image
                           ),
                         ),
                       );
