@@ -125,7 +125,8 @@ import 'package:whatsappclone/core/MyColors.dart';
       )
     ),
     inputDecorationTheme: InputDecorationTheme(
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
               color: Colors.white
           )

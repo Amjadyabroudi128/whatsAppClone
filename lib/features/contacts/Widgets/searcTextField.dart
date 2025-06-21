@@ -14,9 +14,6 @@ class searchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return kTextField(
-      enable: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25)
-      ),
       myIcon: icons.search,
       hint: "Search user",
       myController: userController,
