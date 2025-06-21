@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 
@@ -29,7 +31,6 @@ class kTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = textColor ?? Theme.of(context).textTheme.bodyMedium?.color;
-
     return TextField(
       scrollController: scroll,
       onTap: onTap,
@@ -38,7 +39,6 @@ class kTextField extends StatelessWidget {
       keyboardType: keyBoard,
       maxLines: maxLines ?? 1,
       style: TextStyle(color: color), // <-- Set text color here
-
       // Default to 1 if not provided
       decoration: InputDecoration(
         fillColor: fillColor,

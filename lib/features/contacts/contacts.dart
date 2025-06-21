@@ -62,6 +62,7 @@ class _ContactsState extends State<Contacts> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: kTextField(
+                  myIcon: Icon(Icons.search),
                   hint: "Search user",
                   myController: userController,
                 ),
