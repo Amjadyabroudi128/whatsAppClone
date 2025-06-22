@@ -88,7 +88,7 @@ class _TestnameState extends State<Testname> {
                 }
               },
               child: AppBar(
-                backgroundColor: color,
+                // backgroundColor: color,
                 title: isEditing ? Row(
                   children: [
                     Text("Selected"),
