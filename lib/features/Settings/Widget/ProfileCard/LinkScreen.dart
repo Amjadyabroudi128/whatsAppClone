@@ -47,10 +47,10 @@ class LinksScreen extends StatelessWidget {
                 ),
                 filled: true,
                 myController: linkController,
-                maxLines: 1,
+                maxLines: 2,
                 hint: "${linkController.text.isEmpty ? "Link" : linkController}",
               ),
-              BoxSpacing(myHeight: 10,),
+              BoxSpacing(myHeight: 13,),
               Text("adding isntagram to your profile will make it visible", style: TextStyle(fontSize: 13, color: CupertinoColors.systemGrey),)
             ],
           ),
