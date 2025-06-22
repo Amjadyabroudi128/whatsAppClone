@@ -40,6 +40,11 @@ class LinksScreen extends StatelessWidget {
               Text("Instagram Link",),
               BoxSpacing(myHeight: 10,),
               kTextField(
+                enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Colors.transparent
+                    )
+                ),
                 filled: true,
                 myController: linkController,
                 maxLines: 1,
