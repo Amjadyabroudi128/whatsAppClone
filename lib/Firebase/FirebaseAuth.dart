@@ -19,7 +19,7 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          'bio': '',
          "image": "",
          "link": ""
-       });
+       }, SetOptions(merge: true));
        await auth.currentUser?.reload();
        User? updatedUser = auth.currentUser;
        if (updatedUser != null) {
@@ -40,19 +40,16 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
    Future<void> SigninUser(BuildContext context, String email, String password, String name) async {
      try {
        await auth.signInWithEmailAndPassword(email: email, password: password);
-       users.collection("users").doc(auth.currentUser!.uid).set({
+       await users.collection("users").doc(auth.currentUser!.uid).set({
          'email': email,
          'uid': auth.currentUser!.uid,
-         "name" : name,
-         "bio": "",
-         "image": "",
-         "link": ""
-       });
-       users.collection("users").get();
+         'name': name,
+       }, SetOptions(merge: true));
+
        await auth.currentUser?.reload();
        User? updatedUser = auth.currentUser;
        if (updatedUser != null) {
-         Navigator.pushReplacementNamed(context, "btm"); // Ensure '/home' routes to contacts
+         Navigator.pushReplacementNamed(context, "btm");
        }
      } on FirebaseAuthException catch (e) {
        String message = '';
@@ -62,9 +59,11 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          message = 'Wrong password provided for that user.';
        }
        myToast(message);
+     } catch (e) {
+       print("Unexpected sign-in error: $e");
      }
-     catch (e){}
    }
+
 
    Future<void> SignOut ()async {
      auth.signOut();
