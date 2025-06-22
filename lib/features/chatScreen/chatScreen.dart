@@ -114,16 +114,6 @@ class _TestnameState extends State<Testname> {
                     Text(widget.receiverName)
                   ],
                 ),
-                // backgroundColor: color,
-                // title: Row(
-                //   children: [
-                //     isEditing ? Row(
-
-                //     ) :  Text(widget.receiverName,),
-                //     Spacer(),
-                //
-                //   ],
-                // ),
                 centerTitle: false,
               ),
             ),
