@@ -85,12 +85,16 @@ class _userDetailsState extends State<userDetails> {
                 BoxSpacing(myHeight: 9),
                 Text(widget.name ?? '', style: Textstyles.recieverName),
 
-                GestureDetector(
-                  onTap: () async {
-                    await launchUrl(Uri.parse(
-                        '${widget.link}'));
-                  },
-                  child: Text(widget.link ?? "", style: TextStyle(fontSize: 18, decoration: TextDecoration.underline ),),
+                Padding(
+                  padding: const EdgeInsets.only(left: 63),
+                  child: GestureDetector(
+                    onTap: () async {
+                      await launchUrl(Uri.parse(
+                          '${widget.link}'));
+                    },
+                    child: Text(widget.link ?? "", style: TextStyle(fontSize: 18, decoration: TextDecoration.underline,
+                      color: myTheme.appTheme == true ? Colors.black : Colors.blue.shade800,),),
+                  ),
                 ),
                 // Text(widget.link ?? "",),
                 BoxSpacing(myHeight: 7),
