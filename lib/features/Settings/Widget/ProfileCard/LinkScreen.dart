@@ -19,9 +19,8 @@ class LinksScreen extends StatelessWidget {
     return FractionallySizedBox(
       heightFactor: 0.94,
       child: Scaffold(
-        backgroundColor: myColors.btmSheet,
         appBar: AppBar(
-          backgroundColor: Colors.grey,
+
           title: Text("Add link"),
           actions: [
             kTextButton(
@@ -38,11 +37,10 @@ class LinksScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Instagram UserName", style: TextStyle(color: Colors.white),),
+              Text("Instagram Link",),
               BoxSpacing(myHeight: 10,),
               kTextField(
                 filled: true,
-                fillColor: Colors.grey,
                 myController: linkController,
                 maxLines: 1,
                 hint: "${linkController.text.isEmpty ? "Link" : linkController}",
