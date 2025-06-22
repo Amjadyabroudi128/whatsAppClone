@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/fontWeightHelper.dart';
 import 'package:whatsappclone/core/MyColors.dart';
@@ -33,4 +34,5 @@ class Textstyles {
   static TextStyle btmSheet = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   static TextStyle reply = TextStyle(fontStyle: FontStyle.italic, color: Colors.white,);
   static TextStyle darkLabel =TextStyle(color: Colors.white);
+  static TextStyle insta = TextStyle(fontSize: 13, color: CupertinoColors.systemGrey);
  }
