@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../Firebase/FirebaseAuth.dart';
+import '../../core/icons.dart';
 import '../chatScreen/chatScreen.dart';
 class RecentChatsScreen extends StatefulWidget {
   const RecentChatsScreen({Key? key}) : super(key: key);
@@ -39,14 +41,16 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
               final Timestamp timestamp = chat['lastMessageTime'];
               final dateTime = timestamp.toDate();
               final receiverName = chat['receiverName'] ?? "User";
-
+              String day = DateFormat.yMd().format(dateTime);
               return Dismissible(
                 key: ValueKey(chats.length),
                 direction: DismissDirection.endToStart,
-                background: Container(
-                  color: Colors.red,
-                  alignment: Alignment.center,
-                  child: Icon(Icons.delete),
+                background: Padding(
+                  padding: const EdgeInsets.only(right: 26),
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: icons.deleteIcon,
+                  ),
                 ),
                 confirmDismiss: (direction) async {
                   if (direction == DismissDirection.endToStart) {

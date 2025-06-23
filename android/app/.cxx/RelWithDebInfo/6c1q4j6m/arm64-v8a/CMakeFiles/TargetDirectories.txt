@@ -1,0 +1,2 @@
+C:/Users/Amjad Yabroudi/whatsAppClone/android/app/.cxx/RelWithDebInfo/6c1q4j6m/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Amjad Yabroudi/whatsAppClone/android/app/.cxx/RelWithDebInfo/6c1q4j6m/arm64-v8a/CMakeFiles/rebuild_cache.dir
