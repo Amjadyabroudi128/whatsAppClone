@@ -19,6 +19,11 @@ class editName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+            color: Colors.transparent
+        )
+    );
     return FractionallySizedBox(
       heightFactor: 0.94,
       child: GestureDetector(
@@ -48,11 +53,7 @@ class editName extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: kTextField(
-              enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                      color: Colors.transparent
-                  )
-              ),
+              enable: enabled,
               filled: true,
               myController: nameController,
               maxLines: 9,
