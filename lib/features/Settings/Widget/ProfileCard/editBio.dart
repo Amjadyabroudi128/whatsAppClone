@@ -55,7 +55,6 @@ class Editbio extends StatelessWidget {
             child: kTextField(
               enable: enabled,
               filled: true,
-              // fillColor: myColors.familyText,
               myController: bioController,
               maxLines: 9,
               hint: "Edit your Bio",
