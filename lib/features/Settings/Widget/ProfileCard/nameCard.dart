@@ -167,7 +167,9 @@ class _nameCardState extends State<nameCard> {
                                   context: context,
                                   isScrollControlled: true,
                                   builder: (context) {
-                                    return LinksScreen(linkController: linkController,link: link);
+                                    return LinksScreen(
+                                        linkController: linkController,
+                                        link: link);
                                   },
                                 );
 

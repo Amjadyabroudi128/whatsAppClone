@@ -6,12 +6,13 @@ import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/SizedBox.dart';
 import '../../../../components/TextButton.dart';
 import '../../../../components/TextField.dart';
+import '../../../../components/flutterToast.dart';
 import '../../../../core/MyColors.dart';
 
 class LinksScreen extends StatelessWidget {
   final TextEditingController linkController;
-
-  const LinksScreen({super.key, required this.linkController, required link});
+  final String link;
+  const LinksScreen({super.key, required this.linkController,  required this.link});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +31,15 @@ class LinksScreen extends StatelessWidget {
               kTextButton(
                 child: Text("Save", style: Textstyles.saveBio,),
                 onPressed: ()async {
-                  await service.addLink(linkController.text.trim());
-                  Navigator.of(context).pop();
+                  String newLink = linkController.text.trim();
+                  if(newLink.isEmpty){
+                    myToast("Your name is empty ");
+                  } else if (newLink == link ){
+                    myToast("Change something");
+                  } else {
+                    await service.addLink(linkController.text.trim());
+                    Navigator.of(context).pop();
+                  }
                 },
               )
             ],
@@ -52,7 +60,7 @@ class LinksScreen extends StatelessWidget {
                   filled: true,
                   myController: linkController,
                   maxLines: 2,
-                  hint: "${linkController.text.isEmpty ? "Link" : linkController}",
+                  hint: "${linkController.text.isEmpty ? "Link" : linkController.text.trim()}",
                 ),
                 BoxSpacing(myHeight: 13,),
                 Text("adding isntagram to your profile will make it visible", style: Textstyles.insta,)
