@@ -96,6 +96,26 @@ class _messagesAlignState extends State<messagesAlign> {
               Align(
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
                 child: GestureDetector(
+                  onTap: () {
+                    if (msg.image != null && msg.image!.isNotEmpty) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => Imagescreen(
+                            image: msg.image,
+                            date: day,
+                            senderName: msg.senderEmail,
+                            time: formattedTime,
+                            messageId: msg.messageId,
+                            receiverId: msg.receiverId,
+                            senderId: msg.senderId,
+                            senderEmail: msg.senderEmail,
+                            receiverEmail: msg.receiverEmail,
+                          ),
+                        ),
+                      );
+                    }
+                  },
                   onLongPressStart: (detail) {
                     FocusScope.of(context).unfocus();
                     final position = isMe
