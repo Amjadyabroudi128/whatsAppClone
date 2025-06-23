@@ -17,6 +17,11 @@ class LinksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
+    OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+            color: Colors.transparent
+        )
+    );
     return FractionallySizedBox(
       heightFactor: 0.94,
       child: GestureDetector(
@@ -52,11 +57,7 @@ class LinksScreen extends StatelessWidget {
                 Text("Instagram Link",),
                 BoxSpacing(myHeight: 10,),
                 kTextField(
-                  enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                          color: Colors.transparent
-                      )
-                  ),
+                  enable: enabled,
                   filled: true,
                   myController: linkController,
                   maxLines: 2,
