@@ -285,7 +285,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                             "${msg.replyTo!.senderEmail}",
                                             style: TextStyle(
                                               color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
-                                                  ? Colors.orangeAccent
+                                                  ? Colors.orange.shade800
                                                   : Colors.cyan.shade800,
                                             ),
                                           ),

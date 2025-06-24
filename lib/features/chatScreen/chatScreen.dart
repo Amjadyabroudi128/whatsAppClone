@@ -157,11 +157,22 @@ class _TestnameState extends State<Testname> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Text(
-                          '${_replyMessage!.senderEmail}\n${_replyMessage!.text}',
-                          style: Textstyles.reply,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${_replyMessage!.senderEmail}",
+                              maxLines: 2,
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(
+                                color: isReplyFromMe ? Colors.orange.shade800 :
+                                Colors.cyan.shade800,
+                              ),
+                            ),
+                            Text("${_replyMessage!.text}", style: Textstyles.reply,
+                              maxLines: 3,overflow: TextOverflow.clip,
+                            )
+                          ],
                         ),
                       ),
                       if (_replyMessage!.image != null && _replyMessage!.image!.isNotEmpty)
