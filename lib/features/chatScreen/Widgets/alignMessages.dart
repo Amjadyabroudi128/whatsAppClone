@@ -256,7 +256,7 @@ class _messagesAlignState extends State<messagesAlign> {
                             ),
                             child: Container(
                               margin:  containermargin,
-                              padding:  containerPadding,
+                              // padding:  containerPadding,
                               decoration: containerDecoration(
                                 color: isMe ? myColors.myMessage : Colors.grey,
                                 borderRadius: myTheme.CircularContainer,
@@ -271,6 +271,12 @@ class _messagesAlignState extends State<messagesAlign> {
                                       decoration: BoxDecoration(
                                         color: isMe ? Colors.green[200] : myColors.message,
                                         borderRadius: BorderRadius.circular(8),
+                                        border: Border(
+                                          left: BorderSide(
+                                            color: isMe ? Colors.orangeAccent : Colors.cyan,
+                                            width: 4
+                                          )
+                                        )
                                       ),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -324,11 +330,14 @@ class _messagesAlignState extends State<messagesAlign> {
                                       ],
                                     )
                                   else
-                                    Text(
-                                      softWrap: true,
-                                      overflow: TextOverflow.clip,
-                                      msg.text,
-                                      style: TextStyle(fontSize: 16, color: Colors.black),
+                                    Padding(
+                                      padding: const EdgeInsets.all(9.0),
+                                      child: Text(
+                                        softWrap: true,
+                                        overflow: TextOverflow.clip,
+                                        msg.text,
+                                        style: TextStyle(fontSize: 16, color: Colors.black),
+                                      ),
                                     ),
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -345,7 +354,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                       fomattedDateText(formattedTime: formattedTime,),
                                     ],
                                   )
-                            
+
                                 ],
                               ),
                             ),
