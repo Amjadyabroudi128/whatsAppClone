@@ -282,7 +282,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "${msg.replyTo!.senderEmail}",
+                                            "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email ? "You" : msg.replyTo!.senderEmail}",
                                             style: TextStyle(
                                               color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
                                                   ? Colors.orange.shade800
