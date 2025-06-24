@@ -282,7 +282,15 @@ class _messagesAlignState extends State<messagesAlign> {
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("${msg.replyTo!.senderEmail}"),
+                                          Text(
+                                            "${msg.replyTo!.senderEmail}",
+                                            style: TextStyle(
+                                              color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
+                                                  ? Colors.orangeAccent
+                                                  : Colors.cyan.shade800,
+                                            ),
+                                          ),
+
                                           if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
                                             Column(
                                               mainAxisSize: MainAxisSize.min,
