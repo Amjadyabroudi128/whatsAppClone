@@ -274,7 +274,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         border: Border(
                                           left: BorderSide(
                                             color: isMe ? Colors.orangeAccent : Colors.cyan,
-                                            width: 4
+                                            width: 7
                                           )
                                         )
                                       ),
