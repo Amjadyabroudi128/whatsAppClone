@@ -32,7 +32,7 @@ class Textstyles {
   static TextStyle noStarMessage = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   static TextStyle editBar =  TextStyle(fontSize: 19);
   static TextStyle btmSheet = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-  static TextStyle reply = TextStyle(fontStyle: FontStyle.italic, color: Colors.white,);
+  static TextStyle reply = TextStyle( color: Colors.white, fontSize: 16);
   static TextStyle darkLabel =TextStyle(color: Colors.white);
   static TextStyle insta = TextStyle(fontSize: 13, color: CupertinoColors.systemGrey);
  }
