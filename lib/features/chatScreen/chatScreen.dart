@@ -53,6 +53,7 @@ class _TestnameState extends State<Testname> {
 
   @override
   Widget build(BuildContext context) {
+    final isReplyFromMe = _replyMessage?.senderEmail == user!.email;
     return ValueListenableBuilder<Color>(
       valueListenable: selectedThemeColor,
       builder: (context, color, child) {
@@ -145,6 +146,13 @@ class _TestnameState extends State<Testname> {
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(8),
+                    border: Border(
+                      left: BorderSide(
+                        color: isReplyFromMe ? Colors.orangeAccent
+                        : Colors.cyan.shade800,
+                        width: 7
+                      )
+                    )
                   ),
                   child: Row(
                     children: [
