@@ -114,6 +114,9 @@ class _messagesAlignState extends State<messagesAlign> {
                           ),
                         ),
                       );
+                    } else if (msg.file != null && msg.file!.isNotEmpty) {
+                      launchUrl(Uri.parse(
+                          '${msg.file}'));
                     }
                   },
                   onLongPressStart: (detail) {
