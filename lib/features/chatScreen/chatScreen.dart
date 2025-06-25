@@ -215,6 +215,7 @@ class _TestnameState extends State<Testname> {
                   children: [
                     Expanded(
                       child: kTextField(
+                        maxLines: null,
                         textColor: Colors.black,
                         enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
