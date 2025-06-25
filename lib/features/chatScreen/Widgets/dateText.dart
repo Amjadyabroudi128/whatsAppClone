@@ -12,7 +12,7 @@ class fomattedDateText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: 45,
+        left: MediaQuery.of(context).size.width * 0.38,
       ),
       child: Text(formattedTime, style: TextStyle(color: Colors.black),),
     );
