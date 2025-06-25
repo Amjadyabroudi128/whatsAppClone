@@ -255,7 +255,7 @@ class _messagesAlignState extends State<messagesAlign> {
                         Flexible(
                           child: ConstrainedBox(
                             constraints: BoxConstraints(
-                              maxWidth: MediaQuery.of(context).size.width * 0.70,
+                              maxWidth: MediaQuery.of(context).size.width * 0.60,
                             ),
                             child: IntrinsicWidth(
                               child: Container(
@@ -293,7 +293,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                     : myColors.otherName,
                                               ),
                                             ),
-                              
+
                                             if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
                                               Column(
                                                 mainAxisSize: MainAxisSize.min,
@@ -342,7 +342,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                       )
                                     else
                                       Padding(
-                                        padding: const EdgeInsets.all(9.0),
+                                        padding:  EdgeInsets.all(9.0),
                                         child: Align(
                                           alignment: Alignment.centerRight,
                                           child: Text(
@@ -369,7 +369,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         fomattedDateText(formattedTime: formattedTime,),
                                       ],
                                     )
-                              
+
                                   ],
                                 ),
                               ),
