@@ -272,7 +272,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         padding: const EdgeInsets.all(8),
                                         margin: const EdgeInsets.only(bottom: 4),
                                         decoration: BoxDecoration(
-                                          color: isMe ? Colors.green[200] : myColors.message,
+                                          color: isMe ? myColors.reply: myColors.message,
                                           borderRadius: BorderRadius.circular(8),
                                           border: Border(
                                             left: BorderSide(
