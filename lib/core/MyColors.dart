@@ -9,6 +9,7 @@ class myColors {
    static  Color FG = Colors.white;
    static Color? myMessage = Colors.green[400];
    static Color? message = Colors.grey[300];
+   static Color? reply = Colors.green[200];
    static Color labelClr = Colors.black;
    static Color floating = Colors.black54;
    static Color FAB = Colors.lightGreen;
