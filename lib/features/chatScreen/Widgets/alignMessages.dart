@@ -361,7 +361,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                           Text(
                                             "Edited",
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: 13,
                                               fontStyle: FontStyle.italic,
                                               color: Colors.grey.shade800,
                                             ),
