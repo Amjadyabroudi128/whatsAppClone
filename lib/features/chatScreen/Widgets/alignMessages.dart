@@ -255,117 +255,123 @@ class _messagesAlignState extends State<messagesAlign> {
                         Flexible(
                           child: ConstrainedBox(
                             constraints: BoxConstraints(
-                              maxWidth: MediaQuery.of(context).size.width * 0.80,
+                              maxWidth: MediaQuery.of(context).size.width * 0.70,
                             ),
-                            child: Container(
-                              margin:  containermargin,
-                              decoration: containerDecoration(
-                                color: isMe ? myColors.myMessage : Colors.grey,
-                                borderRadius: myTheme.CircularContainer,
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (msg.replyTo != null)
-                                    Container(
-                                      padding: const EdgeInsets.all(8),
-                                      margin: const EdgeInsets.only(bottom: 4),
-                                      decoration: BoxDecoration(
-                                        color: isMe ? Colors.green[200] : myColors.message,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border(
-                                          left: BorderSide(
-                                            color: isMe ? Colors.orangeAccent : Colors.cyan,
-                                            width: 7
+                            child: IntrinsicWidth(
+                              child: Container(
+                                margin:  containermargin,
+                                decoration: containerDecoration(
+                                  color: isMe ? myColors.myMessage : Colors.grey,
+                                  borderRadius: myTheme.CircularContainer,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (msg.replyTo != null)
+                                      Container(
+                                        padding: const EdgeInsets.all(8),
+                                        margin: const EdgeInsets.only(bottom: 4),
+                                        decoration: BoxDecoration(
+                                          color: isMe ? Colors.green[200] : myColors.message,
+                                          borderRadius: BorderRadius.circular(8),
+                                          border: Border(
+                                            left: BorderSide(
+                                              color: isMe ? Colors.orangeAccent : Colors.cyan,
+                                              width: 7
+                                            )
                                           )
-                                        )
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email ? "You" : msg.replyTo!.senderEmail}",
+                                              style: TextStyle(
+                                                color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
+                                                    ? myColors.myName
+                                                    : myColors.otherName,
+                                              ),
+                                            ),
+                              
+                                            if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
+                                              Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      icons.Wphoto,
+                                                      BoxSpacing(mWidth: 10,),
+                                                      Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey),),
+                                                      BoxSpacing(mWidth: 40,),
+                                                      ClipRRect(
+                                                        child: Image.network("${msg.replyTo!.image}", height: 60,),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            Text(
+                                              msg.replyTo!.text,
+                                              style: TextStyle(color: Colors.black87),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                    if (msg.image != null && msg.image!.isNotEmpty)
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: kimageNet(src: msg.image!),
+                                      )
+                                    else if (msg.file != null && msg.file!.isNotEmpty)
+                                      Row(
                                         children: [
-                                          Text(
-                                            "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email ? "You" : msg.replyTo!.senderEmail}",
-                                            style: TextStyle(
-                                              color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
-                                                  ? myColors.myName
-                                                  : myColors.otherName,
+                                          Icon(Icons.insert_drive_file, color: Colors.blue),
+                                          SizedBox(width: 8),
+                                          Expanded(
+                                            child: Text(
+                                              msg.file!.split('/').last,
+                                              style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
+                                              overflow: TextOverflow.ellipsis,
                                             ),
-                                          ),
-
-                                          if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
-                                            Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    icons.Wphoto,
-                                                    BoxSpacing(mWidth: 10,),
-                                                    Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey),),
-                                                    BoxSpacing(mWidth: 40,),
-                                                    ClipRRect(
-                                                      child: Image.network("${msg.replyTo!.image}", height: 60,),
-                                                      borderRadius: BorderRadius.circular(8),
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          Text(
-                                            msg.replyTo!.text,
-                                            style: TextStyle(color: Colors.black87),
                                           ),
                                         ],
-                                      ),
-                                    ),
-                                  if (msg.image != null && msg.image!.isNotEmpty)
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: kimageNet(src: msg.image!),
-                                    )
-                                  else if (msg.file != null && msg.file!.isNotEmpty)
-                                    Row(
-                                      children: [
-                                        Icon(Icons.insert_drive_file, color: Colors.blue),
-                                        SizedBox(width: 8),
-                                        Expanded(
+                                      )
+                                    else
+                                      Padding(
+                                        padding: const EdgeInsets.all(9.0),
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
                                           child: Text(
-                                            msg.file!.split('/').last,
-                                            style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
-                                            overflow: TextOverflow.ellipsis,
+                                            softWrap: true,
+                                            textAlign: TextAlign.right,
+                                            overflow: TextOverflow.clip,
+                                            msg.text,
+                                            style: TextStyle(fontSize: 16, color: Colors.black),
                                           ),
                                         ),
+                                      ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        if (msg.isEdited == true)
+                                          Text(
+                                            "Edited",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.grey.shade800,
+                                            ),
+                                          ),
+                                        fomattedDateText(formattedTime: formattedTime,),
                                       ],
                                     )
-                                  else
-                                    Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: Text(
-                                        softWrap: true,
-                                        overflow: TextOverflow.clip,
-                                        msg.text,
-                                        style: TextStyle(fontSize: 16, color: Colors.black),
-                                      ),
-                                    ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      if (msg.isEdited == true)
-                                        Text(
-                                          "Edited",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontStyle: FontStyle.italic,
-                                            color: Colors.grey.shade800,
-                                          ),
-                                        ),
-                                      fomattedDateText(formattedTime: formattedTime,),
-                                    ],
-                                  )
-
-                                ],
+                              
+                                  ],
+                                ),
                               ),
                             ),
                           ),
