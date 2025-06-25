@@ -33,7 +33,9 @@ Future takeImage() async  {
   return null;
 }
 Future<String?> pickFile() async {
-  final result = await FilePicker.platform.pickFiles();
+  final result = await FilePicker.platform.pickFiles(
+    type: FileType.any
+  );
   if (result != null && result.files.single.path != null) {
     file = File(result.files.single.path!);
     var fileName = basename(file!.path);
