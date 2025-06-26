@@ -43,6 +43,7 @@ class _TestnameState extends State<Testname> {
   Messages? _replyMessage;
   bool isTextEmpty = true;
   bool isEditing = false;
+  bool isUploading = false;
   Set<String> selectedMessages = {};
   void setReplyMessage(Messages message) {
     setState(() {
@@ -139,6 +140,14 @@ class _TestnameState extends State<Testname> {
                   },
                 ),
               ),
+              if(isUploading)
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.all(7),
+                  child: CircularProgressIndicator(),
+                ),
+              ),
               if (_replyMessage != null)
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -189,6 +198,7 @@ class _TestnameState extends State<Testname> {
                     ],
                   ),
                 ),
+
               isEditing || selectedMessages.isNotEmpty ?
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -206,7 +216,6 @@ class _TestnameState extends State<Testname> {
                         },
                         myIcon: icons.deleteIcon,
                       ),
-
                     ],
                   ) :
               Padding(
@@ -232,7 +241,12 @@ class _TestnameState extends State<Testname> {
                         hintStyle: TextStyle(color: Colors.black, fontSize: 15.7),
                       ),
                     ),
-                    photoBtmSheet(service: service, widget: widget, textColor: textColor),
+                    photoBtmSheet(service: service, widget: widget, textColor: textColor,
+                      onUploadStatusChanged: (value) {
+                      setState(() {
+                        isUploading = value;
+                      });
+                    },),
                       kIconButton(
                         onPressed: () {
                           service.sendMessage(
