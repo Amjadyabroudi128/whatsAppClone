@@ -11,21 +11,29 @@ import '../../../core/icons.dart';
 import '../chatScreen.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
-class photoBtmSheet extends StatelessWidget {
-  const photoBtmSheet({
+class photoBtmSheet extends StatefulWidget {
+   photoBtmSheet({
     super.key,
     required this.service,
     required this.widget,
-    this.textColor
+    this.textColor,
+     this.onUploadStatusChanged,
   });
 
   final FirebaseService service;
   final Testname widget;
   final Color? textColor;
+   final void Function(bool)? onUploadStatusChanged;
+
+  @override
+  State<photoBtmSheet> createState() => _photoBtmSheetState();
+}
+
+class _photoBtmSheetState extends State<photoBtmSheet> {
   @override
   Widget build(BuildContext context) {
     return kIconButton(
-      color: textColor,
+      color: widget.textColor,
       onPressed: () {
         btmSheet(
           context: context,
@@ -45,10 +53,18 @@ class photoBtmSheet extends StatelessWidget {
                         leading: icons.image,
                         label: Text("Photo"),
                         onTap: () async {
+                          Navigator.of(context).pop();
+                          setState(() {
+                            widget.onUploadStatusChanged?.call(true);
+                          });
                           final imageUrls = await url.pickMultiImages();
                           if (imageUrls.isNotEmpty) {
                             for(String imageUrl in imageUrls) {
-                              await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null, null);
+                              await widget.service.sendMessage(widget.widget.receiverId, widget.widget.receiverName, "", imageUrl, null, null);
+                              setState(() {
+                                widget.onUploadStatusChanged?.call(false);
+                                Navigator.of(context).pop();
+                              });
                             }
                           }
                         }
@@ -61,7 +77,7 @@ class photoBtmSheet extends StatelessWidget {
                           Navigator.pop(context);
                           final imageUrl = await url.takeImage();
                           if (imageUrl != null) {
-                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null, null);
+                            await widget.service.sendMessage(widget.widget.receiverId, widget.widget.receiverName, "", imageUrl, null, null);
                           }
                         }
                     ),
@@ -70,7 +86,7 @@ class photoBtmSheet extends StatelessWidget {
                           Navigator.pop(context);
                           final fileLink = await url.pickFile(); // Import this function
                           if (fileLink != null) {
-                            await service.sendMessage(widget.receiverId, widget.receiverName, "", null, fileLink, null);
+                            await widget.service.sendMessage(widget.widget.receiverId, widget.widget.receiverName, "", null, fileLink, null);
 
                           }
                         }),
