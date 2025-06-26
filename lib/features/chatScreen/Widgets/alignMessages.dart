@@ -55,16 +55,6 @@ class messagesAlign extends StatefulWidget {
 class _messagesAlignState extends State<messagesAlign> {
   final bool isStarred = false;
   bool isEditing = false;
-  void _handleSelectMessage() {
-    setState(() {
-      if (widget.selectedMessages.contains(widget.msg!.messageId)) {
-        widget.selectedMessages.remove(widget.msg!.messageId);
-      } else {
-        widget.selectedMessages.add(widget.msg!.messageId!);
-        widget.onToggleEdit?.call();
-      }
-    });
-  }
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
