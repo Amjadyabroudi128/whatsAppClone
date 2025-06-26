@@ -19,6 +19,23 @@ Future pickImage() async {
   }
   return null;
 }
+Future<List<String>> pickMultiImages() async {
+  final ImagePicker picker = ImagePicker();
+  final List<XFile> images = await picker.pickMultiImage(imageQuality: 70);
+  List<String> downloadUrls = [];
+
+  for (var image in images) {
+    File file = File(image.path);
+    var imageName = basename(image.path);
+    var refStorage = FirebaseStorage.instance.ref(imageName);
+
+    await refStorage.putFile(file);
+    String url = await refStorage.getDownloadURL();
+    downloadUrls.add(url);
+  }
+
+  return downloadUrls;
+}
 Future takeImage() async  {
   final ImagePicker picker = ImagePicker();
   final XFile? imageCamera = await picker.pickImage(source: ImageSource.camera);
