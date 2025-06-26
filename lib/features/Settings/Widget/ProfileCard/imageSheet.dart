@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/kCard.dart';
@@ -13,6 +14,8 @@ import '../../../../Firebase/FirebaseCollections.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
 import "package:whatsappclone/utils/pickImage.dart" as url;
+
+import '../../SettingsScreen.dart';
 Future<void> showImage(BuildContext context, {Future<void> Function(String imageUrl)? addToFirebase}) async {
   await showModalBottomSheet(
     context: context,
@@ -48,13 +51,13 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
             ),
             BoxSpacing(myHeight: 9),
             kCard(
-              // color: Colors.grey[800],
               child: Column(
                 children: [
                   kListTile(
                     title: Text("Take Photo", style: Textstyles.saveBio),
                     trailing: icons.camera,
                     onTap: () async {
+                      Navigator.of(context).pop();
                       String? imageUrl = await url.takeImage();
                       if (imageUrl != null && addToFirebase != null) {
                         await addToFirebase(imageUrl);
@@ -67,6 +70,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                     title: Text("Choose Photo",),
                     trailing: icons.whiteImage,
                     onTap: () async {
+                      Navigator.of(context).pop();
                       String? imageUrl = await url.pickImage();
                       if (imageUrl != null && addToFirebase != null) {
                         await addToFirebase(imageUrl);
@@ -81,10 +85,16 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                       style: Textstyles.deletemessage,
                     ),
                     trailing: icons.deleteIcon,
-                    onTap: () {
-                      userC.doc(FirebaseAuth.instance.currentUser!.uid)
-                          .update({"image": FieldValue.delete()});
+                    onTap: () async {
                       Navigator.of(context).pop();
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => SettingScreen()
+                          )
+                      );
+                      myToast("Profile picture deleted");
+                     await userC.doc(FirebaseAuth.instance.currentUser!.uid)
+                          .update({"image": FieldValue.delete()});
                     },
                   ),
                 ],
