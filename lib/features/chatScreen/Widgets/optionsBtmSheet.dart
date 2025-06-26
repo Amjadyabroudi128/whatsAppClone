@@ -45,12 +45,11 @@ class photoBtmSheet extends StatelessWidget {
                         leading: icons.image,
                         label: Text("Photo"),
                         onTap: () async {
-                          final parentContext = context; // save valid parent context
-                          if (!parentContext.mounted) return; // prevent crash
-                          Navigator.pop(context);
-                          final imageUrl = await url.pickImage();
-                          if (imageUrl != null) {
-                            await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null, null);
+                          final imageUrls = await url.pickMultiImages();
+                          if (imageUrls.isNotEmpty) {
+                            for(String imageUrl in imageUrls) {
+                              await service.sendMessage(widget.receiverId, widget.receiverName, "", imageUrl, null, null);
+                            }
                           }
                         }
                     ),
