@@ -26,6 +26,7 @@ class _passFieldState extends State<passField> {
   @override
   Widget build(BuildContext context) {
     return kTextField(
+      maxLines: 1,
       icon: kIconButton(
         myIcon: passwordVisible ? icons.visibility : icons.visibility_off,
         onPressed: (){
