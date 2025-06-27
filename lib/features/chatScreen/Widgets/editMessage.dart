@@ -9,6 +9,7 @@ import '../../../Firebase/FirebaseAuth.dart';
 import '../../../core/TextStyles.dart';
 import '../../../core/icons.dart';
 import '../../../messageClass/messageClass.dart';
+import 'dialogs/editDialog.dart';
 
 PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseService service, Testname? widget, User? user) {
   return PopupMenuItem(
@@ -19,35 +20,7 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
           TextEditingController _controller = TextEditingController(text: msg.text);
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-              title: Text("Edit Message"),
-              content: kTextField(
-                myController: _controller,
-                hint: "Edit Your Message",
-              ),
-              actions: [
-                kTextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text("Cancel"),
-                ),
-                kTextButton(
-                  onPressed: () async {
-                    String newText = _controller.text.trim();
-                    newText.isEmpty
-                        ? myToast("message can't be empty")
-                        : newText == msg.text.trim()
-                        ? myToast("please Edit this message")
-                        : await service.updateMessage(
-                      msg.messageId!,
-                      user!.uid,
-                      widget!.receiverId,
-                      newText,
-                    ).then((_) => Navigator.pop(context));
-                  },
-                  child: Text("Save"),
-                ),
-              ],
-            ),
+            builder: (context) => editDialog(controller: _controller, msg: msg, service: service,Test: widget, user: user,),
           );
         },
         child: Row(
@@ -60,3 +33,4 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
       )
   );
 }
+
