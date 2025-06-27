@@ -198,7 +198,6 @@ class _TestnameState extends State<Testname> {
                     ],
                   ),
                 ),
-
               isEditing || selectedMessages.isNotEmpty ?
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
