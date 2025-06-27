@@ -10,6 +10,7 @@ import '../../../core/TextStyles.dart';
 import '../../../components/flutterToast.dart';
 import '../../../components/imageNetworkComponent.dart';
 import '../../../core/icons.dart';
+import 'dialogs/deleteDialog.dart';
 
 PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname? widget, User? user, FirebaseService service) {
   return PopupMenuItem<String>(
@@ -18,46 +19,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
         onPressed: (){
           Navigator.pop(context);
           showDialog(context: context,
-            builder: (context) => AlertDialog(
-              title: msg.image != null && msg.image!.isNotEmpty ?
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("You are about to delete"),
-                  BoxSpacing(),
-                  kimageNet(
-                    src: msg.image!,
-                  ),
-                ],
-              ) :Text("You are about to delete ${msg.text}"),
-              content: Text("Are you sure? "),
-              actions: [
-                kTextButton(
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                    FocusScope.of(context).unfocus();
-                  },
-                  child: Text("Cancel"),
-                ),
-                kTextButton(
-                  onPressed: () async {
-                    myToast("Message Successfully Deleted");
-                    FocusScope.of(context).unfocus();
-                    Navigator.pop(context); // Close dialog after deleting
-                    await service.Deletemessage(
-                      msg.senderId!,
-                      msg.receiverId!,
-                      msg.messageId!,
-                    );
-                    Navigator.pop(context); // Close dialog after deleting
-                    await service.deleteStar(msg);
-                    FocusScope.of(context).unfocus();
-
-                  },
-                  child: Text("Delete", style: Textstyles.deleteStyle,),
-                ),
-              ],
-            )
+            builder: (context) => deleteDialog(msg: msg, service: service)
           );
         },
         child: Row(
@@ -70,3 +32,4 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
       )
   );
 }
+
