@@ -30,11 +30,15 @@ class editDialog extends StatelessWidget {
       ),
       actions: [
         kTextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+            FocusScope.of(Navigator.of(context).context).unfocus();
+          },
           child: Text("Cancel"),
         ),
         kTextButton(
           onPressed: () async {
+            FocusScope.of(Navigator.of(context).context).unfocus();
             String newText = _controller.text.trim();
             newText.isEmpty
                 ? myToast("message can't be empty")
@@ -46,6 +50,8 @@ class editDialog extends StatelessWidget {
               Test!.receiverId,
               newText,
             ).then((_) => Navigator.pop(context));
+            FocusScope.of(Navigator.of(context).context).unfocus();
+
           },
           child: Text("Save"),
         ),
