@@ -44,6 +44,16 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Container(
+                        height: 4,
+                      margin: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.height * .013, horizontal: MediaQuery.of(context).size.width * .37,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey, 
+                        borderRadius: BorderRadius.circular(7)
+                      ),
+                    ),
                     Text(
                       "Choose an option",
                       style: Textstyles.option,
