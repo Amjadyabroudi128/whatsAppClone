@@ -259,7 +259,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                   children: [
                                     if (msg.replyTo != null)
                                       Container(
-                                        width: double.infinity, // Ensures it fills same width as message
+                                        width: double.infinity,
                                         padding: const EdgeInsets.all(8),
                                         margin: const EdgeInsets.only(bottom: 4),
                                         decoration: BoxDecoration(

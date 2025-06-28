@@ -43,19 +43,18 @@ class deleteDialog extends StatelessWidget {
         ),
         kTextButton(
           onPressed: () async {
+            Navigator.of(context).pop();
             myToast("Message Successfully Deleted");
-            FocusScope.of(context).unfocus();
-            Navigator.pop(context); // Close dialog after deleting
+            FocusScope.of(Navigator.of(context).context).unfocus();
             await service.Deletemessage(
               msg.senderId!,
               msg.receiverId!,
               msg.messageId!,
             );
-            Navigator.pop(context); // Close dialog after deleting
+            FocusScope.of(Navigator.of(context).context).unfocus();
             await service.deleteStar(msg);
-            FocusScope.of(context).unfocus();
-
-          },
+            FocusScope.of(Navigator.of(context).context).unfocus();
+            },
           child: Text("Delete", style: Textstyles.deleteStyle,),
         ),
       ],
