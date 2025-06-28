@@ -48,7 +48,6 @@ class _TestnameState extends State<Testname> {
   void setReplyMessage(Messages message) {
     setState(() {
       _replyMessage = message;
-      messageController.clear();
     });
   }
 

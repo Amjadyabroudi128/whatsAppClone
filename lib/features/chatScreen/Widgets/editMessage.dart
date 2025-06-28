@@ -17,6 +17,7 @@ PopupMenuItem<String> editMessage(BuildContext context, Messages msg, FirebaseSe
       child: kTextButton(
         onPressed: () {
           Navigator.pop(context);
+          FocusScope.of(Navigator.of(context).context).unfocus();
           TextEditingController _controller = TextEditingController(text: msg.text);
           showDialog(
             context: context,

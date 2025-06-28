@@ -161,7 +161,7 @@ class _messagesAlignState extends State<messagesAlign> {
                     }
                     else {
                       showMenu(context: context,
-                        color: myColors.menuColor,
+                          color: myColors.menuColor,
                         position: position,
                         items: [
                           copyMessage(msg, context),
@@ -201,7 +201,8 @@ class _messagesAlignState extends State<messagesAlign> {
                         ]
                       );
                     }
-                    FocusScope.of(context).unfocus();
+                    FocusScope.of(Navigator.of(context).context).unfocus();
+
                   },
                   child: Dismissible(
                     direction: isMe ? DismissDirection.endToStart : DismissDirection.startToEnd,
