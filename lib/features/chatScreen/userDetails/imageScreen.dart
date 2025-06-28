@@ -13,6 +13,7 @@ import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import '../../../Firebase/FirebaseCollections.dart';
+import '../../../components/dividerContainer.dart';
 import '../../../components/flutterToast.dart';
 import 'package:media_gallery_saver/media_gallery_saver.dart';
 
@@ -160,6 +161,7 @@ class _ImagescreenState extends State<Imagescreen> {
                       child: IntrinsicHeight(
                         child: Column(
                           children: [
+                            dividerContainer(),
                             Row(
                               children: [
                                 Container(
@@ -282,4 +284,5 @@ class _ImagescreenState extends State<Imagescreen> {
     );
   }
 }
+
 
