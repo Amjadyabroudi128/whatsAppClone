@@ -158,7 +158,7 @@ class _TestnameState extends State<Testname> {
                     border: Border(
                       left: BorderSide(
                         color: isReplyFromMe ? myColors.myReply
-                        : Colors.cyan.shade800,
+                        : myColors.otherReply,
                         width: 7
                       )
                     )
