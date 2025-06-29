@@ -35,4 +35,6 @@ class myColors {
    static Color bDialog = Colors.black;
    static Color myName = Colors.orange.shade800;
    static Color otherName = Colors.cyan.shade800;
+   static Color myReply = Colors.orangeAccent;
+
  }
