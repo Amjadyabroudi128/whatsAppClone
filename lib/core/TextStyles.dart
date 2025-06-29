@@ -35,4 +35,5 @@ class Textstyles {
   static TextStyle reply = TextStyle( color: Colors.white, fontSize: 16);
   static TextStyle darkLabel =TextStyle(color: Colors.white);
   static TextStyle insta = TextStyle(fontSize: 13, color: CupertinoColors.systemGrey);
+  static TextStyle photo = TextStyle(fontSize: 17, color: Colors.grey);
  }

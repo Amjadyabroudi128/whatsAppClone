@@ -290,7 +290,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                 children: [
                                                   icons.Wphoto,
                                                   BoxSpacing(mWidth: 10),
-                                                  Text("Photo", style: TextStyle(fontSize: 17, color: Colors.grey)),
+                                                  Text("Photo", style: Textstyles.photo),
                                                   Spacer(),
                                                   ClipRRect(
                                                     borderRadius: BorderRadius.circular(8),
