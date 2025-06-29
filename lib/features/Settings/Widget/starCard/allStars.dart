@@ -243,7 +243,7 @@ class _allStarredState extends State<allStarred> {
                                 await showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                      title: Text("You are about to delete ${msg.text}"),
+                                      title: Text("You are about to delete a message"),
                                       content: Text("Are you sure? "),
                                       actions: [
                                         kTextButton(
@@ -252,6 +252,7 @@ class _allStarredState extends State<allStarred> {
                                         ),
                                         kTextButton(
                                           onPressed: () async {
+                                            Navigator.pop(context);
                                             await service.Deletemessage(msg.senderId ?? "", msg.receiverId ?? "", msg.messageId ?? "");
                                             await service.deleteStar(msg);
                                             Navigator.pop(context);

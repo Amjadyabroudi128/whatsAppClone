@@ -55,6 +55,11 @@ class _TestnameState extends State<Testname> {
   @override
   Widget build(BuildContext context) {
     final isReplyFromMe = _replyMessage?.senderEmail == user!.email;
+    final OutlineInputBorder messageBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+            color: Colors.black
+        )
+    );
     return ValueListenableBuilder<Color>(
       valueListenable: selectedThemeColor,
       builder: (context, color, child) {
@@ -98,7 +103,7 @@ class _TestnameState extends State<Testname> {
                     kTextButton(
                         onPressed: (){
                           setState(() {
-                            FocusScope.of(context).unfocus();
+                            FocusScope.of(Navigator.of(context).context).unfocus();
                             selectedMessages.clear();
                             isEditing = !isEditing;
                           });
@@ -174,8 +179,8 @@ class _TestnameState extends State<Testname> {
                               maxLines: 2,
                               overflow: TextOverflow.clip,
                               style: TextStyle(
-                                color: isReplyFromMe ? Colors.orange.shade800 :
-                                Colors.cyan.shade800,
+                                color: isReplyFromMe ? myColors.myName :
+                                myColors.otherName,
                               ),
                             ),
                             Text("${_replyMessage!.text}", style: Textstyles.reply,
@@ -225,16 +230,8 @@ class _TestnameState extends State<Testname> {
                       child: kTextField(
                         maxLines: null,
                         textColor: Colors.black,
-                        enable: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Colors.black
-                            )
-                        ),
-                        focused: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Colors.black
-                            )
-                        ),
+                        enable: messageBorder,
+                        focused: messageBorder,
                         myController: messageController,
                         hint: "Add a message",
                         hintStyle: TextStyle(color: Colors.black, fontSize: 15.7),
