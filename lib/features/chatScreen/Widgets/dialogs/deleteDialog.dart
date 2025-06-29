@@ -37,7 +37,7 @@ class deleteDialog extends StatelessWidget {
         kTextButton(
           onPressed: (){
             Navigator.of(context).pop();
-            FocusScope.of(context).unfocus();
+            FocusScope.of(Navigator.of(context).context).unfocus();
           },
           child: Text("Cancel"),
         ),
