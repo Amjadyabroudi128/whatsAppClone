@@ -12,12 +12,12 @@ PopupMenuItem<String> copyMessage(Messages msg, BuildContext context) {
       value: 'Copy',
       child: kTextButton(
         onPressed: (){
-          // FocusScope.of(context).unfocus();
+          FocusScope.of(Navigator.of(context).context).unfocus();
           final value = ClipboardData(text: msg.text);
           Clipboard.setData(value);
           Navigator.pop(context);
           myToast("✅ Message Copied");
-          FocusScope.of(context).unfocus();
+          FocusScope.of(Navigator.of(context).context).unfocus();
         },
         child: Row(
           children: [
