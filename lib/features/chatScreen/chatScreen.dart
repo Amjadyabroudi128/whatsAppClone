@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
@@ -156,7 +157,7 @@ class _TestnameState extends State<Testname> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border(
                       left: BorderSide(
-                        color: isReplyFromMe ? Colors.orangeAccent
+                        color: isReplyFromMe ? myColors.myReply
                         : Colors.cyan.shade800,
                         width: 7
                       )
