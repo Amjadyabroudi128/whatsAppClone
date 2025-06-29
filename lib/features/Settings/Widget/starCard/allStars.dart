@@ -123,9 +123,6 @@ class _allStarredState extends State<allStarred> {
                                   scale: 1.2,
                                   child: Checkbox(
                                     activeColor: myColors.starColor,
-                                    visualDensity: VisualDensity.compact,
-                                    checkColor: myColors.FG,
-                                    shape: CircleBorder(),
                                     value: selectedMessages.contains(msg.messageId),
                                     onChanged: (value) {
                                       setState(() {

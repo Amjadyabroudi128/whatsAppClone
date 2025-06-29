@@ -97,11 +97,27 @@ import 'package:whatsappclone/core/MyColors.dart';
       selectionHandleColor: myColors.textSelection,
       selectionColor: myColors.textSelection
     ),
+    checkboxTheme: CheckboxThemeData(
+      checkColor: WidgetStatePropertyAll(Colors.white),
+      side: BorderSide(
+        color: Colors.black
+      ),
+      visualDensity: VisualDensity.compact,
+      shape: CircleBorder(),
+    )
    );
   static final ThemeData darkTheme = ThemeData().copyWith(
     cardTheme: CardTheme(
       shape: cardShape,
       color: Colors.grey[700],
+    ),
+    checkboxTheme: CheckboxThemeData(
+      checkColor: WidgetStatePropertyAll(Colors.white),
+      side: BorderSide(
+        color: Colors.white
+      ),
+      visualDensity: VisualDensity.compact,
+      shape: CircleBorder(),
     ),
     appBarTheme: AppBarTheme(
       color: myColors.darkCard,
