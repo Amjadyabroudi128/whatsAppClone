@@ -13,18 +13,18 @@ import '../chatScreen.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
 
 class photoBtmSheet extends StatefulWidget {
-   photoBtmSheet({
+  const photoBtmSheet({
     super.key,
     required this.service,
     required this.widget,
     this.textColor,
-     this.onUploadStatusChanged,
+    this.onUploadStatusChanged,
   });
 
   final FirebaseService service;
   final Testname widget;
   final Color? textColor;
-   final void Function(bool)? onUploadStatusChanged;
+  final void Function(bool)? onUploadStatusChanged;
 
   @override
   State<photoBtmSheet> createState() => _photoBtmSheetState();
@@ -51,54 +51,86 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                       style: Textstyles.option,
                     ),
                     const BoxSpacing(myHeight: 10),
-                    Options(context: context,
-                        leading: icons.image,
-                        label: Text("Photo"),
-                        onTap: () async {
-                          Navigator.of(context).pop();
-                          setState(() {
-                            widget.onUploadStatusChanged?.call(true);
-                          });
-                          final imageUrls = await url.pickMultiImages();
-                          if (imageUrls.isNotEmpty) {
-                            for(String imageUrl in imageUrls) {
-                              await widget.service.sendMessage(widget.widget.receiverId, widget.widget.receiverName, "", imageUrl, null, null);
-                              setState(() {
-                                widget.onUploadStatusChanged?.call(false);
-                                Navigator.of(context).pop();
-                              });
-                            }
-                          }
+                    Options(
+                      context: context,
+                      leading: icons.image,
+                      label: const Text("Photo"),
+                      onTap: () async {
+                        Navigator.of(context).pop();
+                        widget.onUploadStatusChanged?.call(true);
+                        final imageUrls = await url.pickMultiImages();
+                        if (imageUrls.isEmpty) {
+                          widget.onUploadStatusChanged?.call(false); // User cancelled
+                          return;
                         }
+
+                        for (String imageUrl in imageUrls) {
+                          await widget.service.sendMessage(
+                            widget.widget.receiverId,
+                            widget.widget.receiverName,
+                            "",
+                            imageUrl,
+                            null,
+                            null,
+                          );
+                        }
+                        widget.onUploadStatusChanged?.call(false); // Upload done
+                      },
                     ),
                     Options(
-                        context: context,
-                        leading: icons.dCam,
-                        label: Text("Camera"),
-                        onTap: () async {
-                          Navigator.pop(context);
-                          final imageUrl = await url.takeImage();
-                          if (imageUrl != null) {
-                            await widget.service.sendMessage(widget.widget.receiverId, widget.widget.receiverName, "", imageUrl, null, null);
-                          }
-                        }
-                    ),
-                    Options(context: context, leading: icons.file, label: Text("File"),
-                        onTap: () async {
-                          Navigator.pop(context);
-                          final fileLink = await url.pickFile(); // Import this function
-                          if (fileLink != null) {
-                            await widget.service.sendMessage(widget.widget.receiverId, widget.widget.receiverName, "", null, fileLink, null);
+                      context: context,
+                      leading: icons.dCam,
+                      label: const Text("Camera"),
+                      onTap: () async {
+                        Navigator.pop(context);
+                        widget.onUploadStatusChanged?.call(true);
 
-                          }
-                        }),
+                        final imageUrl = await url.takeImage();
+
+                        if (imageUrl != null) {
+                          await widget.service.sendMessage(
+                            widget.widget.receiverId,
+                            widget.widget.receiverName,
+                            "",
+                            imageUrl,
+                            null,
+                            null,
+                          );
+                        }
+
+                        widget.onUploadStatusChanged?.call(false);
+                      },
+                    ),
+                    Options(
+                      context: context,
+                      leading: icons.file,
+                      label: const Text("File"),
+                      onTap: () async {
+                        Navigator.pop(context);
+                        widget.onUploadStatusChanged?.call(true);
+
+                        final fileLink = await url.pickFile();
+
+                        if (fileLink != null) {
+                          await widget.service.sendMessage(
+                            widget.widget.receiverId,
+                            widget.widget.receiverName,
+                            "",
+                            null,
+                            fileLink,
+                            null,
+                          );
+                        }
+
+                        widget.onUploadStatusChanged?.call(false);
+                      },
+                    ),
                   ],
                 ),
               ),
             );
           },
         );
-
       },
       myIcon: icons.add,
     );
