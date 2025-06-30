@@ -341,11 +341,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         if (msg.isEdited == true)
                                           Text(
                                             "Edited",
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              fontStyle: FontStyle.italic,
-                                              color: Colors.grey.shade800,
-                                            ),
+                                            style: Textstyles.edited,
                                           ),
                                         fomattedDateText(formattedTime: formattedTime),
                                       ],
