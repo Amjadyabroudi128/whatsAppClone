@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/fSizedBox.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 
 import '../../../../Firebase/FirebaseAuth.dart';
@@ -24,7 +25,7 @@ class editName extends StatelessWidget {
             color: Colors.transparent
         )
     );
-    return FractionallySizedBox(
+    return fSizedBox(
       heightFactor: 0.94,
       child: GestureDetector(
         onTap: (){
