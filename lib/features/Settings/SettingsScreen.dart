@@ -35,6 +35,8 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   final User? user = FirebaseAuth.instance.currentUser;
+  final TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
           final link = userData?['link'] ?? 'No name found';
           final imageUrl = userData?['image'] ?? '';
           final bio = userData?["bio"] ?? "";
+          final email = userData?["email"];
           return myPadding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -90,7 +93,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               context: context,
                                 isScrollControlled: true,
                               builder: (context) {
-                                return Editemail();
+                                return Editemail(email: email, emailController: emailController);
                               }
                             );
                           }
