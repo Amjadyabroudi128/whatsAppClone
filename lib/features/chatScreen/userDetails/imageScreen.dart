@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/fSizedBox.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
@@ -214,7 +215,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                           context: context,
                                           isScrollControlled: true,
                                           builder: (context) {
-                                            return FractionallySizedBox(
+                                            return fSizedBox(
                                               heightFactor: 0.7,
                                               child: Container(
                                                 padding: EdgeInsets.all(16),
@@ -224,7 +225,6 @@ class _ImagescreenState extends State<Imagescreen> {
                                                       radius: 200,
                                                       backgroundImage: NetworkImage(msg.image!),
                                                     ),
-
                                                     Spacer(),
                                                     Row(
                                                       children: [
