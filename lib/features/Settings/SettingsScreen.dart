@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/features/Settings/Widget/ProfileCard/editEmail.dart';
 import 'package:whatsappclone/features/Settings/Widget/starCard/allStars.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
 import '../../Firebase/FirebaseCollections.dart';
@@ -78,6 +80,21 @@ class _SettingScreenState extends State<SettingScreen> {
                         signOut(),
                         divider(),
                         deleteAccount(),
+                        divider(),
+                        Options(
+                          context: context,
+                          label: Text("Change email"),
+                          trailing: icons.emailIcon,
+                          onTap: ()async {
+                            await btmSheet(
+                              context: context,
+                                isScrollControlled: true,
+                              builder: (context) {
+                                return Editemail();
+                              }
+                            );
+                          }
+                        )
                       ],
                     ),
                   ),
