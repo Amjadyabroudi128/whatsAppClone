@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/colorPicker/ColorPicking.dart';
 import 'package:whatsappclone/core/appTheme.dart';
+import 'package:whatsappclone/features/SignInScreen/signIn.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: _auth.currentUser != null ? "btm" : "welcome",
       routes: {
         "sign up": (context) => const Signupscreen(),
+        "login" : (context) => SignInscreen(),
         "welcome": (context) => WelcomeScreen(),
         "pickColor": (context) => Colorpicking(),
         "contacts": (context) => Contacts(),
