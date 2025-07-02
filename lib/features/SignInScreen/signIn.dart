@@ -46,14 +46,20 @@ class _SignInscreenState extends State<SignInscreen> {
               nameField(name: name),
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
-
-              myPadding(
-                padding: EdgeInsets.only(left: 25, ),
-                child: NotRegisterd(),
+              Padding(
+                padding: EdgeInsets.only(right: 9, top: 9),
+                child: Text("Forgotten password?"),
               ),
               BoxSpacing(myHeight: 19,),
               Center(
                 child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user, name: name,),
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Not registered?",style: TextStyle(fontSize: 15, color: Colors.grey),),
+                  NotRegisterd()
+                ],
               )
             ],
           ),
