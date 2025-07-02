@@ -4,6 +4,7 @@ import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/fSizedBox.dart';
 
 import '../../../../components/TextField.dart';
+import '../../../../components/flutterToast.dart';
 
 class Editemail extends StatelessWidget {
   final String email;
@@ -25,6 +26,11 @@ class Editemail extends StatelessWidget {
               kTextButton(
                 onPressed: ()async {
                   final newEmail = emailController.text.trim();
+                  if(newEmail.isEmpty){
+                    myToast("Your Email is empty ");
+                  } else if (newEmail == email ){
+                    myToast("Change something");
+                  }
                 },
                 child: Text("Save"),
               )
