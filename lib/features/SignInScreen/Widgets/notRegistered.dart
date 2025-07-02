@@ -12,9 +12,10 @@ class NotRegisterd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return kTextButton(
-      style: ButtonStyle(
-        foregroundColor: WidgetStatePropertyAll(Colors.blue)
-      ),
+        style: TextButton.styleFrom(
+          textStyle: Textstyles.haveAccount,
+          foregroundColor: Colors.blue,
+        ),
         onPressed: (){
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => Signupscreen())
