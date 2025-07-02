@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
@@ -13,6 +15,7 @@ class Editemail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();
@@ -30,6 +33,13 @@ class Editemail extends StatelessWidget {
                     myToast("Your Email is empty ");
                   } else if (newEmail == email ){
                     myToast("Change something");
+                  } else {
+                    await FirebaseFirestore.instance.collection("users").doc(uid).update(
+                      {"email": newEmail},
+                    );
+                    myToast("Email Changed succesfullly");
+                    emailController.clear();
+                    Navigator.of(context).pop();
                   }
                 },
                 child: Text("Save"),
@@ -56,6 +66,7 @@ class Editemail extends StatelessWidget {
                   filled: true,
                   maxLines: 1,
                   hint: "Your email",
+                  myController: emailController,
                 ),
               ],
             ),
