@@ -11,6 +11,7 @@ import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
+import 'Firebase/passwordReset.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
 import 'features/welcomeScreen/welcome.dart';
 import 'firebase_options.dart';
@@ -62,6 +63,7 @@ class _MyAppState extends State<MyApp> {
         "sign up": (context) => const Signupscreen(),
         "login" : (context) => SignInscreen(),
         "welcome": (context) => WelcomeScreen(),
+        "passReset": (context) => PasswordReset(),
         "pickColor": (context) => Colorpicking(),
         "contacts": (context) => Contacts(),
         "btm": (context) => Bottomnavbar(onThemeChange: _updateTheme),
