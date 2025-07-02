@@ -9,22 +9,26 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
    final FirebaseAuth auth = FirebaseAuth.instance;
    final FirebaseFirestore users = FirebaseFirestore.instance;
    final uid = FirebaseAuth.instance.currentUser?.uid;
-   Future<void> createEmailPassword(BuildContext context,String email, String password, String name) async {
+   Future<void> createEmailPassword(BuildContext context, String email, String password, String name) async {
      try {
        await auth.createUserWithEmailAndPassword(email: email, password: password);
-       users.collection("users").doc(auth.currentUser!.uid).set({
+
+       await auth.currentUser!.sendEmailVerification();
+
+       // Save user data in Firestore
+       await users.collection("users").doc(auth.currentUser!.uid).set({
          'email': email,
          'uid': auth.currentUser!.uid,
-         "name" : name,
+         'name': name,
          'bio': '',
-         "image": "",
-         "link": ""
+         'image': '',
+         'link': ''
        }, SetOptions(merge: true));
-       await auth.currentUser?.reload();
-       User? updatedUser = auth.currentUser;
-       if (updatedUser != null) {
-         Navigator.pushReplacementNamed(context, "btm"); // Ensure '/home' routes to contacts
-       }
+       Navigator.pushReplacementNamed(context, "login");
+       myToast("Verification email sent. Please check your inbox.");
+       // Sign out immediately after sending verification
+       await auth.signOut();
+
      } on FirebaseAuthException catch (e) {
        String message = '';
        if (e.code == 'weak-password') {
@@ -33,30 +37,38 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          message = 'An account already exists with that email.';
        }
        myToast(message);
+     } catch (e) {
+       print("Error during sign-up: $e");
      }
-     catch (e){}
-
    }
    Future<void> SigninUser(BuildContext context, String email, String password, String name) async {
      try {
        await auth.signInWithEmailAndPassword(email: email, password: password);
-       await users.collection("users").doc(auth.currentUser!.uid).set({
-         'email': email,
-         'uid': auth.currentUser!.uid,
-         'name': name,
-       }, SetOptions(merge: true));
 
-       await auth.currentUser?.reload();
-       User? updatedUser = auth.currentUser;
-       if (updatedUser != null) {
+       await auth.currentUser!.reload();
+       User? user = auth.currentUser;
+
+       if (user != null && user.emailVerified) {
+         // Email is verified - proceed
+         await users.collection("users").doc(user.uid).set({
+           'email': email,
+           'uid': user.uid,
+           'name': name,
+         }, SetOptions(merge: true));
+
          Navigator.pushReplacementNamed(context, "btm");
+       } else {
+         // Email not verified - sign out and prompt
+         await auth.signOut();
+         myToast("Please verify your email before signing in.");
        }
+
      } on FirebaseAuthException catch (e) {
        String message = '';
        if (e.code == 'user-not-found') {
          message = 'No user found for that email.';
-       } else if (e.code == 'invalid-credential') {
-         message = 'Wrong password provided for that user.';
+       } else if (e.code == 'wrong-password' || e.code == 'invalid-credential') {
+         message = 'Wrong password provided.';
        }
        myToast(message);
      } catch (e) {
