@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import '../../Firebase/FirebaseAuth.dart';
@@ -47,8 +48,13 @@ class _SignInscreenState extends State<SignInscreen> {
               BoxSpacing(myHeight: 20,),
               passField(pass: pass),
               Padding(
-                padding: EdgeInsets.only(right: 9, top: 9),
-                child: Text("Forgotten password?"),
+                padding: EdgeInsets.only(right: 1, top: 3),
+                child: kTextButton(
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("passReset");
+                  },
+                  child: Text("Forgotten Password?"),
+                ),
               ),
               BoxSpacing(myHeight: 19,),
               Center(
