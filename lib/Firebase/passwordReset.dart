@@ -35,14 +35,16 @@ class _PasswordResetState extends State<PasswordReset> {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Text("enter the email associated with your account to reset password",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text("Enter your email to reset your password",
+                      style: TextStyle(fontSize: 20),),
+                    // child: Text("enter the email associated with your account to reset password",
+                    //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                   ),
                   SizedBox(height: 14,),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: kTextField(hint: "enter email",
+                    child: kTextField(hint: "Your Email",
                       myController: emailController,
                       icon: icons.emailIcon,
                       ),
