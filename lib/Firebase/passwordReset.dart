@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
@@ -47,12 +48,7 @@ class _PasswordResetState extends State<PasswordReset> {
                       ),
                   ),
                   SizedBox(height: 12,),
-                  kTextButton(
-                    style: ButtonStyle(
-                      fixedSize: WidgetStatePropertyAll(Size(100, 30)),
-                      foregroundColor: WidgetStatePropertyAll(Colors.blue),
-                      backgroundColor: WidgetStatePropertyAll(Colors.black)
-                    ),
+                  kElevatedBtn(
                     child: Text("Send"),
                     onPressed: () async {
                       await service.resetPass(emailController.text);
