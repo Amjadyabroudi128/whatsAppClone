@@ -75,8 +75,10 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        print("Unexpected sign-in error: $e");
      }
    }
-
-
+   Future<void> resetPass(String email) async {
+     auth.sendPasswordResetEmail(email: email);
+     myToast("check your email for password");
+   }
    Future<void> SignOut ()async {
      auth.signOut();
   }
