@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 
 import '../core/icons.dart';
+import 'FirebaseAuth.dart';
 
 class PasswordReset extends StatefulWidget {
   const PasswordReset({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class PasswordReset extends StatefulWidget {
 
 class _PasswordResetState extends State<PasswordReset> {
   TextEditingController emailController = TextEditingController();
+  FirebaseService service  =  FirebaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +55,7 @@ class _PasswordResetState extends State<PasswordReset> {
                     ),
                     child: Text("Send"),
                     onPressed: () async {
-                      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
-                      myToast("check your email for password");
+                      await service.resetPass(emailController.text);
                       Navigator.of(context).pushNamed("login");
 
                     },
