@@ -51,9 +51,13 @@ class _PasswordResetState extends State<PasswordReset> {
                   kElevatedBtn(
                     child: Text("Send"),
                     onPressed: () async {
-                      await service.resetPass(emailController.text);
-                      Navigator.of(context).pushNamed("login");
-
+                      final newEmail = emailController.text.trim();
+                      if(newEmail.isEmpty) {
+                        myToast("add email so we can send you a link");
+                      } else {
+                        await service.resetPass(emailController.text);
+                        Navigator.of(context).pushNamed("login");
+                      }
                     },
                   ),
                 ],

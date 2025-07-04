@@ -34,7 +34,6 @@ class Editemail extends StatelessWidget {
               kTextButton(
                 onPressed: () async {
                   final newEmail = emailController.text.trim();
-
                   if (newEmail.isEmpty) {
                     myToast("Your Email is empty");
                   } else if (newEmail == email) {
