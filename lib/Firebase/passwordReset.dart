@@ -22,6 +22,11 @@ class _PasswordResetState extends State<PasswordReset> {
 
   @override
   Widget build(BuildContext context) {
+    OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+            color: Colors.transparent
+        )
+    );
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();
@@ -43,7 +48,10 @@ class _PasswordResetState extends State<PasswordReset> {
                   BoxSpacing(myHeight: 14,),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: kTextField(hint: "Your Email",
+                    child: kTextField(
+                      hint: "Your Email",
+                      enable: enabled,
+                      filled: true,
                       myController: emailController,
                       icon: icons.emailIcon,
                       ),
