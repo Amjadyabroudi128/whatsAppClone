@@ -37,5 +37,6 @@ class myColors {
    static Color otherName = Colors.cyan.shade800;
    static Color myReply = Colors.orangeAccent;
    static Color otherReply = Colors.cyan.shade800;
+   static Color? dividerTheme = Colors.grey[400];
 
  }
