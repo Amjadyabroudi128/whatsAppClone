@@ -57,7 +57,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       ),
     ),
     dividerTheme: DividerThemeData(
-      color: Colors.grey[400],
+      color: myColors.dividerTheme,
       indent: 30
     ),
     cardTheme: CardTheme(
@@ -176,6 +176,10 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
     dialogTheme: DialogTheme(
       backgroundColor: myColors.bDialog
+    ),
+    dividerTheme: DividerThemeData(
+        color: myColors.dividerTheme,
+        indent: 30
     ),
     iconTheme: IconThemeData(
       color: Colors.black
