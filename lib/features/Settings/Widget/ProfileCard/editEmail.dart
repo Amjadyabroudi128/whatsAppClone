@@ -6,6 +6,7 @@ import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/fSizedBox.dart';
 import '../../../../components/TextField.dart';
 import '../../../../components/flutterToast.dart';
+import '../../../../core/icons.dart';
 
 class Editemail extends StatelessWidget {
   final String email;
@@ -20,7 +21,11 @@ class Editemail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uid = FirebaseAuth.instance.currentUser?.uid;
-
+    OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+            color: Colors.transparent
+        )
+    );
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -72,6 +77,8 @@ class Editemail extends StatelessWidget {
                 Text("Change email"),
                 BoxSpacing(myHeight: 10),
                 kTextField(
+                  icon: icons.emailIcon,
+                  enable: enabled,
                   filled: true,
                   maxLines: 1,
                   hint: "Your email",
