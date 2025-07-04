@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ElevatedBtn.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
@@ -29,9 +30,9 @@ class _PasswordResetState extends State<PasswordReset> {
         appBar: AppBar(
         ),
         body: Center(
-          child: ListView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 120,),
               Column(
                 children: [
                   Padding(
@@ -39,7 +40,7 @@ class _PasswordResetState extends State<PasswordReset> {
                     child: Text("Enter your email to reset your password",
                       style: TextStyle(fontSize: 20),),
                   ),
-                  SizedBox(height: 14,),
+                  BoxSpacing(myHeight: 14,),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: kTextField(hint: "Your Email",
@@ -47,7 +48,7 @@ class _PasswordResetState extends State<PasswordReset> {
                       icon: icons.emailIcon,
                       ),
                   ),
-                  SizedBox(height: 12,),
+                  BoxSpacing(myHeight: 12,),
                   kElevatedBtn(
                     child: Text("Send"),
                     onPressed: () async {
