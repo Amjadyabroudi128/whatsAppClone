@@ -108,7 +108,7 @@ class Editemail extends StatelessWidget {
                   enable: enabled,
                   filled: true,
                   maxLines: 1,
-                  hint: "e.g John@gmail.com",
+                  hint: "e.g name@example.com",
                   myController: emailController,
                 ),
               ],
