@@ -9,6 +9,8 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
    final FirebaseAuth auth = FirebaseAuth.instance;
    final FirebaseFirestore users = FirebaseFirestore.instance;
    final uid = FirebaseAuth.instance.currentUser?.uid;
+   final user = FirebaseAuth.instance.currentUser;
+
    Future<void> createEmailPassword(BuildContext context, String email, String password, String name) async {
      try {
        await auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -73,6 +75,33 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        myToast(message);
      } catch (e) {
        print("Unexpected sign-in error: $e");
+     }
+   }
+   Future<void> authenticate(String currentEmail, String newEmail, String password) async {
+     final user = FirebaseAuth.instance.currentUser;
+     if (password.isEmpty) {
+       myToast("Add your password");
+       return;
+     }
+     try {
+       final cred = EmailAuthProvider.credential(email: currentEmail, password: password);
+       await user!.reauthenticateWithCredential(cred);
+       // Update Firestore
+       await FirebaseFirestore.instance
+           .collection("users")
+           .doc(user.uid)
+           .update({"email": newEmail});
+       // Send verification to new email
+       await user.verifyBeforeUpdateEmail(newEmail);
+       myToast("A verification link was sent to your new email.");
+     } on FirebaseAuthException catch (e) {
+       if (e.code == 'wrong-password') {
+         myToast("Password is incorrect");
+       } else {
+         myToast("Authentication failed: ${e.message}");
+       }
+     } catch (e) {
+       myToast("An unexpected error occurred: $e");
      }
    }
    Future<void> resetPass(String email) async {
