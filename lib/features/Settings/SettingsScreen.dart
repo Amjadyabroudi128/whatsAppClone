@@ -36,7 +36,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController emailController = TextEditingController();
-
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +93,8 @@ class _SettingScreenState extends State<SettingScreen> {
                               context: context,
                                 isScrollControlled: true,
                               builder: (context) {
-                                return Editemail(email: email, emailController: emailController);
+                                return Editemail(email: email, emailController: emailController,
+                                  passwordController: passwordController,);
                               }
                             );
                           }
