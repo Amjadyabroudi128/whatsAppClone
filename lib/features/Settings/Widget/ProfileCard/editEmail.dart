@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/fSizedBox.dart';
+import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextField.dart';
 import '../../../../components/flutterToast.dart';
 import '../../../../core/icons.dart';
@@ -11,16 +12,18 @@ import '../../../../core/icons.dart';
 class Editemail extends StatelessWidget {
   final String email;
   final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   const Editemail({
     super.key,
     required this.email,
-    required this.emailController,
+    required this.emailController, 
+    required this.passwordController,
   });
 
   @override
   Widget build(BuildContext context) {
-
+    FirebaseService service = FirebaseService();
     OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
             color: Colors.transparent
@@ -48,12 +51,36 @@ class Editemail extends StatelessWidget {
                       context: context,
                       builder: (context){
                         return AlertDialog(
-
+                            title: Text("Re-authenticate"),
+                            content: TextField(
+                              controller: passwordController,
+                              obscureText: true,
+                              decoration: InputDecoration(labelText: "Enter your password"),
+                            ),
+                            actions: [
+                              kTextButton(
+                                onPressed: (){
+                                  FocusScope.of(context).unfocus();
+                                },
+                                child: Text("Cancel"),
+                              ),
+                              kTextButton(
+                                onPressed: () async {
+                                  Navigator.of(context).pop();
+                                  if(passwordController.text.isEmpty) {
+                                    myToast("add your password");
+                                  } else {
+                                    await service.authenticate(email, newEmail, passwordController.text.trim());
+                                  }
+                                },
+                                child: Text("Confirm"),
+                              ),
+                            ]
                         );
                       }
                     );
                     emailController.clear();
-                    Navigator.of(context).pop();
+                    passwordController.clear();
                   }
                 },
                 child: Text("Save"),
