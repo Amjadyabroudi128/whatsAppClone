@@ -158,9 +158,7 @@ class _nameCardState extends State<nameCard> {
                             divider(),
                             Options(
                               context: context,
-                              trailing: Icon(
-                                FontAwesomeIcons.instagram,
-                              ),
+                              trailing: icons.instagram,
                               label: Text("Link"),
                               onTap: () async {
                                 await btmSheet(

@@ -38,7 +38,7 @@ class LinksScreen extends StatelessWidget {
                 onPressed: ()async {
                   String newLink = linkController.text.trim();
                   if(newLink.isEmpty){
-                    myToast("Your name is empty ");
+                    myToast("Your Link is empty ");
                   } else if (newLink == link ){
                     myToast("Change something");
                   } else {
