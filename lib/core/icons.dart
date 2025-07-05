@@ -1,6 +1,7 @@
 
  import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 import 'appTheme.dart';
@@ -48,4 +49,5 @@ class icons {
   static Icon Wphoto = Icon(CupertinoIcons.photo, size: 20,color: Colors.white,);
   static Icon selectIcon = Icon(Icons.check_circle_outline, color: myColors.labelClr);
   static Icon search = Icon(Icons.search);
+  static Icon instagram = Icon(FontAwesomeIcons.instagram);
 }
