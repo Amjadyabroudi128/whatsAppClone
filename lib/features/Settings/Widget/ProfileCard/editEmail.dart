@@ -20,7 +20,7 @@ class Editemail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
+
     OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
             color: Colors.transparent
