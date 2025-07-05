@@ -37,6 +37,8 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
          message = 'The password provided is too weak.';
        } else if (e.code == 'email-already-in-use') {
          message = 'An account already exists with that email.';
+       } else if (e.code == 'invalid-email') {
+         message = 'The email address is not valid.';
        }
        myToast(message);
      } catch (e) {
