@@ -7,7 +7,7 @@ class kTextField extends StatelessWidget {
   final Widget? label;
   final TextEditingController? myController;
   final Widget? myIcon;
-  final bool obsecureText;
+  final bool obscureText;
   final InputBorder? border;
   final InputBorder? enable;
   final InputBorder? focused;
@@ -28,7 +28,8 @@ class kTextField extends StatelessWidget {
   final bool? enabled;
   const kTextField(
       {super.key, this.label, this.myController,
-        this.myIcon, this.obsecureText = false, this.border, this.keyBoard, this.hint,
+        this.myIcon,this.obscureText = false,
+        this.border, this.keyBoard, this.hint,
         this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable, this.focused, this.textColor, this.prefixText, this.prefixStyle, this.enabled});
 
   @override
@@ -38,12 +39,11 @@ class kTextField extends StatelessWidget {
       scrollController: scroll,
       onTap: onTap,
       controller: myController,
-      obscureText: obsecureText,
+      obscureText: obscureText,
       keyboardType: keyBoard,
       maxLines: maxLines,
       enabled: enabled,
-      style: TextStyle(color: color), // <-- Set text color here
-      // Default to 1 if not provided
+      style: TextStyle(color: color),
       decoration: InputDecoration(
         fillColor: fillColor,
         prefixText: prefixText,
