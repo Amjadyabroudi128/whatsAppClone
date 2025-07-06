@@ -27,6 +27,10 @@ class Editemail extends StatefulWidget {
 }
 
 class _EditemailState extends State<Editemail> {
+  bool isValidEmail(String email) {
+    return RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(email);
+  }
+
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
@@ -50,6 +54,8 @@ class _EditemailState extends State<Editemail> {
                   final newEmail = widget.emailController.text.trim();
                   if (newEmail.isEmpty) {
                     myToast("Your Email is empty");
+                  } else if (!isValidEmail(newEmail)) {
+                    myToast("Invalid email format");
                   } else if (newEmail == widget.email) {
                     myToast("Change something");
                   } else {
@@ -104,6 +110,7 @@ class _EditemailState extends State<Editemail> {
                         );
                       },
                     );
+                    widget.passwordController.clear();
                   }
                 },
                 child: Text("Save"),
