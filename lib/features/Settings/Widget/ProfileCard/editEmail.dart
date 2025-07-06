@@ -84,6 +84,7 @@ class _EditemailState extends State<Editemail> {
                               actions: [
                                 kTextButton(
                                   onPressed: () {
+                                    widget.passwordController.clear();
                                     FocusScope.of(context).unfocus();
                                     Navigator.of(context).pop();
                                   },
@@ -91,15 +92,11 @@ class _EditemailState extends State<Editemail> {
                                 ),
                                 kTextButton(
                                   onPressed: () async {
-                                    Navigator.of(context).pop();
-                                    if (widget.passwordController.text.isEmpty) {
+                                    if(widget.passwordController.text.isEmpty) {
                                       myToast("Add your password");
                                     } else {
-                                      await service.authenticate(
-                                        widget.email,
-                                        widget.emailController.text.trim(),
-                                        widget.passwordController.text.trim(),
-                                      );
+                                      Navigator.of(context).pop();
+                                      await service.authenticate(widget.email, newEmail, widget.passwordController.text.trim());
                                     }
                                   },
                                   child: Text("Confirm"),
