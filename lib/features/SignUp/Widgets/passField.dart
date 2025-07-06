@@ -38,7 +38,7 @@ class _passFieldState extends State<passField> {
       myController: widget.pass,
       label: Text("Password"),
       myIcon: icons.passIcon,
-      obsecureText: !passwordVisible,
+      obscureText: !passwordVisible,
     );
   }
 }
