@@ -56,7 +56,7 @@ class _EditemailState extends State<Editemail> {
                     await showDialog(
                       context: context,
                       builder: (context) {
-                        bool localPasswordVisible = false; // local state
+                        bool localPasswordVisible = false;
                         return StatefulBuilder(
                           builder: (context, setState) {
                             return AlertDialog(
@@ -104,8 +104,6 @@ class _EditemailState extends State<Editemail> {
                         );
                       },
                     );
-                    widget.emailController.clear();
-                    widget.passwordController.clear();
                   }
                 },
                 child: Text("Save"),
