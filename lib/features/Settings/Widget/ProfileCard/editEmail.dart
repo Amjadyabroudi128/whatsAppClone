@@ -7,9 +7,10 @@ import 'package:whatsappclone/components/fSizedBox.dart';
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextField.dart';
 import '../../../../components/flutterToast.dart';
+import '../../../../components/iconButton.dart';
 import '../../../../core/icons.dart';
 
-class Editemail extends StatelessWidget {
+class Editemail extends StatefulWidget {
   final String email;
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -21,6 +22,11 @@ class Editemail extends StatelessWidget {
     required this.passwordController,
   });
 
+  @override
+  State<Editemail> createState() => _EditemailState();
+}
+
+class _EditemailState extends State<Editemail> {
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
@@ -41,46 +47,65 @@ class Editemail extends StatelessWidget {
             actions: [
               kTextButton(
                 onPressed: () async {
-                  final newEmail = emailController.text.trim();
+                  final newEmail = widget.emailController.text.trim();
                   if (newEmail.isEmpty) {
                     myToast("Your Email is empty");
-                  } else if (newEmail == email) {
+                  } else if (newEmail == widget.email) {
                     myToast("Change something");
                   } else {
                     await showDialog(
                       context: context,
-                      builder: (context){
-                        return AlertDialog(
-                            title: Text("Re-authenticate"),
-                            content: TextField(
-                              controller: passwordController,
-                              obscureText: true,
-                              decoration: InputDecoration(labelText: "Enter your password"),
-                            ),
-                            actions: [
-                              kTextButton(
-                                onPressed: (){
-                                  FocusScope.of(context).unfocus();
-                                },
-                                child: Text("Cancel"),
+                      builder: (context) {
+                        bool localPasswordVisible = false; // local state
+                        return StatefulBuilder(
+                          builder: (context, setState) {
+                            return AlertDialog(
+                              title: Text("Re-authenticate"),
+                              content: kTextField(
+                                maxLines: 1,
+                                icon: kIconButton(
+                                  myIcon: localPasswordVisible ? icons.visibility : icons.visibility_off,
+                                  onPressed: () {
+                                    setState(() {
+                                      localPasswordVisible = !localPasswordVisible;
+                                    });
+                                  },
+                                ),
+                                myController: widget.passwordController,
+                                label: Text("Password"),
+                                obscureText: !localPasswordVisible,
                               ),
-                              kTextButton(
-                                onPressed: () async {
-                                  Navigator.of(context).pop();
-                                  if(passwordController.text.isEmpty) {
-                                    myToast("add your password");
-                                  } else {
-                                    await service.authenticate(email, newEmail, passwordController.text.trim());
-                                  }
-                                },
-                                child: Text("Confirm"),
-                              ),
-                            ]
+                              actions: [
+                                kTextButton(
+                                  onPressed: () {
+                                    FocusScope.of(context).unfocus();
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("Cancel"),
+                                ),
+                                kTextButton(
+                                  onPressed: () async {
+                                    Navigator.of(context).pop();
+                                    if (widget.passwordController.text.isEmpty) {
+                                      myToast("Add your password");
+                                    } else {
+                                      await service.authenticate(
+                                        widget.email,
+                                        widget.emailController.text.trim(),
+                                        widget.passwordController.text.trim(),
+                                      );
+                                    }
+                                  },
+                                  child: Text("Confirm"),
+                                ),
+                              ],
+                            );
+                          },
                         );
-                      }
+                      },
                     );
-                    emailController.clear();
-                    passwordController.clear();
+                    widget.emailController.clear();
+                    widget.passwordController.clear();
                   }
                 },
                 child: Text("Save"),
@@ -97,7 +122,7 @@ class Editemail extends StatelessWidget {
                 kTextField(
                   filled: true,
                   maxLines: 1,
-                  hint: email,
+                  hint: widget.email,
                   enabled: false,
                 ),
                 BoxSpacing(myHeight: 10),
@@ -109,7 +134,7 @@ class Editemail extends StatelessWidget {
                   filled: true,
                   maxLines: 1,
                   hint: "e.g name@example.com",
-                  myController: emailController,
+                  myController: widget.emailController,
                 ),
               ],
             ),
