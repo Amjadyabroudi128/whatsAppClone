@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import 'package:whatsappclone/utils/pickImage.dart' as url;
+import 'package:http/http.dart' as http;
+import 'package:cloud_functions/cloud_functions.dart';
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
    final FirebaseFirestore users = FirebaseFirestore.instance;
@@ -148,8 +153,26 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
      await user.delete();
    }
 
+   void saveFcmTokenToFirestore() async {
+     final user = FirebaseAuth.instance.currentUser;
+     final token = await FirebaseMessaging.instance.getToken();
 
-   Future<void> sendMessage(String receiverId, String receiverName, String message, String? image, String? file, Messages? replyTo) async {
+     if (user != null && token != null) {
+       await FirebaseFirestore.instance.collection('users').doc(user.email).update({
+         'fcmToken': token,
+       });
+       print("✅ FCM token saved for ${user.uid}");
+     }
+   }
+
+   Future<void> sendMessage(
+       String receiverId,
+       String receiverName,
+       String message,
+       String? image,
+       String? file,
+       Messages? replyTo
+       ) async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
      final Timestamp time = Timestamp.fromDate(DateTime.now());
@@ -162,16 +185,17 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        senderId: currentUser,
        receiverId: receiverId,
        senderEmail: email,
-       receiverEmail: receiverName, // Store receiver's name
+       receiverEmail: receiverName,
        isEdited: false,
        isStarred: false,
-       isReply: replyTo !=null,
-       replyTo : replyTo
+       isReply: replyTo != null,
+       replyTo: replyTo,
      );
 
      List<String> ids = [currentUser, receiverId];
      ids.sort();
      String chatRoomID = ids.join("_");
+
      final docRef = await users
          .collection("chat_rooms")
          .doc(chatRoomID)
@@ -194,8 +218,43 @@ import 'package:whatsappclone/utils/pickImage.dart' as url;
        "lastMessageTime": time,
        "lastMessageSender": currentUser,
        "receiverName": receiverName,
-       "lastMessageType": image != null ? "image" : file != null ? "file" : "text",
+       "lastMessageType": image != null
+           ? "image"
+           : file != null
+           ? "file"
+           : "text",
      }, SetOptions(merge: true));
+
+     // 🔥 Get receiver's FCM token
+     final receiverDoc = await users.collection('users').doc(receiverId).get();
+     final fcmToken = receiverDoc.data()?['fcmToken'];
+
+     if (fcmToken != null) {
+       print("✅ Message saved. Now sending push to: $fcmToken"); // <-- Add it here
+       await sendPushNotificationViaFunction(
+         token: fcmToken,
+         title: email,
+         body: message.isNotEmpty ? message : "[Attachment]",
+       );
+     }else {
+       print("❌ No FCM token found for receiver: $receiverId");
+     }
+   }
+   Future<void> sendPushNotificationViaFunction({
+     required String token,
+     required String title,
+     required String body,
+   }) async {
+     try {
+       final callable = FirebaseFunctions.instance.httpsCallable('sendNotification');
+       await callable.call(<String, dynamic>{
+         'token': token,
+         'title': title,
+         'body': body,
+       });
+     } catch (e) {
+       print("Error calling sendNotification function: $e");
+     }
    }
 
    Stream <QuerySnapshot> getMessages(String userID, String otherUser) {
