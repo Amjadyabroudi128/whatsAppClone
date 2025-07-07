@@ -85,9 +85,10 @@ class _nameCardState extends State<nameCard> {
                   }
                   final data = snapshot.data!;
                   final imageUrl = data.data().toString().contains("image") ? data["image"] : "";
-                  final bio = data["bio"] ?? "";
-                  final name = data["name"] ?? "";
-                  final link = data["link"] ?? "";
+                  final bio = data.data().toString().contains("bio") ? data["bio"] : "";
+                  final name = data.data().toString().contains("name") ? data["name"] : "";
+                  final link = data.data().toString().contains("link") ? data["link"] : "";
+
                   return Column(
                     children: [
                       GestureDetector(
