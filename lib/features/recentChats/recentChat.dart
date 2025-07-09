@@ -43,7 +43,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
               final receiverName = chat['receiverName'] ?? "User";
               String day = DateFormat.yMd().format(dateTime);
               return Dismissible(
-                key: ValueKey(chats.length),
+                key: ValueKey(chat.id),
                 direction: DismissDirection.endToStart,
                 background: Padding(
                   padding: const EdgeInsets.only(right: 26),
@@ -54,11 +54,25 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 ),
                 confirmDismiss: (direction) async {
                   if (direction == DismissDirection.endToStart) {
-                    await FirebaseFirestore.instance.collection('chat_rooms')
-                        .doc(chat.id).delete();
+                    final messagesSnapshot = await FirebaseFirestore.instance
+                        .collection('chat_rooms')
+                        .doc(chat.id)
+                        .collection('messages')
+                        .get();
+                    // Delete each message
+                    for (var doc in messagesSnapshot.docs) {
+                      await doc.reference.delete();
+                    }
+                    // Delete the chat room document
+                    await FirebaseFirestore.instance
+                        .collection('chat_rooms')
+                        .doc(chat.id)
+                        .delete();
+                    return true; // Confirm dismissal
                   }
-                  return null;
+                  return false;
                 },
+
                 child: ListTile(
                   title: Text(receiverName),
                   subtitle: Text(
