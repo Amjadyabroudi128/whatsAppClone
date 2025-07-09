@@ -60,14 +60,15 @@ class Messages {
       'senderEmail': senderEmail,
       'receiverEmail': receiverEmail,
       'time': time,
-      'image': image,
-      'file': file,
+      'image': image ?? '',
+      'file': file ?? '',
       'isStarred': isStarred,
       'isReply': isReply,
       'replyTo': replyTo?.toMap(),
       'isEdited': isEdited,
     };
   }
+
 
   // copyWith method to immutably update fields
   Messages copyWith({
