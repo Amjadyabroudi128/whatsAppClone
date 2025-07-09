@@ -15,6 +15,7 @@ import 'Firebase/passwordReset.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
 import 'features/welcomeScreen/welcome.dart';
 import 'firebase_options.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -94,13 +95,19 @@ class _MyAppState extends State<MyApp> {
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       print('✅ User granted notification permission');
+
       final token = await messaging.getToken();
+      print('📱 Current device FCM token: $token');
+
       final user = FirebaseAuth.instance.currentUser;
 
       if (user != null && token != null) {
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'fcmToken': token,
-        }, SetOptions(merge: true));
+        // SAVE TOKEN TO FIRESTORE
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .set({'fcmToken': token}, SetOptions(merge: true));
+
         print('✅ FCM token saved for user: ${user.uid}');
       } else {
         print('⚠️ Could not save token: user or token is null');
@@ -109,6 +116,7 @@ class _MyAppState extends State<MyApp> {
       print('❌ Notification permission denied');
     }
   }
+
 
   void _handleNotificationTap(RemoteMessage message) {
     final data = message.data;
