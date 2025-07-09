@@ -10,7 +10,7 @@ import '../../../components/padding.dart';
 import '../../../core/icons.dart';
 import '../../chatScreen/chatScreen.dart';
 
-Widget userList(String searchQuery,) {
+Widget userList(String searchQuery) {
   User? user = FirebaseAuth.instance.currentUser;
   final currentUserId = user?.uid ?? '';
 
@@ -24,15 +24,15 @@ Widget userList(String searchQuery,) {
       ),
     );
   }
+
   return Flexible(
     child: StreamBuilder<QuerySnapshot>(
       stream: userC.snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(child: Text("No users found"));
+          return const Center(child: Text("No users found"));
         }
 
-        // Filter out current user and apply search
         final users = snapshot.data!.docs.where((doc) {
           final data = doc.data() as Map<String, dynamic>;
           final name = data['name']?.toLowerCase() ?? '';
@@ -41,39 +41,46 @@ Widget userList(String searchQuery,) {
         }).toList();
 
         if (users.isEmpty) {
-          return Center(child: Text("No users match your search"));
+          return const Center(child: Text("No users match your search"));
         }
 
         return ListView.builder(
           itemCount: users.length,
           itemBuilder: (context, index) {
             final userDoc = users[index];
-            final image = userDoc['image'];
+            final data = userDoc.data() as Map<String, dynamic>;
+
+            final name = data['name'] ?? 'Unknown';
+            final uid = data['uid'] ?? '';
+            final image = data['image'] ?? '';
+
             return myPadding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
                   Options(
                     context: context,
-                    label: Text(userDoc["name"]),
-                    leading: image != null && image.isNotEmpty ? CircleAvatar(
+                    label: Text(name),
+                    leading: image.isNotEmpty
+                        ? CircleAvatar(
                       backgroundImage: NetworkImage(image),
                       radius: 20,
-                    ) : icons.person,
-                    onTap: (){
+                    )
+                        : icons.person,
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => Testname(
-                            receiverId: userDoc["uid"],
-                            receiverName: userDoc["name"] ?? "Unknown",
-                            image: image
+                            receiverId: uid,
+                            receiverName: name,
+                            image: image,
                           ),
                         ),
                       );
-                    }
+                    },
                   ),
-                   Divider(),
+                  const Divider(),
                 ],
               ),
             );
@@ -83,3 +90,4 @@ Widget userList(String searchQuery,) {
     ),
   );
 }
+
