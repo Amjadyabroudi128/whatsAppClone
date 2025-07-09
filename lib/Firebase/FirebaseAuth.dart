@@ -58,16 +58,14 @@ import 'package:cloud_functions/cloud_functions.dart';
        User? user = auth.currentUser;
 
        if (user != null && user.emailVerified) {
-         // Email is verified - proceed
-         await users.collection("users").doc(user.uid).set({
+         await users.collection("users").doc(user.uid).update({
            'email': email,
-           'uid': user.uid,
            'name': name,
-         }, SetOptions(merge: true));
+         });
+
 
          Navigator.pushReplacementNamed(context, "btm");
        } else {
-         // Email not verified - sign out and prompt
          await auth.signOut();
          myToast("Please verify your email before signing in.");
        }
@@ -158,7 +156,7 @@ import 'package:cloud_functions/cloud_functions.dart';
      final token = await FirebaseMessaging.instance.getToken();
 
      if (user != null && token != null) {
-       await FirebaseFirestore.instance.collection('users').doc(user.email).update({
+       await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
          'fcmToken': token,
        });
        print("✅ FCM token saved for ${user.uid}");
@@ -171,15 +169,15 @@ import 'package:cloud_functions/cloud_functions.dart';
        String message,
        String? image,
        String? file,
-       Messages? replyTo
+       Messages? replyTo,
        ) async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
      final Timestamp time = Timestamp.fromDate(DateTime.now());
 
      Messages newMessage = Messages(
-       image: image,
-       file: file,
+       image: image ?? "",
+       file: file ?? "",
        time: time,
        text: message,
        senderId: currentUser,
@@ -196,6 +194,7 @@ import 'package:cloud_functions/cloud_functions.dart';
      ids.sort();
      String chatRoomID = ids.join("_");
 
+     // Save message
      final docRef = await users
          .collection("chat_rooms")
          .doc(chatRoomID)
@@ -206,6 +205,8 @@ import 'package:cloud_functions/cloud_functions.dart';
      });
 
      await docRef.update({"messageId": docRef.id});
+
+     // Update chat metadata
      await users.collection("chat_rooms").doc(chatRoomID).set({
        "participants": [currentUser, receiverId],
        "lastMessage": message.isNotEmpty
@@ -226,37 +227,76 @@ import 'package:cloud_functions/cloud_functions.dart';
      }, SetOptions(merge: true));
 
      // 🔥 Get receiver's FCM token
-     final receiverDoc = await users.collection('users').doc(receiverId).get();
-     final fcmToken = receiverDoc.data()?['fcmToken'];
+     final receiverDoc = await FirebaseFirestore.instance
+         .collection('users')
+         .doc(receiverId)
+         .get();
 
-     if (fcmToken != null) {
-       print("✅ Message saved. Now sending push to: $fcmToken"); // <-- Add it here
-       await sendPushNotificationViaFunction(
-         token: fcmToken,
-         title: email,
-         body: message.isNotEmpty ? message : "[Attachment]",
-       );
-     }else {
-       print("❌ No FCM token found for receiver: $receiverId");
+     final receiverToken = receiverDoc.data()?['fcmToken'];
+
+     if (receiverToken == null) {
+       print('❌ No FCM token found for receiver: $receiverId');
+       return;
      }
+
+     // ✅ Call the push notification function
+     final previewText = message.isNotEmpty
+         ? message
+         : image != null
+         ? "📷 Sent an image"
+         : file != null
+         ? "📎 Sent a file"
+         : "New message from ${auth.currentUser!.emailVerified}";
+
+     print("📨 Sending notification to: $receiverName ($receiverToken)");
+     print("$message");
+     await sendPushNotificationViaFunction(
+       token: receiverToken,
+       title: auth.currentUser!.emailVerified == true
+           ? "New message from ${auth.currentUser!.emailVerified}"
+           : "New message from ${auth.currentUser!.emailVerified}",
+       body: previewText,
+       receiverId: receiverId,
+       receiverName: receiverName,
+       image: image,
+     );
    }
+
    Future<void> sendPushNotificationViaFunction({
      required String token,
      required String title,
      required String body,
+     String? receiverId,
+     String? receiverName,
+     String? image,
    }) async {
      try {
-       final callable = FirebaseFunctions.instance.httpsCallable('sendNotification');
-       await callable.call(<String, dynamic>{
+       final data = {
          'token': token,
          'title': title,
          'body': body,
-       });
+         'receiverId': receiverId ?? '',
+         'receiverName': receiverName ?? '',
+         'image': image ?? '',
+       };
+       final callable = FirebaseFunctions.instanceFor(region: 'europe-west1').httpsCallable('sendNotification');
+       final result = await callable.call(data);
+       print("✅ FCM sent: ${result.data}");
      } catch (e) {
-       print("Error calling sendNotification function: $e");
+       print("❌ Error calling sendNotification: $e");
      }
    }
 
+
+   Future<String?> getReceiverFcmToken(String receiverId) async {
+     final doc = await FirebaseFirestore.instance.collection('users').doc(receiverId).get();
+     if (doc.exists && doc.data()!.containsKey('fcmToken')) {
+       return doc['fcmToken'];
+     } else {
+       print('❌ No FCM token found for receiver: $receiverId');
+       return null;
+     }
+   }
    Stream <QuerySnapshot> getMessages(String userID, String otherUser) {
      List<String> ids = [userID, otherUser];
      ids.sort();
