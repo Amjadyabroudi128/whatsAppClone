@@ -63,7 +63,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     for (var doc in messagesSnapshot.docs) {
                       await doc.reference.delete();
                     }
-                    // Delete the chat room document
                     await FirebaseFirestore.instance
                         .collection('chat_rooms')
                         .doc(chat.id)
