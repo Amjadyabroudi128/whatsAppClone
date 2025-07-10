@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../Firebase/FirebaseAuth.dart';
+import '../../components/TextButton.dart';
+import '../../components/flutterToast.dart';
+import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 import '../chatScreen/chatScreen.dart';
 class RecentChatsScreen extends StatefulWidget {
@@ -54,20 +57,44 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 ),
                 confirmDismiss: (direction) async {
                   if (direction == DismissDirection.endToStart) {
-                    final messagesSnapshot = await FirebaseFirestore.instance
-                        .collection('chat_rooms')
-                        .doc(chat.id)
-                        .collection('messages')
-                        .get();
-                    // Delete each message
-                    for (var doc in messagesSnapshot.docs) {
-                      await doc.reference.delete();
-                    }
-                    await FirebaseFirestore.instance
-                        .collection('chat_rooms')
-                        .doc(chat.id)
-                        .delete();
-                    return true; // Confirm dismissal
+                    await showDialog(
+                      context: context,
+                      builder: (context){
+                        return AlertDialog(
+                          title: Text("You are about to delete messages with ${receiverName}"),
+                          content: Text("Are you sure ? "),
+                          actions: [
+                            kTextButton(
+                              onPressed: (){
+                                Navigator.of(context).pop();
+                                FocusScope.of(Navigator.of(context).context).unfocus();
+                              },
+                              child: Text("Cancel"),
+                            ),
+                            kTextButton(
+                              onPressed: () async {
+                                final message = await FirebaseFirestore.instance.collection("chat_rooms")
+                                    .doc(chat.id).collection("messages").get();
+                                for(var doc in message.docs) {
+                                  await doc.reference.delete();
+                                }
+                                await FirebaseFirestore.instance
+                                    .collection('chat_rooms')
+                                    .doc(chat.id)
+                                    .delete();
+                                Navigator.of(context).pop();
+                                myToast("Message Successfully Deleted");
+                                FocusScope.of(Navigator.of(context).context).unfocus();
+
+                                FocusScope.of(Navigator.of(context).context).unfocus();
+                                FocusScope.of(Navigator.of(context).context).unfocus();
+                              },
+                              child: Text("Delete", style: Textstyles.deleteStyle,),
+                            ),
+                          ],
+                        );
+                      }
+                    );
                   }
                   return false;
                 },
