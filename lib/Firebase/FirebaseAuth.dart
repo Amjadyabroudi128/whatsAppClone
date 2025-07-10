@@ -21,7 +21,10 @@ import 'package:cloud_functions/cloud_functions.dart';
        await auth.createUserWithEmailAndPassword(email: email, password: password);
 
        await auth.currentUser!.sendEmailVerification();
+       await auth.currentUser!.updateDisplayName(name);
 
+// Refresh the user to make displayName available
+       await auth.currentUser!.reload();
        // Save user data in Firestore
        await users.collection("users").doc(auth.currentUser!.uid).set({
          'email': email,
@@ -58,6 +61,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        User? user = auth.currentUser;
 
        if (user != null && user.emailVerified) {
+         await auth.currentUser!.updateDisplayName(name);
          await users.collection("users").doc(user.uid).update({
            'email': email,
            'name': name,
@@ -173,8 +177,8 @@ import 'package:cloud_functions/cloud_functions.dart';
        ) async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
+     final String name = auth.currentUser!.displayName ?? "Unknown";
      final Timestamp time = Timestamp.fromDate(DateTime.now());
-
      Messages newMessage = Messages(
        image: image ?? "",
        file: file ?? "",
@@ -184,6 +188,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        receiverId: receiverId,
        senderEmail: email,
        receiverEmail: receiverName,
+       senderName: name,
        isEdited: false,
        isStarred: false,
        isReply: replyTo != null,
@@ -246,20 +251,20 @@ import 'package:cloud_functions/cloud_functions.dart';
          ? "📷 Sent an image"
          : file != null
          ? "📎 Sent a file"
-         : "New message from ${auth.currentUser!.emailVerified}";
+         : auth.currentUser!.displayName!.isEmpty ? "new Message" : "${name} sent a message";
+     // print("new mewssage from ${auth.currentUser!.email}");
 
      print("📨 Sending notification to: $receiverName ($receiverToken)");
      print("$message");
      await sendPushNotificationViaFunction(
        token: receiverToken,
-       title: auth.currentUser!.emailVerified == true
-           ? "New message from ${auth.currentUser!.emailVerified}"
-           : "New message from ${auth.currentUser!.emailVerified}",
+       title: auth.currentUser!.displayName!.isEmpty ? "new Message" : "${name} sent a message",
        body: previewText,
        receiverId: receiverId,
        receiverName: receiverName,
        image: image,
      );
+
    }
 
    Future<void> sendPushNotificationViaFunction({
