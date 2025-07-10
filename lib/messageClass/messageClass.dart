@@ -14,9 +14,10 @@ class Messages {
   final bool? isReply;
   final Messages? replyTo;
   final bool? isEdited;
-
+  final String? senderName;
   Messages({
     required this.text,
+    this.senderName,
     this.receiverEmail,
     this.senderId,
     this.receiverId,
@@ -34,6 +35,7 @@ class Messages {
   factory Messages.fromMap(Map<String, dynamic> map) {
     return Messages(
       text: map['message'],
+      senderName: map["senderName"],
       senderId: map['senderId'],
       receiverId: map['receiverId'],
       senderEmail: map['senderEmail'],
@@ -53,6 +55,7 @@ class Messages {
 
   Map<String, dynamic> toMap() {
     return {
+      "senderName": senderName,
       'messageId': messageId,
       'message': text,
       'senderId': senderId,
@@ -75,6 +78,7 @@ class Messages {
     String? text,
     String? receiverId,
     String? senderEmail,
+    String? senderName,
     String? senderId,
     String? receiverEmail,
     Timestamp? time,
@@ -87,6 +91,7 @@ class Messages {
     bool? isEdited,
   }) {
     return Messages(
+      senderName: senderName ?? this.senderName,
       text: text ?? this.text,
       receiverId: receiverId ?? this.receiverId,
       senderEmail: senderEmail ?? this.senderEmail,
@@ -106,6 +111,7 @@ class Messages {
     final data = doc.data() as Map<String, dynamic>;
     return Messages(
       messageId: doc.id,
+      senderName: data["senderName"],
       text: data['message'],
       senderId: data['senderId'],
       receiverId: data['receiverId'],
