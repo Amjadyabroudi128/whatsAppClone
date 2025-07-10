@@ -49,6 +49,7 @@ class _MessageStreamState extends State<MessageStream> {
           final message = Messages(
             text: data["message"],
             senderId: data["senderId"],
+            senderName: data["senderName"],
             receiverId: data["receiverId"],
             senderEmail: data["senderEmail"],
             receiverEmail: data["receiverEmail"],
