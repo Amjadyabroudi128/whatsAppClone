@@ -14,6 +14,7 @@ class nameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return kTextField(
+      textInputAction: TextInputAction.next,
       myController: name,
       label: Text("Name"),
       myIcon: icons.person,
