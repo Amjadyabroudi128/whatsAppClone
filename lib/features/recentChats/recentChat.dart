@@ -85,9 +85,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                 Navigator.of(context).pop();
                                 myToast("Message Successfully Deleted");
                                 FocusScope.of(Navigator.of(context).context).unfocus();
-
-                                FocusScope.of(Navigator.of(context).context).unfocus();
-                                FocusScope.of(Navigator.of(context).context).unfocus();
                               },
                               child: Text("Delete", style: Textstyles.deleteStyle,),
                             ),
