@@ -15,6 +15,7 @@ class emailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return kTextField(
+      textInputAction: TextInputAction.next,
       keyBoard: TextInputType.emailAddress,
       myController: myEmail,
       myIcon: icons.emailIcon,
