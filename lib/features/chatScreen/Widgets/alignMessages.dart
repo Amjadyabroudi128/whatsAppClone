@@ -79,7 +79,7 @@ class _messagesAlignState extends State<messagesAlign> {
           }
 
           String formattedTime = DateFormat.Hm().format(dateTime!);
-          String day = DateFormat.yMd().format(dateTime);
+          String day = DateFormat('dd/MM/yyyy').format(dateTime);
           return Column(
             children: [
               Text(day, style: TextStyle(color: widget.textColor),),
