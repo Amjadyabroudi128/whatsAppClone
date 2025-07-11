@@ -26,11 +26,13 @@ class kTextField extends StatelessWidget {
   final String? prefixText;
   final TextStyle? prefixStyle;
   final bool? enabled;
+  final TextInputAction? textInputAction;
   const kTextField(
       {super.key, this.label, this.myController,
         this.myIcon,this.obscureText = false,
         this.border, this.keyBoard, this.hint,
-        this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable, this.focused, this.textColor, this.prefixText, this.prefixStyle, this.enabled});
+        this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable,
+        this.focused, this.textColor, this.prefixText, this.prefixStyle, this.enabled, this.textInputAction});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class kTextField extends StatelessWidget {
       maxLines: maxLines,
       enabled: enabled,
       style: TextStyle(color: color),
+      textInputAction: textInputAction,
       decoration: InputDecoration(
         fillColor: fillColor,
         prefixText: prefixText,
