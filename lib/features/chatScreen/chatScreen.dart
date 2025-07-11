@@ -85,7 +85,7 @@ class _TestnameState extends State<Testname> {
                         email: data?['email'] ?? '',
                         imageUrl: data?['image'] ?? '',
                         bio: data?["bio"] ?? '',
-                        link: data?["link"] ?? "", // Default value if "link" is missing
+                        link: data?["link"] ?? "",
                         receiverId: widget.receiverId,
                       ),
                     ),
@@ -125,144 +125,149 @@ class _TestnameState extends State<Testname> {
               ),
             ),
           ),
-          body: Column(
-            children: [
-              Expanded(
-                child: MessageStream(
-                  service: service,
-                  textColor: textColor,
-                  user: user,
-                  widget: widget,
-                  onReply: setReplyMessage,
-                  controller: messageController,
-                  isEditing: isEditing,
-                  selectedMessages: selectedMessages,
-                  onToggleEdit: () {
-                    setState(() {
-                      isEditing = !isEditing;
-                      selectedMessages.clear();
-                    });
-                  },
-                ),
-              ),
-              if(isUploading)
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.all(7),
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-              if (_replyMessage != null)
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border(
-                      left: BorderSide(
-                        color: isReplyFromMe ? myColors.myReply
-                        : myColors.otherReply,
-                        width: 7
-                      )
-                    )
+          body: GestureDetector(
+            onTap: (){
+              FocusScope.of(context).unfocus();
+            },
+            child: Column(
+              children: [
+                Expanded(
+                  child: MessageStream(
+                    service: service,
+                    textColor: textColor,
+                    user: user,
+                    widget: widget,
+                    onReply: setReplyMessage,
+                    controller: messageController,
+                    isEditing: isEditing,
+                    selectedMessages: selectedMessages,
+                    onToggleEdit: () {
+                      setState(() {
+                        isEditing = !isEditing;
+                        selectedMessages.clear();
+                      });
+                    },
                   ),
+                ),
+                if(isUploading)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.all(7),
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                if (_replyMessage != null)
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border(
+                        left: BorderSide(
+                          color: isReplyFromMe ? myColors.myReply
+                          : myColors.otherReply,
+                          width: 7
+                        )
+                      )
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${_replyMessage!.senderEmail}",
+                                maxLines: 2,
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(
+                                  color: isReplyFromMe ? myColors.myName :
+                                  myColors.otherName,
+                                ),
+                              ),
+                              Text("${_replyMessage!.text}", style: Textstyles.reply,
+                                maxLines: 3,overflow: TextOverflow.clip,
+                              )
+                            ],
+                          ),
+                        ),
+                        if (_replyMessage!.image != null && _replyMessage!.image!.isNotEmpty)
+                          Image.network(_replyMessage!.image!, height: 50, width: 60),
+                        kIconButton(
+                          myIcon: icons.Wclose,
+                          onPressed: () {
+                            setState(() {
+                              _replyMessage = null;
+                              FocusScope.of(context).unfocus();
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                isEditing || selectedMessages.isNotEmpty ?
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        kIconButton(
+                          onPressed: () async {
+                            await service.deleteSelectedMessages(
+                                senderId: FirebaseAuth.instance.currentUser!.uid,
+                                receiverId: widget.receiverId,
+                                messageIds: selectedMessages);
+                            setState(() {
+                              isEditing = false;
+                              selectedMessages.clear();
+                            });
+                          },
+                          myIcon: icons.deleteIcon,
+                        ),
+                      ],
+                    ) :
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${_replyMessage!.senderEmail}",
-                              maxLines: 2,
-                              overflow: TextOverflow.clip,
-                              style: TextStyle(
-                                color: isReplyFromMe ? myColors.myName :
-                                myColors.otherName,
-                              ),
-                            ),
-                            Text("${_replyMessage!.text}", style: Textstyles.reply,
-                              maxLines: 3,overflow: TextOverflow.clip,
-                            )
-                          ],
+                        child: kTextField(
+                          maxLines: null,
+                          textColor: Colors.black,
+                          enable: messageBorder,
+                          focused: messageBorder,
+                          myController: messageController,
+                          hint: "Add a message",
+                          hintStyle: TextStyle(color: Colors.black, fontSize: 15.7),
                         ),
                       ),
-                      if (_replyMessage!.image != null && _replyMessage!.image!.isNotEmpty)
-                        Image.network(_replyMessage!.image!, height: 50, width: 60),
-                      kIconButton(
-                        myIcon: icons.Wclose,
-                        onPressed: () {
-                          setState(() {
-                            _replyMessage = null;
+                      photoBtmSheet(service: service, widget: widget, textColor: textColor,
+                        onUploadStatusChanged: (value) {
+                        setState(() {
+                          isUploading = value;
+                        });
+                      },),
+                        kIconButton(
+                          onPressed: () {
+                            service.sendMessage(
+                              widget.receiverId,
+                              widget.receiverName,
+                              messageController.text,
+                              null,
+                              null,
+                              _replyMessage,
+                            );
+                            messageController.clear();
                             FocusScope.of(context).unfocus();
-                          });
-                        },
-                      ),
+                            _replyMessage = null;
+                          },
+                          myIcon: icons.send,
+                        ),
                     ],
                   ),
                 ),
-              isEditing || selectedMessages.isNotEmpty ?
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      kIconButton(
-                        onPressed: () async {
-                          await service.deleteSelectedMessages(
-                              senderId: FirebaseAuth.instance.currentUser!.uid,
-                              receiverId: widget.receiverId,
-                              messageIds: selectedMessages);
-                          setState(() {
-                            isEditing = false;
-                            selectedMessages.clear();
-                          });
-                        },
-                        myIcon: icons.deleteIcon,
-                      ),
-                    ],
-                  ) :
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: kTextField(
-                        maxLines: null,
-                        textColor: Colors.black,
-                        enable: messageBorder,
-                        focused: messageBorder,
-                        myController: messageController,
-                        hint: "Add a message",
-                        hintStyle: TextStyle(color: Colors.black, fontSize: 15.7),
-                      ),
-                    ),
-                    photoBtmSheet(service: service, widget: widget, textColor: textColor,
-                      onUploadStatusChanged: (value) {
-                      setState(() {
-                        isUploading = value;
-                      });
-                    },),
-                      kIconButton(
-                        onPressed: () {
-                          service.sendMessage(
-                            widget.receiverId,
-                            widget.receiverName,
-                            messageController.text,
-                            null,
-                            null,
-                            _replyMessage,
-                          );
-                          messageController.clear();
-                          FocusScope.of(context).unfocus();
-                          _replyMessage = null;
-                        },
-                        myIcon: icons.send,
-                      ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
