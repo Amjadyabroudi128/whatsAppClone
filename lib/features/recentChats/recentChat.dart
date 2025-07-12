@@ -73,18 +73,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                             ),
                             kTextButton(
                               onPressed: () async {
-                                final message = await FirebaseFirestore.instance.collection("chat_rooms")
-                                    .doc(chat.id).collection("messages").get();
-                                for(var doc in message.docs) {
-                                  await doc.reference.delete();
-                                }
-                                await FirebaseFirestore.instance
-                                    .collection('chat_rooms')
-                                    .doc(chat.id)
-                                    .delete();
-                                Navigator.of(context).pop();
-                                myToast("Message Successfully Deleted");
-                                FocusScope.of(Navigator.of(context).context).unfocus();
+                               await service.deleteRecentChat(chat.id, context);
                               },
                               child: Text("Delete", style: Textstyles.deleteStyle,),
                             ),
