@@ -166,6 +166,29 @@ import 'package:cloud_functions/cloud_functions.dart';
        print("✅ FCM token saved for ${user.uid}");
      }
    }
+   Future<void> deleteRecentChat(String chatRoomId, BuildContext context) async {
+     try {
+       // Delete all messages in the chat room
+       final messages = await FirebaseFirestore.instance
+           .collection("chat_rooms")
+           .doc(chatRoomId)
+           .collection("messages")
+           .get();
+
+       for(var doc in messages.docs) {
+         await doc.reference.delete();
+       }
+       await FirebaseFirestore.instance
+           .collection("chat_rooms")
+           .doc(chatRoomId)
+           .delete();
+       Navigator.of(context).pop();
+       myToast("Message Successfully Deleted");
+       FocusScope.of(context).unfocus();
+     } catch (e) {
+       myToast("Failed to delete chat: $e");
+     }
+   }
 
    Future<void> sendMessage(
        String receiverId,
