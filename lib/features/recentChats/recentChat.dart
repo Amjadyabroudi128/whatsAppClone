@@ -45,7 +45,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
               final Timestamp timestamp = chat['lastMessageTime'];
               final dateTime = timestamp.toDate();
               final receiverName = chat['receiverName'] ?? "User";
-              String day = DateFormat.yMd().format(dateTime);
               return Dismissible(
                 key: ValueKey(chat.id),
                 direction: DismissDirection.endToStart,
