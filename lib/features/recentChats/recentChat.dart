@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/components/listTilesOptions.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/TextButton.dart';
 import '../../components/flutterToast.dart';
@@ -84,9 +85,9 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   }
                   return false;
                 },
-
-                child: ListTile(
-                  title: Text(receiverName),
+                child: Options(
+                  context: context,
+                  label: Text(receiverName),
                   subtitle: Text(
                     lastMessage,
                     maxLines: 1,
