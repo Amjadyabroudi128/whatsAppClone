@@ -182,7 +182,7 @@ import 'package:whatsappclone/core/MyColors.dart';
         indent: 30
     ),
     iconTheme: IconThemeData(
-      color: Colors.black
+      color: Colors.white
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.white),
