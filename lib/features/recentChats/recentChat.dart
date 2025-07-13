@@ -10,6 +10,7 @@ import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 import '../chatScreen/chatScreen.dart';
 import 'Widgets/dateText.dart';
+import 'Widgets/deleteAlert.dart';
 class RecentChatsScreen extends StatefulWidget {
   const RecentChatsScreen({Key? key}) : super(key: key);
 
@@ -28,10 +29,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
       body: StreamBuilder<QuerySnapshot>(
         stream: service.getRecentChats(user!.uid),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(child: Text("No recent chats."));
           }
@@ -61,25 +58,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     await showDialog(
                       context: context,
                       builder: (context){
-                        return AlertDialog(
-                          title: Text("You are about to delete messages with ${receiverName}"),
-                          content: Text("Are you sure ? "),
-                          actions: [
-                            kTextButton(
-                              onPressed: (){
-                                Navigator.of(context).pop();
-                                FocusScope.of(Navigator.of(context).context).unfocus();
-                              },
-                              child: Text("Cancel"),
-                            ),
-                            kTextButton(
-                              onPressed: () async {
-                               await service.deleteRecentChat(chat.id, context);
-                              },
-                              child: Text("Delete", style: Textstyles.deleteStyle,),
-                            ),
-                          ],
-                        );
+                        return deleteAlert(receiverName: receiverName, context: context, service: service, chat: chat);
                       }
                     );
                   }
@@ -114,4 +93,5 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
     );
   }
 }
+
 
