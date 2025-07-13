@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/TextButton.dart';
+import '../../../core/TextStyles.dart';
 
 class deleteAlert extends StatelessWidget {
   const deleteAlert({
