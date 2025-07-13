@@ -9,6 +9,7 @@ import '../../components/flutterToast.dart';
 import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 import '../chatScreen/chatScreen.dart';
+import 'Widgets/dateText.dart';
 class RecentChatsScreen extends StatefulWidget {
   const RecentChatsScreen({Key? key}) : super(key: key);
 
@@ -92,10 +93,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  trailing: Text(
-                    "${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}",
-                    style: const TextStyle(fontSize: 12),
-                  ),
+                  trailing: dateText(dateTime: dateTime),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -116,3 +114,4 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
     );
   }
 }
+
