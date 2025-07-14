@@ -213,6 +213,7 @@ class _TestnameState extends State<Testname> {
                       children: [
                         kIconButton(
                           onPressed: () async {
+                            myToast("message Deleted ");
                             await service.deleteSelectedMessages(
                                 senderId: FirebaseAuth.instance.currentUser!.uid,
                                 receiverId: widget.receiverId,
