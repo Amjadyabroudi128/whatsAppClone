@@ -231,7 +231,9 @@ class _TestnameState extends State<Testname> {
                                             Spacer(),
                                             kIconButton(
                                               myIcon: icons.close,
-                                              onPressed: (){},
+                                              onPressed: (){
+                                                Navigator.of(context).pop();
+                                              },
                                             )
                                           ],
                                         ),
