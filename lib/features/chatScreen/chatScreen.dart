@@ -239,7 +239,7 @@ class _TestnameState extends State<Testname> {
                           focused: messageBorder,
                           myController: messageController,
                           hint: "Add a message",
-                          hintStyle: TextStyle(color: Colors.black, fontSize: 15.7),
+                          hintStyle: Textstyles.sendMessage,
                         ),
                       ),
                       photoBtmSheet(service: service, widget: widget, textColor: textColor,
