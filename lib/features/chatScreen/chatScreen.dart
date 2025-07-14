@@ -3,9 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
+import 'package:whatsappclone/components/kCard.dart';
+import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
+import '../../components/ListTiles.dart';
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
 import '../../Firebase/FirebaseAuth.dart';
@@ -213,18 +217,53 @@ class _TestnameState extends State<Testname> {
                       children: [
                         kIconButton(
                           onPressed: () async {
-                            myToast("message Deleted ");
-                            await service.deleteSelectedMessages(
-                                senderId: FirebaseAuth.instance.currentUser!.uid,
-                                receiverId: widget.receiverId,
-                                messageIds: selectedMessages);
-                            setState(() {
-                              isEditing = false;
-                              selectedMessages.clear();
-                            });
+                            await btmSheet(
+                              context: context,
+                              builder: (context) {
+                                return Wrap(
+                                  children: [ Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text("Delete messages"),
+                                            Spacer(),
+                                            kIconButton(
+                                              myIcon: icons.close,
+                                              onPressed: (){},
+                                            )
+                                          ],
+                                        ),
+                                        kCard(
+                                          child: Options(
+                                            label: Text("Delete Messages", style: Textstyles.saveBio),
+                                            trailing: icons.deleteIcon,
+                                            onTap: () async {
+                                              myToast("message Deleted ");
+                                              await service.deleteSelectedMessages(
+                                                  senderId: FirebaseAuth.instance.currentUser!.uid,
+                                                  receiverId: widget.receiverId,
+                                                  messageIds: selectedMessages);
+                                              Navigator.of(context).pop();
+                                              setState(() {
+                                                isEditing = false;
+                                                selectedMessages.clear();
+                                              });
+                                            },
+                                            context: context
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ]
+                                );
+                              }
+                            );
                           },
                           myIcon: icons.deleteIcon,
-                        ),
+                        )
                       ],
                     ) :
                 Padding(
