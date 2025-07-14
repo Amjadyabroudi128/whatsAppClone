@@ -217,6 +217,7 @@ class _TestnameState extends State<Testname> {
                       children: [
                         kIconButton(
                           onPressed: () async {
+                            final count = selectedMessages.length;
                             await btmSheet(
                               context: context,
                               builder: (context) {
@@ -227,7 +228,7 @@ class _TestnameState extends State<Testname> {
                                       children: [
                                         Row(
                                           children: [
-                                            Text("Delete messages"),
+                                            Text("Delete $count Message${count > 1 ? 's' : ''}?"),
                                             Spacer(),
                                             kIconButton(
                                               myIcon: icons.close,
