@@ -226,17 +226,21 @@ class _TestnameState extends State<Testname> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
                                       children: [
-                                        Row(
-                                          children: [
-                                            Text("Delete $count Message${count > 1 ? 's' : ''}?"),
-                                            Spacer(),
-                                            kIconButton(
-                                              myIcon: icons.close,
-                                              onPressed: (){
-                                                Navigator.of(context).pop();
-                                              },
-                                            )
-                                          ],
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Text("Delete $count Message${count > 1 ? 's' : ''}?",
+                                                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
+                                              Spacer(),
+                                              kIconButton(
+                                                myIcon: icons.close,
+                                                onPressed: (){
+                                                  Navigator.of(context).pop();
+                                                },
+                                              )
+                                            ],
+                                          ),
                                         ),
                                         kCard(
                                           child: Options(
