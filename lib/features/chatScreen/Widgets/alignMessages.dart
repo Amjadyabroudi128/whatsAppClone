@@ -68,8 +68,8 @@ class _messagesAlignState extends State<messagesAlign> {
           final msg = widget.messages[index];
           bool isMe = msg.senderId == widget.user!.uid;
           final timestamp = msg.time;
-          DateTime? dateTime;
 
+          DateTime? dateTime;
           if (timestamp is Timestamp) {
             dateTime = timestamp.toDate();
           } else if (timestamp is DateTime) {
@@ -79,10 +79,28 @@ class _messagesAlignState extends State<messagesAlign> {
           }
 
           String formattedTime = DateFormat.Hm().format(dateTime!);
-          String day = DateFormat('dd/MM/yyyy').format(dateTime);
+          String today = DateFormat('dd/MM/yyyy').format(dateTime);
+          bool showDate = false;
+          if (index == 0) {
+            showDate = true;
+          } else {
+            final prevTimestamp = widget.messages[index - 1].time;
+            DateTime prevDate;
+            if (prevTimestamp is Timestamp) {
+              prevDate = prevTimestamp.toDate();
+            } else if (prevTimestamp is DateTime) {
+              prevDate = prevTimestamp!;
+            } else {
+              prevDate = DateTime.now();
+            }
+
+            final prevDay = DateFormat('dd/MM/yyyy').format(prevDate);
+            showDate = today != prevDay;
+          }
           return Column(
             children: [
-              Text(day, style: TextStyle(color: widget.textColor),),
+              if(showDate)
+              Text(today, style: TextStyle(color: widget.textColor),),
               Align(
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
                 child: GestureDetector(
@@ -93,7 +111,7 @@ class _messagesAlignState extends State<messagesAlign> {
                         MaterialPageRoute(
                           builder: (_) => Imagescreen(
                             image: msg.image,
-                            date: day,
+                            date: today,
                             senderName: msg.senderEmail,
                             time: formattedTime,
                             messageId: msg.messageId,
@@ -130,7 +148,7 @@ class _messagesAlignState extends State<messagesAlign> {
                         MaterialPageRoute(
                           builder: (_) => Imagescreen(
                             image: msg.image,
-                              date: day,
+                              date: today,
                             senderName: msg.senderEmail,
                             time: formattedTime,
                             messageId: msg.messageId,
