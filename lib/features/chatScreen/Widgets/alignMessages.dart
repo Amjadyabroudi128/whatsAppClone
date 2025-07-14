@@ -88,8 +88,6 @@ class _messagesAlignState extends State<messagesAlign> {
             DateTime prevDate;
             if (prevTimestamp is Timestamp) {
               prevDate = prevTimestamp.toDate();
-            } else if (prevTimestamp is DateTime) {
-              prevDate = prevTimestamp!;
             } else {
               prevDate = DateTime.now();
             }
