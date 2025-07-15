@@ -286,6 +286,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        receiverId: receiverId,
        receiverName: receiverName,
        image: image,
+       type: "chat"
      );
 
    }
@@ -297,6 +298,7 @@ import 'package:cloud_functions/cloud_functions.dart';
      String? receiverId,
      String? receiverName,
      String? image,
+     String? type,
    }) async {
      try {
        final data = {
@@ -306,10 +308,13 @@ import 'package:cloud_functions/cloud_functions.dart';
          'receiverId': receiverId ?? '',
          'receiverName': receiverName ?? '',
          'image': image ?? '',
+         'type': type ?? 'chat',
+
        };
        final callable = FirebaseFunctions.instanceFor(region: 'europe-west1').httpsCallable('sendNotification');
        final result = await callable.call(data);
        print("✅ FCM sent: ${result.data}");
+       print("➡️ Navigating to chat with $receiverName ($receiverId)");
      } catch (e) {
        print("❌ Error calling sendNotification: $e");
      }
