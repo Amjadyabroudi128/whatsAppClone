@@ -125,6 +125,7 @@ class _MyAppState extends State<MyApp> {
       final receiverId = data['receiverId'];
       final receiverName = data['receiverName'];
       final image = data['image'];
+      print("➡️ Navigating to chat with $receiverName ($receiverId)");
 
       navigatorKey.currentState?.push(
         MaterialPageRoute(
