@@ -28,6 +28,8 @@ exports.sendNotification = onCall(
         receiverId: receiverId || "",
         receiverName: receiverName || "",
         image: image || "",
+        click_action: "FLUTTER_NOTIFICATION_CLICK",
+        type: "chat",
       },
       android: {
         notification: { sound: "default" },
