@@ -471,14 +471,43 @@ import 'package:cloud_functions/cloud_functions.dart';
          .update({"isStarred": false});
 
    }
+   Future<List<Messages>> getAllLastMessages() async {
+     final chatRooms = await users.collection("chat_rooms").get();
 
+     List<Messages> recentMessages = [];
 
-   Stream<QuerySnapshot> getRecentChats(String userId) {
-     return FirebaseFirestore.instance
-         .collection("chat_rooms")
-         .where("participants", arrayContains: userId)
-         .orderBy("lastMessageTime", descending: true)
-         .snapshots();
+     for (var room in chatRooms.docs) {
+       final messagesSnap = await room.reference
+           .collection("messages")
+           .orderBy("timestamp", descending: true)
+           .limit(1)
+           .get();
+
+       if (messagesSnap.docs.isNotEmpty) {
+         final doc = messagesSnap.docs.first;
+         final data = doc.data();
+         final message = Messages(
+           text: data["message"],
+           senderId: data["senderId"],
+           senderName: data["senderName"],
+           receiverId: data["receiverId"],
+           senderEmail: data["senderEmail"],
+           receiverEmail: data["receiverEmail"],
+           time: data["timestamp"],
+           image: data["image"] ?? "",
+           file: data["file"] ?? "",
+           messageId: doc.id,
+           isEdited: data["isEdited"] ?? false,
+           isStarred: data["isStarred"] ?? false,
+           isReply: data["isReply"] ?? false,
+           replyTo: data["replyTo"] != null
+               ? Messages.fromMap(Map<String, dynamic>.from(data["replyTo"]))
+               : null,
+         );
+         recentMessages.add(message);
+       }
+     }
+
+     return recentMessages;
    }
-
  }
