@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/listTilesOptions.dart';
 
 import '../../chatScreen/chatScreen.dart';
 
@@ -13,8 +14,9 @@ class listTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(userDoc["name"] ?? "Unknown Email"),
+    return Options(
+      context: context,
+      label: Text(userDoc["name"] ?? "Unknown"),
       onTap: () {
         Navigator.push(
           context,
@@ -27,5 +29,9 @@ class listTile extends StatelessWidget {
         );
       },
     );
+    // return ListTile(
+    //   title: Text(userDoc["name"] ?? "Unknown Email"),
+
+    // );
   }
 }
