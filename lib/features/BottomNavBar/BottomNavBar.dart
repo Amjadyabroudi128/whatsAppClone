@@ -63,13 +63,13 @@ class _BottomnavbarState extends State<Bottomnavbar> {
                     right: -13,
                     top: -21,
                     child: Container(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.green,
+                        color: Colors.green[400],
                       ),
                       child: Text(
-                        "10",
+                        "5",
                         style: Textstyles.chatNumber
                       ),
                     ),
