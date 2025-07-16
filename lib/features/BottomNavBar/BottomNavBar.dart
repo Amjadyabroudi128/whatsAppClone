@@ -54,9 +54,34 @@ class _BottomnavbarState extends State<Bottomnavbar> {
               label: 'Contacts',
             ),
             BottomNavigationBarItem(
-              icon: icons.chats,
+              icon: Stack(
+                clipBehavior: Clip.none, // allow overflow
+                children: <Widget>[
+                  icons.chats, // The main icon (behind)
+                  Positioned(
+                    right: -13,
+                    top: -21,
+                    child: Container(
+                      padding: const EdgeInsets.all(4.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.green,
+                      ),
+                      child: Text(
+                        "10",
+                        style: TextStyle(
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               label: 'Chats',
             ),
+
             BottomNavigationBarItem(
               icon: icons.settings,
               label: 'Settings',
