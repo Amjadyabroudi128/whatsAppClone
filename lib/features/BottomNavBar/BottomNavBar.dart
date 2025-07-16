@@ -66,7 +66,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
                       padding: const EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.green[400],
+                        color: myColors.chatNumber,
                       ),
                       child: Text(
                         "5",
