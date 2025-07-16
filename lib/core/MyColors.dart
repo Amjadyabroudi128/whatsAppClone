@@ -38,5 +38,6 @@ class myColors {
    static Color myReply = Colors.orangeAccent;
    static Color otherReply = Colors.cyan.shade800;
    static Color? dividerTheme = Colors.grey[400];
+   static Color? chatNumber = Colors.green[400];
 
  }
