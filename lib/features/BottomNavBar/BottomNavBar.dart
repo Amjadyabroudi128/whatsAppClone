@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
@@ -69,11 +70,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
                       ),
                       child: Text(
                         "10",
-                        style: TextStyle(
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                        style: Textstyles.chatNumber
                       ),
                     ),
                   ),
