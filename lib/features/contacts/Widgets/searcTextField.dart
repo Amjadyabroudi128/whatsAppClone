@@ -14,6 +14,7 @@ class searchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return kTextField(
+      textInputAction: TextInputAction.go,
       myIcon: icons.search,
       hint: "Search user",
       myController: userController,
