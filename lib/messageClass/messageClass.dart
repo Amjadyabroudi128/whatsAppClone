@@ -15,9 +15,11 @@ class Messages {
   final Messages? replyTo;
   final bool? isEdited;
   final String? senderName;
+  final bool? isRead;
   Messages({
     required this.text,
     this.senderName,
+    this.isRead,
     this.receiverEmail,
     this.senderId,
     this.receiverId,
@@ -34,6 +36,7 @@ class Messages {
 
   factory Messages.fromMap(Map<String, dynamic> map) {
     return Messages(
+      isRead: map["isRead"] ?? false,
       text: map['message'],
       senderName: map["senderName"],
       senderId: map['senderId'],
@@ -55,6 +58,7 @@ class Messages {
 
   Map<String, dynamic> toMap() {
     return {
+      "isRead" : isRead,
       "senderName": senderName,
       'messageId': messageId,
       'message': text,
@@ -75,6 +79,7 @@ class Messages {
 
   // copyWith method to immutably update fields
   Messages copyWith({
+    bool? isRead,
     String? text,
     String? receiverId,
     String? senderEmail,
@@ -93,6 +98,7 @@ class Messages {
     return Messages(
       senderName: senderName ?? this.senderName,
       text: text ?? this.text,
+      isRead: isRead ?? this.isRead,
       receiverId: receiverId ?? this.receiverId,
       senderEmail: senderEmail ?? this.senderEmail,
       senderId: senderId ?? this.senderId,
@@ -111,6 +117,7 @@ class Messages {
     final data = doc.data() as Map<String, dynamic>;
     return Messages(
       messageId: doc.id,
+      isRead: data["isRead"],
       senderName: data["senderName"],
       text: data['message'],
       senderId: data['senderId'],
