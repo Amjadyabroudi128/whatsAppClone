@@ -45,8 +45,12 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
             itemBuilder: (context, index) {
               final msg = messages[index];
               final dateTime = (msg.time as Timestamp).toDate();
+              final isSender = msg.senderId == user!.uid;
+
+              final otherUserId = isSender ? msg.receiverId : msg.senderId;
+              final otherUserName = isSender ? msg.receiverEmail : msg.senderName;
               return ListTile(
-                title: Text(msg.receiverEmail!), // or msg.senderName
+                title: Text(msg.senderName!), // or msg.senderName
                 subtitle: Text(msg.text, maxLines: 1, overflow: TextOverflow.ellipsis),
                 trailing: Text(DateFormat('HH:mm').format(dateTime)),
                 onTap: () {
@@ -54,8 +58,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (_) => Testname(
-                        receiverId: msg.receiverId!,
-                        receiverName: msg.receiverEmail!,
+                        receiverId: otherUserId!,
+                        receiverName: otherUserName!,
                       ),
                     ),
                   );
