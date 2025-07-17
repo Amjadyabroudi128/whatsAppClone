@@ -47,6 +47,7 @@ class _MessageStreamState extends State<MessageStream> {
         var messages = snapshot.data!.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
           final message = Messages(
+            isRead: data.containsKey("isRead") ? data["isRead"] as bool : false,
             text: data["message"],
             senderId: data["senderId"],
             senderName: data["senderName"],
