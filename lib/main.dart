@@ -138,7 +138,6 @@ class _MyAppState extends State<MyApp> {
       );
     }
   }
-
   void _updateTheme(ThemeData newTheme, ThemeMode newMode) {
     if (mounted) {
       setState(() {

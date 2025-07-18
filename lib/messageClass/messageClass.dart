@@ -116,8 +116,8 @@ class Messages {
   factory Messages.fromDocument(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Messages(
+      isRead: data['isRead'] ?? false,
       messageId: doc.id,
-      isRead: data["isRead"],
       senderName: data["senderName"],
       text: data['message'],
       senderId: data['senderId'],
