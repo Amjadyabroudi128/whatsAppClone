@@ -47,7 +47,7 @@ class _MessageStreamState extends State<MessageStream> {
         var messages = snapshot.data!.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
           final message = Messages(
-            isRead: data.containsKey("isRead") ? data["isRead"] as bool : false,
+            isRead: (data["isRead"] ?? false) as bool,
             text: data["message"],
             senderId: data["senderId"],
             senderName: data["senderName"],
@@ -58,9 +58,9 @@ class _MessageStreamState extends State<MessageStream> {
             image: data.containsKey('image') ? data["image"] : null,
             file: data.containsKey("file") ? data["file"] : null,
             messageId: doc.id,
-            isEdited: data.containsKey("isEdited") ? data["isEdited"] as bool : false,
-            isStarred: data.containsKey("isStarred") ? data["isStarred"] as bool : false,
-            isReply: data.containsKey("isReply") ? data["isReply"] : false,
+            isEdited: (data["isEdited"] ?? false) as bool,
+            isStarred: (data["isStarred"] ?? false) as bool,
+            isReply: (data["isReply"] ?? false) as bool,
             replyTo: data.containsKey("replyTo") && data["replyTo"] != null
                 ? Messages.fromMap(Map<String, dynamic>.from(data["replyTo"]))
                 : null,
