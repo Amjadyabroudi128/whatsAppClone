@@ -55,7 +55,34 @@ class _TestnameState extends State<Testname> {
       _replyMessage = message;
     });
   }
+  void markMessagesAsRead() async {
+    final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+    final chatRoomId = getChatRoomId(currentUserId, widget.receiverId);
 
+    final unreadMessages = await FirebaseFirestore.instance
+        .collection("chat_rooms")
+        .doc(chatRoomId)
+        .collection("messages")
+        .where("receieverId", isEqualTo: currentUserId)
+        .where("isRead", isEqualTo: false)
+        .get();
+
+    for (final doc in unreadMessages.docs) {
+      await doc.reference.update({"isRead": true});
+    }
+  }
+
+  String getChatRoomId(String user1, String user2) {
+    final ids = [user1, user2]..sort();
+    return ids.join("_");
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    markMessagesAsRead();
+    service.readMsg(widget.receiverId);
+  }
   @override
   Widget build(BuildContext context) {
     final isReplyFromMe = _replyMessage?.senderEmail == user!.email;
