@@ -9,6 +9,7 @@ import '../../components/TextButton.dart';
 import '../../components/flutterToast.dart';
 import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
+import '../../globalState.dart';
 import '../chatScreen/chatScreen.dart';
 import 'Widgets/dateText.dart';
 import 'Widgets/deleteAlert.dart';
@@ -22,11 +23,13 @@ class RecentChatsScreen extends StatefulWidget {
 class _RecentChatsScreenState extends State<RecentChatsScreen> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Recent Chats"),automaticallyImplyLeading: false,),
+      appBar: AppBar(
+        title: const Text("Recent Chats"),
+        automaticallyImplyLeading: false,
+      ),
       body: FutureBuilder<List<Messages>>(
         future: service.getAllLastMessages(),
         builder: (context, snapshot) {
@@ -44,34 +47,80 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
             itemCount: messages.length,
             itemBuilder: (context, index) {
               final msg = messages[index];
-              final dateTime = (msg.time as Timestamp).toDate();
-              final isSender = msg.senderId == user!.uid;
-
+              final currentUserId = user!.uid;
+              final isSender = msg.senderId == currentUserId;
               final otherUserId = isSender ? msg.receiverId : msg.senderId;
               final otherUserName = isSender ? msg.receiverEmail : msg.senderName;
-              return ListTile(
-                title: Text(msg.senderName!), // or msg.senderName
-                subtitle: Text(msg.text, maxLines: 1, overflow: TextOverflow.ellipsis),
-                trailing: Text(DateFormat('HH:mm').format(dateTime)),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Testname(
-                        receiverId: otherUserId!,
-                        receiverName: otherUserName!,
-                      ),
+              String getChatRoomId(String userId1, String userId2) {
+                List<String> ids = [userId1, userId2];
+                ids.sort();
+                return ids.join("_");
+              }
+              final chatRoomId = getChatRoomId(currentUserId, otherUserId!);
+
+              return StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection("chat_rooms")
+                    .doc(chatRoomId)
+                    .collection("messages")
+                    .where("receiverId", isEqualTo: currentUserId)
+                    .where("isRead", isEqualTo: false)
+                    .snapshots(),
+                builder: (context, snapshotUnread) {
+                  final unreadCount = snapshotUnread.data?.docs.length ?? 0;
+
+                  return ListTile(
+                    title: Text(otherUserName!),
+                    subtitle: Text(
+                      msg.text,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
+                    trailing: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          DateFormat('HH:mm').format(msg.time!.toDate()),
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        if (unreadCount > 0)
+                          Container(
+                            margin: const EdgeInsets.only(top: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              unreadCount.toString(),
+                              style: const TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                      ],
+                    ),
+                    onTap: () {
+                      currentReceiverId.value = otherUserId;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => Testname(
+                            receiverId: otherUserId!,
+                            receiverName: otherUserName,
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               );
             },
           );
         },
-      )
-      ,
+      ),
     );
   }
+
 }
 
 
