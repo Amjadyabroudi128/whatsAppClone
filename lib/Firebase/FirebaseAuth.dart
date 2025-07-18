@@ -214,6 +214,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        senderName: name,
        isEdited: false,
        isStarred: false,
+       isRead: false, // ✅ ADD THIS
        isReply: replyTo != null,
        replyTo: replyTo,
      );
@@ -421,6 +422,59 @@ import 'package:cloud_functions/cloud_functions.dart';
        );
      }
    }
+   Future<void> readMsg(String? receiverId) async {
+     final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
+
+     if (receiverId == null) return;
+
+     // Build chatRoomID from both user IDs
+     List<String> ids = [currentUserId, receiverId];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     final messagesRef = FirebaseFirestore.instance
+         .collection("chat_rooms")
+         .doc(chatRoomID)
+         .collection("messages");
+
+     // Query unread messages received by current user
+     final unreadMessagesQuery = await messagesRef
+         .where("receiverId", isEqualTo: currentUserId)
+         .where("isRead", isEqualTo: false)
+         .get();
+     for (final doc in unreadMessagesQuery.docs) {
+       await doc.reference.update({"isRead": true});
+     }
+   }
+   Stream<int> getTotalUnreadCount(String userId) {
+     return FirebaseFirestore.instance
+         .collectionGroup("messages")
+         .where("receiverId", isEqualTo: userId)
+         .where("isRead", isEqualTo: false)
+         .snapshots()
+         .map((snapshot) => snapshot.docs.length);
+   }
+   // Stream<int> getTotalUnreadMessages(String? receiverId) {
+   //   final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
+   //   List<String> ids = [currentUserId, receiverId!];
+   //   ids.sort();
+   //   String chatRoomID = ids.join("_");
+   //
+   //   return FirebaseFirestore.instance
+   //       .collection("chat_rooms")
+   //       .doc(chatRoomID)
+   //       .collection("messages")
+   //       .where("receieverId", isEqualTo: currentUserId)
+   //       .where("isRead", isEqualTo: false)
+   //       .snapshots()
+   //       .map((snapshot) {
+   //     return snapshot.docs
+   //         .where((doc) => doc.data()['senderId'] != currentUserId)
+   //         .length;
+   //   });
+   // }
+
+
    Future addToStar(Messages msg) async {
      String email = auth.currentUser!.email!;
      String messageId = msg.messageId!;
