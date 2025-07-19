@@ -446,6 +446,23 @@ import 'package:cloud_functions/cloud_functions.dart';
        await doc.reference.update({"isRead": true});
      }
    }
+   Future<void> unread(String receiverId) async  {
+     final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
+     List<String> ids = [currentUserId, receiverId];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+     final messagesRef = FirebaseFirestore.instance
+         .collection("chat_rooms")
+         .doc(chatRoomID)
+         .collection("messages");
+     final messageRead = await messagesRef.where("receiverId", isEqualTo: currentUserId)
+         .where("isRead", isEqualTo: true).orderBy("timestamp", descending: true).limit(1).get();
+     for (var doc in messageRead.docs) {
+       await doc.reference.update({
+         "isRead": false
+       });
+     }
+   }
    Stream<int> getTotalUnreadCount(String userId) {
      return FirebaseFirestore.instance
          .collectionGroup("messages")
