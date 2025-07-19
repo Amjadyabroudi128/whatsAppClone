@@ -33,14 +33,9 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
       body: FutureBuilder<List<Messages>>(
         future: service.getAllLastMessages(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text("No recent chats."));
           }
-
           final messages = snapshot.data!;
 
           return ListView.builder(
@@ -68,7 +63,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     .snapshots(),
                 builder: (context, snapshotUnread) {
                   final unreadCount = snapshotUnread.data?.docs.length ?? 0;
-
                   return GestureDetector(
                     onLongPress: () async {
                       final selected = await showMenu(
@@ -96,7 +90,9 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                           }
                         );
                       } else if (selected == "unread") {
-
+                        await service.unread(otherUserId);
+                        myToast("Message marked as unread");
+                        setState(() {});
                       }
                     },
                     child: Options(
