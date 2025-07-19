@@ -77,12 +77,12 @@ class _BottomnavbarState extends State<Bottomnavbar> {
                               color: Colors.green,
                               shape: BoxShape.circle,
                             ),
-                            constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
+                            constraints: const BoxConstraints(minWidth: 23, minHeight: 25),
                             child: Text(
                               unreadCount.toString(),
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 12,
+                                fontSize: 16,
                               ),
                               textAlign: TextAlign.center,
                             ),
