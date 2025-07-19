@@ -11,13 +11,14 @@ class deleteAlert extends StatelessWidget {
     required this.receiverName,
     required this.context,
     required this.service,
-    required this.chat,
+    required this.chatRoomId,
+
   });
 
   final dynamic receiverName;
   final BuildContext context;
   final FirebaseService service;
-  final QueryDocumentSnapshot<Object?> chat;
+  final String chatRoomId;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class deleteAlert extends StatelessWidget {
         ),
         kTextButton(
           onPressed: () async {
-            await service.deleteRecentChat(chat.id, context);
+            await service.deleteRecentChat(chatRoomId, context);
           },
           child: Text("Delete", style: Textstyles.deleteStyle,),
         ),
