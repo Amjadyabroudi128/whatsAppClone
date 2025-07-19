@@ -69,48 +69,80 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 builder: (context, snapshotUnread) {
                   final unreadCount = snapshotUnread.data?.docs.length ?? 0;
 
-                  return ListTile(
-                    title: Text(otherUserName!),
-                    subtitle: Text(
-                      msg.text,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    trailing: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          DateFormat('HH:mm').format(msg.time!.toDate()),
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        if (unreadCount > 0)
-                          Container(
-                            margin: const EdgeInsets.only(top: 4),
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              unreadCount.toString(),
-                              style: const TextStyle(color: Colors.white, fontSize: 12),
-                            ),
+                  return GestureDetector(
+                    onLongPress: () async {
+                      final selected = await showMenu(
+                        context: context,
+                        items: [
+                          PopupMenuItem(
+                            value: "delete",
+                            child: Text("delete"),
+
                           ),
-                      ],
-                    ),
-                    onTap: () {
-                      currentReceiverId.value = otherUserId;
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => Testname(
-                            receiverId: otherUserId!,
-                            receiverName: otherUserName,
+                          PopupMenuItem(
+                            value: "unread",
+                            child: Text("Mark as Unread"),
                           ),
-                        ),
+                        ],
+                        position: RelativeRect.fromLTRB(200,160,0,0)
                       );
+                      if(selected == "delete") {
+                        await showDialog(
+                          context: context,
+                          builder: (context) {
+                           return deleteAlert(receiverName: msg.receiverEmail, context: context,
+                                service: service, chatRoomId: chatRoomId,
+                           );
+                          }
+                        );
+                      } else if (selected == "unread") {
+
+                      }
                     },
+                    child: Options(
+                      context: context,
+                      label: Text(otherUserName!),
+                      subtitle: Text(
+                        msg.text,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      trailing: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            DateFormat('HH:mm').format(msg.time!.toDate()),
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                          if (unreadCount > 0)
+                            Container(
+                              margin: const EdgeInsets.only(top: 4),
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                unreadCount.toString(),
+                                style: const TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                        ],
+                      ),
+                      onTap: () {
+                        currentReceiverId.value = otherUserId;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Testname(
+                              receiverId: otherUserId!,
+                              receiverName: otherUserName,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
               );
@@ -122,5 +154,3 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
   }
 
 }
-
-
