@@ -363,7 +363,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                             style: Textstyles.edited,
                                           ),
                                         BoxSpacing(mWidth: 5,),
-                                        msg.isRead! ? icons.messageRead : Icon(Icons.check),
+                                        msg.isRead! ? icons.messageRead : icons.sent,
                                         // Icon(
                                         //   msg.isRead! ? Icons.done_all : Icons.check,
                                         //   color: msg.isRead! ? Colors.blue[400] : Colors.grey[850],
