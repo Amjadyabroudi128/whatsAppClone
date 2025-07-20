@@ -99,7 +99,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       context: context,
                       label: Text(otherUserName!),
                       subtitle: Text(
-                        msg.text,
+                        (msg.image != null && msg.image!.isNotEmpty) ? "[image]" : msg.text,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
