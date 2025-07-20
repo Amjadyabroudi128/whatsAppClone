@@ -362,6 +362,11 @@ class _messagesAlignState extends State<messagesAlign> {
                                             "Edited",
                                             style: Textstyles.edited,
                                           ),
+                                        BoxSpacing(mWidth: 5,),
+                                        Icon(
+                                          msg.isRead! ? Icons.done_all : Icons.check,
+                                          color: msg.isRead! ? Colors.blue[400] : Colors.grey[850],
+                                        ),
                                         fomattedDateText(formattedTime: formattedTime),
                                       ],
                                     ),
