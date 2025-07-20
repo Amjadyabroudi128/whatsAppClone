@@ -51,4 +51,5 @@ class icons {
   static Icon search = Icon(Icons.search);
   static Icon instagram = Icon(FontAwesomeIcons.instagram);
   static Icon messageRead = Icon(Icons.done_all, color: myColors.readColor);
+  static Icon sent = Icon(Icons.check, color: Colors.grey[850],);
 }
