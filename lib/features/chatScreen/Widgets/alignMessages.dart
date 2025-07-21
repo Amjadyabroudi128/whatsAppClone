@@ -358,16 +358,11 @@ class _messagesAlignState extends State<messagesAlign> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         if (msg.isEdited == true)
-                                          Text(
-                                            "Edited",
-                                            style: Textstyles.edited,
-                                          ),
-                                        BoxSpacing(mWidth: 5,),
-                                        msg.isRead! ? icons.messageRead : icons.sent,
-                                        // Icon(
-                                        //   msg.isRead! ? Icons.done_all : Icons.check,
-                                        //   color: msg.isRead! ? Colors.blue[400] : Colors.grey[850],
-                                        // ),
+                                          Text("Edited", style: Textstyles.edited),
+                                        BoxSpacing(mWidth: 5),
+                                        isMe
+                                            ? (msg.isRead! ? icons.messageRead : icons.sent)
+                                            : SizedBox.shrink(),
                                         fomattedDateText(formattedTime: formattedTime),
                                       ],
                                     ),
