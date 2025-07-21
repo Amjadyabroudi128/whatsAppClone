@@ -149,7 +149,11 @@ class _TestnameState extends State<Testname> {
                       radius: 20,
                     ) else icons.person,
                     SizedBox(width: 10,),
-                    Text(widget.receiverName)
+                    Column(
+                      children: [
+                        Text(widget.receiverName),
+                      ],
+                    )
                   ],
                 ),
                 centerTitle: false,
