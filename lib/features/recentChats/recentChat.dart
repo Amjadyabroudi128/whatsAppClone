@@ -63,81 +63,116 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     .snapshots(),
                 builder: (context, snapshotUnread) {
                   final unreadCount = snapshotUnread.data?.docs.length ?? 0;
-                  return GestureDetector(
-                    onLongPress: () async {
-                      final selected = await showMenu(
-                        context: context,
-                        items: [
-                          PopupMenuItem(
-                            value: "delete",
-                            child: Text("delete"),
-
-                          ),
-                          PopupMenuItem(
-                            value: "unread",
-                            child: Text("Mark as Unread"),
-                          ),
-                        ],
-                        position: RelativeRect.fromLTRB(200,160,0,0)
-                      );
-                      if(selected == "delete") {
-                        await showDialog(
+                  return  Dismissible(
+                    key: ValueKey(chatRoomId),
+                    direction: DismissDirection.horizontal, // allow both directions
+                    background: Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      color: Colors.blue,
+                      child: const Icon(Icons.mark_email_unread, color: Colors.white),
+                    ),
+                    secondaryBackground: Container(
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: icons.deleteIcon
+                    ),
+                    confirmDismiss: (direction) async {
+                      if (direction == DismissDirection.endToStart) {
+                        // Right to left swipe — delete
+                        final confirmed = await showDialog(
                           context: context,
                           builder: (context) {
-                           return deleteAlert(receiverName: msg.receiverEmail, context: context,
-                                service: service, chatRoomId: chatRoomId,
-                           );
-                          }
+                            return deleteAlert(
+                              receiverName: msg.receiverEmail,
+                              context: context,
+                              service: service,
+                              chatRoomId: chatRoomId,
+                            );
+                          },
                         );
-                      } else if (selected == "unread") {
+                        return confirmed ?? false;
+                      } else if (direction == DismissDirection.startToEnd) {
+                        // Left to right swipe — mark as unread
                         await service.unread(otherUserId);
                         myToast("Message marked as unread");
                         setState(() {});
+                        return false; // Don't dismiss the item
                       }
+                      return false;
                     },
-                    child: Options(
-                      context: context,
-                      label: Text(otherUserName!),
-                      subtitle: Text(
-                        (msg.image != null && msg.image!.isNotEmpty) ? "[image]" : msg.text,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      trailing: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            DateFormat('HH:mm').format(msg.time!.toDate()),
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                          if (unreadCount > 0)
-                            Container(
-                              margin: const EdgeInsets.only(top: 4),
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                unreadCount.toString(),
-                                style: const TextStyle(color: Colors.white, fontSize: 12),
-                              ),
-                            ),
-                        ],
-                      ),
-                      onTap: () {
-                        currentReceiverId.value = otherUserId;
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => Testname(
-                              receiverId: otherUserId!,
-                              receiverName: otherUserName,
-                            ),
-                          ),
+                    child: GestureDetector(
+                      onLongPress: () async {
+                        final selected = await showMenu(
+                          context: context,
+                          items: [
+                            const PopupMenuItem(value: "delete", child: Text("Delete")),
+                            const PopupMenuItem(value: "unread", child: Text("Mark as Unread")),
+                          ],
+                          position: const RelativeRect.fromLTRB(200, 160, 0, 0),
                         );
+                        if (selected == "delete") {
+                          await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return deleteAlert(
+                                receiverName: msg.receiverEmail,
+                                context: context,
+                                service: service,
+                                chatRoomId: chatRoomId,
+                              );
+                            },
+                          );
+                        } else if (selected == "unread") {
+                          await service.unread(otherUserId);
+                          myToast("Message marked as unread");
+                          setState(() {});
+                        }
                       },
+                      child: Options(
+                        context: context,
+                        label: Text(otherUserName!),
+                        subtitle: Text(
+                          (msg.image != null && msg.image!.isNotEmpty) ? "[image]" : msg.text,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        trailing: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              DateFormat('HH:mm').format(msg.time!.toDate()),
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                            if (unreadCount > 0)
+                              Container(
+                                margin: const EdgeInsets.only(top: 4),
+                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  unreadCount.toString(),
+                                  style: const TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                              ),
+                          ],
+                        ),
+                        onTap: () {
+                          currentReceiverId.value = otherUserId;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => Testname(
+                                receiverId: otherUserId!,
+                                receiverName: otherUserName,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   );
                 },
