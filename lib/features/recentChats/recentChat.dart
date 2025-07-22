@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import '../../Firebase/FirebaseAuth.dart';
@@ -84,6 +85,30 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       children: [
                         CustomSlidableAction(
                             onPressed: (context) async {
+                              final selected = await showMenu(
+                                context: context,
+                                items: [
+                                  PopupMenuItem(
+                                    value: "Mute",
+                                    child: Options(
+                                      label: Text("Mute"),
+                                      trailing: Icon(Icons.volume_off_outlined),
+                                      context: context,
+                                    ),
+                                  ),
+                                  PopupMenuItem(
+                                    value: "Favourite",
+                                    child: Options(
+                                      label: Text("Add o favourite"),
+                                      trailing: Icon(Icons.favorite_border),
+                                      context: context,
+                                    ),
+                                  )
+                                  // const PopupMenuItem(value: "delete", child: Text("Delete")),
+                                  // const PopupMenuItem(value: "unread", child: Text("Mark as Unread")),
+                                ],
+                                position: const RelativeRect.fromLTRB(200, 160, 0, 0),
+                              );
                             },
                             child: Icon(Icons.more_horiz_outlined, size: 27,)
                         ),
