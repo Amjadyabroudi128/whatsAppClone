@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
@@ -63,44 +64,30 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     .snapshots(),
                 builder: (context, snapshotUnread) {
                   final unreadCount = snapshotUnread.data?.docs.length ?? 0;
-                  return  Dismissible(
-                    key: ValueKey(chatRoomId),
-                    direction: DismissDirection.horizontal, // allow both directions
-                    background: Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      color: Colors.blue,
-                      child: const Icon(Icons.mark_email_unread, color: Colors.white),
+                  return  Slidable(
+                    startActionPane: ActionPane(
+                      motion: StretchMotion(),
+                      children: [
+                        CustomSlidableAction(
+                          onPressed: (context) {},
+                          backgroundColor: Colors.lightBlue,
+                          child: icons.unread
+                        )
+                      ],
                     ),
-                    secondaryBackground: Container(
-                      alignment: Alignment.centerRight,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: icons.deleteIcon
+                    endActionPane: ActionPane(
+                      motion: StretchMotion(),
+                      children: [
+                        SlidableAction(
+                          onPressed: ((context) {
+
+                          }),
+                          icon: Icons.delete,
+
+                          foregroundColor: Colors.red,
+                        )
+                      ],
                     ),
-                    confirmDismiss: (direction) async {
-                      if (direction == DismissDirection.endToStart) {
-                        // Right to left swipe — delete
-                        final confirmed = await showDialog(
-                          context: context,
-                          builder: (context) {
-                            return deleteAlert(
-                              receiverName: msg.receiverEmail,
-                              context: context,
-                              service: service,
-                              chatRoomId: chatRoomId,
-                            );
-                          },
-                        );
-                        return confirmed ?? false;
-                      } else if (direction == DismissDirection.startToEnd) {
-                        // Left to right swipe — mark as unread
-                        await service.unread(otherUserId);
-                        myToast("Message marked as unread");
-                        setState(() {});
-                        return false; // Don't dismiss the item
-                      }
-                      return false;
-                    },
                     child: GestureDetector(
                       onLongPress: () async {
                         final selected = await showMenu(
