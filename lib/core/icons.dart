@@ -52,4 +52,5 @@ class icons {
   static Icon instagram = Icon(FontAwesomeIcons.instagram);
   static Icon messageRead = Icon(Icons.done_all, color: myColors.readColor);
   static Icon sent = Icon(Icons.check, color: myColors.sent,);
+  static Icon unread =Icon(Icons.mark_chat_unread, size: 23, color: Colors.white,);
 }
