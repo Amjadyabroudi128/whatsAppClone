@@ -69,7 +69,11 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       motion: StretchMotion(),
                       children: [
                         CustomSlidableAction(
-                          onPressed: (context) {},
+                          onPressed: (context) async {
+                            await service.unread(otherUserId);
+                            myToast("Message marked as unread");
+                            setState(() {});
+                          },
                           backgroundColor: Colors.lightBlue,
                           child: icons.unread
                         )
