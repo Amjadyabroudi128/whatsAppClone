@@ -53,4 +53,5 @@ class icons {
   static Icon messageRead = Icon(Icons.done_all, color: myColors.readColor);
   static Icon sent = Icon(Icons.check, color: myColors.sent,);
   static Icon unread =Icon(Icons.mark_chat_unread, size: 23, color: Colors.white,);
+  static Icon options = Icon(Icons.more_horiz_outlined, size: 27,);
 }

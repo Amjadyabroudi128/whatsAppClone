@@ -108,7 +108,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                 position: const RelativeRect.fromLTRB(200, 160, 0, 0),
                               );
                             },
-                            child: Icon(Icons.more_horiz_outlined, size: 27,),
+                            child: icons.options,
                           autoClose: false,
                         ),
                         CustomSlidableAction(
