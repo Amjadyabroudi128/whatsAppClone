@@ -100,7 +100,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     value: "Favourite",
                                     child: Options(
                                       label: Text("Add o favourite"),
-                                      trailing: Icon(Icons.favorite_border),
+                                      trailing: icons.fave,
                                       context: context,
                                     ),
                                   )
