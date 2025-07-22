@@ -92,7 +92,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     value: "Mute",
                                     child: Options(
                                       label: Text("Mute"),
-                                      trailing: Icon(Icons.volume_off_outlined),
+                                      trailing: icons.mute,
                                       context: context,
                                     ),
                                   ),

@@ -55,4 +55,5 @@ class icons {
   static Icon unread =Icon(Icons.mark_chat_unread, size: 23, color: Colors.white,);
   static Icon options = Icon(Icons.more_horiz_outlined, size: 27,);
   static Icon fave = Icon(Icons.favorite_border);
+  static Icon mute = Icon(Icons.volume_off_outlined);
 }
