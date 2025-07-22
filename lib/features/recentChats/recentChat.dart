@@ -82,13 +82,26 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     endActionPane: ActionPane(
                       motion: StretchMotion(),
                       children: [
-                        SlidableAction(
-                          onPressed: ((context) {
-
-                          }),
-                          icon: Icons.delete,
-
-                          foregroundColor: Colors.red,
+                        CustomSlidableAction(
+                            onPressed: (context) async {
+                            },
+                            child: Icon(Icons.more_horiz_outlined, size: 27,)
+                        ),
+                        CustomSlidableAction(
+                          onPressed: (context) async {
+                            await showDialog(
+                              context: context,
+                              builder: (context) {
+                                return deleteAlert(
+                                  receiverName: msg.receiverEmail,
+                                  context: context,
+                                  service: service,
+                                  chatRoomId: chatRoomId,
+                                );
+                              },
+                            );
+                          },
+                          child: icons.deleteIcon,
                         )
                       ],
                     ),
