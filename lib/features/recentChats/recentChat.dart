@@ -76,7 +76,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                             setState(() {});
                           },
                           backgroundColor: Colors.lightBlue,
-                          child: icons.unread
+                          child: icons.unread,
                         )
                       ],
                     ),
@@ -104,13 +104,12 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                       context: context,
                                     ),
                                   )
-                                  // const PopupMenuItem(value: "delete", child: Text("Delete")),
-                                  // const PopupMenuItem(value: "unread", child: Text("Mark as Unread")),
                                 ],
                                 position: const RelativeRect.fromLTRB(200, 160, 0, 0),
                               );
                             },
-                            child: Icon(Icons.more_horiz_outlined, size: 27,)
+                            child: Icon(Icons.more_horiz_outlined, size: 27,),
+                          autoClose: false,
                         ),
                         CustomSlidableAction(
                           onPressed: (context) async {
