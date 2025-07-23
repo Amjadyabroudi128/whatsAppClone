@@ -56,4 +56,5 @@ class icons {
   static Icon options = Icon(Icons.more_horiz_outlined, size: 27,);
   static Icon fave = Icon(Icons.favorite_border);
   static Icon mute = Icon(Icons.volume_off_outlined);
+  static Icon info = Icon(Icons.info_outline);
 }

@@ -117,7 +117,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                               Options(
                                                 context: context,
                                                 label: Text("User Info"),
-                                                trailing: Icon(Icons.info_outline),
+                                                trailing: icons.info,
                                                 onTap: () async {
                                                   try {
                                                     final snapshot = await FirebaseFirestore.instance
