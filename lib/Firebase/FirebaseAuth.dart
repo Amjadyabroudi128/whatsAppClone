@@ -471,27 +471,6 @@ import 'package:cloud_functions/cloud_functions.dart';
          .snapshots()
          .map((snapshot) => snapshot.docs.length);
    }
-   // Stream<int> getTotalUnreadMessages(String? receiverId) {
-   //   final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
-   //   List<String> ids = [currentUserId, receiverId!];
-   //   ids.sort();
-   //   String chatRoomID = ids.join("_");
-   //
-   //   return FirebaseFirestore.instance
-   //       .collection("chat_rooms")
-   //       .doc(chatRoomID)
-   //       .collection("messages")
-   //       .where("receieverId", isEqualTo: currentUserId)
-   //       .where("isRead", isEqualTo: false)
-   //       .snapshots()
-   //       .map((snapshot) {
-   //     return snapshot.docs
-   //         .where((doc) => doc.data()['senderId'] != currentUserId)
-   //         .length;
-   //   });
-   // }
-
-
    Future addToStar(Messages msg) async {
      String email = auth.currentUser!.email!;
      String messageId = msg.messageId!;
