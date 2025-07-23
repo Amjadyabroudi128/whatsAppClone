@@ -501,6 +501,33 @@ import 'package:cloud_functions/cloud_functions.dart';
          .doc(messageId)
          .update({"isStarred": true});
    }
+   Future addToFavourite(String name) async {
+     String email = auth.currentUser!.email!;
+     await FirebaseFirestore.instance.collection("Favourites").doc(email).collection("myFavourites").add(
+       {
+         "name":name
+       }
+     );
+   }
+   Future removeFavourite(String name) async {
+     String email = auth.currentUser!.email!;
+    final favourite = await FirebaseFirestore.instance.collection("Favourites").doc(email)
+         .collection("myFavourites").where("name", isEqualTo: name).get();
+     for(var doc in favourite.docs) {
+       await doc.reference.delete();
+     }
+   }
+   Future<bool> isFavourite(String name) async {
+     String email = auth.currentUser!.email!;
+     final isFavourite = await FirebaseFirestore.instance
+         .collection("Favourites")
+         .doc(email)
+         .collection("myFavourites")
+         .where('name', isEqualTo: name)
+         .get();
+
+     return isFavourite.docs.isNotEmpty;
+   }
    Future deleteStar(Messages msg) async {
      String email = auth.currentUser!.email!;
      String messageId = msg.messageId!;
