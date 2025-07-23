@@ -15,6 +15,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/editEmail.dart';
 import 'package:whatsappclone/features/Settings/Widget/starCard/allStars.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
+import '../../Firebase/FirebaseAuth.dart';
 import '../../Firebase/FirebaseCollections.dart';
 import '../../core/icons.dart';
 import '../chatScreen/userDetails/StarredMessages.dart';
@@ -37,6 +38,8 @@ class _SettingScreenState extends State<SettingScreen> {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FirebaseService service = FirebaseService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +106,17 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                   starCard(user: user),
+                  BoxSpacing(myHeight: 10,),
+                  Text("List of Favourite chats", style: TextStyle(color: Colors.grey),),
+                  kCard(
+                    child: Options(
+                      context: context,
+                      label: Text("Favourite"),
+                      trailing: Icon(Icons.favorite),
+                      onTap: (){
+                      }
+                    ),
+                  ),
                   BoxSpacing(myHeight: 10,),
                   Text("App Theme", style: Textstyles.themeStyle),
                   themeCard(mounted: mounted, widget: widget)
