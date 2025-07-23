@@ -30,13 +30,6 @@ class RecentChatsScreen extends StatefulWidget {
 class _RecentChatsScreenState extends State<RecentChatsScreen> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
-  bool isFavourite = false;
-  @override
-  Future<void> initState() async {
-    // TODO: implement initState
-    super.initState();
-    isFavourite = await service.isFavourite("");
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +59,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 return ids.join("_");
               }
               final chatRoomId = getChatRoomId(currentUserId, otherUserId!);
-
               return StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("chat_rooms")

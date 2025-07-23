@@ -114,6 +114,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       label: Text("Favourite"),
                       trailing: Icon(Icons.favorite),
                       onTap: (){
+                        Navigator.of(context).pushNamed("favourite");
                       }
                     ),
                   ),
