@@ -30,7 +30,13 @@ class RecentChatsScreen extends StatefulWidget {
 class _RecentChatsScreenState extends State<RecentChatsScreen> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
-
+  bool isFavourite = false;
+  @override
+  Future<void> initState() async {
+    // TODO: implement initState
+    super.initState();
+    isFavourite = await service.isFavourite("");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,16 +164,34 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                 context: context,
                                               ),
                                               divider(),
-                                              Options(
-                                                label: Text("Add o favourite"),
-                                                trailing: icons.fave,
-                                                context: context,
-                                                onTap: () async {
-                                                  await service.addToFavourite(otherUserName);
-                                                  myToast("Added to favourites");
-                                                  Navigator.of(context).pop();
-                                                }
+                                              FutureBuilder<bool>(
+                                                future: service.isFavourite(otherUserName),
+                                                builder: (context, snapshot) {
+                                                  if (!snapshot.hasData) {
+                                                    return const Padding(
+                                                      padding: EdgeInsets.all(16.0),
+                                                      child: CircularProgressIndicator(),
+                                                    );
+                                                  }
+                                                  final isFavourite = snapshot.data!;
+                                                  return Options(
+                                                    label: Text(isFavourite ? "Remove from favourite" : "Add to favourite"),
+                                                    trailing: icons.fave,
+                                                    context: context,
+                                                    onTap: () async {
+                                                      if (isFavourite) {
+                                                        await service.removeFavourite(otherUserName);
+                                                        myToast("Removed from favourites");
+                                                      } else {
+                                                        await service.addToFavourite(otherUserName);
+                                                        myToast("Added to favourites");
+                                                      }
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  );
+                                                },
                                               ),
+
                                             ],
                                           ),
                                         )

@@ -517,7 +517,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        await doc.reference.delete();
      }
    }
-   Future<bool> isFavourite(String name) async {
+   Future<bool> isFavourite(String? name) async {
      String email = auth.currentUser!.email!;
      final isFavourite = await FirebaseFirestore.instance
          .collection("Favourites")
