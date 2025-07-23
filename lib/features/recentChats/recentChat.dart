@@ -30,6 +30,7 @@ class RecentChatsScreen extends StatefulWidget {
 class _RecentChatsScreenState extends State<RecentChatsScreen> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,6 +162,11 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                 label: Text("Add o favourite"),
                                                 trailing: icons.fave,
                                                 context: context,
+                                                onTap: () async {
+                                                  await service.addToFavourite(otherUserName);
+                                                  myToast("Added to favourites");
+                                                  Navigator.of(context).pop();
+                                                }
                                               ),
                                             ],
                                           ),
