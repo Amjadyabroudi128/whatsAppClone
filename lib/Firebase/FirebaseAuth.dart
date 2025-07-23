@@ -34,6 +34,7 @@ import 'package:cloud_functions/cloud_functions.dart';
          'image': '',
          'link': ''
        }, SetOptions(merge: true));
+       await saveFcmTokenToFirestore();
        Navigator.pushReplacementNamed(context, "login");
        myToast("Verification email sent. Please check your inbox.");
        // Sign out immediately after sending verification
@@ -66,8 +67,7 @@ import 'package:cloud_functions/cloud_functions.dart';
            'email': email,
            'name': name,
          });
-
-
+         await saveFcmTokenToFirestore(); // ✅ await to avoid warning and run it properly
          Navigator.pushReplacementNamed(context, "btm");
        } else {
          await auth.signOut();
@@ -155,7 +155,7 @@ import 'package:cloud_functions/cloud_functions.dart';
      await user.delete();
    }
 
-   void saveFcmTokenToFirestore() async {
+   Future <void> saveFcmTokenToFirestore() async {
      final user = FirebaseAuth.instance.currentUser;
      final token = await FirebaseMessaging.instance.getToken();
 
@@ -543,7 +543,13 @@ import 'package:cloud_functions/cloud_functions.dart';
 
    }
    Future<List<Messages>> getAllLastMessages() async {
-     final chatRooms = await users.collection("chat_rooms").get();
+     final currentUser = FirebaseAuth.instance.currentUser;
+     if (currentUser == null) return [];
+
+     final chatRooms = await users
+         .collection("chat_rooms")
+         .where("participants", arrayContains: currentUser.uid) // ✅ only relevant rooms
+         .get();
 
      List<Messages> recentMessages = [];
 
@@ -581,4 +587,5 @@ import 'package:cloud_functions/cloud_functions.dart';
 
      return recentMessages;
    }
+
  }
