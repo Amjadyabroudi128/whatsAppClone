@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
+import 'package:whatsappclone/components/dividerWidget.dart';
+import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/TextButton.dart';
+import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
+import '../../components/iconButton.dart';
 import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 import '../../globalState.dart';
@@ -84,30 +88,84 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       motion: StretchMotion(),
                       children: [
                         CustomSlidableAction(
-                            onPressed: (context) async {
-                              final selected = await showMenu(
+                          onPressed: (context) async {
+                            final selected = await btmSheet(
                                 context: context,
-                                items: [
-                                  PopupMenuItem(
-                                    value: "Mute",
-                                    child: Options(
-                                      label: Text("Mute"),
-                                      trailing: icons.mute,
-                                      context: context,
+                                builder: (bottomSheetContext) {
+                                  return SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Text(otherUserName!),
+                                              Spacer(),
+                                              kIconButton(
+                                                myIcon: icons.close,
+                                                onPressed: (){
+                                                  Navigator.of(bottomSheetContext).pop();
+                                                },
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        kCard(
+                                          child: Column(
+                                            children: [
+                                              Options(
+                                                context: context,
+                                                label: Text("User Info"),
+                                                trailing: Icon(Icons.info_outline),
+                                                onTap: (){
+
+                                                }
+                                              ),
+                                              divider(),
+                                              Options(
+                                                label: Text("Mute"),
+                                                trailing: icons.mute,
+                                                context: context,
+                                              ),
+                                              divider(),
+                                              Options(
+                                                label: Text("Add o favourite"),
+                                                trailing: icons.fave,
+                                                context: context,
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  ),
-                                  PopupMenuItem(
-                                    value: "Favourite",
-                                    child: Options(
-                                      label: Text("Add o favourite"),
-                                      trailing: icons.fave,
-                                      context: context,
-                                    ),
-                                  )
-                                ],
-                                position: const RelativeRect.fromLTRB(200, 160, 0, 0),
-                              );
-                            },
+                                  );
+                                }
+                            );
+                          },
+                            // onPressed: (context) async {
+                            //   final selected = await showMenu(
+                            //     context: context,
+                            //     items: [
+                            //       PopupMenuItem(
+                            //         value: "Mute",
+                            //         child: Options(
+                            //           label: Text("Mute"),
+                            //           trailing: icons.mute,
+                            //           context: context,
+                            //         ),
+                            //       ),
+                            //       PopupMenuItem(
+                            //         value: "Favourite",
+                            //         child: Options(
+                            //           label: Text("Add o favourite"),
+                            //           trailing: icons.fave,
+                            //           context: context,
+                            //         ),
+                            //       )
+                            //     ],
+                            //     position: const RelativeRect.fromLTRB(200, 160, 0, 0),
+                            //   );
+                            // },
                             child: icons.options,
                           autoClose: false,
                         ),
@@ -194,7 +252,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (_) => Testname(
-                                receiverId: otherUserId!,
+                                receiverId: otherUserId,
                                 receiverName: otherUserName,
                               ),
                             ),
