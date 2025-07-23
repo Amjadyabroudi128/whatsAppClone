@@ -17,6 +17,7 @@ import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 import '../../globalState.dart';
 import '../chatScreen/chatScreen.dart';
+import '../chatScreen/userDetails/recieverdetails.dart';
 import 'Widgets/dateText.dart';
 import 'Widgets/deleteAlert.dart';
 class RecentChatsScreen extends StatefulWidget {
@@ -117,10 +118,38 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                 context: context,
                                                 label: Text("User Info"),
                                                 trailing: Icon(Icons.info_outline),
-                                                onTap: (){
-
-                                                }
+                                                onTap: () async {
+                                                  try {
+                                                    final snapshot = await FirebaseFirestore.instance
+                                                        .collection('users')
+                                                        .doc(otherUserId)
+                                                        .get();
+                                                    Navigator.of(context).pop(); // dismiss loading
+                                                    if (snapshot.exists) {
+                                                      final data = snapshot.data()!;
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (_) => userDetails(
+                                                            name: data['name'] ?? otherUserName,
+                                                            email: data['email'] ?? '',
+                                                            imageUrl: data['image'] ?? '',
+                                                            bio: data['bio'] ?? '',
+                                                            link: data['link'] ?? '',
+                                                            receiverId: otherUserId,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      myToast("User data not found.");
+                                                    }
+                                                  } catch (e) {
+                                                    Navigator.of(context).pop(); // dismiss loading
+                                                    myToast("Failed to load user data.");
+                                                  }
+                                                },
                                               ),
+
                                               divider(),
                                               Options(
                                                 label: Text("Mute"),
