@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 
@@ -75,35 +74,40 @@ class _FavouritescreenState extends State<Favouritescreen> {
                     final favData =
                     favourites[index].data() as Map<String, dynamic>;
                     final name = favData['name'] ?? 'Unknown';
-
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: kCard(
-                        child: Options(
-                          context: context,
-                          label: Row(
-                            children: [
-                              if (isEditing)
-                                Transform.scale(
-                                  scale: 1.2,
-                                  child: Checkbox(
-                                    activeColor: myColors.starColor,
-                                    value: selectedMessages.contains(name),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        if (value == true) {
-                                          selectedMessages.add(name);
-                                        } else {
-                                          selectedMessages.remove(name);
-                                        }
-                                      });
-                                    },
-                                  ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (isEditing)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                              child: Transform.scale(
+                                scale: 1.2,
+                                child: Checkbox(
+                                  activeColor: myColors.starColor,
+                                  value: selectedMessages.contains(name),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (value == true) {
+                                        selectedMessages.add(name);
+                                      } else {
+                                        selectedMessages.remove(name);
+                                      }
+                                    });
+                                  },
                                 ),
-                              Text(name),
-                            ],
+                              ),
+                            ),
+                          Flexible(
+                            child: kCard(
+                              child: Options(
+                                context: context,
+                                label: Text(name),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     );
                   },
@@ -120,7 +124,6 @@ class _FavouritescreenState extends State<Favouritescreen> {
                         onPressed: () async {
                           for (final name in selectedMessages) {
                             await service.removeFavourite(name);
-                            myToast("name deleted from favourite ");
                           }
                           setState(() {
                             isEditing = false;
