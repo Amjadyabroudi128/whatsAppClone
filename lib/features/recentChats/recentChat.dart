@@ -278,7 +278,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                   mWidth: MediaQuery.of(context).size.width * 0.52,
                                 ),
                                 if (isMuted)
-                                  const Icon(Icons.volume_off, size: 16, color: Colors.black),
+                                  icons.vOff
                               ],
                             );
                           },
