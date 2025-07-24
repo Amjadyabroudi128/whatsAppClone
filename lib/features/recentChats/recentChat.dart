@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
@@ -89,7 +90,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       children: [
                         CustomSlidableAction(
                           onPressed: (context) async {
-                            final selected = await btmSheet(
+                             await btmSheet(
                                 context: context,
                                 builder: (bottomSheetContext) {
                                   return SingleChildScrollView(
@@ -150,10 +151,32 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                               ),
 
                                               divider(),
-                                              Options(
-                                                label: Text("Mute"),
-                                                trailing: icons.mute,
-                                                context: context,
+                                              FutureBuilder<bool>(
+                                                future: service.isChatMuted(chatRoomId,otherUserId),
+                                                builder: (context, snapshot) {
+                                                  if (!snapshot.hasData) {
+                                                    return const Padding(
+                                                      padding: EdgeInsets.all(16.0),
+                                                      child: CircularProgressIndicator(),
+                                                    );
+                                                  }
+                                                  final isMuted = snapshot.data!;
+                                                  return Options(
+                                                    label: Text(isMuted ? "Unmute" : "Mute"),
+                                                    trailing: isMuted ? Icon(Icons.volume_off) : Icon(Icons.volume_up),
+                                                    context: context,
+                                                    onTap: () async {
+                                                      if (isMuted) {
+                                                        await service.unMute(chatRoomId, otherUserId);
+                                                        myToast("Removed from mute");
+                                                      } else {
+                                                        await service.MuteChat(chatRoomId, otherUserId);
+                                                        myToast("Added to mute");
+                                                      }
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  );
+                                                },
                                               ),
                                               divider(),
                                               FutureBuilder<bool>(
@@ -244,7 +267,22 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       },
                       child: Options(
                         context: context,
-                        label: Text(otherUserName!),
+                        label: FutureBuilder<bool>(
+                          future: service.isChatMuted(chatRoomId, otherUserId),
+                          builder: (context, snapshot) {
+                            final isMuted = snapshot.data ?? false;
+                            return Row(
+                              children: [
+                                Text(otherUserName!),
+                                BoxSpacing(
+                                  mWidth: MediaQuery.of(context).size.width * 0.52,
+                                ),
+                                if (isMuted)
+                                  const Icon(Icons.volume_off, size: 16, color: Colors.black),
+                              ],
+                            );
+                          },
+                        ),
                         subtitle: Text(
                           (msg.image != null && msg.image!.isNotEmpty) ? "[image]" : msg.text,
                           maxLines: 1,
@@ -280,12 +318,13 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                             MaterialPageRoute(
                               builder: (_) => Testname(
                                 receiverId: otherUserId,
-                                receiverName: otherUserName,
+                                receiverName: otherUserName!,
                               ),
                             ),
                           );
                         },
                       ),
+
                     ),
                   );
                 },
