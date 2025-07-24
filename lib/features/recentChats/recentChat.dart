@@ -163,7 +163,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                   final isMuted = snapshot.data!;
                                                   return Options(
                                                     label: Text(isMuted ? "Unmute" : "Mute"),
-                                                    trailing: isMuted ? Icon(Icons.volume_off) : Icon(Icons.volume_up),
+                                                    trailing: isMuted ? icons.mute : Icon(Icons.volume_up),
                                                     context: context,
                                                     onTap: () async {
                                                       if (isMuted) {
