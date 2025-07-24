@@ -193,30 +193,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                 }
                             );
                           },
-                            // onPressed: (context) async {
-                            //   final selected = await showMenu(
-                            //     context: context,
-                            //     items: [
-                            //       PopupMenuItem(
-                            //         value: "Mute",
-                            //         child: Options(
-                            //           label: Text("Mute"),
-                            //           trailing: icons.mute,
-                            //           context: context,
-                            //         ),
-                            //       ),
-                            //       PopupMenuItem(
-                            //         value: "Favourite",
-                            //         child: Options(
-                            //           label: Text("Add o favourite"),
-                            //           trailing: icons.fave,
-                            //           context: context,
-                            //         ),
-                            //       )
-                            //     ],
-                            //     position: const RelativeRect.fromLTRB(200, 160, 0, 0),
-                            //   );
-                            // },
                             child: icons.options,
                           autoClose: false,
                         ),
