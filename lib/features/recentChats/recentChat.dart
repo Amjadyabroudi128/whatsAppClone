@@ -284,10 +284,15 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                           },
                         ),
                         subtitle: Text(
-                          (msg.image != null && msg.image!.isNotEmpty) ? "[image]" : msg.text,
+                          msg.file != null && msg.file!.isNotEmpty
+                              ? "[file]"
+                              : msg.image != null && msg.image!.isNotEmpty
+                              ? "[image]"
+                              : msg.text,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
+
                         trailing: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.center,
