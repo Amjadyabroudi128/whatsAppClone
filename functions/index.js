@@ -1,35 +1,57 @@
 const { onCall } = require("firebase-functions/v2/https");
 const { initializeApp } = require("firebase-admin/app");
 const { getMessaging } = require("firebase-admin/messaging");
+const { getFirestore } = require("firebase-admin/firestore");
 
 initializeApp();
 
 exports.sendNotification = onCall(
   {
-    region: "europe-west1", // or "us-central1"
+    region: "europe-west1",
     memory: "256MiB",
     timeoutSeconds: 30,
-    cpu: 1, // ✅ Now allowed in Gen 2
+    cpu: 1,
   },
   async (request) => {
     const data = request.data;
-    console.log("Function called with data:", data);
+    const context = request.auth;
 
     const { token, title, body, receiverId, receiverName, image } = data;
+    const senderId = context?.uid;
 
-    if (!token || !title || !body) {
-      throw new Error("Missing fields: token, title, or body");
+    if (!token || !title || !body || !receiverId || !senderId) {
+      throw new Error("Missing required fields");
+    }
+
+    const ids = [senderId, receiverId].sort();
+    const chatRoomId = ids.join("_");
+
+    const db = getFirestore();
+
+    //  Check mute status for both users
+    const [receiverMuteDoc, senderMuteDoc] = await Promise.all([
+      db.collection("mutedChats").doc(receiverId).get(),
+      db.collection("mutedChats").doc(senderId).get(),
+    ]);
+
+    const isReceiverMuted = receiverMuteDoc.exists && receiverMuteDoc.data()?.[chatRoomId] === true;
+    const isSenderMuted = senderMuteDoc.exists && senderMuteDoc.data()?.[chatRoomId] === true;
+
+    if (isReceiverMuted || isSenderMuted) {
+      console.log(`🔕 Chat is muted by one or both users for ${chatRoomId}. Skipping notification.`);
+      return { success: false, muted: true };
     }
 
     const message = {
       token,
       notification: { title, body },
       data: {
-        receiverId: receiverId || "",
+        receiverId: receiverId,
         receiverName: receiverName || "",
         image: image || "",
         click_action: "FLUTTER_NOTIFICATION_CLICK",
         type: "chat",
+        chatRoomId,
       },
       android: {
         notification: { sound: "default" },
