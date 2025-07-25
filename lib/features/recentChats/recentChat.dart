@@ -151,8 +151,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                               ),
 
                                               divider(),
-                                              FutureBuilder<bool>(
-                                                future: service.isChatMuted(chatRoomId,otherUserId),
+                                              StreamBuilder<bool>(
+                                                stream: service.isChatMutedStream(chatRoomId, otherUserId),
                                                 builder: (context, snapshot) {
                                                   if (!snapshot.hasData) {
                                                     return const Padding(
@@ -267,13 +267,13 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       },
                       child: Options(
                         context: context,
-                        label: FutureBuilder<bool>(
-                          future: service.isChatMuted(chatRoomId, otherUserId),
+                        label: StreamBuilder<bool>(
+                          stream: service.isChatMutedStream(chatRoomId, otherUserId),
                           builder: (context, snapshot) {
                             final isMuted = snapshot.data ?? false;
                             return Row(
                               children: [
-                                Text(otherUserName!),
+                                Flexible(child: Text(otherUserName!)),
                                 BoxSpacing(
                                   mWidth: MediaQuery.of(context).size.width * 0.52,
                                 ),
