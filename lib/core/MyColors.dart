@@ -41,5 +41,5 @@ class myColors {
    static Color? chatNumber = Colors.green[400];
    static Color? readColor = Colors.blue[400];
    static Color? sent = Colors.grey[850];
-
+   static Color? read = Colors.green[600];
  }
