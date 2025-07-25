@@ -12,3 +12,9 @@ Decoration containerDecoration({Color? color, BorderRadiusGeometry? borderRadius
     borderRadius: myTheme.CircularContainer,
   );
 }
+Decoration readDecoration() {
+  return BoxDecoration(
+    color: Colors.green,
+    borderRadius: BorderRadius.circular(12),
+  );
+}
