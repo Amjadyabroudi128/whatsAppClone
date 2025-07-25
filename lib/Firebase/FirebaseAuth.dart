@@ -517,14 +517,14 @@ import 'package:cloud_functions/cloud_functions.dart';
      await FirebaseFirestore.instance.collection("mutedChats").doc(userId)
          .update({chatRoomId: FieldValue.delete()});
    }
-   Future<bool> isChatMuted(String chatRoomId, String userId) async {
-     final doc = await FirebaseFirestore.instance
+   Stream<bool> isChatMutedStream(String chatRoomId, String userId) {
+     return FirebaseFirestore.instance
          .collection('mutedChats')
          .doc(userId)
-         .get();
-
-     return doc.exists && (doc.data()?[chatRoomId] == true);
+         .snapshots()
+         .map((doc) => doc.exists && (doc.data()?[chatRoomId] == true));
    }
+
    Future removeFavourite(String name) async {
      String email = auth.currentUser!.email!;
     final favourite = await FirebaseFirestore.instance.collection("Favourites").doc(email)
