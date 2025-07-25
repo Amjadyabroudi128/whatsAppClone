@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import 'MyColors.dart';
 import 'appTheme.dart';
 
 EdgeInsetsGeometry containerPadding = EdgeInsets.all(10);
@@ -14,7 +15,7 @@ Decoration containerDecoration({Color? color, BorderRadiusGeometry? borderRadius
 }
 Decoration readDecoration() {
   return BoxDecoration(
-    color: Colors.green,
+    color: myColors.read,
     borderRadius: BorderRadius.circular(12),
   );
 }
