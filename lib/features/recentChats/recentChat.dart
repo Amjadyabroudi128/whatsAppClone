@@ -8,6 +8,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
+import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/TextButton.dart';
@@ -305,10 +306,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                               Container(
                                 margin: const EdgeInsets.only(top: 4),
                                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
+                                decoration: readDecoration(),
                                 child: Text(
                                   unreadCount.toString(),
                                   style: const TextStyle(color: Colors.white, fontSize: 12),
