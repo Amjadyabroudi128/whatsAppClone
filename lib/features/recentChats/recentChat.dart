@@ -305,7 +305,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                             if (unreadCount > 0)
                               Container(
                                 margin: const EdgeInsets.only(top: 4),
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                padding: unreadPadding,
                                 decoration: readDecoration(),
                                 child: Text(
                                   unreadCount.toString(),
