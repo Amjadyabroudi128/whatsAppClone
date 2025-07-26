@@ -42,7 +42,7 @@ class _MessageStreamState extends State<MessageStream> {
       stream: widget.service.getMessages(widget.user!.uid, widget.widget.receiverId),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(child: Text("No messages yet", style: TextStyle(color: widget.textColor),));
+          return Center(child: Text("say hi 👋 to ${widget.widget.receiverName} \n to start a conversation", style: TextStyle(color: widget.textColor),));
         }
         var messages = snapshot.data!.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
