@@ -19,3 +19,7 @@ Decoration readDecoration() {
     borderRadius: BorderRadius.circular(12),
   );
 }
+// Padding containerPadding() {
+//   return EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+// }
+EdgeInsetsGeometry unreadPadding = EdgeInsets.symmetric(horizontal: 6, vertical: 2);
