@@ -313,7 +313,6 @@ class _TestnameState extends State<Testname> {
                     children: [
                       Expanded(
                         child: kTextField(
-                          maxLines: null,
                           textColor: Colors.black,
                           enable: messageBorder,
                           focused: messageBorder,
@@ -345,7 +344,7 @@ class _TestnameState extends State<Testname> {
                         },
                         myIcon: icons.send,
                       )
-                          : SizedBox(),
+                          : SizedBox.shrink(),
                     ],
                   ),
                 ),
