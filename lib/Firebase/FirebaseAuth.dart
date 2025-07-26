@@ -23,7 +23,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        await auth.currentUser!.sendEmailVerification();
        await auth.currentUser!.updateDisplayName(name);
 
-// Refresh the user to make displayName available
+
        await auth.currentUser!.reload();
        // Save user data in Firestore
        await users.collection("users").doc(auth.currentUser!.uid).set({
@@ -67,7 +67,7 @@ import 'package:cloud_functions/cloud_functions.dart';
            'email': email,
            'name': name,
          });
-         await saveFcmTokenToFirestore(); // ✅ await to avoid warning and run it properly
+         await saveFcmTokenToFirestore(); // await to avoid warning and run it properly
          Navigator.pushReplacementNamed(context, "btm");
        } else {
          await auth.signOut();
@@ -100,7 +100,6 @@ import 'package:cloud_functions/cloud_functions.dart';
            .collection("users")
            .doc(user.uid)
            .update({"email": newEmail});
-       // Send verification to new email
        await user.verifyBeforeUpdateEmail(newEmail);
        myToast("A verification link was sent to your new email.");
      } on FirebaseAuthException catch (e) {
@@ -163,7 +162,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
          'fcmToken': token,
        });
-       print("✅ FCM token saved for ${user.uid}");
+       print(" FCM token saved for ${user.uid}");
      }
    }
    Future<void> deleteRecentChat(String chatRoomId, BuildContext context) async {
@@ -214,7 +213,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        senderName: name,
        isEdited: false,
        isStarred: false,
-       isRead: false, // ✅ ADD THIS
+       isRead: false,
        isReply: replyTo != null,
        replyTo: replyTo,
      );
@@ -255,7 +254,7 @@ import 'package:cloud_functions/cloud_functions.dart';
            : "text",
      }, SetOptions(merge: true));
 
-     // 🔥 Get receiver's FCM token
+     //  Get receiver's FCM token
      final receiverDoc = await FirebaseFirestore.instance
          .collection('users')
          .doc(receiverId)
@@ -268,7 +267,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        return;
      }
 
-     // ✅ Call the push notification function
+     //  Call the push notification function
      final previewText = message.isNotEmpty
          ? message
          : image != null
@@ -276,7 +275,6 @@ import 'package:cloud_functions/cloud_functions.dart';
          : file != null
          ? "📎 Sent a file"
          : auth.currentUser!.displayName!.isEmpty ? "new Message" : "${name} sent a message";
-     // print("new mewssage from ${auth.currentUser!.email}");
 
      print("📨 Sending notification to: $receiverName ($receiverToken)");
      print("$message");
