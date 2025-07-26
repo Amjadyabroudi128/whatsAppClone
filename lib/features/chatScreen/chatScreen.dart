@@ -82,6 +82,9 @@ class _TestnameState extends State<Testname> {
     super.initState();
     markMessagesAsRead();
     service.readMsg(widget.receiverId);
+    messageController.addListener(() {
+      setState(() {}); // Rebuild UI when text changes
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -325,22 +328,24 @@ class _TestnameState extends State<Testname> {
                           isUploading = value;
                         });
                       },),
-                        kIconButton(
-                          onPressed: () {
-                            service.sendMessage(
-                              widget.receiverId,
-                              widget.receiverName,
-                              messageController.text,
-                              null,
-                              null,
-                              _replyMessage,
-                            );
-                            messageController.clear();
-                            FocusScope.of(context).unfocus();
-                            _replyMessage = null;
-                          },
-                          myIcon: icons.send,
-                        ),
+                      messageController.text.trim().isNotEmpty
+                          ? kIconButton(
+                        onPressed: () {
+                          service.sendMessage(
+                            widget.receiverId,
+                            widget.receiverName,
+                            messageController.text.trim(),
+                            null,
+                            null,
+                            _replyMessage,
+                          );
+                          messageController.clear();
+                          FocusScope.of(context).unfocus();
+                          _replyMessage = null;
+                        },
+                        myIcon: icons.send,
+                      )
+                          : SizedBox(),
                     ],
                   ),
                 ),
