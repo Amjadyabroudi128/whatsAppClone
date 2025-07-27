@@ -13,7 +13,7 @@ import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
 import 'Firebase/passwordReset.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
-import 'features/Settings/Widget/favourite.dart';
+import 'features/Settings/Widget/favouriteCard/favourite.dart';
 import 'features/welcomeScreen/welcome.dart';
 import 'firebase_options.dart';
 import 'package:cloud_functions/cloud_functions.dart';

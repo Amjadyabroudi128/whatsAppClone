@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 
-import '../../../Firebase/FirebaseAuth.dart';
-import '../../../components/TextButton.dart';
-import '../../../components/iconButton.dart';
-import '../../../core/MyColors.dart';
-import '../../../core/TextStyles.dart';
-import '../../../core/icons.dart';
+import '../../../../Firebase/FirebaseAuth.dart';
+import '../../../../components/TextButton.dart';
+import '../../../../components/iconButton.dart';
+import '../../../../core/MyColors.dart';
+import '../../../../core/TextStyles.dart';
+import '../../../../core/icons.dart';
 
 class Favouritescreen extends StatefulWidget {
   const Favouritescreen({super.key});

@@ -108,16 +108,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   starCard(user: user),
                   BoxSpacing(myHeight: 10,),
                   Text("List of Favourite chats", style: TextStyle(color: Colors.grey),),
-                  kCard(
-                    child: Options(
-                      context: context,
-                      label: Text("Favourite"),
-                      trailing: Icon(Icons.favorite),
-                      onTap: (){
-                        Navigator.of(context).pushNamed("favourite");
-                      }
-                    ),
-                  ),
+                  favouriteCard(),
                   BoxSpacing(myHeight: 10,),
                   Text("App Theme", style: Textstyles.themeStyle),
                   themeCard(mounted: mounted, widget: widget)
@@ -126,6 +117,26 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class favouriteCard extends StatelessWidget {
+  const favouriteCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return kCard(
+      child: Options(
+        context: context,
+        label: Text("Favourite"),
+        trailing: Icon(Icons.favorite),
+        onTap: (){
+          Navigator.of(context).pushNamed("favourite");
+        }
       ),
     );
   }
