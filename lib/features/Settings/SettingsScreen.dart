@@ -23,6 +23,7 @@ import 'Widget/accountFunctions/deleteAccount.dart';
 import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
 import 'Widget/accountFunctions/signout.dart';
+import 'Widget/favouriteCard/favouriteOptions.dart';
 import 'Widget/starCard/starCard.dart';
 import 'Widget/themeCard/themeCard.dart';
 
@@ -117,26 +118,6 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class favouriteCard extends StatelessWidget {
-  const favouriteCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return kCard(
-      child: Options(
-        context: context,
-        label: Text("Favourite"),
-        trailing: Icon(Icons.favorite),
-        onTap: (){
-          Navigator.of(context).pushNamed("favourite");
-        }
       ),
     );
   }
