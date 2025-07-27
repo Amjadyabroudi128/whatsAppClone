@@ -59,4 +59,5 @@ class icons {
   static Icon info = Icon(Icons.info_outline);
   static Icon vOff =  Icon(Icons.volume_off, size: 18, color: Colors.black);
   static Icon VolumeUp = Icon(Icons.volume_up);
+  static Icon myFavourite = Icon(Icons.favorite);
 }
