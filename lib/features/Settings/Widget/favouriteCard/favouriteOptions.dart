@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../components/kCard.dart';
 import '../../../../components/listTilesOptions.dart';
+import '../../../../core/icons.dart';
 
 class favouriteCard extends StatelessWidget {
   const favouriteCard({
@@ -14,7 +15,7 @@ class favouriteCard extends StatelessWidget {
       child: Options(
           context: context,
           label: Text("Favourite"),
-          trailing: Icon(Icons.favorite),
+          trailing: icons.myFavourite,
           onTap: (){
             Navigator.of(context).pushNamed("favourite");
           }
