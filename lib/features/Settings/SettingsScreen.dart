@@ -109,7 +109,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   starCard(user: user),
                   BoxSpacing(myHeight: 10,),
                   Text("List of Favourite chats", style: TextStyle(color: Colors.grey),),
-                  favouriteCard(),
+                  favouriteCard(user: user),
                   BoxSpacing(myHeight: 10,),
                   Text("App Theme", style: Textstyles.themeStyle),
                   themeCard(mounted: mounted, widget: widget)
