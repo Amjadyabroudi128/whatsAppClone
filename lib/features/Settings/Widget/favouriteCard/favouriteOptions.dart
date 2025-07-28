@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/Firebase/FirebaseCollections.dart';
 
 import '../../../../components/kCard.dart';
 import '../../../../components/listTilesOptions.dart';
@@ -16,7 +17,7 @@ class favouriteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("Favourites").doc(user!.email).collection("myFavourites").snapshots(),
+      stream: favourites.doc(user!.email).collection("myFavourites").snapshots(),
       builder: (context, snapshot) {
         final count = snapshot.hasData ? snapshot.data!.docs.length : 0;
         return kCard(
