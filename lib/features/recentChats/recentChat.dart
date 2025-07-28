@@ -192,7 +192,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                   final isFavourite = snapshot.data!;
                                                   return Options(
                                                     label: Text(isFavourite ? "Remove from favourite" : "Add to favourite"),
-                                                    trailing: icons.fave,
+                                                    trailing: isFavourite ? icons.myFavourite : icons.fave,
+                                                    // trailing: icons.fave,
                                                     context: context,
                                                     onTap: () async {
                                                       if (isFavourite) {
