@@ -342,7 +342,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                       decoration: readDecoration(),
                                       child: Text(
                                         unreadCount.toString(),
-                                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                                        style:  Textstyles.unreadCount
                                       ),
                                     ),
                                 ],
