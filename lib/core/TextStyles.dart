@@ -39,4 +39,5 @@ class Textstyles {
   static TextStyle edited = TextStyle(fontSize: 13, fontStyle: FontStyle.italic, color: Colors.grey.shade800,);
   static TextStyle sendMessage = TextStyle(color: Colors.black, fontSize: 15.7);
   static TextStyle chatNumber = TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.white,);
+  static TextStyle unreadCount = TextStyle(color: Colors.white, fontSize: 12);
  }
