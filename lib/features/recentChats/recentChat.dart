@@ -282,65 +282,85 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                           setState(() {});
                         }
                       },
-                      child: Options(
-                        context: context,
-                        label: StreamBuilder<bool>(
-                          stream: service.isChatMutedStream(chatRoomId, otherUserId),
-                          builder: (context, snapshot) {
-                            final isMuted = snapshot.data ?? false;
-                            return Row(
-                              children: [
-                                Flexible(child: Text(otherUserName!)),
-                                BoxSpacing(
-                                  mWidth: MediaQuery.of(context).size.width * 0.52,
-                                ),
-                                if (isMuted)
-                                  icons.vOff
-                              ],
-                            );
-                          },
-                        ),
-                        subtitle: Text(
-                          msg.file != null && msg.file!.isNotEmpty
-                              ? "[file]"
-                              : msg.image != null && msg.image!.isNotEmpty
-                              ? "[image]"
-                              : msg.text,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-
-                        trailing: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              DateFormat('HH:mm').format(msg.time!.toDate()),
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                            if (unreadCount > 0)
-                              Container(
-                                margin: const EdgeInsets.only(top: 4),
-                                padding: unreadPadding,
-                                decoration: readDecoration(),
-                                child: Text(
-                                  unreadCount.toString(),
-                                  style: const TextStyle(color: Colors.white, fontSize: 12),
-                                ),
+                      child: Row(
+                        children: [
+                          if(userImage.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 7),
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(userImage),
+                                radius: 20,
                               ),
-                          ],
-                        ),
-                        onTap: () {
-                          currentReceiverId.value = otherUserId;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => Testname(
-                                receiverId: otherUserId,
-                                receiverName: otherUserName!,
-                              ),  ),
-                          );
-                        },
+                            ),
+                          Flexible(
+                            child: Options(
+                              context: context,
+                              label: StreamBuilder<bool>(
+                                stream: service.isChatMutedStream(chatRoomId, otherUserId),
+                                builder: (context, snapshot) {
+                                  final isMuted = snapshot.data ?? false;
+                                  return Row(
+                                    children: [
+                                    Expanded(
+                                    child: Text(
+                                    otherUserName!,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(fontSize: 16),
+                                    ),
+                                    ),
+                                      if (isMuted)
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: icons.vOff,
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              subtitle: Text(
+                                msg.file != null && msg.file!.isNotEmpty
+                                    ? "[file]"
+                                    : msg.image != null && msg.image!.isNotEmpty
+                                    ? "[image]"
+                                    : msg.text,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+
+                              trailing: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    DateFormat('HH:mm').format(msg.time!.toDate()),
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                  if (unreadCount > 0)
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 4),
+                                      padding: unreadPadding,
+                                      decoration: readDecoration(),
+                                      child: Text(
+                                        unreadCount.toString(),
+                                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              onTap: () {
+                                currentReceiverId.value = otherUserId;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => Testname(
+                                      receiverId: otherUserId,
+                                      receiverName: otherUserName!,
+                                    ),  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
