@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
+import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/consts.dart';
@@ -61,6 +62,14 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 return ids.join("_");
               }
               final chatRoomId = getChatRoomId(currentUserId, otherUserId!);
+              return FutureBuilder<DocumentSnapshot>(
+                future: FirebaseFirestore.instance.collection('users').doc(otherUserId).get(), 
+                builder: (context, userSnapshot) {
+                  if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
+                    return const SizedBox.shrink();
+                  }
+                  final userData = userSnapshot.data!.data() as Map<String, dynamic>;
+                  final userImage = userData['image'] ?? '';
               return StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("chat_rooms")
@@ -101,6 +110,12 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Row(
                                             children: [
+                                              if(userImage.isNotEmpty)
+                                                CircleAvatar(
+                                                  backgroundImage: NetworkImage(userImage),
+                                                  radius: 20,
+                                                ),
+                                              BoxSpacing(mWidth: 6,),
                                               Text(otherUserName!),
                                               Spacer(),
                                               kIconButton(
@@ -323,15 +338,15 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                               builder: (_) => Testname(
                                 receiverId: otherUserId,
                                 receiverName: otherUserName!,
-                              ),
-                            ),
+                              ),  ),
                           );
                         },
                       ),
-
                     ),
                   );
                 },
+              );
+              },
               );
             },
           );
@@ -339,5 +354,4 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
       ),
     );
   }
-
 }
