@@ -201,7 +201,7 @@ class _TestnameState extends State<Testname> {
                     margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     padding: const EdgeInsets.all(8),
                     decoration: replyDecoration(
-                      color: Colors.black,
+                      color: myColors.labelClr,
                       borderRadius: BorderRadius.circular(8),
                       border: Border(
                         left: BorderSide(
