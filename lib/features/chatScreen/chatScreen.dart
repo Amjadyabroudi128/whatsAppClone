@@ -8,6 +8,7 @@ import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/core/consts.dart';
 
 import '../../components/ListTiles.dart';
 import '../../globalState.dart';
@@ -199,7 +200,7 @@ class _TestnameState extends State<Testname> {
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
+                    decoration: replyDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(8),
                       border: Border(
