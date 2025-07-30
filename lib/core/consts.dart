@@ -23,3 +23,10 @@ Decoration readDecoration() {
 //   return EdgeInsets.symmetric(horizontal: 6, vertical: 2),
 // }
 EdgeInsetsGeometry unreadPadding = EdgeInsets.symmetric(horizontal: 6, vertical: 2);
+Decoration replyDecoration({Color? color, BorderRadiusGeometry? borderRadius, BoxBorder? border}) {
+  return BoxDecoration(
+    color: color,
+    borderRadius: borderRadius,
+    border: border
+  );
+}
