@@ -266,7 +266,7 @@ class _TestnameState extends State<Testname> {
                                           child: Row(
                                             children: [
                                               Text("Delete $count Message${count > 1 ? 's' : ''}?",
-                                                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
+                                                style: Textstyles.deleteMessages,),
                                               Spacer(),
                                               kIconButton(
                                                 myIcon: icons.close,
