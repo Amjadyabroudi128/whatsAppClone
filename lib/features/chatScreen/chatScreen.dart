@@ -314,7 +314,7 @@ class _TestnameState extends State<Testname> {
                     children: [
                       Expanded(
                         child: kTextField(
-                          textColor: Colors.black,
+                          textColor: myColors.labelClr,
                           enable: messageBorder,
                           focused: messageBorder,
                           myController: messageController,
