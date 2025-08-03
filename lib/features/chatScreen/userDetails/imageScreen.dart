@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/fSizedBox.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
@@ -206,7 +207,7 @@ class _ImagescreenState extends State<Imagescreen> {
                               ],
                             ),
                             kCard(
-                              color: Colors.grey,
+                              // color: Colors.grey,
                               child: Column(
                                 children: [
                                   Options(
@@ -258,6 +259,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                         );
                                       }
                                   ),
+                                  divider(),
                                   Options(
                                       context: context,
                                       label: Text("Save to Gallery"),
