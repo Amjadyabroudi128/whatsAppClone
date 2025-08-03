@@ -246,7 +246,7 @@ class _messagesAlignState extends State<messagesAlign> {
                             child: Checkbox(
                               activeColor: myColors.starColor,
                               side: BorderSide(
-                                  color: Colors.black
+                                  color: myColors.labelClr
                               ),
                               visualDensity: VisualDensity.compact,
                               checkColor: myColors.FG,
