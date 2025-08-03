@@ -73,6 +73,7 @@ class _ImagescreenState extends State<Imagescreen> {
    final msg = Messages(
       text: "",
       senderId: widget.senderId,
+      senderName: widget.senderName,
       receiverId: widget.receiverId,
       senderEmail: widget.senderEmail,
       receiverEmail: widget.receiverEmail,
@@ -96,7 +97,7 @@ class _ImagescreenState extends State<Imagescreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.senderName == auth.currentUser!.email ? "You" : widget.senderName ?? "",
+              widget.senderName == auth.currentUser!.displayName ? "You" : widget.senderName ?? "",
               style: TextStyle(fontSize: 19),
             ),
             Row(
