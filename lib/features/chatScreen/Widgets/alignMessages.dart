@@ -154,6 +154,7 @@ class _messagesAlignState extends State<messagesAlign> {
                             senderId: msg.senderId,
                             senderEmail: msg.senderEmail,
                             receiverEmail: msg.receiverEmail,
+                            isMe: isMe
                           ),
                         ),
                       );
