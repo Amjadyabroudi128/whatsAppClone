@@ -32,6 +32,7 @@ class Imagescreen extends StatefulWidget {
   final String? senderId;
   final String? senderEmail;
   final String? receiverEmail;
+  final bool? isMe;
   const Imagescreen({
     super.key,
     required this.date,
@@ -44,7 +45,8 @@ class Imagescreen extends StatefulWidget {
     this.day,
     this.senderId,
     this.receiverEmail,
-    this.senderEmail
+    this.senderEmail,
+    this.isMe
   });
 
   @override
@@ -56,11 +58,12 @@ class _ImagescreenState extends State<Imagescreen> {
   final auth = FirebaseAuth.instance;
   final FirebaseService service = FirebaseService();
   bool _isStarred = false;
-
+  bool _isMe = false;
   @override
   void initState() {
     super.initState();
     _isStarred = widget.isStarred ?? false;
+    _isMe = widget.isMe ?? false;
   }
 
   @override
@@ -121,6 +124,7 @@ class _ImagescreenState extends State<Imagescreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            if(_isMe)
             IconButton(
               icon: icons.deleteIcon,
               onPressed: () async {
