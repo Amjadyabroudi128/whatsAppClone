@@ -110,7 +110,7 @@ class _messagesAlignState extends State<messagesAlign> {
                           builder: (_) => Imagescreen(
                             image: msg.image,
                             date: today,
-                            senderName: msg.senderEmail,
+                            senderName: msg.senderName,
                             time: formattedTime,
                             messageId: msg.messageId,
                             receiverId: msg.receiverId,
@@ -147,7 +147,7 @@ class _messagesAlignState extends State<messagesAlign> {
                           builder: (_) => Imagescreen(
                             image: msg.image,
                               date: today,
-                            senderName: msg.senderEmail,
+                            senderName: msg.senderName,
                             time: formattedTime,
                             messageId: msg.messageId,
                             receiverId: msg.receiverId,
