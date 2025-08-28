@@ -16,7 +16,6 @@ import 'features/BottomNavBar/BottomNavBar.dart';
 import 'features/Settings/Widget/favouriteCard/favouriteScreen.dart';
 import 'features/welcomeScreen/welcome.dart';
 import 'firebase_options.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -47,7 +46,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeData _theme = myTheme.appTheme;
+  ThemeData _theme = MyTheme.appTheme;
   ThemeMode _themeMode = ThemeMode.system;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -155,7 +154,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: _theme,
-      darkTheme: myTheme.darkTheme,
+      darkTheme: MyTheme.darkTheme,
       themeMode: _themeMode,
       initialRoute: _auth.currentUser != null ? "btm" : "welcome",
       routes: {

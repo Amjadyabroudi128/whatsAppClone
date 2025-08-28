@@ -4,25 +4,25 @@
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
- class myTheme {
+ class MyTheme {
    static OutlineInputBorder fieldBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-     borderSide: BorderSide()
+     borderSide: const BorderSide()
    );
-   static OutlineInputBorder darkBoder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-       borderSide: BorderSide(
+   static OutlineInputBorder darkBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+       borderSide: const BorderSide(
            color: Colors.white
        )
    );
    static OutlinedBorder circular = RoundedRectangleBorder(
      borderRadius: BorderRadius.circular(10)
    );
-   static BorderRadiusGeometry CircularContainer = BorderRadius.circular(10);
+   static BorderRadiusGeometry circularContainer = BorderRadius.circular(10);
    static ShapeBorder cardShape = RoundedRectangleBorder(
      borderRadius: BorderRadius.circular(10.0),
    );
   static final ThemeData appTheme = ThemeData().copyWith(
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
       iconTheme: IconThemeData(
           color: Colors.black
@@ -64,9 +64,9 @@ import 'package:whatsappclone/core/MyColors.dart';
       shape: cardShape,
       color: Colors.white60,
     ),
-    bottomSheetTheme: BottomSheetThemeData(
+    bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
     ),
@@ -97,7 +97,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       selectionHandleColor: myColors.textSelection,
       selectionColor: myColors.textSelection
     ),
-    checkboxTheme: CheckboxThemeData(
+    checkboxTheme: const CheckboxThemeData(
       checkColor: WidgetStatePropertyAll(Colors.white),
       side: BorderSide(
         color: Colors.black
@@ -111,7 +111,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       shape: cardShape,
       color: Colors.grey[700],
     ),
-    checkboxTheme: CheckboxThemeData(
+    checkboxTheme: const CheckboxThemeData(
       checkColor: WidgetStatePropertyAll(Colors.white),
       side: BorderSide(
         color: Colors.white
@@ -120,9 +120,9 @@ import 'package:whatsappclone/core/MyColors.dart';
       shape: CircleBorder(),
     ),
     appBarTheme: AppBarTheme(
-      color: myColors.darkCard,
+      backgroundColor: myColors.darkCard,
       foregroundColor: Colors.white,
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
           color: Colors.white
       ),
     ),
@@ -143,12 +143,12 @@ import 'package:whatsappclone/core/MyColors.dart';
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
               color: Colors.white
           )
       ),
-      focusedBorder: darkBoder,
-      errorBorder: darkBoder,
+      focusedBorder: darkBorder,
+      errorBorder: darkBorder,
       fillColor: Colors.grey,
       focusColor: Colors.white,
       labelStyle: Textstyles.darkLabel,
@@ -160,7 +160,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       selectionHandleColor: myColors.textSelection,
       selectionColor: myColors.textSelection
     ),
-    listTileTheme: ListTileThemeData(
+    listTileTheme: const ListTileThemeData(
         textColor: Colors.white
     ),
     iconButtonTheme: IconButtonThemeData(
@@ -181,7 +181,7 @@ import 'package:whatsappclone/core/MyColors.dart';
         color: myColors.dividerTheme,
         indent: 30
     ),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: Colors.white
     ),
     textTheme: const TextTheme(

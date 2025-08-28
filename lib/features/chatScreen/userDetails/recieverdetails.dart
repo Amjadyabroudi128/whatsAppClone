@@ -6,7 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
-import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
@@ -74,15 +73,15 @@ class _userDetailsState extends State<userDetails> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 widget.imageUrl == null || widget.imageUrl!.isEmpty
-                    ? kimageNet(
+                    ? const kimageNet(
                   src: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
                 )
                     : kCard(
-                  shape: CircleBorder(),
+                  shape: const CircleBorder(),
                   clipBehavior: Clip.antiAlias,
                   child: kimageNet(src: widget.imageUrl!),
                 ),
-                BoxSpacing(myHeight: 9),
+                const BoxSpacing(myHeight: 9),
                 Text(widget.name ?? '', style: Textstyles.recieverName),
 
                 Padding(
@@ -93,11 +92,11 @@ class _userDetailsState extends State<userDetails> {
                           '${widget.link}'));
                     },
                     child: Text(widget.link ?? "", style: TextStyle(fontSize: 18, decoration: TextDecoration.underline,
-                      color: myTheme.appTheme == true ? Colors.black : Colors.blue.shade800,),),
+                      color: MyTheme.appTheme == true ? Colors.black : Colors.blue.shade800,),),
                   ),
                 ),
                 // Text(widget.link ?? "",),
-                BoxSpacing(myHeight: 7),
+                const BoxSpacing(myHeight: 7),
                 Text(widget.email ?? '', style: Textstyles.recieverEmail),
                 if (widget.bio != null && widget.bio!.isNotEmpty)
                   GestureDetector(
@@ -119,7 +118,7 @@ class _userDetailsState extends State<userDetails> {
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
                           decoration: BoxDecoration(
                             // color: Colors.black,
-                            color: myTheme.appTheme == true ? Colors.black : Colors.white,
+                            color: MyTheme.appTheme == true ? Colors.black : Colors.white,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: kTextButton(
@@ -136,7 +135,7 @@ class _userDetailsState extends State<userDetails> {
                                 icons.copy,
                                 BoxSpacing(mWidth: 10,),
                                 Text("Copy", style: TextStyle(
-                                  color: myTheme.appTheme == true ? Colors.white : Colors.black,
+                                  color: MyTheme.appTheme == true ? Colors.white : Colors.black,
                                 ),
                                 )
                               ],

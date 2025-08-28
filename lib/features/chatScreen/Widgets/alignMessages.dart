@@ -273,7 +273,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                 margin: containermargin,
                                 decoration: containerDecoration(
                                   color: isMe ? myColors.myMessage : Colors.grey,
-                                  borderRadius: myTheme.CircularContainer,
+                                  borderRadius: MyTheme.circularContainer,
                                 ),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,

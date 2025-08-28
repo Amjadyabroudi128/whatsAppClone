@@ -10,7 +10,7 @@ EdgeInsetsGeometry containermargin = EdgeInsets.symmetric(vertical: 5, horizonta
 Decoration containerDecoration({Color? color, BorderRadiusGeometry? borderRadius}) {
   return BoxDecoration(
     color: color,
-    borderRadius: myTheme.CircularContainer,
+    borderRadius: MyTheme.circularContainer,
   );
 }
 Decoration readDecoration() {

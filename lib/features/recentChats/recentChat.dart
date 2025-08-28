@@ -3,16 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import 'package:whatsappclone/components/ListTiles.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
-import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 import '../../Firebase/FirebaseAuth.dart';
-import '../../components/TextButton.dart';
 import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
 import '../../components/iconButton.dart';
@@ -21,10 +18,9 @@ import '../../core/icons.dart';
 import '../../globalState.dart';
 import '../chatScreen/chatScreen.dart';
 import '../chatScreen/userDetails/recieverdetails.dart';
-import 'Widgets/dateText.dart';
 import 'Widgets/deleteAlert.dart';
 class RecentChatsScreen extends StatefulWidget {
-  const RecentChatsScreen({Key? key}) : super(key: key);
+  const RecentChatsScreen({super.key});
 
   @override
   State<RecentChatsScreen> createState() => _RecentChatsScreenState();
@@ -82,7 +78,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   final unreadCount = snapshotUnread.data?.docs.length ?? 0;
                   return  Slidable(
                     startActionPane: ActionPane(
-                      motion: StretchMotion(),
+                      motion: const StretchMotion(),
                       children: [
                         CustomSlidableAction(
                           onPressed: (context) async {
@@ -96,7 +92,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       ],
                     ),
                     endActionPane: ActionPane(
-                      motion: StretchMotion(),
+                      motion: const StretchMotion(),
                       children: [
                         CustomSlidableAction(
                           onPressed: (context) async {
@@ -117,7 +113,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                 ),
                                               BoxSpacing(mWidth: 6,),
                                               Text(otherUserName!),
-                                              Spacer(),
+                                              const Spacer(),
                                               kIconButton(
                                                 myIcon: icons.close,
                                                 onPressed: (){
@@ -132,7 +128,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                             children: [
                                               Options(
                                                 context: context,
-                                                label: Text("User Info"),
+                                                label: const Text("User Info"),
                                                 trailing: icons.info,
                                                 onTap: () async {
                                                   try {
@@ -166,7 +162,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                 },
                                               ),
 
-                                              divider(),
+                                              const divider(),
                                               StreamBuilder<bool>(
                                                 stream: service.isChatMutedStream(chatRoomId, otherUserId),
                                                 builder: (context, snapshot) {
@@ -179,7 +175,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                   final isMuted = snapshot.data!;
                                                   return Options(
                                                     label: Text(isMuted ? "Unmute" : "Mute"),
-                                                    trailing: isMuted ? icons.mute : icons.VolumeUp,
+                                                    trailing: isMuted ? icons.mute : icons.volumeUp,
                                                     context: context,
                                                     onTap: () async {
                                                       if (isMuted) {
@@ -194,7 +190,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                   );
                                                 },
                                               ),
-                                              divider(),
+                                              const divider(),
                                               FutureBuilder<bool>(
                                                 future: service.isFavourite(otherUserName),
                                                 builder: (context, snapshot) {
@@ -233,8 +229,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                 }
                             );
                           },
-                            child: icons.options,
                           autoClose: false,
+                            child: icons.options,
                         ),
                         CustomSlidableAction(
                           onPressed: (context) async {
