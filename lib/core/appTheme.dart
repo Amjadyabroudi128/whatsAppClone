@@ -60,7 +60,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       color: myColors.dividerTheme,
       indent: 30
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       shape: cardShape,
       color: Colors.white60,
     ),
@@ -107,7 +107,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     )
    );
   static final ThemeData darkTheme = ThemeData().copyWith(
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       shape: cardShape,
       color: Colors.grey[700],
     ),
@@ -174,7 +174,7 @@ import 'package:whatsappclone/core/MyColors.dart';
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       backgroundColor: myColors.bDialog
     ),
     dividerTheme: DividerThemeData(
