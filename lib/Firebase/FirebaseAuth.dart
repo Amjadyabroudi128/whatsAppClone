@@ -1,14 +1,10 @@
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
-import 'package:whatsappclone/utils/pickImage.dart' as url;
-import 'package:http/http.dart' as http;
 import 'package:cloud_functions/cloud_functions.dart';
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
@@ -51,7 +47,7 @@ import 'package:cloud_functions/cloud_functions.dart';
        }
        myToast(message);
      } catch (e) {
-       print("Error during sign-up: $e");
+       debugPrint("Error during sign-up: $e");
      }
    }
    Future<void> SigninUser(BuildContext context, String email, String password, String name) async {

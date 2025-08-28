@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:whatsappclone/components/Strings.dart';
-import 'package:whatsappclone/core/TextStyles.dart';
-import 'package:whatsappclone/features/SignInScreen/signIn.dart';
-import 'package:whatsappclone/features/SignUp/signupScreen.dart';
+
 import 'package:whatsappclone/features/welcomeScreen/Widgets/welcome%20text.dart';
 import 'package:firebase_core/firebase_core.dart';
 void main() {

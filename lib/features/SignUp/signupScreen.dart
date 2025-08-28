@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/padding.dart';
-import 'package:whatsappclone/core/MyColors.dart';
-import '../../core/icons.dart';
 import 'Widgets/emailTextField.dart';
 import 'Widgets/haveAnAccount.dart';
 import 'Widgets/nameTextfield.dart';
