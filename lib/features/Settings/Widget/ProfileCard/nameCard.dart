@@ -93,14 +93,14 @@ class _nameCardState extends State<nameCard> {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          if (imageUrl != null && imageUrl.isNotEmpty)
+                          if (imageUrl != null && imageUrl.isNotEmpty) {
                             Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (_) => FullScreenImageScreen(imageUrl: imageUrl),
                                     ),
                                   );
-                          else {
+                          } else {
                             await showImage(
                               context,
                               addToFirebase: (String path) async {

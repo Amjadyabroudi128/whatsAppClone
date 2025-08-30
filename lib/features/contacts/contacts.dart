@@ -5,8 +5,6 @@ import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/signoutBtn.dart';
-import '../../components/TextField.dart';
-import '../../core/icons.dart';
 import 'Widgets/searcTextField.dart';
 import 'Widgets/streamUser.dart';
 class Contacts extends StatefulWidget {
@@ -48,21 +46,21 @@ class _ContactsState extends State<Contacts> {
       },
       child: Scaffold(
           appBar: AppBar(
-            actions: [
+            actions: const [
              signoutBtn()
             ],
             title: myPadding(
               padding: const EdgeInsets.only(top: 18),
               child: Text("Chats", style: Textstyles.appBar,),
             ),
-            backgroundColor: MyColors.TC,
+            backgroundColor: MyColors.tc,
             automaticallyImplyLeading: false,
             centerTitle: false,
           ),
           body: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12.0),
                 child: searchTextField(userController: userController),
               ),
               userList(searchQuery, ),

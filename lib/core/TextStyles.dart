@@ -5,7 +5,7 @@ import 'package:whatsappclone/components/fontWeightHelper.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 class Textstyles {
   static TextStyle welcome = TextStyle(fontSize: 22, fontWeight: fontWeightHelper.bold);
-  static TextStyle privacy = TextStyle(color: MyColors.TC);
+  static TextStyle privacy = TextStyle(color: MyColors.tc);
   static TextStyle read = TextStyle(fontSize: 20, color: MyColors.familyText);
   static TextStyle haveAccount = const TextStyle(fontSize: 15);
   static TextStyle hintStyle = TextStyle(color: MyColors.floating, fontSize: 16);

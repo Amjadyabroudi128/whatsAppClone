@@ -27,8 +27,8 @@ class starCard extends StatelessWidget {
               context: context,
               label: Row(
                 children: [
-                  Text("Starred"),
-                  Spacer(),
+                  const Text("Starred"),
+                  const Spacer(),
                   if (count > 0) Text(count.toString()),
                 ],
               ),

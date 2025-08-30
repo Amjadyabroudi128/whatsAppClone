@@ -29,7 +29,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
        elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
-             backgroundColor: MyColors.TC,
+             backgroundColor: MyColors.tc,
              foregroundColor: MyColors.FG,
              textStyle: Textstyles.Ebtn,
            shape: circular
@@ -127,7 +127,7 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: MyColors.TC,
+          backgroundColor: MyColors.tc,
           foregroundColor: MyColors.FG,
           textStyle: Textstyles.Ebtn,
           shape: circular

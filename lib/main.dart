@@ -159,14 +159,14 @@ class _MyAppState extends State<MyApp> {
       initialRoute: _auth.currentUser != null ? "btm" : "welcome",
       routes: {
         "sign up": (context) => const Signupscreen(),
-        "login": (context) => SignInscreen(),
-        "welcome": (context) => WelcomeScreen(),
-        "passReset": (context) => PasswordReset(),
-        "pickColor": (context) => Colorpicking(),
-        "contacts": (context) => Contacts(),
+        "login": (context) => const SignInscreen(),
+        "welcome": (context) => const WelcomeScreen(),
+        "passReset": (context) => const PasswordReset(),
+        "pickColor": (context) => const Colorpicking(),
+        "contacts": (context) => const Contacts(),
         "btm": (context) => Bottomnavbar(onThemeChange: _updateTheme),
-        "mediaScreen": (context) => MyMedia(),
-        "favourite" : (context) => Favouritescreen()
+        "mediaScreen": (context) => const MyMedia(),
+        "favourite" : (context) => const Favouritescreen()
       },
       home: Bottomnavbar(onThemeChange: _updateTheme),
     );
