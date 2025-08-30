@@ -201,12 +201,12 @@ class _TestnameState extends State<Testname> {
                     margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     padding: const EdgeInsets.all(8),
                     decoration: replyDecoration(
-                      color: myColors.labelClr,
+                      color: MyColors.labelClr,
                       borderRadius: BorderRadius.circular(8),
                       border: Border(
                         left: BorderSide(
-                          color: isReplyFromMe ? myColors.myReply
-                          : myColors.otherReply,
+                          color: isReplyFromMe ? MyColors.myReply
+                          : MyColors.otherReply,
                           width: 7
                         )
                       )
@@ -222,8 +222,8 @@ class _TestnameState extends State<Testname> {
                                 maxLines: 2,
                                 overflow: TextOverflow.clip,
                                 style: TextStyle(
-                                  color: isReplyFromMe ? myColors.myName :
-                                  myColors.otherName,
+                                  color: isReplyFromMe ? MyColors.myName :
+                                  MyColors.otherName,
                                 ),
                               ),
                               Text("${_replyMessage!.text}", style: Textstyles.reply,
@@ -314,7 +314,7 @@ class _TestnameState extends State<Testname> {
                     children: [
                       Expanded(
                         child: kTextField(
-                          textColor: myColors.labelClr,
+                          textColor: MyColors.labelClr,
                           enable: messageBorder,
                           focused: messageBorder,
                           myController: messageController,

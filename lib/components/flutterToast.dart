@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
@@ -7,8 +6,8 @@ void myToast(String message) {
     msg: message,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.SNACKBAR,
-    backgroundColor: myColors.toastBackGround,
-    textColor: myColors.toastMessage,
+    backgroundColor: MyColors.toastBackGround,
+    textColor: MyColors.toastMessage,
     fontSize: 17.0,
   );
 }

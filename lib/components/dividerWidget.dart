@@ -11,7 +11,7 @@ class divider extends StatelessWidget {
     return Divider(
       indent: 19,
       endIndent: 10,
-      color:myColors.DividerClr,
+      color:MyColors.DividerClr,
     );
   }
 }

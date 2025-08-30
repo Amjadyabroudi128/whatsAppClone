@@ -59,10 +59,10 @@ class _userDetailsState extends State<userDetails> {
         });
       },
       child: Scaffold(
-        backgroundColor: myColors.BG,
+        backgroundColor: MyColors.BG,
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: myColors.BG,
+          backgroundColor: MyColors.BG,
           title: Text("Contact Details", style: TextStyle(color: Colors.black),),
           centerTitle: true,
         ),
@@ -156,7 +156,7 @@ class _userDetailsState extends State<userDetails> {
                   builder: (context, snapshot) {
                     final count = snapshot.hasData ? snapshot.data!.docs.length : 0;
                     return kCard(
-                      color: myColors.familyText,
+                      color: MyColors.familyText,
                       child: Options(
                         context: context,
                         leading: icons.star,
@@ -187,7 +187,7 @@ class _userDetailsState extends State<userDetails> {
                       .where("image", isNotEqualTo: null).orderBy("timestamp", descending: true).snapshots(),
                   builder: (context, snapshot) {
                     return kCard(
-                      color: myColors.familyText,
+                      color: MyColors.familyText,
                       child: Options(
                         context: context,
                         leading: icons.image,

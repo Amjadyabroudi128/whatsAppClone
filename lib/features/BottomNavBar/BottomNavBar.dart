@@ -98,7 +98,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
                 ),
               ],
               currentIndex: _selectedIndex,
-              selectedItemColor: myColors.selecteditem,
+              selectedItemColor: MyColors.selecteditem,
               onTap: _onItemTapped,
             );
           },

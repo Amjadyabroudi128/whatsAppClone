@@ -85,7 +85,7 @@ class _FavouritescreenState extends State<Favouritescreen> {
                               child: Transform.scale(
                                 scale: 1.2,
                                 child: Checkbox(
-                                  activeColor: myColors.starColor,
+                                  activeColor: MyColors.starColor,
                                   value: selectedMessages.contains(name),
                                   onChanged: (value) {
                                     setState(() {

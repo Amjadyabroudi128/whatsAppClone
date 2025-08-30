@@ -161,7 +161,7 @@ class _messagesAlignState extends State<messagesAlign> {
                     } else if (msg.file != null && msg.file!.isNotEmpty) {
                       showMenu<String>(
                         context: context,
-                        color: myColors.menuColor,
+                        color: MyColors.menuColor,
                         position: position,
                         items: [
                           PopupMenuItem<String>(
@@ -178,7 +178,7 @@ class _messagesAlignState extends State<messagesAlign> {
                     }
                     else {
                       showMenu(context: context,
-                          color: myColors.menuColor,
+                          color: MyColors.menuColor,
                         position: position,
                         items: [
                           copyMessage(msg, context),
@@ -244,12 +244,12 @@ class _messagesAlignState extends State<messagesAlign> {
                           Transform.scale(
                             scale: 1.2,
                             child: Checkbox(
-                              activeColor: myColors.starColor,
+                              activeColor: MyColors.starColor,
                               side: BorderSide(
-                                  color: myColors.labelClr
+                                  color: MyColors.labelClr
                               ),
                               visualDensity: VisualDensity.compact,
-                              checkColor: myColors.FG,
+                              checkColor: MyColors.FG,
                               shape: CircleBorder(),
                               value: widget.selectedMessages.contains(msg.messageId),
                               onChanged: (value) {
@@ -272,7 +272,7 @@ class _messagesAlignState extends State<messagesAlign> {
                               child: Container(
                                 margin: containermargin,
                                 decoration: containerDecoration(
-                                  color: isMe ? myColors.myMessage : Colors.grey,
+                                  color: isMe ? MyColors.myMessage : Colors.grey,
                                   borderRadius: MyTheme.circularContainer,
                                 ),
                                 child: Column(
@@ -284,7 +284,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         padding: const EdgeInsets.all(8),
                                         margin: const EdgeInsets.only(bottom: 4),
                                         decoration: BoxDecoration(
-                                          color: isMe ? myColors.reply : myColors.message,
+                                          color: isMe ? MyColors.reply : MyColors.message,
                                           borderRadius: BorderRadius.circular(8),
                                           border: Border(
                                             left: BorderSide(
@@ -301,8 +301,8 @@ class _messagesAlignState extends State<messagesAlign> {
                                               "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email? "You": msg.replyTo!.senderEmail}",
                                               style: TextStyle(
                                                 color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
-                                                    ? myColors.myName
-                                                    : myColors.otherName,
+                                                    ? MyColors.myName
+                                                    : MyColors.otherName,
                                               ),
                                             ),
                                             if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)

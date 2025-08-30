@@ -1,7 +1,5 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/core/TextStyles.dart';
 
 class kTextField extends StatelessWidget {
   final Widget? label;

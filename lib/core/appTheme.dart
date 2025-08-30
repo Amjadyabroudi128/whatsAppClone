@@ -1,6 +1,5 @@
 
-
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
@@ -30,8 +29,8 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
        elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
-             backgroundColor: myColors.TC,
-             foregroundColor: myColors.FG,
+             backgroundColor: MyColors.TC,
+             foregroundColor: MyColors.FG,
              textStyle: Textstyles.Ebtn,
            shape: circular
          ),
@@ -39,13 +38,13 @@ import 'package:whatsappclone/core/MyColors.dart';
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: fieldBorder,
       focusedBorder: fieldBorder,
-      focusColor: myColors.labelClr,
+      focusColor: MyColors.labelClr,
       labelStyle: Textstyles.label,
       hintStyle: Textstyles.hintStyle,
       floatingLabelStyle: Textstyles.floating
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: myColors.FAB,
+      backgroundColor: MyColors.FAB,
       foregroundColor: Colors.white60,
       iconSize: 32,
       elevation: 0
@@ -57,7 +56,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       ),
     ),
     dividerTheme: DividerThemeData(
-      color: myColors.dividerTheme,
+      color: MyColors.dividerTheme,
       indent: 30
     ),
     cardTheme: CardThemeData(
@@ -93,9 +92,9 @@ import 'package:whatsappclone/core/MyColors.dart';
         )
     ),
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: myColors.textSelection,
-      selectionHandleColor: myColors.textSelection,
-      selectionColor: myColors.textSelection
+      cursorColor: MyColors.textSelection,
+      selectionHandleColor: MyColors.textSelection,
+      selectionColor: MyColors.textSelection
     ),
     checkboxTheme: const CheckboxThemeData(
       checkColor: WidgetStatePropertyAll(Colors.white),
@@ -120,7 +119,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       shape: CircleBorder(),
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: myColors.darkCard,
+      backgroundColor: MyColors.darkCard,
       foregroundColor: Colors.white,
       iconTheme: const IconThemeData(
           color: Colors.white
@@ -128,8 +127,8 @@ import 'package:whatsappclone/core/MyColors.dart';
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: myColors.TC,
-          foregroundColor: myColors.FG,
+          backgroundColor: MyColors.TC,
+          foregroundColor: MyColors.FG,
           textStyle: Textstyles.Ebtn,
           shape: circular
       ),
@@ -156,9 +155,9 @@ import 'package:whatsappclone/core/MyColors.dart';
       floatingLabelStyle: Textstyles.darkLabel,
     ),
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: myColors.textSelection,
-      selectionHandleColor: myColors.textSelection,
-      selectionColor: myColors.textSelection
+      cursorColor: MyColors.textSelection,
+      selectionHandleColor: MyColors.textSelection,
+      selectionColor: MyColors.textSelection
     ),
     listTileTheme: const ListTileThemeData(
         textColor: Colors.white
@@ -175,10 +174,10 @@ import 'package:whatsappclone/core/MyColors.dart';
       ),
     ),
     dialogTheme: DialogThemeData(
-      backgroundColor: myColors.bDialog
+      backgroundColor: MyColors.bDialog
     ),
     dividerTheme: DividerThemeData(
-        color: myColors.dividerTheme,
+        color: MyColors.dividerTheme,
         indent: 30
     ),
     iconTheme: const IconThemeData(
@@ -201,6 +200,6 @@ import 'package:whatsappclone/core/MyColors.dart';
       labelMedium:TextStyle(color: Colors.white) ,
       labelSmall: TextStyle(color: Colors.white),
     ),
-    scaffoldBackgroundColor: myColors.darkCard,
+    scaffoldBackgroundColor: MyColors.darkCard,
   );
  }

@@ -55,7 +55,7 @@ class _ContactsState extends State<Contacts> {
               padding: const EdgeInsets.only(top: 18),
               child: Text("Chats", style: Textstyles.appBar,),
             ),
-            backgroundColor: myColors.TC,
+            backgroundColor: MyColors.TC,
             automaticallyImplyLeading: false,
             centerTitle: false,
           ),

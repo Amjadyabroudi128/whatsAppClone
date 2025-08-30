@@ -19,7 +19,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: myColors.BG,
+      backgroundColor: MyColors.BG,
       body:  const SingleChildScrollView(
         child:  Column(
           children: [

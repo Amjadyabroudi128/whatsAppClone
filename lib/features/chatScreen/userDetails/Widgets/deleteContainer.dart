@@ -66,7 +66,7 @@ class deleteContainer extends StatelessWidget {
               },
               label: Text(
                 "Delete for Everyone",
-                style: TextStyle(color: myColors.redAccent),
+                style: TextStyle(color: MyColors.redAccent),
               ),
               context: context,
             ),

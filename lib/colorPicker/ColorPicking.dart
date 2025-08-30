@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/colorPicker/Widgets/circleAvatar.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import '../core/icons.dart';
-import 'Widgets/circleAvatar.dart';
 import 'colorsList.dart';
 
 class Colorpicking extends StatefulWidget {
@@ -22,7 +22,7 @@ class _ColorpickingState extends State<Colorpicking> {
       appBar: AppBar(
         centerTitle: true,
         title:  Text(" Chat Color", style: Textstyles.selectClr),
-        iconTheme:  IconThemeData(color: Colors.white),
+        iconTheme:  const IconThemeData(color: Colors.white),
         backgroundColor: Colors.black54,
       ),
       body: GridView.builder(
@@ -44,7 +44,7 @@ class _ColorpickingState extends State<Colorpicking> {
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    avatar(color: color),
+                    Avatar(color: color),
                     if (selectedIndex == index)
                        icons.tick,
                   ],

@@ -63,7 +63,7 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
             if (updatedImage.isEmpty) {
               return Text(
                 "No image available",
-                style: TextStyle(color: myColors.FG),
+                style: TextStyle(color: MyColors.FG),
               );
             }
 

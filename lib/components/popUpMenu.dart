@@ -16,7 +16,7 @@ class MyPopUpMenu<T> extends StatelessWidget {
       icon: icon,
       itemBuilder: itemBuilder,
       onSelected: onSelected,
-      popUpAnimationStyle: AnimationStyle(
+      popUpAnimationStyle: const AnimationStyle(
           duration: kDuration
       ),
     );

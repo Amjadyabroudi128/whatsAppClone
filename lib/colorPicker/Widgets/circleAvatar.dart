@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 
-class avatar extends StatelessWidget {
-  const avatar({
+import 'package:flutter/material.dart';
+class Avatar extends StatelessWidget {
+  const Avatar({
     super.key,
     required this.color,
   });

@@ -132,7 +132,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                               Transform.scale(
                                 scale: 1.2,
                                 child: Checkbox(
-                                  activeColor: myColors.starColor,
+                                  activeColor: MyColors.starColor,
                                   value: selectedMessages.contains(msg.messageId),
                                   onChanged: (value) {
                                     setState(() {
@@ -148,7 +148,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                             Flexible(
                               child: kCard(
                                 color: msg.senderEmail == auth.currentUser!.email ?
-                                myColors.starColor : myColors.familyText,
+                                MyColors.starColor : MyColors.familyText,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(

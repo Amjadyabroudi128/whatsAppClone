@@ -4,7 +4,6 @@ import 'package:whatsappclone/components/dividerContainer.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/SizedBox.dart';
-import '../../../components/TextButton.dart';
 import '../../../core/TextStyles.dart';
 import '../../../components/iconButton.dart';
 import '../../../components/listTilesOptions.dart';
@@ -45,7 +44,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    dividerContainer(),
+                    const DividerContainer(),
                     Text(
                       "Choose an option",
                       style: Textstyles.option,
