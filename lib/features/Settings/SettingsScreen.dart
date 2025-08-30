@@ -14,6 +14,7 @@ import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/editEmail.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/changeEmail.dart';
+import 'package:whatsappclone/features/Settings/Widget/issueReport/issueReport.dart';
 import 'package:whatsappclone/features/Settings/Widget/starCard/allStars.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
 import '../../Firebase/FirebaseAuth.dart';
@@ -91,7 +92,21 @@ class _SettingScreenState extends State<SettingScreen> {
                         divider(),
                         ChangeEmail(passwordController: passwordController,
                             email: email,
-                            emailController: emailController)
+                            emailController: emailController),
+                        divider(),
+                        Options(
+                          context: context,
+                          label: const Text("Report an issue"),
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => IssueReport(emailController: emailController),
+                              ),
+                            );
+                          },
+                          trailing: const Icon(CupertinoIcons.exclamationmark_circle)
+                        )
                       ],
                     ),
                   ),
