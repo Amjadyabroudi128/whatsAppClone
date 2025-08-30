@@ -48,9 +48,7 @@ class _userDetailsState extends State<userDetails> {
   }
   @override
   Widget build(BuildContext context) {
-    final auth = FirebaseAuth.instance;
     String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
-
     return GestureDetector(
       onTap: (){
         setState(() {
@@ -59,10 +57,10 @@ class _userDetailsState extends State<userDetails> {
         });
       },
       child: Scaffold(
-        backgroundColor: MyColors.BG,
+        backgroundColor: MyColors.bg,
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: MyColors.BG,
+          iconTheme: const IconThemeData(color: Colors.black),
+          backgroundColor: MyColors.bg,
           title: Text("Contact Details", style: TextStyle(color: Colors.black),),
           centerTitle: true,
         ),
@@ -101,7 +99,7 @@ class _userDetailsState extends State<userDetails> {
                 if (widget.bio != null && widget.bio!.isNotEmpty)
                   GestureDetector(
                     onLongPress: _onTapBio,
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: kCard(
                         child: Padding(
@@ -133,7 +131,7 @@ class _userDetailsState extends State<userDetails> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 icons.copy,
-                                BoxSpacing(mWidth: 10,),
+                                const BoxSpacing(mWidth: 10,),
                                 Text("Copy", style: TextStyle(
                                   color: MyTheme.appTheme == true ? Colors.white : Colors.black,
                                 ),
@@ -143,7 +141,7 @@ class _userDetailsState extends State<userDetails> {
                           )
                       ),
                    ),
-                BoxSpacing(myHeight: 5),
+                const BoxSpacing(myHeight: 5),
                 // Starred Messages
                 StreamBuilder(
                   stream: FirebaseFirestore.instance
@@ -162,8 +160,8 @@ class _userDetailsState extends State<userDetails> {
                         leading: icons.star,
                         label: Row(
                           children: [
-                            Text("Starred messages"),
-                            Spacer(),
+                            const Text("Starred messages"),
+                            const Spacer(),
                             if (count > 0) Text(count.toString()),
                           ],
                         ),
@@ -191,7 +189,7 @@ class _userDetailsState extends State<userDetails> {
                       child: Options(
                         context: context,
                         leading: icons.image,
-                        label: Row(
+                        label: const Row(
                           children: [
                             Text("Media"),
                             Spacer(),

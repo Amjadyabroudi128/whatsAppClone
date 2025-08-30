@@ -3,7 +3,7 @@
  import 'package:flutter/material.dart';
 
 class MyColors {
-   static Color BG = Colors.grey.shade300;
+   static Color bg = Colors.grey.shade300;
    static Color TC = Colors.green;
    static Color familyText = Colors.grey;
    static  Color FG = Colors.white;
