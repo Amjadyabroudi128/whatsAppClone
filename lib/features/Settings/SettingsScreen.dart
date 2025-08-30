@@ -13,6 +13,7 @@ import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/editEmail.dart';
+import 'package:whatsappclone/features/Settings/Widget/accountFunctions/changeEmail.dart';
 import 'package:whatsappclone/features/Settings/Widget/starCard/allStars.dart';
 import 'package:whatsappclone/utils/pickImage.dart';
 import '../../Firebase/FirebaseAuth.dart';
@@ -88,21 +89,9 @@ class _SettingScreenState extends State<SettingScreen> {
                         divider(),
                         deleteAccount(),
                         divider(),
-                        Options(
-                          context: context,
-                          label: Text("Change email"),
-                          trailing: icons.emailIcon,
-                          onTap: ()async {
-                            await btmSheet(
-                              context: context,
-                                isScrollControlled: true,
-                              builder: (context) {
-                                return Editemail(email: email, emailController: emailController,
-                                  passwordController: passwordController,);
-                              }
-                            );
-                          }
-                        )
+                        ChangeEmail(passwordController: passwordController,
+                            email: email,
+                            emailController: emailController)
                       ],
                     ),
                   ),
