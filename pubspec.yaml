@@ -54,6 +54,7 @@ dependencies:
   http: ^1.4.0
   cloud_functions: ^5.4.0
   flutter_slidable: ^4.0.0
+  path:
 
 
 dev_dependencies:
