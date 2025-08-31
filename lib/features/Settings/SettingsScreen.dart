@@ -14,6 +14,7 @@ import 'package:whatsappclone/features/Settings/Widget/accountFunctions/changeEm
 import 'package:whatsappclone/features/Settings/Widget/issueReport/issueReport.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../Firebase/FirebaseCollections.dart';
+import '../../core/icons.dart';
 import 'Widget/accountFunctions/deleteAccount.dart';
 import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
@@ -97,7 +98,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                             );
                           },
-                          trailing: const Icon(CupertinoIcons.exclamationmark_circle)
+                          trailing: icons.getIssueIcon(context)
                         )
                       ],
                     ),

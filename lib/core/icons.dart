@@ -60,4 +60,10 @@ class icons {
   static Icon vOff =  const Icon(Icons.volume_off, size: 18, color: Colors.black);
   static Icon volumeUp = const Icon(Icons.volume_up);
   static Icon myFavourite = const Icon(Icons.favorite);
+  static Icon getIssueIcon(BuildContext context) {
+    return Icon(
+      CupertinoIcons.exclamationmark_circle,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
 }
