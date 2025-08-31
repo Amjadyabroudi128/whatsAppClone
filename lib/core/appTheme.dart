@@ -27,7 +27,9 @@ import 'package:whatsappclone/core/MyColors.dart';
           color: Colors.black
       )
     ),
-       elevatedButtonTheme: ElevatedButtonThemeData(
+      iconTheme: const IconThemeData(color: Colors.black),
+
+      elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
              backgroundColor: MyColors.tc,
              foregroundColor: MyColors.FG,
@@ -110,6 +112,7 @@ import 'package:whatsappclone/core/MyColors.dart';
       shape: cardShape,
       color: Colors.grey[700],
     ),
+
     checkboxTheme: const CheckboxThemeData(
       checkColor: WidgetStatePropertyAll(Colors.white),
       side: BorderSide(
@@ -125,6 +128,7 @@ import 'package:whatsappclone/core/MyColors.dart';
           color: Colors.white
       ),
     ),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           backgroundColor: MyColors.tc,
@@ -180,9 +184,7 @@ import 'package:whatsappclone/core/MyColors.dart';
         color: MyColors.dividerTheme,
         indent: 30
     ),
-    iconTheme: const IconThemeData(
-      color: Colors.white
-    ),
+    iconTheme: const IconThemeData(color: Colors.white),
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.white),
       displayMedium: TextStyle(color: Colors.white),
