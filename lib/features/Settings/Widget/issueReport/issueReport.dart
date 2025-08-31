@@ -41,6 +41,9 @@ class IssueReport extends StatelessWidget {
                 kElevatedBtn(onPressed: (){
                   if(emailController.text.isEmpty || issueController.text.isEmpty) {
                     myToast("Please fill the fields before submitting");
+                  } else {
+                    myToast("We have received your issue");
+                    Navigator.of(context).pop();
                   }
 
                 }, child: const Text("Submit"))
