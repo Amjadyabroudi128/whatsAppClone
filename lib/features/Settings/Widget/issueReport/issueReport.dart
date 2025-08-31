@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextField.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 
 class IssueReport extends StatelessWidget {
   const IssueReport({super.key, required this.emailController});
@@ -38,6 +39,9 @@ class IssueReport extends StatelessWidget {
                 ),
                 const BoxSpacing(myHeight: 12,),
                 kElevatedBtn(onPressed: (){
+                  if(emailController.text.isEmpty || issueController.text.isEmpty) {
+                    myToast("Please fill the fields before submitting");
+                  }
 
                 }, child: const Text("Submit"))
               ],
