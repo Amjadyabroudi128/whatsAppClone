@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
 
 class IssueReport extends StatelessWidget {
@@ -9,6 +8,7 @@ class IssueReport extends StatelessWidget {
   final TextEditingController emailController;
   @override
   Widget build(BuildContext context) {
+    final TextEditingController issueController = TextEditingController();
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();
@@ -23,15 +23,18 @@ class IssueReport extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const BoxSpacing(myHeight: 60,),
                 const Center(child: Text("What to report?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
                 const BoxSpacing(myHeight: 9,),
-                const kTextField(
+                 kTextField(
+                  myController: emailController,
                   hint: "Your email ",
                 ),
                 const BoxSpacing(myHeight: 12,),
-                const kTextField(
+                 kTextField(
                   hint: "Please describe your Issue...",
                   minLines: 4,
+                  myController: issueController,
                 ),
                 const BoxSpacing(myHeight: 12,),
                 kElevatedBtn(onPressed: (){
