@@ -20,7 +20,7 @@ class Editbio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
             color: Colors.transparent
         )
     );

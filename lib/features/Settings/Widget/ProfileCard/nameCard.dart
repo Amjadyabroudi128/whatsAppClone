@@ -116,7 +116,7 @@ class _nameCardState extends State<nameCard> {
                           child: imageWidget(imageUrl: imageUrl),
                         ),
                       ),
-                      BoxSpacing(myHeight: 5),
+                      const BoxSpacing(myHeight: 5),
                       kCard(
                         child: Column(
                           children: [
@@ -138,7 +138,7 @@ class _nameCardState extends State<nameCard> {
                                 );
                               },
                             ),
-                            divider(),
+                            const divider(),
                             Options(
                               context: context,
                               trailing: icons.arrowForward,
@@ -156,11 +156,11 @@ class _nameCardState extends State<nameCard> {
                                 );
                               },
                             ),
-                            divider(),
+                            const divider(),
                             Options(
                               context: context,
                               trailing: icons.instagram,
-                              label: Text("Link"),
+                              label: const Text("Link"),
                               onTap: () async {
                                 await btmSheet(
                                   context: context,
