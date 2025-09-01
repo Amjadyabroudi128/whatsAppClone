@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 
@@ -28,6 +29,7 @@ class _FavouritescreenState extends State<Favouritescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text("Favourites"),
         actions: [
           kTextButton(
@@ -57,85 +59,89 @@ class _FavouritescreenState extends State<Favouritescreen> {
 
           final favourites = snapshot.data!.docs;
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  "Favourites",
-                  style: TextStyle(color: Colors.grey, fontSize: 16),
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Favourites",
+                    style: TextStyle(color: Colors.grey, fontSize: 16),
+                  ),
                 ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: favourites.length,
-                  itemBuilder: (context, index) {
-                    final favData =
-                    favourites[index].data() as Map<String, dynamic>;
-                    final name = favData['name'] ?? 'Unknown';
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (isEditing)
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12.0, top: 12.0),
-                              child: Transform.scale(
-                                scale: 1.2,
-                                child: Checkbox(
-                                  activeColor: MyColors.starColor,
-                                  value: selectedMessages.contains(name),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      if (value == true) {
-                                        selectedMessages.add(name);
-                                      } else {
-                                        selectedMessages.remove(name);
-                                      }
-                                    });
-                                  },
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: favourites.length,
+                    itemBuilder: (context, index) {
+                      final favData =
+                      favourites[index].data() as Map<String, dynamic>;
+                      final name = favData['name'] ?? 'Unknown';
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (isEditing)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                                child: Transform.scale(
+                                  scale: 1.2,
+                                  child: Checkbox(
+                                    activeColor: MyColors.starColor,
+                                    value: selectedMessages.contains(name),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        if (value == true) {
+                                          selectedMessages.add(name);
+                                        } else {
+                                          selectedMessages.remove(name);
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            Flexible(
+                              child: kCard(
+                                child: Options(
+                                  context: context,
+                                  label: Text(name),
                                 ),
                               ),
                             ),
-                          Flexible(
-                            child: kCard(
-                              child: Options(
-                                context: context,
-                                label: Text(name),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              if (isEditing && selectedMessages.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      kIconButton(
-                        onPressed: () async {
-                          for (final name in selectedMessages) {
-                            await service.removeFavourite(name);
-                          }
-                          setState(() {
-                            isEditing = false;
-                            selectedMessages.clear();
-                          });
-                        },
-                        myIcon: icons.deleteIcon,
-                      ),
-                    ],
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ),
-            ],
+                if (isEditing && selectedMessages.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        kIconButton(
+                          onPressed: () async {
+                            for (final name in selectedMessages) {
+                              await service.removeFavourite(name);
+                              myToast("Removed from Favourites");
+                            }
+                            setState(() {
+                              isEditing = false;
+                              selectedMessages.clear();
+                            });
+                          },
+                          myIcon: icons.deleteIcon,
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           );
         },
       ),
