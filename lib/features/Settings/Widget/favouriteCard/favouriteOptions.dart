@@ -30,7 +30,7 @@ class favouriteCard extends StatelessWidget {
                   if (count > 0) Text(count.toString()),
                 ],
               ),
-              trailing: icons.myFavourite,
+              trailing: icons.myFavourite(context),
               onTap: (){
                 Navigator.of(context).pushNamed("favourite");
               }
