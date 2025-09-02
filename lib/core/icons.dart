@@ -49,7 +49,13 @@ class icons {
   static Icon Wphoto = const Icon(CupertinoIcons.photo, size: 20,color: Colors.white,);
   static Icon selectIcon = Icon(Icons.check_circle_outline, color: MyColors.labelClr);
   static Icon search = const  Icon(Icons.search);
-  static Icon instagram = const Icon(FontAwesomeIcons.instagram);
+  // static Icon instagram = const Icon(FontAwesomeIcons.instagram);
+  static Icon instagram(BuildContext context) {
+    return Icon(
+        FontAwesomeIcons.instagram,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon messageRead = Icon(Icons.done_all, color: MyColors.readColor);
   static Icon sent = Icon(Icons.check, color: MyColors.sent,);
   static Icon unread = const Icon(Icons.mark_chat_unread, size: 23, color: Colors.white,);

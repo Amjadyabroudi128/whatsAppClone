@@ -159,7 +159,7 @@ class _nameCardState extends State<nameCard> {
                             const divider(),
                             Options(
                               context: context,
-                              trailing: icons.instagram,
+                              trailing: icons.instagram(context),
                               label: const Text("Link"),
                               onTap: () async {
                                 await btmSheet(
