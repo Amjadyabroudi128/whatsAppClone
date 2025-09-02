@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 
@@ -23,7 +21,7 @@ class _PasswordResetState extends State<PasswordReset> {
   @override
   Widget build(BuildContext context) {
     OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
             color: Colors.transparent
         )
     );
@@ -40,12 +38,12 @@ class _PasswordResetState extends State<PasswordReset> {
             children: [
               Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
                     child: Text("Enter your email to reset your password",
                       style: TextStyle(fontSize: 20),),
                   ),
-                  BoxSpacing(myHeight: 14,),
+                  const BoxSpacing(myHeight: 14,),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: kTextField(
@@ -56,7 +54,7 @@ class _PasswordResetState extends State<PasswordReset> {
                       icon: icons.emailIcon(context),
                       ),
                   ),
-                  BoxSpacing(myHeight: 12,),
+                  const BoxSpacing(myHeight: 12,),
                   kElevatedBtn(
                     child: Text("Send"),
                     onPressed: () async {
