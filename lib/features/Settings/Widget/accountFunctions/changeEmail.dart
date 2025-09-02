@@ -15,7 +15,7 @@ class ChangeEmail extends StatelessWidget {
     return Options(
         context: context,
         label: Text("Change email"),
-        trailing: icons.emailIcon,
+        trailing: icons.emailIcon(context),
         onTap: ()async {
           await btmSheet(
               context: context,

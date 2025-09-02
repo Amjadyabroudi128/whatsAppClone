@@ -7,7 +7,12 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'appTheme.dart';
 
 class icons {
-  static Icon emailIcon = const Icon(Icons.email);
+  static Icon emailIcon(BuildContext context) {
+    return Icon(
+      Icons.email,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon passIcon = const Icon(Icons.password);
   static Icon name = const Icon(Icons.person);
   static Icon logout = Icon(Icons.logout,color: MyColors.delete,);

@@ -53,7 +53,7 @@ class _PasswordResetState extends State<PasswordReset> {
                       enable: enabled,
                       filled: true,
                       myController: emailController,
-                      icon: icons.emailIcon,
+                      icon: icons.emailIcon(context),
                       ),
                   ),
                   BoxSpacing(myHeight: 12,),

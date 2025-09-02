@@ -131,7 +131,7 @@ class _EditemailState extends State<Editemail> {
                 Text("Change email"),
                 BoxSpacing(myHeight: 10),
                 kTextField(
-                  icon: icons.emailIcon,
+                  icon: icons.emailIcon(context),
                   enable: enabled,
                   filled: true,
                   maxLines: 1,
