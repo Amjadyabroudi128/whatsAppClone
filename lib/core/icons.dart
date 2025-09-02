@@ -45,7 +45,12 @@ class icons {
   static Icon copy = Icon(Icons.copy,color: MyTheme.appTheme == true ? Colors.white : Colors.black,);
   static Icon wcopy = const Icon(Icons.copy, color: Colors.white,);
   static Icon edit = Icon(CupertinoIcons.pencil, color: MyColors.tick, size: 27,);
-  static Icon camera = const Icon(CupertinoIcons.camera,);
+  static Icon camera(BuildContext context) {
+    return Icon(
+      CupertinoIcons.camera,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon cancel = const Icon(Icons.cancel_outlined,);
   static Icon dCam = const Icon(Icons.camera_alt_outlined);
   static Icon file = const Icon(Icons.file_copy_outlined);

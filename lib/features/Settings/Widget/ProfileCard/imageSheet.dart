@@ -55,7 +55,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                 children: [
                   kListTile(
                     title: Text("Take Photo", style: Textstyles.saveBio),
-                    trailing: icons.camera,
+                    trailing: icons.camera(context),
                     onTap: () async {
                       Navigator.of(context).pop();
                       String? imageUrl = await url.takeImage();
