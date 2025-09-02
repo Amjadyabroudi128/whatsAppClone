@@ -8,11 +8,17 @@ import 'appTheme.dart';
 
 class icons {
   static Icon emailIcon = const Icon(Icons.email);
-  static Icon passIcon = Icon(Icons.password);
+  static Icon passIcon = const Icon(Icons.password);
   static Icon name = const Icon(Icons.person);
   static Icon logout = Icon(Icons.logout,color: MyColors.delete,);
   static Icon image = const Icon(Icons.image);
-  static Icon whiteImage = const Icon(CupertinoIcons.photo,);
+  // static Icon whiteImage = const Icon(CupertinoIcons.photo,);
+  static Icon whiteImage(BuildContext context) {
+    return Icon(
+      CupertinoIcons.photo,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon send = Icon(Icons.send,color: MyColors.myMessage);
   static Icon arrow = const Icon(Icons.arrow_back);
   static Icon add = const Icon(Icons.add);
@@ -49,7 +55,6 @@ class icons {
   static Icon Wphoto = const Icon(CupertinoIcons.photo, size: 20,color: Colors.white,);
   static Icon selectIcon = Icon(Icons.check_circle_outline, color: MyColors.labelClr);
   static Icon search = const  Icon(Icons.search);
-  // static Icon instagram = const Icon(FontAwesomeIcons.instagram);
   static Icon instagram(BuildContext context) {
     return Icon(
         FontAwesomeIcons.instagram,

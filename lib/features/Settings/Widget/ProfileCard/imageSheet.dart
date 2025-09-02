@@ -68,7 +68,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                   divider(),
                   kListTile(
                     title: Text("Choose Photo",),
-                    trailing: icons.whiteImage,
+                    trailing: icons.whiteImage(context),
                     onTap: () async {
                       Navigator.of(context).pop();
                       String? imageUrl = await url.pickImage();
