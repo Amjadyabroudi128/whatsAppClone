@@ -12,7 +12,6 @@ class icons {
   static Icon name = const Icon(Icons.person);
   static Icon logout = Icon(Icons.logout,color: MyColors.delete,);
   static Icon image = const Icon(Icons.image);
-  // static Icon whiteImage = const Icon(CupertinoIcons.photo,);
   static Icon whiteImage(BuildContext context) {
     return Icon(
       CupertinoIcons.photo,
@@ -29,7 +28,12 @@ class icons {
   static Icon settings = const Icon(Icons.settings);
   static Icon person = const Icon(Icons.person, size: 30,);
   static Icon arrowForward = const Icon(Icons.arrow_forward_ios);
-  static Icon remove = const Icon(Icons.remove_circle);
+  static Icon remove(BuildContext context) {
+    return Icon(
+      Icons.remove_circle,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon tick = Icon(Icons.check, color: MyColors.tick, size: 40);
   static Icon colors = const Icon(Icons.color_lens_outlined);
   static Icon deleteIcon = Icon(CupertinoIcons.delete, color: MyColors.delete);

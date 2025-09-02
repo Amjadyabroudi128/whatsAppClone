@@ -24,7 +24,7 @@ class deleteAccount extends StatelessWidget {
     return Options(
       context: context,
       label: Text("DeleteAccount"),
-      trailing: icons.remove,
+      trailing: icons.remove(context),
       onTap: () async {
         await showDialog(
           context: context,
