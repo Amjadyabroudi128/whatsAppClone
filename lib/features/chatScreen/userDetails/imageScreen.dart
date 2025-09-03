@@ -123,6 +123,7 @@ class _ImagescreenState extends State<Imagescreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.grey,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -139,7 +140,7 @@ class _ImagescreenState extends State<Imagescreen> {
               },
             ),
             kIconButton(
-              myIcon: _isStarred ? icons.slash : icons.stary,
+              myIcon: _isStarred ? icons.slash(context) : icons.stary,
               onPressed: () async {
                 if (_isStarred) {
                   FocusScope.of(context).unfocus();
