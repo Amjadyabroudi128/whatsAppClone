@@ -224,7 +224,7 @@ class _allStarredState extends State<allStarred> {
                               selectedMessages.clear();
                             });
                           },
-                          myIcon: icons.slash,
+                          myIcon: icons.slash(context),
                         ),
                         kIconButton(
                           onPressed: () async {
