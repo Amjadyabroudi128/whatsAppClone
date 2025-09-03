@@ -57,8 +57,14 @@ class icons {
   static Icon star = Icon(Icons.star_border_outlined, color: MyColors.labelClr,);
   static Icon noStar = Icon(Icons.stars, color: MyColors.starColor, size: 90,);
   static Icon wStar = const Icon(Icons.star, color: Colors.white,size: 18,);
-  static Icon slash = const Icon(CupertinoIcons.star_slash_fill, size: 30,);
-  static Icon stary = const Icon(CupertinoIcons.star, size: 30,color: Colors.black,);
+  static Icon slash(BuildContext context) {
+    return Icon(
+      CupertinoIcons.star_slash_fill, size: 30,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
+  // static Icon slash = const Icon(CupertinoIcons.star_slash_fill, size: 30,);
+  static Icon stary = const Icon(CupertinoIcons.star, size: 30,);
   static Icon amberStar = Icon(Icons.star, color: MyColors.amberStar);
   static Icon noImages = const Icon(CupertinoIcons.photo, size: 50,);
   static Icon supportedImage = const Icon(Icons.image_not_supported, size: 50, color: Colors.grey);
