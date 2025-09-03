@@ -216,7 +216,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                             selectedMessages.clear();
                           });
                         },
-                        myIcon: icons.slash,
+                        myIcon: icons.slash(context),
                       ),
                       kIconButton(
                         onPressed: () async {
