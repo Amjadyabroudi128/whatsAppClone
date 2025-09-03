@@ -31,12 +31,13 @@ import 'package:whatsappclone/core/MyColors.dart';
 
       elevatedButtonTheme: ElevatedButtonThemeData(
          style: ElevatedButton.styleFrom(
-             backgroundColor: MyColors.tc,
+             backgroundColor: MyColors.TC,
              foregroundColor: MyColors.FG,
              textStyle: Textstyles.Ebtn,
            shape: circular
          ),
        ),
+
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: fieldBorder,
       focusedBorder: fieldBorder,
@@ -131,7 +132,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: MyColors.tc,
+          backgroundColor: MyColors.TC,
           foregroundColor: MyColors.FG,
           textStyle: Textstyles.Ebtn,
           shape: circular
