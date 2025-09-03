@@ -4,7 +4,7 @@
 
 class MyColors {
    static Color bg = Colors.grey.shade300;
-   static Color tc = Colors.green;
+   static Color TC = Colors.green;
    static Color familyText = Colors.grey;
    static  Color FG = Colors.white;
    static Color? myMessage = Colors.green[400];
