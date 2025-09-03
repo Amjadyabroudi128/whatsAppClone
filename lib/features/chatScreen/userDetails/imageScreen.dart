@@ -7,7 +7,6 @@ import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/fSizedBox.dart';
 import 'package:whatsappclone/components/iconButton.dart';
-import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
@@ -55,7 +54,7 @@ class Imagescreen extends StatefulWidget {
 }
 
 class _ImagescreenState extends State<Imagescreen> {
-  final TextStyle dates = TextStyle(fontSize: 13);
+  static const TextStyle dates = TextStyle(fontSize: 13);
   final auth = FirebaseAuth.instance;
   final FirebaseService service = FirebaseService();
   bool _isStarred = false;
@@ -81,12 +80,10 @@ class _ImagescreenState extends State<Imagescreen> {
       image: widget.image,
     );
     Future addToFireStore(String imagePath) async {
-      String? imageUrl;
       await userC.doc(user!.uid).set({
         "image": imagePath,
       }, SetOptions(merge: true));
       setState(() {
-        imageUrl = imagePath;
       });
     }
 
@@ -98,13 +95,13 @@ class _ImagescreenState extends State<Imagescreen> {
           children: [
             Text(
               widget.senderName == auth.currentUser!.displayName ? "You" : widget.senderName ?? "",
-              style: TextStyle(fontSize: 19),
+              style: const TextStyle(fontSize: 19),
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(widget.date, style: dates),
-                BoxSpacing(mWidth: 7),
+                const BoxSpacing(mWidth: 7),
                 Text(widget.time, style: dates)
               ],
             ),
@@ -122,171 +119,187 @@ class _ImagescreenState extends State<Imagescreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.grey,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            if(_isMe)
-            IconButton(
-              icon: icons.deleteIcon,
-              onPressed: () async {
-                await showModalBottomSheet(
-                  backgroundColor: MyColors.familyText,
-                  context: context,
-                  builder: (context) =>
-                      deleteContainer(service: service, user: user, widget: widget, msg: msg),
-                );
-              },
-            ),
-            kIconButton(
-              myIcon: _isStarred ? icons.slash(context) : icons.stary,
-              onPressed: () async {
-                if (_isStarred) {
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          // For light theme
+          bottomAppBarTheme: Theme.of(context).brightness == Brightness.light
+              ? const BottomAppBarThemeData(
+            color: Colors.white,
+            shadowColor: Colors.grey,
+            elevation: 8,
+          )
+          // For dark theme
+              : BottomAppBarThemeData(
+            color: MyColors.darkCard, // Use your dark card color
+            shadowColor: Colors.black,
+            elevation: 8,
+          ),
+        ),
+        child: BottomAppBar(
+          color: Colors.transparent,
+          elevation: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              if(_isMe)
+              IconButton(
+                icon: icons.deleteIcon,
+                onPressed: () async {
+                  await showModalBottomSheet(
+                    backgroundColor: MyColors.familyText,
+                    context: context,
+                    builder: (context) =>
+                        deleteContainer(service: service, user: user, widget: widget, msg: msg),
+                  );
+                },
+              ),
+              kIconButton(
+                myIcon: _isStarred ? icons.slash(context) : icons.stary,
+                onPressed: () async {
+                  if (_isStarred) {
+                    FocusScope.of(context).unfocus();
+                    await service.deleteStar(msg);
+                    myToast("Message unstarred");
+                  } else {
+                    FocusScope.of(context).unfocus();
+                    await service.addToStar(msg);
+                    myToast("Message starred");
+                  }
+                  setState(() {
+                    _isStarred = !_isStarred;
+                  });
                   FocusScope.of(context).unfocus();
-                  await service.deleteStar(msg);
-                  myToast("Message unstarred");
-                } else {
-                  FocusScope.of(context).unfocus();
-                  await service.addToStar(msg);
-                  myToast("Message starred");
-                }
-                setState(() {
-                  _isStarred = !_isStarred;
-                });
-                FocusScope.of(context).unfocus();
-                // Navigator.pop(context);
-              },
-            ),
-            kIconButton(
-              myIcon: icons.share,
-              onPressed: ()async {
-                await showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                   return  Container(
-                     padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: IntrinsicHeight(
-                        child: Column(
-                          children: [
-                            const DividerContainer(),
-                            Row(
-                              children: [
-                                Container(
-                                  height: 49, width: 49,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                      image: DecorationImage(
-                                        image: NetworkImage(msg.image!),
-                                        fit: BoxFit.cover,
-                                      )
-                                  ),
-                                ),
-                                BoxSpacing(mWidth: 10,),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${user!.email == auth.currentUser!.email ? "You" : user.email}",
-                                      style: TextStyle(fontSize: 15),
+                  // Navigator.pop(context);
+                },
+              ),
+              kIconButton(
+                myIcon: icons.share(context),
+                onPressed: ()async {
+                  await showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                     return  Container(
+                       padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: IntrinsicHeight(
+                          child: Column(
+                            children: [
+                              const DividerContainer(),
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 49, width: 49,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                        image: DecorationImage(
+                                          image: NetworkImage(msg.image!),
+                                          fit: BoxFit.cover,
+                                        )
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(widget.date, style: dates),
-                                        BoxSpacing(mWidth: 7,),
-                                        Text(widget.time, style: dates)
-                                      ],
+                                  ),
+                                  const BoxSpacing(mWidth: 10,),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${user!.email == auth.currentUser!.email ? "You" : user.email}",
+                                        style: const TextStyle(fontSize: 15),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(widget.date, style: dates),
+                                          BoxSpacing(mWidth: 7,),
+                                          Text(widget.time, style: dates)
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  kIconButton(
+                                    onPressed: (){
+                                      Navigator.of(context).pop();
+                                    },
+                                    myIcon: icons.close,
+                                  )
+                                ],
+                              ),
+                              kCard(
+                                // color: Colors.grey,
+                                child: Column(
+                                  children: [
+                                    Options(
+                                      context: context,
+                                      label: const Text("Set as Profile photo"),
+                                      trailing: icons.person,
+                                        onTap: () async  {
+                                        Navigator.of(context).pop();
+                                         await showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: true,
+                                            builder: (context) {
+                                              return fSizedBox(
+                                                heightFactor: 0.7,
+                                                child: Container(
+                                                  padding: EdgeInsets.all(16),
+                                                  child: Column(
+                                                    children: [
+                                                      CircleAvatar(
+                                                        radius: 200,
+                                                        backgroundImage: NetworkImage(msg.image!),
+                                                      ),
+                                                      const Spacer(),
+                                                      Row(
+                                                        children: [
+                                                          kTextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(context).pop();
+                                                            },
+                                                            child: Text("Cancel"),
+                                                          ),
+                                                          const Spacer(),
+                                                          kTextButton(
+                                                            onPressed: () async {
+                                                              await addToFireStore(widget.image!);
+                                                              myToast("image is Updated");
+                                                              Navigator.of(context).pop();
+                                                            },
+                                                            child: Text("Choose"),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      // Add more widgets here
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        }
+                                    ),
+                                    const divider(),
+                                    Options(
+                                        context: context,
+                                        label: const Text("Save to Gallery"),
+                                        trailing: icons.share(context),
+                                      onTap: () async {
+                                        await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
+                                        myToast("Image Saved");
+                                        Navigator.of(context).pop();
+                                      }
                                     ),
                                   ],
                                 ),
-                                Spacer(),
-                                kIconButton(
-                                  onPressed: (){
-                                    Navigator.of(context).pop();
-                                  },
-                                  myIcon: icons.close,
-                                )
-                              ],
-                            ),
-                            kCard(
-                              // color: Colors.grey,
-                              child: Column(
-                                children: [
-                                  Options(
-                                    context: context,
-                                    label: Text("Set as Profile photo"),
-                                    trailing: icons.person,
-                                      onTap: () async  {
-                                      Navigator.of(context).pop();
-                                       await showModalBottomSheet(
-                                          context: context,
-                                          isScrollControlled: true,
-                                          builder: (context) {
-                                            return fSizedBox(
-                                              heightFactor: 0.7,
-                                              child: Container(
-                                                padding: EdgeInsets.all(16),
-                                                child: Column(
-                                                  children: [
-                                                    CircleAvatar(
-                                                      radius: 200,
-                                                      backgroundImage: NetworkImage(msg.image!),
-                                                    ),
-                                                    Spacer(),
-                                                    Row(
-                                                      children: [
-                                                        kTextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(context).pop();
-                                                          },
-                                                          child: Text("Cancel"),
-                                                        ),
-                                                        Spacer(),
-                                                        kTextButton(
-                                                          onPressed: () async {
-                                                            await addToFireStore(widget.image!);
-                                                            myToast("image is Updated");
-                                                            Navigator.of(context).pop();
-                                                          },
-                                                          child: Text("Choose"),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    // Add more widgets here
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      }
-                                  ),
-                                  divider(),
-                                  Options(
-                                      context: context,
-                                      label: Text("Save to Gallery"),
-                                      trailing: icons.share,
-                                    onTap: () async {
-                                      await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
-                                      myToast("Image Saved");
-                                      Navigator.of(context).pop();
-                                    }
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                );
-              },
-              // onPressed: ()  async {
-              //
-              // },
-            ),
-          ],
+                      );
+                    }
+                  );
+                },
+
+              ),
+            ],
+          ),
         ),
       ),
     );
