@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
@@ -207,7 +206,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                       Row(
                                         children: [
                                           Text(widget.date, style: dates),
-                                          BoxSpacing(mWidth: 7,),
+                                          const BoxSpacing(mWidth: 7,),
                                           Text(widget.time, style: dates)
                                         ],
                                       ),
@@ -239,7 +238,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                               return fSizedBox(
                                                 heightFactor: 0.7,
                                                 child: Container(
-                                                  padding: EdgeInsets.all(16),
+                                                  padding: const EdgeInsets.all(16),
                                                   child: Column(
                                                     children: [
                                                       CircleAvatar(
@@ -253,7 +252,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                                             onPressed: () {
                                                               Navigator.of(context).pop();
                                                             },
-                                                            child: Text("Cancel"),
+                                                            child: const Text("Cancel"),
                                                           ),
                                                           const Spacer(),
                                                           kTextButton(
@@ -262,7 +261,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                                               myToast("image is Updated");
                                                               Navigator.of(context).pop();
                                                             },
-                                                            child: Text("Choose"),
+                                                            child: const Text("Choose"),
                                                           ),
                                                         ],
                                                       ),
