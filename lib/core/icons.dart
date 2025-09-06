@@ -98,7 +98,6 @@ class icons {
   static Icon options =  const Icon(Icons.more_horiz_outlined, size: 27,);
   static Icon fave = const  Icon(Icons.favorite_border);
   static Icon mute = const Icon(Icons.volume_off_outlined);
-  static Icon info = const Icon(Icons.info_outline);
   static Icon vOff =  const Icon(Icons.volume_off, size: 18, color: Colors.black);
   static Icon volumeUp = const Icon(Icons.volume_up);
   static Icon myFavourite(BuildContext context) {
