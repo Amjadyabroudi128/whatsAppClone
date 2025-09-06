@@ -31,7 +31,14 @@ class icons {
   static Icon contacts = const Icon(CupertinoIcons.person);
   static Icon chats = const Icon(Icons.chat);
   static Icon settings = const Icon(Icons.settings);
-  static Icon person = const Icon(Icons.person, size: 30,);
+  static Icon person(BuildContext context) {
+    return Icon(
+      Icons.person,
+      size: 30,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
+  // static Icon person = const Icon(Icons.person, size: 30,);
   static Icon arrowForward = const Icon(Icons.arrow_forward_ios);
   static Icon remove(BuildContext context) {
     return Icon(

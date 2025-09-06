@@ -16,8 +16,8 @@ class nameField extends StatelessWidget {
     return kTextField(
       textInputAction: TextInputAction.next,
       myController: name,
-      label: Text("Name"),
-      myIcon: icons.person,
+      label: const Text("Name"),
+      myIcon: icons.person(context),
     );
   }
 }

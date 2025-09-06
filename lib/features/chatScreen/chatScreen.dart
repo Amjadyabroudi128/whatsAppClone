@@ -151,7 +151,7 @@ class _TestnameState extends State<Testname> {
                       CircleAvatar(
                       backgroundImage: NetworkImage(widget.image!),
                       radius: 20,
-                    ) else icons.person,
+                    ) else icons.person(context),
                     SizedBox(width: 10,),
                     Column(
                       children: [

@@ -228,7 +228,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                     Options(
                                       context: context,
                                       label: const Text("Set as Profile photo"),
-                                      trailing: icons.person,
+                                      trailing: icons.person(context),
                                         onTap: () async  {
                                         Navigator.of(context).pop();
                                          await showModalBottomSheet(

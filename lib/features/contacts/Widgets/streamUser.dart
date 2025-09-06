@@ -66,7 +66,7 @@ Widget userList(String searchQuery) {
                       backgroundImage: NetworkImage(image),
                       radius: 20,
                     )
-                        : icons.person,
+                        : icons.person(context),
                     onTap: () {
                       Navigator.push(
                         context,
