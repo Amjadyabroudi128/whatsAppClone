@@ -98,7 +98,13 @@ class icons {
   static Icon options =  const Icon(Icons.more_horiz_outlined, size: 27,);
   static Icon fave = const  Icon(Icons.favorite_border);
   static Icon mute = const Icon(Icons.volume_off_outlined);
-  static Icon vOff =  const Icon(Icons.volume_off, size: 18, color: Colors.black);
+  // static Icon vOff =  const Icon(Icons.volume_off, size: 18, color: Colors.black);
+  static Icon vOff(BuildContext context) {
+    return  Icon(
+      Icons.volume_off, size: 18,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon volumeUp = const Icon(Icons.volume_up);
   static Icon myFavourite(BuildContext context) {
     return Icon(Icons.favorite, color: Theme.of(context).iconTheme.color,);
