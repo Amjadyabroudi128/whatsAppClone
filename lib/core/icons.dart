@@ -96,7 +96,12 @@ class icons {
   static Icon sent = Icon(Icons.check, color: MyColors.sent,);
   static Icon unread = const Icon(Icons.mark_chat_unread, size: 23, color: Colors.white,);
   static Icon options =  const Icon(Icons.more_horiz_outlined, size: 27,);
-  static Icon fave = const  Icon(Icons.favorite_border);
+  static Icon fave(BuildContext context) {
+    return  Icon(
+      Icons.favorite_border,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon mute(BuildContext context) {
     return  Icon(
       Icons.volume_off_outlined,
