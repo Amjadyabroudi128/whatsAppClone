@@ -97,15 +97,24 @@ class icons {
   static Icon unread = const Icon(Icons.mark_chat_unread, size: 23, color: Colors.white,);
   static Icon options =  const Icon(Icons.more_horiz_outlined, size: 27,);
   static Icon fave = const  Icon(Icons.favorite_border);
-  static Icon mute = const Icon(Icons.volume_off_outlined);
-  // static Icon vOff =  const Icon(Icons.volume_off, size: 18, color: Colors.black);
+  static Icon mute(BuildContext context) {
+    return  Icon(
+      Icons.volume_off_outlined,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon vOff(BuildContext context) {
     return  Icon(
       Icons.volume_off, size: 18,
       color: Theme.of(context).iconTheme.color,
     );
   }
-  static Icon volumeUp = const Icon(Icons.volume_up);
+  static Icon volumeUp(BuildContext context) {
+    return  Icon(
+      Icons.volume_up,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon myFavourite(BuildContext context) {
     return Icon(Icons.favorite, color: Theme.of(context).iconTheme.color,);
   }
