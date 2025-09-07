@@ -307,7 +307,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                       if (isMuted)
                                          Padding(
                                           padding: const EdgeInsets.only(left: 8.0),
-                                          child: icons.vOff(context),
+                                          child: icons.mute(context),
                                         ),
                                     ],
                                   );

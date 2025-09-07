@@ -103,12 +103,6 @@ class icons {
       color: Theme.of(context).iconTheme.color,
     );
   }
-  static Icon vOff(BuildContext context) {
-    return  Icon(
-      Icons.volume_off, size: 18,
-      color: Theme.of(context).iconTheme.color,
-    );
-  }
   static Icon volumeUp(BuildContext context) {
     return  Icon(
       Icons.volume_up,
