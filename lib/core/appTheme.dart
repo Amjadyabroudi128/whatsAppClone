@@ -173,6 +173,7 @@ import 'package:whatsappclone/core/MyColors.dart';
         )
     ),
     bottomSheetTheme: const BottomSheetThemeData(
+      modalBackgroundColor: Colors.black12,
       backgroundColor: Colors.black,
       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
