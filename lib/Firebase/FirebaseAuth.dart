@@ -398,6 +398,19 @@ import 'package:cloud_functions/cloud_functions.dart';
        );
      }
    }
+   Future<void> reportIssue(String email, String issue) async {
+     final user = auth.currentUser;
+     try{
+       await users.collection("Issues").add({
+         'email': email,
+         'issue': issue,
+         'name': user?.displayName ?? '',
+         "reportedAt": FieldValue.serverTimestamp()
+       });
+     } catch (e) {
+       debugPrint("Error during sign-up: $e");
+     }
+   }
    Future<void> updateName(newName) async {
      if(uid != null) {
        await users.collection("users").doc(uid).update(
