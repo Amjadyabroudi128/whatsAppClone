@@ -155,6 +155,7 @@ class _ImagescreenState extends State<Imagescreen> {
               kIconButton(
                 myIcon: _isStarred ? icons.slash(context) : icons.stary,
                 onPressed: () async {
+                  FocusScope.of(context).unfocus();
                   if (_isStarred) {
                     FocusScope.of(context).unfocus();
                     await service.deleteStar(msg);
@@ -167,8 +168,6 @@ class _ImagescreenState extends State<Imagescreen> {
                   setState(() {
                     _isStarred = !_isStarred;
                   });
-                  FocusScope.of(context).unfocus();
-                  // Navigator.pop(context);
                 },
               ),
               kIconButton(
@@ -212,7 +211,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   kIconButton(
                                     onPressed: (){
                                       Navigator.of(context).pop();
@@ -257,9 +256,9 @@ class _ImagescreenState extends State<Imagescreen> {
                                                           const Spacer(),
                                                           kTextButton(
                                                             onPressed: () async {
+                                                              Navigator.of(context).pop();
                                                               await addToFireStore(widget.image!);
                                                               myToast("image is Updated");
-                                                              Navigator.of(context).pop();
                                                             },
                                                             child: const Text("Choose"),
                                                           ),
@@ -280,9 +279,9 @@ class _ImagescreenState extends State<Imagescreen> {
                                         label: const Text("Save to Gallery"),
                                         trailing: icons.share(context),
                                       onTap: () async {
+                                        Navigator.of(context).pop();
                                         await MediaGallerySaver().saveMediaFromUrl(url: msg.image!);
                                         myToast("Image Saved");
-                                        Navigator.of(context).pop();
                                       }
                                     ),
                                   ],
