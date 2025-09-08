@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextField.dart';
@@ -10,6 +11,7 @@ class IssueReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController issueController = TextEditingController();
+    FirebaseService service = FirebaseService();
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();
@@ -38,12 +40,13 @@ class IssueReport extends StatelessWidget {
                   myController: issueController,
                 ),
                 const BoxSpacing(myHeight: 12,),
-                kElevatedBtn(onPressed: (){
+                kElevatedBtn(onPressed: () async {
                   if(emailController.text.isEmpty || issueController.text.isEmpty) {
                     myToast("Please fill the fields before submitting");
                   } else {
-                    myToast("We have received your issue");
                     Navigator.of(context).pop();
+                   await service.reportIssue(emailController.text.trim(), issueController.text.trim());
+                    myToast("We have received your issue");
                   }
 
                 }, child: const Text("Submit"))
