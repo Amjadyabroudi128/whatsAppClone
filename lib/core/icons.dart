@@ -108,6 +108,7 @@ class icons {
       color: Theme.of(context).iconTheme.color,
     );
   }
+  static Icon myFile = const Icon(Icons.insert_drive_file, color: Colors.blue);
   static Icon volumeUp(BuildContext context) {
     return  Icon(
       Icons.volume_up,

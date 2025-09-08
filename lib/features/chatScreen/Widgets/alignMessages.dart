@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
@@ -44,7 +42,7 @@ class messagesAlign extends StatefulWidget {
   final Testname? widget;
   final void Function(Messages)? onReply;
   final Color? textColor;
-  late bool isEditing;
+  late final bool isEditing;
   final Set<String> selectedMessages;
    final VoidCallback? onToggleEdit;
 
@@ -198,7 +196,7 @@ class _messagesAlignState extends State<messagesAlign> {
                               child: Row(
                                 children: [
                                   Text("Reply",style: Textstyles.copyMessage,),
-                                  Spacer(),
+                                  const Spacer(),
                                   icons.reply
                                 ],
                               ),
@@ -225,8 +223,8 @@ class _messagesAlignState extends State<messagesAlign> {
                   child: Dismissible(
                     direction: isMe ? DismissDirection.endToStart : DismissDirection.startToEnd,
                     background: Container(
-                      child: icons.reply,
                       alignment: isMe ? Alignment.centerLeft : Alignment.centerRight,
+                      child: icons.reply,
                     ),
                     confirmDismiss: (direction) async {
                       if (direction == direction) {
@@ -251,7 +249,7 @@ class _messagesAlignState extends State<messagesAlign> {
                               ),
                               visualDensity: VisualDensity.compact,
                               checkColor: MyColors.FG,
-                              shape: CircleBorder(),
+                              shape: const CircleBorder(),
                               value: widget.selectedMessages.contains(msg.messageId),
                               onChanged: (value) {
                                 setState(() {
@@ -310,9 +308,9 @@ class _messagesAlignState extends State<messagesAlign> {
                                               Row(
                                                 children: [
                                                   icons.Wphoto,
-                                                  BoxSpacing(mWidth: 10),
+                                                  const BoxSpacing(mWidth: 10),
                                                   Text("Photo", style: Textstyles.photo),
-                                                  Spacer(),
+                                                  const Spacer(),
                                                   ClipRRect(
                                                     borderRadius: BorderRadius.circular(8),
                                                     child: Image.network(msg.replyTo!.image!, height: 60),
@@ -331,12 +329,12 @@ class _messagesAlignState extends State<messagesAlign> {
                                     else if (msg.file != null && msg.file!.isNotEmpty)
                                       Row(
                                         children: [
-                                          Icon(Icons.insert_drive_file, color: Colors.blue),
-                                          SizedBox(width: 8),
+                                           icons.myFile,
+                                          const SizedBox(width: 8),
                                           Expanded(
                                             child: Text(
                                               msg.file!.split('/').last,
-                                              style: TextStyle(fontSize: 16, decoration: TextDecoration.underline),
+                                              style: const TextStyle(fontSize: 16, decoration: TextDecoration.underline),
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
@@ -352,7 +350,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                             softWrap: true,
                                             textAlign: TextAlign.right,
                                             overflow: TextOverflow.clip,
-                                            style: TextStyle(fontSize: 16, color: Colors.black),
+                                            style: const TextStyle(fontSize: 16, color: Colors.black),
                                           ),
                                         ),
                                       ),
@@ -361,10 +359,10 @@ class _messagesAlignState extends State<messagesAlign> {
                                       children: [
                                         if (msg.isEdited == true)
                                           Text("Edited", style: Textstyles.edited),
-                                        BoxSpacing(mWidth: 5),
+                                        const BoxSpacing(mWidth: 5),
                                         isMe
                                             ? (msg.isRead! ? icons.messageRead : icons.sent)
-                                            : SizedBox.shrink(),
+                                            : const SizedBox.shrink(),
                                         fomattedDateText(formattedTime: formattedTime),
                                       ],
                                     ),
