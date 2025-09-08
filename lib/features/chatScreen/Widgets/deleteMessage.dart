@@ -1,14 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
-import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
 
 import '../../../core/TextStyles.dart';
-import '../../../components/flutterToast.dart';
-import '../../../components/imageNetworkComponent.dart';
 import '../../../core/icons.dart';
 import 'dialogs/deleteDialog.dart';
 
