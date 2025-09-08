@@ -26,14 +26,10 @@ class deleteDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Determine message type and content to display
-    String messageType;
     Widget titleWidget;
-
     if (msg.text.isNotEmpty) {
-      messageType = "text";
       titleWidget = Text("You are about to delete \"${msg.text}\"");
     } else if (msg.image != null && msg.image!.isNotEmpty) {
-      messageType = "image";
       titleWidget = Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -45,7 +41,6 @@ class deleteDialog extends StatelessWidget {
         ],
       );
     } else if (msg.file != null && msg.file!.isNotEmpty) {
-      messageType = "file";
       titleWidget = Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -57,7 +52,6 @@ class deleteDialog extends StatelessWidget {
         ],
       );
     } else {
-      messageType = "unknown";
       titleWidget = const Text("You are about to delete this message");
     }
 
