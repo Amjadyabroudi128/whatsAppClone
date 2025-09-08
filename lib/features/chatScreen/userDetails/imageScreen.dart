@@ -145,10 +145,16 @@ class _ImagescreenState extends State<Imagescreen> {
                 icon: icons.deleteIcon,
                 onPressed: () async {
                   await showModalBottomSheet(
-                    backgroundColor: MyColors.familyText,
                     context: context,
                     builder: (context) =>
-                        deleteContainer(service: service, user: user, widget: widget, msg: msg),
+                        IntrinsicHeight(
+                          child: Column(
+                            children: [
+                              const DividerContainer(),
+                              deleteContainer(service: service, user: user, widget: widget, msg: msg),
+                            ],
+                          ),
+                        ),
                   );
                 },
               ),
