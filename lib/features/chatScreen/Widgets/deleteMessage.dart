@@ -25,7 +25,7 @@ PopupMenuItem<String> deleteMessage(BuildContext context, Messages msg, Testname
         child: Row(
           children: [
             Text("Delete", style: Textstyles.deletemessage),
-            Spacer(),
+            const Spacer(),
             icons.deleteIcon,
           ],
         ),
