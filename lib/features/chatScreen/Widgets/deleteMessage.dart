@@ -4,7 +4,6 @@ import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/messageClass/messageClass.dart';
-
 import '../../../core/TextStyles.dart';
 import '../../../core/icons.dart';
 import 'dialogs/deleteDialog.dart';

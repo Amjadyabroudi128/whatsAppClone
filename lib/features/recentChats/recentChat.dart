@@ -179,13 +179,13 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                     context: context,
                                                     onTap: () async {
                                                       if (isMuted) {
+                                                        Navigator.of(context).pop();
                                                         await service.unMute(chatRoomId, otherUserId);
                                                         myToast("Removed from mute");
                                                       } else {
                                                         await service.MuteChat(chatRoomId, otherUserId);
                                                         myToast("Added to mute");
                                                       }
-                                                      Navigator.of(context).pop();
                                                     },
                                                   );
                                                 },
@@ -208,13 +208,14 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                     context: context,
                                                     onTap: () async {
                                                       if (isFavourite) {
+                                                        Navigator.of(context).pop();
                                                         await service.removeFavourite(otherUserName);
                                                         myToast("Removed from favourites");
                                                       } else {
                                                         await service.addToFavourite(otherUserName);
                                                         myToast("Added to favourites");
                                                       }
-                                                      Navigator.of(context).pop();
+
                                                     },
                                                   );
                                                 },
