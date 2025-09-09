@@ -78,7 +78,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                     ),
                     Options(
                       context: context,
-                      leading: icons.dCam,
+                      leading: icons.camera(context),
                       label: const Text("Camera"),
                       onTap: () async {
                         Navigator.pop(context);
