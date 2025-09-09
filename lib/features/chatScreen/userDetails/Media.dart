@@ -88,6 +88,7 @@ class _MyMediaState extends State<MyMedia> {
                   senderId: data["senderId"],
                   receiverId: data["receiverId"],
                   senderEmail: data["senderEmail"],
+                  senderName: data["senderName"]
                 );
                 if (msg.image == null) return const SizedBox.shrink();
                 final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
@@ -97,7 +98,7 @@ class _MyMediaState extends State<MyMedia> {
                   children: [
                     Text(day, style: const TextStyle(fontSize: 12)),
                     Text(
-                      msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail ?? "",
+                      msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderName ?? "",
                       style: TextStyle(fontSize: 15),
                     ),
                     Expanded(
@@ -116,6 +117,7 @@ class _MyMediaState extends State<MyMedia> {
                                 senderId: msg.senderId,
                                 senderEmail: msg.senderEmail,
                                 receiverEmail: msg.receiverEmail,
+                                isMe: msg.senderId == auth.currentUser!.uid,
                               ),
                             ),
                           );
