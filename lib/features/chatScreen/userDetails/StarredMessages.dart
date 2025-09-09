@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
-import 'package:whatsappclone/Firebase/FirebaseCollections.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
@@ -218,7 +217,11 @@ class _StarredmessagesState extends State<Starredmessages> {
                         },
                         myIcon: icons.slash(context),
                       ),
-                      kIconButton(
+                      if(user!.uid == widget.receiverId ||
+                          selectedMessages.any((messageId) =>
+                              snapshot.data!.docs.any((doc) =>
+                              doc.id == messageId && doc["senderId"] == user!.uid)))
+                        kIconButton(
                         onPressed: () async {
                           for( var doc in snapshot.data!.docs ) {
                             if (selectedMessages.contains(doc.id)) {
