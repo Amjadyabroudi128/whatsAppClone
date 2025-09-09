@@ -188,7 +188,7 @@ class _userDetailsState extends State<userDetails> {
                       color: MyColors.familyText,
                       child: Options(
                         context: context,
-                        leading: icons.image,
+                        leading: icons.image(context),
                         label: const Row(
                           children: [
                             Text("Media"),

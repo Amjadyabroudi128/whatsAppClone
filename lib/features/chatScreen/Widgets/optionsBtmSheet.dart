@@ -102,7 +102,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                     ),
                     Options(
                       context: context,
-                      leading: icons.file,
+                      leading: icons.file(context),
                       label: const Text("File"),
                       onTap: () async {
                         Navigator.pop(context);

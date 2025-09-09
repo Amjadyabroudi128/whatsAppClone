@@ -65,7 +65,12 @@ class icons {
   }
   static Icon cancel = const Icon(Icons.cancel_outlined,);
   static Icon dCam = const Icon(Icons.camera_alt_outlined);
-  static Icon file = const Icon(Icons.file_copy_outlined);
+  static Icon file(BuildContext context) {
+    return Icon(Icons.file_copy_outlined,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
+  // static Icon file = const Icon(Icons.file_copy_outlined);
   static Icon star = Icon(Icons.star_border_outlined, color: MyColors.labelClr,);
   static Icon noStar = Icon(Icons.stars, color: MyColors.starColor, size: 90,);
   static Icon wStar = const Icon(Icons.star, color: Colors.white,size: 18,);
