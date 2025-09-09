@@ -31,6 +31,7 @@ class _allStarredState extends State<allStarred> {
   Set<String> selectedMessages = {};
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       appBar: AppBar(
@@ -226,6 +227,9 @@ class _allStarredState extends State<allStarred> {
                           },
                           myIcon: icons.slash(context),
                         ),
+                        if(selectedMessages.any((messageId) =>
+                            snapshot.data!.docs.any((doc) =>
+                            doc.id == messageId && doc["senderId"] == user!.uid)))
                         kIconButton(
                           onPressed: () async {
                             for( var doc in snapshot.data!.docs ) {
