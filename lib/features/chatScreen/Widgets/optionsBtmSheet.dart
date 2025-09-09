@@ -52,7 +52,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                     const BoxSpacing(myHeight: 10),
                     Options(
                       context: context,
-                      leading: icons.image,
+                      leading: icons.image(context),
                       label: const Text("Photo"),
                       onTap: () async {
                         Navigator.of(context).pop();

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/features/welcomeScreen/Widgets/whatsappImage.dart';
 
 import 'appTheme.dart';
 
@@ -16,8 +17,12 @@ class icons {
   static Icon passIcon = const Icon(Icons.password);
   static Icon name = const Icon(Icons.person);
   static Icon logout = Icon(Icons.logout,color: MyColors.delete,);
-  static Icon image = const Icon(Icons.image);
-  static Icon whiteImage(BuildContext context) {
+  static Icon image(BuildContext context) {
+    return Icon(
+      CupertinoIcons.photo,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }  static Icon whiteImage(BuildContext context) {
     return Icon(
       CupertinoIcons.photo,
       color: Theme.of(context).iconTheme.color,
