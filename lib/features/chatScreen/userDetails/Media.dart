@@ -52,7 +52,7 @@ class _MyMediaState extends State<MyMedia> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   icons.noImages,
-                  BoxSpacing(myHeight: 10),
+                  const BoxSpacing(myHeight: 10),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30.0),
                     child: Text(
@@ -62,7 +62,7 @@ class _MyMediaState extends State<MyMedia> {
                     ),
                   ),
                   BoxSpacing(myHeight: 9),
-                  noMedia(),
+                  const noMedia(),
                 ],
               ),
             );
@@ -99,7 +99,7 @@ class _MyMediaState extends State<MyMedia> {
                     Text(day, style: const TextStyle(fontSize: 12)),
                     Text(
                       msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderName ?? "",
-                      style: TextStyle(fontSize: 15),
+                      style: const TextStyle(fontSize: 15),
                     ),
                     Expanded(
                       child: GestureDetector(
