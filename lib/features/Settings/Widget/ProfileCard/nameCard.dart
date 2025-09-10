@@ -122,7 +122,7 @@ class _nameCardState extends State<nameCard> {
                           children: [
                             Options(
                               context: context,
-                              trailing: icons.arrowForward,
+                              trailing: icons.arrowForward(context),
                               label: Text(name.isNotEmpty ? name : "Edit Your Name"),
                               onTap: () async {
                                 await btmSheet(
@@ -141,7 +141,7 @@ class _nameCardState extends State<nameCard> {
                             const divider(),
                             Options(
                               context: context,
-                              trailing: icons.arrowForward,
+                              trailing: icons.arrowForward(context),
                               label: Text(bio.isNotEmpty ? bio : "Edit Your Bio"),
                               onTap: () async {
                                 await btmSheet(

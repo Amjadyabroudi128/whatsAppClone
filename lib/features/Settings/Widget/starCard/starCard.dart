@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +31,7 @@ class starCard extends StatelessWidget {
                   if (count > 0) Text(count.toString()),
                 ],
               ),
-              trailing: icons.arrowForward,
+              trailing: icons.arrowForward(context),
               leading: icons.star,
               onTap: (){
                 Navigator.push(

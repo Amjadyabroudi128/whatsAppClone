@@ -165,7 +165,7 @@ class _userDetailsState extends State<userDetails> {
                             if (count > 0) Text(count.toString()),
                           ],
                         ),
-                        trailing: icons.arrowForward,
+                        trailing: icons.arrowForward(context),
                         onTap: () {
                           Navigator.push(
                             context,
@@ -195,7 +195,7 @@ class _userDetailsState extends State<userDetails> {
                             Spacer(),
                           ],
                         ),
-                        trailing: icons.arrowForward,
+                        trailing: icons.arrowForward(context),
                         onTap: () {
                           Navigator.push(
                             context,

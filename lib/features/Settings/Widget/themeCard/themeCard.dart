@@ -1,10 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ListTiles.dart';
-import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
-
 import '../../../../components/iconButton.dart';
 import '../../../../components/popUpMenu.dart';
 import '../../../../core/appTheme.dart';
@@ -47,18 +45,18 @@ class _themeCardState extends State<themeCard> {
           kListTile(
               title: Text("Theme"),
               trailing: MyPopUpMenu(
-                  icon: icons.arrowForward,
+                  icon: icons.arrowForward(context),
                   itemBuilder: (context) {
                     return [
-                      PopupMenuItem<myPop>(
+                      const PopupMenuItem<myPop>(
                         value: myPop.off,
                         child: Text(("Off")),
                       ),
-                      PopupMenuItem<myPop>(
+                      const PopupMenuItem<myPop>(
                         value: myPop.darkTheme ,
                         child: Text(("Dark Theme")),
                       ),
-                      PopupMenuItem<myPop>(
+                      const PopupMenuItem<myPop>(
                         value: myPop.system ,
                         child: Text(("System")),
                       ),
@@ -76,7 +74,7 @@ class _themeCardState extends State<themeCard> {
                   }
               )
           ),
-          divider(),
+          const divider(),
           GestureDetector(
             onTap: () async {
               final selectedColor = await Navigator.of(context).pushNamed("pickColor");
@@ -86,7 +84,7 @@ class _themeCardState extends State<themeCard> {
               }
             },
             child: kListTile(
-              title: Text("Chat Theme"),
+              title: const Text("Chat Theme"),
               trailing: kIconButton(
                 onPressed: () {},
                 myIcon: icons.colors,

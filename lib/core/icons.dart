@@ -43,8 +43,12 @@ class icons {
       color: Theme.of(context).iconTheme.color,
     );
   }
-  // static Icon person = const Icon(Icons.person, size: 30,);
-  static Icon arrowForward = const Icon(Icons.arrow_forward_ios);
+  static Icon arrowForward(BuildContext context){
+    return Icon(
+        Icons.arrow_forward_ios,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon remove(BuildContext context) {
     return Icon(
       Icons.remove_circle,
