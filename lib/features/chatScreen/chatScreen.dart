@@ -4,13 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
-import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
-
-import '../../components/ListTiles.dart';
 import '../../globalState.dart';
 import '../../messageClass/messageClass.dart';
 import '../../Firebase/FirebaseAuth.dart';
@@ -91,7 +88,7 @@ class _TestnameState extends State<Testname> {
   Widget build(BuildContext context) {
     final isReplyFromMe = _replyMessage?.senderEmail == user!.email;
     final OutlineInputBorder messageBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
             color: Colors.black
         )
     );
@@ -133,7 +130,7 @@ class _TestnameState extends State<Testname> {
                 // backgroundColor: color,
                 title: isEditing ? Row(
                   children: [
-                    Text("Selected"),
+                    const Text("Selected"),
                     BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.39,),
                     kTextButton(
                         onPressed: (){
@@ -143,7 +140,7 @@ class _TestnameState extends State<Testname> {
                             isEditing = !isEditing;
                           });
                         },
-                        child: Text("Cancel"))
+                        child: const Text("Cancel"))
                   ],
                 ) :Row(
                   children: [

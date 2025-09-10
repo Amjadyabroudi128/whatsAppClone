@@ -240,6 +240,7 @@ class _messagesAlignState extends State<messagesAlign> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         if (widget.isEditing)
+                          (isMe) ?
                           Transform.scale(
                             scale: 1.2,
                             child: Checkbox(
@@ -261,7 +262,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                 });
                               },
                             ),
-                          ),
+                          ) : SizedBox(),
                         Flexible(
                           child: IntrinsicWidth(
                             child: ConstrainedBox(
