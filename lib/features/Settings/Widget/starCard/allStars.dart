@@ -184,7 +184,7 @@ class _allStarredState extends State<allStarred> {
                                     myToast("Receiver data not found.");
                                   }
                                 },
-                                myIcon: icons.arrowForward,
+                                myIcon: icons.arrowForward(context),
                               )
 
                             ],
