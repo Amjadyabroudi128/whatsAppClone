@@ -14,15 +14,14 @@ PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int ind
       child: Row(
         children: [
           Text("Star", style: Textstyles.copyMessage),
-          Spacer(),
-          icons.star,
+          const Spacer(),
+          icons.star(context),
         ],
       ),
       onPressed: () async {
         FocusScope.of(context).unfocus();
         Navigator.of(context).pop();
         await service.addToStar(msg);
-        FocusScope.of(context).unfocus();
         myToast("Message starred");
           msg = Messages(
             text: msg.text,

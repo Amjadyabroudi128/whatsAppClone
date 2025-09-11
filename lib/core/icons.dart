@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whatsappclone/core/MyColors.dart';
-import 'package:whatsappclone/features/welcomeScreen/Widgets/whatsappImage.dart';
-
 import 'appTheme.dart';
 
 class icons {
@@ -74,8 +72,11 @@ class icons {
       color: Theme.of(context).iconTheme.color,
     );
   }
-  // static Icon file = const Icon(Icons.file_copy_outlined);
-  static Icon star = Icon(Icons.star_border_outlined, color: MyColors.labelClr,);
+  static Icon star(BuildContext context) {
+    return Icon(
+      Icons.star_border_outlined, color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon noStar = Icon(Icons.stars, color: MyColors.starColor, size: 90,);
   static Icon wStar = const Icon(Icons.star, color: Colors.white,size: 18,);
   static Icon slash(BuildContext context) {
@@ -84,7 +85,10 @@ class icons {
       color: Theme.of(context).iconTheme.color,
     );
   }
-  static Icon stary = const Icon(CupertinoIcons.star, size: 30,);
+  // static Icon stary = const Icon(CupertinoIcons.star, size: 30,);
+  static Icon stary(BuildContext context) {
+    return Icon(CupertinoIcons.star, size: 30,color:Theme.of(context).iconTheme.color,);
+  }
   static Icon amberStar = Icon(Icons.star, color: MyColors.amberStar);
   static Icon noImages = const Icon(CupertinoIcons.photo, size: 50,);
   static Icon supportedImage = const Icon(Icons.image_not_supported, size: 50, color: Colors.grey);

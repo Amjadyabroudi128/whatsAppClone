@@ -159,7 +159,7 @@ class _ImagescreenState extends State<Imagescreen> {
                 },
               ),
               kIconButton(
-                myIcon: _isStarred ? icons.slash(context) : icons.stary,
+                myIcon: _isStarred ? icons.slash(context) : icons.stary(context),
                 onPressed: () async {
                   FocusScope.of(context).unfocus();
                   if (_isStarred) {

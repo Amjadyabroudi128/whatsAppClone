@@ -32,7 +32,7 @@ class starCard extends StatelessWidget {
                 ],
               ),
               trailing: icons.arrowForward(context),
-              leading: icons.star,
+              leading: icons.star(context),
               onTap: (){
                 Navigator.push(
                   context,

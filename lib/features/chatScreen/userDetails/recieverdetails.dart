@@ -157,7 +157,7 @@ class _userDetailsState extends State<userDetails> {
                       color: MyColors.familyText,
                       child: Options(
                         context: context,
-                        leading: icons.star,
+                        leading: icons.star(context),
                         label: Row(
                           children: [
                             const Text("Starred messages"),
