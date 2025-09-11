@@ -262,7 +262,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                 });
                               },
                             ),
-                          ) : SizedBox(),
+                          ) : const SizedBox(),
                         Flexible(
                           child: IntrinsicWidth(
                             child: ConstrainedBox(
@@ -318,7 +318,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                   ),
                                                 ],
                                               ),
-                                            Text(msg.replyTo!.text, style: TextStyle(color: Colors.black87)),
+                                            Text(msg.replyTo!.text, style: const TextStyle(color: Colors.black87)),
                                           ],
                                         ),
                                       ),
