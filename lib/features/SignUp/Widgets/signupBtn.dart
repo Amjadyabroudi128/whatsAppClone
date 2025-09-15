@@ -24,9 +24,15 @@ class signUpBtn extends StatelessWidget {
           return;
         }
           await firebase.createEmailPassword(context, myEmail.text, pass.text,name.text );
+        clearController();
       },
-      child: Text("Sign Up"),
+      child: const Text("Sign Up"),
     );
+  }
+  void clearController(){
+    myEmail.clear();
+    pass.clear();
+    name.clear();
   }
 }
 
