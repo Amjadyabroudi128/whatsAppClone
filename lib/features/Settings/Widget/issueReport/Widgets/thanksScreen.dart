@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/icons.dart';
+
 
 class ThanksScreen extends StatefulWidget {
   const ThanksScreen({super.key});
@@ -21,22 +23,22 @@ class _ThanksScreenState extends State<ThanksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       // Prevent accidental back until auto-pop
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.check_circle_outline, size: 72),
-              SizedBox(height: 16),
-              Text(
+              icons.thanks(context),
+              const SizedBox(height: 16),
+              const Text(
                 "Thanks!",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 8),
-              Text(
+              const SizedBox(height: 8),
+              const Text(
                 "We’ve received your issue. We’ll take a look shortly.",
                 textAlign: TextAlign.center,
               ),
@@ -46,5 +48,5 @@ class _ThanksScreenState extends State<ThanksScreen> {
       ),
     );
   }
-  
+
 }

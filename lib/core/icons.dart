@@ -142,4 +142,7 @@ class icons {
       color: Theme.of(context).iconTheme.color,
     );
   }
+  static Icon thanks(BuildContext context) {
+    return Icon(Icons.check_circle_outline, size: 72, color: Theme.of(context).iconTheme.color,);
+  }
 }
