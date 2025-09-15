@@ -46,4 +46,5 @@ class _ThanksScreenState extends State<ThanksScreen> {
       ),
     );
   }
+  
 }

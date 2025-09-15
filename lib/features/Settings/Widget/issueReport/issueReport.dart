@@ -74,7 +74,6 @@ class IssueReport extends StatelessWidget {
         ),
       ),
     );
-
   }
 
 }
