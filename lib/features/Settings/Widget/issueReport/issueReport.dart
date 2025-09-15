@@ -14,6 +14,10 @@ class IssueReport extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController issueController = TextEditingController();
     FirebaseService service = FirebaseService();
+    void removeController(){
+      emailController.clear();
+      issueController.clear();
+    }
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();
@@ -55,13 +59,9 @@ class IssueReport extends StatelessWidget {
                       issueController.text.trim(),
                     );
 
-                    // Optional toast
-                    // myToast("We have received your issue");
-                    emailController.clear();
-                    issueController.clear();
+                    removeController();
                     if (!context.mounted) return;
-
-                    // Replace the current screen with the Thanks screen.
+                    //go to screen
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (_) => const ThanksScreen()),
                     );
@@ -74,6 +74,8 @@ class IssueReport extends StatelessWidget {
         ),
       ),
     );
+
   }
+
 }
 
