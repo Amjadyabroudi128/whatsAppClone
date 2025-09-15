@@ -52,6 +52,11 @@ class IssueReport extends StatelessWidget {
                       myToast("Please fill the fields before submitting");
                       return;
                     }
+                    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                    if (!emailRegex.hasMatch(emailController.text.trim())) {
+                      myToast("Please enter a valid email address");
+                      return;
+                    }
                     FocusScope.of(context).unfocus();
                     // Submit first
                     await service.reportIssue(
