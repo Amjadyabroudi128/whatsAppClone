@@ -41,4 +41,6 @@ class Textstyles {
   static TextStyle chatNumber = const TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.white,);
   static TextStyle unreadCount = const TextStyle(color: Colors.white, fontSize: 12);
   static TextStyle deleteMessages = const TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
+  static TextStyle important = const TextStyle(
+      fontSize: 16, fontWeight: FontWeight.w500);
  }
