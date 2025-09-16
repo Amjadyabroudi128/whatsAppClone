@@ -62,8 +62,7 @@ class IssueReport extends StatelessWidget {
                     Text.rich(
                       TextSpan(
                         text: "Email ",
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                        style: Textstyles.important,
                         children: [
                           TextSpan(
                             text: "*",
@@ -91,8 +90,7 @@ class IssueReport extends StatelessWidget {
                     Text.rich(
                       TextSpan(
                         text: "Issue ",
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                        style: Textstyles.important,
                         children: [
                           TextSpan(
                             text: "*",
