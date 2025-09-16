@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 
+import '../../../../core/TextStyles.dart';
 import 'Widgets/thanksScreen.dart';
 
 class IssueReport extends StatelessWidget {
@@ -35,37 +36,37 @@ class IssueReport extends StatelessWidget {
                 const BoxSpacing(myHeight: 60,),
                 const Center(child: Text("What to report?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
                 const BoxSpacing(myHeight: 12,),
-                const Text.rich(
+                Text.rich(
                   TextSpan(
                     text: "Email ",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
                         text: "*",
-                        style: TextStyle(color: Colors.red),
+                        style: Textstyles.deleteStyle,
                       ),
                     ],
                   ),
                 ),
-                 BoxSpacing(myHeight: 9,),
+                 const BoxSpacing(myHeight: 9,),
                  kTextField(
                   myController: emailController,
                   hint: "Your email",
                 ),
                 const BoxSpacing(myHeight: 12,),
-                const Text.rich(
+                Text.rich(
                   TextSpan(
                     text: "Issue ",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
                         text: "*",
-                        style: TextStyle(color: Colors.red),
+                        style: Textstyles.deleteStyle,
                       ),
                     ],
                   ),
                 ),
-                 BoxSpacing(myHeight: 7,),
+                 const BoxSpacing(myHeight: 7,),
                  kTextField(
                   hint: "Please describe your Issue...",
                   minLines: 4,
