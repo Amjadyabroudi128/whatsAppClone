@@ -48,20 +48,22 @@ class IssueReport extends StatelessWidget {
                 const BoxSpacing(myHeight: 12,),
                 kElevatedBtn(
                   onPressed: () async {
-                    if (emailController.text.isEmpty || issueController.text.isEmpty) {
+                    final email = emailController.text.trim();
+                    final issue = issueController.text.trim();
+                    if (email.isEmpty || issue.isEmpty) {
                       myToast("Please fill the fields before submitting");
                       return;
                     }
                     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                    if (!emailRegex.hasMatch(emailController.text.trim())) {
+                    if (!emailRegex.hasMatch(email)) {
                       myToast("Please enter a valid email address");
                       return;
                     }
                     FocusScope.of(context).unfocus();
                     // Submit first
                     await service.reportIssue(
-                      emailController.text.trim(),
-                      issueController.text.trim(),
+                      email,
+                      issue
                     );
 
                     removeController();
