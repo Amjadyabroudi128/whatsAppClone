@@ -43,4 +43,5 @@ class Textstyles {
   static TextStyle deleteMessages = const TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
   static TextStyle important = const TextStyle(
       fontSize: 16, fontWeight: FontWeight.w500);
+  static TextStyle thanks = const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
  }
