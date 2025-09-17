@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 
 import '../../../../core/TextStyles.dart';
+import '../../../../core/icons.dart';
 import 'Widgets/thanksScreen.dart';
 
 class IssueReport extends StatelessWidget {
@@ -40,7 +41,7 @@ class IssueReport extends StatelessWidget {
                     Navigator.of(context).pop();
                     removeController();
                   },
-                  myIcon: const Icon(Icons.arrow_back_rounded),
+                  myIcon: icons.arrow,
                   color: Theme.of(context).iconTheme.color,
                 ),
               ),
