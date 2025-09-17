@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/core/icons.dart';
 
 
@@ -33,9 +34,9 @@ class _ThanksScreenState extends State<ThanksScreen> {
             children: [
               icons.thanks(context),
               const SizedBox(height: 16),
-              const Text(
+               Text(
                 "Thanks!",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: Textstyles.thanks ,
               ),
               const SizedBox(height: 8),
               const Text(
