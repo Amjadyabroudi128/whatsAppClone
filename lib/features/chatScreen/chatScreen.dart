@@ -215,7 +215,7 @@ class _TestnameState extends State<Testname> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${_replyMessage!.senderEmail}",
+                                isReplyFromMe ? "You" : (_replyMessage!.senderName ?? ""),
                                 maxLines: 2,
                                 overflow: TextOverflow.clip,
                                 style: TextStyle(
