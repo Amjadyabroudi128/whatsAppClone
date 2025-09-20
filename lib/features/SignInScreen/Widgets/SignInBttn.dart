@@ -31,8 +31,14 @@ class siginIn extends StatelessWidget {
           return;
         }
         await firebase.SigninUser(context,myEmail.text, pass.text, name.text);
+        clearController();
       },
-      child: Text("Sign in"),
+      child: const Text("Sign in"),
     );
+  }
+  void clearController(){
+    myEmail.clear();
+    pass.clear();
+    name.clear();
   }
 }
