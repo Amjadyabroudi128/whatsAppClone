@@ -28,25 +28,25 @@ class _SignupscreenState extends State<Signupscreen> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("Sign up"),
+          title: const Text("Sign up"),
         ),
         body: myPadding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               emailField(myEmail: myEmail),
-              BoxSpacing(myHeight: 20,),
+              const BoxSpacing(myHeight: 20,),
               nameField(name: name),
-              BoxSpacing(myHeight: 20,),
+              const BoxSpacing(myHeight: 20,),
               passField(pass: pass),
-              myPadding(
+              const myPadding(
                 padding: EdgeInsets.only(left: 25, ),
                 child: haveAnAccount(),
               ),
 
-              BoxSpacing(myHeight: 19,),
+              const BoxSpacing(myHeight: 19,),
               Center(
                 child: signUpBtn(myEmail: myEmail, pass: pass, name: name,),
               )
