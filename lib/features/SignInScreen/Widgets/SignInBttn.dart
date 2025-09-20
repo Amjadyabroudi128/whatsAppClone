@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
-import 'package:whatsappclone/components/scaffoldMessanger.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 

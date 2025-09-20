@@ -10,7 +10,7 @@ import '../SignUp/Widgets/nameTextfield.dart';
 import '../SignUp/Widgets/passField.dart';
 import 'Widgets/SignInBttn.dart';
 import 'Widgets/notRegistered.dart';
-
+final _formKey = GlobalKey<FormState>();
 class SignInscreen extends StatefulWidget {
   const SignInscreen({super.key});
 
@@ -38,36 +38,39 @@ class _SignInscreenState extends State<SignInscreen> {
         ),
         body: myPadding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              emailField(myEmail: myEmail),
-              const BoxSpacing(myHeight: 20,),
-              nameField(name: name),
-              const BoxSpacing(myHeight: 20,),
-              passField(pass: pass),
-              Padding(
-                padding: const EdgeInsets.only(right: 1, top: 3),
-                child: kTextButton(
-                  onPressed: (){
-                    Navigator.of(context).pushNamed("passReset");
-                  },
-                  child: const Text("Forgotten Password?"),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                emailField(myEmail: myEmail,),
+                const BoxSpacing(myHeight: 20,),
+                nameField(name: name),
+                const BoxSpacing(myHeight: 20,),
+                passField(pass: pass),
+                Padding(
+                  padding: const EdgeInsets.only(right: 1, top: 3),
+                  child: kTextButton(
+                    onPressed: (){
+                      Navigator.of(context).pushNamed("passReset");
+                    },
+                    child: const Text("Forgotten Password?"),
+                  ),
                 ),
-              ),
-              const BoxSpacing(myHeight: 19,),
-              Center(
-                child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user, name: name,),
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Not registered?",style: TextStyle(fontSize: 15, color: Colors.grey),),
-                  NotRegisterd()
-                ],
-              )
-            ],
+                const BoxSpacing(myHeight: 19,),
+                Center(
+                  child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user, name: name,),
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Not registered?",style: TextStyle(fontSize: 15, color: Colors.grey),),
+                    NotRegisterd()
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
