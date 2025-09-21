@@ -23,6 +23,13 @@ class IssueReport extends StatelessWidget {
       emailController.clear();
       issueController.clear();
     }
+    String? validateEmail(String? value) {
+      final email = value?.trim() ?? '';
+      if (email.isEmpty) return 'Email is required';
+      final emailRegex = RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$');
+      if (!emailRegex.hasMatch(email)) return 'Please enter a valid email address';
+      return null;
+    }
 
     return GestureDetector(
       onTap: () {
@@ -78,6 +85,7 @@ class IssueReport extends StatelessWidget {
                       kTextField(
                         myController: emailController,
                         hint: "Your email",
+                        validator: validateEmail,
                       ),
                     ],
                   ),
@@ -120,27 +128,25 @@ class IssueReport extends StatelessWidget {
                     onPressed: () async {
                       final email = emailController.text.trim();
                       final issue = issueController.text.trim();
-                      _formKey.currentState!.validate();
+                      // Run all validators
+                      final isValid = _formKey.currentState?.validate() ?? false;
+                      if (!isValid) return;
                       if (email.isEmpty || issue.isEmpty) {
                         myToast("Please fill the fields before submitting");
                         return;
                       }
-                      final emailRegex =
-                      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                      if (!emailRegex.hasMatch(email)) {
-                        myToast("Please enter a valid email address");
-                        return;
-                      }
+
                       FocusScope.of(context).unfocus();
+
                       await service.reportIssue(email, issue);
-
                       removeController();
-                      if (!context.mounted) return;
 
+                      if (!context.mounted) return;
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (_) => const ThanksScreen()),
                       );
                     },
+
                     child: const Text("Submit"),
                   ),
                 ),
@@ -151,4 +157,5 @@ class IssueReport extends StatelessWidget {
       ),
     );
   }
+
 }
