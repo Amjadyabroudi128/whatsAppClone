@@ -10,7 +10,12 @@ import 'package:whatsappclone/core/MyColors.dart';
    static OutlineInputBorder darkBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
        borderSide: const BorderSide(
            color: Colors.white
-       )
+       ),
+   );
+   static OutlineInputBorder errorBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
+     borderSide: const BorderSide(
+         color: Colors.red
+     ),
    );
    static OutlinedBorder circular = RoundedRectangleBorder(
      borderRadius: BorderRadius.circular(10)
@@ -44,7 +49,8 @@ import 'package:whatsappclone/core/MyColors.dart';
       focusColor: MyColors.labelClr,
       labelStyle: Textstyles.label,
       hintStyle: Textstyles.hintStyle,
-      floatingLabelStyle: Textstyles.floating
+      floatingLabelStyle: Textstyles.floating,
+      errorBorder: errorBorder,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: MyColors.FAB,
