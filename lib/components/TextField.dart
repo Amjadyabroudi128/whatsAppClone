@@ -25,7 +25,7 @@ class kTextField extends StatelessWidget {
   final String? prefixText;
   final TextStyle? prefixStyle;
   final bool? enabled;
-  final FormFieldValidator<String>? validator; // ✅ Correct validator type
+  final FormFieldValidator<String>? validator;
   final TextInputAction? textInputAction;
   const kTextField(
       {super.key, this.label, this.myController,
