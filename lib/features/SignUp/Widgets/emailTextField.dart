@@ -19,7 +19,7 @@ class emailField extends StatelessWidget {
       keyBoard: TextInputType.emailAddress,
       myController: myEmail,
       myIcon: icons.emailIcon(context),
-      label: Text("Email"),
+      label: const Text("Email"),
     );
   }
 }
