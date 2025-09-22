@@ -26,7 +26,7 @@ class IssueReport extends StatelessWidget {
     String? validateEmail(String? value) {
       final email = value?.trim() ?? '';
       if (email.isEmpty) return 'Email is required';
-      final emailRegex = RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$');
+      final emailRegex = RegExp(r'^[\w.-]+@([\w-]+\.)+[\w-]{2,}$');
       if (!emailRegex.hasMatch(email)) return 'Please enter a valid email address';
       return null;
     }
