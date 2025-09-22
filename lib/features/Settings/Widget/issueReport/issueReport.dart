@@ -58,7 +58,7 @@ class IssueReport extends StatelessWidget {
                 const Center(
                   child: Text(
                     "What to report?",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: Textstyles.report,
                   ),
                 ),
                 const BoxSpacing(myHeight: 20),
