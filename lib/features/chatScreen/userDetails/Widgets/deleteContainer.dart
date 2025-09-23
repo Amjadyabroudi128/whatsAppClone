@@ -1,16 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/core/icons.dart';
-
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/flutterToast.dart';
 import '../../../../components/iconButton.dart';
 import '../../../../components/kCard.dart';
 import '../../../../components/listTilesOptions.dart';
 import '../../../../core/MyColors.dart';
-import '../../../../messageClass/messageClass.dart';
+import '../../Model/MessageModel.dart';
 import '../imageScreen.dart';
 
 class deleteContainer extends StatelessWidget {
@@ -31,7 +29,7 @@ class deleteContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 160,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

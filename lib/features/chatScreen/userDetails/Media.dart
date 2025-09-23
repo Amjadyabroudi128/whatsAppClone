@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 import '../../../core/icons.dart';
-import '../../../messageClass/messageClass.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 

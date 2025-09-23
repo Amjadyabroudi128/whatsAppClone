@@ -5,7 +5,7 @@ import 'package:whatsappclone/components/flutterToast.dart';
 
 import '../../../components/TextButton.dart';
 import '../../../core/icons.dart';
-import '../../../messageClass/messageClass.dart';
+import '../Model/MessageModel.dart';
 
 PopupMenuItem<String> copyMessage(Messages msg, BuildContext context) {
   return PopupMenuItem(

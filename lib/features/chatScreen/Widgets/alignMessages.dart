@@ -9,12 +9,12 @@ import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/core/icons.dart';
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/selectMessage.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/starMessage.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import '../../../core/MyColors.dart';
 import '../../../core/appTheme.dart';
-import '../../../messageClass/messageClass.dart';
 import 'package:intl/intl.dart';
 
 import '../userDetails/imageScreen.dart';

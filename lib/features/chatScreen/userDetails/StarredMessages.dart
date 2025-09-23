@@ -9,8 +9,7 @@ import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/kCard.dart';
-import 'package:whatsappclone/messageClass/messageClass.dart';
-
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 import '../../../components/TextButton.dart';
 import '../../../components/flutterToast.dart';
 import '../../../core/MyColors.dart';

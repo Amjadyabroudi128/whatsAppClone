@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/TextButton.dart';
 import '../../../core/TextStyles.dart';
 import '../../../components/flutterToast.dart';
 import '../../../core/icons.dart';
-import '../../../messageClass/messageClass.dart';
 
 PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int index, BuildContext context,) {
   return PopupMenuItem(

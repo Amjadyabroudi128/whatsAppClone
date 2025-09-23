@@ -15,8 +15,7 @@ import '../../../../components/iconButton.dart';
 import '../../../../components/kCard.dart';
 import '../../../../core/MyColors.dart';
 import '../../../../core/icons.dart';
-import '../../../../messageClass/messageClass.dart';
-
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 class allStarred extends StatefulWidget {
   const allStarred({super.key, String? receiverId});
 

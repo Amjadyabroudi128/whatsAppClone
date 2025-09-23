@@ -6,8 +6,7 @@ import '../../../../components/TextButton.dart';
 import '../../../../components/flutterToast.dart';
 import '../../../../components/imageNetworkComponent.dart';
 import '../../../../core/TextStyles.dart';
-import '../../../../messageClass/messageClass.dart';
-import '../../chatScreen.dart';
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';import '../../chatScreen.dart';
 
 class deleteDialog extends StatelessWidget {
   const deleteDialog({

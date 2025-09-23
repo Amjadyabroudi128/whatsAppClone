@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 
 import '../../../components/TextButton.dart';
 import '../../../core/TextStyles.dart';
 import '../../../core/icons.dart';
-import '../../../messageClass/messageClass.dart';
 
 PopupMenuItem<String> selectMessage(BuildContext context, Messages msg, bool isEditing,
     VoidCallback? onToggleEdit, Set<String> selectedMessages, VoidCallback onUpdateState) {
@@ -14,7 +14,7 @@ PopupMenuItem<String> selectMessage(BuildContext context, Messages msg, bool isE
         child: Row(
           children: [
             Text("Select",style: Textstyles.copyMessage,),
-            Spacer(),
+            const Spacer(),
             icons.selectIcon
           ],
         ),

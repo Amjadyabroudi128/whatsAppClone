@@ -5,8 +5,7 @@ import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextButton.dart';
 import '../../../../components/TextField.dart';
 import '../../../../components/flutterToast.dart';
-import '../../../../messageClass/messageClass.dart';
-import '../../chatScreen.dart';
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';import '../../chatScreen.dart';
 
 class editDialog extends StatelessWidget {
   const editDialog({
