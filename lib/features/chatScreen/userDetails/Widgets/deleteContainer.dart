@@ -8,9 +8,7 @@ import '../../../../components/flutterToast.dart';
 import '../../../../components/iconButton.dart';
 import '../../../../components/kCard.dart';
 import '../../../../components/listTilesOptions.dart';
-import '../../../../core/MyColors.dart';
 import '../../Model/MessageModel.dart';
-import '../../Widgets/deleteMessage.dart' as TextStyles;
 import '../imageScreen.dart';
 
 class deleteContainer extends StatelessWidget {
