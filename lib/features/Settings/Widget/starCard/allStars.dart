@@ -34,7 +34,7 @@ class _allStarredState extends State<allStarred> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Starred messages"),
+        title: const Text("Starred messages"),
         centerTitle: true,
         actions: [
           kTextButton(
@@ -65,7 +65,7 @@ class _allStarredState extends State<allStarred> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     icons.noStar,
-                    BoxSpacing(myHeight: 9),
+                    const BoxSpacing(myHeight: 9),
                     Text("No Starred Messages", style: Textstyles.noStarMessage),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.0),
@@ -109,9 +109,9 @@ class _allStarredState extends State<allStarred> {
                             children: [
                               Text(
                                 msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail!,
-                                style: TextStyle(fontSize: 15),
+                                style: const TextStyle(fontSize: 15),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(day)
                             ],
                           ),
@@ -150,7 +150,7 @@ class _allStarredState extends State<allStarred> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             icons.wStar,
-                                            BoxSpacing(mWidth: 4,),
+                                            const BoxSpacing(mWidth: 4,),
                                             Text(formattedTime),
                                           ],
                                         ),
@@ -159,7 +159,7 @@ class _allStarredState extends State<allStarred> {
                                   ),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               kIconButton(
                                 onPressed: () async {
                                   final currentUserId = FirebaseAuth.instance.currentUser!.uid;
@@ -188,7 +188,7 @@ class _allStarredState extends State<allStarred> {
 
                             ],
                           ),
-                          divider(),
+                          const divider(),
                         ],
                       ),
                     );
@@ -274,7 +274,7 @@ class _allStarredState extends State<allStarred> {
                         ),
                       ],
                     ),
-                  ) : SizedBox.shrink()
+                  ) : const SizedBox.shrink()
                 ]
             );
           },
