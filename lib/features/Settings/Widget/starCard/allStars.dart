@@ -243,12 +243,12 @@ class _allStarredState extends State<allStarred> {
                                 await showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                      title: Text("You are about to delete a message"),
-                                      content: Text("Are you sure? "),
+                                      title: const Text("You are about to delete a message"),
+                                      content: const Text("Are you sure? "),
                                       actions: [
                                         kTextButton(
                                           onPressed: () =>  Navigator.pop(context),
-                                          child: Text("Cancel"),
+                                          child: const Text("Cancel"),
                                         ),
                                         kTextButton(
                                           onPressed: () async {
