@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/core/icons.dart';
 import '../../../../Firebase/FirebaseAuth.dart';
@@ -9,6 +10,7 @@ import '../../../../components/kCard.dart';
 import '../../../../components/listTilesOptions.dart';
 import '../../../../core/MyColors.dart';
 import '../../Model/MessageModel.dart';
+import '../../Widgets/deleteMessage.dart' as TextStyles;
 import '../imageScreen.dart';
 
 class deleteContainer extends StatelessWidget {
@@ -38,10 +40,10 @@ class deleteContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Delete message?",
+                "Delete Image?",
                 style: Textstyles.btmSheet,
               ),
-              Spacer(),
+              const Spacer(),
               kIconButton(
                 myIcon: icons.close,
                 onPressed: () {
@@ -50,9 +52,8 @@ class deleteContainer extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const BoxSpacing(myHeight: 13,),
           kCard(
-            color: Colors.grey[350],
             child: Options(
               onTap: () async {
                 FocusScope.of(context).unfocus();
@@ -64,7 +65,7 @@ class deleteContainer extends StatelessWidget {
               },
               label: Text(
                 "Delete for Everyone",
-                style: TextStyle(color: MyColors.redAccent),
+                style: Textstyles.deletemessage
               ),
               context: context,
             ),
