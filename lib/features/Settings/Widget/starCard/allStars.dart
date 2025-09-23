@@ -79,7 +79,6 @@ class _allStarredState extends State<allStarred> {
                 ),
               );
             }
-
             return Stack(
                 children:[ ListView.builder(
                   itemCount: snapshot.data!.docs.length,
@@ -226,7 +225,7 @@ class _allStarredState extends State<allStarred> {
                           },
                           myIcon: icons.slash(context),
                         ),
-                        if(selectedMessages.any((messageId) =>
+                        if(selectedMessages.isNotEmpty && selectedMessages.every((messageId) =>
                             snapshot.data!.docs.any((doc) =>
                             doc.id == messageId && doc["senderId"] == user!.uid)))
                         kIconButton(
