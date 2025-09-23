@@ -5,36 +5,29 @@ import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/TextButton.dart';
 import '../../../core/TextStyles.dart';
 import '../../../components/flutterToast.dart';
-import '../../../core/icons.dart';
 
 PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int index, BuildContext context,) {
+  final isStarred = msg.isStarred ?? false;
   return PopupMenuItem(
-    value: "Star",
+    value: isStarred ? "Unstar" : "Star",
     child: kTextButton(
       child: Row(
         children: [
-          Text("Star", style: Textstyles.copyMessage),
+          Text(isStarred ? "Unstar" : "Star", style: Textstyles.copyMessage),
           const Spacer(),
-          icons.star(context),
+          isStarred ? const Icon(Icons.star): const Icon(Icons.star_border)
         ],
       ),
       onPressed: () async {
         FocusScope.of(context).unfocus();
         Navigator.of(context).pop();
-        await service.addToStar(msg);
-        myToast("Message starred");
-          msg = Messages(
-            text: msg.text,
-            senderId: msg.senderId,
-            receiverId: msg.receiverId,
-            senderEmail: msg.senderEmail,
-            receiverEmail: msg.receiverEmail,
-            time: msg.time,
-            messageId: msg.messageId,
-            image: msg.image,
-            file: msg.file,
-            isStarred: msg.isStarred
-          );
+        if(isStarred) {
+          await service.deleteStar(msg);
+          myToast("Message Unstarred");
+        } else {
+          await service.addToStar(msg);
+          myToast("Message starred");
+        }
       },
     ),
   );
