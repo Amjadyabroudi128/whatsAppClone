@@ -42,7 +42,7 @@ class _StarredmessagesState extends State<Starredmessages> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Starred messages"),
+        title: const Text("Starred messages"),
         centerTitle: true,
         actions: [
           kTextButton(
@@ -75,7 +75,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     icons.noStar,
-                    BoxSpacing(myHeight: 9),
+                    const BoxSpacing(myHeight: 9),
                     Text("No Starred Messages", style: Textstyles.noStarMessage),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.0),
@@ -117,9 +117,9 @@ class _StarredmessagesState extends State<Starredmessages> {
                           children: [
                             Text(
                               msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail!,
-                              style: TextStyle(fontSize: 15),
+                              style: const TextStyle(fontSize: 15),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(day)
                           ],
                         ),
@@ -165,7 +165,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           icons.wStar,
-                                          BoxSpacing(mWidth: 4,),
+                                          const BoxSpacing(mWidth: 4,),
                                           Text(formattedTime),
                               
                                         ],
@@ -177,7 +177,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                             ),
                           ],
                         ),
-                        divider(),
+                        const divider(),
                       ],
                     ),
                   );
@@ -187,12 +187,12 @@ class _StarredmessagesState extends State<Starredmessages> {
                 Positioned(
                   bottom: 0,
                   left: 0,
-                  right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.2 : 0,
+                  right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.3 : 0,
                   child: Row(
                     mainAxisAlignment: selectedMessages.length > 1 ?
                     MainAxisAlignment.spaceAround : MainAxisAlignment.spaceEvenly,
                     children: [
-                      selectedMessages.length > 1 ? SizedBox.shrink() : copyIcon(snapshot),
+                      selectedMessages.length > 1 ? const SizedBox.shrink() : copyIcon(snapshot),
                       kIconButton(
                         onPressed: () async {
                           myToast("⭐ Message unstarred ");
@@ -216,10 +216,16 @@ class _StarredmessagesState extends State<Starredmessages> {
                         },
                         myIcon: icons.slash(context),
                       ),
-                      if(user!.uid == widget.receiverId ||
+                      if(selectedMessages.length == 1 ?
+                      // For single message: show if user is receiver OR message sender
+                      (user!.uid == widget.receiverId ||
                           selectedMessages.any((messageId) =>
                               snapshot.data!.docs.any((doc) =>
-                              doc.id == messageId && doc["senderId"] == user!.uid)))
+                              doc.id == messageId && doc["senderId"] == user!.uid))) :
+                      // For multiple messages: show only if ALL selected messages belong to current user
+                      selectedMessages.every((messageId) =>
+                          snapshot.data!.docs.any((doc) =>
+                          doc.id == messageId && doc["senderId"] == user!.uid)))
                         kIconButton(
                         onPressed: () async {
                           for( var doc in snapshot.data!.docs ) {
@@ -238,11 +244,11 @@ class _StarredmessagesState extends State<Starredmessages> {
                                   title: selectedMessages.length > 1 ?
                                   Text("You are about to Delete ${selectedMessages.length} Messages") :
                                   Text("You are about to Delete ${msg.text}"),
-                                  content: Text("Are you sure? "),
+                                  content: const Text("Are you sure? "),
                                   actions: [
                                     kTextButton(
                                       onPressed: () =>  Navigator.pop(context),
-                                      child: Text("Cancel"),
+                                      child: const Text("Cancel"),
                                     ),
                                     kTextButton(
                                       onPressed: () async {
@@ -272,7 +278,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                       ),
                     ],
                   ),
-                ) : SizedBox.shrink()
+                ) : const SizedBox.shrink()
             ]
             );
           },
@@ -302,7 +308,7 @@ class _StarredmessagesState extends State<Starredmessages> {
           }
         }
       },
-      myIcon: Icon(Icons.copy),
+      myIcon: const Icon(Icons.copy),
     );
   }
 
