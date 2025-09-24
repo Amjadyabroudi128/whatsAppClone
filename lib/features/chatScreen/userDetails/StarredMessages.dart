@@ -30,6 +30,7 @@ class _StarredmessagesState extends State<Starredmessages> {
   bool isEditing = false;
   Set<String> selectedMessages = {};
   User? user = FirebaseAuth.instance.currentUser;
+  bool hasMessages = false;
 
   String getChatRoomId(String id1, String id2) {
     List<String> ids = [id1, id2];
@@ -46,7 +47,8 @@ class _StarredmessagesState extends State<Starredmessages> {
         title: const Text("Starred messages"),
         centerTitle: true,
         actions: [
-          kTextButton(
+          if (hasMessages)
+            kTextButton(
             onPressed: () {
               setState(() {
                 isEditing = !isEditing;
@@ -69,6 +71,20 @@ class _StarredmessagesState extends State<Starredmessages> {
               .orderBy("timestamp", descending: true)
               .snapshots(),
           builder: (context, snapshot) {
+            bool currentHasMessages = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
+            if (hasMessages != currentHasMessages) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted) {
+                  setState(() {
+                    hasMessages = currentHasMessages;
+                    if (!hasMessages) {
+                      isEditing = false; // Reset editing mode when no messages
+                      selectedMessages.clear();
+                    }
+                  });
+                }
+              });
+            }
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
             }
