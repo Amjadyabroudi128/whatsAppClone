@@ -28,15 +28,17 @@ class _allStarredState extends State<allStarred> {
   FirebaseService service = FirebaseService();
   bool isEditing = false;
   Set<String> selectedMessages = {};
+  bool hasMessages = false; // Add this to track if messages exist
+
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Starred messages"),
         centerTitle: true,
         actions: [
+          if (hasMessages)
           kTextButton(
             onPressed: () {
               setState(() {
@@ -59,6 +61,20 @@ class _allStarredState extends State<allStarred> {
               .orderBy("timestamp", descending: true)
               .snapshots(),
           builder: (context, snapshot) {
+            bool currentHasMessages = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
+            if (hasMessages != currentHasMessages) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted) {
+                  setState(() {
+                    hasMessages = currentHasMessages;
+                    if (!hasMessages) {
+                      isEditing = false; // Reset editing mode when no messages
+                      selectedMessages.clear();
+                    }
+                  });
+                }
+              });
+            }
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
               return Center(
                 child: Column(
