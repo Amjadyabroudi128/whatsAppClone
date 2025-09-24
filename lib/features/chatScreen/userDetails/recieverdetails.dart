@@ -46,6 +46,7 @@ class _userDetailsState extends State<userDetails> {
     setState(() => _showCopyLabel = true);
 
   }
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
@@ -145,14 +146,24 @@ class _userDetailsState extends State<userDetails> {
                 // Starred Messages
                 StreamBuilder(
                   stream: FirebaseFirestore.instance
-                      .collection("chat_rooms")
-                      .doc(chatRoomId)
+                      .collection("starred-messages")
+                      .doc(auth.currentUser!.email!)
                       .collection("messages")
-                      .where("isStarred", isEqualTo: true)
                       .orderBy("timestamp", descending: true)
                       .snapshots(),
                   builder: (context, snapshot) {
-                    final count = snapshot.hasData ? snapshot.data!.docs.length : 0;
+                    int count = 0;
+                    if (snapshot.hasData) {
+                      // Filter for current chat room messages only
+                      final currentChatMessages = snapshot.data!.docs.where((doc) {
+                        final data = doc.data();
+                        List<String> ids = [data['senderId'], data['receiverId']];
+                        ids.sort();
+                        String docChatRoomID = ids.join("_");
+                        return docChatRoomID == chatRoomId;
+                      }).toList();
+                      count = currentChatMessages.length;
+                    }
                     return kCard(
                       color: MyColors.familyText,
                       child: Options(

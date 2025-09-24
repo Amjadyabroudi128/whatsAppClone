@@ -29,7 +29,8 @@ class _StarredmessagesState extends State<Starredmessages> {
   FirebaseService service = FirebaseService();
   bool isEditing = false;
   Set<String> selectedMessages = {};
-   User? user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
+
   String getChatRoomId(String id1, String id2) {
     List<String> ids = [id1, id2];
     ids.sort();
@@ -57,19 +58,31 @@ class _StarredmessagesState extends State<Starredmessages> {
             ),
           )
         ],
-
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
+          // FIXED: First get user's starred messages, then filter for current chat room
           stream: FirebaseFirestore.instance
-              .collection("chat_rooms")
-              .doc(chatRoomId)
+              .collection("starred-messages")
+              .doc(auth.currentUser!.email!)
               .collection("messages")
-              .where("isStarred", isEqualTo: true)
               .orderBy("timestamp", descending: true)
               .snapshots(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            // Filter for current chat room only
+            final currentChatMessages = snapshot.data!.docs.where((doc) {
+              final data = doc.data() as Map<String, dynamic>;
+              List<String> ids = [data['senderId'], data['receiverId']];
+              ids.sort();
+              String docChatRoomID = ids.join("_");
+              return docChatRoomID == chatRoomId;
+            }).toList();
+
+            if (currentChatMessages.isEmpty) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -89,197 +102,199 @@ class _StarredmessagesState extends State<Starredmessages> {
                 ),
               );
             }
+
+            // No need to filter anymore since query is already specific to this chat
+
             return Stack(
-              children:[ ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (_, index) {
-                  final data = snapshot.data!.docs[index];
-                  final msg = Messages(
-                    text: data["message"],
-                    time:  data["timestamp"],
-                    senderEmail: data["senderEmail"],
-                    senderId: data["senderId"],
-                    receiverId: data["receiverId"],
-                    messageId: data.id,
-                    image: data.data().toString().contains("image")
-                        ? data["image"]
-                        : null,
-                  );
-                  final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
-                  final formattedTime = DateFormat.Hm().format(dateTime);
-                  final day = DateFormat.yMd().format(dateTime);
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                children: [
+                  ListView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (_, index) {
+                      final data = snapshot.data!.docs[index];
+                      final msg = Messages(
+                        text: data["message"],
+                        time: data["timestamp"],
+                        senderEmail: data["senderEmail"],
+                        senderId: data["senderId"],
+                        receiverId: data["receiverId"],
+                        messageId: data.id,
+                        image: data.data().toString().contains("image")
+                            ? data["image"]
+                            : null,
+                      );
+                      final dateTime = (msg.time != null) ? msg.time!.toDate() : DateTime.now();
+                      final formattedTime = DateFormat.Hm().format(dateTime);
+                      final day = DateFormat.yMd().format(dateTime);
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail!,
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                            const Spacer(),
-                            Text(day)
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (isEditing)
-                              Transform.scale(
-                                scale: 1.2,
-                                child: Checkbox(
-                                  activeColor: MyColors.starColor,
-                                  value: selectedMessages.contains(msg.messageId),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      if (value == true) {
-                                        selectedMessages.add(msg.messageId!);
-                                      } else {
-                                        selectedMessages.remove(msg.messageId);
-                                      }
-                                    });
-                                  },
+                            Row(
+                              children: [
+                                Text(
+                                  msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderEmail!,
+                                  style: const TextStyle(fontSize: 15),
                                 ),
-                              ),
-                            Flexible(
-                              child: kCard(
-                                color: msg.senderEmail == auth.currentUser!.email ?
-                                MyColors.starColor : MyColors.familyText,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      msg.image != null && msg.image!.isNotEmpty
-                                          ? Image.network(
-                                        msg.image!,
-                                        height: 150,
-                                        width: 150,
-                                        fit: BoxFit.cover,
-                                      )
-                                          : Text(msg.text, maxLines: msg.text.length,
-                                        overflow: TextOverflow.ellipsis,),
-                              
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
+                                const Spacer(),
+                                Text(day)
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (isEditing)
+                                  Transform.scale(
+                                    scale: 1.2,
+                                    child: Checkbox(
+                                      activeColor: MyColors.starColor,
+                                      value: selectedMessages.contains(msg.messageId),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          if (value == true) {
+                                            selectedMessages.add(msg.messageId!);
+                                          } else {
+                                            selectedMessages.remove(msg.messageId);
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                Flexible(
+                                  child: kCard(
+                                    color: msg.senderEmail == auth.currentUser!.email ?
+                                    MyColors.starColor : MyColors.familyText,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
                                         children: [
-                                          icons.wStar,
-                                          const BoxSpacing(mWidth: 4,),
-                                          Text(formattedTime),
-                              
+                                          msg.image != null && msg.image!.isNotEmpty
+                                              ? Image.network(
+                                            msg.image!,
+                                            height: 150,
+                                            width: 150,
+                                            fit: BoxFit.cover,
+                                          )
+                                              : Text(msg.text, maxLines: msg.text.length,
+                                            overflow: TextOverflow.ellipsis,),
+
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              icons.wStar,
+                                              const BoxSpacing(mWidth: 4,),
+                                              Text(formattedTime),
+                                            ],
+                                          ),
                                         ],
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
+                            const divider(),
                           ],
                         ),
-                        const divider(),
+                      );
+                    },
+                  ),
+                  isEditing && selectedMessages.isNotEmpty ?
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.3 : 0,
+                    child: Row(
+                      mainAxisAlignment: selectedMessages.length > 1 ?
+                      MainAxisAlignment.spaceAround : MainAxisAlignment.spaceEvenly,
+                      children: [
+                        selectedMessages.length > 1 ? const SizedBox.shrink() : copyIcon(currentChatMessages),
+                        kIconButton(
+                          onPressed: () async {
+                            myToast("⭐ Message unstarred ");
+                            for (var doc in currentChatMessages) {
+                              if (selectedMessages.contains(doc.id)) {
+                                final msg = Messages(
+                                  text: doc["message"],
+                                  time: doc["timestamp"],
+                                  senderEmail: doc["senderEmail"],
+                                  messageId: doc.id,
+                                  senderId: doc["senderId"],
+                                  receiverId: doc["receiverId"],
+                                );
+                                await service.deleteStar(msg);
+                              }
+                            }
+                            setState(() {
+                              isEditing = !isEditing;
+                              selectedMessages.clear();
+                            });
+                          },
+                          myIcon: icons.slash(context),
+                        ),
+                        if(selectedMessages.length == 1 ?
+                        // For single message: show if user is receiver OR message sender
+                        (user!.uid == widget.receiverId ||
+                            selectedMessages.any((messageId) =>
+                                currentChatMessages.any((doc) =>
+                                doc.id == messageId && doc["senderId"] == user!.uid))) :
+                        // For multiple messages: show only if ALL selected messages belong to current user
+                        selectedMessages.every((messageId) =>
+                            currentChatMessages.any((doc) =>
+                            doc.id == messageId && doc["senderId"] == user!.uid)))
+                          kIconButton(
+                            onPressed: () async {
+                              for( var doc in currentChatMessages ) {
+                                if (selectedMessages.contains(doc.id)) {
+                                  final msg = Messages(
+                                    messageId: doc.id,
+                                    text: doc["message"],
+                                    time: doc["timestamp"],
+                                    receiverId: doc["receiverId"],
+                                    senderEmail: doc["senderEmail"],
+                                    senderId: doc["senderId"],
+                                  );
+                                  await showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: selectedMessages.length > 1 ?
+                                        Text("You are about to Delete ${selectedMessages.length} Messages") :
+                                        Text("You are about to Delete ${msg.text}"),
+                                        content: const Text("Are you sure? "),
+                                        actions: [
+                                          kTextButton(
+                                            onPressed: () =>  Navigator.pop(context),
+                                            child: const Text("Cancel"),
+                                          ),
+                                          kTextButton(
+                                            onPressed: () async {
+                                              Navigator.pop(context);
+                                              myToast("Selected messages deleted");
+                                              await service.deleteSelectedMessages(
+                                                  senderId: msg.senderId ?? "",
+                                                  receiverId: msg.receiverId ?? "",
+                                                  messageIds: selectedMessages);
+                                              await service.deleteStar(msg);
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text("Delete", style: Textstyles.deletemessage,),
+                                          )
+                                        ],
+                                      )
+                                  );
+                                  setState(() {
+                                    isEditing = !isEditing;
+                                    selectedMessages.clear();
+                                  });
+                                }
+                              }
+                            },
+                            myIcon: icons.deleteIcon,
+                          ),
                       ],
                     ),
-                  );
-                },
-              ),
-                isEditing && selectedMessages.isNotEmpty ?
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.3 : 0,
-                  child: Row(
-                    mainAxisAlignment: selectedMessages.length > 1 ?
-                    MainAxisAlignment.spaceAround : MainAxisAlignment.spaceEvenly,
-                    children: [
-                      selectedMessages.length > 1 ? const SizedBox.shrink() : copyIcon(snapshot),
-                      kIconButton(
-                        onPressed: () async {
-                          myToast("⭐ Message unstarred ");
-                          for (var doc in snapshot.data!.docs) {
-                            if (selectedMessages.contains(doc.id)) {
-                              final msg = Messages(
-                                text: doc["message"],
-                                time: doc["timestamp"],
-                                senderEmail: doc["senderEmail"],
-                                messageId: doc.id,
-                                senderId: doc["senderId"],
-                                receiverId: doc["receiverId"],
-                              );
-                              await service.deleteStar(msg);
-                            }
-                          }
-                          setState(() {
-                            isEditing = !isEditing;
-                            selectedMessages.clear();
-                          });
-                        },
-                        myIcon: icons.slash(context),
-                      ),
-                      if(selectedMessages.length == 1 ?
-                      // For single message: show if user is receiver OR message sender
-                      (user!.uid == widget.receiverId ||
-                          selectedMessages.any((messageId) =>
-                              snapshot.data!.docs.any((doc) =>
-                              doc.id == messageId && doc["senderId"] == user!.uid))) :
-                      // For multiple messages: show only if ALL selected messages belong to current user
-                      selectedMessages.every((messageId) =>
-                          snapshot.data!.docs.any((doc) =>
-                          doc.id == messageId && doc["senderId"] == user!.uid)))
-                        kIconButton(
-                        onPressed: () async {
-                          for( var doc in snapshot.data!.docs ) {
-                            if (selectedMessages.contains(doc.id)) {
-                              final msg = Messages(
-                                messageId: doc.id,
-                                text: doc["message"],
-                                time: doc["timestamp"],
-                                receiverId: doc["receiverId"],
-                                senderEmail: doc["senderEmail"],
-                                senderId: doc["senderId"],
-                              );
-                              await showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: selectedMessages.length > 1 ?
-                                  Text("You are about to Delete ${selectedMessages.length} Messages") :
-                                  Text("You are about to Delete ${msg.text}"),
-                                  content: const Text("Are you sure? "),
-                                  actions: [
-                                    kTextButton(
-                                      onPressed: () =>  Navigator.pop(context),
-                                      child: const Text("Cancel"),
-                                    ),
-                                    kTextButton(
-                                      onPressed: () async {
-                                        Navigator.pop(context);
-                                        myToast("Selected messages deleted");
-                                        await service.deleteSelectedMessages(
-                                            senderId: msg.senderId ?? "",
-                                            receiverId: msg.receiverId ?? "",
-                                            messageIds: selectedMessages);
-                                        await service.deleteStar(msg);
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Delete", style: Textstyles.deletemessage,),
-                                    )
-                                  ],
-                                )
-                              );
-                              setState(() {
-                                isEditing = !isEditing;
-                                selectedMessages.clear();
-                              });
-
-                            }
-                          }
-                        },
-                        myIcon: icons.deleteIcon,
-                      ),
-                    ],
-                  ),
-                ) : const SizedBox.shrink()
-            ]
+                  ) : const SizedBox.shrink()
+                ]
             );
           },
         ),
@@ -287,10 +302,10 @@ class _StarredmessagesState extends State<Starredmessages> {
     );
   }
 
-  kIconButton copyIcon(AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+  kIconButton copyIcon(List<QueryDocumentSnapshot> docs) {
     return kIconButton(
       onPressed: () async {
-        for (var doc in snapshot.data!.docs) {
+        for (var doc in docs) {
           if (selectedMessages.contains(doc.id)) {
             final msg = Messages(
               text: doc["message"],
@@ -311,5 +326,4 @@ class _StarredmessagesState extends State<Starredmessages> {
       myIcon: const Icon(Icons.copy),
     );
   }
-
 }
