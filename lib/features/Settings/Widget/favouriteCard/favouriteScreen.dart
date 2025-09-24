@@ -24,6 +24,7 @@ class _FavouritescreenState extends State<Favouritescreen> {
   FirebaseService service = FirebaseService();
   bool isEditing = false;
   Set<String> selectedMessages = {};
+  bool hasFavourites = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,7 @@ class _FavouritescreenState extends State<Favouritescreen> {
         centerTitle: true,
         title: const Text("Favourites"),
         actions: [
+          if(hasFavourites)
           kTextButton(
             onPressed: () {
               setState(() {
@@ -53,6 +55,20 @@ class _FavouritescreenState extends State<Favouritescreen> {
             .collection("myFavourites")
             .snapshots(),
         builder: (context, snapshot) {
+          bool currentFave = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
+          if (hasFavourites != currentFave) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                setState(() {
+                  hasFavourites = currentFave;
+                  if (!hasFavourites) {
+                    isEditing = false; // Reset editing mode when no messages
+                    selectedMessages.clear();
+                  }
+                });
+              }
+            });
+          }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(child: Text("No favourites yet."));
           }
@@ -126,7 +142,7 @@ class _FavouritescreenState extends State<Favouritescreen> {
                       children: [
                         kIconButton(
                           onPressed: () async {
-                            for (final name in selectedMessages) {
+                            for (final name in selectedMessages.toList()) {
                               await service.removeFavourite(name);
                               myToast("Removed from Favourites");
                             }
