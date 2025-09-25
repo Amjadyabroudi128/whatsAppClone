@@ -11,6 +11,8 @@ import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
+import 'Firebase/FirebaseAuth.dart';
+import 'Firebase/online/offline.dart';
 import 'Firebase/passwordReset.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
 import 'features/Settings/Widget/favouriteCard/favouriteScreen.dart';
@@ -23,6 +25,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('📩 Handling a background message: ${message.messageId}');
 }
+late final PresenceController presence;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +37,9 @@ void main() async {
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.debug,
   );
+  final service = FirebaseService();
+  presence = PresenceController(service);
+  presence.attach();
 
   runApp(const MyApp());
 }
