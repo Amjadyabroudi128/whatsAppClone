@@ -12,7 +12,7 @@ import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
 import 'Firebase/FirebaseAuth.dart';
-import 'Firebase/online/offline.dart';
+import 'Firebase/offline.dart';
 import 'Firebase/passwordReset.dart';
 import 'features/BottomNavBar/BottomNavBar.dart';
 import 'features/Settings/Widget/favouriteCard/favouriteScreen.dart';
