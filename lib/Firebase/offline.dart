@@ -2,7 +2,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../FirebaseAuth.dart';
+import 'FirebaseAuth.dart';
 
 class PresenceController with WidgetsBindingObserver {
   final FirebaseService _service;
@@ -20,19 +20,21 @@ class PresenceController with WidgetsBindingObserver {
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    final loggedIn = FirebaseAuth.instance.currentUser != null;
-    if (!loggedIn) return;
+  void didChangeAppLifecycleState(AppLifecycleState state){
+    switch(state){
+      case AppLifecycleState.resumed:
+        _setOnline();
+        break;
+      case AppLifecycleState.paused:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+        _setOffline();
+        break;
+      default:
+        break;
 
-    if (state == AppLifecycleState.resumed) {
-      _setOnline();
-    } else if (state == AppLifecycleState.inactive ||
-        state == AppLifecycleState.paused ||
-        state == AppLifecycleState.detached) {
-      _setOffline();
     }
   }
-
   void _setOnline() {
     _service.onlineStatues(true);
   }
