@@ -142,17 +142,48 @@ class _TestnameState extends State<Testname> {
                         },
                         child: const Text("Cancel"))
                   ],
-                ) :Row(
+                ) :
+                Row(
                   children: [
-                    if(widget.image != null && widget.image!.isNotEmpty) 
-                      CircleAvatar(
-                      backgroundImage: NetworkImage(widget.image!),
-                      radius: 20,
-                    ) else icons.person(context),
-                    SizedBox(width: 10,),
+                    if (widget.image != null && widget.image!.isNotEmpty)
+                      CircleAvatar(backgroundImage: NetworkImage(widget.image!), radius: 20)
+                    else
+                      icons.person(context),
+                    const SizedBox(width: 10),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.receiverName),
+                        StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                          stream: service.presenceStream(widget.receiverId),
+                          builder: (context, snap) {
+                            if (!snap.hasData || !snap.data!.exists) {
+                              return const SizedBox.shrink();
+                            }
+                            final data = snap.data!.data()!;
+                            final isOnline = (data['isOnline'] == true);
+                            final timestamp = data["LastSeen"];
+
+                            DateTime? dateTime;
+                            if (timestamp is Timestamp) {
+                              dateTime = timestamp.toDate();
+                            } else if (timestamp is DateTime) {
+                              dateTime = timestamp;
+                            } else {
+                              dateTime = DateTime.now();
+                            }
+                            String subtitle;
+                            if (isOnline) {
+                              subtitle = "online";
+                            } else {
+                              subtitle = "offline";
+                            }
+                            return Text(
+                              subtitle,
+                              style: const TextStyle(fontSize: 13),
+                            );
+                          },
+                        ),
                       ],
                     )
                   ],
