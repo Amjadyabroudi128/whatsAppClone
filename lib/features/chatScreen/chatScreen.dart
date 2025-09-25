@@ -174,13 +174,13 @@ class _TestnameState extends State<Testname> {
                             }
                             String subtitle;
                             if (isOnline) {
-                              subtitle = "online";
+                              subtitle ="Online";
                             } else {
                               subtitle = "offline";
                             }
                             return Text(
                               subtitle,
-                              style: const TextStyle(fontSize: 13),
+                              style: TextStyle(fontSize: 13, color: isOnline ? Colors.green : Colors.red),
                             );
                           },
                         ),
