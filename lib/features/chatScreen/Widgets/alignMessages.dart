@@ -288,7 +288,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                           borderRadius: BorderRadius.circular(8),
                                           border: Border(
                                             left: BorderSide(
-                                              color: isMe ? Colors.orangeAccent : Colors.cyan,
+                                              color: isMe ? MyColors.myBorder : Colors.cyan,
                                               width: 7,
                                             ),
                                           ),
