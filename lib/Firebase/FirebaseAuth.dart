@@ -29,7 +29,9 @@ import '../features/chatScreen/Model/MessageModel.dart';
          'name': name,
          'bio': '',
          'image': '',
-         'link': ''
+         'link': '',
+          "isOnline": true,
+         "LastSeen": FieldValue.serverTimestamp()
        }, SetOptions(merge: true));
        await saveFcmTokenToFirestore();
        Navigator.pushReplacementNamed(context, "login");
@@ -63,10 +65,13 @@ import '../features/chatScreen/Model/MessageModel.dart';
          await users.collection("users").doc(user.uid).update({
            'email': email,
            'name': name,
+           'isOnline': true,
+           'lastSeen': FieldValue.serverTimestamp(),
          });
          await saveFcmTokenToFirestore(); // await to avoid warning and run it properly
          Navigator.pushReplacementNamed(context, "btm");
        } else {
+         await onlineStatues(false);
          await auth.signOut();
          myToast("Please verify your email before signing in.");
        }
@@ -114,6 +119,7 @@ import '../features/chatScreen/Model/MessageModel.dart';
      myToast("check your email for password");
    }
    Future<void> SignOut ()async {
+     await onlineStatues(false);
      auth.signOut();
   }
    Future<void> deleteAccount() async {
@@ -430,6 +436,27 @@ import '../features/chatScreen/Model/MessageModel.dart';
        );
      }
    }
+   Future<void> onlineStatues(bool isOnline) async {
+     final u = FirebaseAuth.instance.currentUser;
+     if (u == null) return;
+
+     final ref = FirebaseFirestore.instance.collection('users').doc(u.uid);
+
+     if (isOnline) {
+       await ref.set({
+         'isOnline': true,
+         'lastSeen': FieldValue.serverTimestamp(), // optional, updates anyway
+       }, SetOptions(merge: true));
+     } else {
+       await ref.set({
+         'isOnline': false,
+         'lastSeen': FieldValue.serverTimestamp(),
+       }, SetOptions(merge: true));
+     }
+   }
+   Stream<DocumentSnapshot<Map<String, dynamic>>> presenceStream(String userId) {
+     return FirebaseFirestore.instance.collection('users').doc(userId).snapshots();
+   }
    Future<void> readMsg(String? receiverId) async {
      final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
 
@@ -618,5 +645,6 @@ import '../features/chatScreen/Model/MessageModel.dart';
 
      return recentMessages;
    }
+
 
  }
