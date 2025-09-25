@@ -42,4 +42,5 @@ class MyColors {
    static Color? readColor = Colors.blue[400];
    static Color? sent = Colors.grey[850];
    static Color? read = Colors.green[600];
+   static Color myBorder = Colors.orangeAccent;
  }
