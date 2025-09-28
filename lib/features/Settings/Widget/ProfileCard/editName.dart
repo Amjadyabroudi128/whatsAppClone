@@ -57,10 +57,23 @@ class editName extends StatelessWidget {
               enable: enabled,
               filled: true,
               myController: nameController,
-              maxLines: 9,
+              maxLines: 1,
               hint: "Edit your Bio",
+              onFieldSubmitted: (value) async {   // ✅ handle Enter key
+                String newName = value.trim();
+                if (newName.isEmpty) {
+                  myToast("Your name is empty");
+                } else if (newName == name) {
+                  myToast("Change something");
+                } else {
+                  Navigator.of(context).pop();   // ✅ close after save
+                  await service.updateName(newName);
+
+                }
+              },
             ),
           ),
+
         ),
       ),
     );

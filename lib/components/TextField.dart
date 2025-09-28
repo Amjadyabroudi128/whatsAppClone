@@ -26,6 +26,7 @@ class kTextField extends StatelessWidget {
   final TextStyle? prefixStyle;
   final bool? enabled;
   final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onFieldSubmitted;
   final TextInputAction? textInputAction;
   const kTextField(
       {super.key, this.label, this.myController,
@@ -33,12 +34,14 @@ class kTextField extends StatelessWidget {
         this.border, this.keyBoard, this.hint,
         this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable,
         this.focused, this.textColor, this.prefixText, this.prefixStyle, this.enabled, this.textInputAction,
-        this.minLines, this.validator});
+        this.minLines, this.validator,this.onFieldSubmitted,
+      });
 
   @override
   Widget build(BuildContext context) {
     final color = textColor ?? Theme.of(context).textTheme.bodyMedium?.color;
     return TextFormField(
+      onFieldSubmitted: onFieldSubmitted,
       validator: validator,
       scrollController: scroll,
       onTap: onTap,
