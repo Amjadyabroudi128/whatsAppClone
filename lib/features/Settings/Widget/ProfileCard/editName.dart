@@ -6,8 +6,6 @@ import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextButton.dart';
 import '../../../../components/TextField.dart';
 import '../../../../core/TextStyles.dart';
-import '../../../../core/MyColors.dart';
-
 class editName extends StatelessWidget {
   final FirebaseService service;
   final TextEditingController nameController;
@@ -25,7 +23,6 @@ class editName extends StatelessWidget {
      myToast("Change something");
    } else {
      await service.updateName(nameController.text.trim());
-
    }
  }
   @override
