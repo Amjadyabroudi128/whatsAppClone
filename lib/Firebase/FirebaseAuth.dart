@@ -457,6 +457,22 @@ import '../features/chatScreen/Model/MessageModel.dart';
    Stream<DocumentSnapshot<Map<String, dynamic>>> presenceStream(String userId) {
      return FirebaseFirestore.instance.collection('users').doc(userId).snapshots();
    }
+   Future<void> updateOnlineStatus(bool isOnline) async {
+     await onlineStatues(true);
+   }
+   Future<void> updateUserOnlineStatus(bool isOnline) async{
+     if(user!.uid.isEmpty) return;
+     try{
+       await FirebaseFirestore.instance.collection("users").doc(user!.uid).update(
+         {
+           "isOnline": isOnline,
+           "lastSeen": FieldValue.serverTimestamp(),
+         }
+       );
+     } catch(e){
+
+     }
+   }
    Future<void> readMsg(String? receiverId) async {
      final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
 

@@ -1,7 +1,5 @@
 // presence_controller.dart
 import 'package:flutter/widgets.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'FirebaseAuth.dart';
 
 class PresenceController with WidgetsBindingObserver {
