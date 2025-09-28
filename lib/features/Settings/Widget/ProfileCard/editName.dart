@@ -17,11 +17,21 @@ class editName extends StatelessWidget {
     required this.service,
     required this.nameController, required this.name,
   }) : super(key: key);
+ Future<void> updateName() async {
+   final newName = nameController.text.trim();
+   if(newName.isEmpty){
+     myToast("Your name is empty ");
+   } else if (newName == name ){
+     myToast("Change something");
+   } else {
+     await service.updateName(nameController.text.trim());
 
+   }
+ }
   @override
   Widget build(BuildContext context) {
     OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
             color: Colors.transparent
         )
     );
@@ -37,15 +47,8 @@ class editName extends StatelessWidget {
             actions: [
               kTextButton(
                 onPressed: () async {
-                  String newName = nameController.text.trim();
-                  if(newName.isEmpty){
-                    myToast("Your name is empty ");
-                  } else if (newName == name ){
-                    myToast("Change something");
-                  } else {
-                    await service.updateName(nameController.text.trim());
-                    Navigator.of(context).pop();
-                  }
+                  updateName();
+                  Navigator.of(context).pop();
                 },
                 child: Text("Save", style: Textstyles.saveBio),
               ),
@@ -60,16 +63,8 @@ class editName extends StatelessWidget {
               maxLines: 1,
               hint: "Edit your Bio",
               onFieldSubmitted: (value) async {   // ✅ handle Enter key
-                String newName = value.trim();
-                if (newName.isEmpty) {
-                  myToast("Your name is empty");
-                } else if (newName == name) {
-                  myToast("Change something");
-                } else {
-                  Navigator.of(context).pop();   // ✅ close after save
-                  await service.updateName(newName);
-
-                }
+                updateName();
+                Navigator.of(context).pop();
               },
             ),
           ),
