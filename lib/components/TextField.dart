@@ -48,7 +48,7 @@ class kTextField extends StatelessWidget {
       controller: myController,
       obscureText: obscureText,
       keyboardType: keyBoard,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
       minLines: minLines,
       enabled: enabled,
       style: TextStyle(color: color),
