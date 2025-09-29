@@ -57,9 +57,9 @@ class editName extends StatelessWidget {
               enable: enabled,
               filled: true,
               myController: nameController,
-              maxLines: 1,
+              // maxLines: 1,
               hint: "Edit your Bio",
-              onFieldSubmitted: (value) async {   // ✅ handle Enter key
+              onFieldSubmitted: (value) async {
                 updateName();
                 Navigator.of(context).pop();
               },
