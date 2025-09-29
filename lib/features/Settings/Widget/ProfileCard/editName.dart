@@ -15,7 +15,7 @@ class editName extends StatelessWidget {
     required this.service,
     required this.nameController, required this.name,
   }) : super(key: key);
- Future<void> updateName() async {
+ Future<void> updateName(BuildContext context) async {
    final newName = nameController.text.trim();
    if(newName.isEmpty){
      myToast("Your name is empty ");
@@ -23,6 +23,8 @@ class editName extends StatelessWidget {
      myToast("Change something");
    } else {
      await service.updateName(nameController.text.trim());
+     myToast("Name Changed successfully");
+     Navigator.of(context).pop();
    }
  }
   @override
@@ -44,8 +46,7 @@ class editName extends StatelessWidget {
             actions: [
               kTextButton(
                 onPressed: () async {
-                  updateName();
-                  Navigator.of(context).pop();
+                  updateName(context);
                 },
                 child: Text("Save", style: Textstyles.saveBio),
               ),
@@ -57,10 +58,9 @@ class editName extends StatelessWidget {
               enable: enabled,
               filled: true,
               myController: nameController,
-              hint: "Edit your Bio",
+              hint: "Edit your Name",
               onFieldSubmitted: (value) async {
-                updateName();
-                Navigator.of(context).pop();
+                updateName(context);
               },
             ),
           ),
