@@ -7,6 +7,7 @@ In this read me I will show you some screenshots of this app and other things as
 
  2. recent chats
 
+
  <img width="222" height="670" alt="image" src="https://github.com/user-attachments/assets/e8b82e78-ee99-4dbe-8d08-7f70f81ec12e" />
  
 2.1 unread messages 
@@ -16,6 +17,11 @@ In this read me I will show you some screenshots of this app and other things as
  2.2 user info 
 
  <img width="222" height="667" alt="image" src="https://github.com/user-attachments/assets/c754faf3-fa6f-4858-9c97-9e6df90bba95" />
+
+
+ 3. :inbox_tray: inside chat 
+
+<img width="222" height="670" alt="image" src="https://github.com/user-attachments/assets/fcb0ceaa-03d8-44e1-a7ef-d37d3bec0e6b" />
 
 
 
