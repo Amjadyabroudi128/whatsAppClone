@@ -1,5 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
@@ -35,7 +34,7 @@ class _EditemailState extends State<Editemail> {
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
     OutlineInputBorder enabled = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
             color: Colors.transparent
         )
     );
@@ -47,7 +46,7 @@ class _EditemailState extends State<Editemail> {
         heightFactor: 0.94,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Edit your email"),
+            title: const Text("Edit your email"),
             actions: [
               kTextButton(
                 onPressed: () async {
@@ -66,7 +65,7 @@ class _EditemailState extends State<Editemail> {
                         return StatefulBuilder(
                           builder: (context, setState) {
                             return AlertDialog(
-                              title: Text("Re-authenticate"),
+                              title: const Text("Re-authenticate"),
                               content: kTextField(
                                 maxLines: 1,
                                 icon: kIconButton(
@@ -78,7 +77,7 @@ class _EditemailState extends State<Editemail> {
                                   },
                                 ),
                                 myController: widget.passwordController,
-                                label: Text("Password"),
+                                label: const Text("Password"),
                                 obscureText: !localPasswordVisible,
                               ),
                               actions: [
@@ -88,7 +87,7 @@ class _EditemailState extends State<Editemail> {
                                     FocusScope.of(context).unfocus();
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text("Cancel"),
+                                  child: const Text("Cancel"),
                                 ),
                                 kTextButton(
                                   onPressed: () async {
@@ -99,7 +98,7 @@ class _EditemailState extends State<Editemail> {
                                       await service.authenticate(widget.email, newEmail, widget.passwordController.text.trim());
                                     }
                                   },
-                                  child: Text("Confirm"),
+                                  child: const Text("Confirm"),
                                 ),
                               ],
                             );
@@ -110,7 +109,7 @@ class _EditemailState extends State<Editemail> {
                     widget.passwordController.clear();
                   }
                 },
-                child: Text("Save"),
+                child: const Text("Save"),
               )
             ],
           ),
@@ -119,17 +118,17 @@ class _EditemailState extends State<Editemail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("This is your Current Email"),
-                BoxSpacing(myHeight: 10),
+                const Text("This is your Current Email"),
+                const BoxSpacing(myHeight: 10),
                 kTextField(
                   filled: true,
                   maxLines: 1,
                   hint: widget.email,
                   enabled: false,
                 ),
-                BoxSpacing(myHeight: 10),
-                Text("Change email"),
-                BoxSpacing(myHeight: 10),
+                const BoxSpacing(myHeight: 10),
+                const Text("Change email"),
+                const BoxSpacing(myHeight: 10),
                 kTextField(
                   icon: icons.emailIcon(context),
                   enable: enabled,

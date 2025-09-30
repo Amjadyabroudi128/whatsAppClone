@@ -5,7 +5,6 @@ import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/TextButton.dart';
 import '../../../../components/TextField.dart';
 import '../../../../core/TextStyles.dart';
-import '../../../../core/MyColors.dart';
 
 class Editbio extends StatelessWidget {
   final FirebaseService service;
