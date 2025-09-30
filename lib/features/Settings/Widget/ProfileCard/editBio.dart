@@ -24,6 +24,18 @@ class Editbio extends StatelessWidget {
             color: Colors.transparent
         )
     );
+    Future<void> updateMyBio(BuildContext context) async {
+      String newBio = bioController.text.trim();
+      if(newBio.isEmpty){
+        myToast("Your Bio is empty ");
+      } else if (newBio == bio ){
+        myToast("Change something");
+      } else {
+        await service.updateBio(newBio);
+        myToast("Bio Changed successfully");
+        Navigator.of(context).pop();
+      }
+    }
     return FractionallySizedBox(
       heightFactor: 0.94,
       child: GestureDetector(
@@ -35,16 +47,8 @@ class Editbio extends StatelessWidget {
             title: const Text("Edit Your Bio",),
             actions: [
               kTextButton(
-                onPressed: () async {
-                  String newBio = bioController.text.trim();
-                  if(newBio.isEmpty){
-                    myToast("Your Bio is empty ");
-                  } else if (newBio == bio ){
-                    myToast("Change something");
-                  } else {
-                    await service.updateBio(bioController.text.trim());
-                    Navigator.of(context).pop();
-                  }
+                onPressed: () {
+                  updateMyBio(context);
                 },
                 child: Text("Save", style: Textstyles.saveBio),
               ),
@@ -56,9 +60,12 @@ class Editbio extends StatelessWidget {
               enable: enabled,
               filled: true,
               myController: bioController,
-              maxLines: 9,
+              keyBoard: TextInputType.multiline,
+              textInputAction: TextInputAction.done, // enter adds a new line
+              minLines: 1,
+              maxLines: null,
               hint: "Edit your Bio",
-            ),
+            )
           ),
         ),
       ),
