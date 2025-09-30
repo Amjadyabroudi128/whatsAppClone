@@ -25,6 +25,7 @@ class kTextField extends StatelessWidget {
   final String? prefixText;
   final TextStyle? prefixStyle;
   final bool? enabled;
+  final bool? expands;
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onFieldSubmitted;
   final TextInputAction? textInputAction;
@@ -34,7 +35,7 @@ class kTextField extends StatelessWidget {
         this.border, this.keyBoard, this.hint,
         this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable,
         this.focused, this.textColor, this.prefixText, this.prefixStyle, this.enabled, this.textInputAction,
-        this.minLines, this.validator,this.onFieldSubmitted,
+        this.minLines, this.validator,this.onFieldSubmitted, this.expands,
       });
 
   @override
@@ -48,9 +49,11 @@ class kTextField extends StatelessWidget {
       controller: myController,
       obscureText: obscureText,
       keyboardType: keyBoard,
-      maxLines: maxLines ?? 1,
+      maxLines: maxLines,
       minLines: minLines,
       enabled: enabled,
+      expands: expands ?? false,
+      textAlignVertical: TextAlignVertical.top,
       style: TextStyle(color: color),
       textInputAction: textInputAction,
       decoration: InputDecoration(
