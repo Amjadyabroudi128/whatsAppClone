@@ -8,5 +8,10 @@ In this read me I will show you some screenshots of this app and other things as
  2. recent chats
 
  <img width="222" height="670" alt="image" src="https://github.com/user-attachments/assets/e8b82e78-ee99-4dbe-8d08-7f70f81ec12e" />
+ 
+ unread messages 
+ 
+ <img width="222" height="670" alt="image" src="https://github.com/user-attachments/assets/3169923f-631a-43d2-a141-a4b8a73941f8" />
+
 
  
