@@ -22,7 +22,7 @@ class editName extends StatelessWidget {
    } else if (newName == name ){
      myToast("Change something");
    } else {
-     await service.updateName(nameController.text.trim());
+     await service.updateName(newName);
      myToast("Name Changed successfully");
      Navigator.of(context).pop();
    }
