@@ -86,6 +86,7 @@ class _EditemailState extends State<Editemail> {
                                     widget.passwordController.clear();
                                     FocusScope.of(context).unfocus();
                                     Navigator.of(context).pop();
+                                    widget.emailController.clear();
                                   },
                                   child: const Text("Cancel"),
                                 ),
@@ -96,6 +97,7 @@ class _EditemailState extends State<Editemail> {
                                     } else {
                                       Navigator.of(context).pop();
                                       await service.authenticate(widget.email, newEmail, widget.passwordController.text.trim());
+                                      myToast("Email has been changed ");
                                     }
                                   },
                                   child: const Text("Confirm"),
