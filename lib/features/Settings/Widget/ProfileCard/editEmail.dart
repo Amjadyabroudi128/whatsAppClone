@@ -38,6 +38,68 @@ class _EditemailState extends State<Editemail> {
             color: Colors.transparent
         )
     );
+    Future<void> changeEmail() async {
+      final newEmail = widget.emailController.text.trim();
+      if (newEmail.isEmpty) {
+        myToast("Your Email is empty");
+      } else if (!isValidEmail(newEmail)) {
+        myToast("Invalid email format");
+      } else if (newEmail == widget.email) {
+        myToast("Change something");
+      } else {
+        await showDialog(
+        context: context,
+        builder: (context) {
+          bool localPasswordVisible = false;
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: const Text("Re-authenticate"),
+                content: kTextField(
+                  maxLines: 1,
+                  icon: kIconButton(
+                    myIcon: localPasswordVisible ? icons.visibility : icons.visibility_off,
+                    onPressed: () {
+                      setState(() {
+                        localPasswordVisible = !localPasswordVisible;
+                      });
+                    },
+                  ),
+                  myController: widget.passwordController,
+                  label: const Text("Password"),
+                  obscureText: !localPasswordVisible,
+                ),
+                actions: [
+                  kTextButton(
+                    onPressed: () {
+                      widget.passwordController.clear();
+                      FocusScope.of(context).unfocus();
+                      Navigator.of(context).pop();
+                      widget.emailController.clear();
+                    },
+                    child: const Text("Cancel"),
+                  ),
+                  kTextButton(
+                    onPressed: () async {
+                      if(widget.passwordController.text.isEmpty) {
+                        myToast("Add your password");
+                      } else {
+                        Navigator.of(context).pop();
+                        await service.authenticate(widget.email, newEmail, widget.passwordController.text.trim());
+                        myToast("Email has been changed ");
+                      }
+                    },
+                    child: const Text("Confirm"),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        );
+        widget.passwordController.clear();
+      }
+    }
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -49,67 +111,8 @@ class _EditemailState extends State<Editemail> {
             title: const Text("Edit your email"),
             actions: [
               kTextButton(
-                onPressed: () async {
-                  final newEmail = widget.emailController.text.trim();
-                  if (newEmail.isEmpty) {
-                    myToast("Your Email is empty");
-                  } else if (!isValidEmail(newEmail)) {
-                    myToast("Invalid email format");
-                  } else if (newEmail == widget.email) {
-                    myToast("Change something");
-                  } else {
-                    await showDialog(
-                      context: context,
-                      builder: (context) {
-                        bool localPasswordVisible = false;
-                        return StatefulBuilder(
-                          builder: (context, setState) {
-                            return AlertDialog(
-                              title: const Text("Re-authenticate"),
-                              content: kTextField(
-                                maxLines: 1,
-                                icon: kIconButton(
-                                  myIcon: localPasswordVisible ? icons.visibility : icons.visibility_off,
-                                  onPressed: () {
-                                    setState(() {
-                                      localPasswordVisible = !localPasswordVisible;
-                                    });
-                                  },
-                                ),
-                                myController: widget.passwordController,
-                                label: const Text("Password"),
-                                obscureText: !localPasswordVisible,
-                              ),
-                              actions: [
-                                kTextButton(
-                                  onPressed: () {
-                                    widget.passwordController.clear();
-                                    FocusScope.of(context).unfocus();
-                                    Navigator.of(context).pop();
-                                    widget.emailController.clear();
-                                  },
-                                  child: const Text("Cancel"),
-                                ),
-                                kTextButton(
-                                  onPressed: () async {
-                                    if(widget.passwordController.text.isEmpty) {
-                                      myToast("Add your password");
-                                    } else {
-                                      Navigator.of(context).pop();
-                                      await service.authenticate(widget.email, newEmail, widget.passwordController.text.trim());
-                                      myToast("Email has been changed ");
-                                    }
-                                  },
-                                  child: const Text("Confirm"),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    );
-                    widget.passwordController.clear();
-                  }
+                onPressed: (){
+                  changeEmail();
                 },
                 child: const Text("Save"),
               )
@@ -138,6 +141,9 @@ class _EditemailState extends State<Editemail> {
                   maxLines: 1,
                   hint: "e.g name@example.com",
                   myController: widget.emailController,
+                  onFieldSubmitted: (value) async {
+                    changeEmail();
+                  },
                 ),
               ],
             ),
