@@ -4,20 +4,21 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/Firebase/offline.dart';
+import 'package:whatsappclone/Firebase/passwordReset.dart';
 import 'package:whatsappclone/colorPicker/ColorPicking.dart';
 import 'package:whatsappclone/core/appTheme.dart';
+import 'package:whatsappclone/features/BottomNavBar/BottomNavBar.dart';
+import 'package:whatsappclone/features/Settings/Widget/favouriteCard/favouriteScreen.dart';
 import 'package:whatsappclone/features/SignInScreen/signIn.dart';
 import 'package:whatsappclone/features/SignUp/signupScreen.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
-import 'Firebase/FirebaseAuth.dart';
-import 'Firebase/offline.dart';
-import 'Firebase/passwordReset.dart';
-import 'features/BottomNavBar/BottomNavBar.dart';
-import 'features/Settings/Widget/favouriteCard/favouriteScreen.dart';
-import 'features/welcomeScreen/welcome.dart';
-import 'firebase_options.dart';
+import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
+import 'package:whatsappclone/firebase_options.dart';
+
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

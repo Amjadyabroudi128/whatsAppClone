@@ -8,6 +8,10 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
+import 'package:whatsappclone/features/chatScreen/Widgets/messageStream.dart';
+import 'package:whatsappclone/features/chatScreen/Widgets/optionsBtmSheet.dart';
+import 'package:whatsappclone/features/chatScreen/userDetails/recieverdetails.dart';
 import '../../globalState.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/TextField.dart';
@@ -16,10 +20,7 @@ import '../../components/iconButton.dart';
 import '../../colorPicker/colorsList.dart';
 import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
-import 'Model/MessageModel.dart';
-import 'Widgets/messageStream.dart';
-import 'userDetails/recieverdetails.dart';
-import 'Widgets/optionsBtmSheet.dart';
+
 
 class Testname extends StatefulWidget {
   final String receiverId;
@@ -214,14 +215,6 @@ class _TestnameState extends State<Testname> {
                         selectedMessages.clear();
                       });
                     },
-                  ),
-                ),
-                if(isUploading)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: EdgeInsets.all(7),
-                    child: CircularProgressIndicator(),
                   ),
                 ),
                 if (_replyMessage != null)

@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
+import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
-
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../components/SizedBox.dart';
 import '../../../../components/TextButton.dart';
@@ -15,7 +15,6 @@ import '../../../../components/iconButton.dart';
 import '../../../../components/kCard.dart';
 import '../../../../core/MyColors.dart';
 import '../../../../core/icons.dart';
-import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 class allStarred extends StatefulWidget {
   const allStarred({super.key, String? receiverId});
 
