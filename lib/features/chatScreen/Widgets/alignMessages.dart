@@ -22,19 +22,20 @@ import 'copyMessage.dart';
 import 'dateText.dart';
 import 'deleteMessage.dart';
 import 'editMessage.dart';
+
 class messagesAlign extends StatefulWidget {
-   messagesAlign({
+  messagesAlign({
     super.key,
     required this.messages,
     required this.user,
-     this.widget,
+    this.widget,
     this.onReply,
     this.textColor,
     required this.isEditing,
     required this.selectedMessages,
-     required this.onToggleEdit,
-     this.msg
-   });
+    required this.onToggleEdit,
+    this.msg,
+  });
 
   final List<Messages> messages;
   final Messages? msg;
@@ -44,21 +45,22 @@ class messagesAlign extends StatefulWidget {
   final Color? textColor;
   late final bool isEditing;
   final Set<String> selectedMessages;
-   final VoidCallback? onToggleEdit;
+  final VoidCallback? onToggleEdit;
 
-   @override
+  @override
   State<messagesAlign> createState() => _messagesAlignState();
 }
 
 class _messagesAlignState extends State<messagesAlign> {
   final bool isStarred = false;
   bool isEditing = false;
+
   @override
   Widget build(BuildContext context) {
     FirebaseService service = FirebaseService();
     return GestureDetector(
-      onTap: (){
-         FocusScope.of(context).unfocus();
+      onTap: () {
+        FocusScope.of(context).unfocus();
       },
       child: ListView.builder(
         itemCount: widget.messages.length,
@@ -95,8 +97,11 @@ class _messagesAlignState extends State<messagesAlign> {
           }
           return Column(
             children: [
-              if(showDate)
-              Text(today, style: TextStyle(color: widget.textColor),),
+              if (showDate)
+                Text(
+                  today,
+                  style: TextStyle(color: widget.textColor),
+                ),
               Align(
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
                 child: GestureDetector(
@@ -106,22 +111,21 @@ class _messagesAlignState extends State<messagesAlign> {
                         context,
                         MaterialPageRoute(
                           builder: (_) => Imagescreen(
-                              image: msg.image,
-                              date: today,
-                              senderName: msg.senderName,
-                              time: formattedTime,
-                              messageId: msg.messageId,
-                              receiverId: msg.receiverId,
-                              senderId: msg.senderId,
-                              senderEmail: msg.senderEmail,
-                              receiverEmail: msg.receiverEmail,
-                              isMe: isMe
+                            image: msg.image,
+                            date: today,
+                            senderName: msg.senderName,
+                            time: formattedTime,
+                            messageId: msg.messageId,
+                            receiverId: msg.receiverId,
+                            senderId: msg.senderId,
+                            senderEmail: msg.senderEmail,
+                            receiverEmail: msg.receiverEmail,
+                            isMe: isMe,
                           ),
                         ),
                       );
                     } else if (msg.file != null && msg.file!.isNotEmpty) {
-                      launchUrl(Uri.parse(
-                          '${msg.file}'));
+                      launchUrl(Uri.parse('${msg.file}'));
                     }
                   },
                   onLongPressStart: (detail) {
@@ -135,17 +139,17 @@ class _messagesAlignState extends State<messagesAlign> {
                     )
                         : RelativeRect.fromLTRB(
                       detail.globalPosition.dx,
-                      detail.globalPosition.dy ,
+                      detail.globalPosition.dy,
                       MediaQuery.of(context).size.width / 4,
                       0.0,
                     );
-                    if(msg.image != null && msg.image!.isNotEmpty) {
+                    if (msg.image != null && msg.image!.isNotEmpty) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) => Imagescreen(
                             image: msg.image,
-                              date: today,
+                            date: today,
                             senderName: msg.senderName,
                             time: formattedTime,
                             messageId: msg.messageId,
@@ -153,7 +157,7 @@ class _messagesAlignState extends State<messagesAlign> {
                             senderId: msg.senderId,
                             senderEmail: msg.senderEmail,
                             receiverEmail: msg.receiverEmail,
-                            isMe: isMe
+                            isMe: isMe,
                           ),
                         ),
                       );
@@ -167,43 +171,48 @@ class _messagesAlignState extends State<messagesAlign> {
                             value: 'open',
                             child: const Text('Open File'),
                             onTap: () async {
-                              await launchUrl(Uri.parse(
-                                  '${msg.file}'));
+                              await launchUrl(Uri.parse('${msg.file}'));
                             },
                           ),
                           deleteMessage(context, msg, widget.widget, widget.user, service),
                         ],
                       );
-                    }
-                    else {
-                      showMenu(context: context,
-                          color: MyColors.menuColor,
+                    } else {
+                      showMenu(
+                        context: context,
+                        color: MyColors.menuColor,
                         position: position,
                         items: [
                           copyMessage(msg, context),
                           if (isMe) editMessage(context, msg, service, widget.widget, widget.user),
-                         if (isMe) deleteMessage(context, msg, widget.widget, widget.user, service,),
-                          starMessage(msg, service, index, context, ),
+                          if (isMe) deleteMessage(context, msg, widget.widget, widget.user, service),
+                          starMessage(msg, service, index, context),
                           PopupMenuItem(
                             value: "reply",
-                            child:kTextButton(
+                            child: kTextButton(
                               onPressed: () {
                                 Navigator.pop(context);
                                 if (widget.onReply != null) {
-                                  widget.onReply!(msg); // Call the reply handler
+                                  widget.onReply!(msg);
                                 }
                               },
                               child: Row(
                                 children: [
-                                  Text("Reply",style: Textstyles.copyMessage,),
+                                  Text("Reply", style: Textstyles.copyMessage),
                                   const Spacer(),
                                   icons.reply
                                 ],
                               ),
-                            )
+                            ),
                           ),
-                          selectMessage(context, msg, widget.isEditing, widget.onToggleEdit, widget.selectedMessages, () {
-                            setState(() {
+                          selectMessage(
+                            context,
+                            msg,
+                            widget.isEditing,
+                            widget.onToggleEdit,
+                            widget.selectedMessages,
+                                () {
+                              setState(() {
                                 if (!widget.isEditing) {
                                   widget.onToggleEdit?.call();
                                 }
@@ -212,16 +221,18 @@ class _messagesAlignState extends State<messagesAlign> {
                                 } else {
                                   widget.selectedMessages.add(msg.messageId!);
                                 }
-                            });
-                          })
-                        ]
+                              });
+                            },
+                          )
+                        ],
                       );
                     }
                     FocusScope.of(Navigator.of(context).context).unfocus();
-
                   },
                   child: Dismissible(
-                    direction: isMe ? DismissDirection.endToStart : DismissDirection.startToEnd,
+                    direction: isMe
+                        ? DismissDirection.endToStart
+                        : DismissDirection.startToEnd,
                     background: Container(
                       alignment: isMe ? Alignment.centerLeft : Alignment.centerRight,
                       child: icons.reply,
@@ -240,14 +251,12 @@ class _messagesAlignState extends State<messagesAlign> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         if (widget.isEditing)
-                          (isMe) ?
-                          Transform.scale(
+                          (isMe)
+                              ? Transform.scale(
                             scale: 1.2,
                             child: Checkbox(
                               activeColor: MyColors.starColor,
-                              side: BorderSide(
-                                  color: MyColors.labelClr
-                              ),
+                              side: BorderSide(color: MyColors.labelClr),
                               visualDensity: VisualDensity.compact,
                               checkColor: MyColors.FG,
                               shape: const CircleBorder(),
@@ -262,7 +271,8 @@ class _messagesAlignState extends State<messagesAlign> {
                                 });
                               },
                             ),
-                          ) : const SizedBox(),
+                          )
+                              : const SizedBox(),
                         Flexible(
                           child: IntrinsicWidth(
                             child: ConstrainedBox(
@@ -298,7 +308,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email? "You": msg.replyTo!.senderName}",
+                                              "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email ? "You" : msg.replyTo!.senderName}",
                                               style: TextStyle(
                                                 color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
                                                     ? MyColors.myName
@@ -318,7 +328,8 @@ class _messagesAlignState extends State<messagesAlign> {
                                                   ),
                                                 ],
                                               ),
-                                            Text(msg.replyTo!.text,
+                                            Text(
+                                              msg.replyTo!.text,
                                               style: Textstyles.textMsg,
                                             ),
                                           ],
@@ -327,17 +338,36 @@ class _messagesAlignState extends State<messagesAlign> {
                                     if (msg.image != null && msg.image!.isNotEmpty)
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(12),
-                                        child: kimageNet(src: msg.image!),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            // msg.image is a Firebase download URL
+                                            kimageNet(src: msg.image!),
+                                            if (msg.text.trim().isNotEmpty)
+                                              const SizedBox(height: 8),
+                                            if (msg.text.trim().isNotEmpty)
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 11, bottom: 8),
+                                                child: Text(
+                                                  msg.text.trim(),
+                                                  style: const TextStyle(fontSize: 16),
+                                                ),
+                                              )
+                                          ],
+                                        ),
                                       )
                                     else if (msg.file != null && msg.file!.isNotEmpty)
                                       Row(
                                         children: [
-                                           icons.myFile,
+                                          icons.myFile,
                                           const SizedBox(width: 8),
                                           Expanded(
                                             child: Text(
                                               msg.file!.split('/').last,
-                                              style: const TextStyle(fontSize: 16, decoration: TextDecoration.underline),
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                decoration: TextDecoration.underline,
+                                              ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
@@ -386,6 +416,4 @@ class _messagesAlignState extends State<messagesAlign> {
       ),
     );
   }
-
 }
-
