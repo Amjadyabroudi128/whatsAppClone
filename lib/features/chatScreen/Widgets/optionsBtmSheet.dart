@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/dividerContainer.dart';
 
@@ -45,11 +47,10 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const DividerContainer(),
-                    Text(
-                      "Choose an option",
-                      style: Textstyles.option,
-                    ),
+                    Text("Choose an option", style: Textstyles.option),
                     const BoxSpacing(myHeight: 10),
+
+                    // PHOTO (Gallery)
                     Options(
                       context: context,
                       leading: icons.image(context),
@@ -57,25 +58,34 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                       onTap: () async {
                         Navigator.of(context).pop();
                         widget.onUploadStatusChanged?.call(true);
+
+                        // NOTE: your util uploads first and returns download URLs
                         final imageUrls = await url.pickMultiImages();
                         if (imageUrls.isEmpty) {
-                          widget.onUploadStatusChanged?.call(false); // User cancelled
+                          widget.onUploadStatusChanged?.call(false);
                           return;
                         }
 
-                        for (String imageUrl in imageUrls) {
-                          await widget.service.sendMessage(
-                            widget.widget.receiverId,
-                            widget.widget.receiverName,
-                            "",
-                            imageUrl,
-                            null,
-                            null,
-                          );
+                        for (final imageUrl in imageUrls) {
+                          // Preview with NETWORK (not File)
+                          final result = await showImagePreview(imageUrl);
+                          if (result != null && result.$1) {
+                            await widget.service.sendMessage(
+                              widget.widget.receiverId,
+                              widget.widget.receiverName,
+                              result.$2.trim(), // caption (may be empty)
+                              imageUrl, // already a download URL
+                              null,
+                              null,
+                            );
+                          }
                         }
-                        widget.onUploadStatusChanged?.call(false); // Upload done
+
+                        widget.onUploadStatusChanged?.call(false);
                       },
                     ),
+
+                    // CAMERA
                     Options(
                       context: context,
                       leading: icons.camera(context),
@@ -84,22 +94,27 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                         Navigator.pop(context);
                         widget.onUploadStatusChanged?.call(true);
 
+                        // NOTE: your util uploads first and returns download URL
                         final imageUrl = await url.takeImage();
-
                         if (imageUrl != null) {
-                          await widget.service.sendMessage(
-                            widget.widget.receiverId,
-                            widget.widget.receiverName,
-                            "",
-                            imageUrl,
-                            null,
-                            null,
-                          );
+                          final result = await showImagePreview(imageUrl);
+                          if (result != null && result.$1) {
+                            await widget.service.sendMessage(
+                              widget.widget.receiverId,
+                              widget.widget.receiverName,
+                              result.$2.trim(), // caption
+                              imageUrl, // already a download URL
+                              null,
+                              null,
+                            );
+                          }
                         }
 
                         widget.onUploadStatusChanged?.call(false);
                       },
                     ),
+
+                    // FILE
                     Options(
                       context: context,
                       leading: icons.file(context),
@@ -116,7 +131,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                             widget.widget.receiverName,
                             "",
                             null,
-                            fileLink,
+                            fileLink, // already uploaded URL
                             null,
                           );
                         }
@@ -133,5 +148,64 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
       },
       myIcon: icons.add,
     );
+  }
+
+
+  Future<(bool, String)?> showImagePreview(String imageUrl) async {
+    String caption = '';
+
+    final result = await showDialog<(bool, String)?>(
+      context: context,
+      useRootNavigator: true,
+      barrierDismissible: false,
+      builder: (dialogCtx) => AlertDialog(
+        contentPadding: const EdgeInsets.all(17),
+        content: SizedBox(
+          width: MediaQuery.of(dialogCtx).size.width * 0.9,   // 90% of screen width
+          height: 400,
+          child: SingleChildScrollView(
+            child: Column(
+              // mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 420, maxHeight: 420),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Image.network(imageUrl, fit: BoxFit.cover),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                kTextField(
+                  hint: "Add a caption..",
+                  // no controller here
+                  onChanged: (v) => caption = v,
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          kTextButton(
+            child: const Text("Cancel"),
+            onPressed: () {
+              FocusScope.of(dialogCtx).unfocus();
+              Navigator.of(dialogCtx).pop(null);
+            },
+          ),
+          kTextButton(
+            child: const Text("Send"),
+            onPressed: () {
+              FocusScope.of(dialogCtx).unfocus();
+              Navigator.of(dialogCtx).pop((true, caption));
+            },
+          ),
+        ],
+      ),
+    );
+
+    return result;
   }
 }
