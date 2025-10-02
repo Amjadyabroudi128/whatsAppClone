@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class kTextField extends StatelessWidget {
@@ -28,15 +27,43 @@ class kTextField extends StatelessWidget {
   final bool? expands;
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onFieldSubmitted;
+
+  // NEW: add onChanged
+  final ValueChanged<String>? onChanged;
+
   final TextInputAction? textInputAction;
-  const kTextField(
-      {super.key, this.label, this.myController,
-        this.myIcon,this.obscureText = false,
-        this.border, this.keyBoard, this.hint,
-        this.icon, this.suffix, this.maxLines, this.fillColor, this.filled, this.onTap, this.scroll, this.hintStyle, this.style, this.enable,
-        this.focused, this.textColor, this.prefixText, this.prefixStyle, this.enabled, this.textInputAction,
-        this.minLines, this.validator,this.onFieldSubmitted, this.expands,
-      });
+
+  const kTextField({
+    super.key,
+    this.label,
+    this.myController,
+    this.myIcon,
+    this.obscureText = false,
+    this.border,
+    this.keyBoard,
+    this.hint,
+    this.icon,
+    this.suffix,
+    this.maxLines,
+    this.fillColor,
+    this.filled,
+    this.onTap,
+    this.scroll,
+    this.hintStyle,
+    this.style,
+    this.enable,
+    this.focused,
+    this.textColor,
+    this.prefixText,
+    this.prefixStyle,
+    this.enabled,
+    this.textInputAction,
+    this.minLines,
+    this.validator,
+    this.onFieldSubmitted,
+    this.expands,
+    this.onChanged, // NEW
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +73,8 @@ class kTextField extends StatelessWidget {
       validator: validator,
       scrollController: scroll,
       onTap: onTap,
-      controller: myController,
+      controller: myController, // can be null
+      onChanged: onChanged,     // NEW: safe when no controller
       obscureText: obscureText,
       keyboardType: keyBoard,
       maxLines: maxLines,
@@ -69,7 +97,7 @@ class kTextField extends StatelessWidget {
         prefixIcon: myIcon,
         suffix: suffix,
         border: border,
-        hintStyle: hintStyle
+        hintStyle: hintStyle,
       ),
     );
   }
