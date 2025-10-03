@@ -44,4 +44,5 @@ class MyColors {
    static Color? read = Colors.green[600];
    static Color myBorder = Colors.orangeAccent;
    static Color otherBorder = Colors.cyan;
+   static Color offline = Colors.red;
  }
