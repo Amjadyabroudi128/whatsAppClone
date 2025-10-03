@@ -46,4 +46,10 @@ class Textstyles {
   static TextStyle textMsg = const TextStyle(fontSize: 16, color: Colors.black);
   static TextStyle thanks = const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
   static TextStyle report = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  static TextStyle offline(BuildContext context, Color color, double fontsize){
+    return TextStyle(
+      color: color,
+      fontSize: fontsize
+    );
+  }
  }
