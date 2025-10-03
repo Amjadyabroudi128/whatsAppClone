@@ -181,7 +181,7 @@ class _TestnameState extends State<Testname> {
                             }
                             return Text(
                               subtitle,
-                              style: Textstyles.offline(context, isOnline ? Colors.green : Colors.red, 13),
+                              style: Textstyles.offline(context, isOnline ? Colors.green : MyColors.offline, 13),
                               // style: TextStyle(fontSize: 13, color: isOnline ? Colors.green : Colors.red),
                             );
                           },
