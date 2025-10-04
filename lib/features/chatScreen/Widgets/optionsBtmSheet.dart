@@ -178,31 +178,43 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                kTextField(
-                  hint: "Add a caption..",
-                  // no controller here
-                  onChanged: (v) => caption = v,
+                Row(
+                  children: [
+                    Expanded(
+                      child: kTextField(
+                        hint: "Add a caption..",
+                        onChanged: (v) => caption = v,
+                      ),
+                    ),
+                    kIconButton(
+                      myIcon: icons.send,
+                      onPressed: (){
+                        FocusScope.of(dialogCtx).unfocus();
+                        Navigator.of(dialogCtx).pop((true, caption));
+                      },
+                    )
+                  ],
                 ),
               ],
             ),
           ),
         ),
-        actions: [
-          kTextButton(
-            child: const Text("Cancel"),
-            onPressed: () {
-              FocusScope.of(dialogCtx).unfocus();
-              Navigator.of(dialogCtx).pop(null);
-            },
-          ),
-          kTextButton(
-            child: const Text("Send"),
-            onPressed: () {
-              FocusScope.of(dialogCtx).unfocus();
-              Navigator.of(dialogCtx).pop((true, caption));
-            },
-          ),
-        ],
+        // actions: [
+        //   kTextButton(
+        //     child: const Text("Cancel"),
+        //     onPressed: () {
+        //       FocusScope.of(dialogCtx).unfocus();
+        //       Navigator.of(dialogCtx).pop(null);
+        //     },
+        //   ),
+        //   kTextButton(
+        //     child: const Text("Send"),
+        //     onPressed: () {
+        //       FocusScope.of(dialogCtx).unfocus();
+        //       Navigator.of(dialogCtx).pop((true, caption));
+        //     },
+        //   ),
+        // ],
       ),
     );
 
