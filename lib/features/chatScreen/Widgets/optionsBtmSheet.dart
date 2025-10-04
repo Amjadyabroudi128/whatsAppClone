@@ -165,8 +165,17 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
           height: 400,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.min,
               children: [
+                kIconButton(
+                  onPressed: (){
+                          FocusScope.of(dialogCtx).unfocus();
+                          Navigator.of(dialogCtx).pop(null);
+                  },
+                  myIcon: icons.close,
+                ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: ConstrainedBox(
