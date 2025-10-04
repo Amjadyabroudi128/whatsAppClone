@@ -184,15 +184,15 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                       child: kTextField(
                         hint: "Add a caption..",
                         onChanged: (v) => caption = v,
+                        icon: kIconButton(
+                          myIcon: icons.send,
+                          onPressed: (){
+                            FocusScope.of(dialogCtx).unfocus();
+                            Navigator.of(dialogCtx).pop((true, caption));
+                          },
+                        ),
                       ),
                     ),
-                    kIconButton(
-                      myIcon: icons.send,
-                      onPressed: (){
-                        FocusScope.of(dialogCtx).unfocus();
-                        Navigator.of(dialogCtx).pop((true, caption));
-                      },
-                    )
                   ],
                 ),
               ],
