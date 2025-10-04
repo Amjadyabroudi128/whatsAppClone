@@ -162,7 +162,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
         contentPadding: const EdgeInsets.all(17),
         content: SizedBox(
           width: MediaQuery.of(dialogCtx).size.width * 0.9,   // 90% of screen width
-          height: 400,
+          height: 460,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
