@@ -17,29 +17,32 @@ class passField extends StatefulWidget {
 }
 
 class _passFieldState extends State<passField> {
-  bool passwordVisible = true;
+  final ValueNotifier<bool> passwordV = ValueNotifier<bool>(false);
  @override
   void initState() {
     super.initState();
-    passwordVisible = false;
+
   }
   @override
   Widget build(BuildContext context) {
-    return kTextField(
-      textInputAction: TextInputAction.done,
-      maxLines: 1,
-      icon: kIconButton(
-        myIcon: passwordVisible ? icons.visibility : icons.visibility_off,
-        onPressed: (){
-          setState(() {
-            passwordVisible = !passwordVisible;
-          });
-        },
-      ),
-      myController: widget.pass,
-      label: Text("Password"),
-      myIcon: icons.passIcon,
-      obscureText: !passwordVisible,
+    return ValueListenableBuilder(
+      valueListenable: passwordV,
+      builder: (context,value, _) {
+        return kTextField(
+          textInputAction: TextInputAction.done,
+          maxLines: 1,
+          icon: kIconButton(
+            myIcon: value ? icons.visibility : icons.visibility_off,
+            onPressed: (){
+              passwordV.value = !value;
+            },
+          ),
+          myController: widget.pass,
+          label: const Text("Password"),
+          myIcon: icons.passIcon,
+          obscureText: !value,
+        );
+      },
     );
   }
 }
