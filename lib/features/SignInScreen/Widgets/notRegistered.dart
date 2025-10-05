@@ -18,10 +18,10 @@ class NotRegisterd extends StatelessWidget {
         ),
         onPressed: (){
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Signupscreen())
+              MaterialPageRoute(builder: (context) => const Signupscreen())
           );
         }, child:
-    Text("Sign up",)
+    const Text("Sign up",)
     );
   }
 }
