@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/padding.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../SignUp/Widgets/emailTextField.dart';
 import '../SignUp/Widgets/nameTextfield.dart';
@@ -62,11 +63,11 @@ class _SignInscreenState extends State<SignInscreen> {
                 Center(
                   child: siginIn(firebase: firebase, myEmail: myEmail, pass: pass, user: user, name: name,),
                 ),
-                const Row(
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Not registered?",style: TextStyle(fontSize: 15, color: Colors.grey),),
-                    NotRegisterd()
+                    Text("Not registered?",style: Textstyles.notReg,),
+                    const NotRegisterd()
                   ],
                 )
               ],
