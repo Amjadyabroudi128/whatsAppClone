@@ -52,4 +52,5 @@ class Textstyles {
       fontSize: fontsize
     );
   }
+  static TextStyle notReg = const TextStyle(fontSize: 15, color: Colors.grey);
  }
