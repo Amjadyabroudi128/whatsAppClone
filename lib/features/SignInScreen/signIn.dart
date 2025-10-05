@@ -67,7 +67,7 @@ class _SignInscreenState extends State<SignInscreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Not registered?",style: Textstyles.notReg,),
-                    const NotRegisterd()
+                    const NotRegistered()
                   ],
                 )
               ],

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../../../components/TextButton.dart';
 import '../../../core/TextStyles.dart';
 import '../../SignUp/signupScreen.dart';
 
-class NotRegisterd extends StatelessWidget {
-  const NotRegisterd({
+class NotRegistered extends StatelessWidget {
+  const NotRegistered({
     super.key,
   });
 
