@@ -208,22 +208,6 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
             ),
           ),
         ),
-        // actions: [
-        //   kTextButton(
-        //     child: const Text("Cancel"),
-        //     onPressed: () {
-        //       FocusScope.of(dialogCtx).unfocus();
-        //       Navigator.of(dialogCtx).pop(null);
-        //     },
-        //   ),
-        //   kTextButton(
-        //     child: const Text("Send"),
-        //     onPressed: () {
-        //       FocusScope.of(dialogCtx).unfocus();
-        //       Navigator.of(dialogCtx).pop((true, caption));
-        //     },
-        //   ),
-        // ],
       ),
     );
 
