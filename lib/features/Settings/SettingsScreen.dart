@@ -10,6 +10,7 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/features/Settings/Widget/ActiveStatus/ActiveStatus.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/changeEmail.dart';
 import 'package:whatsappclone/features/Settings/Widget/issueReport/issueReport.dart';
 import '../../Firebase/FirebaseAuth.dart';
@@ -99,7 +100,21 @@ class _SettingScreenState extends State<SettingScreen> {
                             );
                           },
                           trailing: icons.getIssueIcon(context)
-                        )
+                        ),
+                        divider(),
+                        Options(
+                            context: context,
+                            label: const Text("Active Status"),
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const ActiveStatus()
+                                ),
+                              );
+                            },
+                            trailing: icons.arrowForward(context)
+                        ),
                       ],
                     ),
                   ),
