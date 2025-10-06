@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/dividerContainer.dart';
@@ -67,14 +66,13 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                         }
 
                         for (final imageUrl in imageUrls) {
-                          // Preview with NETWORK (not File)
                           final result = await showImagePreview(imageUrl);
                           if (result != null && result.$1) {
                             await widget.service.sendMessage(
                               widget.widget.receiverId,
                               widget.widget.receiverName,
-                              result.$2.trim(), // caption (may be empty)
-                              imageUrl, // already a download URL
+                              result.$2.trim(),
+                              imageUrl,
                               null,
                               null,
                             );
@@ -93,8 +91,6 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                       onTap: () async {
                         Navigator.pop(context);
                         widget.onUploadStatusChanged?.call(true);
-
-                        // NOTE: your util uploads first and returns download URL
                         final imageUrl = await url.takeImage();
                         if (imageUrl != null) {
                           final result = await showImagePreview(imageUrl);
@@ -102,8 +98,8 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                             await widget.service.sendMessage(
                               widget.widget.receiverId,
                               widget.widget.receiverName,
-                              result.$2.trim(), // caption
-                              imageUrl, // already a download URL
+                              result.$2.trim(),
+                              imageUrl,
                               null,
                               null,
                             );
