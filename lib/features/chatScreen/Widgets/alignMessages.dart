@@ -349,8 +349,11 @@ class _messagesAlignState extends State<messagesAlign> {
                                               Padding(
                                                 padding: const EdgeInsets.only(left: 11, bottom: 8),
                                                 child: Text(
-                                                  msg.text.trim(),
-                                                  style: const TextStyle(fontSize: 16),
+                                                  msg.text,
+                                                  softWrap: true,
+                                                  textAlign: TextAlign.right,
+                                                  overflow: TextOverflow.clip,
+                                                  style: Textstyles.textMsg,
                                                 ),
                                               )
                                           ],
