@@ -57,8 +57,6 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                       onTap: () async {
                         Navigator.of(context).pop();
                         widget.onUploadStatusChanged?.call(true);
-
-                        // NOTE: your util uploads first and returns download URLs
                         final imageUrls = await url.pickMultiImages();
                         if (imageUrls.isEmpty) {
                           widget.onUploadStatusChanged?.call(false);
@@ -118,9 +116,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                       onTap: () async {
                         Navigator.pop(context);
                         widget.onUploadStatusChanged?.call(true);
-
                         final fileLink = await url.pickFile();
-
                         if (fileLink != null) {
                           await widget.service.sendMessage(
                             widget.widget.receiverId,

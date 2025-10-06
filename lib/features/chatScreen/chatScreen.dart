@@ -164,14 +164,9 @@ class _TestnameState extends State<Testname> {
                             final data = snap.data!.data()!;
                             final isOnline = (data['isOnline'] == true);
                             final timestamp = data["LastSeen"];
-
-                            DateTime? dateTime;
                             if (timestamp is Timestamp) {
-                              dateTime = timestamp.toDate();
                             } else if (timestamp is DateTime) {
-                              dateTime = timestamp;
                             } else {
-                              dateTime = DateTime.now();
                             }
                             String subtitle;
                             if (isOnline) {
@@ -288,7 +283,7 @@ class _TestnameState extends State<Testname> {
                                             children: [
                                               Text("Delete $count Message${count > 1 ? 's' : ''}?",
                                                 style: Textstyles.deleteMessages,),
-                                              Spacer(),
+                                              const Spacer(),
                                               kIconButton(
                                                 myIcon: icons.close,
                                                 onPressed: (){
@@ -304,11 +299,11 @@ class _TestnameState extends State<Testname> {
                                             trailing: icons.deleteIcon,
                                             onTap: () async {
                                               myToast("message Deleted ");
+                                              Navigator.of(context).pop();
                                               await service.deleteSelectedMessages(
                                                   senderId: FirebaseAuth.instance.currentUser!.uid,
                                                   receiverId: widget.receiverId,
                                                   messageIds: selectedMessages);
-                                              Navigator.of(context).pop();
                                               setState(() {
                                                 isEditing = false;
                                                 selectedMessages.clear();
