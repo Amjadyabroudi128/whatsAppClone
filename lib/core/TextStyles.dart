@@ -53,4 +53,9 @@ class Textstyles {
     );
   }
   static TextStyle notReg = const TextStyle(fontSize: 15, color: Colors.grey);
+  static TextStyle whoOnline = TextStyle(
+    color: Colors.grey[600],
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+  );
  }
