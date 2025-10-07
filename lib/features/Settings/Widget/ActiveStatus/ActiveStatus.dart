@@ -4,6 +4,8 @@ import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 
+import '../../../../core/icons.dart';
+
 class ActiveStatus extends StatefulWidget {
   const ActiveStatus({super.key});
 
@@ -53,7 +55,7 @@ class _ActiveStatusState extends State<ActiveStatus> {
                         });
                       },
                       trailing: selectedOption == "Everyone"
-                          ? const Icon(Icons.check_circle)
+                          ? icons.onlineStatue
                           : const SizedBox.shrink(),
                     ),
                     const divider(),
@@ -66,7 +68,7 @@ class _ActiveStatusState extends State<ActiveStatus> {
                         });
                       },
                       trailing: selectedOption == "Nobody"
-                          ? const Icon(Icons.check_circle)
+                          ? icons.onlineStatue
                           : const SizedBox.shrink(),
                     ),
                   ],
