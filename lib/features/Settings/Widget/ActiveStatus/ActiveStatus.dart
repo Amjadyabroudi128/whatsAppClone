@@ -55,7 +55,7 @@ class _ActiveStatusState extends State<ActiveStatus> {
                         });
                       },
                       trailing: selectedOption == "Everyone"
-                          ? icons.onlineStatue
+                          ? icons.onlineStatus
                           : const SizedBox.shrink(),
                     ),
                     const divider(),
@@ -68,7 +68,7 @@ class _ActiveStatusState extends State<ActiveStatus> {
                         });
                       },
                       trailing: selectedOption == "Nobody"
-                          ? icons.onlineStatue
+                          ? icons.onlineStatus
                           : const SizedBox.shrink(),
                     ),
                   ],
