@@ -3,6 +3,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 
 import '../../../../core/icons.dart';
 
@@ -35,11 +36,7 @@ class _ActiveStatusState extends State<ActiveStatus> {
               padding: const EdgeInsets.symmetric(horizontal: 4, ),
               child: Text(
                 "Who can see when I'm online",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Textstyles.whoOnline
               ),
             ),
             const BoxSpacing(myHeight: 16),
