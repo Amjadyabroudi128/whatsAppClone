@@ -145,5 +145,5 @@ class icons {
   static Icon thanks(BuildContext context) {
     return Icon(Icons.check_circle_outline, size: 72, color: Theme.of(context).iconTheme.color,);
   }
-  static Icon onlineStatue = Icon(Icons.check_circle,color: Colors.green, size: 18,,);
+  static Icon onlineStatue = const Icon(Icons.check_circle,color: Colors.green, size: 18,);
 }

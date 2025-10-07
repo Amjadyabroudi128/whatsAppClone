@@ -32,7 +32,7 @@ class _ActiveStatusState extends State<ActiveStatus> {
           children: [
             // Description text
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 4, ),
               child: Text(
                 "Who can see when I'm online",
                 style: TextStyle(
