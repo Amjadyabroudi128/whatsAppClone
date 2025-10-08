@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
@@ -49,6 +50,7 @@ class _ActiveStatusState extends State<ActiveStatus> {
                       onTap: () {
                         setState(() {
                           selectedOption = "Everyone";
+                          myToast("Your status is now visible");
                         });
                       },
                       trailing: selectedOption == "Everyone"
