@@ -16,7 +16,7 @@ class ActiveStatus extends StatefulWidget {
 
 class _ActiveStatusState extends State<ActiveStatus> {
   String selectedOption = 'Everyone'; // Default selection
-  bool isSelected = false;
+  // bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
