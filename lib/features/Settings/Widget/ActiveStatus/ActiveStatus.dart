@@ -64,6 +64,7 @@ class _ActiveStatusState extends State<ActiveStatus> {
                       onTap: () {
                         setState(() {
                           selectedOption = "Nobody";
+                          myToast("Only you can see your status ");
                         });
                       },
                       trailing: selectedOption == "Nobody"
