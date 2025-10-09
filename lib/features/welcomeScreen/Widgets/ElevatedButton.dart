@@ -12,7 +12,7 @@ class elevatedBtn extends StatelessWidget {
       onPressed: (){
         Navigator.of(context).pushNamed("sign up");
       },
-      child: Text("Agree and Continue"),
+      child: const Text("Agree and Continue"),
     );
   }
 }

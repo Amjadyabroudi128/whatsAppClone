@@ -12,10 +12,10 @@ class haveAnAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return kTextButton(onPressed: (){
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => SignInscreen())
+          MaterialPageRoute(builder: (context) => const SignInscreen())
       );
     },
-        child: Text("have an account?",)
+        child: const Text("have an account?",)
     );
   }
 }
