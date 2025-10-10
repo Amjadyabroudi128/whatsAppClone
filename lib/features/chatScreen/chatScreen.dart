@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/kCard.dart';
@@ -21,17 +21,20 @@ import '../../colorPicker/colorsList.dart';
 import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 
-
 class Testname extends StatefulWidget {
   final String receiverId;
   final String receiverName;
   final String? senderId;
   final String? msg;
   final String? image;
+
   const Testname({
     Key? key,
     required this.receiverId,
-    required this.receiverName,  this.senderId, this.msg, this.image,
+    required this.receiverName,
+    this.senderId,
+    this.msg,
+    this.image,
   }) : super(key: key);
 
   @override
@@ -45,15 +48,16 @@ class _TestnameState extends State<Testname> {
   final currentUser = FirebaseAuth.instance.currentUser!.uid;
 
   Messages? _replyMessage;
-  bool isTextEmpty = true;
   bool isEditing = false;
   bool isUploading = false;
   Set<String> selectedMessages = {};
+
   void setReplyMessage(Messages message) {
     setState(() {
       _replyMessage = message;
     });
   }
+
   void markMessagesAsRead() async {
     final currentUserId = FirebaseAuth.instance.currentUser!.uid;
     final chatRoomId = getChatRoomId(currentUserId, widget.receiverId);
@@ -62,7 +66,7 @@ class _TestnameState extends State<Testname> {
         .collection("chat_rooms")
         .doc(chatRoomId)
         .collection("messages")
-        .where("receieverId", isEqualTo: currentUserId)
+        .where("receiverId", isEqualTo: currentUserId)
         .where("isRead", isEqualTo: false)
         .get();
 
@@ -75,24 +79,25 @@ class _TestnameState extends State<Testname> {
     final ids = [user1, user2]..sort();
     return ids.join("_");
   }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     markMessagesAsRead();
     service.readMsg(widget.receiverId);
     messageController.addListener(() {
-      setState(() {}); // Rebuild UI when text changes
+      setState(() {});
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final isReplyFromMe = _replyMessage?.senderEmail == user!.email;
-    final OutlineInputBorder messageBorder = OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
-            color: Colors.black
-        )
+    final OutlineInputBorder messageBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: const BorderSide(color: Colors.black),
     );
+
     return ValueListenableBuilder<Color>(
       valueListenable: selectedThemeColor,
       builder: (context, color, child) {
@@ -128,60 +133,93 @@ class _TestnameState extends State<Testname> {
                 }
               },
               child: AppBar(
-                // backgroundColor: color,
-                title: isEditing ? Row(
+                title: isEditing
+                    ? Row(
                   children: [
                     const Text("Selected"),
-                    BoxSpacing(mWidth: MediaQuery.of(context).size.width * 0.39,),
+                    const Spacer(),
                     kTextButton(
-                        onPressed: (){
-                          setState(() {
-                            FocusScope.of(Navigator.of(context).context).unfocus();
-                            selectedMessages.clear();
-                            isEditing = !isEditing;
-                          });
-                        },
-                        child: const Text("Cancel"))
+                      onPressed: () {
+                        setState(() {
+                          FocusScope.of(context).unfocus();
+                          selectedMessages.clear();
+                          isEditing = false;
+                        });
+                      },
+                      child: const Text("Cancel"),
+                    ),
                   ],
-                ) :
-                Row(
+                )
+                    : Row(
                   children: [
                     if (widget.image != null && widget.image!.isNotEmpty)
-                      CircleAvatar(backgroundImage: NetworkImage(widget.image!), radius: 20)
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(widget.image!),
+                        radius: 20,
+                      )
                     else
                       icons.person(context),
                     const SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(widget.receiverName),
-                        StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                          stream: service.presenceStream(widget.receiverId),
-                          builder: (context, snap) {
-                            if (!snap.hasData || !snap.data!.exists) {
-                              return const SizedBox.shrink();
-                            }
-                            final data = snap.data!.data()!;
-                            final isOnline = (data['isOnline'] == true);
-                            final timestamp = data["LastSeen"];
-                            if (timestamp is Timestamp) {
-                            } else if (timestamp is DateTime) {
-                            } else {
-                            }
-                            String subtitle;
-                            if (isOnline) {
-                              subtitle ="Online";
-                            } else {
-                              subtitle = "offline";
-                            }
-                            return Text(
-                              subtitle,
-                              style: Textstyles.offline(context, isOnline ? MyColors.online : MyColors.offline, 13),
-                            );
-                          },
-                        ),
-                      ],
-                    )
+
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            widget.receiverName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          StreamBuilder<
+                              DocumentSnapshot<Map<String, dynamic>>>(
+                            stream:
+                            service.presenceStream(widget.receiverId),
+                            builder: (context, snap) {
+                              if (!snap.hasData ||
+                                  !snap.data!.exists) {
+                                return const SizedBox.shrink();
+                              }
+
+                              final data = snap.data!.data()!;
+                              final bool isOnline =
+                                  data['isOnline'] == true;
+
+                              final raw =
+                                  data['LastSeen'] ?? data['lastSeen'];
+                              DateTime? lastSeen;
+                              if (raw is Timestamp) {
+                                lastSeen = raw.toDate();
+                              } else if (raw is DateTime) {
+                                lastSeen = raw;
+                              }
+
+                              final subtitle = isOnline
+                                  ? "Online"
+                                  : (lastSeen != null
+                                  ? "last seen at ${DateFormat('E HH:mm').format(lastSeen)}"
+                                  : "Offline");
+
+                              return Text(
+                                subtitle,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Textstyles.offline(
+                                  context,
+                                  isOnline
+                                      ? MyColors.online
+                                      : MyColors.offline,
+                                  14,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
                 centerTitle: false,
@@ -189,7 +227,7 @@ class _TestnameState extends State<Testname> {
             ),
           ),
           body: GestureDetector(
-            onTap: (){
+            onTap: () {
               FocusScope.of(context).unfocus();
             },
             child: Column(
@@ -214,42 +252,56 @@ class _TestnameState extends State<Testname> {
                 ),
                 if (_replyMessage != null)
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 8, vertical: 4),
                     padding: const EdgeInsets.all(8),
                     decoration: replyDecoration(
                       color: MyColors.labelClr,
                       borderRadius: BorderRadius.circular(8),
                       border: Border(
                         left: BorderSide(
-                          color: isReplyFromMe ? MyColors.myReply
-                          : MyColors.otherReply,
-                          width: 7
-                        )
-                      )
+                          color: isReplyFromMe
+                              ? MyColors.myReply
+                              : MyColors.otherReply,
+                          width: 7,
+                        ),
+                      ),
                     ),
                     child: Row(
                       children: [
                         Expanded(
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
                             children: [
                               Text(
-                                isReplyFromMe ? "You" : (_replyMessage!.senderName ?? ""),
+                                isReplyFromMe
+                                    ? "You"
+                                    : (_replyMessage!.senderName ?? ""),
                                 maxLines: 2,
                                 overflow: TextOverflow.clip,
                                 style: TextStyle(
-                                  color: isReplyFromMe ? MyColors.myName :
-                                  MyColors.otherName,
+                                  color: isReplyFromMe
+                                      ? MyColors.myName
+                                      : MyColors.otherName,
                                 ),
                               ),
-                              Text("${_replyMessage!.text}", style: Textstyles.reply,
-                                maxLines: 3,overflow: TextOverflow.clip,
-                              )
+                              Text(
+                                _replyMessage!.text,
+                                style: Textstyles.reply,
+                                maxLines: 3,
+                                overflow: TextOverflow.clip,
+                              ),
                             ],
                           ),
                         ),
-                        if (_replyMessage!.image != null && _replyMessage!.image!.isNotEmpty)
-                          Image.network(_replyMessage!.image!, height: 50, width: 60),
+                        if (_replyMessage!.image != null &&
+                            _replyMessage!.image!.isNotEmpty)
+                          Image.network(
+                            _replyMessage!.image!,
+                            height: 50,
+                            width: 60,
+                          ),
                         kIconButton(
                           myIcon: icons.Wclose,
                           onPressed: () {
@@ -262,69 +314,93 @@ class _TestnameState extends State<Testname> {
                       ],
                     ),
                   ),
-                isEditing || selectedMessages.isNotEmpty ?
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        kIconButton(
-                          onPressed: () async {
-                            final count = selectedMessages.length;
-                            await btmSheet(
-                              context: context,
-                              builder: (context) {
-                                return Wrap(
-                                  children: [ Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: [
-                                              Text("Delete $count Message${count > 1 ? 's' : ''}?",
-                                                style: Textstyles.deleteMessages,),
-                                              const Spacer(),
-                                              kIconButton(
-                                                myIcon: icons.close,
-                                                onPressed: (){
-                                                  Navigator.of(context).pop();
-                                                },
-                                              )
-                                            ],
-                                          ),
+                isEditing || selectedMessages.isNotEmpty
+                    ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    kIconButton(
+                      onPressed: () async {
+                        final count = selectedMessages.length;
+                        await btmSheet(
+                          context: context,
+                          builder: (context) {
+                            return Wrap(
+                              children: [
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.all(
+                                            8.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Delete $count Message${count > 1 ? 's' : ''}?",
+                                              style: Textstyles
+                                                  .deleteMessages,
+                                            ),
+                                            const Spacer(),
+                                            kIconButton(
+                                              myIcon: icons.close,
+                                              onPressed: () {
+                                                Navigator.of(
+                                                    context)
+                                                    .pop();
+                                              },
+                                            ),
+                                          ],
                                         ),
-                                        kCard(
-                                          child: Options(
-                                            label: Text("Delete Messages", style: Textstyles.saveBio),
-                                            trailing: icons.deleteIcon,
-                                            onTap: () async {
-                                              myToast("message Deleted ");
-                                              Navigator.of(context).pop();
-                                              await service.deleteSelectedMessages(
-                                                  senderId: FirebaseAuth.instance.currentUser!.uid,
-                                                  receiverId: widget.receiverId,
-                                                  messageIds: selectedMessages);
-                                              setState(() {
-                                                isEditing = false;
-                                                selectedMessages.clear();
-                                              });
-                                            },
-                                            context: context
+                                      ),
+                                      kCard(
+                                        child: Options(
+                                          label: Text(
+                                            "Delete Messages",
+                                            style: Textstyles
+                                                .saveBio,
                                           ),
-                                        )
-                                      ],
-                                    ),
+                                          trailing:
+                                          icons.deleteIcon,
+                                          onTap: () async {
+                                            myToast(
+                                                "Message deleted");
+                                            Navigator.of(context)
+                                                .pop();
+                                            await service
+                                                .deleteSelectedMessages(
+                                              senderId: FirebaseAuth
+                                                  .instance
+                                                  .currentUser!
+                                                  .uid,
+                                              receiverId: widget
+                                                  .receiverId,
+                                              messageIds:
+                                              selectedMessages,
+                                            );
+                                            setState(() {
+                                              isEditing = false;
+                                              selectedMessages
+                                                  .clear();
+                                            });
+                                          },
+                                          context: context,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ]
-                                );
-                              }
+                                ),
+                              ],
                             );
                           },
-                          myIcon: icons.deleteIcon,
-                        )
-                      ],
-                    ) :
-                Padding(
+                        );
+                      },
+                      myIcon: icons.deleteIcon,
+                    ),
+                  ],
+                )
+                    : Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
@@ -338,13 +414,19 @@ class _TestnameState extends State<Testname> {
                           hintStyle: Textstyles.sendMessage,
                         ),
                       ),
-                      photoBtmSheet(service: service, widget: widget, textColor: textColor,
+                      photoBtmSheet(
+                        service: service,
+                        widget: widget,
+                        textColor: textColor,
                         onUploadStatusChanged: (value) {
-                        setState(() {
-                          isUploading = value;
-                        });
-                      },),
-                      messageController.text.trim().isNotEmpty
+                          setState(() {
+                            isUploading = value;
+                          });
+                        },
+                      ),
+                      messageController.text
+                          .trim()
+                          .isNotEmpty
                           ? kIconButton(
                         onPressed: () {
                           service.sendMessage(
@@ -361,7 +443,7 @@ class _TestnameState extends State<Testname> {
                         },
                         myIcon: icons.send,
                       )
-                          : SizedBox.shrink(),
+                          : const SizedBox.shrink(),
                     ],
                   ),
                 ),
