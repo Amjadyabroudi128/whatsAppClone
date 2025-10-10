@@ -118,7 +118,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       ],
                     ),
                   ),
-                  starCard(user: user),
+                  // starCard(user: user),
                   const BoxSpacing(myHeight: 10,),
                   Text("List of Favourite chats",  style: Textstyles.accountStyle,),
                   favouriteCard(user: user),
