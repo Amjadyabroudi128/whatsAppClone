@@ -1,7 +1,3 @@
-
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,9 +17,7 @@ import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
 import 'Widget/accountFunctions/signout.dart';
 import 'Widget/favouriteCard/favouriteOptions.dart';
-import 'Widget/starCard/starCard.dart';
 import 'Widget/themeCard/themeCard.dart';
-
 class SettingScreen extends StatefulWidget {
   final void Function(ThemeData, ThemeMode)? onThemeChange;
   const SettingScreen({super.key, this.onThemeChange,});
