@@ -29,6 +29,7 @@ class RecentChatsScreen extends StatefulWidget {
 class _RecentChatsScreenState extends State<RecentChatsScreen> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
+  final ValueNotifier<bool> isFav = ValueNotifier<bool>(false);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +112,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                   backgroundImage: NetworkImage(userImage),
                                                   radius: 20,
                                                 ),
-                                              BoxSpacing(mWidth: 6,),
+                                              const BoxSpacing(mWidth: 6,),
                                               Text(otherUserName!),
                                               const Spacer(),
                                               kIconButton(
@@ -132,11 +133,11 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                 trailing: icons.getIssueIcon(context),
                                                 onTap: () async {
                                                   try {
+                                                    Navigator.of(context).pop(); // dismiss loading
                                                     final snapshot = await FirebaseFirestore.instance
                                                         .collection('users')
                                                         .doc(otherUserId)
                                                         .get();
-                                                    Navigator.of(context).pop(); // dismiss loading
                                                     if (snapshot.exists) {
                                                       final data = snapshot.data()!;
                                                       Navigator.push(
@@ -191,36 +192,26 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                 },
                                               ),
                                               const divider(),
-                                              FutureBuilder<bool>(
-                                                future: service.isFavourite(otherUserName),
-                                                builder: (context, snapshot) {
-                                                  if (!snapshot.hasData) {
-                                                    return const Padding(
-                                                      padding: EdgeInsets.all(16.0),
-                                                      child: CircularProgressIndicator(),
-                                                    );
-                                                  }
-                                                  final isFavourite = snapshot.data!;
+                                              ValueListenableBuilder<bool>(
+                                                valueListenable: isFav,
+                                                builder: (context, value, _) {
                                                   return Options(
-                                                    label: Text(isFavourite ? "Remove from favourite" : "Add to favourite"),
-                                                    trailing: isFavourite ? icons.myFavourite(context) : icons.fave(context),
-                                                    // trailing: icons.fave,
+                                                    label: Text(value ? "Remove from favourite" : "Add to favourite"),
+                                                    trailing: value ? icons.myFavourite(context) : icons.fave(context),
                                                     context: context,
                                                     onTap: () async {
-                                                      if (isFavourite) {
-                                                        Navigator.of(context).pop();
-                                                        await service.removeFavourite(otherUserName);
-                                                        myToast("Removed from favourites");
-                                                      } else {
+                                                      Navigator.of(context).pop();
+                                                      if (isFav.value = !value) {
                                                         await service.addToFavourite(otherUserName);
                                                         myToast("Added to favourites");
+                                                      } else {
+                                                        await service.removeFavourite(otherUserName);
+                                                        myToast("Removed from favourites");
                                                       }
-
                                                     },
                                                   );
                                                 },
                                               ),
-
                                             ],
                                           ),
                                         )
