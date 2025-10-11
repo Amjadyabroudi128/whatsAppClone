@@ -15,7 +15,7 @@ PopupMenuItem<String> starMessage(Messages msg, FirebaseService service, int ind
         children: [
           Text("Star", style: Textstyles.copyMessage),
           const Spacer(),
-          icons.star(context),
+          const Icon(Icons.star_border_outlined),
         ],
       ),
       onPressed: () async {

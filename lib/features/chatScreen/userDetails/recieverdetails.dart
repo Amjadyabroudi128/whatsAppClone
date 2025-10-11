@@ -131,7 +131,7 @@ class _userDetailsState extends State<userDetails> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                icons.copy,
+                                icons.copy(context),
                                 const BoxSpacing(mWidth: 10,),
                                 Text("Copy", style: TextStyle(
                                   color: MyTheme.appTheme == true ? Colors.white : Colors.black,
