@@ -23,7 +23,7 @@ PopupMenuItem<String> copyMessage(Messages msg, BuildContext context) {
           children: [
             Text("Copy",style: Textstyles.copyMessage,),
             Spacer(),
-            icons.copy,
+            const Icon(Icons.copy),
           ],
         ),
       )
