@@ -56,7 +56,13 @@ class icons {
   static Icon tick = Icon(Icons.check, color: MyColors.tick, size: 40);
   static Icon colors = const Icon(Icons.color_lens_outlined);
   static Icon deleteIcon = Icon(CupertinoIcons.delete, color: MyColors.delete);
-  static Icon copy = Icon(Icons.copy,color: MyTheme.appTheme == true ? Colors.white : Colors.black,);
+  static Icon copy(BuildContext context) {
+    return Icon(
+      Icons.copy,
+      color: Theme.of(context).iconTheme.color,
+    );
+  }
+  // static Icon copy = Icon(Icons.copy,color: MyTheme.appTheme == true ? Colors.white : Colors.black,);
   static Icon wcopy = const Icon(Icons.copy, color: Colors.white,);
   static Icon edit = Icon(CupertinoIcons.pencil, color: MyColors.tick, size: 27,);
   static Icon camera(BuildContext context) {
