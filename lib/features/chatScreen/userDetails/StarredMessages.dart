@@ -219,7 +219,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                   Positioned(
                     bottom: 0,
                     left: 0,
-                    right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.3 : 0,
+                    right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.18 : 0,
                     child: Row(
                       mainAxisAlignment: selectedMessages.length > 1 ?
                       MainAxisAlignment.spaceAround : MainAxisAlignment.spaceEvenly,
@@ -339,7 +339,7 @@ class _StarredmessagesState extends State<Starredmessages> {
           }
         }
       },
-      myIcon: const Icon(Icons.copy),
+      myIcon: icons.copy(context),
     );
   }
 }
