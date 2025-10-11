@@ -21,7 +21,15 @@ In this read me I will show you some screenshots of this app and other things as
 
  3. :inbox_tray: inside chat 
 
-<img width="222" height="670" alt="image" src="https://github.com/user-attachments/assets/fcb0ceaa-03d8-44e1-a7ef-d37d3bec0e6b" />
+<img width="222" height="660" alt="image" src="https://github.com/user-attachments/assets/fcb0ceaa-03d8-44e1-a7ef-d37d3bec0e6b" />
+<img width="222" height="698" alt="image" src="https://github.com/user-attachments/assets/6b33439f-9a25-4fb7-af6e-2526a3b74b4b" />
+
+if user has not signed in for a long time, show "Offline" 
+
+4. ### :wrench: Settings screen
+
+<img width="222" height="673" alt="image" src="https://github.com/user-attachments/assets/ad70c75e-d27f-4f9b-a418-02042da25d8b" />
+
 
 
 
