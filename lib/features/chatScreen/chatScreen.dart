@@ -174,34 +174,32 @@ class _TestnameState extends State<Testname> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600),
                           ),
-                          StreamBuilder<
-                              DocumentSnapshot<Map<String, dynamic>>>(
-                            stream:
-                            service.presenceStream(widget.receiverId),
+                          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                            stream: service.presenceStream(widget.receiverId),
                             builder: (context, snap) {
-                              if (!snap.hasData ||
-                                  !snap.data!.exists) {
+                              if (!snap.hasData || !snap.data!.exists) {
                                 return const SizedBox.shrink();
                               }
 
                               final data = snap.data!.data()!;
-                              final bool isOnline =
-                                  data['isOnline'] == true;
+                              final visibility = data['onlineVisibility'] as String? ?? 'Everyone';
 
-                              final raw =
-                                  data['LastSeen'] ?? data['lastSeen'];
+                              // Hide if user set visibility to "Nobody"
+                              if (visibility == 'Nobody') {
+                                return const SizedBox.shrink();
+                              }
+                              final bool isOnline = data['isOnline'] == true;
+                              final raw = data['lastSeen'] ?? data['LastSeen'];
                               DateTime? lastSeen;
                               if (raw is Timestamp) {
                                 lastSeen = raw.toDate();
-                              } else if (raw is DateTime) {
-                                lastSeen = raw;
                               }
 
                               final subtitle = isOnline
                                   ? "Online"
-                                  : (lastSeen != null
+                                  : lastSeen != null
                                   ? "last seen at ${DateFormat('E HH:mm').format(lastSeen)}"
-                                  : "Offline");
+                                  : "Offline";
 
                               return Text(
                                 subtitle,
@@ -209,15 +207,14 @@ class _TestnameState extends State<Testname> {
                                 overflow: TextOverflow.ellipsis,
                                 style: Textstyles.offline(
                                   context,
-                                  isOnline
-                                      ? MyColors.online
-                                      : MyColors.offline,
+                                  isOnline ? MyColors.online : MyColors.offline,
                                   14,
                                 ),
                               );
                             },
-                          ),
-                        ],
+                          )
+
+                      ],
                       ),
                     ),
                   ],
