@@ -35,122 +35,124 @@ class IssueReport extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 22, left: 1),
-                  child: kIconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      removeController();
-                    },
-                    myIcon: icons.arrow,
-                    color: Theme.of(context).iconTheme.color,
+      child: SafeArea(
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 22, left: 1),
+                    child: kIconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        removeController();
+                      },
+                      myIcon: icons.arrow,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
-                ),
-                const BoxSpacing(myHeight: 60),
-                Center(
-                  child: Text(
-                    "What to report?",
-                    style: Textstyles.report,
+                  const BoxSpacing(myHeight: 60),
+                  Center(
+                    child: Text(
+                      "What to report?",
+                      style: Textstyles.report,
+                    ),
                   ),
-                ),
-                const BoxSpacing(myHeight: 20),
-
-                // Email field with padding
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text.rich(
-                        TextSpan(
-                          text: "Email ",
-                          style: Textstyles.important,
-                          children: [
-                            TextSpan(
-                              text: "*",
-                              style: Textstyles.deleteStyle,
-                            ),
-                          ],
+                  const BoxSpacing(myHeight: 20),
+        
+                  // Email field with padding
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            text: "Email ",
+                            style: Textstyles.important,
+                            children: [
+                              TextSpan(
+                                text: "*",
+                                style: Textstyles.deleteStyle,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      const BoxSpacing(myHeight: 9),
-                      kTextField(
-                        myController: emailController,
-                        hint: "Your email",
-                        validator: validateEmail,
-                      ),
-                    ],
-                  ),
-                ),
-                const BoxSpacing(myHeight: 20),
-
-                // Issue field with padding
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text.rich(
-                        TextSpan(
-                          text: "Issue ",
-                          style: Textstyles.important,
-                          children: [
-                            TextSpan(
-                              text: "*",
-                              style: Textstyles.deleteStyle,
-                            ),
-                          ],
+                        const BoxSpacing(myHeight: 9),
+                        kTextField(
+                          myController: emailController,
+                          hint: "Your email",
+                          validator: validateEmail,
                         ),
-                      ),
-                      const BoxSpacing(myHeight: 7),
-                      kTextField(
-                        hint: "Please describe your Issue...",
-                        minLines: 4,
-                        myController: issueController,
-                        validator: (issue) => issue!.isEmpty ? "don't leave this empty" : null,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const BoxSpacing(myHeight: 20),
-
-                // Submit button centered
-                Center(
-                  child: kElevatedBtn(
-                    onPressed: () async {
-                      final email = emailController.text.trim();
-                      final issue = issueController.text.trim();
-                      // Run all validators
-                      final isValid = _formKey.currentState?.validate() ?? false;
-                      if (!isValid) return;
-                      if (email.isEmpty || issue.isEmpty) {
-                        myToast("Please fill the fields before submitting");
-                        return;
-                      }
-
-                      FocusScope.of(context).unfocus();
-
-                      await service.reportIssue(email, issue);
-                      removeController();
-
-                      if (!context.mounted) return;
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => const ThanksScreen()),
-                      );
-                    },
-
-                    child: const Text("Submit"),
+                  const BoxSpacing(myHeight: 20),
+        
+                  // Issue field with padding
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            text: "Issue ",
+                            style: Textstyles.important,
+                            children: [
+                              TextSpan(
+                                text: "*",
+                                style: Textstyles.deleteStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const BoxSpacing(myHeight: 7),
+                        kTextField(
+                          hint: "Please describe your Issue...",
+                          minLines: 4,
+                          myController: issueController,
+                          validator: (issue) => issue!.isEmpty ? "don't leave this empty" : null,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  const BoxSpacing(myHeight: 20),
+        
+                  // Submit button centered
+                  Center(
+                    child: kElevatedBtn(
+                      onPressed: () async {
+                        final email = emailController.text.trim();
+                        final issue = issueController.text.trim();
+                        // Run all validators
+                        final isValid = _formKey.currentState?.validate() ?? false;
+                        if (!isValid) return;
+                        if (email.isEmpty || issue.isEmpty) {
+                          myToast("Please fill the fields before submitting");
+                          return;
+                        }
+        
+                        FocusScope.of(context).unfocus();
+        
+                        await service.reportIssue(email, issue);
+                        removeController();
+        
+                        if (!context.mounted) return;
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (_) => const ThanksScreen()),
+                        );
+                      },
+        
+                      child: const Text("Submit"),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
