@@ -31,7 +31,7 @@ import '../features/chatScreen/Model/MessageModel.dart';
          'image': '',
          'link': '',
           "isOnline": true,
-         "LastSeen": FieldValue.serverTimestamp()
+         "lastSeen": FieldValue.serverTimestamp()
        }, SetOptions(merge: true));
        await saveFcmTokenToFirestore();
        Navigator.pushReplacementNamed(context, "login");
@@ -53,6 +53,15 @@ import '../features/chatScreen/Model/MessageModel.dart';
        debugPrint("Error during sign-up: $e");
      }
    }
+   Future<void> setOnlineVisibility(String option) async {
+     final u = FirebaseAuth.instance.currentUser;
+     if (u == null) return;
+     await FirebaseFirestore.instance
+         .collection('users')
+         .doc(u.uid)
+         .set({'onlineVisibility': option}, SetOptions(merge: true));
+   }
+
    Future<void> SigninUser(BuildContext context, String email, String password, String name) async {
      try {
        await auth.signInWithEmailAndPassword(email: email, password: password);
