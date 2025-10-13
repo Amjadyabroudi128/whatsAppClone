@@ -343,6 +343,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     builder: (_) => Testname(
                                       receiverId: otherUserId,
                                       receiverName: otherUserName!,
+                                      image: userImage,
                                     ),  ),
                                 );
                               },
