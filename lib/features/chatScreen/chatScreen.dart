@@ -160,7 +160,6 @@ class _TestnameState extends State<Testname> {
                     else
                       icons.person(context),
                     const SizedBox(width: 10),
-
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
