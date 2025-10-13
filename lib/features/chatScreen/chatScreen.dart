@@ -198,7 +198,7 @@ class _TestnameState extends State<Testname> {
                               final subtitle = isOnline
                                   ? "Online"
                                   : lastSeen != null
-                                  ? "last seen at ${DateFormat('E HH:mm').format(lastSeen)}"
+                                  ? "last seen On ${DateFormat('E HH:mm').format(lastSeen)}"
                                   : "Offline";
 
                               return Text(
