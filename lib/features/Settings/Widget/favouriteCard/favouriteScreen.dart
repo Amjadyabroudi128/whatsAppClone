@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
@@ -70,7 +71,22 @@ class _FavouritescreenState extends State<Favouritescreen> {
             });
           }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text("No favourites yet."));
+            return  Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  icons.myFavourite(context, size: 80),
+                  const BoxSpacing(myHeight: 10,),
+                   Text("No Favourite yet", style: Textstyles.noStarMessage),
+                  const BoxSpacing(myHeight: 10,),
+                  const Text(
+                    "add user to favourite to see it here ",
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            );
           }
 
           final favourites = snapshot.data!.docs;

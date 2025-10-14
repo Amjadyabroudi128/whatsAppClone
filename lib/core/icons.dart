@@ -139,8 +139,8 @@ class icons {
       color: Theme.of(context).iconTheme.color,
     );
   }
-  static Icon myFavourite(BuildContext context) {
-    return Icon(Icons.favorite, color: Theme.of(context).iconTheme.color,);
+  static Icon myFavourite(BuildContext context, {double? size}) {
+    return Icon(Icons.favorite, color: Theme.of(context).iconTheme.color, size: size,);
   }
   static Icon getIssueIcon(BuildContext context) {
     return Icon(
