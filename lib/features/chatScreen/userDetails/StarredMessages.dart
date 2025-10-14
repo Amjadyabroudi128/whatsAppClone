@@ -219,7 +219,7 @@ class _StarredmessagesState extends State<Starredmessages> {
                   Positioned(
                     bottom: 0,
                     left: 0,
-                    right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.18 : 0,
+                    right: selectedMessages.length > 1 ? MediaQuery.of(context).size.width * 0.30 : 0,
                     child: Row(
                       mainAxisAlignment: selectedMessages.length > 1 ?
                       MainAxisAlignment.spaceAround : MainAxisAlignment.spaceEvenly,
@@ -286,12 +286,13 @@ class _StarredmessagesState extends State<Starredmessages> {
                                             onPressed: () async {
                                               Navigator.pop(context);
                                               myToast("Selected messages deleted");
+                                              Navigator.pop(context);
                                               await service.deleteSelectedMessages(
                                                   senderId: msg.senderId ?? "",
                                                   receiverId: msg.receiverId ?? "",
                                                   messageIds: selectedMessages);
                                               await service.deleteStar(msg);
-                                              Navigator.pop(context);
+
                                             },
                                             child: Text("Delete", style: Textstyles.deletemessage,),
                                           )
