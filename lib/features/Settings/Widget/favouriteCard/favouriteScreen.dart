@@ -49,134 +49,252 @@ class _FavouritescreenState extends State<Favouritescreen> {
           ),
         ],
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection("Favourites")
-            .doc(userEmail)
-            .collection("myFavourites")
-            .snapshots(),
-        builder: (context, snapshot) {
-          bool currentFave = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
-          if (hasFavourites != currentFave) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted) {
-                setState(() {
-                  hasFavourites = currentFave;
-                  if (!hasFavourites) {
-                    isEditing = false; // Reset editing mode when no messages
-                    selectedMessages.clear();
-                  }
-                });
-              }
-            });
-          }
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return  Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  icons.myFavourite(context, size: 80),
-                  const BoxSpacing(myHeight: 10,),
-                   Text("No Favourite yet", style: Textstyles.noStarMessage),
-                  const BoxSpacing(myHeight: 10,),
-                  const Text(
-                    "add user to favourite to see it here ",
-                    style: TextStyle(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            );
-          }
-
-          final favourites = snapshot.data!.docs;
-
-          return Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "Favourites",
-                    style: TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: favourites.length,
-                    itemBuilder: (context, index) {
-                      final favData =
-                      favourites[index].data() as Map<String, dynamic>;
-                      final name = favData['name'] ?? 'Unknown';
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (isEditing)
-                              Padding(
-                                padding: const EdgeInsets.only(left: 12.0, top: 12.0),
-                                child: Transform.scale(
-                                  scale: 1.2,
-                                  child: Checkbox(
-                                    activeColor: MyColors.starColor,
-                                    value: selectedMessages.contains(name),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        if (value == true) {
-                                          selectedMessages.add(name);
-                                        } else {
-                                          selectedMessages.remove(name);
-                                        }
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                            Flexible(
-                              child: kCard(
-                                child: Options(
-                                  context: context,
-                                  label: Text(name),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                if (isEditing && selectedMessages.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 20.0),
-                    child: Row(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: kCard(
+                 child: Options(
+                   context: context,
+                   leading: icons.add,
+                   label: const Text("Add people"),
+                   onTap: (){
+                     _showAddUsersDialog();
+                   }
+                 ),
+                         ),
+            ),
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection("Favourites")
+                  .doc(userEmail)
+                  .collection("myFavourites")
+                  .snapshots(),
+              builder: (context, snapshot) {
+                bool currentFave = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
+                if (hasFavourites != currentFave) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (mounted) {
+                      setState(() {
+                        hasFavourites = currentFave;
+                        if (!hasFavourites) {
+                          isEditing = false; // Reset editing mode when no messages
+                          selectedMessages.clear();
+                        }
+                      });
+                    }
+                  });
+                }
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return  Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        kIconButton(
-                          onPressed: () async {
-                            for (final name in selectedMessages.toList()) {
-                              await service.removeFavourite(name);
-                              myToast("Removed from Favourites");
-                            }
-                            setState(() {
-                              isEditing = false;
-                              selectedMessages.clear();
-                            });
-                          },
-                          myIcon: icons.deleteIcon,
+                        icons.myFavourite(context, size: 80),
+                        const BoxSpacing(myHeight: 10,),
+                         Text("No Favourite yet", style: Textstyles.noStarMessage),
+                        const BoxSpacing(myHeight: 10,),
+                        const Text(
+                          "add user to favourite to see it here ",
+                          style: TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
+                  );
+                }
+
+                final favourites = snapshot.data!.docs;
+
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Favourites",
+                          style: TextStyle(color: Colors.grey, fontSize: 16),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: favourites.length,
+                          itemBuilder: (context, index) {
+                            final favData =
+                            favourites[index].data() as Map<String, dynamic>;
+                            final name = favData['name'] ?? 'Unknown';
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (isEditing)
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                                      child: Transform.scale(
+                                        scale: 1.2,
+                                        child: Checkbox(
+                                          activeColor: MyColors.starColor,
+                                          value: selectedMessages.contains(name),
+                                          onChanged: (value) {
+                                            setState(() {
+                                              if (value == true) {
+                                                selectedMessages.add(name);
+                                              } else {
+                                                selectedMessages.remove(name);
+                                              }
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  Flexible(
+                                    child: kCard(
+                                      child: Options(
+                                        context: context,
+                                        label: Text(name),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      if (isEditing && selectedMessages.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              kIconButton(
+                                onPressed: () async {
+                                  for (final name in selectedMessages.toList()) {
+                                    await service.removeFavourite(name);
+                                    myToast("Removed from Favourites");
+                                  }
+                                  setState(() {
+                                    isEditing = false;
+                                    selectedMessages.clear();
+                                  });
+                                },
+                                myIcon: icons.deleteIcon,
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
                   ),
-              ],
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
+    );
+  }
+  void _showAddUsersDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Add to Favourites"),
+          content: SizedBox(
+            width: double.maxFinite,
+            height: 400,
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection("users")
+                  .where("email", isNotEqualTo: userEmail) // Exclude current user
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return const Center(
+                    child: Text("No users available"),
+                  );
+                }
+
+                final users = snapshot.data!.docs;
+
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: users.length,
+                  itemBuilder: (context, index) {
+                    final userData = users[index].data() as Map<String, dynamic>;
+                    final userName = userData['name'] ?? 'Unknown';
+                    final userEmail = userData['email'] ?? '';
+                    final userImage = userData['image'] ?? '';
+
+                    return FutureBuilder<bool>(
+                      future: service.isFavourite(userName),
+                      builder: (context, favSnapshot) {
+                        final isAlreadyFavourite = favSnapshot.data ?? false;
+
+                        return Options(
+                          context: context,
+                          leading: CircleAvatar(
+                            backgroundImage: userImage.isNotEmpty
+                                ? NetworkImage(userImage)
+                                : null,
+                            child: userImage.isEmpty
+                                ? Text(
+                              userName.isNotEmpty
+                                  ? userName[0].toUpperCase()
+                                  : '?',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                                : null,
+                          ),
+                          label: Text(userName),
+                          subtitle: Text(
+                            userEmail,
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                          trailing: isAlreadyFavourite
+                              ? Icon(
+                            Icons.check_circle,
+                            color: MyColors.starColor,
+                          )
+                              : null,
+                          onTap: isAlreadyFavourite
+                              ? null
+                              : () async {
+                            Navigator.of(context).pop();
+                            await service.addToFavourite(userName);
+                            myToast("Added to Favourites");
+
+                          },
+                          enabled: !isAlreadyFavourite,
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text("Cancel"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
