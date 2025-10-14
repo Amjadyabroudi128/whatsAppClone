@@ -185,16 +185,18 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                 },
                                               ),
                                               const divider(),
-                                              ValueListenableBuilder<bool>(
-                                                valueListenable: isFav,
-                                                builder: (context, value, _) {
+                                              FutureBuilder(
+                                                future: service.isFavourite(otherUserName) ,
+                                                builder: (context, favSnap) {
+                                                  final isFav = favSnap.data ?? false;
+
                                                   return Options(
-                                                    label: Text(value ? "Remove from favourite" : "Add to favourite"),
-                                                    trailing: value ? icons.myFavourite(context) : icons.fave(context),
+                                                    label: Text(isFav ? "Remove from favourite" : "Add to favourite"),
+                                                    trailing: isFav ? icons.myFavourite(context) : icons.fave(context),
                                                     context: context,
                                                     onTap: () async {
                                                       Navigator.of(context).pop();
-                                                      if (isFav.value = !value) {
+                                                      if (!isFav) {
                                                         await service.addToFavourite(otherUserName);
                                                         myToast("Added to favourites");
                                                       } else {
