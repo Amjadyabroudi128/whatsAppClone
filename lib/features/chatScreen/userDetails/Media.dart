@@ -98,7 +98,7 @@ class _MyMediaState extends State<MyMedia> {
                   children: [
                     Text(day, style: const TextStyle(fontSize: 12)),
                     Text(
-                      msg.senderEmail == auth.currentUser!.email ? "You" : msg.senderName ?? "",
+                      msg.senderName == auth.currentUser!.email ? "You" : msg.senderName ?? "",
                       style: const TextStyle(fontSize: 15),
                     ),
                     Expanded(
