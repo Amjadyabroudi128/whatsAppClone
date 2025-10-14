@@ -61,7 +61,7 @@ class _MyMediaState extends State<MyMedia> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  BoxSpacing(myHeight: 9),
+                  const BoxSpacing(myHeight: 9),
                   const noMedia(),
                 ],
               ),
