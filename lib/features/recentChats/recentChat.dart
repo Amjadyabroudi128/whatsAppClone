@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/btmSheet.dart';
@@ -81,15 +82,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     startActionPane: ActionPane(
                       motion: const StretchMotion(),
                       children: [
-                        CustomSlidableAction(
-                          onPressed: (context) async {
-                            await service.unread(otherUserId);
-                            myToast("Message marked as unread");
-                            setState(() {});
-                          },
-                          backgroundColor: Colors.lightBlue,
-                          child: icons.unread,
-                        )
+                        unreadMessage(otherUserId)
                       ],
                     ),
                     endActionPane: ActionPane(
@@ -361,6 +354,18 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
           );
         },
       ),
+    );
+  }
+
+   unreadMessage(String otherUserId) {
+    return CustomSlidableAction(
+      onPressed: (context) async {
+        await service.unread(otherUserId);
+        myToast("Message marked as unread");
+        setState(() {});
+        },
+      backgroundColor: MyColors.unread,
+      child: icons.unread,
     );
   }
 }

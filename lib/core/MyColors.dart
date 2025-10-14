@@ -46,4 +46,5 @@ class MyColors {
    static Color otherBorder = Colors.cyan;
    static Color offline = Colors.red;
    static Color online = Colors.green.shade400;
+   static Color unread = Colors.lightBlue;
  }
