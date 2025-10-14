@@ -58,4 +58,5 @@ class Textstyles {
     fontSize: 15,
     fontWeight: FontWeight.w500,
   );
+  static TextStyle noMedia = const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
  }

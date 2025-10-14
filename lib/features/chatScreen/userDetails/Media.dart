@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 import '../../../core/icons.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
@@ -53,11 +54,11 @@ class _MyMediaState extends State<MyMedia> {
                 children: [
                   icons.noImages,
                   const BoxSpacing(myHeight: 10),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30.0),
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: Text(
                       "No Media",
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: Textstyles.noMedia,
                       textAlign: TextAlign.center,
                     ),
                   ),
