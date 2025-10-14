@@ -246,12 +246,11 @@ class _StarredmessagesState extends State<Starredmessages> {
                           myIcon: icons.slash(context),
                         ),
                         if(selectedMessages.length == 1 ?
-                        // For single message: show if user is receiver OR message sender
+
                         (user!.uid == widget.receiverId ||
                             selectedMessages.any((messageId) =>
                                 currentChatMessages.any((doc) =>
                                 doc.id == messageId && doc["senderId"] == user!.uid))) :
-                        // For multiple messages: show only if ALL selected messages belong to current user
                         selectedMessages.every((messageId) =>
                             currentChatMessages.any((doc) =>
                             doc.id == messageId && doc["senderId"] == user!.uid)))
