@@ -54,9 +54,10 @@ class _FavouritescreenState extends State<Favouritescreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(13.0),
               child: kCard(
                  child: Options(
+
                    context: context,
                    leading: icons.add,
                    label: const Text("Add people"),
@@ -64,7 +65,7 @@ class _FavouritescreenState extends State<Favouritescreen> {
                      _showAddUsersDialog();
                    }
                  ),
-                         ),
+              ),
             ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
@@ -210,81 +211,74 @@ class _FavouritescreenState extends State<Favouritescreen> {
           content: SizedBox(
             width: double.maxFinite,
             height: 400,
-            child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection("users")
-                  .where("email", isNotEqualTo: userEmail) // Exclude current user
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+            child: Column(
+              children: [
+                Expanded(
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection("users")
+                        .where("email", isNotEqualTo: userEmail) // Exclude current user
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
 
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Center(
-                    child: Text("No users available"),
-                  );
-                }
-
-                final users = snapshot.data!.docs;
-
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: users.length,
-                  itemBuilder: (context, index) {
-                    final userData = users[index].data() as Map<String, dynamic>;
-                    final userName = userData['name'] ?? 'Unknown';
-                    final userEmail = userData['email'] ?? '';
-                    final userImage = userData['image'] ?? '';
-
-                    return FutureBuilder<bool>(
-                      future: service.isFavourite(userName),
-                      builder: (context, favSnapshot) {
-                        final isAlreadyFavourite = favSnapshot.data ?? false;
-
-                        return Options(
-                          context: context,
-                          leading: CircleAvatar(
-                            backgroundImage: userImage.isNotEmpty
-                                ? NetworkImage(userImage)
-                                : null,
-                            child: userImage.isEmpty
-                                ? Text(
-                              userName.isNotEmpty
-                                  ? userName[0].toUpperCase()
-                                  : '?',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                                : null,
-                          ),
-                          label: Text(userName),
-                          subtitle: Text(
-                            userEmail,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                          trailing: isAlreadyFavourite
-                              ? Icon(
-                            Icons.check_circle,
-                            color: MyColors.starColor,
-                          )
-                              : null,
-                          onTap: isAlreadyFavourite
-                              ? null
-                              : () async {
-                            Navigator.of(context).pop();
-                            await service.addToFavourite(userName);
-                            myToast("Added to Favourites");
-
-                          },
-                          enabled: !isAlreadyFavourite,
+                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                        return const Center(
+                          child: Text("No users available"),
                         );
-                      },
-                    );
-                  },
-                );
-              },
+                      }
+
+                      final users = snapshot.data!.docs;
+
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: users.length,
+                        itemBuilder: (context, index) {
+                          final userData = users[index].data() as Map<String, dynamic>;
+                          final userName = userData['name'] ?? 'Unknown';
+                          final userBio = userData["bio"] ?? "";
+                          final userImage = userData['image'] ?? '';
+                          return FutureBuilder<bool>(
+                            future: service.isFavourite(userName),
+                            builder: (context, favSnapshot) {
+                              final isAlreadyFavourite = favSnapshot.data ?? false;
+                              return Options(
+                                subtitle: Text(userBio),
+                                context: context,
+                                leading: userImage.isNotEmpty ? Padding(
+                                  padding: const EdgeInsets.only(left: 7),
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(userImage),
+                                    radius: 20,
+                                  ),
+                                ) : CircleAvatar(
+                                  radius: 20,
+                                  child: Text(userName[0]),
+                                ),
+                                label: Text(userName),
+                                trailing: isAlreadyFavourite
+                                    ? icons.onlineStatus
+                                    : null,
+                                onTap: isAlreadyFavourite
+                                    ? null
+                                    : () async {
+                                  Navigator.of(context).pop();
+                                  await service.addToFavourite(userName);
+                                  myToast("Added to Favourites");
+
+                                },
+                                enabled: !isAlreadyFavourite,
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           actions: [
