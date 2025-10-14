@@ -118,9 +118,6 @@ class _StarredmessagesState extends State<Starredmessages> {
                 ),
               );
             }
-
-            // No need to filter anymore since query is already specific to this chat
-
             return Stack(
                 children: [
                   ListView.builder(
