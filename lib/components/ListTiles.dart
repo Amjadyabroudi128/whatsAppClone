@@ -6,7 +6,8 @@ class kListTile extends StatelessWidget {
   final Widget? trailing;
   final Widget? leading;
   final Widget? subtitle;
-  const kListTile({super.key, this.title, this.onTap, this.trailing, this.leading, this.subtitle});
+  final bool? enabled;
+  const kListTile({super.key, this.title, this.onTap, this.trailing, this.leading, this.subtitle, this.enabled});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class kListTile extends StatelessWidget {
       onTap: onTap,
       trailing: trailing,
       leading: leading,
+      enabled: enabled ?? true,
     );
   }
 }
