@@ -187,10 +187,9 @@ class _FavouritescreenState extends State<Favouritescreen> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       elevation: 2,
-                                      content: Text("${removedItems.length} user removed from favourites"),
+                                      content: Text("$removedItems removed from favourites"),
                                       action: SnackBarAction(
                                         label: 'Undo',
-                                        textColor: Colors.white,
                                         onPressed: () async {
                                           for (final name in removedItems) {
                                             await service.addToFavourite(name);
