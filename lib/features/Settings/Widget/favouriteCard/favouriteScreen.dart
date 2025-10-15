@@ -187,6 +187,10 @@ class _FavouritescreenState extends State<Favouritescreen> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       elevation: 2,
+                                      behavior: SnackBarBehavior.floating,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(Radius.circular(10))
+                                      ),
                                       content: Text("$removedItems removed from favourites"),
                                       action: SnackBarAction(
                                         label: 'Undo',
