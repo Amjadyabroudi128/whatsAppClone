@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
@@ -6,6 +5,7 @@ import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import '../../Firebase/FirebaseAuth.dart';
+import '../../components/TextField.dart';
 import '../SignUp/Widgets/emailTextField.dart';
 import '../SignUp/Widgets/nameTextfield.dart';
 import '../SignUp/Widgets/passField.dart';
@@ -50,6 +50,12 @@ class _SignInscreenState extends State<SignInscreen> {
                 nameField(name: name),
                 const BoxSpacing(myHeight: 20,),
                 passField(pass: pass),
+                const BoxSpacing(myHeight: 20,),
+                const kTextField(
+                  textInputAction: TextInputAction.done,
+                  maxLines: 1,
+                  label: Text("Confirm pass"),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(right: 1, top: 3),
                   child: kTextButton(

@@ -1,14 +1,11 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
-import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
 import 'package:whatsappclone/features/recentChats/recentChat.dart';
-import 'package:whatsappclone/features/welcomeScreen/welcome.dart';
 
 import '../Settings/SettingsScreen.dart';
 
@@ -28,8 +25,8 @@ class _BottomnavbarState extends State<Bottomnavbar> {
   void initState() {
     super.initState();
     _widgetOptions.addAll([
-      Contacts(),
-      RecentChatsScreen(),
+      const Contacts(),
+      const RecentChatsScreen(),
       SettingScreen(onThemeChange: widget.onThemeChange),
     ]);
   }
@@ -73,7 +70,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
                           top: -15,
                           child: Container(
                             padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.green,
                               shape: BoxShape.circle,
                             ),
