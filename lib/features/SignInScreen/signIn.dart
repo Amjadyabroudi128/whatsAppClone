@@ -23,6 +23,7 @@ class _SignInscreenState extends State<SignInscreen> {
   final TextEditingController myEmail = TextEditingController();
   final TextEditingController pass = TextEditingController();
   final TextEditingController name = TextEditingController();
+  final TextEditingController confirm = TextEditingController();
 
   FirebaseService firebase =  FirebaseService();
   User? user = FirebaseAuth.instance.currentUser;
@@ -51,10 +52,11 @@ class _SignInscreenState extends State<SignInscreen> {
                 const BoxSpacing(myHeight: 20,),
                 passField(pass: pass),
                 const BoxSpacing(myHeight: 20,),
-                const kTextField(
+                 kTextField(
                   textInputAction: TextInputAction.done,
                   maxLines: 1,
-                  label: Text("Confirm pass"),
+                  label: const Text("Confirm pass"),
+                  myController: confirm,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 1, top: 3),
