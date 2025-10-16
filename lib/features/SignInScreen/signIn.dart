@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/padding.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/TextField.dart';
@@ -93,7 +94,7 @@ class _SignInscreenState extends State<SignInscreen> {
                         child: Text(
                           "Password match: ${hasMatched() ? "Yes" : "No"}",
                           style: TextStyle(
-                            color: hasMatched() ? Colors.green : Colors.red,
+                            color: hasMatched() ? MyColors.read : MyColors.delete,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
