@@ -7,6 +7,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/TextField.dart';
+import '../../components/iconButton.dart';
 import '../../core/icons.dart';
 import '../SignUp/Widgets/emailTextField.dart';
 import '../SignUp/Widgets/nameTextfield.dart';
@@ -28,6 +29,7 @@ class _SignInscreenState extends State<SignInscreen> {
   final TextEditingController pass = TextEditingController();
   final TextEditingController name = TextEditingController();
   final TextEditingController confirm = TextEditingController();
+  final ValueNotifier<bool> passwordV = ValueNotifier<bool>(false);
 
   FirebaseService firebase = FirebaseService();
   User? user = FirebaseAuth.instance.currentUser;
@@ -80,13 +82,26 @@ class _SignInscreenState extends State<SignInscreen> {
                     const BoxSpacing(myHeight: 20),
                     passField(pass: pass),
                     const BoxSpacing(myHeight: 20),
-                    kTextField(
-                      textInputAction: TextInputAction.done,
-                      maxLines: 1,
-                      label: const Text("Confirm pass"),
-                      myController: confirm,
-                      myIcon: icons.passIcon,
+                    ValueListenableBuilder(
+                      valueListenable: passwordV,
+                      builder: (context,value, _) {
+                        return kTextField(
+                          textInputAction: TextInputAction.done,
+                          maxLines: 1,
+                          label: const Text("Confirm pass"),
+                          myController: confirm,
+                          myIcon: icons.passIcon,
+                          icon: kIconButton(
+                            myIcon: value ? icons.visibility : icons.visibility_off,
+                            onPressed: (){
+                              passwordV.value = !value;
+                            },
+                          ),
+                          obscureText: !value,
+                        );
+                      },
                     ),
+                    if(pass.text.isNotEmpty && confirm.text.isNotEmpty)
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
