@@ -108,11 +108,16 @@ class _SignInscreenState extends State<SignInscreen> {
                         padding: const EdgeInsets.only(top: 6),
                         child: Text(
                           "Password match: ${hasMatched() ? "Yes" : "No"}",
-                          style: TextStyle(
+                          style: Textstyles.pMatch(
                             color: hasMatched() ? MyColors.read : MyColors.delete,
-                            fontSize: 16,
                             fontWeight: FontWeight.w500,
+                            fontSize: 16
                           ),
+                          // style: TextStyle(
+                          //   color:
+                          //   fontSize: 16,
+                          //
+                          // ),
                         ),
                       ),
                     ),

@@ -59,4 +59,11 @@ class Textstyles {
     fontWeight: FontWeight.w500,
   );
   static TextStyle noMedia = const TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
+  static TextStyle pMatch({Color? color, double? fontSize, FontWeight? fontWeight }) {
+    return TextStyle(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: fontWeight
+    )
+  }
  }
