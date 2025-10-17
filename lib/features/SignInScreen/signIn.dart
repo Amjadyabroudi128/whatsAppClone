@@ -113,11 +113,6 @@ class _SignInscreenState extends State<SignInscreen> {
                             fontWeight: FontWeight.w500,
                             fontSize: 16
                           ),
-                          // style: TextStyle(
-                          //   color:
-                          //   fontSize: 16,
-                          //
-                          // ),
                         ),
                       ),
                     ),
