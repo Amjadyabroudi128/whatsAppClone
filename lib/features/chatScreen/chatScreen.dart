@@ -46,6 +46,7 @@ class _TestnameState extends State<Testname> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
   final currentUser = FirebaseAuth.instance.currentUser!.uid;
+  String searchQuery = "";
 
   Messages? _replyMessage;
   bool isEditing = false;
@@ -57,7 +58,11 @@ class _TestnameState extends State<Testname> {
       _replyMessage = message;
     });
   }
-
+  void _onSearched() {
+    setState(() {
+      searchQuery = messageController.text;
+    });
+  }
   void markMessagesAsRead() async {
     final currentUserId = FirebaseAuth.instance.currentUser!.uid;
     final chatRoomId = getChatRoomId(currentUserId, widget.receiverId);
@@ -216,6 +221,10 @@ class _TestnameState extends State<Testname> {
                       ],
                       ),
                     ),
+                    kIconButton(
+                      onPressed: (){},
+                      myIcon: Icon(Icons.search),
+                    )
                   ],
                 ),
                 centerTitle: false,
