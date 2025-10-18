@@ -64,6 +64,6 @@ class Textstyles {
       color: color,
       fontSize: fontSize,
       fontWeight: fontWeight
-    )
+    );
   }
  }
