@@ -57,6 +57,7 @@ class _TestnameState extends State<Testname> {
       _replyMessage = message;
     });
   }
+
   void markMessagesAsRead() async {
     final currentUserId = FirebaseAuth.instance.currentUser!.uid;
     final chatRoomId = getChatRoomId(currentUserId, widget.receiverId);
@@ -79,22 +80,37 @@ class _TestnameState extends State<Testname> {
     return ids.join("_");
   }
 
+  // Update typing status in Firestore
+  void updateTypingStatus(bool isTyping) {
+    if (user == null) return;
+
+    service.updateUserTypingStatus(
+      isTyping: isTyping,
+      typingToUserId: isTyping ? widget.receiverId : null,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     markMessagesAsRead();
     service.readMsg(widget.receiverId);
     messageController.addListener(() {
+      // Update typing status based on text field content
+      updateTypingStatus(messageController.text.trim().isNotEmpty);
       setState(() {});
     });
   }
+
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
+    // Clear typing status when leaving chat
+    updateTypingStatus(false);
     messageController.removeListener(() {});
     messageController.dispose();
+    super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final isReplyFromMe = _replyMessage?.senderEmail == user!.email;
@@ -192,6 +208,7 @@ class _TestnameState extends State<Testname> {
                               if (visibility == 'Nobody') {
                                 return const SizedBox.shrink();
                               }
+
                               final bool isOnline = data['isOnline'] == true;
                               final raw = data['lastSeen'] ?? data['LastSeen'];
                               DateTime? lastSeen;
@@ -199,8 +216,13 @@ class _TestnameState extends State<Testname> {
                                 lastSeen = raw.toDate();
                               }
 
+                              // Check if the receiver is typing to ME (current user)
+                              final isTypingTo = data['isTypingTo'] as String?;
+                              final bool receiverIsTyping =
+                                  isTypingTo == user!.uid;
+
                               String subtitle;
-                              if (messageController.text.isNotEmpty) {
+                              if (receiverIsTyping) {
                                 subtitle = "Typing...";
                               } else if (isOnline) {
                                 subtitle = "Online";
@@ -209,24 +231,26 @@ class _TestnameState extends State<Testname> {
                               } else {
                                 subtitle = "Offline";
                               }
+
                               return Text(
                                 subtitle,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: Textstyles.offline(
                                   context,
-                                  isOnline ? MyColors.online : MyColors.offline,
+                                  receiverIsTyping || isOnline
+                                      ? MyColors.online
+                                      : MyColors.offline,
                                   14,
                                 ),
                               );
                             },
                           )
-
-                      ],
+                        ],
                       ),
                     ),
                     kIconButton(
-                      onPressed: (){},
+                      onPressed: () {},
                       myIcon: Icon(Icons.search),
                     )
                   ],
@@ -280,8 +304,7 @@ class _TestnameState extends State<Testname> {
                       children: [
                         Expanded(
                           child: Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 isReplyFromMe
@@ -336,14 +359,12 @@ class _TestnameState extends State<Testname> {
                             return Wrap(
                               children: [
                                 Padding(
-                                  padding:
-                                  const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     children: [
                                       Padding(
                                         padding:
-                                        const EdgeInsets.all(
-                                            8.0),
+                                        const EdgeInsets.all(8.0),
                                         child: Row(
                                           children: [
                                             Text(
@@ -355,8 +376,7 @@ class _TestnameState extends State<Testname> {
                                             kIconButton(
                                               myIcon: icons.close,
                                               onPressed: () {
-                                                Navigator.of(
-                                                    context)
+                                                Navigator.of(context)
                                                     .pop();
                                               },
                                             ),
@@ -367,31 +387,27 @@ class _TestnameState extends State<Testname> {
                                         child: Options(
                                           label: Text(
                                             "Delete Messages",
-                                            style: Textstyles
-                                                .saveBio,
+                                            style:
+                                            Textstyles.saveBio,
                                           ),
-                                          trailing:
-                                          icons.deleteIcon,
+                                          trailing: icons.deleteIcon,
                                           onTap: () async {
-                                            myToast(
-                                                "Message deleted");
-                                            Navigator.of(context)
-                                                .pop();
+                                            myToast("Message deleted");
+                                            Navigator.of(context).pop();
                                             await service
                                                 .deleteSelectedMessages(
                                               senderId: FirebaseAuth
                                                   .instance
                                                   .currentUser!
                                                   .uid,
-                                              receiverId: widget
-                                                  .receiverId,
+                                              receiverId:
+                                              widget.receiverId,
                                               messageIds:
                                               selectedMessages,
                                             );
                                             setState(() {
                                               isEditing = false;
-                                              selectedMessages
-                                                  .clear();
+                                              selectedMessages.clear();
                                             });
                                           },
                                           context: context,
@@ -433,9 +449,7 @@ class _TestnameState extends State<Testname> {
                           });
                         },
                       ),
-                      messageController.text
-                          .trim()
-                          .isNotEmpty
+                      messageController.text.trim().isNotEmpty
                           ? kIconButton(
                         onPressed: () {
                           service.sendMessage(
@@ -449,6 +463,8 @@ class _TestnameState extends State<Testname> {
                           messageController.clear();
                           FocusScope.of(context).unfocus();
                           _replyMessage = null;
+                          // Clear typing status after sending
+                          updateTypingStatus(false);
                         },
                         myIcon: icons.send,
                       )
