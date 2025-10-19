@@ -238,7 +238,7 @@ class _TestnameState extends State<Testname> {
                                 overflow: TextOverflow.ellipsis,
                                 style: Textstyles.offline(
                                   context,
-                                  receiverIsTyping ? Colors.grey
+                                  receiverIsTyping ? MyColors.familyText
                                       : isOnline ? MyColors.online : MyColors.offline,
                                     14
                                 ),
