@@ -46,7 +46,6 @@ class _TestnameState extends State<Testname> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
   final currentUser = FirebaseAuth.instance.currentUser!.uid;
-  String searchQuery = "";
 
   Messages? _replyMessage;
   bool isEditing = false;
@@ -56,11 +55,6 @@ class _TestnameState extends State<Testname> {
   void setReplyMessage(Messages message) {
     setState(() {
       _replyMessage = message;
-    });
-  }
-  void _onSearched() {
-    setState(() {
-      searchQuery = messageController.text;
     });
   }
   void markMessagesAsRead() async {
@@ -94,7 +88,13 @@ class _TestnameState extends State<Testname> {
       setState(() {});
     });
   }
-
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    messageController.removeListener(() {});
+    messageController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final isReplyFromMe = _replyMessage?.senderEmail == user!.email;
@@ -199,12 +199,16 @@ class _TestnameState extends State<Testname> {
                                 lastSeen = raw.toDate();
                               }
 
-                              final subtitle = isOnline
-                                  ? "Online"
-                                  : lastSeen != null
-                                  ? "last seen On ${DateFormat('E HH:mm').format(lastSeen)}"
-                                  : "Offline";
-
+                              String subtitle;
+                              if (messageController.text.isNotEmpty) {
+                                subtitle = "Typing...";
+                              } else if (isOnline) {
+                                subtitle = "Online";
+                              } else if (lastSeen != null) {
+                                subtitle = "last seen On ${DateFormat('E HH:mm').format(lastSeen)}";
+                              } else {
+                                subtitle = "Offline";
+                              }
                               return Text(
                                 subtitle,
                                 maxLines: 1,
