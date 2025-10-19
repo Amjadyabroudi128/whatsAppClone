@@ -238,10 +238,9 @@ class _TestnameState extends State<Testname> {
                                 overflow: TextOverflow.ellipsis,
                                 style: Textstyles.offline(
                                   context,
-                                  receiverIsTyping || isOnline
-                                      ? MyColors.online
-                                      : MyColors.offline,
-                                  14,
+                                  receiverIsTyping ? Colors.grey
+                                      : isOnline ? MyColors.online : MyColors.offline,
+                                    14
                                 ),
                               );
                             },
