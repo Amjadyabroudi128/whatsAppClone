@@ -463,6 +463,20 @@ import '../features/chatScreen/Model/MessageModel.dart';
        }, SetOptions(merge: true));
      }
    }
+
+   Future<void> updateUserTypingStatus({required bool isTyping, String? typingToUserId,}) async {
+     final user = FirebaseAuth.instance.currentUser;
+     if (user == null) return;
+
+     try {
+       await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+         'isTypingTo': isTyping ? typingToUserId : null,
+         'typingTimestamp': FieldValue.serverTimestamp(),
+       }, SetOptions(merge: true));
+     } catch (e) {
+       debugPrint("Error updating typing status: $e");
+     }
+   }
    Stream<DocumentSnapshot<Map<String, dynamic>>> presenceStream(String userId) {
      return FirebaseFirestore.instance.collection('users').doc(userId).snapshots();
    }
