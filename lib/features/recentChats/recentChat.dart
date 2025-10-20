@@ -267,16 +267,36 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       },
                       child: Row(
                         children: [
-                          userImage.isNotEmpty ? Padding(
-                            padding: const EdgeInsets.only(left: 7),
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(userImage),
-                              radius: 20,
-                            ),
-                          ) : CircleAvatar(
-                            radius: 20,
-                            child: Text(otherUserName![0]),
+                          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                            stream: service.presenceStream(otherUserId),
+                            builder: (context, presenceSnap) {
+                              bool isOnline = false;
+                              if (presenceSnap.hasData && presenceSnap.data!.exists) {
+                                final data = presenceSnap.data!.data()!;
+                                isOnline = data['isOnline'] == true;
+                              }
+                              return Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  userImage.isNotEmpty
+                                      ? Padding(
+                                    padding: const EdgeInsets.only(left: 7),
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(userImage),
+                                      radius: 20,
+                                    ),
+                                  )
+                                      : CircleAvatar(
+                                    radius: 20,
+                                    child: Text(otherUserName![0]),
+                                  ),
+                                  // Green/Grey Dot
+                                  presenceDot(isOnline),
+                                ],
+                              );
+                            },
                           ),
+
                           Flexible(
                             child: Options(
                               context: context,
@@ -370,6 +390,21 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
         },
       backgroundColor: MyColors.unread,
       child: icons.unread,
+    );
+  }
+  Widget presenceDot(bool isOnline) {
+    return Positioned(
+      right: 2,
+      bottom: 2,
+      child: Container(
+        width: 13,
+        height: 13,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isOnline ? MyColors.online : MyColors.menuColor,
+          border: Border.all(color: Colors.white, width: 2),
+        ),
+      ),
     );
   }
 }
