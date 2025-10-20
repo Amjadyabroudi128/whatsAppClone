@@ -267,14 +267,16 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       },
                       child: Row(
                         children: [
-                          if(userImage.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(left: 7),
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(userImage),
-                                radius: 20,
-                              ),
+                          userImage.isNotEmpty ? Padding(
+                            padding: const EdgeInsets.only(left: 7),
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(userImage),
+                              radius: 20,
                             ),
+                          ) : CircleAvatar(
+                            radius: 20,
+                            child: Text(otherUserName![0]),
+                          ),
                           Flexible(
                             child: Options(
                               context: context,
