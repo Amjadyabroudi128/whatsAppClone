@@ -14,6 +14,11 @@ In this read me I will show you some screenshots of this app and other things as
 
  <img width="222" height="671" alt="image" src="https://github.com/user-attachments/assets/e3af1633-c2e4-4021-b1de-0a0563d90e77" />
 
+ typing from recent chats 
+
+ <img width="222" height="696" alt="image" src="https://github.com/user-attachments/assets/202301aa-6c47-4e84-b556-ec200ece3e64" />
+
+
  
 2.1 unread messages 
  
