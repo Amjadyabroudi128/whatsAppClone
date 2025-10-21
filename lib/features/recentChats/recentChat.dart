@@ -20,6 +20,7 @@ import '../chatScreen/Model/MessageModel.dart';
 import '../chatScreen/chatScreen.dart';
 import '../chatScreen/userDetails/recieverdetails.dart';
 import 'Widgets/deleteAlert.dart';
+import 'Widgets/onlineDot.dart';
 class RecentChatsScreen extends StatefulWidget {
   const RecentChatsScreen({super.key});
 
@@ -409,19 +410,5 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
       child: icons.unread,
     );
   }
-  Widget presenceDot(bool isOnline) {
-    return Positioned(
-      right: 2,
-      bottom: 2,
-      child: Container(
-        width: 13,
-        height: 13,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: isOnline ? MyColors.online : MyColors.menuColor,
-          border: Border.all(color: Colors.white, width: 2),
-        ),
-      ),
-    );
-  }
+
 }
