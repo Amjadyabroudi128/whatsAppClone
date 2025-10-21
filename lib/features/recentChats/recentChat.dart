@@ -315,7 +315,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                         ? "[file]"
                                         : (msg.image?.isNotEmpty == true)
                                         ? "[image]"
-                                        : (msg.text ?? "");
+                                        : (msg.text);
                                   }
                                 }
                                 return Options(
