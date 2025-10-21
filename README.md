@@ -9,6 +9,11 @@ In this read me I will show you some screenshots of this app and other things as
 
 
  <img width="222" height="670" alt="image" src="https://github.com/user-attachments/assets/e8b82e78-ee99-4dbe-8d08-7f70f81ec12e" />
+
+ online from recent chats 
+
+ <img width="222" height="671" alt="image" src="https://github.com/user-attachments/assets/e3af1633-c2e4-4021-b1de-0a0563d90e77" />
+
  
 2.1 unread messages 
  
