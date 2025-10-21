@@ -317,14 +317,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                         : (msg.text ?? "");
                                   }
                                 }
-                                //   subtitle = receiverIsTyping
-                                //       ? "Typing..."
-                                //       : (msg.file?.isNotEmpty == true)
-                                //       ? "[file]"
-                                //       : (msg.image?.isNotEmpty == true)
-                                //       ? "[image]"
-                                //       : (msg.text ?? "");
-                                // }
                                 return Options(
                                   context: context,
                                   label: StreamBuilder<bool>(
