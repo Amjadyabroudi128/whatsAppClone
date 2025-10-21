@@ -265,7 +265,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                           setState(() {});
                         }
                       },
-                      child: Row(
+                      child:
+                      Row(
                         children: [
                           StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                             stream: service.presenceStream(otherUserId),
@@ -275,6 +276,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                 final data = presenceSnap.data!.data()!;
                                 isOnline = data['isOnline'] == true;
                               }
+
                               return Stack(
                                 clipBehavior: Clip.none,
                                 children: [
@@ -290,78 +292,101 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     radius: 20,
                                     child: Text(otherUserName![0]),
                                   ),
-                                  // Green/Grey Dot
                                   presenceDot(isOnline),
                                 ],
                               );
                             },
                           ),
 
+                          // Chat info with typing indicator
                           Flexible(
-                            child: Options(
-                              context: context,
-                              label: StreamBuilder<bool>(
-                                stream: service.isChatMutedStream(chatRoomId, otherUserId),
-                                builder: (context, snapshot) {
-                                  final isMuted = snapshot.data ?? false;
-                                  return Row(
-                                    children: [
-                                    Expanded(
-                                    child: Text(
-                                    otherUserName!,
+                            child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                              stream: service.presenceStream(otherUserId),
+                              builder: (context, presenceSnap) {
+                                String subtitle = "";
+                                if (presenceSnap.hasData && presenceSnap.data!.exists) {
+                                  final data = presenceSnap.data!.data()!;
+                                  final bool receiverIsTyping = (data['isTypingTo'] as String?) == user!.uid;
+                                  if(receiverIsTyping) {
+                                    subtitle = "Typing";
+                                  } else {
+                                    subtitle = (msg.file?.isNotEmpty == true)
+                                        ? "[file]"
+                                        : (msg.image?.isNotEmpty == true)
+                                        ? "[image]"
+                                        : (msg.text ?? "");
+                                  }
+                                }
+                                //   subtitle = receiverIsTyping
+                                //       ? "Typing..."
+                                //       : (msg.file?.isNotEmpty == true)
+                                //       ? "[file]"
+                                //       : (msg.image?.isNotEmpty == true)
+                                //       ? "[image]"
+                                //       : (msg.text ?? "");
+                                // }
+                                return Options(
+                                  context: context,
+                                  label: StreamBuilder<bool>(
+                                    stream: service.isChatMutedStream(chatRoomId, otherUserId),
+                                    builder: (context, snapshot) {
+                                      final isMuted = snapshot.data ?? false;
+                                      return Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              otherUserName!,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(fontSize: 16),
+                                            ),
+                                          ),
+                                          if (isMuted)
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0),
+                                              child: icons.mute(context),
+                                            ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                  subtitle: Text(
+                                    subtitle,
+                                    maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 16),
-                                    ),
-                                    ),
-                                      if (isMuted)
-                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
-                                          child: icons.mute(context),
+                                  ),
+                                  trailing: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        DateFormat('HH:mm').format(msg.time!.toDate()),
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      if (unreadCount > 0)
+                                        Container(
+                                          margin: const EdgeInsets.only(top: 4),
+                                          padding: unreadPadding,
+                                          decoration: readDecoration(),
+                                          child: Text(
+                                            unreadCount.toString(),
+                                            style: Textstyles.unreadCount,
+                                          ),
                                         ),
                                     ],
-                                  );
-                                },
-                              ),
-                              subtitle: Text(
-                                msg.file != null && msg.file!.isNotEmpty
-                                    ? "[file]"
-                                    : msg.image != null && msg.image!.isNotEmpty
-                                    ? "[image]"
-                                    : msg.text,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-
-                              trailing: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    DateFormat('HH:mm').format(msg.time!.toDate()),
-                                    style: const TextStyle(fontSize: 12),
                                   ),
-                                  if (unreadCount > 0)
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 4),
-                                      padding: unreadPadding,
-                                      decoration: readDecoration(),
-                                      child: Text(
-                                        unreadCount.toString(),
-                                        style:  Textstyles.unreadCount
+                                  onTap: () {
+                                    currentReceiverId.value = otherUserId;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => Testname(
+                                          receiverId: otherUserId,
+                                          receiverName: otherUserName!,
+                                          image: userImage,
+                                        ),
                                       ),
-                                    ),
-                                ],
-                              ),
-                              onTap: () {
-                                currentReceiverId.value = otherUserId;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => Testname(
-                                      receiverId: otherUserId,
-                                      receiverName: otherUserName!,
-                                      image: userImage,
-                                    ),  ),
+                                    );
+                                  },
                                 );
                               },
                             ),
