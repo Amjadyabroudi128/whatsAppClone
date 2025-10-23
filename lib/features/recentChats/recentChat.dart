@@ -324,13 +324,17 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     stream: service.isChatMutedStream(chatRoomId, otherUserId),
                                     builder: (context, snapshot) {
                                       final isMuted = snapshot.data ?? false;
+                                      final isUnread = unreadCount > 0; // <<— use your counter
                                       return Row(
                                         children: [
                                           Expanded(
                                             child: Text(
                                               otherUserName!,
                                               overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(fontSize: 16),
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: isUnread ? FontWeight.w800 : FontWeight.w400,
+                                              ),
                                             ),
                                           ),
                                           if (isMuted)
@@ -346,6 +350,9 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     subtitle,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontWeight: (unreadCount > 0) ? FontWeight.w800 : FontWeight.w400,
+                                    ),
                                   ),
                                   trailing: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
