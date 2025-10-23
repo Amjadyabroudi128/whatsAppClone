@@ -248,10 +248,6 @@ class _TestnameState extends State<Testname> {
                         ],
                       ),
                     ),
-                    kIconButton(
-                      onPressed: () {},
-                      myIcon: icons.search,
-                    )
                   ],
                 ),
                 centerTitle: false,
