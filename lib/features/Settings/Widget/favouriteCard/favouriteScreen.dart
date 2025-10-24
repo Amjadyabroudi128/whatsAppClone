@@ -292,7 +292,6 @@ class _FavouritescreenState extends State<Favouritescreen> {
                                   myToast("Added to Favourites");
 
                                 },
-                                enabled: !isAlreadyFavourite,
                               );
                             },
                           );
