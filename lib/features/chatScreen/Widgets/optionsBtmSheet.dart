@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/dividerContainer.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
 import '../../../components/SizedBox.dart';
@@ -138,7 +139,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
           },
         );
       },
-      myIcon: icons.add,
+      myIcon: icons.add(context, MyColors.bDialog),
     );
   }
 

@@ -28,7 +28,14 @@ class icons {
   }
   static Icon send = Icon(Icons.send,color: MyColors.myMessage);
   static Icon arrow = const Icon(Icons.arrow_back);
-  static Icon add = const Icon(Icons.add);
+  // static Icon add = const Icon(Icons.add);
+  static Icon add(BuildContext context, Color? color) {
+    return Icon(
+      Icons.add,
+      color: color,
+      // color: Theme.of(context).iconTheme.color,
+    );
+  }
   static Icon visibility = const Icon(Icons.visibility);
   static Icon visibility_off = const Icon(Icons.visibility_off);
   static Icon contacts = const Icon(CupertinoIcons.person);

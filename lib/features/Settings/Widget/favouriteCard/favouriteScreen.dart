@@ -57,9 +57,8 @@ class _FavouritescreenState extends State<Favouritescreen> {
               padding: const EdgeInsets.all(13.0),
               child: kCard(
                  child: Options(
-
                    context: context,
-                   leading: icons.add,
+                   leading: icons.add(context, Theme.of(context).iconTheme.color),
                    label: const Text("Add people"),
                    onTap: (){
                      _showAddUsersDialog();
