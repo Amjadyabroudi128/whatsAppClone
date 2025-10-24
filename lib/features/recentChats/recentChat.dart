@@ -352,6 +352,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontWeight: (unreadCount > 0) ? FontWeight.w800 : FontWeight.w400,
+                                      fontSize: (unreadCount > 0) ? 19: 15
                                     ),
                                   ),
                                   trailing: Column(
