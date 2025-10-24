@@ -324,7 +324,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     stream: service.isChatMutedStream(chatRoomId, otherUserId),
                                     builder: (context, snapshot) {
                                       final isMuted = snapshot.data ?? false;
-                                      final isUnread = unreadCount > 0; // <<— use your counter
+                                      final isUnread = unreadCount > 0;
                                       return Row(
                                         children: [
                                           Expanded(
