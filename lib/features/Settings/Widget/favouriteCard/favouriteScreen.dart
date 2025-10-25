@@ -229,88 +229,123 @@ class _FavouritescreenState extends State<Favouritescreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Add to Favourites"),
-          content: SizedBox(
-            width: double.maxFinite,
-            height: 400,
-            child: Column(
-              children: [
-                Expanded(
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection("users")
-                        .where("email", isNotEqualTo: userEmail) // Exclude current user
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
+        // Dialog-local selection
+        final Set<String> selected = {};
+            return AlertDialog(
+              title: Row(
+                children: [
+                  const Text("Add to Favourites"),
+                  Spacer(),
+                  TextButton(
+                    onPressed: selected.isEmpty
+                        ? null
+                        : () async {
+                      for (final name in selected) {
+                        await service.addToFavourite(name);
+                        myToast("added To favourite");
                       }
+                    },
+                    child: Text(
+                      selected.isEmpty ? "Add" : "done",
+                    ),
+                  ),
+                ],
+              ),
+              content: SizedBox(
+                width: double.maxFinite,
+                height: 420,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection("users")
+                            .where("email", isNotEqualTo: userEmail)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                            return const Center(child: Text("No users available"));
+                          }
+                          final users = snapshot.data!.docs;
+                          return ListView.builder(
+                            itemCount: users.length,
+                            itemBuilder: (context, index) {
+                              final userData = users[index].data() as Map<String, dynamic>;
+                              final userName = (userData['name'] ?? 'Unknown') as String;
+                              final userBio = (userData['bio'] ?? '') as String;
+                              final userImage = (userData['image'] ?? '') as String;
 
-                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                        return const Center(
-                          child: Text("No users available"),
-                        );
-                      }
+                              return FutureBuilder<bool>(
+                                future: service.isFavourite(userName),
+                                builder: (context, favSnapshot) {
+                                  final isAlreadyFavourite = favSnapshot.data ?? false;
 
-                      final users = snapshot.data!.docs;
+                                  Widget trailingWidget;
+                                  if (isAlreadyFavourite) {
+                                    trailingWidget = icons.onlineStatus;
+                                  } else {
+                                    trailingWidget = Checkbox(
+                                      activeColor: MyColors.online,
+                                      value: selected.contains(userName),
+                                      onChanged: (checked) {
+                                        setState(() {
+                                          if (checked == true) {
+                                            selected.add(userName);
+                                          } else {
+                                            selected.remove(userName);
+                                          }
+                                        });
+                                      },
+                                    );
+                                  }
 
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: users.length,
-                        itemBuilder: (context, index) {
-                          final userData = users[index].data() as Map<String, dynamic>;
-                          final userName = userData['name'] ?? 'Unknown';
-                          final userBio = userData["bio"] ?? "";
-                          final userImage = userData['image'] ?? '';
-                          return FutureBuilder<bool>(
-                            future: service.isFavourite(userName),
-                            builder: (context, favSnapshot) {
-                              final isAlreadyFavourite = favSnapshot.data ?? false;
-                              return Options(
-                                subtitle: Text(userBio),
-                                context: context,
-                                leading: userImage.isNotEmpty ? Padding(
-                                  padding: const EdgeInsets.only(left: 7),
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(userImage),
-                                    radius: 20,
-                                  ),
-                                ) : CircleAvatar(
-                                  radius: 20,
-                                  child: Text(userName[0]),
-                                ),
-                                label: Text(userName),
-                                trailing: isAlreadyFavourite
-                                    ? icons.onlineStatus
-                                    : null,
-                                onTap: isAlreadyFavourite
-                                    ? null
-                                    : () async {
-                                  Navigator.of(context).pop();
-                                  await service.addToFavourite(userName);
-                                  myToast("Added to Favourites");
-
+                                  return Options(
+                                    context: context,
+                                    subtitle: userBio.isNotEmpty ? Text(userBio) : null,
+                                    leading: userImage.isNotEmpty
+                                        ? const Padding(
+                                      padding: EdgeInsets.only(left: 7),
+                                      child: CircleAvatar(radius: 20), // image below
+                                    )
+                                        : CircleAvatar(
+                                      radius: 20,
+                                      child: Text(userName.isNotEmpty ? userName[0] : '?'),
+                                    ),
+                                    label: Text(userName),
+                                    trailing: trailingWidget,
+                                    onTap: isAlreadyFavourite
+                                        ? null
+                                        : () {
+                                      setState(() {
+                                        if (selected.contains(userName)) {
+                                          selected.remove(userName);
+                                        } else {
+                                          selected.add(userName);
+                                        }
+                                      });
+                                    },
+                                  );
                                 },
                               );
                             },
                           );
                         },
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text("Cancel"),
+                ),
+
               ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text("Cancel"),
-            ),
-          ],
+            );
+          },
         );
-      },
-    );
+
   }
 }
