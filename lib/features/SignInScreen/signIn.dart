@@ -153,7 +153,7 @@ class _SignInscreenState extends State<SignInscreen> {
                     Center(
                       child: IntrinsicWidth(
                         child: kElevatedBtn(
-                          color: WidgetStatePropertyAll(Colors.red.shade700),
+                          color: WidgetStatePropertyAll(MyColors.google),
                           onPressed: (){},
                           child: Row(
                             children: [
