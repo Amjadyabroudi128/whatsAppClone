@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/ElevatedBtn.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
@@ -147,6 +148,21 @@ class _SignInscreenState extends State<SignInscreen> {
                           Text("OR"),
                           Expanded(child: divider()),
                         ],
+                      ),
+                    ),
+                    Center(
+                      child: IntrinsicWidth(
+                        child: kElevatedBtn(
+                          color: WidgetStatePropertyAll(Colors.red.shade700),
+                          onPressed: (){},
+                          child: Row(
+                            children: [
+                              const Text("Sign in with"),
+                              BoxSpacing(mWidth: 19,),
+                              Image.asset("images/google.png", width: 30,),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     Row(
