@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
@@ -133,6 +134,19 @@ class _SignInscreenState extends State<SignInscreen> {
                         pass: pass,
                         user: user,
                         name: name,
+                      ),
+                    ),
+
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(child: divider()),
+                          Text("OR"),
+                          Expanded(child: divider()),
+                        ],
                       ),
                     ),
                     Row(
