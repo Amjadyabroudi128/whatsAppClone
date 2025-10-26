@@ -47,4 +47,5 @@ class MyColors {
    static Color offline = Colors.red;
    static Color online = Colors.green.shade400;
    static Color unread = Colors.lightBlue;
+   static Color google = Colors.red.shade700;
  }
