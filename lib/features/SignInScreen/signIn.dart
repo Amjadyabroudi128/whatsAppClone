@@ -158,7 +158,7 @@ class _SignInscreenState extends State<SignInscreen> {
                           child: Row(
                             children: [
                               const Text("Sign in with"),
-                              BoxSpacing(mWidth: 19,),
+                              const BoxSpacing(mWidth: 19,),
                               Image.asset("images/google.png", width: 30,),
                             ],
                           ),
