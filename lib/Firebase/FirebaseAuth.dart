@@ -12,6 +12,7 @@ import '../features/chatScreen/Model/MessageModel.dart';
    final FirebaseFirestore users = FirebaseFirestore.instance;
    final uid = FirebaseAuth.instance.currentUser?.uid;
    final user = FirebaseAuth.instance.currentUser;
+   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
    Future<void> createEmailPassword(BuildContext context, String email, String password, String name) async {
      try {
@@ -127,13 +128,34 @@ import '../features/chatScreen/Model/MessageModel.dart';
      auth.sendPasswordResetEmail(email: email);
      myToast("check your email for password");
    }
-   // signInWithGoogle() async {
-   //   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-   //
-   // }
+
+   Future<void> signInWithGoogle(BuildContext context) async {
+     try {
+       final GoogleSignInAccount? gUser = await _googleSignIn.signIn();
+
+       if (gUser == null) {
+         return;
+       }
+       final GoogleSignInAuthentication gAuth = await gUser.authentication;
+       final cred = GoogleAuthProvider.credential(
+         idToken: gAuth.idToken,
+         accessToken: gAuth.accessToken,
+       );
+
+       await FirebaseAuth.instance.signInWithCredential(cred);
+       Navigator.pushReplacementNamed(context, "btm");
+       await Future.delayed(const Duration(seconds: 1));
+
+     } catch (e) {
+       print('Error signing in with Google: $e');
+       // Handle error appropriately
+     }
+   }
    Future<void> SignOut ()async {
      await onlineStatues(false);
      auth.signOut();
+     _googleSignIn.disconnect();
+
   }
    Future<void> deleteAccount() async {
      final user = FirebaseAuth.instance.currentUser;
