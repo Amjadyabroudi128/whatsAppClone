@@ -154,7 +154,9 @@ class _SignInscreenState extends State<SignInscreen> {
                       child: IntrinsicWidth(
                         child: kElevatedBtn(
                           color: WidgetStatePropertyAll(MyColors.google),
-                          onPressed: (){},
+                          onPressed: (){
+                            firebase.signInWithGoogle(context);
+                          },
                           child: Row(
                             children: [
                               const Text("Sign in with"),
