@@ -84,13 +84,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                         motion: const StretchMotion(),
                         children: [
                           StreamBuilder<QuerySnapshot>(
-                            stream: FirebaseFirestore.instance
-                                .collection("chat_rooms")
-                                .doc(chatRoomId)
-                                .collection("messages")
-                                .where("receiverId", isEqualTo: currentUserId)
-                                .where("isRead", isEqualTo: false)
-                                .snapshots(),
+                            stream: service.isRead(chatRoomId, currentUserId),
                             builder: (context, snapshot) {
                               final hasUnreadMessages = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
                               return CustomSlidableAction(
