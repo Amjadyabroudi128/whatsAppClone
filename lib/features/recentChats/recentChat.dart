@@ -80,12 +80,42 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 builder: (context, snapshotUnread) {
                   final unreadCount = snapshotUnread.data?.docs.length ?? 0;
                   return  Slidable(
-                    startActionPane: ActionPane(
-                      motion: const StretchMotion(),
-                      children: [
-                        unreadMessage(otherUserId)
-                      ],
-                    ),
+                      startActionPane: ActionPane(
+                        motion: const StretchMotion(),
+                        children: [
+                          StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection("chat_rooms")
+                                .doc(chatRoomId)
+                                .collection("messages")
+                                .where("receiverId", isEqualTo: currentUserId)
+                                .where("isRead", isEqualTo: false)
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              final hasUnreadMessages = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
+                              return CustomSlidableAction(
+                                onPressed: (context) async {
+                                  if (hasUnreadMessages) {
+                                    await service.markRead(otherUserId);
+                                    myToast("Messages marked as read");
+                                  } else {
+                                    await service.unread(otherUserId);
+                                    myToast("Messages marked as unread");
+                                  }
+                                  setState(() {});
+                                },
+                                backgroundColor: hasUnreadMessages
+                                    ? Colors.grey  // Color when there are unread messages
+                                    : MyColors.unread ,     // Color when all messages are read
+                                child: hasUnreadMessages
+                                    ? const Icon(Icons.mark_chat_read_outlined)
+                                    // Icon for marking as read
+                                    : icons.unread,      // Icon for marking as unread (you'll need to add this to your icons)
+                              );
+                            },
+                          )
+                        ],
+                      ),
                     endActionPane: ActionPane(
                       motion: const StretchMotion(),
                       children: [
@@ -412,7 +442,9 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
       onPressed: (context) async {
         await service.unread(otherUserId);
         myToast("Message marked as unread");
-        setState(() {});
+        setState(() {
+
+        });
         },
       backgroundColor: MyColors.unread,
       child: icons.unread,
