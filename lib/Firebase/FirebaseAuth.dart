@@ -580,6 +580,15 @@ import '../features/chatScreen/Model/MessageModel.dart';
        });
      }
    }
+   Stream<QuerySnapshot>isRead(String chatRoomId, String currentUserId){
+     return FirebaseFirestore.instance
+         .collection("chat_rooms")
+         .doc(chatRoomId)
+         .collection("messages")
+         .where("receiverId", isEqualTo: currentUserId)
+         .where("isRead", isEqualTo: false)
+         .snapshots();
+   }
    Stream<int> getTotalUnreadCount(String userId) {
      return FirebaseFirestore.instance
          .collectionGroup("messages")
