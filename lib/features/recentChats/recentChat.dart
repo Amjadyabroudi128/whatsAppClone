@@ -83,31 +83,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       startActionPane: ActionPane(
                         motion: const StretchMotion(),
                         children: [
-                          StreamBuilder<QuerySnapshot>(
-                            stream: service.isRead(chatRoomId, currentUserId),
-                            builder: (context, snapshot) {
-                              final hasUnreadMessages = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
-                              return CustomSlidableAction(
-                                onPressed: (context) async {
-                                  if (hasUnreadMessages) {
-                                    await service.markRead(otherUserId);
-                                    myToast("Messages marked as read");
-                                  } else {
-                                    await service.unread(otherUserId);
-                                    myToast("Messages marked as unread");
-                                  }
-                                  setState(() {});
-                                },
-                                backgroundColor: hasUnreadMessages
-                                    ? Colors.grey  // Color when there are unread messages
-                                    : MyColors.unread ,     // Color when all messages are read
-                                child: hasUnreadMessages
-                                    ? const Icon(Icons.mark_chat_read_outlined)
-                                    // Icon for marking as read
-                                    : icons.unread,      // Icon for marking as unread (you'll need to add this to your icons)
-                              );
-                            },
-                          )
+                          unreadMessages(chatRoomId, currentUserId, otherUserId)
                         ],
                       ),
                     endActionPane: ActionPane(
@@ -431,17 +407,30 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
     );
   }
 
-   unreadMessage(String otherUserId) {
-    return CustomSlidableAction(
-      onPressed: (context) async {
-        await service.unread(otherUserId);
-        myToast("Message marked as unread");
-        setState(() {
-
-        });
+  StreamBuilder<QuerySnapshot<Object?>> unreadMessages(String chatRoomId, String currentUserId, String otherUserId) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: service.isRead(chatRoomId, currentUserId),
+      builder: (context, snapshot) {
+        final hasUnreadMessages = snapshot.hasData && snapshot.data!.docs.isNotEmpty;
+        return CustomSlidableAction(
+          onPressed: (context) async {
+            if (hasUnreadMessages) {
+              await service.markRead(otherUserId);
+              myToast("Messages marked as read");
+            } else {
+              await service.unread(otherUserId);
+              myToast("Messages marked as unread");
+            }
+            setState(() {});
+            },
+          backgroundColor: hasUnreadMessages
+              ? Colors.grey
+              : MyColors.unread,
+          child: hasUnreadMessages
+              ? const Icon(Icons.mark_chat_read_outlined)
+              : icons.unread,
+        );
         },
-      backgroundColor: MyColors.unread,
-      child: icons.unread,
     );
   }
 
