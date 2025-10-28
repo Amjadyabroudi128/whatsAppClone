@@ -135,6 +135,7 @@ class _SignInscreenState extends State<SignInscreen> {
                         pass: pass,
                         user: user,
                         name: name,
+                        confirm: confirm
                       ),
                     ),
 
