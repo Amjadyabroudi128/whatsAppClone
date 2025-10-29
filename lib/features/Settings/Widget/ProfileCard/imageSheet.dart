@@ -19,8 +19,8 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
   // Get current user's image status
   final userId = FirebaseAuth.instance.currentUser!.uid;
   final userDoc = await userC.doc(userId).get();
-  final userData = userDoc.data() as Map<String, dynamic>?;
-  final hasImage = userData?['image'] != null;
+  final data = userDoc.data() as Map<String, dynamic>?;
+  final hasImage = data["image"] ?? "";
 
   await showModalBottomSheet(
     context: context,
