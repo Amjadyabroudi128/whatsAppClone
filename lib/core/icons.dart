@@ -126,6 +126,7 @@ class icons {
   static Icon messageRead = Icon(Icons.done_all, color: MyColors.readColor);
   static Icon sent = Icon(Icons.check, color: MyColors.sent,);
   static Icon unread = const Icon(Icons.mark_chat_unread, size: 23, color: Colors.white,);
+  static Icon read = const Icon(Icons.mark_chat_read_outlined);
   static Icon options =  const Icon(Icons.more_horiz_outlined, size: 27,);
   static Icon fave(BuildContext context) {
     return  Icon(
