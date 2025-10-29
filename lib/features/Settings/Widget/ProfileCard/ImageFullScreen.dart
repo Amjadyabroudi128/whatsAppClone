@@ -24,13 +24,13 @@ class _FullScreenImageScreenState extends State<FullScreenImageScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme:  IconThemeData(color: MyColors.MIcons),
         backgroundColor: Colors.transparent,
-        title: Text("Profile Photo", style: Textstyles.editProfile),
+        title:  Text("Profile Photo",style: TextStyle(color: MyColors.MIcons),),
         actions: [
           kTextButton(
-            style: const ButtonStyle(
-              foregroundColor: WidgetStatePropertyAll(Colors.white),
+            style:  ButtonStyle(
+              foregroundColor: WidgetStatePropertyAll(MyColors.MIcons),
             ),
             onPressed: () async {
               await showImage(
