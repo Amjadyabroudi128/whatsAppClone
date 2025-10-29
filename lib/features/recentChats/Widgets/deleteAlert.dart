@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
@@ -23,15 +22,15 @@ class deleteAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("You are about to delete messages with ${receiverName}"),
-      content: Text("Are you sure ? "),
+      title: Text("You are about to delete messages with $receiverName"),
+      content: const Text("Are you sure ? "),
       actions: [
         kTextButton(
           onPressed: (){
             Navigator.of(context).pop();
             FocusScope.of(Navigator.of(context).context).unfocus();
           },
-          child: Text("Cancel"),
+          child: const Text("Cancel"),
         ),
         kTextButton(
           onPressed: () async {
