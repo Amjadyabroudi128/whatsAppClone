@@ -9,6 +9,8 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
+import 'package:whatsappclone/features/recentChats/Tabs/FavouriteTab.dart';
+import 'package:whatsappclone/features/recentChats/Tabs/UnreadTab.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
@@ -418,12 +420,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 );
               },
             ),
-
-            // --------------------- TAB 2: FAVOURITE ---------------------
-            const Center(child: Text("Favourite")),
-
-            // --------------------- TAB 3: UNREAD ---------------------
-            const Center(child: Text("Unread")),
+            const FavouriteTab(),
+            const UnreadTab(),
           ],
         ),
       ),
