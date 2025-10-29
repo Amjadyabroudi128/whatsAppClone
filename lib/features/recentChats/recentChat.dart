@@ -424,7 +424,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
             setState(() {});
             },
           backgroundColor: hasUnreadMessages
-              ? Colors.grey
+              ? MyColors.familyText
               : MyColors.unread,
           child: hasUnreadMessages
               ? icons.read
