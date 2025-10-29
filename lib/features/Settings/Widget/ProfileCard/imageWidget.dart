@@ -16,7 +16,7 @@ class imageWidget extends StatelessWidget {
       shape: CircleBorder(),
       clipBehavior: Clip.antiAlias,
       child: SizedBox(
-        width: 100, // set a size to make the card visible
+        width: 100,
         height: 100,
         child: Center(
           child: Text(

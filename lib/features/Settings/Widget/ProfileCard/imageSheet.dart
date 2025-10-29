@@ -8,7 +8,6 @@ import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/kCard.dart';
-import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/features/Settings/Widget/ProfileCard/imageStream.dart';
 import '../../../../Firebase/FirebaseCollections.dart';
 import '../../../../core/icons.dart';
@@ -33,7 +32,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                       padding: const EdgeInsets.only(left: 27),
                       child: ProfileStream(),
                     ),
-                     BoxSpacing(mWidth: 18,),
+                     const BoxSpacing(mWidth: 18,),
                      Text(
                       "Edit Profile photo",
                       style: Textstyles.editProfile,
@@ -49,7 +48,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                 ),
               ],
             ),
-            BoxSpacing(myHeight: 9),
+            const BoxSpacing(myHeight: 9),
             kCard(
               child: Column(
                 children: [
@@ -65,9 +64,9 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                       }
                     },
                   ),
-                  divider(),
+                  const divider(),
                   kListTile(
-                    title: Text("Choose Photo",),
+                    title: const Text("Choose Photo",),
                     trailing: icons.whiteImage(context),
                     onTap: () async {
                       Navigator.of(context).pop();
@@ -78,7 +77,7 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                       }
                     },
                   ),
-                  divider(),
+                  const divider(),
                   kListTile(
                     title: Text(
                       "Delete Photo",
