@@ -427,7 +427,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
               ? Colors.grey
               : MyColors.unread,
           child: hasUnreadMessages
-              ? const Icon(Icons.mark_chat_read_outlined)
+              ? icons.read
               : icons.unread,
         );
         },
