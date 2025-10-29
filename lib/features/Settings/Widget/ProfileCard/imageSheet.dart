@@ -13,6 +13,7 @@ import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
 import "package:whatsappclone/utils/pickImage.dart" as url;
 
+import '../../../BottomNavBar/BottomNavBar.dart';
 import '../../SettingsScreen.dart';
 
 Future<void> showImage(BuildContext context, {Future<void> Function(String imageUrl)? addToFirebase}) async {
@@ -92,10 +93,10 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                       ),
                       trailing: icons.deleteIcon,
                       onTap: () async {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).push(
+                        // Navigator.of(context).pop();
+                        Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => SettingScreen()
+                                builder: (context) => const Bottomnavbar()
                             )
                         );
                         myToast("Profile picture deleted");
