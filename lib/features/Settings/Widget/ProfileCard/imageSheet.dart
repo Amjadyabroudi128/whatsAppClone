@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,14 @@ import '../../../../components/dividerWidget.dart';
 import "package:whatsappclone/utils/pickImage.dart" as url;
 
 import '../../SettingsScreen.dart';
+
 Future<void> showImage(BuildContext context, {Future<void> Function(String imageUrl)? addToFirebase}) async {
+  // Get current user's image status
+  final userId = FirebaseAuth.instance.currentUser!.uid;
+  final userDoc = await userC.doc(userId).get();
+  final userData = userDoc.data() as Map<String, dynamic>?;
+  final hasImage = userData?['image'] != null;
+
   await showModalBottomSheet(
     context: context,
     builder: (context) {
@@ -32,8 +38,8 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                       padding: const EdgeInsets.only(left: 27),
                       child: ProfileStream(),
                     ),
-                     const BoxSpacing(mWidth: 18,),
-                     Text(
+                    const BoxSpacing(mWidth: 18,),
+                    Text(
                       "Edit Profile photo",
                       style: Textstyles.editProfile,
                     ),
@@ -77,25 +83,27 @@ Future<void> showImage(BuildContext context, {Future<void> Function(String image
                       }
                     },
                   ),
-                  const divider(),
-                  kListTile(
-                    title: Text(
-                      "Delete Photo",
-                      style: Textstyles.deletemessage,
+                  if (hasImage) ...[
+                    const divider(),
+                    kListTile(
+                      title: Text(
+                        "Delete Photo",
+                        style: Textstyles.deletemessage,
+                      ),
+                      trailing: icons.deleteIcon,
+                      onTap: () async {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => SettingScreen()
+                            )
+                        );
+                        myToast("Profile picture deleted");
+                        await userC.doc(FirebaseAuth.instance.currentUser!.uid)
+                            .update({"image": FieldValue.delete()});
+                      },
                     ),
-                    trailing: icons.deleteIcon,
-                    onTap: () async {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => SettingScreen()
-                          )
-                      );
-                      myToast("Profile picture deleted");
-                     await userC.doc(FirebaseAuth.instance.currentUser!.uid)
-                          .update({"image": FieldValue.delete()});
-                    },
-                  ),
+                  ],
                 ],
               ),
             )
