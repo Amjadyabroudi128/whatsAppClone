@@ -12,10 +12,7 @@ import '../../../../Firebase/FirebaseCollections.dart';
 import '../../../../core/icons.dart';
 import '../../../../components/dividerWidget.dart';
 import "package:whatsappclone/utils/pickImage.dart" as url;
-
 import '../../../BottomNavBar/BottomNavBar.dart';
-import '../../SettingsScreen.dart';
-
 Future<void> showImage(BuildContext context, {Future<void> Function(String imageUrl)? addToFirebase}) async {
   // Get current user's image status
   final userId = FirebaseAuth.instance.currentUser!.uid;
