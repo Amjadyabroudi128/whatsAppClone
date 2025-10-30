@@ -417,7 +417,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 );
               },
             ),
-            const FavouriteTab(),
+            // const FavouriteTab(),
             const UnreadTab(),
           ],
         ),

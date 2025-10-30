@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/TextButton.dart';
@@ -46,7 +47,7 @@ class _TestnameState extends State<Testname> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
   final currentUser = FirebaseAuth.instance.currentUser!.uid;
-
+  DateTime dateTime = DateTime.now();
   Messages? _replyMessage;
   bool isEditing = false;
   bool isUploading = false;
@@ -458,8 +459,60 @@ class _TestnameState extends State<Testname> {
                           messageController.clear();
                           FocusScope.of(context).unfocus();
                           _replyMessage = null;
-                          // Clear typing status after sending
                           updateTypingStatus(false);
+                        },
+                        onLongPress: () {
+                          showCupertinoModalPopup(
+                            context: context,
+                            builder: (BuildContext context) => Container(
+                              height: 300,
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(color: Colors.grey.shade300),
+                                      ),
+                                    ),
+                                  ),
+                                  // Date Picker
+                                  Expanded(
+                                    child: CupertinoDatePicker(
+                                      mode: CupertinoDatePickerMode.dateAndTime,
+                                      backgroundColor: Colors.white,
+                                      minimumDate: DateTime.now(),
+                                      initialDateTime: DateTime.now(),
+                                      onDateTimeChanged: (DateTime newTime) {
+                                        setState(() {
+                                          dateTime = newTime;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      kTextButton(
+                                        onPressed: (){
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text("Cancel"),
+                                      ),
+                                      kTextButton(
+                                        child: const Text("Save"),
+                                        onPressed: (){
+
+                                        },
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
                         },
                         myIcon: icons.send,
                       )
