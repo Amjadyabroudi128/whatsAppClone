@@ -61,6 +61,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   return const Center(child: Text("No recent chats."));
                 }
                 final messages = snapshot.data!;
+
                 return ListView.builder(
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
@@ -76,6 +77,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     }
 
                     final chatRoomId = getChatRoomId(currentUserId, otherUserId!);
+
                     return FutureBuilder<DocumentSnapshot>(
                       future: FirebaseFirestore.instance.collection('users').doc(otherUserId).get(),
                       builder: (context, userSnapshot) {
