@@ -57,14 +57,10 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
             FutureBuilder<List<Messages>>(
               future: service.getAllLastMessages(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return const Center(child: Text("No recent chats."));
                 }
                 final messages = snapshot.data!;
-
                 return ListView.builder(
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
@@ -80,7 +76,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                     }
 
                     final chatRoomId = getChatRoomId(currentUserId, otherUserId!);
-
                     return FutureBuilder<DocumentSnapshot>(
                       future: FirebaseFirestore.instance.collection('users').doc(otherUserId).get(),
                       builder: (context, userSnapshot) {
@@ -427,8 +422,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
       ),
     );
   }
-  StreamBuilder<QuerySnapshot<Object?>> unreadMessages(
-      String chatRoomId, String currentUserId, String otherUserId) {
+  StreamBuilder<QuerySnapshot<Object?>> unreadMessages(String chatRoomId, String currentUserId, String otherUserId) {
     return StreamBuilder<QuerySnapshot>(
       stream: service.isRead(chatRoomId, currentUserId),
       builder: (context, snapshot) {
