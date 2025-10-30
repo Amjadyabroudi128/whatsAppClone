@@ -45,7 +45,7 @@ class _UnreadTabState extends State<UnreadTab> {
       future: service.getAllLastMessages(),
       builder: (context, snapshot) {
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text("No recent chats."));
+          return const Center(child: Text("No Unread chats."));
         }
 
         final messages = snapshot.data!;
@@ -54,14 +54,9 @@ class _UnreadTabState extends State<UnreadTab> {
         return StreamBuilder<List<String>>(
           stream: _getChatsWithUnreadMessages(messages, currentUserId),
           builder: (context, unreadSnapshot) {
-            if (unreadSnapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
             if (!unreadSnapshot.hasData || unreadSnapshot.data!.isEmpty) {
               return const Center(child: Text("No unread messages."));
             }
-
             final chatsWithUnread = unreadSnapshot.data!;
             final unreadMessages = messages.where((msg) {
               final isSender = msg.senderId == currentUserId;
