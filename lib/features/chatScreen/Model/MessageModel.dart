@@ -16,6 +16,9 @@ class Messages {
   final bool? isEdited;
   final String? senderName;
   final bool? isRead;
+  final Timestamp? scheduledFor;
+  final bool? isScheduled;
+
   Messages({
     required this.text,
     this.senderName,
@@ -32,6 +35,8 @@ class Messages {
     this.isReply = false,
     this.replyTo,
     this.isEdited,
+    this.scheduledFor,
+    this.isScheduled = false,
   });
 
   factory Messages.fromMap(Map<String, dynamic> map) {
@@ -53,12 +58,14 @@ class Messages {
           ? Messages.fromMap(Map<String, dynamic>.from(map['replyTo']))
           : null,
       isEdited: map['isEdited'] ?? false,
+      scheduledFor: map['scheduledFor'],
+      isScheduled: map['isScheduled'] ?? false,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      "isRead" : isRead,
+      "isRead": isRead,
       "senderName": senderName,
       'messageId': messageId,
       'message': text,
@@ -73,11 +80,11 @@ class Messages {
       'isReply': isReply,
       'replyTo': replyTo?.toMap(),
       'isEdited': isEdited,
+      'scheduledFor': scheduledFor,
+      'isScheduled': isScheduled,
     };
   }
 
-
-  // copyWith method to immutably update fields
   Messages copyWith({
     bool? isRead,
     String? text,
@@ -94,6 +101,8 @@ class Messages {
     bool? isReply,
     Messages? replyTo,
     bool? isEdited,
+    Timestamp? scheduledFor,
+    bool? isScheduled,
   }) {
     return Messages(
       senderName: senderName ?? this.senderName,
@@ -111,8 +120,11 @@ class Messages {
       isReply: isReply ?? this.isReply,
       replyTo: replyTo ?? this.replyTo,
       isEdited: isEdited ?? this.isEdited,
+      scheduledFor: scheduledFor ?? this.scheduledFor,
+      isScheduled: isScheduled ?? this.isScheduled,
     );
   }
+
   factory Messages.fromDocument(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Messages(
@@ -125,7 +137,8 @@ class Messages {
       senderEmail: data['senderEmail'],
       image: data['image'] ?? '',
       time: data['time']?.toDate(),
+      scheduledFor: data['scheduledFor'],
+      isScheduled: data['isScheduled'] ?? false,
     );
   }
-
 }
