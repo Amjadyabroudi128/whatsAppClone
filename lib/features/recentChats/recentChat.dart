@@ -38,7 +38,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
@@ -47,7 +47,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
           bottom: const TabBar(
             tabs: [
               Tab(text: "All"),
-              Tab(text: "Favourite"),
               Tab(text: "Unread"),
             ],
           ),
