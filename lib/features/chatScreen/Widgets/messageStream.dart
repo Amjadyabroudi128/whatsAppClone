@@ -7,14 +7,14 @@ import '../chatScreen.dart';
 import 'alignMessages.dart';
 
 class MessageStream extends StatefulWidget {
-   MessageStream({
+   const MessageStream({
     super.key,
     required this.service,
     required this.user,
     required this.widget, this.onReply,  this.controller, this.textColor,
     required this.selectedMessages,
     required this.isEditing,
-     this.onToggleEdit, // 👈 ADD THIS
+     this.onToggleEdit,
 
   });
 
@@ -26,7 +26,7 @@ class MessageStream extends StatefulWidget {
   final Color? textColor;
   final Set<String> selectedMessages;
    final bool isEditing;
-   final VoidCallback? onToggleEdit; // 👈 ADD THIS
+   final VoidCallback? onToggleEdit;
 
    @override
   State<MessageStream> createState() => _MessageStreamState();
@@ -57,6 +57,8 @@ class _MessageStreamState extends State<MessageStream> {
             image: data.containsKey('image') ? data["image"] : null,
             file: data.containsKey("file") ? data["file"] : null,
             messageId: doc.id,
+            isScheduled: data["isScheduled"] ?? false,
+            scheduledFor: data["scheduledFor"],
             isEdited: (data["isEdited"] ?? false) as bool,
             isStarred: (data["isStarred"] ?? false) as bool,
             isReply: (data["isReply"] ?? false) as bool,
