@@ -44,11 +44,33 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
         appBar: AppBar(
           title: const Text("Recent Chats"),
           automaticallyImplyLeading: false,
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: "All"),
-              Tab(text: "Unread"),
-            ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(kTextTabBarHeight),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collectionGroup('messages')
+                  .where('receiverId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                  .where('isRead', isEqualTo: false)
+                  .snapshots(),
+              builder: (context, snap) {
+                final unreadTotal = snap.data?.docs.length;
+                return TabBar(
+                  tabs: [
+                    const Tab(text: "All"),
+                    Tab(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Unread"),
+                          const BoxSpacing(mWidth: 7,),
+                          if(unreadTotal! > 0) Text("${unreadTotal}", style: TextStyle(color: Colors.green, fontSize: 16),)
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
         body: TabBarView(
@@ -60,7 +82,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   return const Center(child: Text("No recent chats."));
                 }
                 final messages = snapshot.data!;
-
+                final count = snapshot.data?.length;
                 return ListView.builder(
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
@@ -96,7 +118,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                               .snapshots(),
                           builder: (context, snapshotUnread) {
                             final unreadCount = snapshotUnread.data?.docs.length ?? 0;
-
                             return Slidable(
                               startActionPane: ActionPane(
                                 motion: const StretchMotion(),
@@ -209,10 +230,10 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                             onTap: () async {
                                                               Navigator.of(context).pop();
                                                               if (!isFav) {
-                                                                await service.addToFavourite(otherUserName!);
+                                                                await service.addToFavourite(otherUserName);
                                                                 myToast("Added to favourites");
                                                               } else {
-                                                                await service.removeFavourite(otherUserName!);
+                                                                await service.removeFavourite(otherUserName);
                                                                 myToast("Removed from favourites");
                                                               }
                                                             },
