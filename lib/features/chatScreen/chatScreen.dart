@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -90,6 +92,7 @@ class _TestnameState extends State<Testname> {
       typingToUserId: isTyping ? widget.receiverId : null,
     );
   }
+  Timer? _scheduleTimer;
 
   @override
   void initState() {
@@ -98,9 +101,11 @@ class _TestnameState extends State<Testname> {
     service.readMsg(widget.receiverId);
     messageController.addListener(() {
       // Update typing status based on text field content
+
       updateTypingStatus(messageController.text.trim().isNotEmpty);
       setState(() {});
     });
+
   }
 
   @override
@@ -469,22 +474,14 @@ class _TestnameState extends State<Testname> {
                               color: Colors.white,
                               child: Column(
                                 children: [
-
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(color: Colors.grey.shade300),
-                                      ),
-                                    ),
-                                  ),
                                   // Date Picker
                                   Expanded(
                                     child: CupertinoDatePicker(
                                       mode: CupertinoDatePickerMode.dateAndTime,
                                       backgroundColor: Colors.white,
                                       minimumDate: DateTime.now(),
-                                      initialDateTime: DateTime.now(),
+                                      initialDateTime:
+                                      DateTime.now().add(const Duration(minutes: 1)),
                                       onDateTimeChanged: (DateTime newTime) {
                                         setState(() {
                                           dateTime = newTime;
@@ -496,13 +493,13 @@ class _TestnameState extends State<Testname> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       kTextButton(
-                                        onPressed: (){
+                                        onPressed: () {
                                           Navigator.of(context).pop();
                                         },
                                         child: const Text("Cancel"),
                                       ),
                                       kTextButton(
-                                        child: const Text("Save"),
+                                        child: const Text("Schedule"),
                                         onPressed: (){
 
                                         },
