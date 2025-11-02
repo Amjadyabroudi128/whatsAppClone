@@ -86,7 +86,6 @@ class _ImagescreenState extends State<Imagescreen> {
       });
     }
 
-
     return Scaffold(
       appBar: AppBar(
         title: Column(
