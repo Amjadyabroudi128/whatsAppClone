@@ -63,7 +63,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                         children: [
                           const Text("Unread"),
                           const BoxSpacing(mWidth: 7,),
-                          if(unreadTotal! > 0) Text("${unreadTotal}", style: TextStyle(color: Colors.green, fontSize: 16),)
+                          if(unreadTotal! > 0) Text("$unreadTotal", style: const TextStyle(color: Colors.green, fontSize: 16),)
                         ],
                       ),
                     ),
