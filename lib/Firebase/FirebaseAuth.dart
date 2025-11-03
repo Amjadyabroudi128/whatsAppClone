@@ -254,6 +254,8 @@ import '../features/chatScreen/Model/MessageModel.dart';
        isRead: false,
        isReply: replyTo != null,
        replyTo: replyTo,
+       isReacted: false,
+       reactBy: null,
      );
 
      List<String> ids = [currentUser, receiverId];
@@ -268,6 +270,8 @@ import '../features/chatScreen/Model/MessageModel.dart';
          .add({
        ...newMessage.toMap(),
        "timestamp": FieldValue.serverTimestamp(),
+       "isReacted": false,
+       "reactBy": null,
      });
 
      await docRef.update({"messageId": docRef.id});
@@ -326,6 +330,65 @@ import '../features/chatScreen/Model/MessageModel.dart';
        type: "chat"
      );
 
+   }
+   Future<void> addReaction(
+        String? senderId,
+        String? receiverId,
+       String? messageId,
+       String? emoji,
+       String? senderName,
+       ) async {
+     List<String> ids = [senderId!, receiverId!];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+     try{
+       await FirebaseFirestore.instance.collection("chat_rooms")
+           .doc(chatRoomID).collection("messages").doc(messageId).update({
+         "isReacted": true,
+         "reactBy": senderName
+       });
+     } catch(e){
+       debugPrint("❌ Error adding reaction: $e");
+     }
+   }
+   Future<void> removeReactionFromMessage({
+      String? senderId,
+      String?  receiverId,
+      String?  messageId,
+   }) async {
+     List<String> ids = [senderId!, receiverId!];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     try {
+       await FirebaseFirestore.instance
+           .collection("chat_rooms")
+           .doc(chatRoomID)
+           .collection("messages")
+           .doc(messageId)
+           .update({
+         "isReacted": false,
+         "reactBy": null,
+       });
+     } catch (e) {
+       debugPrint("❌ Error removing reaction: $e");
+     }
+   }
+   Stream<QuerySnapshot> isReacted({
+     required String userId,
+     required String otherUserId,
+   }) {
+     final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+     final ids = [currentUserId, otherUserId]..sort();
+     final chatRoomID = ids.join("_");
+
+     return FirebaseFirestore.instance
+         .collection("chat_rooms")
+         .doc(chatRoomID)
+         .collection("messages")
+         .where("isReacted", isEqualTo: true)
+         .where("reactById", isEqualTo: userId)
+         .snapshots();
    }
 
    Future<void> sendPushNotificationViaFunction({
@@ -580,7 +643,7 @@ import '../features/chatScreen/Model/MessageModel.dart';
        });
      }
    }
-   Stream<QuerySnapshot>isRead(String chatRoomId, String currentUserId){
+   Stream<QuerySnapshot>isRead(String chatRoomId, String currentUserId) {
      return FirebaseFirestore.instance
          .collection("chat_rooms")
          .doc(chatRoomId)
