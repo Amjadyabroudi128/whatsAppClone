@@ -13,6 +13,8 @@ import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/selectMessage.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/starMessage.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
+import 'package:whatsappclone/reactions/ReactionList.dart';
+import 'package:whatsappclone/reactions/reactionCard.dart';
 import '../../../core/MyColors.dart';
 import '../../../core/appTheme.dart';
 import 'package:intl/intl.dart';
@@ -187,6 +189,33 @@ class _messagesAlignState extends State<messagesAlign> {
                           if (isMe) editMessage(context, msg, service, widget.widget, widget.user),
                           if (isMe) deleteMessage(context, msg, widget.widget, widget.user, service),
                           starMessage(msg, service, index, context),
+                          PopupMenuItem(
+                            value: "reaction",
+                            child: kTextButton(
+                              onPressed: (){
+                                showMenu(
+                                  context: context,
+                                  position: position,
+                                  items: [
+                                    PopupMenuItem(
+                                      padding: EdgeInsets.zero,
+                                      child: ReactionCard(
+                                        onReactionTap: (emoji) {
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                              child: const Row(
+                                children: [
+                                  Text("Add reaction"),
+                                  Spacer(),
+                                  Icon(Icons.face)
+                                ],
+                              ),
+                            ),
+                          ),
                           PopupMenuItem(
                             value: "reply",
                             child: kTextButton(
