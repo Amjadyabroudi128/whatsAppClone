@@ -9,7 +9,6 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
-import 'package:whatsappclone/features/recentChats/Tabs/FavouriteTab.dart';
 import 'package:whatsappclone/features/recentChats/Tabs/UnreadTab.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/btmSheet.dart';
@@ -87,7 +86,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   return const Center(child: Text("No recent chats."));
                 }
                 final messages = snapshot.data!;
-                final count = snapshot.data?.length;
                 return ListView.builder(
                   itemCount: messages.length,
                   itemBuilder: (context, index) {

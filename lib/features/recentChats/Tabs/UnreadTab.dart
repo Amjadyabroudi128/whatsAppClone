@@ -50,7 +50,6 @@ class _UnreadTabState extends State<UnreadTab> {
 
         final messages = snapshot.data!;
         final currentUserId = user!.uid;
-        final count = snapshot.data!.length;
         return StreamBuilder<List<String>>(
           stream: _getChatsWithUnreadMessages(messages, currentUserId),
           builder: (context, unreadSnapshot) {
