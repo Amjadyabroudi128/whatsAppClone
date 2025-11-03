@@ -462,8 +462,10 @@ class _messagesAlignState extends State<messagesAlign> {
                                                 padding: const EdgeInsets.all(8.0),
                                                 child: Row(
                                                   children: [
-                                                    Text("${msg.reactBy}"),
-                                                    const Spacer(),
+                                                    Text(
+                                                      isMe ? "you" : msg.senderName ?? "User",
+                                                      style: const TextStyle(fontSize: 14),
+                                                    ),                                                    const Spacer(),
                                                     GestureDetector(
                                                       onTap: (){
                                                         service.removeReactionFromMessage(
