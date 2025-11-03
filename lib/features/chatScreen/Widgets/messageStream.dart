@@ -65,6 +65,9 @@ class _MessageStreamState extends State<MessageStream> {
             replyTo: data.containsKey("replyTo") && data["replyTo"] != null
                 ? Messages.fromMap(Map<String, dynamic>.from(data["replyTo"]))
                 : null,
+            isReacted: (data["isReacted"] ?? false) as bool,
+            reactionEmoji: data["reactionEmoji"],
+            reactBy: data["reactBy"]
           );
 
           return message;
