@@ -201,6 +201,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                       padding: EdgeInsets.zero,
                                       child: ReactionCard(
                                         onReactionTap: (emoji) {
+
                                         },
                                       ),
                                     ),

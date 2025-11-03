@@ -345,7 +345,8 @@ import '../features/chatScreen/Model/MessageModel.dart';
        await FirebaseFirestore.instance.collection("chat_rooms")
            .doc(chatRoomID).collection("messages").doc(messageId).update({
          "isReacted": true,
-         "reactBy": senderName
+         "reactBy": senderName,
+         "reactionEmoji": emoji,
        });
      } catch(e){
        debugPrint("❌ Error adding reaction: $e");
@@ -369,6 +370,8 @@ import '../features/chatScreen/Model/MessageModel.dart';
            .update({
          "isReacted": false,
          "reactBy": null,
+         "reactionEmoji": null,
+
        });
      } catch (e) {
        debugPrint("❌ Error removing reaction: $e");
