@@ -46,14 +46,15 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
           automaticallyImplyLeading: false,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(kTextTabBarHeight),
-            child: StreamBuilder<QuerySnapshot>(
+            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: FirebaseFirestore.instance
                   .collectionGroup('messages')
                   .where('receiverId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
                   .where('isRead', isEqualTo: false)
                   .snapshots(),
               builder: (context, snap) {
-                final unreadTotal = snap.data?.docs.length;
+                final int unreadTotal = snap.hasData ? snap.data!.size : 0;
+
                 return TabBar(
                   tabs: [
                     const Tab(text: "All"),
@@ -62,8 +63,11 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Unread"),
-                          const BoxSpacing(mWidth: 7,),
-                          if(unreadTotal! > 0) Text("$unreadTotal", style: const TextStyle(color: Colors.green, fontSize: 16),)
+                          const BoxSpacing(mWidth: 7),
+                          if (unreadTotal > 0)
+                            Text("$unreadTotal",
+                              style: const TextStyle(color: Colors.green, fontSize: 16),
+                            ),
                         ],
                       ),
                     ),
@@ -72,6 +76,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
               },
             ),
           ),
+
         ),
         body: TabBarView(
           children: [
