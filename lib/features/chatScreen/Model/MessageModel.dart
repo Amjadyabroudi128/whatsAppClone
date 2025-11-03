@@ -18,7 +18,8 @@ class Messages {
   final bool? isRead;
   final Timestamp? scheduledFor;
   final bool? isScheduled;
-
+  final bool? isReacted;
+  final Messages? reactBy;
   Messages({
     required this.text,
     this.senderName,
@@ -37,6 +38,8 @@ class Messages {
     this.isEdited,
     this.scheduledFor,
     this.isScheduled = false,
+    this.isReacted = false,
+    this.reactBy
   });
 
   factory Messages.fromMap(Map<String, dynamic> map) {
@@ -60,6 +63,10 @@ class Messages {
       isEdited: map['isEdited'] ?? false,
       scheduledFor: map['scheduledFor'],
       isScheduled: map['isScheduled'] ?? false,
+      isReacted: map["isReacted"] ?? false,
+      reactBy: map['reactBy'] != null
+          ? Messages.fromMap(Map<String, dynamic>.from(map['reactBy']))
+          : null,
     );
   }
 
@@ -82,6 +89,8 @@ class Messages {
       'isEdited': isEdited,
       'scheduledFor': scheduledFor,
       'isScheduled': isScheduled,
+      "isReacted" : isReacted,
+      "reactBy": reactBy?.toMap(),
     };
   }
 
@@ -103,6 +112,8 @@ class Messages {
     bool? isEdited,
     Timestamp? scheduledFor,
     bool? isScheduled,
+    bool? isReacted,
+    Messages? reactBy,
   }) {
     return Messages(
       senderName: senderName ?? this.senderName,
@@ -122,6 +133,8 @@ class Messages {
       isEdited: isEdited ?? this.isEdited,
       scheduledFor: scheduledFor ?? this.scheduledFor,
       isScheduled: isScheduled ?? this.isScheduled,
+      isReacted: isReacted ?? this.isReacted,
+      reactBy: reactBy ?? this.reactBy
     );
   }
 
@@ -139,6 +152,10 @@ class Messages {
       time: data['time']?.toDate(),
       scheduledFor: data['scheduledFor'],
       isScheduled: data['isScheduled'] ?? false,
+      isReacted: data["isReacted"] ?? false,
+      reactBy: data['reactBy'] != null
+          ? Messages.fromMap(Map<String, dynamic>.from(data['reactBy']))
+          : null,
     );
   }
 }
