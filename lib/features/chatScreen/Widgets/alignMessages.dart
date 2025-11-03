@@ -13,7 +13,6 @@ import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/selectMessage.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/starMessage.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
-import 'package:whatsappclone/reactions/ReactionList.dart';
 import 'package:whatsappclone/reactions/reactionCard.dart';
 import '../../../core/MyColors.dart';
 import '../../../core/appTheme.dart';
@@ -201,7 +200,13 @@ class _messagesAlignState extends State<messagesAlign> {
                                       padding: EdgeInsets.zero,
                                       child: ReactionCard(
                                         onReactionTap: (emoji) {
+                                          service.addReaction(
+                                              msg.senderId, msg.receiverId,
+                                              msg.messageId, emoji, msg.senderName
+                                          );
+                                          setState(() {
 
+                                          });
                                         },
                                       ),
                                     ),
@@ -304,138 +309,157 @@ class _messagesAlignState extends State<messagesAlign> {
                           )
                               : const SizedBox(),
                         Flexible(
-                          child: IntrinsicWidth(
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxWidth: MediaQuery.of(context).size.width * 0.50,
-                              ),
-                              child: Container(
-                                margin: containermargin,
-                                decoration: containerDecoration(
-                                  color: isMe ? MyColors.myMessage : Colors.grey,
-                                  borderRadius: MyTheme.circularContainer,
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [ IntrinsicWidth(
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width * 0.50,
                                 ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (msg.replyTo != null)
-                                      Container(
-                                        width: double.infinity,
-                                        padding: const EdgeInsets.all(8),
-                                        margin: const EdgeInsets.only(bottom: 4),
-                                        decoration: BoxDecoration(
-                                          color: isMe ? MyColors.reply : MyColors.message,
-                                          borderRadius: BorderRadius.circular(8),
-                                          border: Border(
-                                            left: BorderSide(
-                                              color: isMe ? MyColors.myBorder : MyColors.otherBorder,
-                                              width: 7,
+
+                                child: Container(
+                                  margin: containermargin,
+                                  decoration: containerDecoration(
+                                    color: isMe ? MyColors.myMessage : Colors.grey,
+                                    borderRadius: MyTheme.circularContainer,
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      if (msg.replyTo != null)
+                                        Container(
+                                          width: double.infinity,
+                                          padding: const EdgeInsets.all(8),
+                                          margin: const EdgeInsets.only(bottom: 4),
+                                          decoration: BoxDecoration(
+                                            color: isMe ? MyColors.reply : MyColors.message,
+                                            borderRadius: BorderRadius.circular(8),
+                                            border: Border(
+                                              left: BorderSide(
+                                                color: isMe ? MyColors.myBorder : MyColors.otherBorder,
+                                                width: 7,
+                                              ),
                                             ),
                                           ),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email ? "You" : msg.replyTo!.senderName}",
+                                                style: TextStyle(
+                                                  color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
+                                                      ? MyColors.myName
+                                                      : MyColors.otherName,
+                                                ),
+                                              ),
+                                              if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
+                                                Row(
+                                                  children: [
+                                                    icons.Wphoto,
+                                                    const BoxSpacing(mWidth: 10),
+                                                    Text("Photo", style: Textstyles.photo),
+                                                    const Spacer(),
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Image.network(msg.replyTo!.image!, height: 60),
+                                                    ),
+                                                  ],
+                                                ),
+                                              Text(
+                                                msg.replyTo!.text,
+                                                style: Textstyles.textMsg,
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                      if (msg.image != null && msg.image!.isNotEmpty)
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(12),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              // msg.image is a Firebase download URL
+                                              kimageNet(src: msg.image!),
+                                              if (msg.text.trim().isNotEmpty)
+                                                const SizedBox(height: 8),
+                                              if (msg.text.trim().isNotEmpty)
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 11, bottom: 8),
+                                                  child: Text(
+                                                    msg.text,
+                                                    softWrap: true,
+                                                    textAlign: TextAlign.right,
+                                                    overflow: TextOverflow.clip,
+                                                    style: Textstyles.textMsg,
+                                                  ),
+                                                )
+                                            ],
+                                          ),
+                                        )
+                                      else if (msg.file != null && msg.file!.isNotEmpty)
+                                        Row(
                                           children: [
-                                            Text(
-                                              "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email ? "You" : msg.replyTo!.senderName}",
-                                              style: TextStyle(
-                                                color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
-                                                    ? MyColors.myName
-                                                    : MyColors.otherName,
+                                            icons.myFile,
+                                            const SizedBox(width: 8),
+                                            Expanded(
+                                              child: Text(
+                                                msg.file!.split('/').last,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  decoration: TextDecoration.underline,
+                                                ),
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                            if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
-                                              Row(
-                                                children: [
-                                                  icons.Wphoto,
-                                                  const BoxSpacing(mWidth: 10),
-                                                  Text("Photo", style: Textstyles.photo),
-                                                  const Spacer(),
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    child: Image.network(msg.replyTo!.image!, height: 60),
-                                                  ),
-                                                ],
-                                              ),
-                                            Text(
-                                              msg.replyTo!.text,
+                                          ],
+                                        )
+                                      else
+                                        Padding(
+                                          padding: const EdgeInsets.all(9.0),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: Text(
+                                              msg.text,
+                                              softWrap: true,
+                                              textAlign: TextAlign.right,
+                                              overflow: TextOverflow.clip,
                                               style: Textstyles.textMsg,
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                    if (msg.image != null && msg.image!.isNotEmpty)
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            // msg.image is a Firebase download URL
-                                            kimageNet(src: msg.image!),
-                                            if (msg.text.trim().isNotEmpty)
-                                              const SizedBox(height: 8),
-                                            if (msg.text.trim().isNotEmpty)
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 11, bottom: 8),
-                                                child: Text(
-                                                  msg.text,
-                                                  softWrap: true,
-                                                  textAlign: TextAlign.right,
-                                                  overflow: TextOverflow.clip,
-                                                  style: Textstyles.textMsg,
-                                                ),
-                                              )
-                                          ],
-                                        ),
-                                      )
-                                    else if (msg.file != null && msg.file!.isNotEmpty)
                                       Row(
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          icons.myFile,
-                                          const SizedBox(width: 8),
-                                          Expanded(
-                                            child: Text(
-                                              msg.file!.split('/').last,
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                decoration: TextDecoration.underline,
-                                              ),
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
+                                          if (msg.isEdited == true)
+                                            Text("Edited", style: Textstyles.edited),
+                                          const BoxSpacing(mWidth: 5),
+                                          isMe
+                                              ? (msg.isRead! ? icons.messageRead : icons.sent)
+                                              : const SizedBox.shrink(),
+                                          fomattedDateText(formattedTime: formattedTime),
                                         ],
-                                      )
-                                    else
-                                      Padding(
-                                        padding: const EdgeInsets.all(9.0),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Text(
-                                            msg.text,
-                                            softWrap: true,
-                                            textAlign: TextAlign.right,
-                                            overflow: TextOverflow.clip,
-                                            style: Textstyles.textMsg,
-                                          ),
-                                        ),
                                       ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        if (msg.isEdited == true)
-                                          Text("Edited", style: Textstyles.edited),
-                                        const BoxSpacing(mWidth: 5),
-                                        isMe
-                                            ? (msg.isRead! ? icons.messageRead : icons.sent)
-                                            : const SizedBox.shrink(),
-                                        fomattedDateText(formattedTime: formattedTime),
-                                      ],
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
+                              if(msg.isReacted == true)
+                                GestureDetector(
+                                  onTap: (){
+
+                                  },
+                                  child: Positioned(
+                                    top: -6,
+                                    child: Text(
+                                      "${msg.reactionEmoji}",
+                                      style: const TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+
+                            ]
                           ),
                         ),
                       ],
@@ -443,6 +467,7 @@ class _messagesAlignState extends State<messagesAlign> {
                   ),
                 ),
               ),
+
             ],
           );
         },
