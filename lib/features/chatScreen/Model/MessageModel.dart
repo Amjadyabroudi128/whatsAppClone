@@ -19,7 +19,8 @@ class Messages {
   final Timestamp? scheduledFor;
   final bool? isScheduled;
   final bool? isReacted;
-  final Messages? reactBy;
+  final String? reactBy;
+  final String? reactionEmoji;
   Messages({
     required this.text,
     this.senderName,
@@ -39,7 +40,8 @@ class Messages {
     this.scheduledFor,
     this.isScheduled = false,
     this.isReacted = false,
-    this.reactBy
+    this.reactBy,
+    this.reactionEmoji
   });
 
   factory Messages.fromMap(Map<String, dynamic> map) {
@@ -64,9 +66,8 @@ class Messages {
       scheduledFor: map['scheduledFor'],
       isScheduled: map['isScheduled'] ?? false,
       isReacted: map["isReacted"] ?? false,
-      reactBy: map['reactBy'] != null
-          ? Messages.fromMap(Map<String, dynamic>.from(map['reactBy']))
-          : null,
+      reactBy: map["reactBy"],
+      reactionEmoji: map["reactionEmoji"]
     );
   }
 
@@ -90,7 +91,8 @@ class Messages {
       'scheduledFor': scheduledFor,
       'isScheduled': isScheduled,
       "isReacted" : isReacted,
-      "reactBy": reactBy?.toMap(),
+      "reactBy": reactBy,
+      "reactionEmoji": reactionEmoji
     };
   }
 
@@ -113,7 +115,8 @@ class Messages {
     Timestamp? scheduledFor,
     bool? isScheduled,
     bool? isReacted,
-    Messages? reactBy,
+    String? reactBy,
+    String? reactionEmoji,
   }) {
     return Messages(
       senderName: senderName ?? this.senderName,
@@ -134,7 +137,8 @@ class Messages {
       scheduledFor: scheduledFor ?? this.scheduledFor,
       isScheduled: isScheduled ?? this.isScheduled,
       isReacted: isReacted ?? this.isReacted,
-      reactBy: reactBy ?? this.reactBy
+      reactBy: reactBy ?? this.reactBy,
+      reactionEmoji: reactionEmoji ?? this.reactionEmoji
     );
   }
 
@@ -153,9 +157,8 @@ class Messages {
       scheduledFor: data['scheduledFor'],
       isScheduled: data['isScheduled'] ?? false,
       isReacted: data["isReacted"] ?? false,
-      reactBy: data['reactBy'] != null
-          ? Messages.fromMap(Map<String, dynamic>.from(data['reactBy']))
-          : null,
+      reactBy: data["reactBy"],
+      reactionEmoji: data["reactionEmoji"]
     );
   }
 }
