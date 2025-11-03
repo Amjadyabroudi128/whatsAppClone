@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/kCard.dart';
-
 import 'ReactionList.dart';
 
 class ReactionCard extends StatelessWidget {
@@ -10,30 +9,33 @@ class ReactionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return kCard(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(13),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+    return Center(
+      child: kCard(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: reactionList.entries.map((entry) {
               return GestureDetector(
-                onTap: () => onReactionTap?.call(entry.value),
+                onTap: () {
+                  Navigator.pop(context);
+                  onReactionTap?.call(entry.value);
+                },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
+                      color: Colors.grey.withOpacity(0.15),
                     ),
                     child: Text(
                       entry.value,
-                      style: const TextStyle(fontSize: 24),
+                      style: const TextStyle(fontSize: 20),
                     ),
                   ),
                 ),
