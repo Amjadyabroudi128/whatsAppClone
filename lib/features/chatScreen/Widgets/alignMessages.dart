@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
+import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/components/imageNetworkComponent.dart';
 import 'package:whatsappclone/core/consts.dart';
@@ -14,6 +15,7 @@ import 'package:whatsappclone/features/chatScreen/Widgets/selectMessage.dart';
 import 'package:whatsappclone/features/chatScreen/Widgets/starMessage.dart';
 import 'package:whatsappclone/features/chatScreen/chatScreen.dart';
 import 'package:whatsappclone/reactions/reactionCard.dart';
+import '../../../components/dividerContainer.dart';
 import '../../../core/MyColors.dart';
 import '../../../core/appTheme.dart';
 import 'package:intl/intl.dart';
@@ -448,7 +450,39 @@ class _messagesAlignState extends State<messagesAlign> {
                               if(msg.isReacted == true)
                                 GestureDetector(
                                   onTap: (){
-
+                                    btmSheet(
+                                      context: context,
+                                      builder: (context){
+                                        return SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              const DividerContainer(),
+                                              const Text("Reactions"),
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text("${msg.reactBy}"),
+                                                    const Spacer(),
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        service.removeReactionFromMessage(
+                                                          senderId: msg.senderId,
+                                                          receiverId: msg.receiverId,
+                                                          messageId: msg.messageId,
+                                                        );
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                      child: Text("${msg.reactionEmoji}"),
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                    );
                                   },
                                   child: Positioned(
                                     top: -6,

@@ -371,7 +371,6 @@ import '../features/chatScreen/Model/MessageModel.dart';
          "isReacted": false,
          "reactBy": null,
          "reactionEmoji": null,
-
        });
      } catch (e) {
        debugPrint("❌ Error removing reaction: $e");
