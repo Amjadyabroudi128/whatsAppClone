@@ -31,7 +31,6 @@ class ReactionCard extends StatelessWidget {
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.grey.withOpacity(0.15),
                     ),
                     child: Text(
                       entry.value,
