@@ -1,7 +1,7 @@
 
 final Map<String,String> reactionList = {
   "haha": "😂",
-   "sad": "'😢",
+   "sad": "😢",
   "angry": "😡",
   "like": "👍",
    "love": "❤️"
