@@ -72,7 +72,6 @@ class _MessageStreamState extends State<MessageStream> {
 
           return message;
         }).toList();
-
         return messagesAlign(messages: messages, user: widget.user,
             widget: widget.widget, onReply: widget.onReply,
             textColor: widget.textColor, isEditing : widget.isEditing, selectedMessages: widget.selectedMessages,
