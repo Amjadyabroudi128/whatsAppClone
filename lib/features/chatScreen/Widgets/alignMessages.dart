@@ -447,43 +447,99 @@ class _messagesAlignState extends State<messagesAlign> {
                                 ),
                               ),
                             ),
+                              // In your alignMessages.dart file, update the reactions bottom sheet section:
+
                               if(msg.isReacted == true)
                                 GestureDetector(
                                   onTap: (){
                                     btmSheet(
-                                      context: context,
-                                      builder: (context){
-                                        return SingleChildScrollView(
-                                          child: Column(
-                                            children: [
-                                              const DividerContainer(),
-                                              const Text("Reactions"),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      isMe ? "you" : msg.senderName ?? "User",
-                                                      style: const TextStyle(fontSize: 14),
-                                                    ),                                                    const Spacer(),
-                                                    GestureDetector(
-                                                      onTap: (){
-                                                        service.removeReactionFromMessage(
-                                                          senderId: msg.senderId,
-                                                          receiverId: msg.receiverId,
-                                                          messageId: msg.messageId,
+                                        context: context,
+                                        builder: (context){
+                                          return SingleChildScrollView(
+                                            child: Column(
+                                              children: [
+                                                const DividerContainer(),
+                                                const Text("Reactions"),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: FutureBuilder<DocumentSnapshot>(
+                                                    future: FirebaseFirestore.instance
+                                                        .collection('users')
+                                                        .doc(msg.senderId)
+                                                        .get(),
+                                                    builder: (context, snapshot) {
+                                                      if (!snapshot.hasData) {
+                                                        return Row(
+                                                          children: [
+                                                            Text(
+                                                              isMe ? "You" : msg.senderName ?? "User",
+                                                              style: const TextStyle(fontSize: 20),
+                                                            ),
+                                                            const Spacer(),
+                                                            GestureDetector(
+                                                              onTap: (){
+                                                                service.removeReactionFromMessage(
+                                                                  senderId: msg.senderId,
+                                                                  receiverId: msg.receiverId,
+                                                                  messageId: msg.messageId,
+                                                                );
+                                                                Navigator.of(context).pop();
+                                                              },
+                                                              child: Text("${msg.reactionEmoji}"),
+                                                            )
+                                                          ],
                                                         );
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                      child: Text("${msg.reactionEmoji}"),
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                      }
+                                                      }
+                                                      final userData = snapshot.data?.data() as Map<String, dynamic>?;
+                                                      final userImage = userData?['image'] ?? '';
+                                                      return Row(
+                                                        children: [
+                                                          // User Avatar
+                                                          if (userImage.isNotEmpty)
+                                                            CircleAvatar(
+                                                              backgroundImage: NetworkImage(userImage),
+                                                              radius: 20,
+                                                            )
+                                                          else
+                                                            const CircleAvatar(
+                                                              radius: 20,
+                                                              child: Icon(Icons.person),
+                                                            ),
+                                                          const SizedBox(width: 12),
+                                                          // User Name
+                                                          Expanded(
+                                                            child: Text(
+                                                              isMe ? "You" : msg.senderName ?? "User",
+                                                              style: const TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight: FontWeight.w500,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          // Reaction Emoji
+                                                          GestureDetector(
+                                                            onTap: (){
+                                                              service.removeReactionFromMessage(
+                                                                senderId: msg.senderId,
+                                                                receiverId: msg.receiverId,
+                                                                messageId: msg.messageId,
+                                                              );
+                                                              Navigator.of(context).pop();
+                                                            },
+                                                            child: Text(
+                                                              "${msg.reactionEmoji}",
+                                                              style: const TextStyle(fontSize: 24),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        }
                                     );
                                   },
                                   child: Positioned(
