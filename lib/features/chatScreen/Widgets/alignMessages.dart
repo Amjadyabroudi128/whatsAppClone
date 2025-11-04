@@ -501,9 +501,9 @@ class _messagesAlignState extends State<messagesAlign> {
                                                               radius: 20,
                                                             )
                                                           else
-                                                            const CircleAvatar(
+                                                             CircleAvatar(
                                                               radius: 20,
-                                                              child: Icon(Icons.person),
+                                                              child: icons.person(context),
                                                             ),
                                                           const SizedBox(width: 12),
                                                           // User Name
