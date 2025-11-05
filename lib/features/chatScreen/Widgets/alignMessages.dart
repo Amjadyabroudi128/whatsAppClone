@@ -512,10 +512,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                           Expanded(
                                                             child: Text(
                                                               "${msg.reactBy}",
-                                                              style: const TextStyle(
-                                                                fontSize: 18,
-                                                                fontWeight: FontWeight.w500,
-                                                              ),
+                                                              style: Textstyles.reaction
                                                             ),
                                                           ),
                                                           // Reaction Emoji
