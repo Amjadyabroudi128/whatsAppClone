@@ -203,8 +203,12 @@ class _messagesAlignState extends State<messagesAlign> {
                                       child: ReactionCard(
                                         onReactionTap: (emoji) {
                                           service.addReaction(
-                                              msg.senderId, msg.receiverId,
-                                              msg.messageId, emoji, msg.senderName
+                                            msg.senderId,
+                                            msg.receiverId,
+                                            msg.messageId,
+                                            emoji,
+                                            msg.senderName,
+                                            widget.user!.displayName,
                                           );
                                           setState(() {
 
@@ -447,8 +451,6 @@ class _messagesAlignState extends State<messagesAlign> {
                                 ),
                               ),
                             ),
-                              // In your alignMessages.dart file, update the reactions bottom sheet section:
-
                               if(msg.isReacted == true)
                                 GestureDetector(
                                   onTap: (){
@@ -465,14 +467,14 @@ class _messagesAlignState extends State<messagesAlign> {
                                                   child: FutureBuilder<DocumentSnapshot>(
                                                     future: FirebaseFirestore.instance
                                                         .collection('users')
-                                                        .doc(msg.senderId)
+                                                        .doc(msg.reactBy)
                                                         .get(),
                                                     builder: (context, snapshot) {
                                                       if (!snapshot.hasData) {
                                                         return Row(
                                                           children: [
                                                             Text(
-                                                              isMe ? "You" : msg.senderName ?? "User",
+                                                              isMe ? "You" : msg.reactBy ?? "User",
                                                               style: const TextStyle(fontSize: 20),
                                                             ),
                                                             const Spacer(),
@@ -509,7 +511,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                           // User Name
                                                           Expanded(
                                                             child: Text(
-                                                              isMe ? "You" : msg.senderName ?? "User",
+                                                              "${msg.reactBy}",
                                                               style: const TextStyle(
                                                                 fontSize: 18,
                                                                 fontWeight: FontWeight.w500,

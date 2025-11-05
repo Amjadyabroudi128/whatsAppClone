@@ -332,23 +332,28 @@ import '../features/chatScreen/Model/MessageModel.dart';
 
    }
    Future<void> addReaction(
-        String? senderId,
-        String? receiverId,
+       String? senderId,
+       String? receiverId,
        String? messageId,
        String? emoji,
        String? senderName,
+       String? currentUserName,  // This is the user who reacted
        ) async {
      List<String> ids = [senderId!, receiverId!];
      ids.sort();
      String chatRoomID = ids.join("_");
-     try{
-       await FirebaseFirestore.instance.collection("chat_rooms")
-           .doc(chatRoomID).collection("messages").doc(messageId).update({
+     try {
+       await FirebaseFirestore.instance
+           .collection("chat_rooms")
+           .doc(chatRoomID)
+           .collection("messages")
+           .doc(messageId)
+           .update({
          "isReacted": true,
-         "reactBy": senderName,
+         "reactBy": currentUserName,  // Store current user's name
          "reactionEmoji": emoji,
        });
-     } catch(e){
+     } catch (e) {
        debugPrint("❌ Error adding reaction: $e");
      }
    }
@@ -376,23 +381,6 @@ import '../features/chatScreen/Model/MessageModel.dart';
        debugPrint("❌ Error removing reaction: $e");
      }
    }
-   Stream<QuerySnapshot> isReacted({
-     required String userId,
-     required String otherUserId,
-   }) {
-     final currentUserId = FirebaseAuth.instance.currentUser!.uid;
-     final ids = [currentUserId, otherUserId]..sort();
-     final chatRoomID = ids.join("_");
-
-     return FirebaseFirestore.instance
-         .collection("chat_rooms")
-         .doc(chatRoomID)
-         .collection("messages")
-         .where("isReacted", isEqualTo: true)
-         .where("reactById", isEqualTo: userId)
-         .snapshots();
-   }
-
    Future<void> sendPushNotificationViaFunction({
      required String token,
      required String title,
