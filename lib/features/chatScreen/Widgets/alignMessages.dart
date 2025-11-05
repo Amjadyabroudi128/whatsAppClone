@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
+import 'package:whatsappclone/Firebase/FirebaseCollections.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
@@ -465,16 +466,15 @@ class _messagesAlignState extends State<messagesAlign> {
                                                 Padding(
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: FutureBuilder<DocumentSnapshot>(
-                                                    future: FirebaseFirestore.instance
-                                                        .collection('users')
-                                                        .doc(msg.reactBy)
+                                                    future: userC
+                                                        .doc(widget.user!.uid)
                                                         .get(),
                                                     builder: (context, snapshot) {
                                                       if (!snapshot.hasData) {
                                                         return Row(
                                                           children: [
                                                             Text(
-                                                              isMe ? "You" : msg.reactBy ?? "User",
+                                                              "${msg.reactBy}",
                                                               style: const TextStyle(fontSize: 20),
                                                             ),
                                                             const Spacer(),
