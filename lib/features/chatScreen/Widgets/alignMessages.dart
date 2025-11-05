@@ -507,7 +507,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                               radius: 20,
                                                               child: icons.person(context),
                                                             ),
-                                                          const SizedBox(width: 12),
+                                                          const BoxSpacing(mWidth: 12),
                                                           // User Name
                                                           Expanded(
                                                             child: Text(
