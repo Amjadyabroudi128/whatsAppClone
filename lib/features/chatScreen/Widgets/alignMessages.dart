@@ -136,17 +136,17 @@ class _messagesAlignState extends State<messagesAlign> {
                     FocusScope.of(context).unfocus();
                     final position = isMe
                         ? RelativeRect.fromLTRB(
-                            detail.globalPosition.dx,
-                            detail.globalPosition.dy,
-                            0.0,
-                            0.0,
-                          )
+                      detail.globalPosition.dx,
+                      detail.globalPosition.dy,
+                      0.0,
+                      0.0,
+                    )
                         : RelativeRect.fromLTRB(
-                            detail.globalPosition.dx,
-                            detail.globalPosition.dy,
-                            MediaQuery.of(context).size.width / 4,
-                            0.0,
-                          );
+                      detail.globalPosition.dx,
+                      detail.globalPosition.dy,
+                      MediaQuery.of(context).size.width / 4,
+                      0.0,
+                    );
                     if (msg.image != null && msg.image!.isNotEmpty) {
                       Navigator.push(
                         context,
@@ -178,8 +178,7 @@ class _messagesAlignState extends State<messagesAlign> {
                               await launchUrl(Uri.parse('${msg.file}'));
                             },
                           ),
-                          deleteMessage(context, msg, widget.widget,
-                              widget.user, service),
+                          deleteMessage(context, msg, widget.widget, widget.user, service),
                         ],
                       );
                     } else {
@@ -189,12 +188,8 @@ class _messagesAlignState extends State<messagesAlign> {
                         position: position,
                         items: [
                           copyMessage(msg, context),
-                          if (isMe)
-                            editMessage(context, msg, service, widget.widget,
-                                widget.user),
-                          if (isMe)
-                            deleteMessage(context, msg, widget.widget,
-                                widget.user, service),
+                          if (isMe) editMessage(context, msg, service, widget.widget, widget.user),
+                          if (isMe) deleteMessage(context, msg, widget.widget, widget.user, service),
                           starMessage(msg, service, index, context),
                           addReaction(context, position, service, msg),
                           PopupMenuItem(
@@ -221,13 +216,12 @@ class _messagesAlignState extends State<messagesAlign> {
                             widget.isEditing,
                             widget.onToggleEdit,
                             widget.selectedMessages,
-                            () {
+                                () {
                               setState(() {
                                 if (!widget.isEditing) {
                                   widget.onToggleEdit?.call();
                                 }
-                                if (widget.selectedMessages
-                                    .contains(msg.messageId)) {
+                                if (widget.selectedMessages.contains(msg.messageId)) {
                                   widget.selectedMessages.remove(msg.messageId);
                                 } else {
                                   widget.selectedMessages.add(msg.messageId!);
@@ -245,8 +239,7 @@ class _messagesAlignState extends State<messagesAlign> {
                         ? DismissDirection.endToStart
                         : DismissDirection.startToEnd,
                     background: Container(
-                      alignment:
-                          isMe ? Alignment.centerLeft : Alignment.centerRight,
+                      alignment: isMe ? Alignment.centerLeft : Alignment.centerRight,
                       child: icons.reply,
                     ),
                     confirmDismiss: (direction) async {
@@ -265,42 +258,39 @@ class _messagesAlignState extends State<messagesAlign> {
                         if (widget.isEditing)
                           (isMe)
                               ? Transform.scale(
-                                  scale: 1.2,
-                                  child: Checkbox(
-                                    activeColor: MyColors.starColor,
-                                    side: BorderSide(color: MyColors.labelClr),
-                                    visualDensity: VisualDensity.compact,
-                                    checkColor: MyColors.FG,
-                                    shape: const CircleBorder(),
-                                    value: widget.selectedMessages
-                                        .contains(msg.messageId),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        if (value == true) {
-                                          widget.selectedMessages
-                                              .add(msg.messageId!);
-                                        } else {
-                                          widget.selectedMessages
-                                              .remove(msg.messageId);
-                                        }
-                                      });
-                                    },
-                                  ),
-                                )
+                            scale: 1.2,
+                            child: Checkbox(
+                              activeColor: MyColors.starColor,
+                              side: BorderSide(color: MyColors.labelClr),
+                              visualDensity: VisualDensity.compact,
+                              checkColor: MyColors.FG,
+                              shape: const CircleBorder(),
+                              value: widget.selectedMessages.contains(msg.messageId),
+                              onChanged: (value) {
+                                setState(() {
+                                  if (value == true) {
+                                    widget.selectedMessages.add(msg.messageId!);
+                                  } else {
+                                    widget.selectedMessages.remove(msg.messageId);
+                                  }
+                                });
+                              },
+                            ),
+                          )
                               : const SizedBox(),
                         Flexible(
-                          child: Stack(clipBehavior: Clip.none, children: [
-                            IntrinsicWidth(
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [ IntrinsicWidth(
                               child: ConstrainedBox(
                                 constraints: BoxConstraints(
-                                  maxWidth:
-                                      MediaQuery.of(context).size.width * 0.50,
+                                  maxWidth: MediaQuery.of(context).size.width * 0.50,
                                 ),
+
                                 child: Container(
                                   margin: containermargin,
                                   decoration: containerDecoration(
-                                    color:
-                                        isMe ? MyColors.myMessage : Colors.grey,
+                                    color: isMe ? MyColors.myMessage : Colors.grey,
                                     borderRadius: MyTheme.circularContainer,
                                   ),
                                   child: Column(
@@ -310,60 +300,39 @@ class _messagesAlignState extends State<messagesAlign> {
                                         Container(
                                           width: double.infinity,
                                           padding: const EdgeInsets.all(8),
-                                          margin:
-                                              const EdgeInsets.only(bottom: 4),
+                                          margin: const EdgeInsets.only(bottom: 4),
                                           decoration: BoxDecoration(
-                                            color: isMe
-                                                ? MyColors.reply
-                                                : MyColors.message,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                            color: isMe ? MyColors.reply : MyColors.message,
+                                            borderRadius: BorderRadius.circular(8),
                                             border: Border(
                                               left: BorderSide(
-                                                color: isMe
-                                                    ? MyColors.myBorder
-                                                    : MyColors.otherBorder,
+                                                color: isMe ? MyColors.myBorder : MyColors.otherBorder,
                                                 width: 7,
                                               ),
                                             ),
                                           ),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email ? "You" : msg.replyTo!.senderName}",
                                                 style: TextStyle(
-                                                  color: msg.replyTo!
-                                                              .senderEmail ==
-                                                          FirebaseAuth
-                                                              .instance
-                                                              .currentUser!
-                                                              .email
+                                                  color: msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email
                                                       ? MyColors.myName
                                                       : MyColors.otherName,
                                                 ),
                                               ),
-                                              if (msg.replyTo!.image != null &&
-                                                  msg.replyTo!.image!
-                                                      .isNotEmpty)
+                                              if (msg.replyTo!.image != null && msg.replyTo!.image!.isNotEmpty)
                                                 Row(
                                                   children: [
                                                     icons.Wphoto,
-                                                    const BoxSpacing(
-                                                        mWidth: 10),
-                                                    Text("Photo",
-                                                        style:
-                                                            Textstyles.photo),
+                                                    const BoxSpacing(mWidth: 10),
+                                                    Text("Photo", style: Textstyles.photo),
                                                     const Spacer(),
                                                     ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      child: Image.network(
-                                                          msg.replyTo!.image!,
-                                                          height: 60),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Image.network(msg.replyTo!.image!, height: 60),
                                                     ),
                                                   ],
                                                 ),
@@ -374,14 +343,11 @@ class _messagesAlignState extends State<messagesAlign> {
                                             ],
                                           ),
                                         ),
-                                      if (msg.image != null &&
-                                          msg.image!.isNotEmpty)
+                                      if (msg.image != null && msg.image!.isNotEmpty)
                                         ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
+                                          borderRadius: BorderRadius.circular(12),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               // msg.image is a Firebase download URL
                                               kimageNet(src: msg.image!),
@@ -389,9 +355,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                 const SizedBox(height: 8),
                                               if (msg.text.trim().isNotEmpty)
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 11, bottom: 8),
+                                                  padding: const EdgeInsets.only(left: 11, bottom: 8),
                                                   child: Text(
                                                     msg.text,
                                                     softWrap: true,
@@ -403,8 +367,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                             ],
                                           ),
                                         )
-                                      else if (msg.file != null &&
-                                          msg.file!.isNotEmpty)
+                                      else if (msg.file != null && msg.file!.isNotEmpty)
                                         Row(
                                           children: [
                                             icons.myFile,
@@ -414,8 +377,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                 msg.file!.split('/').last,
                                                 style: const TextStyle(
                                                   fontSize: 16,
-                                                  decoration:
-                                                      TextDecoration.underline,
+                                                  decoration: TextDecoration.underline,
                                                 ),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
@@ -440,16 +402,12 @@ class _messagesAlignState extends State<messagesAlign> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           if (msg.isEdited == true)
-                                            Text("Edited",
-                                                style: Textstyles.edited),
+                                            Text("Edited", style: Textstyles.edited),
                                           const BoxSpacing(mWidth: 5),
                                           isMe
-                                              ? (msg.isRead!
-                                                  ? icons.messageRead
-                                                  : icons.sent)
+                                              ? (msg.isRead! ? icons.messageRead : icons.sent)
                                               : const SizedBox.shrink(),
-                                          fomattedDateText(
-                                              formattedTime: formattedTime),
+                                          fomattedDateText(formattedTime: formattedTime),
                                         ],
                                       ),
                                     ],
@@ -457,140 +415,113 @@ class _messagesAlignState extends State<messagesAlign> {
                                 ),
                               ),
                             ),
-                            if (msg.isReacted == true)
-                              GestureDetector(
-                                onTap: () {
-                                  btmSheet(
-                                      context: context,
-                                      builder: (context) {
-                                        return SingleChildScrollView(
-                                          child: Column(
-                                            children: [
-                                              const DividerContainer(),
-                                              const Text("Reactions"),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: FutureBuilder<
-                                                    DocumentSnapshot>(
-                                                  future: userC
-                                                      .doc(widget.user!.uid)
-                                                      .get(),
-                                                  builder: (context, snapshot) {
-                                                    if (!snapshot.hasData) {
+                              if(msg.isReacted == true)
+                                GestureDetector(
+                                  onTap: (){
+                                    btmSheet(
+                                        context: context,
+                                        builder: (context){
+                                          return SingleChildScrollView(
+                                            child: Column(
+                                              children: [
+                                                const DividerContainer(),
+                                                const Text("Reactions"),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: FutureBuilder<DocumentSnapshot>(
+                                                    future: userC
+                                                        .doc(widget.user!.uid)
+                                                        .get(),
+                                                    builder: (context, snapshot) {
+                                                      if (!snapshot.hasData) {
+                                                        return Row(
+                                                          children: [
+                                                            Text(
+                                                              "${msg.reactBy}",
+                                                              style: const TextStyle(fontSize: 20),
+                                                            ),
+                                                            const Spacer(),
+                                                            GestureDetector(
+                                                              onTap: (){
+                                                                service.removeReactionFromMessage(
+                                                                  senderId: msg.senderId,
+                                                                  receiverId: msg.receiverId,
+                                                                  messageId: msg.messageId,
+                                                                );
+                                                                Navigator.of(context).pop();
+                                                              },
+                                                              child: Text("${msg.reactionEmoji}"),
+                                                            )
+                                                          ],
+                                                        );
+                                                      }
+                                                      final userData = snapshot.data?.data() as Map<String, dynamic>?;
+                                                      final userImage = userData?['image'] ?? '';
                                                       return Row(
                                                         children: [
-                                                          Text(
-                                                            "${msg.reactBy}",
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        20),
+                                                          // User Avatar
+                                                          if (userImage.isNotEmpty)
+                                                            CircleAvatar(
+                                                              backgroundImage: NetworkImage(userImage),
+                                                              radius: 20,
+                                                            )
+                                                          else
+                                                             CircleAvatar(
+                                                              radius: 20,
+                                                              child: icons.person(context),
+                                                            ),
+                                                          const BoxSpacing(mWidth: 12),
+                                                          // User Name
+                                                          Expanded(
+                                                            child: Text(
+                                                              "${msg.reactBy}",
+                                                              style: Textstyles.reaction
+                                                            ),
                                                           ),
-                                                          const Spacer(),
+                                                          // Reaction Emoji
                                                           GestureDetector(
-                                                            onTap: () {
-                                                              service
-                                                                  .removeReactionFromMessage(
-                                                                senderId: msg
-                                                                    .senderId,
-                                                                receiverId: msg
-                                                                    .receiverId,
-                                                                messageId: msg
-                                                                    .messageId,
+                                                            onTap: (){
+                                                              service.removeReactionFromMessage(
+                                                                senderId: msg.senderId,
+                                                                receiverId: msg.receiverId,
+                                                                messageId: msg.messageId,
                                                               );
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
+                                                              Navigator.of(context).pop();
                                                             },
                                                             child: Text(
-                                                                "${msg.reactionEmoji}"),
+                                                              "${msg.reactionEmoji}",
+                                                              style: const TextStyle(fontSize: 24),
+                                                            ),
                                                           )
                                                         ],
                                                       );
-                                                    }
-                                                    final userData =
-                                                        snapshot.data?.data()
-                                                            as Map<String,
-                                                                dynamic>?;
-                                                    final userImage =
-                                                        userData?['image'] ??
-                                                            '';
-                                                    return Row(
-                                                      children: [
-                                                        // User Avatar
-                                                        if (userImage
-                                                            .isNotEmpty)
-                                                          CircleAvatar(
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    userImage),
-                                                            radius: 20,
-                                                          )
-                                                        else
-                                                          CircleAvatar(
-                                                            radius: 20,
-                                                            child: icons.person(
-                                                                context),
-                                                          ),
-                                                        const BoxSpacing(
-                                                            mWidth: 12),
-                                                        // User Name
-                                                        Expanded(
-                                                          child: Text(
-                                                              "${msg.reactBy}",
-                                                              style: Textstyles
-                                                                  .reaction),
-                                                        ),
-                                                        // Reaction Emoji
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            service
-                                                                .removeReactionFromMessage(
-                                                              senderId:
-                                                                  msg.senderId,
-                                                              receiverId: msg
-                                                                  .receiverId,
-                                                              messageId:
-                                                                  msg.messageId,
-                                                            );
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Text(
-                                                            "${msg.reactionEmoji}",
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        24),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                      });
-                                },
-                                child: Positioned(
-                                  top: -6,
-                                  child: Text(
-                                    "${msg.reactionEmoji}",
-                                    style: const TextStyle(fontSize: 20),
+                                                    },
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        }
+                                    );
+                                  },
+                                  child: Positioned(
+                                    top: -6,
+                                    child: Text(
+                                      "${msg.reactionEmoji}",
+                                      style: const TextStyle(fontSize: 20),
+                                    ),
                                   ),
                                 ),
-                              ),
-                          ]),
+
+                            ]
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
+
             ],
           );
         },
@@ -598,39 +529,44 @@ class _messagesAlignState extends State<messagesAlign> {
     );
   }
 
-  PopupMenuItem<String> addReaction(BuildContext context, RelativeRect position,
-      FirebaseService service, Messages msg) {
+  PopupMenuItem<String> addReaction(BuildContext context, RelativeRect position, FirebaseService service, Messages msg) {
     return PopupMenuItem(
-      value: "reaction",
-      child: kTextButton(
-        onPressed: () {
-          showMenu(
-            context: context,
-            position: position,
-            items: [
-              PopupMenuItem(
-                padding: EdgeInsets.zero,
-                child: ReactionCard(
-                  onReactionTap: (emoji) {
-                    service.addReaction(
-                      msg.senderId,
-                      msg.receiverId,
-                      msg.messageId,
-                      emoji,
-                      msg.senderName,
-                      widget.user!.displayName,
-                    );
-                    setState(() {});
-                  },
-                ),
-              ),
-            ],
-          );
-        },
-        child: const Row(
-          children: [Text("Add reaction"), Spacer(), Icon(Icons.face)],
-        ),
-      ),
-    );
+                          value: "reaction",
+                          child: kTextButton(
+                            onPressed: (){
+                              showMenu(
+                                context: context,
+                                position: position,
+                                items: [
+                                  PopupMenuItem(
+                                    padding: EdgeInsets.zero,
+                                    child: ReactionCard(
+                                      onReactionTap: (emoji) {
+                                        service.addReaction(
+                                          msg.senderId,
+                                          msg.receiverId,
+                                          msg.messageId,
+                                          emoji,
+                                          msg.senderName,
+                                          widget.user!.displayName,
+                                        );
+                                        setState(() {
+
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                            child:  Row(
+                              children: [
+                                const Text("Add reaction"),
+                                const Spacer(),
+                                icons.reaction
+                              ],
+                            ),
+                          ),
+                        );
   }
 }
