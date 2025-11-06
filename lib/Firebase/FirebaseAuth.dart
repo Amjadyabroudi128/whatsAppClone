@@ -424,7 +424,8 @@ import '../features/chatScreen/Model/MessageModel.dart';
      List<String> ids = [userID, otherUser];
      ids.sort();
      String chatRoomID = ids.join("_");
-     return users.collection("chat_rooms").doc(chatRoomID).collection("messages").orderBy("timestamp", descending: false).snapshots();
+     return users.collection("chat_rooms").doc(chatRoomID).collection("messages").
+     orderBy("timestamp", descending: false).snapshots();
    }
    Future<void> checkUserLoggedIn(BuildContext context) async {
      User? user = auth.currentUser;
@@ -789,6 +790,154 @@ import '../features/chatScreen/Model/MessageModel.dart';
 
      return recentMessages;
    }
+// Add this to your FirebaseService class
 
+   Future<void> scheduleMessage({
+     required String receiverId,
+     required String receiverName,
+     required String message,
+     required DateTime scheduledTime,
+     String? image,
+     String? file,
+     Messages? replyTo,
+   }) async {
+     try {
+       final String currentUser = auth.currentUser!.uid;
+       final String email = auth.currentUser!.email!;
+       final String name = auth.currentUser!.displayName ?? "Unknown";
+       final Timestamp scheduledTimestamp = Timestamp.fromDate(scheduledTime);
+
+       // Create scheduled message
+       Messages scheduledMessage = Messages(
+         image: image ?? "",
+         file: file ?? "",
+         time: scheduledTimestamp,
+         text: message,
+         senderId: currentUser,
+         receiverId: receiverId,
+         senderEmail: email,
+         receiverEmail: receiverName,
+         senderName: name,
+         isEdited: false,
+         isStarred: false,
+         isRead: false,
+         isReply: replyTo != null,
+         replyTo: replyTo,
+         isReacted: false,
+         reactBy: null,
+       );
+
+       List<String> ids = [currentUser, receiverId];
+       ids.sort();
+       String chatRoomID = ids.join("_");
+
+       // Add message with scheduled status
+       final docRef = await users
+           .collection("chat_rooms")
+           .doc(chatRoomID)
+           .collection("messages")
+           .add({
+         ...scheduledMessage.toMap(),
+         "timestamp": scheduledTimestamp,
+         "isScheduled": true,
+         "scheduledTime": scheduledTimestamp,
+         "isReacted": false,
+         "reactBy": null,
+       });
+
+       await docRef.update({"messageId": docRef.id});
+
+       myToast("Message scheduled for ${scheduledTime.toString()}");
+     } catch (e) {
+       debugPrint("Error scheduling message: $e");
+       myToast("Failed to schedule message");
+     }
+   }
+
+   /// Fetch and send all due scheduled messages
+   Future<void> processDueScheduledMessages() async {
+     try {
+       final now = Timestamp.now();
+
+       // Get all scheduled messages across all chat rooms
+       final chatRooms = await users
+           .collection("chat_rooms")
+           .get();
+
+       for (var chatRoom in chatRooms.docs) {
+         final dueMessages = await chatRoom.reference
+             .collection("messages")
+             .where("isScheduled", isEqualTo: true)
+             .where("scheduledTime", isLessThanOrEqualTo: now)
+             .get();
+
+         for (var msgDoc in dueMessages.docs) {
+           final msgData = msgDoc.data();
+
+           // Send push notification
+           final receiverDoc = await FirebaseFirestore.instance
+               .collection('users')
+               .doc(msgData['receiverId'])
+               .get();
+
+           final receiverToken = receiverDoc.data()?['fcmToken'];
+
+           if (receiverToken != null) {
+             final previewText = msgData['message'].isNotEmpty
+                 ? msgData['message']
+                 : msgData['image'] != null && msgData['image'].isNotEmpty
+                 ? "📷 Sent an image"
+                 : msgData['file'] != null && msgData['file'].isNotEmpty
+                 ? "📎 Sent a file"
+                 : "New message";
+
+             await sendPushNotificationViaFunction(
+               token: receiverToken,
+               title: "${msgData['senderName']} sent a scheduled message",
+               body: previewText,
+               receiverId: msgData['receiverId'],
+               receiverName: msgData['receiverEmail'],
+               image: msgData['image'],
+               type: "chat",
+             );
+           }
+
+           // Mark as sent (no longer scheduled)
+           await msgDoc.reference.update({
+             "isScheduled": false,
+           });
+         }
+       }
+     } catch (e) {
+       debugPrint("Error processing scheduled messages: $e");
+     }
+   }
+
+   /// Get scheduled messages for a specific chat
+   Stream<QuerySnapshot> getScheduledMessages(String userID, String otherUser) {
+     List<String> ids = [userID, otherUser];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     return users
+         .collection("chat_rooms")
+         .doc(chatRoomID)
+         .collection("messages")
+         .where("isScheduled", isEqualTo: true)
+         .orderBy("scheduledTime", descending: false)
+         .snapshots();
+   }
+
+   /// Get all user's scheduled messages
+   Stream<QuerySnapshot> getAllScheduledMessages() {
+     final currentUser = auth.currentUser;
+     if (currentUser == null) return const Stream.empty();
+     return users
+         .collectionGroup("messages")
+         .where("senderId", isEqualTo: currentUser.uid)
+         .where("isScheduled", isEqualTo: true)
+         .orderBy("scheduledTime", descending: false)
+         .snapshots();
+   }
 
  }
