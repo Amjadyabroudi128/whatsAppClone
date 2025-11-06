@@ -92,7 +92,7 @@
         typingToUserId: isTyping ? widget.receiverId : null,
       );
     }
-    Timer? _scheduleTimer;
+    DateTime? selectedDateTime;
 
     @override
     void initState() {
@@ -469,18 +469,14 @@
                                 color: Colors.white,
                                 child: Column(
                                   children: [
-                                    // Date Picker
                                     Expanded(
                                       child: CupertinoDatePicker(
                                         mode: CupertinoDatePickerMode.dateAndTime,
                                         backgroundColor: Colors.white,
-                                        minimumDate: DateTime.now(),
-                                        initialDateTime:
-                                        DateTime.now().add(const Duration(minutes: 1)),
+                                        minimumDate: DateTime.now().add(const Duration(minutes: 1)),
+                                        initialDateTime: DateTime.now().add(const Duration(minutes: 5)),
                                         onDateTimeChanged: (DateTime newTime) {
-                                          setState(() {
-                                            dateTime = newTime;
-                                          });
+                                          selectedDateTime = newTime;
                                         },
                                       ),
                                     ),
@@ -495,8 +491,29 @@
                                         ),
                                         kTextButton(
                                           child: const Text("Schedule"),
-                                          onPressed: (){
+                                          onPressed: () async {
+                                            if (selectedDateTime == null) {
+                                              myToast("Please select a date and time");
+                                              return;
+                                            }
 
+                                            // Show loading indicator
+                                            Navigator.of(context).pop();
+
+                                            // Call the schedule message function
+                                            await FirebaseService().scheduleMessage(
+                                              receiverId: widget.receiverId,
+                                              receiverName: widget.receiverName,
+                                              message: messageController.text,
+                                              scheduledTime: selectedDateTime!,
+                                              image: null, // if you have image support
+                                              file: null,   // if you have file support
+                                              replyTo: _replyMessage,  // if you have reply support
+                                            );
+
+                                            // Clear the message field
+                                            messageController.clear();
+                                            setState(() {});
                                           },
                                         )
                                       ],
