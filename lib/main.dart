@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,12 +28,18 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('📩 Handling a background message: ${message.messageId}');
 }
+void _initScheduledMessageProcessor() {
+  // Check for due messages every 30 seconds
+  Timer.periodic(const Duration(seconds: 30), (timer) {
+    FirebaseService().processDueScheduledMessages();
+  });
+}
 late final PresenceController presence;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  _initScheduledMessageProcessor();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await FirebaseAppCheck.instance.activate(
