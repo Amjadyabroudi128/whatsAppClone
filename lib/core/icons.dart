@@ -159,7 +159,6 @@ class icons {
   static Icon thanks(BuildContext context) {
     return Icon(Icons.check_circle_outline, size: 72, color: Theme.of(context).iconTheme.color,);
   }
-  static Icon onlineStatus = const Icon(Icons.check_circle,color: Colors.green, size: 25,);
+  static Icon onlineStatus =  Icon(Icons.check_circle,color: MyColors.online, size: 25,);
   static Icon reaction = const Icon(Icons.face_2);
-  // static Icon onlineStatue = const Icon(Icons.check_circle,color: Colors.green, size: 40,);
 }
