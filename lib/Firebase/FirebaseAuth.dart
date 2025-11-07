@@ -227,6 +227,7 @@ import '../features/chatScreen/Model/MessageModel.dart';
      }
    }
 
+   // Locate and replace your existing sendMessage function
    Future<void> sendMessage(
        String receiverId,
        String receiverName,
@@ -272,6 +273,10 @@ import '../features/chatScreen/Model/MessageModel.dart';
        "timestamp": FieldValue.serverTimestamp(),
        "isReacted": false,
        "reactBy": null,
+       // <<<< CRITICAL ADDITIONS FOR CONSISTENCY >>>>
+       "isScheduled": false,
+       "scheduledTime": time,
+       // <<<< END OF CRITICAL ADDITIONS >>>>
      });
 
      await docRef.update({"messageId": docRef.id});
@@ -296,7 +301,7 @@ import '../features/chatScreen/Model/MessageModel.dart';
            : "text",
      }, SetOptions(merge: true));
 
-     //  Get receiver's FCM token
+     // The rest of your notification logic remains the same...
      final receiverDoc = await FirebaseFirestore.instance
          .collection('users')
          .doc(receiverId)
@@ -309,7 +314,6 @@ import '../features/chatScreen/Model/MessageModel.dart';
        return;
      }
 
-     //  Call the push notification function
      final previewText = message.isNotEmpty
          ? message
          : image != null
@@ -321,15 +325,14 @@ import '../features/chatScreen/Model/MessageModel.dart';
      print("📨 Sending notification to: $receiverName ($receiverToken)");
      print("$message");
      await sendPushNotificationViaFunction(
-       token: receiverToken,
-       title: auth.currentUser!.displayName!.isEmpty ? "new Message" : "${name} sent a message",
-       body: previewText,
-       receiverId: receiverId,
-       receiverName: receiverName,
-       image: image,
-       type: "chat"
+         token: receiverToken,
+         title: auth.currentUser!.displayName!.isEmpty ? "new Message" : "${name} sent a message",
+         body: previewText,
+         receiverId: receiverId,
+         receiverName: receiverName,
+         image: image,
+         type: "chat"
      );
-
    }
    Future<void> addReaction(
        String? senderId,
@@ -751,7 +754,7 @@ import '../features/chatScreen/Model/MessageModel.dart';
 
      final chatRooms = await users
          .collection("chat_rooms")
-         .where("participants", arrayContains: currentUser.uid) // ✅ only relevant rooms
+         .where("participants", arrayContains: currentUser.uid)
          .get();
 
      List<Messages> recentMessages = [];
