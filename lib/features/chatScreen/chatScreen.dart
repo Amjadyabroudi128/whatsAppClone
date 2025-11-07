@@ -1,6 +1,4 @@
-  import 'dart:async';
-
-  import 'package:cloud_firestore/cloud_firestore.dart';
+ import 'package:cloud_firestore/cloud_firestore.dart';
   import 'package:firebase_auth/firebase_auth.dart';
   import 'package:flutter/cupertino.dart';
   import 'package:flutter/material.dart';
@@ -54,6 +52,7 @@
     bool isEditing = false;
     bool isUploading = false;
     Set<String> selectedMessages = {};
+    DateTime? selectedDateTime;
 
     void setReplyMessage(Messages message) {
       setState(() {
@@ -92,8 +91,6 @@
         typingToUserId: isTyping ? widget.receiverId : null,
       );
     }
-    DateTime? selectedDateTime;
-
     @override
     void initState() {
       super.initState();
@@ -446,7 +443,8 @@
                           },
                         ),
                         messageController.text.trim().isNotEmpty
-                            ? kIconButton(
+                            ? // ... inside your build method, look for the kIconButton that uses icons.send
+                        kIconButton(
                           onPressed: () {
                             service.sendMessage(
                               widget.receiverId,
@@ -462,6 +460,8 @@
                             updateTypingStatus(false);
                           },
                           onLongPress: () {
+                            DateTime initialTime = DateTime.now().add(const Duration(minutes: 5));
+                            selectedDateTime = initialTime;
                             showCupertinoModalPopup(
                               context: context,
                               builder: (BuildContext context) => Container(
@@ -474,7 +474,7 @@
                                         mode: CupertinoDatePickerMode.dateAndTime,
                                         backgroundColor: Colors.white,
                                         minimumDate: DateTime.now().add(const Duration(minutes: 1)),
-                                        initialDateTime: DateTime.now().add(const Duration(minutes: 5)),
+                                        initialDateTime: initialTime,
                                         onDateTimeChanged: (DateTime newTime) {
                                           selectedDateTime = newTime;
                                         },
@@ -492,27 +492,30 @@
                                         kTextButton(
                                           child: const Text("Schedule"),
                                           onPressed: () async {
+                                            final messageText = messageController.text.trim();
+                                            if (messageText.isEmpty) {
+                                              myToast("Cannot schedule an empty message.");
+                                              Navigator.of(context).pop();
+                                              return;
+                                            }
+
                                             if (selectedDateTime == null) {
                                               myToast("Please select a date and time");
                                               return;
                                             }
 
-                                            // Show loading indicator
                                             Navigator.of(context).pop();
-
-                                            // Call the schedule message function
-                                            await FirebaseService().scheduleMessage(
+                                            await service.scheduleMessage(
                                               receiverId: widget.receiverId,
                                               receiverName: widget.receiverName,
-                                              message: messageController.text,
+                                              message: messageText,
                                               scheduledTime: selectedDateTime!,
-                                              image: null, // if you have image support
-                                              file: null,   // if you have file support
-                                              replyTo: _replyMessage,  // if you have reply support
+                                              image: null,
+                                              file: null,
+                                              replyTo: _replyMessage,
                                             );
-
-                                            // Clear the message field
                                             messageController.clear();
+                                            _replyMessage = null;
                                             setState(() {});
                                           },
                                         )
