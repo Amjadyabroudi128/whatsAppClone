@@ -7,15 +7,17 @@ import '../chatScreen.dart';
 import 'alignMessages.dart';
 
 class MessageStream extends StatefulWidget {
-   const MessageStream({
+  const MessageStream({
     super.key,
     required this.service,
     required this.user,
-    required this.widget, this.onReply,  this.controller, this.textColor,
+    required this.widget,
+    this.onReply,
+    this.controller,
+    this.textColor,
     required this.selectedMessages,
     required this.isEditing,
-     this.onToggleEdit,
-
+    this.onToggleEdit,
   });
 
   final FirebaseService service;
@@ -25,25 +27,29 @@ class MessageStream extends StatefulWidget {
   final void Function(Messages message)? onReply;
   final Color? textColor;
   final Set<String> selectedMessages;
-   final bool isEditing;
-   final VoidCallback? onToggleEdit;
+  final bool isEditing;
+  final VoidCallback? onToggleEdit;
 
-   @override
+  @override
   State<MessageStream> createState() => _MessageStreamState();
 }
 
 class _MessageStreamState extends State<MessageStream> {
-
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: widget.service.getMessages(widget.user!.uid, widget.widget.receiverId),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(child: Text("say hi 👋 to ${widget.widget.receiverName} \n to start a conversation", style: TextStyle(color: widget.textColor),));
+          return Center(
+            child: Text(
+              "say hi 👋 to ${widget.widget.receiverName} \n to start a conversation",
+              style: TextStyle(color: widget.textColor),
+            ),
+          );
         }
-        var messages = snapshot.data!.docs.map((doc) {
+
+        var allMessages = snapshot.data!.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
           final message = Messages(
             isRead: (data["isRead"] ?? false) as bool,
@@ -58,7 +64,7 @@ class _MessageStreamState extends State<MessageStream> {
             file: data.containsKey("file") ? data["file"] : null,
             messageId: doc.id,
             isScheduled: data["isScheduled"] ?? false,
-            scheduledFor: data["scheduledFor"],
+            scheduledFor: data["scheduledTime"],
             isEdited: (data["isEdited"] ?? false) as bool,
             isStarred: (data["isStarred"] ?? false) as bool,
             isReply: (data["isReply"] ?? false) as bool,
@@ -67,14 +73,45 @@ class _MessageStreamState extends State<MessageStream> {
                 : null,
             isReacted: (data["isReacted"] ?? false) as bool,
             reactionEmoji: data["reactionEmoji"],
-            reactBy: data["reactBy"]
+            reactBy: data["reactBy"],
           );
-
           return message;
         }).toList();
-        return messagesAlign(messages: messages, user: widget.user,
-            widget: widget.widget, onReply: widget.onReply,
-            textColor: widget.textColor, isEditing : widget.isEditing, selectedMessages: widget.selectedMessages,
+        var filteredMessages = allMessages.where((msg) {
+          if (msg.isScheduled == false) {
+            return true;
+          }
+          if (msg.isScheduled == true && msg.scheduledFor != null) {
+            final scheduledTime = msg.scheduledFor is Timestamp
+                ? (msg.scheduledFor as Timestamp).toDate()
+                : msg.scheduledFor as DateTime?;
+
+            if (scheduledTime == null) return false;
+            return DateTime.now().isAfter(scheduledTime) ||
+                DateTime.now().isAtSameMomentAs(scheduledTime);
+          }
+
+          return false;
+        }).toList();
+
+        // Show empty message if no messages to display
+        if (filteredMessages.isEmpty) {
+          return Center(
+            child: Text(
+              "say hi 👋 to ${widget.widget.receiverName} \n to start a conversation",
+              style: TextStyle(color: widget.textColor),
+            ),
+          );
+        }
+
+        return messagesAlign(
+          messages: filteredMessages,
+          user: widget.user,
+          widget: widget.widget,
+          onReply: widget.onReply,
+          textColor: widget.textColor,
+          isEditing: widget.isEditing,
+          selectedMessages: widget.selectedMessages,
           onToggleEdit: widget.onToggleEdit ?? () {},
         );
       },
