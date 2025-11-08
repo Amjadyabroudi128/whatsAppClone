@@ -466,13 +466,13 @@
                               context: context,
                               builder: (BuildContext context) => Container(
                                 height: 300,
-                                color: Colors.white,
+                                color: MyColors.MIcons,
                                 child: Column(
                                   children: [
                                     Expanded(
                                       child: CupertinoDatePicker(
                                         mode: CupertinoDatePickerMode.dateAndTime,
-                                        backgroundColor: Colors.white,
+                                        backgroundColor: MyColors.MIcons,
                                         minimumDate: DateTime.now().add(const Duration(minutes: 1)),
                                         initialDateTime: initialTime,
                                         onDateTimeChanged: (DateTime newTime) {
