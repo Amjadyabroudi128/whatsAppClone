@@ -460,7 +460,7 @@
                             updateTypingStatus(false);
                           },
                           onLongPress: () {
-                            DateTime initialTime = DateTime.now().add(const Duration(minutes: 5));
+                            DateTime initialTime = DateTime.now().add(const Duration(minutes: 2));
                             selectedDateTime = initialTime;
                             showCupertinoModalPopup(
                               context: context,
