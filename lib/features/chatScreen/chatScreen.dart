@@ -493,10 +493,6 @@
                                           child: const Text("Schedule"),
                                           onPressed: () async {
                                             final messageText = messageController.text.trim();
-                                            if (selectedDateTime == null) {
-                                              myToast("Please select a date and time");
-                                              return;
-                                            }
                                             Navigator.of(context).pop();
                                             await service.scheduleMessage(
                                               receiverId: widget.receiverId,
