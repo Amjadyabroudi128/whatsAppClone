@@ -486,6 +486,7 @@
                                         kTextButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
+                                            messageController.clear();
                                           },
                                           child: const Text("Cancel"),
                                         ),
