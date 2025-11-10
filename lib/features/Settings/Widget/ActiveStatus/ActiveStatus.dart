@@ -17,6 +17,7 @@ class ActiveStatus extends StatefulWidget {
 
 class _ActiveStatusState extends State<ActiveStatus> {
   String selectedOption = 'Everyone'; // Default selection
+  String selectedBio = "Everyone";
   final FirebaseService service = FirebaseService();
 
   @override
@@ -73,11 +74,48 @@ class _ActiveStatusState extends State<ActiveStatus> {
                         ? icons.onlineStatus
                         : const SizedBox.shrink(),
                   ),
+
                 ],
               ),
             ),
             const BoxSpacing(myHeight: 24),
+             Text("Who can see My Bio",style: Textstyles.whoOnline),
+      kCard(
+        child: Column(
+          children: [
+            Options(
+              context: context,
+              label: const Text("Everyone"),
+              onTap: () async {
+                await service.bioVisibility("Everyone");
+                setState(() {
+                  selectedBio = "Everyone";
+                });
+                myToast("Everyone can see your bio");
+              },
+              trailing: selectedBio == "Everyone"
+                  ? icons.onlineStatus
+                  : const SizedBox.shrink(),
+            ),
+            const divider(),
+            Options(
+              context: context,
+              label: const Text("Nobody"),
+              onTap: () async {
+                await service.bioVisibility("Nobody");
+                setState(() {
+                  selectedBio = "Nobody";
+                });
+                myToast("Only you can see your bio");
+              },
+              trailing: selectedBio == "Nobody"
+                  ? icons.onlineStatus
+                  : const SizedBox.shrink(),
+            ),
           ],
+        ),
+      )
+      ],
         ),
       ),
     );
