@@ -21,6 +21,7 @@ class Messages {
   final bool? isReacted;
   final String? reactBy;
   final String? reactionEmoji;
+
   Messages({
     required this.text,
     this.senderName,
@@ -41,7 +42,7 @@ class Messages {
     this.isScheduled = false,
     this.isReacted = false,
     this.reactBy,
-    this.reactionEmoji
+    this.reactionEmoji,
   });
 
   factory Messages.fromMap(Map<String, dynamic> map) {
@@ -57,7 +58,7 @@ class Messages {
       image: map['image'],
       file: map['file'],
       messageId: map['messageId'],
-      isStarred: map['isStarred'],
+      isStarred: map['isStarred'] ?? false,
       isReply: map['isReply'] ?? false,
       replyTo: map['replyTo'] != null
           ? Messages.fromMap(Map<String, dynamic>.from(map['replyTo']))
@@ -67,13 +68,13 @@ class Messages {
       isScheduled: map['isScheduled'] ?? false,
       isReacted: map["isReacted"] ?? false,
       reactBy: map["reactBy"],
-      reactionEmoji: map["reactionEmoji"]
+      reactionEmoji: map["reactionEmoji"],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      "isRead": isRead,
+      "isRead": isRead ?? false,
       "senderName": senderName,
       'messageId': messageId,
       'message': text,
@@ -81,20 +82,22 @@ class Messages {
       'receiverId': receiverId,
       'senderEmail': senderEmail,
       'receiverEmail': receiverEmail,
-      'time': time,
+      'timestamp': time,
       'image': image ?? '',
       'file': file ?? '',
-      'isStarred': isStarred,
-      'isReply': isReply,
+      'isStarred': isStarred ?? false,
+      'isReply': isReply ?? false,
       'replyTo': replyTo?.toMap(),
-      'isEdited': isEdited,
+      'isEdited': isEdited ?? false,
       'scheduledFor': scheduledFor,
-      'isScheduled': isScheduled,
-      "isReacted" : isReacted,
+      'isScheduled': isScheduled ?? false,
+      "isReacted": isReacted ?? false,
       "reactBy": reactBy,
-      "reactionEmoji": reactionEmoji
+      "reactionEmoji": reactionEmoji,
     };
   }
+
+
 
   Messages copyWith({
     bool? isRead,
@@ -138,7 +141,7 @@ class Messages {
       isScheduled: isScheduled ?? this.isScheduled,
       isReacted: isReacted ?? this.isReacted,
       reactBy: reactBy ?? this.reactBy,
-      reactionEmoji: reactionEmoji ?? this.reactionEmoji
+      reactionEmoji: reactionEmoji ?? this.reactionEmoji,
     );
   }
 
@@ -152,13 +155,21 @@ class Messages {
       senderId: data['senderId'],
       receiverId: data['receiverId'],
       senderEmail: data['senderEmail'],
+      receiverEmail: data['receiverEmail'],
       image: data['image'] ?? '',
-      time: data['time']?.toDate(),
+      file: data['file'] ?? '',
+      time: data['timestamp'],
+      isStarred: data['isStarred'] ?? false,
+      isReply: data['isReply'] ?? false,
+      replyTo: data['replyTo'] != null
+          ? Messages.fromMap(Map<String, dynamic>.from(data['replyTo']))
+          : null,
+      isEdited: data['isEdited'] ?? false,
       scheduledFor: data['scheduledFor'],
       isScheduled: data['isScheduled'] ?? false,
       isReacted: data["isReacted"] ?? false,
       reactBy: data["reactBy"],
-      reactionEmoji: data["reactionEmoji"]
+      reactionEmoji: data["reactionEmoji"],
     );
   }
 }
