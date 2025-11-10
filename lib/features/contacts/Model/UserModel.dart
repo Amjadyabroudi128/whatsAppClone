@@ -1,27 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User {
+class UserModel {
   final String? bio;
-  final String name;
-  final bool isOnline;
-  final String email;
+  final String? name;
+  final bool? isOnline;
+  final String? email;
   final String? link;
-  final String onlineVisibility;
-  final String uid;
+  final String? onlineVisibility;
+  final String? uid;
   final String? image;
-  final String fcmToken;
+  final String? fcmToken;
   final Timestamp? createdAt;
   final Timestamp? lastSeen;
 
-  User({
-    required this.name,
-    required this.isOnline,
-    required this.email,
+  UserModel({
+     this.name,
+     this.isOnline,
+     this.email,
      this.link,
-    required this.onlineVisibility,
-    required this.uid,
+     this.onlineVisibility,
+     this.uid,
     this.image,
-    required this.fcmToken,
+     this.fcmToken,
     this.bio,
     this.createdAt,
     this.lastSeen,
@@ -45,8 +45,8 @@ class User {
   }
 
   // Convert Map from Firebase to User object
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
       bio: map['bio'],
       name: map['name'],
       isOnline: map['isOnline'] ?? false,
@@ -62,9 +62,9 @@ class User {
   }
 
   // Convert DocumentSnapshot to User object
-  factory User.fromDocument(DocumentSnapshot doc) {
+  factory UserModel.fromDocument(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    return User(
+    return UserModel(
       bio: data['bio'],
       name: data['name'],
       isOnline: data['isOnline'] ?? false,
@@ -80,7 +80,7 @@ class User {
   }
 
   // Create a copy of User with optional field updates
-  User copyWith({
+  UserModel copyWith({
     String? bio,
     String? name,
     bool? isOnline,
@@ -93,7 +93,7 @@ class User {
     Timestamp? createdAt,
     Timestamp? lastSeen,
   }) {
-    return User(
+    return UserModel(
       bio: bio ?? this.bio,
       name: name ?? this.name,
       isOnline: isOnline ?? this.isOnline,
