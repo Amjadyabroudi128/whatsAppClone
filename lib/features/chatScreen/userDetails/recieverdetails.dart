@@ -13,6 +13,7 @@ import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/Media.dart';
 import 'package:whatsappclone/features/chatScreen/userDetails/StarredMessages.dart';
 
+import '../../../Firebase/FirebaseAuth.dart';
 import '../../../core/MyColors.dart';
 import '../../../core/appTheme.dart';
 import '../../../core/icons.dart';
@@ -50,6 +51,8 @@ class _userDetailsState extends State<userDetails> {
   @override
   Widget build(BuildContext context) {
     String chatRoomId = getChatRoomId(user!.uid, widget.receiverId!);
+    final FirebaseService service = FirebaseService();
+
     return GestureDetector(
       onTap: (){
         setState(() {
@@ -62,7 +65,7 @@ class _userDetailsState extends State<userDetails> {
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: MyColors.bg,
-          title: Text("Contact Details", style: TextStyle(color: Colors.black),),
+          title: const Text("Contact Details", style: TextStyle(color: Colors.black),),
           centerTitle: true,
         ),
         body: SafeArea(
@@ -98,17 +101,27 @@ class _userDetailsState extends State<userDetails> {
                 const BoxSpacing(myHeight: 7),
                 Text(widget.email ?? '', style: Textstyles.recieverEmail),
                 if (widget.bio != null && widget.bio!.isNotEmpty)
-                  GestureDetector(
-                    onLongPress: _onTapBio,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: kCard(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(widget.bio!),
+                  StreamBuilder(
+                      stream: service.presenceStream(widget.receiverId!),
+                      builder: (context, snap) {
+                        final data = snap.data!.data()!;
+                        final visibility = data['BioVisibility'] as String? ?? 'Everyone';
+                        if (visibility == 'Nobody') {
+                          return const SizedBox.shrink();
+                        }
+                        return GestureDetector(
+                        onLongPress: _onTapBio,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: kCard(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(widget.bio!),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    }
                   ),
                 if (_showCopyLabel)
                    Padding(
