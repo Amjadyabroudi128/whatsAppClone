@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import '../features/chatScreen/Model/MessageModel.dart';
+import '../features/contacts/Model/UserModel.dart';
  class FirebaseService {
    final FirebaseAuth auth = FirebaseAuth.instance;
    final FirebaseFirestore users = FirebaseFirestore.instance;
@@ -490,11 +491,13 @@ import '../features/chatScreen/Model/MessageModel.dart';
    }
    Future<void> updateBio(newBio) async {
      if(uid != null) {
-       await users.collection("users").doc(uid).update(
-        {
-          "bio": newBio,
-        }
-       );
+       final docRef = users.collection("users").doc(uid);
+       final snapshot = await docRef.get();
+       final currentUser = UserModel.fromDocument(snapshot);
+       final updatedUser = currentUser.copyWith(bio: newBio);
+       await docRef.update({
+         "bio": updatedUser.bio,
+       });
      }
    }
    Future<void> reportIssue(String email, String issue) async {
