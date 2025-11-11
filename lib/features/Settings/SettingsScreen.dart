@@ -95,7 +95,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           },
                           trailing: icons.getIssueIcon(context)
                         ),
-                        divider(),
+                        const divider(),
                         Options(
                             context: context,
                             label: const Text("Privacy"),
