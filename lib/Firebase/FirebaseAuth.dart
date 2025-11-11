@@ -71,6 +71,14 @@ import '../features/contacts/Model/UserModel.dart';
          .doc(u.uid)
          .set({'BioVisibility': option}, SetOptions(merge: true));
    }
+   Future<void> imageVisibility(String option) async {
+     final u = FirebaseAuth.instance.currentUser;
+     if (u == null) return;
+     await FirebaseFirestore.instance
+         .collection('users')
+         .doc(u.uid)
+         .set({'imageVisibility': option}, SetOptions(merge: true));
+   }
 
    Future<void> SigninUser(BuildContext context, String email, String password, String name) async {
      try {
