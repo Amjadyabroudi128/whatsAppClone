@@ -6,6 +6,7 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/features/Settings/Widget/Privacy/ActiveStatus.dart';
+import 'package:whatsappclone/features/Settings/Widget/Privacy/BioStatus.dart';
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../core/icons.dart';
 
@@ -55,47 +56,17 @@ class _ActiveStatusState extends State<PrivacyScreen> {
                child: Options(
                  context: context,
                  onTap: (){
-                   
+                   Navigator.push(
+                     context,
+                     MaterialPageRoute(
+                         builder: (_) => const BioStatus()
+                     ),
+                   );
                  },
                  trailing: icons.arrowForward(context),
                  label: const Text("My Bio")
                ),
              )
-      // kCard(
-      //   child: Column(
-      //     children: [
-      //       Options(
-      //         context: context,
-      //         label: const Text("Everyone"),
-      //         onTap: () async {
-      //           await service.bioVisibility("Everyone");
-      //           setState(() {
-      //             selectedBio = "Everyone";
-      //           });
-      //           myToast("Everyone can see your bio");
-      //         },
-      //         trailing: selectedBio == "Everyone"
-      //             ? icons.onlineStatus
-      //             : const SizedBox.shrink(),
-      //       ),
-      //       const divider(),
-      //       Options(
-      //         context: context,
-      //         label: const Text("Nobody"),
-      //         onTap: () async {
-      //           await service.bioVisibility("Nobody");
-      //           setState(() {
-      //             selectedBio = "Nobody";
-      //           });
-      //           myToast("Only you can see your bio");
-      //         },
-      //         trailing: selectedBio == "Nobody"
-      //             ? icons.onlineStatus
-      //             : const SizedBox.shrink(),
-      //       ),
-      //     ],
-      //   ),
-      // )
       ],
         ),
       ),
