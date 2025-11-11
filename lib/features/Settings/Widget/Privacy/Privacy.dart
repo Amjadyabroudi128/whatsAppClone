@@ -5,6 +5,7 @@ import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
+import 'package:whatsappclone/features/Settings/Widget/Privacy/ActiveStatus.dart';
 import '../../../../Firebase/FirebaseAuth.dart';
 import '../../../../core/icons.dart';
 
@@ -33,20 +34,17 @@ class _ActiveStatusState extends State<PrivacyScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Description text
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 4),
-            //   child: Text(
-            //       "Who can see when I'm online",
-            //       style: Textstyles.whoOnline
-            //   ),
-            // ),
             const BoxSpacing(myHeight: 16),
             kCard(
               child: Options(
                 context: context,
                 onTap: (){
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const LastSeen()
+                    ),
+                  );
                 },
                 label: const Text("Last seen & online"),
                 trailing: icons.arrowForward(context),
