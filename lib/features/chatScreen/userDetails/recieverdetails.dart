@@ -134,12 +134,9 @@ class _userDetailsState extends State<userDetails> {
                   StreamBuilder(
                     stream: service.presenceStream(widget.receiverId!),
                     builder: (context, snap) {
-                      // Handle loading state
                       if (!snap.hasData || snap.data == null) {
                         return const SizedBox.shrink();
                       }
-
-                      // Safely get data
                       final data = snap.data!.data();
                       if (data == null) return const SizedBox.shrink();
 
