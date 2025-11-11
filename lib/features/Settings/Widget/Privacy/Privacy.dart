@@ -58,10 +58,9 @@ class _ActiveStatusState extends State<PrivacyScreen> {
                    
                  },
                  trailing: icons.arrowForward(context),
-                 label: Text("My Bio")
+                 label: const Text("My Bio")
                ),
              )
-             // Text("Who can see My Bio",style: Textstyles.whoOnline),
       // kCard(
       //   child: Column(
       //     children: [
