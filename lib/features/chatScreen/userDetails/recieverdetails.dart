@@ -42,11 +42,15 @@ class _userDetailsState extends State<userDetails> {
   User? user = FirebaseAuth.instance.currentUser;
   bool _showCopyLabel = false;
   late UserModel myBio;
+  late UserModel myImage;
+  static const String _placeholderImageUrl =
+      "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg";
 
   @override
   void initState() {
     super.initState();
     myBio = UserModel(bio: widget.bio);
+    myImage = UserModel(image: widget.imageUrl);
   }
 
   Future _onTapBio() async {
@@ -98,15 +102,72 @@ class _userDetailsState extends State<userDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                widget.imageUrl == null || widget.imageUrl!.isEmpty
-                    ? const kimageNet(
-                  src: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
-                )
-                    : kCard(
-                  shape: const CircleBorder(),
-                  clipBehavior: Clip.antiAlias,
-                  child: kimageNet(src: widget.imageUrl!),
+                StreamBuilder(
+                  stream: service.presenceStream(widget.receiverId!),
+                  builder: (context, snap) {
+                    final String? url = myImage.image;
+                    if (!snap.hasData || snap.data == null || snap.data!.data() == null) {
+                      return kCard(
+                        shape: const CircleBorder(),
+                        clipBehavior: Clip.antiAlias,
+                        child: kimageNet(
+                          src: (url != null && url.isNotEmpty)
+                              ? url
+                              : _placeholderImageUrl,
+                        ),
+                      );
+                    }
+
+                    final data = snap.data!.data() as Map<String, dynamic>;
+                    final visibility =
+                        data['imageVisibility'] as String? ?? 'Everyone';
+
+                    // If user set visibility to Nobody → show static placeholder
+                    if (visibility == 'Nobody') {
+                      return const kCard(
+                        shape: CircleBorder(),
+                        clipBehavior: Clip.antiAlias,
+                        child: kimageNet(src: _placeholderImageUrl),
+                      );
+                    }
+
+                    // If no image URL → show static placeholder
+                    if (url == null || url.isEmpty) {
+                      return const kCard(
+                        shape: CircleBorder(),
+                        clipBehavior: Clip.antiAlias,
+                        child: kimageNet(src: _placeholderImageUrl),
+                      );
+                    }
+
+                    return kCard(
+                      shape: const CircleBorder(),
+                      clipBehavior: Clip.antiAlias,
+                      child: kimageNet(src: url),
+                    );
+                  },
                 ),
+
+                const BoxSpacing(myHeight: 9),
+                if (widget.link != null && widget.link!.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 63),
+                    child: GestureDetector(
+                      onTap: () async {
+                        await launchUrl(Uri.parse(widget.link!));
+                      },
+                      child: Text(
+                        widget.link!,
+                        style: TextStyle(
+                          fontSize: 18,
+                          decoration: TextDecoration.underline,
+                          color: MyTheme.appTheme == true
+                              ? Colors.black
+                              : Colors.blue.shade800,
+                        ),
+                      ),
+                    ),
+                  ),
                 const BoxSpacing(myHeight: 9),
                 Text(widget.name ?? '', style: Textstyles.recieverName),
 
