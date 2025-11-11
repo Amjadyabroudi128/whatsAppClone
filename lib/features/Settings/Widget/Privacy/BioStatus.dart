@@ -26,6 +26,7 @@ class _BioStatusState extends State<BioStatus> {
         title: const Text("Bio"),
       ),
       body:  SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

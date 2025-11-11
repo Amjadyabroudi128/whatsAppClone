@@ -27,6 +27,7 @@ class _LastSeenState extends State<LastSeen> {
         title: const Text("Last Seen "),
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
