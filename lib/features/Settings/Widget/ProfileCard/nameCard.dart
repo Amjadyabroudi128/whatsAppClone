@@ -77,17 +77,16 @@ class _nameCardState extends State<nameCard> {
                   if (!snapshot.hasData || !snapshot.data!.exists) {
                     return const Center(child: Text("No user data available"));
                   }
-                  final data = snapshot.data!;
-                  final imageUrl = data.data().toString().contains("image") ? data["image"] : "";
-                  final bio = data.data().toString().contains("bio") ? data["bio"] : "";
-                  final name = data.data().toString().contains("name") ? data["name"] : "";
-                  final link = data.data().toString().contains("link") ? data["link"] : "";
-
+                  final data = snapshot.data!.data() as Map<String, dynamic>? ?? {};
+                  final imageUrl = data['image'] as String? ?? '';
+                  final bio      = data['bio']   as String? ?? '';
+                  final name     = data['name']  as String? ?? '';
+                  final link     = data['link']  as String? ?? '';
                   return Column(
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          if (imageUrl != null && imageUrl.isNotEmpty) {
+                          if (imageUrl.isNotEmpty) {
                             Navigator.push(
                                     context,
                                     MaterialPageRoute(
