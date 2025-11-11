@@ -6,12 +6,12 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
-import 'package:whatsappclone/features/Settings/Widget/ActiveStatus/ActiveStatus.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/changeEmail.dart';
 import 'package:whatsappclone/features/Settings/Widget/issueReport/issueReport.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../Firebase/FirebaseCollections.dart';
 import '../../core/icons.dart';
+import 'Widget/Privacy/Privacy.dart';
 import 'Widget/accountFunctions/deleteAccount.dart';
 import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
@@ -98,12 +98,12 @@ class _SettingScreenState extends State<SettingScreen> {
                         divider(),
                         Options(
                             context: context,
-                            label: const Text("Active Status"),
+                            label: const Text("Privacy"),
                             onTap: (){
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const ActiveStatus()
+                                  builder: (_) => const PrivacyScreen()
                                 ),
                               );
                             },
