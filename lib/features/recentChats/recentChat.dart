@@ -14,6 +14,7 @@ import '../../Firebase/FirebaseAuth.dart';
 import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
 import '../../components/iconButton.dart';
+import '../../components/imageNetworkComponent.dart';
 import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 import '../../globalState.dart';
@@ -33,6 +34,8 @@ class RecentChatsScreen extends StatefulWidget {
 class _RecentChatsScreenState extends State<RecentChatsScreen> {
   final FirebaseService service = FirebaseService();
   final User? user = FirebaseAuth.instance.currentUser;
+  static const String _placeholderImageUrl =
+      "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg";
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,21 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                         }
                         final userData = userSnapshot.data!.data() as Map<String, dynamic>;
                         final userImage = userData['image'] ?? '';
-
+                        final visibility = userData['imageVisibility'] as String? ?? 'Everyone';
+                        final avatarWidget = visibility == 'Nobody'
+                            ? CircleAvatar(
+                          radius: 20,
+                          child: Text(otherUserName![0]),
+                        )
+                            : (userImage.isNotEmpty
+                            ? CircleAvatar(
+                          backgroundImage: NetworkImage(userImage),
+                          radius: 20,
+                        )
+                            : CircleAvatar(
+                          radius: 20,
+                          child: Text(otherUserName![0]),
+                        ));
                         return StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection("chat_rooms")
@@ -143,11 +160,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: Row(
                                                     children: [
-                                                      if (userImage.isNotEmpty)
-                                                        CircleAvatar(
-                                                          backgroundImage: NetworkImage(userImage),
-                                                          radius: 20,
-                                                        ),
+                                                      avatarWidget,
                                                       const BoxSpacing(mWidth: 6),
                                                       Text(otherUserName!),
                                                       const Spacer(),
