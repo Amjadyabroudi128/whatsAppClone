@@ -9,7 +9,6 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
-import 'package:whatsappclone/features/recentChats/Tabs/UnreadTab.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
@@ -36,51 +35,84 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
   static const String _placeholderImageUrl =
       "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg";
 
+  int _selectedTab = 0;
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      initialIndex: 0,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Recent Chats"),
-          automaticallyImplyLeading: false,
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(kTextTabBarHeight),
-            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: FirebaseFirestore.instance
-                  .collectionGroup('messages')
-                  .where('receiverId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                  .where('isRead', isEqualTo: false)
-                  .snapshots(),
-              builder: (context, snap) {
-                final int unreadTotal = snap.hasData ? snap.data!.size : 0;
-                return TabBar(
-                  tabs: [
-                    const Tab(text: "All"),
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text("Unread"),
-                          const BoxSpacing(mWidth: 7),
-                          if (unreadTotal > 0)
-                            Text("$unreadTotal",
-                              style: Textstyles.unread,
-                            ),
-                        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Recent Chats"),
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      _selectedTab = 0;
+                    });
+                  },
+                  child: kCard(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25), // rounded rectangle
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("All"),
+                    ),
+                  ),
+                ),
+              ),
+              const BoxSpacing(mWidth: 2,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      _selectedTab = 1;
+                    });
+                  },
+                  child: kCard(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25), // rounded rectangle
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collectionGroup('messages')
+                              .where('receiverId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                              .where('isRead', isEqualTo: false)
+                              .snapshots(),
+                        builder: (context, snap) {
+                          final int unreadTotal = snap.hasData ? snap.data!.size : 0;
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text("Unread"),
+                              if (unreadTotal > 0) ...[
+                                const BoxSpacing(mWidth: 7),
+                                Text("$unreadTotal",
+                                  style: Textstyles.unread,
+                                ),
+                              ],
+                            ],
+                          );
+                        }
                       ),
                     ),
-                  ],
-                );
-              },
-            ),
+                  ),
+                ),
+              ),
+            ],
           ),
-
-        ),
-        body: TabBarView(
-          children: [
-            FutureBuilder<List<Messages>>(
+          Expanded(
+            child: FutureBuilder<List<Messages>>(
               future: service.getAllLastMessages(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -111,7 +143,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                         }
                         final userData = userSnapshot.data!.data() as Map<String, dynamic>;
                         final userImage = userData['image'] ?? '';
-                        final visibility = userData['imageVisibility'] as String? ?? 'Everyone';
                         return StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection("chat_rooms")
@@ -122,6 +153,11 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                               .snapshots(),
                           builder: (context, snapshotUnread) {
                             final unreadCount = snapshotUnread.data?.docs.length ?? 0;
+
+                            if (_selectedTab == 1 && unreadCount == 0) {
+                              return const SizedBox.shrink();
+                            }
+
                             return Slidable(
                               startActionPane: ActionPane(
                                 motion: const StretchMotion(),
@@ -275,33 +311,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                 ],
                               ),
                               child: GestureDetector(
-                                onLongPress: () async {
-                                  final selected = await showMenu<String>(
-                                    context: context,
-                                    items: const [
-                                      PopupMenuItem(value: "delete", child: Text("Delete")),
-                                      PopupMenuItem(value: "unread", child: Text("Mark as Unread")),
-                                    ],
-                                    position: const RelativeRect.fromLTRB(200, 160, 0, 0),
-                                  );
-                                  if (selected == "delete") {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return deleteAlert(
-                                          receiverName: msg.receiverEmail,
-                                          context: context,
-                                          service: service,
-                                          chatRoomId: chatRoomId,
-                                        );
-                                      },
-                                    );
-                                  } else if (selected == "unread") {
-                                    await service.unread(otherUserId);
-                                    myToast("Message marked as unread");
-                                    setState(() {});
-                                  }
-                                },
                                 child: Row(
                                   children: [
                                     // Avatar + presence
@@ -314,12 +323,12 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                           isOnline = data['isOnline'] == true;
                                           final visibility = userData['imageVisibility'] as String? ?? 'Everyone';
                                           if(visibility == "Nobody") {
-                                           return CircleAvatar(
+                                            return CircleAvatar(
                                               radius: 20,
                                               child: Text(otherUserName![0]),
                                             );
                                           } else if (userImage == null || userImage!.isEmpty) {
-                                           return CircleAvatar(
+                                            return CircleAvatar(
                                               radius: 20,
                                               child: Text(otherUserName![0]),
                                             );
@@ -447,10 +456,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 );
               },
             ),
-            // const FavouriteTab(),
-            const UnreadTab(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
