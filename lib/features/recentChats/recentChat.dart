@@ -14,7 +14,6 @@ import '../../Firebase/FirebaseAuth.dart';
 import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
 import '../../components/iconButton.dart';
-import '../../components/imageNetworkComponent.dart';
 import '../../core/TextStyles.dart';
 import '../../core/icons.dart';
 import '../../globalState.dart';
@@ -56,7 +55,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   .snapshots(),
               builder: (context, snap) {
                 final int unreadTotal = snap.hasData ? snap.data!.size : 0;
-
                 return TabBar(
                   tabs: [
                     const Tab(text: "All"),
@@ -114,20 +112,13 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                         final userData = userSnapshot.data!.data() as Map<String, dynamic>;
                         final userImage = userData['image'] ?? '';
                         final visibility = userData['imageVisibility'] as String? ?? 'Everyone';
-                        final avatarWidget = visibility == 'Nobody'
-                            ? CircleAvatar(
-                          radius: 20,
-                          child: Text(otherUserName![0]),
-                        )
-                            : (userImage.isNotEmpty
-                            ? CircleAvatar(
-                          backgroundImage: NetworkImage(userImage),
-                          radius: 20,
-                        )
-                            : CircleAvatar(
-                          radius: 20,
-                          child: Text(otherUserName![0]),
-                        ));
+                        // if (visibility == 'Nobody') {
+                        //   return const kCard(
+                        //     shape: CircleBorder(),
+                        //     clipBehavior: Clip.antiAlias,
+                        //     child: kimageNet(src: _placeholderImageUrl),
+                        //   );
+                        // }
                         return StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection("chat_rooms")
@@ -160,7 +151,11 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: Row(
                                                     children: [
-                                                      avatarWidget,
+                                                      if (userImage.isNotEmpty)
+                                                        CircleAvatar(
+                                                          backgroundImage: NetworkImage(userImage),
+                                                          radius: 20,
+                                                        ),
                                                       const BoxSpacing(mWidth: 6),
                                                       Text(otherUserName!),
                                                       const Spacer(),
@@ -324,22 +319,28 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                         if (presenceSnap.hasData && presenceSnap.data!.exists) {
                                           final data = presenceSnap.data!.data()!;
                                           isOnline = data['isOnline'] == true;
+                                          final visibility = userData['imageVisibility'] as String? ?? 'Everyone';
+                                          if(visibility == "Nobody") {
+                                           return CircleAvatar(
+                                              radius: 20,
+                                              child: Text(otherUserName![0]),
+                                            );
+                                          } else if (userImage == null || userImage!.isEmpty) {
+                                           return CircleAvatar(
+                                              radius: 20,
+                                              child: Text(otherUserName![0]),
+                                            );
+                                          }
                                         }
-
                                         return Stack(
                                           clipBehavior: Clip.none,
                                           children: [
-                                            userImage.isNotEmpty
-                                                ? Padding(
+                                            Padding(
                                               padding: const EdgeInsets.only(left: 7),
                                               child: CircleAvatar(
                                                 backgroundImage: NetworkImage(userImage),
                                                 radius: 20,
                                               ),
-                                            )
-                                                : CircleAvatar(
-                                              radius: 20,
-                                              child: Text(otherUserName![0]),
                                             ),
                                             presenceDot(isOnline),
                                           ],
