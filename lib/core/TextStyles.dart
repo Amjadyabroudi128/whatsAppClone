@@ -67,4 +67,5 @@ class Textstyles {
       fontWeight: fontWeight
     );
   }
+  static TextStyle unread =  TextStyle(color: MyColors.online, fontSize: 16);
  }

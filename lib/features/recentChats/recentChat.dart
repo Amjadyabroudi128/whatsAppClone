@@ -66,7 +66,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                           const BoxSpacing(mWidth: 7),
                           if (unreadTotal > 0)
                             Text("$unreadTotal",
-                              style: const TextStyle(color: Colors.green, fontSize: 16),
+                              style: Textstyles.unread,
                             ),
                         ],
                       ),
@@ -112,13 +112,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                         final userData = userSnapshot.data!.data() as Map<String, dynamic>;
                         final userImage = userData['image'] ?? '';
                         final visibility = userData['imageVisibility'] as String? ?? 'Everyone';
-                        // if (visibility == 'Nobody') {
-                        //   return const kCard(
-                        //     shape: CircleBorder(),
-                        //     clipBehavior: Clip.antiAlias,
-                        //     child: kimageNet(src: _placeholderImageUrl),
-                        //   );
-                        // }
                         return StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection("chat_rooms")
