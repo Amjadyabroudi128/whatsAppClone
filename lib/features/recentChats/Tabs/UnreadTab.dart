@@ -54,7 +54,7 @@ class _UnreadTabState extends State<UnreadTab> {
           stream: _getChatsWithUnreadMessages(messages, currentUserId),
           builder: (context, unreadSnapshot) {
             if (!unreadSnapshot.hasData || unreadSnapshot.data!.isEmpty) {
-              return const Center(child: Text("No unread messages."));
+              // return const Center(child: Text("No unread messages."));
             }
             final chatsWithUnread = unreadSnapshot.data!;
             final unreadMessages = messages.where((msg) {
@@ -77,7 +77,7 @@ class _UnreadTabState extends State<UnreadTab> {
                   future: FirebaseFirestore.instance.collection('users').doc(otherUserId).get(),
                   builder: (context, userSnapshot) {
                     if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
-                      return const Center(child: Text("No Unread messages"),);
+                      // return const Center(child: Text("No Unread messages"),);
                     }
                     final userData = userSnapshot.data!.data() as Map<String, dynamic>;
                     final userImage = userData['image'] ?? '';
