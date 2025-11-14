@@ -46,7 +46,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Tabs row
           Row(
             children: [
               Padding(
@@ -68,6 +67,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   ),
                 ),
               ),
+
               const BoxSpacing(mWidth: 2),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -113,6 +113,26 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   ),
                 ),
               ),
+              const BoxSpacing(mWidth: 2),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedTab = 2;
+                    });
+                  },
+                  child: kCard(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Favourite"),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           // List area
@@ -126,8 +146,6 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
     );
   }
 
-  /// Builds the main chats list (used for both All and Unread tabs).
-  /// When _selectedTab == 1, rows with unreadCount == 0 are hidden.
   Widget _buildChatsList() {
     return FutureBuilder<List<Messages>>(
       future: service.getAllLastMessages(),
