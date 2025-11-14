@@ -137,9 +137,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
           ),
           // List area
           Expanded(
-            child: _selectedTab == 1
-                ? const UnreadTab()
-                : _buildChatsList(),
+            child: (_selectedTab == 1 ? const UnreadTab()
+                : _selectedTab == 2 ? const Center(child: Text("Favourite list"),) : _buildChatsList()),
           ),
         ],
       ),
