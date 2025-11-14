@@ -9,6 +9,7 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
+import 'package:whatsappclone/features/recentChats/Tabs/UnreadTab.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
@@ -117,27 +118,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
           // List area
           Expanded(
             child: _selectedTab == 1
-                ? StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collectionGroup('messages')
-                        .where('receiverId',
-                            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                        .where('isRead', isEqualTo: false)
-                        .snapshots(),
-                    builder: (context, snap) {
-                      final totalUnread = snap.data?.size ?? 0;
-
-                      // If no unread messages anywhere and Unread tab selected
-                      if (totalUnread == 0) {
-                        return const Center(
-                          child: Text("No unread messages."),
-                        );
-                      }
-
-                      // There are unread messages, show normal list (filtered per-chat)
-                      return _buildChatsList();
-                    },
-                  )
+                ? const UnreadTab()
                 : _buildChatsList(),
           ),
         ],
