@@ -132,6 +132,7 @@ class _FavouritescreenState extends State<Favouritescreen> {
                             final favData =
                             favourites[index].data() as Map<String, dynamic>;
                             final name = favData['name'] ?? 'Unknown';
+                            final image = favData["image"] ?? "";
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4.0),
                               child: Row(
