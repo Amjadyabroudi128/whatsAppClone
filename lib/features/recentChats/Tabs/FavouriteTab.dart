@@ -76,6 +76,7 @@ class FavouriteTab extends StatelessWidget {
                     final favData =
                     favourites[index].data();
                     final name = favData['name'] ?? 'Unknown';
+                    final image = favData["image"] ?? "";
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Row(
