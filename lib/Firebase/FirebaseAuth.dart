@@ -703,11 +703,13 @@ import '../features/contacts/Model/UserModel.dart';
          .doc(messageId)
          .update({"isStarred": true});
    }
-   Future addToFavourite(String name) async {
+   Future addToFavourite(String name, {String? image, String? email}) async {
      String email = auth.currentUser!.email!;
      await FirebaseFirestore.instance.collection("Favourites").doc(email).collection("myFavourites").add(
        {
-         "name":name
+         "name":name,
+         "image": image,
+         "email": email
        }
      );
    }
