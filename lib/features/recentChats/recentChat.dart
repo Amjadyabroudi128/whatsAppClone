@@ -327,9 +327,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                                       Navigator.of(context)
                                                           .pop();
                                                       if (!isFav) {
-                                                        await service
-                                                            .addToFavourite(
-                                                                otherUserName);
+                                                        await service.addToFavourite(otherUserName,
+                                                            email: user!.email, image: userImage);
                                                         myToast("Added to favourites");
                                                       } else {
                                                         await service.removeFavourite(otherUserName);
