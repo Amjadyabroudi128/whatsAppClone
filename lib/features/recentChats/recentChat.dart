@@ -11,6 +11,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/features/recentChats/Tabs/UnreadTab.dart';
 import '../../Firebase/FirebaseAuth.dart';
+import '../../components/UserCircleAvatar.dart';
 import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
 import '../../components/iconButton.dart';
@@ -389,11 +390,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                       return Stack(
                                           clipBehavior: Clip.none,
                                           children: [
-                                            CircleAvatar(
-                                              radius: 20,
-                                              child: Text(otherUserName![0]),
-
-                                            ),
+                                            userNamecircle(otherUserName: otherUserName),
                                             presenceDot(isOnline),
 
                                           ]
@@ -401,10 +398,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     }
                                   }
                                   if (userImage.isEmpty) {
-                                    return CircleAvatar(
-                                      radius: 20,
-                                      child: Text(otherUserName![0]),
-                                    );
+                                    return userNamecircle(otherUserName: otherUserName);
                                   }
                                   return Stack(
                                     clipBehavior: Clip.none,
@@ -570,4 +564,5 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
     );
   }
 }
+
 
