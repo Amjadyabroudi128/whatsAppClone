@@ -62,11 +62,11 @@ class FavouriteTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
+               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
                   "Favourites",
-                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                  style: Textstyles.favourite,
                 ),
               ),
               Expanded(
@@ -97,7 +97,7 @@ class FavouriteTab extends StatelessWidget {
                                       radius: 20,
                                       child: Text(name![0]),
                                     ),
-                                    BoxSpacing(mWidth: 8,),
+                                    const BoxSpacing(mWidth: 8,),
                                     Text(name),
                                   ],
                                 ),
