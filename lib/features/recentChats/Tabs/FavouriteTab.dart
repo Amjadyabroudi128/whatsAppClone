@@ -82,11 +82,25 @@ class FavouriteTab extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+
                           Flexible(
                             child: kCard(
                               child: Options(
                                 context: context,
-                                label: Text(name),
+                                label: Row(
+                                  children: [
+                                    image.isNotEmpty ? CircleAvatar(
+                                      backgroundImage:
+                                      NetworkImage(image),
+                                      radius: 20,
+                                    ) : CircleAvatar(
+                                      radius: 20,
+                                      child: Text(name![0]),
+                                    ),
+                                    BoxSpacing(mWidth: 8,),
+                                    Text(name),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
