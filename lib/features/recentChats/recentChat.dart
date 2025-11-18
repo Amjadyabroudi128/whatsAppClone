@@ -374,8 +374,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                           child: Row(
                             children: [
                               // Avatar + presence
-                              StreamBuilder<
-                                  DocumentSnapshot<Map<String, dynamic>>>(
+                              StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                                 stream: service.presenceStream(otherUserId),
                                 builder: (context, presenceSnap) {
                                   bool isOnline = false;
@@ -387,9 +386,17 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                         userData['imageVisibility'] as String? ?? 'Everyone';
                                     if (visibility == "Nobody" ||
                                         userImage.isEmpty) {
-                                      return CircleAvatar(
-                                        radius: 20,
-                                        child: Text(otherUserName![0]),
+                                      return Stack(
+                                          clipBehavior: Clip.none,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 20,
+                                              child: Text(otherUserName![0]),
+
+                                            ),
+                                            presenceDot(isOnline),
+
+                                          ]
                                       );
                                     }
                                   }
