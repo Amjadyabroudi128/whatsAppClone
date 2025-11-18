@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/components/UserCircleAvatar.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
@@ -398,10 +399,7 @@ class _UnreadTabState extends State<UnreadTab> {
                 radius: 20,
               ),
             )
-                : CircleAvatar(
-              radius: 20,
-              child: Text(otherUserName?[0] ?? "?"),
-            ),
+                : userNamecircle(otherUserName: otherUserName),
             presenceDot(isOnline),
           ],
         );
