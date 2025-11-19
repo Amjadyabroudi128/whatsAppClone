@@ -482,10 +482,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                         ),
                                       ),
                                       trailing: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: .end,
+                                        mainAxisAlignment: .center,
                                         children: [
                                           Text(
                                             DateFormat('HH:mm')
