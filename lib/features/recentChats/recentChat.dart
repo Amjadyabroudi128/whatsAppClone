@@ -46,7 +46,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
         automaticallyImplyLeading: false,
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           Row(
             children: [
