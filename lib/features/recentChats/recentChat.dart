@@ -60,10 +60,10 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   },
                   child: kCard(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: .circular(25),
                     ),
                     child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: .all(8.0),
                       child: Text("All"),
                     ),
                   ),
@@ -72,7 +72,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
 
               const BoxSpacing(mWidth: 2),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
@@ -84,7 +84,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const .all(8.0),
                       child: StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
                             .collectionGroup('messages')
@@ -117,7 +117,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
               ),
               const BoxSpacing(mWidth: 2),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
@@ -129,7 +129,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: .all(8.0),
                       child: Text("Favourite"),
                     ),
                   ),
@@ -221,7 +221,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     child: Column(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const .all(8.0),
                                           child: Row(
                                             children: [
                                               if (userImage.isNotEmpty)
@@ -371,7 +371,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                       ),
                       child: GestureDetector(
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 14),
+                          padding: const .only(left: 14),
                           child: Row(
                             children: [
                               // Avatar + presence
@@ -404,7 +404,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     clipBehavior: Clip.none,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 7),
+                                        padding: const .only(left: 7),
                                         child: CircleAvatar(
                                           backgroundImage:
                                               NetworkImage(userImage),
@@ -461,9 +461,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                               ),
                                               if (isMuted)
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
+                                                  padding: const .only(left: 8.0),
                                                   child: icons.mute(context),
                                                 ),
                                             ],
