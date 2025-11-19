@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/UserCircleAvatar.dart';
 import '../../../components/SizedBox.dart';
 import '../../../components/kCard.dart';
 import '../../../components/listTilesOptions.dart';
@@ -32,7 +33,7 @@ class FavouriteTab extends StatelessWidget {
           return Center(
             child: Text(
               'Something went wrong\n${snap.error}',
-              textAlign: TextAlign.center,
+              textAlign: .center,
             ),
           );
         }
@@ -49,7 +50,7 @@ class FavouriteTab extends StatelessWidget {
                 const Text(
                   "add user to favourite to see it here ",
                   style: TextStyle(fontSize: 16),
-                  textAlign: TextAlign.center,
+                  textAlign: .center,
                 ),
               ],
             ),
@@ -58,12 +59,12 @@ class FavouriteTab extends StatelessWidget {
         final favourites = snap.data!.docs;
 
         return Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const .all(5.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: Text(
                   "Favourites",
                   style: Textstyles.favourite,
@@ -78,11 +79,10 @@ class FavouriteTab extends StatelessWidget {
                     final name = favData['name'] ?? 'Unknown';
                     final image = favData["image"] ?? "";
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      padding: const .symmetric(vertical: 4.0),
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: .start,
                         children: [
-
                           Flexible(
                             child: kCard(
                               child: Options(
@@ -93,10 +93,7 @@ class FavouriteTab extends StatelessWidget {
                                       backgroundImage:
                                       NetworkImage(image),
                                       radius: 20,
-                                    ) : CircleAvatar(
-                                      radius: 20,
-                                      child: Text(name![0]),
-                                    ),
+                                    ) : userNamecircle(otherUserName: name),
                                     const BoxSpacing(mWidth: 8,),
                                     Text(name),
                                   ],
