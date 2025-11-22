@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/Firebase/FirebaseCollections.dart';
+import 'package:whatsappclone/components/NetworkImage.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/TextButton.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
@@ -461,10 +462,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                         children: [
                                                           // User Avatar
                                                           if (userImage.isNotEmpty)
-                                                            CircleAvatar(
-                                                              backgroundImage: NetworkImage(userImage),
-                                                              radius: 20,
-                                                            )
+                                                            UserImage(userImage: userImage)
                                                           else
                                                              CircleAvatar(
                                                               radius: 20,
