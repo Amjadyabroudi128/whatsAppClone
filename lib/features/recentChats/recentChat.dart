@@ -184,6 +184,8 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                 final userData =
                     userSnapshot.data!.data() as Map<String, dynamic>;
                 final userImage = userData['image'] ?? '';
+                final imageVisibility =
+                    userData['imageVisibility'] as String? ?? 'Everyone';
                 return StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection("chat_rooms")
@@ -221,24 +223,23 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     child: Column(
                                       children: [
                                         Padding(
-                                          padding: const .all(8.0),
+                                          padding: const EdgeInsets.all(8.0),
                                           child: Row(
                                             children: [
-                                              if (userImage.isNotEmpty)
+                                              if (imageVisibility != "Nobody" && userImage.isNotEmpty)
                                                 CircleAvatar(
-                                                  backgroundImage:
-                                                      NetworkImage(userImage),
+                                                  backgroundImage: NetworkImage(userImage),
                                                   radius: 20,
-                                                ),
+                                                )
+                                              else
+                                                userNamecircle(otherUserName: otherUserName),
                                               const BoxSpacing(mWidth: 6),
                                               Text(otherUserName!),
                                               const Spacer(),
                                               kIconButton(
                                                 myIcon: icons.close,
                                                 onPressed: () {
-                                                  Navigator.of(
-                                                          bottomSheetContext)
-                                                      .pop();
+                                                  Navigator.of(bottomSheetContext).pop();
                                                 },
                                               ),
                                             ],
