@@ -223,7 +223,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     child: Column(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const .all(8s),
                                           child: Row(
                                             children: [
                                               if (imageVisibility != "Nobody" && userImage.isNotEmpty)
