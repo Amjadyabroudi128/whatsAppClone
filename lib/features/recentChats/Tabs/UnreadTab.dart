@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/components/NetworkImage.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/UserCircleAvatar.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
@@ -394,10 +395,7 @@ class _UnreadTabState extends State<UnreadTab> {
             userImage.isNotEmpty
                 ? Padding(
               padding: const EdgeInsets.only(left: 7),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(userImage),
-                radius: 20,
-              ),
+              child: UserImage(userImage: userImage),
             )
                 : userNamecircle(otherUserName: otherUserName),
             presenceDot(isOnline),
@@ -425,11 +423,8 @@ class _UnreadTabState extends State<UnreadTab> {
                 child: Row(
                   children: [
                     if (userImage.isNotEmpty)
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(userImage),
-                        radius: 20,
-                      ),
-                    const BoxSpacing(mWidth: 6),
+                      UserImage(userImage: userImage),
+                     BoxSpacing(mWidth: 6),
                     Text(otherUserName ?? "Unknown"),
                     const Spacer(),
                     kIconButton(
