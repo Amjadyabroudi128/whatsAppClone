@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/NetworkImage.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/fSizedBox.dart';
@@ -326,10 +327,7 @@ class _FavouritescreenState extends State<Favouritescreen> {
                                         leading: userImage.isNotEmpty
                                             ? Padding(
                                           padding: const EdgeInsets.only(left: 7),
-                                          child: CircleAvatar(
-                                            radius: 20,
-                                            backgroundImage: NetworkImage(userImage),
-                                          ),
+                                          child: UserImage(userImage: userImage),
                                         )
                                             : CircleAvatar(
                                           radius: 20,
