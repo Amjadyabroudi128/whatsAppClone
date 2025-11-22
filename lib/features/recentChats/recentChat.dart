@@ -11,6 +11,7 @@ import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/consts.dart';
 import 'package:whatsappclone/features/recentChats/Tabs/UnreadTab.dart';
 import '../../Firebase/FirebaseAuth.dart';
+import '../../components/NetworkImage.dart';
 import '../../components/UserCircleAvatar.dart';
 import '../../components/btmSheet.dart';
 import '../../components/flutterToast.dart';
@@ -223,14 +224,11 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     child: Column(
                                       children: [
                                         Padding(
-                                          padding: const .all(8s),
+                                          padding: const .all(8),
                                           child: Row(
                                             children: [
                                               if (imageVisibility != "Nobody" && userImage.isNotEmpty)
-                                                CircleAvatar(
-                                                  backgroundImage: NetworkImage(userImage),
-                                                  radius: 20,
-                                                )
+                                                UserImage(userImage: userImage)
                                               else
                                                 userNamecircle(otherUserName: otherUserName),
                                               const BoxSpacing(mWidth: 6),
@@ -406,11 +404,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                                     children: [
                                       Padding(
                                         padding: const .only(left: 7),
-                                        child: CircleAvatar(
-                                          backgroundImage:
-                                              NetworkImage(userImage),
-                                          radius: 20,
-                                        ),
+                                        child: UserImage(userImage: userImage),
                                       ),
                                       presenceDot(isOnline),
                                     ],
@@ -561,5 +555,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
     );
   }
 }
+
+
 
 
