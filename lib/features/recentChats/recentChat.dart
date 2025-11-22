@@ -97,7 +97,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                           final int unreadTotal =
                               snap.hasData ? snap.data!.size : 0;
                           return Row(
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisSize: .min,
                             children: [
                               const Text("Unread"),
                               if (unreadTotal > 0) ...[
