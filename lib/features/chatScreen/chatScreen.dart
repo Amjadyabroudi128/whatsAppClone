@@ -3,6 +3,7 @@
   import 'package:flutter/cupertino.dart';
   import 'package:flutter/material.dart';
   import 'package:intl/intl.dart';
+import 'package:whatsappclone/components/NetworkImage.dart';
   import 'package:whatsappclone/components/TextButton.dart';
   import 'package:whatsappclone/components/btmSheet.dart';
   import 'package:whatsappclone/components/kCard.dart';
@@ -140,6 +141,7 @@
                   if (snapshot.exists) {
                     final data = snapshot.data();
                     final userImage = data?["image"] ?? "";
+                    final imageVisibility = data?['imageVisibility'] as String? ?? 'Everyone';
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -178,10 +180,7 @@
                       : Row(
                     children: [
                       if (widget.image != null && widget.image!.isNotEmpty)
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(widget.image!),
-                          radius: 20,
-                        )
+                        UserImage(userImage: widget.image)
                       else
                         icons.person(context),
                       const SizedBox(width: 10),
