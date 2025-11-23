@@ -25,7 +25,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
         title: const Text("Profile picture"),
       ),
       body:  SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        padding: const symmetric(horizontal: 16, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
