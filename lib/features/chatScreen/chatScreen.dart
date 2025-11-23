@@ -186,8 +186,8 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                       const SizedBox(width: 10),
                       Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: .start,
+                          mainAxisSize: .min,
                           children: [
                             Text(
                               widget.receiverName,
