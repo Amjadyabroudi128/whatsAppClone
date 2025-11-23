@@ -192,7 +192,7 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                             Text(
                               widget.receiverName,
                               maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                              overflow: .ellipsis,
                               style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600),
