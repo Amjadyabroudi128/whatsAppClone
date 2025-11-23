@@ -127,7 +127,7 @@ class _RecentChatsScreenState extends State<RecentChatsScreen> {
                   },
                   child: kCard(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: .circular(25),
                     ),
                     child: const Padding(
                       padding: .all(8.0),
