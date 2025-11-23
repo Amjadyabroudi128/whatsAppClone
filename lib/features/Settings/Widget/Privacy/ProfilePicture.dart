@@ -27,7 +27,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
       body:  SingleChildScrollView(
         padding: const .symmetric(horizontal: 16, vertical: 20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
             Text("Who can see My Profile picture",style: Textstyles.whoOnline),
             kCard(
