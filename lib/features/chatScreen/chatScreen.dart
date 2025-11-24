@@ -292,12 +292,12 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                   ),
                   if (_replyMessage != null)
                     Container(
-                      margin: const EdgeInsets.symmetric(
+                      margin: const.symmetric(
                           horizontal: 8, vertical: 4),
-                      padding: const EdgeInsets.all(8),
+                      padding: const .all(8),
                       decoration: replyDecoration(
                         color: MyColors.labelClr,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: .circular(8),
                         border: Border(
                           left: BorderSide(
                             color: isReplyFromMe
@@ -311,14 +311,14 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                         children: [
                           Expanded(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: .start,
                               children: [
                                 Text(
                                   isReplyFromMe
                                       ? "You"
                                       : (_replyMessage!.senderName ?? ""),
                                   maxLines: 2,
-                                  overflow: TextOverflow.clip,
+                                  overflow: .clip,
                                   style: TextStyle(
                                     color: isReplyFromMe
                                         ? MyColors.myName
@@ -355,7 +355,7 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                     ),
                   isEditing || selectedMessages.isNotEmpty
                       ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: .center,
                     children: [
                       kIconButton(
                         onPressed: () async {
@@ -366,12 +366,12 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                               return Wrap(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const .all(8.0),
                                     child: Column(
                                       children: [
                                         Padding(
                                           padding:
-                                          const EdgeInsets.all(8.0),
+                                          const .all(8.0),
                                           child: Row(
                                             children: [
                                               Text(
@@ -433,7 +433,7 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                     ],
                   )
                       : Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const .all(8.0),
                     child: Row(
                       children: [
                         Expanded(
