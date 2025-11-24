@@ -69,4 +69,7 @@ class Textstyles {
   }
   static TextStyle unread =  TextStyle(color: MyColors.online, fontSize: 16);
   static TextStyle favourite = const TextStyle(color: Colors.grey, fontSize: 15);
+  static TextStyle receiverName = const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600);
  }
