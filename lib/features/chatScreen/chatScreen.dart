@@ -210,9 +210,7 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                               widget.receiverName,
                               maxLines: 1,
                               overflow: .ellipsis,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
+                              style:  Textstyles.receiverName,
                             ),
                             StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                               stream: service.presenceStream(widget.receiverId),
