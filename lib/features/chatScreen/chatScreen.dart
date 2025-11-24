@@ -179,10 +179,27 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                   )
                       : Row(
                     children: [
-                      if (widget.image != null && widget.image!.isNotEmpty)
-                        UserImage(userImage: widget.image)
-                      else
-                        icons.person(context),
+                      StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(widget.receiverId)
+                            .snapshots(),
+                        builder: (context, snap) {
+                          if (!snap.hasData || !snap.data!.exists) {
+                            return icons.person(context);
+                          }
+
+                          final data = snap.data!.data()!;
+                          final userImage = data['image'] ?? '';
+                          final imageVisibility = data['imageVisibility'] as String? ?? 'Everyone';
+
+                          if (imageVisibility == 'Everyone' && userImage.isNotEmpty) {
+                            return UserImage(userImage: userImage);
+                          }
+
+                          return icons.person(context);
+                        },
+                      ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Column(
