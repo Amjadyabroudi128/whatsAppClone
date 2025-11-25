@@ -161,7 +161,7 @@ class _userDetailsState extends State<userDetails> {
                       style: TextStyle(
                         fontSize: 16,
                         decoration: .underline,
-                        color: Colors.blue.shade800
+                        color: MyColors.link
                       ),
                     ),
                   ),
