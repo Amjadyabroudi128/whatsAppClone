@@ -135,56 +135,33 @@ class _userDetailsState extends State<userDetails> {
                     if (url == null || url.isEmpty) {
                       return const kCard(
                         shape: CircleBorder(),
-                        clipBehavior: Clip.antiAlias,
+                        clipBehavior: .antiAlias,
                         child: kimageNet(src: _placeholderImageUrl),
                       );
                     }
 
                     return kCard(
                       shape: const CircleBorder(),
-                      clipBehavior: Clip.antiAlias,
+                      clipBehavior: .antiAlias,
                       child: kimageNet(src: url),
                     );
                   },
                 ),
-
                 const BoxSpacing(myHeight: 9),
-                if (widget.link != null && widget.link!.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 63),
-                    child: GestureDetector(
-                      onTap: () async {
-                        await launchUrl(Uri.parse(widget.link!));
-                      },
-                      child: Text(
-                        widget.link!,
-                        style: TextStyle(
-                          fontSize: 18,
-                          decoration: TextDecoration.underline,
-                          color: MyTheme.appTheme == true
-                              ? Colors.black
-                              : Colors.blue.shade800,
-                        ),
-                      ),
-                    ),
-                  ),
                 const BoxSpacing(myHeight: 9),
                 Text(widget.name ?? '', style: Textstyles.recieverName),
 
                 if (widget.link != null && widget.link!.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 63),
-                    child: GestureDetector(
-                      onTap: () async {
-                        await launchUrl(Uri.parse(widget.link!));
-                      },
-                      child: Text(
-                        widget.link!,
-                        style: TextStyle(
-                          fontSize: 18,
-                          decoration: TextDecoration.underline,
-                          color: MyTheme.appTheme == true ? Colors.black : Colors.blue.shade800,
-                        ),
+                  GestureDetector(
+                    onTap: () async {
+                      await launchUrl(Uri.parse(widget.link!));
+                    },
+                    child: Text(
+                      widget.link!,
+                      style: TextStyle(
+                        fontSize: 16,
+                        decoration: .underline,
+                        color: Colors.blue.shade800
                       ),
                     ),
                   ),
