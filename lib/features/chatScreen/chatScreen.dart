@@ -141,7 +141,7 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                   if (snapshot.exists) {
                     final data = snapshot.data();
                     final userImage = data?["image"] ?? "";
-                    final imageVisibility = data?['imageVisibility'] as String? ?? 'Everyone';
+                    // final _ = data?['imageVisibility'] as String? ?? 'Everyone';
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -247,7 +247,7 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                                 return Text(
                                   subtitle,
                                   maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+                                  overflow: .ellipsis,
                                   style: Textstyles.offline(
                                     context,
                                     receiverIsTyping ? MyColors.familyText
