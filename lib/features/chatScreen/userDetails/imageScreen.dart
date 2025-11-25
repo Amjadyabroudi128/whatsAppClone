@@ -89,14 +89,14 @@ class _ImagescreenState extends State<Imagescreen> {
     return Scaffold(
       appBar: AppBar(
         title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
             Text(
               widget.senderName == auth.currentUser!.email ? "You" : widget.senderName ?? "",
               style: const TextStyle(fontSize: 19),
             ),
             Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               children: [
                 Text(widget.date, style: dates),
                 const BoxSpacing(mWidth: 7),
@@ -108,7 +108,7 @@ class _ImagescreenState extends State<Imagescreen> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(2),
+          padding: const .all(2),
           child: Image.network(
             widget.image!,
             fit: BoxFit.contain,
@@ -182,7 +182,7 @@ class _ImagescreenState extends State<Imagescreen> {
                     context: context,
                     builder: (context) {
                      return  Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 16),
+                       padding: const .symmetric(horizontal: 16),
                         child: IntrinsicHeight(
                           child: Column(
                             children: [
@@ -192,7 +192,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                   Container(
                                     height: 49, width: 49,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: .circular(12),
                                         image: DecorationImage(
                                           image: NetworkImage(msg.image!),
                                           fit: BoxFit.cover,
@@ -201,7 +201,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                   ),
                                   const BoxSpacing(mWidth: 10,),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment: .start,
                                     children: [
                                       Text(
                                         "${user!.email == auth.currentUser!.email ? "You" : user.email}",
