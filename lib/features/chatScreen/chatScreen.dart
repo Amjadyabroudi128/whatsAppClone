@@ -118,11 +118,6 @@ import 'package:whatsappclone/components/NetworkImage.dart';
     @override
     Widget build(BuildContext context) {
       final isReplyFromMe = _replyMessage?.senderEmail == user!.email;
-      final OutlineInputBorder messageBorder = OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(color: Colors.black),
-      );
-
       return ValueListenableBuilder<Color>(
         valueListenable: selectedThemeColor,
         builder: (context, color, child) {

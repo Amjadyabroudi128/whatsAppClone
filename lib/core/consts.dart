@@ -30,3 +30,7 @@ Decoration replyDecoration({Color? color, BorderRadiusGeometry? borderRadius, Bo
     border: border
   );
 }
+final OutlineInputBorder messageBorder = OutlineInputBorder(
+    borderRadius: .circular(10),
+    borderSide: const BorderSide(color: Colors.black),
+);
