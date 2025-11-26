@@ -93,7 +93,7 @@ class _ImagescreenState extends State<Imagescreen> {
           crossAxisAlignment: .start,
           children: [
             Text(
-              widget.senderName == auth.currentUser!.displayName ? "You" : widget.senderName ?? "",
+              _isMe ? "You" : (widget.senderName ?? ""),
               style: const TextStyle(fontSize: 19),
             ),
             Row(
@@ -205,8 +205,8 @@ class _ImagescreenState extends State<Imagescreen> {
                                     crossAxisAlignment: .start,
                                     children: [
                                       Text(
-                                        "${user!.email == auth.currentUser!.email ? "You" : user.email}",
-                                        style: const TextStyle(fontSize: 15),
+                                        _isMe ? "You" : (widget.senderName ?? ""),
+                                        style: const TextStyle(fontSize: 19),
                                       ),
                                       Row(
                                         children: [
