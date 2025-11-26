@@ -72,7 +72,7 @@ class _MyMediaState extends State<MyMedia> {
           final mediaDocs = snapshot.data!.docs;
 
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const .all(8.0),
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -124,7 +124,7 @@ class _MyMediaState extends State<MyMedia> {
                           );
                         },
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: .circular(8),
                           child: msg.image != null
                               ? kimageNet(src: msg.image!)
                               :  icons.supportedImage
