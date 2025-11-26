@@ -118,7 +118,7 @@ class _MyMediaState extends State<MyMedia> {
                                 senderId: msg.senderId,
                                 senderEmail: msg.senderEmail,
                                 receiverEmail: msg.receiverEmail,
-                                isMe: msg.senderId == auth.currentUser!.uid,
+                                isMe: msg.senderName == auth.currentUser!.displayName,
                               ),
                             ),
                           );
