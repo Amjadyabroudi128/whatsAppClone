@@ -88,11 +88,12 @@ class _ImagescreenState extends State<Imagescreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         title: Column(
           crossAxisAlignment: .start,
           children: [
             Text(
-              widget.senderName == auth.currentUser!.email ? "You" : widget.senderName ?? "",
+              widget.senderName == auth.currentUser!.displayName ? "You" : widget.senderName ?? "",
               style: const TextStyle(fontSize: 19),
             ),
             Row(
