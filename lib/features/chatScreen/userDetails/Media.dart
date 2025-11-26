@@ -50,16 +50,16 @@ class _MyMediaState extends State<MyMedia> {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: .center,
                 children: [
                   icons.noImages,
                   const BoxSpacing(myHeight: 10),
                    Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    padding: const .symmetric(horizontal: 30.0),
                     child: Text(
                       "No Media",
                       style: Textstyles.noMedia,
-                      textAlign: TextAlign.center,
+                      textAlign: .center,
                     ),
                   ),
                   const BoxSpacing(myHeight: 9),
