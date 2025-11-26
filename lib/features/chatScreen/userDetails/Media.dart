@@ -111,7 +111,7 @@ class _MyMediaState extends State<MyMedia> {
                               builder: (_) => Imagescreen(
                                 image: msg.image,
                                 date: day,
-                                senderName: msg.senderEmail,
+                                senderName: msg.senderName,
                                 time: formattedTime,
                                 messageId: msg.messageId,
                                 receiverId: msg.receiverId,
