@@ -223,7 +223,7 @@ class _userDetailsState extends State<userDetails> {
                             Text(
                               "Copy",
                               style: TextStyle(
-                                color: MyTheme.appTheme == true ? Colors.white : Colors.black,
+                                color: MyTheme.appTheme == true ? MyColors.bDialog : MyColors.FG,
                               ),
                             )
                           ],
