@@ -243,7 +243,7 @@ class _ImagescreenState extends State<Imagescreen> {
                                               return fSizedBox(
                                                 heightFactor: 0.7,
                                                 child: Container(
-                                                  padding: const EdgeInsets.all(16),
+                                                  padding: const .all(16),
                                                   child: Column(
                                                     children: [
                                                       CircleAvatar(
