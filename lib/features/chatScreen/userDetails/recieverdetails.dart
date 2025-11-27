@@ -204,7 +204,7 @@ class _userDetailsState extends State<userDetails> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
                       decoration: BoxDecoration(
-                        color: MyTheme.appTheme == true ? Colors.black : Colors.white,
+                        color: MyTheme.appTheme == true ? MyColors.bDialog : MyColors.FG,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: kTextButton(
