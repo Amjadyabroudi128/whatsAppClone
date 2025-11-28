@@ -54,7 +54,8 @@ Widget userList(String searchQuery) {
             final name = data['name'] ?? 'Unknown';
             final uid = data['uid'] ?? '';
             final image = data['image'] ?? '';
-
+            final imageVisibility =
+                data['imageVisibility'] as String? ?? 'Everyone';
             return myPadding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
@@ -62,9 +63,8 @@ Widget userList(String searchQuery) {
                   Options(
                     context: context,
                     label: Text(name),
-                    leading: image.isNotEmpty
-                        ? UserImage(userImage: image)
-                        : icons.person(context),
+                    leading: imageVisibility != "Nobody" &&
+                        image.isNotEmpty? UserImage(userImage: image) : icons.person(context),
                     onTap: () {
                       Navigator.push(
                         context,
