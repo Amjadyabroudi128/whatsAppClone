@@ -26,26 +26,26 @@ class Textstyles {
   static TextStyle saveBio = const TextStyle(fontSize: 18,);
   static TextStyle editProfile = const TextStyle(fontSize: 20);
   static TextStyle addPhoto = TextStyle(fontSize: 18, color: MyColors.tick);
-  static TextStyle option = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+  static TextStyle option = const TextStyle(fontSize: 18, fontWeight: .bold);
   static TextStyle recieverName = const TextStyle(fontSize: 25,color: Colors.black);
   static TextStyle recieverEmail = const TextStyle(fontSize: 18, letterSpacing: 2, color: Colors.black);
-  static TextStyle noStarMessage = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  static TextStyle noStarMessage = const TextStyle(fontSize: 20, fontWeight: .bold);
   static TextStyle editBar =  const TextStyle(fontSize: 19);
-  static TextStyle btmSheet = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+  static TextStyle btmSheet = const TextStyle(fontSize: 18, fontWeight: .bold);
   static TextStyle reply = const TextStyle( color: Colors.white, fontSize: 16);
   static TextStyle darkLabel =const TextStyle(color: Colors.white);
   static TextStyle insta = const TextStyle(fontSize: 13, color: CupertinoColors.systemGrey);
   static TextStyle photo = const TextStyle(fontSize: 17, color: Colors.grey);
-  static TextStyle edited = TextStyle(fontSize: 13, fontStyle: FontStyle.italic, color: Colors.grey.shade800,);
+  static TextStyle edited = TextStyle(fontSize: 13, fontStyle: .italic, color: Colors.grey.shade800,);
   static TextStyle sendMessage = const TextStyle(color: Colors.black, fontSize: 15.7);
-  static TextStyle chatNumber = const TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.white,);
+  static TextStyle chatNumber = const TextStyle(fontSize: 13.0, fontWeight: .bold, color: Colors.white,);
   static TextStyle unreadCount = const TextStyle(color: Colors.white, fontSize: 12);
-  static TextStyle deleteMessages = const TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
+  static TextStyle deleteMessages = const TextStyle(fontSize: 17, fontWeight: .bold);
   static TextStyle important = const TextStyle(
       fontSize: 16, fontWeight: FontWeight.w500);
   static TextStyle textMsg = const TextStyle(fontSize: 16, color: Colors.black);
-  static TextStyle thanks = const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
-  static TextStyle report = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  static TextStyle thanks = const TextStyle(fontSize: 24, fontWeight: .bold);
+  static TextStyle report = const TextStyle(fontSize: 20, fontWeight: .bold);
   static TextStyle offline(BuildContext context, Color color, double fontsize){
     return TextStyle(
       color: color,
@@ -56,7 +56,7 @@ class Textstyles {
   static TextStyle whoOnline = TextStyle(
     color: Colors.grey[600],
     fontSize: 15,
-    fontWeight: FontWeight.w500,
+    fontWeight: .w500,
   );
   static TextStyle noMedia = const TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
   static TextStyle reaction = const TextStyle(fontSize: 18, fontWeight: FontWeight.w500,);
