@@ -20,7 +20,7 @@ Widget userList(String searchQuery) {
       child: Center(
         child: Text(
           "Search for users\n to start a chat with them",
-          textAlign: TextAlign.center,
+          textAlign: .center,
         ),
       ),
     );
@@ -57,7 +57,7 @@ Widget userList(String searchQuery) {
             final imageVisibility =
                 data['imageVisibility'] as String? ?? 'Everyone';
             return myPadding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const .all(10.0),
               child: Column(
                 children: [
                   Options(
