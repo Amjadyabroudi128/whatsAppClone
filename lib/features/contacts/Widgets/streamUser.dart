@@ -2,10 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/NetworkImage.dart';
-import 'package:whatsappclone/features/contacts/Widgets/userListTile.dart';
-
 import '../../../Firebase/FirebaseCollections.dart';
-import '../../../components/SizedBox.dart';
 import '../../../components/listTilesOptions.dart';
 import '../../../components/padding.dart';
 import '../../../core/icons.dart';
