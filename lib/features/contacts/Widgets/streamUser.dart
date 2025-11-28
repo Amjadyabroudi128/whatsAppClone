@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/components/NetworkImage.dart';
 import 'package:whatsappclone/features/contacts/Widgets/userListTile.dart';
 
 import '../../../Firebase/FirebaseCollections.dart';
@@ -62,10 +63,7 @@ Widget userList(String searchQuery) {
                     context: context,
                     label: Text(name),
                     leading: image.isNotEmpty
-                        ? CircleAvatar(
-                      backgroundImage: NetworkImage(image),
-                      radius: 20,
-                    )
+                        ? UserImage(userImage: image)
                         : icons.person(context),
                     onTap: () {
                       Navigator.push(
