@@ -50,7 +50,7 @@ class _ContactsState extends State<Contacts> {
              // signoutBtn()
             ],
             title: myPadding(
-              padding: const EdgeInsets.only(top: 18),
+              padding: const .only(top: 18),
               child: Text("Chats", style: Textstyles.appBar,),
             ),
             backgroundColor: MyColors.TC,
@@ -60,7 +60,7 @@ class _ContactsState extends State<Contacts> {
           body: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const .all(12.0),
                 child: searchTextField(userController: userController),
               ),
               userList(searchQuery, ),
