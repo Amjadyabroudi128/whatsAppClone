@@ -10,7 +10,7 @@ Widget presenceDot(bool isOnline) {
       width: 11,
       height: 11,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
+        shape: .circle,
         color: isOnline ? MyColors.online : MyColors.menuColor,
         border: .all(color: Colors.white, width: 1),
       ),
