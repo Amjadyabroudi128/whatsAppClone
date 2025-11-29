@@ -266,7 +266,7 @@ class _UnreadTabState extends State<UnreadTab> {
             PopupMenuItem(value: "delete", child: Text("Delete")),
             PopupMenuItem(value: "read", child: Text("Mark as Read")),
           ],
-          position: const RelativeRect.fromLTRB(200, 160, 0, 0),
+          position: const .fromLTRB(200, 160, 0, 0),
         );
         if (selected == "delete") {
           await showDialog(
@@ -307,7 +307,7 @@ class _UnreadTabState extends State<UnreadTab> {
                           ? "[file]"
                           : (msg.image?.isNotEmpty == true)
                           ? "[image]"
-                          : (msg.text ?? "");
+                          : (msg.text);
                     }
                   }
 
@@ -424,7 +424,7 @@ class _UnreadTabState extends State<UnreadTab> {
                   children: [
                     if (userImage.isNotEmpty)
                       UserImage(userImage: userImage),
-                     BoxSpacing(mWidth: 6),
+                     const BoxSpacing(mWidth: 6),
                     Text(otherUserName ?? "Unknown"),
                     const Spacer(),
                     kIconButton(
