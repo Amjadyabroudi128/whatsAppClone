@@ -47,7 +47,7 @@ class _ContactsState extends State<Contacts> {
       child: Scaffold(
           appBar: AppBar(
             actions: const [
-             signoutBtn()
+             // signoutBtn()
             ],
             title: myPadding(
               padding: const EdgeInsets.only(top: 18),
