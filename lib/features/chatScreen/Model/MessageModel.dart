@@ -21,7 +21,7 @@ class Messages {
   final bool? isReacted;
   final String? reactBy;
   final String? reactionEmoji;
-
+  final bool? isViewed;
   Messages({
     required this.text,
     this.senderName,
@@ -43,6 +43,7 @@ class Messages {
     this.isReacted = false,
     this.reactBy,
     this.reactionEmoji,
+    this.isViewed
   });
 
   factory Messages.fromMap(Map<String, dynamic> map) {
@@ -69,6 +70,7 @@ class Messages {
       isReacted: map["isReacted"] ?? false,
       reactBy: map["reactBy"],
       reactionEmoji: map["reactionEmoji"],
+      isViewed: map["isViewed"],
     );
   }
 
