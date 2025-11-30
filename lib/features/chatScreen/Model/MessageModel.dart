@@ -96,6 +96,7 @@ class Messages {
       "isReacted": isReacted ?? false,
       "reactBy": reactBy,
       "reactionEmoji": reactionEmoji,
+      "isViewed" isViewed ?? false
     };
   }
 
@@ -122,6 +123,7 @@ class Messages {
     bool? isReacted,
     String? reactBy,
     String? reactionEmoji,
+    bool? isViewed,
   }) {
     return Messages(
       senderName: senderName ?? this.senderName,
@@ -144,6 +146,7 @@ class Messages {
       isReacted: isReacted ?? this.isReacted,
       reactBy: reactBy ?? this.reactBy,
       reactionEmoji: reactionEmoji ?? this.reactionEmoji,
+        isViewed: isViewed ?? this.isViewed
     );
   }
 
@@ -172,6 +175,7 @@ class Messages {
       isReacted: data["isReacted"] ?? false,
       reactBy: data["reactBy"],
       reactionEmoji: data["reactionEmoji"],
+        isViewed: data["isViewed"] ?? false
     );
   }
 }
