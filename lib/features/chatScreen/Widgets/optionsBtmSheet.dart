@@ -151,57 +151,74 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
       context: context,
       useRootNavigator: true,
       barrierDismissible: false,
-      builder: (dialogCtx) => AlertDialog(
-        contentPadding: const .all(17),
-        content: SizedBox(
-          width: MediaQuery.of(dialogCtx).size.width * 0.9,   // 90% of screen width
-          height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: .start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisSize: MainAxisSize.min,
-              children: [
-                kIconButton(
-                  onPressed: (){
-                          FocusScope.of(dialogCtx).unfocus();
-                          Navigator.of(dialogCtx).pop(null);
-                  },
-                  myIcon: icons.close,
-                ),
-                ClipRRect(
-                  borderRadius: .circular(8),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 420, maxHeight: 420),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Image.network(imageUrl, fit: BoxFit.cover),
+      builder: (dialogCtx) {
+        final size = MediaQuery.of(dialogCtx).size;
+
+        return AlertDialog(
+          insetPadding: .zero,
+          contentPadding: const .all(7),
+          content: SizedBox(
+            width: size.width,
+            height: size.height, // full height
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: .topLeft,
+                    child: kIconButton(
+                      onPressed: () {
+                        FocusScope.of(dialogCtx).unfocus();
+                        Navigator.of(dialogCtx).pop(null);
+                      },
+                      myIcon: icons.close,
                     ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    Expanded(
-                      child: kTextField(
-                        hint: "Add a caption..",
-                        onChanged: (v) => caption = v,
-                        icon: kIconButton(
-                          myIcon: icons.send,
-                          onPressed: (){
-                            FocusScope.of(dialogCtx).unfocus();
-                            Navigator.of(dialogCtx).pop((true, caption));
-                          },
+
+                  Expanded(
+                    flex: 9,
+                    child: Center(
+                      child: ClipRRect(
+                        borderRadius: .circular(8),
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            maxWidth: 420,
+                            maxHeight: 420,
+                          ),
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: Image.network(
+                              imageUrl,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // CAPTION FIELD – takes remaining height
+            Expanded(
+              child: kTextField(
+                hint: "Add a caption..",
+                onChanged: (v) => caption = v,
+                icon: kIconButton(
+                  myIcon: icons.send,
+                  onPressed: (){
+                    FocusScope.of(dialogCtx).unfocus();
+                    Navigator.of(dialogCtx).pop((true, caption));
+                  },
                 ),
-              ],
+              ),
+            ),
+                ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
 
     return result;
