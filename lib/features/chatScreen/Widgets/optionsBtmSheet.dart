@@ -42,9 +42,9 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
           builder: (BuildContext context) {
             return SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const .all(16),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: .start,
                   children: [
                     const DividerContainer(),
                     Text("Choose an option", style: Textstyles.option),
@@ -152,13 +152,13 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
       useRootNavigator: true,
       barrierDismissible: false,
       builder: (dialogCtx) => AlertDialog(
-        contentPadding: const EdgeInsets.all(17),
+        contentPadding: const .all(17),
         content: SizedBox(
           width: MediaQuery.of(dialogCtx).size.width * 0.9,   // 90% of screen width
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: .start,
               crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.min,
               children: [
@@ -170,7 +170,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                   myIcon: icons.close,
                 ),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: .circular(8),
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 420, maxHeight: 420),
                     child: AspectRatio(
