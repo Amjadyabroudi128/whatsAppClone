@@ -96,7 +96,7 @@ class Messages {
       "isReacted": isReacted ?? false,
       "reactBy": reactBy,
       "reactionEmoji": reactionEmoji,
-      "isViewed" isViewed ?? false
+      "isViewed": isViewed ?? false
     };
   }
 
