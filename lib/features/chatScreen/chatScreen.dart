@@ -452,7 +452,7 @@ import 'package:whatsappclone/components/NetworkImage.dart';
                           },
                         ),
                         messageController.text.trim().isNotEmpty
-                            ? // ... inside your build method, look for the kIconButton that uses icons.send
+                            ?
                         kIconButton(
                           onPressed: () {
                             service.sendMessage(
