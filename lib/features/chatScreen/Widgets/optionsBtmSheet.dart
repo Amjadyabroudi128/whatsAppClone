@@ -209,14 +209,14 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(top: 4),
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.transparent,                // no fill
+                        color: Colors.transparent,
                         border: Border.all(
-                          color: Colors.black,                    // black edges only
+                          color: Colors.black,
                           width: 1.5,
                         ),
-                        borderRadius: BorderRadius.circular(20),   // more circular
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Text(
                         '1',
