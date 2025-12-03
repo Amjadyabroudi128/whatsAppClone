@@ -153,20 +153,21 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
       useRootNavigator: true,
       barrierDismissible: false,
       builder: (dialogCtx) {
-        final size = MediaQuery.of(dialogCtx).size;
+        final size = MediaQuery
+            .of(dialogCtx)
+            .size;
 
         return AlertDialog(
-          insetPadding: .zero,
-          contentPadding: const .all(7),
+          insetPadding: EdgeInsets.zero,
+          contentPadding: const EdgeInsets.all(7),
           content: SizedBox(
             width: size.width,
-            height: size.height, // full height
             child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: .topLeft,
+                    alignment: Alignment.topLeft,
                     child: kIconButton(
                       onPressed: () {
                         FocusScope.of(dialogCtx).unfocus();
@@ -175,12 +176,11 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                       myIcon: icons.close,
                     ),
                   ),
-
                   Expanded(
                     flex: 9,
                     child: Center(
                       child: ClipRRect(
-                        borderRadius: .circular(8),
+                        borderRadius: BorderRadius.circular(8),
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(
                             maxWidth: 420,
@@ -197,54 +197,69 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 12),
-
-                  // CAPTION FIELD – takes remaining height
-            Expanded(
-              child: kTextField(
-                hint: "Add a caption..",
-                onChanged: (v) => caption = v,
-                icon: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        border: .all(
-                          color: Colors.black,
-                          width: 1.5,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                      constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
-                      child: GestureDetector(
-                        onTap: (){
-                          myToast("Image set as view once");
-                        },
-                        child: const Text(
-                          '1',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery
+                          .of(dialogCtx)
+                          .viewInsets
+                          .bottom + 2,
+                    ),
+                    child: SizedBox(
+                      height: 50,
+                      child: kTextField(
+                        hint: "Add a caption..",
+                        maxLines: 1,
+                        onChanged: (v) => caption = v,
+                        icon: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 1.5,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                              constraints: const BoxConstraints(
+                                minWidth: 38,
+                                minHeight: 38,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (caption.isNotEmpty) {
+                                    myToast("set to view once");
+                                  } else {
+                                    myToast("Normal Message");
+                                  }
+                                },
+                                child: const Text(
+                                  '1',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            kIconButton(
+                              myIcon: icons.send,
+                              onPressed: () {
+                                FocusScope.of(dialogCtx).unfocus();
+                                Navigator.of(dialogCtx).pop((true, caption));
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    kIconButton(
-                      myIcon: icons.send,
-                      onPressed: () {
-                        FocusScope.of(dialogCtx).unfocus();
-                        Navigator.of(dialogCtx).pop((true, caption));
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
                 ],
               ),
             ),
