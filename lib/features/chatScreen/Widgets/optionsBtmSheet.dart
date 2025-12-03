@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/TextField.dart';
 import 'package:whatsappclone/components/btmSheet.dart';
 import 'package:whatsappclone/components/dividerContainer.dart';
+import 'package:whatsappclone/components/flutterToast.dart';
 import 'package:whatsappclone/core/MyColors.dart';
 
 import '../../../Firebase/FirebaseAuth.dart';
@@ -218,13 +219,18 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                         shape: BoxShape.circle,
                       ),
                       constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
-                      child: const Text(
-                        '1',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      child: GestureDetector(
+                        onTap: (){
+                          myToast("Image set as view once");
+                        },
+                        child: const Text(
+                          '1',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ),
