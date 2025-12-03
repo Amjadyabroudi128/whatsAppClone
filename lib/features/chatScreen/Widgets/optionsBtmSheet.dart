@@ -205,19 +205,32 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                 hint: "Add a caption..",
                 onChanged: (v) => caption = v,
                 icon: Row(
-                  mainAxisAlignment: .end,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                     const Text(
-                      '1',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      margin: const EdgeInsets.only(top: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,                // no fill
+                        border: Border.all(
+                          color: Colors.black,                    // black edges only
+                          width: 1.5,
+                        ),
+                        borderRadius: BorderRadius.circular(20),   // more circular
+                      ),
+                      child: const Text(
+                        '1',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,                    // match border
+                        ),
                       ),
                     ),
                     kIconButton(
                       myIcon: icons.send,
-                      onPressed: (){
+                      onPressed: () {
                         FocusScope.of(dialogCtx).unfocus();
                         Navigator.of(dialogCtx).pop((true, caption));
                       },
