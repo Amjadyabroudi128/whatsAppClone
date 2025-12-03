@@ -208,23 +208,23 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(top: 4),
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                      padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         color: Colors.transparent,
-                        border: Border.all(
+                        border: .all(
                           color: Colors.black,
                           width: 1.5,
                         ),
-                        borderRadius: BorderRadius.circular(20),
+                        shape: BoxShape.circle,
                       ),
+                      constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
                       child: const Text(
                         '1',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,                    // match border
+                          color: Colors.black,
                         ),
                       ),
                     ),
