@@ -74,6 +74,8 @@ class _MessageStreamState extends State<MessageStream> {
             isReacted: (data["isReacted"] ?? false) as bool,
             reactionEmoji: data["reactionEmoji"],
             reactBy: data["reactBy"],
+            isViewOnce: (data["isViewOnce"] ?? false) as bool,
+            isViewed: (data["isViewed"] ?? false) as bool,
           );
           return message;
         }).toList();
