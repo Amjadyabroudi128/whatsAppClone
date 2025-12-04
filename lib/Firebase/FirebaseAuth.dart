@@ -268,6 +268,37 @@ import '../features/contacts/Model/UserModel.dart';
        debugPrint("❌ Error marking image as viewed: $e");
      }
    }
+   Future<void> deleteViewOnceMessage({
+     required String senderId,
+     required String receiverId,
+     required String messageId,
+   }) async {
+     List<String> ids = [senderId, receiverId];
+     ids.sort();
+     String chatRoomID = ids.join("_");
+
+     try {
+       final docRef = FirebaseFirestore.instance
+           .collection("chat_rooms")
+           .doc(chatRoomID)
+           .collection("messages")
+           .doc(messageId);
+
+       final snap = await docRef.get();
+       if (!snap.exists) return;
+
+       final data = snap.data() as Map<String, dynamic>;
+       final isViewOnce = data['isViewOnce'] ?? false;
+       final isViewed = data['isViewed'] ?? false;
+       if (isViewOnce == true && isViewed == true) {
+         await docRef.delete();
+         debugPrint("✅ View-once message deleted");
+       }
+     } catch (e) {
+       debugPrint("❌ Error deleting view-once message: $e");
+     }
+   }
+
    // Locate and replace your existing sendMessage function
    Future<void> sendMessage(
        String receiverId,
