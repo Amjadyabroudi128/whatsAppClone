@@ -263,9 +263,9 @@ import '../features/contacts/Model/UserModel.dart';
          "viewedAt": FieldValue.serverTimestamp(),
        });
 
-       debugPrint("✅ Image marked as viewed");
+       debugPrint(" Image marked as viewed");
      } catch (e) {
-       debugPrint("❌ Error marking image as viewed: $e");
+       debugPrint(" Error marking image as viewed: $e");
      }
    }
    Future<void> deleteViewOnceMessage({
@@ -292,14 +292,13 @@ import '../features/contacts/Model/UserModel.dart';
        final isViewed = data['isViewed'] ?? false;
        if (isViewOnce == true && isViewed == true) {
          await docRef.delete();
-         debugPrint("✅ View-once message deleted");
+         debugPrint(" View-once message deleted");
        }
      } catch (e) {
-       debugPrint("❌ Error deleting view-once message: $e");
+       debugPrint(" Error deleting view-once message: $e");
      }
    }
 
-   // Locate and replace your existing sendMessage function
    Future<void> sendMessage(
        String receiverId,
        String receiverName,
@@ -355,7 +354,6 @@ import '../features/contacts/Model/UserModel.dart';
 
      await docRef.update({"messageId": docRef.id});
 
-     // Update chat metadata
      await users.collection("chat_rooms").doc(chatRoomID).set({
        "participants": [currentUser, receiverId],
        "lastMessage": message.isNotEmpty
@@ -375,7 +373,6 @@ import '../features/contacts/Model/UserModel.dart';
            : "text",
      }, SetOptions(merge: true));
 
-     // The rest of your notification logic remains the same...
      final receiverDoc = await FirebaseFirestore.instance
          .collection('users')
          .doc(receiverId)
@@ -414,7 +411,7 @@ import '../features/contacts/Model/UserModel.dart';
        String? messageId,
        String? emoji,
        String? senderName,
-       String? currentUserName,  // This is the user who reacted
+       String? currentUserName,  //this user reacted
        ) async {
      List<String> ids = [senderId!, receiverId!];
      ids.sort();
@@ -427,7 +424,7 @@ import '../features/contacts/Model/UserModel.dart';
            .doc(messageId)
            .update({
          "isReacted": true,
-         "reactBy": currentUserName,  // Store current user's name
+         "reactBy": currentUserName,
          "reactionEmoji": emoji,
        });
      } catch (e) {
@@ -659,8 +656,6 @@ import '../features/contacts/Model/UserModel.dart';
      final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
 
      if (receiverId == null) return;
-
-     // Build chatRoomID from both user IDs
      List<String> ids = [currentUserId, receiverId];
      ids.sort();
      String chatRoomID = ids.join("_");

@@ -374,7 +374,6 @@ class _messagesAlignState extends State<messagesAlign> {
                                                     ],
                                                   ),
                                                 ),
-                                              // EXISTING IMAGE DISPLAY
                                               kimageNet(src: msg.image!),
                                               if (msg.text.trim().isNotEmpty)
                                                 const SizedBox(height: 8),

@@ -80,7 +80,6 @@ class _MessageStreamState extends State<MessageStream> {
           return message;
         }).toList();
         var filteredMessages = allMessages.where((msg) {
-          // Filter scheduled messages
           if (msg.isScheduled == false) {
             if (msg.isViewOnce == true && msg.isViewed == true) {
               if (msg.senderId != widget.user!.uid) {
@@ -102,7 +101,6 @@ class _MessageStreamState extends State<MessageStream> {
           return false;
         }).toList();
 
-        // Show empty message if no messages to display
         if (filteredMessages.isEmpty) {
           return Center(
             child: Text(
