@@ -243,7 +243,31 @@ import '../features/contacts/Model/UserModel.dart';
        myToast("Failed to delete chat: $e");
      }
    }
+   Future<void> markImageAsViewed({
+     required String senderId,
+     required String receiverId,
+     required String messageId,
+   }) async {
+     List<String> ids = [senderId, receiverId];
+     ids.sort();
+     String chatRoomID = ids.join("_");
 
+     try {
+       await FirebaseFirestore.instance
+           .collection("chat_rooms")
+           .doc(chatRoomID)
+           .collection("messages")
+           .doc(messageId)
+           .update({
+         "isViewed": true,
+         "viewedAt": FieldValue.serverTimestamp(),
+       });
+
+       debugPrint("✅ Image marked as viewed");
+     } catch (e) {
+       debugPrint("❌ Error marking image as viewed: $e");
+     }
+   }
    // Locate and replace your existing sendMessage function
    Future<void> sendMessage(
        String receiverId,
@@ -252,6 +276,7 @@ import '../features/contacts/Model/UserModel.dart';
        String? image,
        String? file,
        Messages? replyTo,
+       {bool isViewOnce = false}
        ) async {
      final String currentUser = auth.currentUser!.uid;
      final String email = auth.currentUser!.email!;
@@ -274,6 +299,7 @@ import '../features/contacts/Model/UserModel.dart';
        replyTo: replyTo,
        isReacted: false,
        reactBy: null,
+       isViewOnce: isViewOnce
      );
 
      List<String> ids = [currentUser, receiverId];
@@ -290,10 +316,10 @@ import '../features/contacts/Model/UserModel.dart';
        "timestamp": FieldValue.serverTimestamp(),
        "isReacted": false,
        "reactBy": null,
-       // <<<< CRITICAL ADDITIONS FOR CONSISTENCY >>>>
        "isScheduled": false,
        "scheduledTime": time,
-       // <<<< END OF CRITICAL ADDITIONS >>>>
+       "isViewOnce": isViewOnce,
+       "isViewed": false,
      });
 
      await docRef.update({"messageId": docRef.id});

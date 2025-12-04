@@ -147,6 +147,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
 
   Future<(bool, String)?> showImagePreview(String imageUrl) async {
     String caption = '';
+    bool isViewOnce = false;
 
     final result = await showDialog<(bool, String)?>(
       context: context,
@@ -231,11 +232,12 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                               ),
                               child: GestureDetector(
                                 onTap: () {
-                                  if (caption.isNotEmpty) {
-                                    myToast("set to view once");
-                                  } else {
-                                    myToast("Normal Message");
-                                  }
+                                  setState(() {
+                                    isViewOnce = !isViewOnce;
+                                  });
+                                  myToast(isViewOnce
+                                      ? "Set to view once"
+                                      : "Normal message");
                                 },
                                 child: const Text(
                                   '1',
