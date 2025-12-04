@@ -344,13 +344,37 @@ class _messagesAlignState extends State<messagesAlign> {
                                             ],
                                           ),
                                         ),
+
                                       if (msg.image != null && msg.image!.isNotEmpty)
                                         ClipRRect(
                                           borderRadius: BorderRadius.circular(12),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              // msg.image is a Firebase download URL
+                                              if (msg.isViewOnce == true && msg.isViewed == false)
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                                  child: Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.visibility_off,
+                                                        size: 16,
+                                                        color: isMe ? Colors.white70 : Colors.black54,
+                                                      ),
+                                                      const SizedBox(width: 4),
+                                                      Text(
+                                                        "View once",
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: isMe ? Colors.white70 : Colors.black54,
+                                                          fontStyle: FontStyle.italic,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              // EXISTING IMAGE DISPLAY
                                               kimageNet(src: msg.image!),
                                               if (msg.text.trim().isNotEmpty)
                                                 const SizedBox(height: 8),
