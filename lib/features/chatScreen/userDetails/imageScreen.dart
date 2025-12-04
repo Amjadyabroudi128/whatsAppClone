@@ -58,11 +58,72 @@ class _ImagescreenState extends State<Imagescreen> {
   final FirebaseService service = FirebaseService();
   bool _isStarred = false;
   bool _isMe = false;
+  Future<void> _markAsViewedIfNeeded() async {
+    final currentUserId = FirebaseAuth.instance.currentUser?.uid;
+
+    if (currentUserId == null || widget.isMe!) return;
+
+    try {
+      List<String> ids = [widget.senderId!, widget.receiverId!];
+      ids.sort();
+      String chatRoomID = ids.join("_");
+
+      final msgDoc = await FirebaseFirestore.instance
+          .collection("chat_rooms")
+          .doc(chatRoomID)
+          .collection("messages")
+          .doc(widget.messageId)
+          .get();
+
+      if (msgDoc.exists) {
+        final data = msgDoc.data();
+        final isViewOnce = data?['isViewOnce'] ?? false;
+        final isViewed = data?['isViewed'] ?? false;
+
+        if (isViewOnce && !isViewed) {
+          await FirebaseService().markImageAsViewed(
+            senderId: widget.senderId!,
+            receiverId: widget.receiverId!,
+            messageId: widget.messageId!,
+          );
+
+          myToast("This image will disappear after you close it");
+        }
+      }
+    } catch (e) {
+      debugPrint("Error marking image as viewed: $e");
+    }
+  }
+  Future<void> _deleteIfViewOnceAndViewed() async {
+    final currentUserId = FirebaseAuth.instance.currentUser?.uid;
+
+    if (currentUserId == null ||
+        widget.senderId == null ||
+        widget.receiverId == null ||
+        widget.messageId == null) {
+      return;
+    }
+
+    if (currentUserId == widget.senderId) return;
+
+    try {
+      await FirebaseService().deleteViewOnceMessage(
+        senderId: widget.senderId!,
+        receiverId: widget.receiverId!,
+        messageId: widget.messageId!,
+      );
+    } catch (e) {
+      debugPrint("Error deleting view-once message on close: $e");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _isStarred = widget.isStarred ?? false;
     _isMe = widget.isMe ?? false;
+    _markAsViewedIfNeeded();
+    _deleteIfViewOnceAndViewed();
   }
 
   @override
