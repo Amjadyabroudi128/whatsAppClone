@@ -78,7 +78,13 @@ class _MessageStreamState extends State<MessageStream> {
           return message;
         }).toList();
         var filteredMessages = allMessages.where((msg) {
+          // Filter scheduled messages
           if (msg.isScheduled == false) {
+            if (msg.isViewOnce == true && msg.isViewed == true) {
+              if (msg.senderId != widget.user!.uid) {
+                return false;
+              }
+            }
             return true;
           }
           if (msg.isScheduled == true && msg.scheduledFor != null) {
