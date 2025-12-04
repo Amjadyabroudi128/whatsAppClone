@@ -75,6 +75,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                               imageUrl,
                               null,
                               null,
+                              isViewOnce: result.$3,
                             );
                           }
                         }
@@ -102,6 +103,7 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
                               imageUrl,
                               null,
                               null,
+                              isViewOnce: result.$3,
                             );
                           }
                         }
@@ -145,131 +147,135 @@ class _photoBtmSheetState extends State<photoBtmSheet> {
   }
 
 
-  Future<(bool, String)?> showImagePreview(String imageUrl) async {
+  Future<(bool, String, bool)?> showImagePreview(String imageUrl) async {
     String caption = '';
     bool isViewOnce = false;
 
-    final result = await showDialog<(bool, String)?>(
+    final result = await showDialog<(bool, String, bool)?>(
       context: context,
       useRootNavigator: true,
       barrierDismissible: false,
       builder: (dialogCtx) {
-        final size = MediaQuery
-            .of(dialogCtx)
-            .size;
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            final size = MediaQuery.of(dialogCtx).size;
 
-        return AlertDialog(
-          insetPadding: EdgeInsets.zero,
-          contentPadding: const EdgeInsets.all(7),
-          content: SizedBox(
-            width: size.width,
-            child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: kIconButton(
-                      onPressed: () {
-                        FocusScope.of(dialogCtx).unfocus();
-                        Navigator.of(dialogCtx).pop(null);
-                      },
-                      myIcon: icons.close,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 9,
-                    child: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: ConstrainedBox(
-                          constraints: const BoxConstraints(
-                            maxWidth: 420,
-                            maxHeight: 420,
-                          ),
-                          child: AspectRatio(
-                            aspectRatio: 1,
-                            child: Image.network(
-                              imageUrl,
-                              fit: BoxFit.cover,
+            return AlertDialog(
+              insetPadding: EdgeInsets.zero,
+              contentPadding: const EdgeInsets.all(7),
+              content: SizedBox(
+                width: size.width,
+                child: SafeArea(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: kIconButton(
+                          onPressed: () {
+                            FocusScope.of(dialogCtx).unfocus();
+                            Navigator.of(dialogCtx).pop(null);
+                          },
+                          myIcon: icons.close,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 9,
+                        child: Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                maxWidth: 420,
+                                maxHeight: 420,
+                              ),
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: Image.network(
+                                  imageUrl,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: MediaQuery
-                          .of(dialogCtx)
-                          .viewInsets
-                          .bottom + 2,
-                    ),
-                    child: SizedBox(
-                      height: 50,
-                      child: kTextField(
-                        hint: "Add a caption..",
-                        maxLines: 1,
-                        onChanged: (v) => caption = v,
-                        icon: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 1.5,
-                                ),
-                                shape: BoxShape.circle,
-                              ),
-                              constraints: const BoxConstraints(
-                                minWidth: 38,
-                                minHeight: 38,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isViewOnce = !isViewOnce;
-                                  });
-                                  myToast(isViewOnce
-                                      ? "Set to view once"
-                                      : "Normal message");
-                                },
-                                child: const Text(
-                                  '1',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(dialogCtx).viewInsets.bottom + 2,
+                        ),
+                        child: SizedBox(
+                          height: 50,
+                          child: kTextField(
+                            hint: "Add a caption..",
+                            maxLines: 1,
+                            onChanged: (v) => caption = v,
+                            icon: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setDialogState(() {
+                                      isViewOnce = !isViewOnce;
+                                    });
+                                    myToast(isViewOnce
+                                        ? "Set to view once"
+                                        : "Normal message");
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: isViewOnce
+                                          ? MyColors.starColor
+                                          : Colors.transparent,
+                                      border: Border.all(
+                                        color: isViewOnce
+                                            ? MyColors.starColor
+                                            : Colors.black,
+                                        width: 1.5,
+                                      ),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    constraints: const BoxConstraints(
+                                      minWidth: 38,
+                                      minHeight: 38,
+                                    ),
+                                    child: Text(
+                                      '1',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: isViewOnce
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                kIconButton(
+                                  myIcon: icons.send,
+                                  onPressed: () {
+                                    FocusScope.of(dialogCtx).unfocus();
+                                    Navigator.of(dialogCtx).pop((true, caption, isViewOnce));
+                                  },
+                                ),
+                              ],
                             ),
-                            kIconButton(
-                              myIcon: icons.send,
-                              onPressed: () {
-                                FocusScope.of(dialogCtx).unfocus();
-                                Navigator.of(dialogCtx).pop((true, caption));
-                              },
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );
 
     return result;
-  }
-}
+  }}
