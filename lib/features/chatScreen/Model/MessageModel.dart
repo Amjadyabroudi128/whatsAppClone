@@ -22,6 +22,8 @@ class Messages {
   final String? reactBy;
   final String? reactionEmoji;
   final bool? isViewed;
+  final bool? isViewOnce;
+
   Messages({
     required this.text,
     this.senderName,
@@ -43,7 +45,8 @@ class Messages {
     this.isReacted = false,
     this.reactBy,
     this.reactionEmoji,
-    this.isViewed
+    this.isViewed,
+    this.isViewOnce = false,
   });
 
   factory Messages.fromMap(Map<String, dynamic> map) {
@@ -71,6 +74,7 @@ class Messages {
       reactBy: map["reactBy"],
       reactionEmoji: map["reactionEmoji"],
       isViewed: map["isViewed"],
+      isViewOnce: map['isViewOnce'] ?? false,
     );
   }
 
@@ -96,7 +100,8 @@ class Messages {
       "isReacted": isReacted ?? false,
       "reactBy": reactBy,
       "reactionEmoji": reactionEmoji,
-      "isViewed": isViewed ?? false
+      "isViewed": isViewed ?? false,
+      'isViewOnce': isViewOnce ?? false,
     };
   }
 
@@ -124,6 +129,7 @@ class Messages {
     String? reactBy,
     String? reactionEmoji,
     bool? isViewed,
+    bool? isViewOnce,
   }) {
     return Messages(
       senderName: senderName ?? this.senderName,
@@ -146,7 +152,8 @@ class Messages {
       isReacted: isReacted ?? this.isReacted,
       reactBy: reactBy ?? this.reactBy,
       reactionEmoji: reactionEmoji ?? this.reactionEmoji,
-        isViewed: isViewed ?? this.isViewed
+        isViewed: isViewed ?? this.isViewed,
+      isViewOnce: isViewOnce ?? this.isViewOnce,
     );
   }
 
@@ -175,7 +182,8 @@ class Messages {
       isReacted: data["isReacted"] ?? false,
       reactBy: data["reactBy"],
       reactionEmoji: data["reactionEmoji"],
-        isViewed: data["isViewed"] ?? false
+        isViewed: data["isViewed"] ?? false,
+      isViewOnce: data['isViewOnce'] ?? false,
     );
   }
 }
