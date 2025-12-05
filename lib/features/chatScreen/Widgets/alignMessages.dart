@@ -351,30 +351,78 @@ class _messagesAlignState extends State<messagesAlign> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              if (msg.isViewOnce == true && msg.isViewed == false)
+                                              // if (msg.isViewOnce == true && msg.isViewed == false)
+                                              //   Padding(
+                                              //     padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                              //     child: Row(
+                                              //       mainAxisSize: MainAxisSize.min,
+                                              //       children: [
+                                              //         Icon(
+                                              //           Icons.visibility_off,
+                                              //           size: 16,
+                                              //           color: isMe ? Colors.white70 : Colors.black54,
+                                              //         ),
+                                              //         const SizedBox(width: 4),
+                                              //         Text(
+                                              //           "View once",
+                                              //           style: TextStyle(
+                                              //             fontSize: 12,
+                                              //             color: isMe ? Colors.white70 : Colors.black54,
+                                              //             fontStyle: FontStyle.italic,
+                                              //           ),
+                                              //         ),
+                                              //       ],
+                                              //     ),
+                                              //   ),
+                                              if(msg.isViewOnce == true)
                                                 Padding(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
                                                   child: Row(
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: [
-                                                      Icon(
-                                                        Icons.visibility_off,
-                                                        size: 16,
-                                                        color: isMe ? Colors.white70 : Colors.black54,
-                                                      ),
-                                                      const SizedBox(width: 4),
-                                                      Text(
-                                                        "View once",
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: isMe ? Colors.white70 : Colors.black54,
-                                                          fontStyle: FontStyle.italic,
+                                                      Container(
+                                                        padding: const EdgeInsets.all(4),
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.transparent,
+                                                          border: Border.all(
+                                                            color: Colors.black,
+                                                            width: 1.5,
+                                                          ),
+                                                          shape: BoxShape.circle,
+                                                        ),
+                                                        constraints: const BoxConstraints(
+                                                          minWidth: 15,
+                                                          minHeight: 15,
+                                                        ),
+                                                        child: const Text(
+                                                          '1',
+                                                          textAlign: TextAlign.center,
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.bold,
+                                                          ),
                                                         ),
                                                       ),
+                                                      const SizedBox(width: 8),
+                                                      msg.isViewed == true ? const Text(
+                                                        'Opened',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ) : const Text(
+                                                        'Photo',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
-                                                ),
-                                              kimageNet(src: msg.image!),
+                                                )
+                                            else kimageNet(src: msg.image!),
                                               if (msg.text.trim().isNotEmpty)
                                                 const SizedBox(height: 8),
                                               if (msg.text.trim().isNotEmpty)
