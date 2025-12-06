@@ -421,12 +421,12 @@ class _messagesAlignState extends State<messagesAlign> {
                                                 const BoxSpacing(myHeight: 8),
                                               if (msg.text.trim().isNotEmpty)
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 11, bottom: 8),
+                                                  padding: const .only(left: 11, bottom: 8),
                                                   child: Text(
                                                     msg.text,
                                                     softWrap: true,
-                                                    textAlign: TextAlign.right,
-                                                    overflow: TextOverflow.clip,
+                                                    textAlign: .right,
+                                                    overflow: .clip,
                                                     style: Textstyles.textMsg,
                                                   ),
                                                 )
