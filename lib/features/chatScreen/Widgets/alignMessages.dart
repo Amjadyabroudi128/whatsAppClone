@@ -418,7 +418,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                 )
                                             else kimageNet(src: msg.image!),
                                               if (msg.text.trim().isNotEmpty)
-                                                const SizedBox(height: 8),
+                                                const BoxSpacing(myHeight: 8),
                                               if (msg.text.trim().isNotEmpty)
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 11, bottom: 8),
