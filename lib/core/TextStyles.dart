@@ -72,4 +72,9 @@ class Textstyles {
   static TextStyle receiverName = const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600);
+  static TextStyle opened =TextStyle(
+    color: Colors.grey[600],
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
  }
