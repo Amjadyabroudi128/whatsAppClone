@@ -407,11 +407,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                       msg.isViewed == true ? Text(
                                                         'Opened',
                                                         textAlign: TextAlign.center,
-                                                        style: TextStyle(
-                                                          color: Colors.grey[600],
-                                                          fontSize: 14,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
+                                                        style: Textstyles.opened,
                                                       ) : const Text(
                                                         'Photo',
                                                         textAlign: TextAlign.center,
