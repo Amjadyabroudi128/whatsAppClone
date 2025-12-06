@@ -408,13 +408,10 @@ class _messagesAlignState extends State<messagesAlign> {
                                                         'Opened',
                                                         textAlign: TextAlign.center,
                                                         style: Textstyles.opened,
-                                                      ) : const Text(
+                                                      ) :  Text(
                                                         'Photo',
                                                         textAlign: TextAlign.center,
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
+                                                        style: Textstyles.viewOnce,
                                                       )
                                                     ],
                                                   ),
