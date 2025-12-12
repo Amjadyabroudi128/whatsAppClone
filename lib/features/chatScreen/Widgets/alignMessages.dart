@@ -394,13 +394,10 @@ class _messagesAlignState extends State<messagesAlign> {
                                                           minWidth: 15,
                                                           minHeight: 15,
                                                         ),
-                                                        child: const Text(
+                                                        child:  Text(
                                                           '1',
                                                           textAlign: TextAlign.center,
-                                                          style: TextStyle(
-                                                            fontSize: 14,
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
+                                                          style: Textstyles.viewOnce,
                                                         ),
                                                       ),
                                                       const BoxSpacing(mWidth: 8,),
