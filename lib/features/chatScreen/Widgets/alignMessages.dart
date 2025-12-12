@@ -403,7 +403,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                           ),
                                                         ),
                                                       ),
-                                                      const SizedBox(width: 8),
+                                                      const BoxSpacing(mWidth: 8,),
                                                       msg.isViewed == true ? Text(
                                                         'Opened',
                                                         textAlign: .center,
