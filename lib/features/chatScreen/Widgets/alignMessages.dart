@@ -406,11 +406,11 @@ class _messagesAlignState extends State<messagesAlign> {
                                                       const SizedBox(width: 8),
                                                       msg.isViewed == true ? Text(
                                                         'Opened',
-                                                        textAlign: TextAlign.center,
+                                                        textAlign: .center,
                                                         style: Textstyles.opened,
                                                       ) :  Text(
                                                         'Photo',
-                                                        textAlign: TextAlign.center,
+                                                        textAlign: .center,
                                                         style: Textstyles.viewOnce,
                                                       )
                                                     ],
