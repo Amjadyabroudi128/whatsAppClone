@@ -448,7 +448,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         Padding(
                                           padding: const .all(9.0),
                                           child: Align(
-                                            alignment: Alignment.centerRight,
+                                            alignment: .centerRight,
                                             child: Text(
                                               msg.text,
                                               softWrap: true,
