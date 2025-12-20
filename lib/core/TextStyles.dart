@@ -81,4 +81,8 @@ class Textstyles {
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle fileStyle = const TextStyle(
+    fontSize: 16,
+    decoration: TextDecoration.underline,
+  );
  }
