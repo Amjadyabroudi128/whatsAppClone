@@ -438,10 +438,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                             Expanded(
                                               child: Text(
                                                 msg.file!.split('/').last,
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  decoration: TextDecoration.underline,
-                                                ),
+                                                style: Textstyles.fileStyle,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
