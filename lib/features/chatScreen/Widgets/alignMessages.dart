@@ -446,7 +446,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         )
                                       else
                                         Padding(
-                                          padding: const EdgeInsets.all(9.0),
+                                          padding: const .all(9.0),
                                           child: Align(
                                             alignment: Alignment.centerRight,
                                             child: Text(
