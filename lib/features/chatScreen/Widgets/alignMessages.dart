@@ -434,7 +434,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                         Row(
                                           children: [
                                             icons.myFile,
-                                            const SizedBox(width: 8),
+                                            const BoxSpacing(mWidth: 8,),
                                             Expanded(
                                               child: Text(
                                                 msg.file!.split('/').last,
