@@ -452,8 +452,8 @@ class _messagesAlignState extends State<messagesAlign> {
                                             child: Text(
                                               msg.text,
                                               softWrap: true,
-                                              textAlign: TextAlign.right,
-                                              overflow: TextOverflow.clip,
+                                              textAlign: .right,
+                                              overflow: .clip,
                                               style: Textstyles.textMsg,
                                             ),
                                           ),
@@ -487,7 +487,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                 const DividerContainer(),
                                                 const Text("Reactions"),
                                                 Padding(
-                                                  padding: const EdgeInsets.all(8.0),
+                                                  padding: const .all(8.0),
                                                   child: FutureBuilder<DocumentSnapshot>(
                                                     future: userC
                                                         .doc(widget.user!.uid)
