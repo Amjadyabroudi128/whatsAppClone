@@ -78,12 +78,11 @@ class _messagesAlignState extends State<messagesAlign> {
           if (timestamp is Timestamp) {
             dateTime = timestamp.toDate();
           } else if (timestamp is DateTime) {
-            dateTime = timestamp;
           } else {
             dateTime = DateTime.now();
           }
 
-          String formattedTime = DateFormat.Hm().format(dateTime!);
+          String formattedTime = DateFormat.Hm().format(dateTime);
           String today = DateFormat('dd/MM/yyyy').format(dateTime);
           bool showDate = false;
           if (index == 0) {
