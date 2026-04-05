@@ -116,7 +116,7 @@ class _messagesAlignState extends State<messagesAlign> {
                       "Replied to themselves",
                       style: TextStyle(
                         fontSize: 12,
-                        fontStyle: FontStyle.italic,
+                        fontStyle: .italic,
                         color: Colors.grey,
                       ),
                     ),
