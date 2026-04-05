@@ -108,17 +108,13 @@ class _messagesAlignState extends State<messagesAlign> {
                   style: TextStyle(color: widget.textColor),
                 ),
               if (isReplyingToSelf)
-                const Padding(
-                  padding: EdgeInsets.only(right: 7),
+                 Padding(
+                  padding: const EdgeInsets.only(right: 7),
                   child: Align(
                     alignment: AlignmentGeometry.centerRight,
                     child: Text(
                       "Replied to themselves",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontStyle: .italic,
-                        color: Colors.grey,
-                      ),
+                      style: Textstyles.replied,
                     ),
                   ),
                 ),
