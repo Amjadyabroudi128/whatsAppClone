@@ -85,4 +85,9 @@ class Textstyles {
     fontSize: 16,
     decoration: TextDecoration.underline,
   );
+  static TextStyle replied = const TextStyle(
+    fontSize: 12,
+    fontStyle: .italic,
+    color: Colors.grey,
+  );
  }
