@@ -73,7 +73,7 @@ class _messagesAlignState extends State<messagesAlign> {
           final msg = widget.messages[index];
           bool isMe = msg.senderId == widget.user!.uid;
           final timestamp = msg.time;
-
+          bool isReplyingToSelf = msg.senderId == msg.replyTo?.senderId;
           DateTime? dateTime;
           if (timestamp is Timestamp) {
             dateTime = timestamp.toDate();
@@ -101,10 +101,26 @@ class _messagesAlignState extends State<messagesAlign> {
           }
           return Column(
             children: [
+
               if (showDate)
                 Text(
                   today,
                   style: TextStyle(color: widget.textColor),
+                ),
+              if (isReplyingToSelf)
+                const Padding(
+                  padding: EdgeInsets.only(right: 7),
+                  child: Align(
+                    alignment: AlignmentGeometry.centerRight,
+                    child: Text(
+                      "Replied to themselves",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
                 ),
               Align(
                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -296,6 +312,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
+
                                       if (msg.replyTo != null)
                                         Container(
                                           width: double.infinity,
@@ -315,6 +332,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
+
                                               Text(
                                                 "${msg.replyTo!.senderEmail == FirebaseAuth.instance.currentUser!.email ? "You" : msg.replyTo!.senderName}",
                                                 style: TextStyle(
@@ -350,29 +368,6 @@ class _messagesAlignState extends State<messagesAlign> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              // if (msg.isViewOnce == true && msg.isViewed == false)
-                                              //   Padding(
-                                              //     padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                                              //     child: Row(
-                                              //       mainAxisSize: MainAxisSize.min,
-                                              //       children: [
-                                              //         Icon(
-                                              //           Icons.visibility_off,
-                                              //           size: 16,
-                                              //           color: isMe ? Colors.white70 : Colors.black54,
-                                              //         ),
-                                              //         const SizedBox(width: 4),
-                                              //         Text(
-                                              //           "View once",
-                                              //           style: TextStyle(
-                                              //             fontSize: 12,
-                                              //             color: isMe ? Colors.white70 : Colors.black54,
-                                              //             fontStyle: FontStyle.italic,
-                                              //           ),
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                              //   ),
                                               if(msg.isViewOnce == true)
                                                 Padding(
                                                   padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
