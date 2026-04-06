@@ -109,7 +109,7 @@ class _messagesAlignState extends State<messagesAlign> {
                 ),
               if (isReplyingToSelf)
                  Padding(
-                  padding: const EdgeInsets.only(right: 7),
+                  padding: const .only(right: 7),
                   child: Align(
                     alignment: AlignmentGeometry.centerRight,
                     child: Text(
