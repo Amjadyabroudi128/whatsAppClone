@@ -119,7 +119,7 @@ class _SignInscreenState extends State<SignInscreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 1, top: 1),
+                      padding: const .only(right: 1, top: 1),
                       child: kTextButton(
                         onPressed: () {
                           Navigator.of(context).pushNamed("passReset");
