@@ -68,7 +68,7 @@ class Textstyles {
     );
   }
   static TextStyle unread =  TextStyle(color: MyColors.online, fontSize: 16);
-  static TextStyle favourite = const TextStyle(color: Colors.grey, fontSize: 15);
+  static TextStyle favourite = TextStyle(color: MyColors.familyText, fontSize: 15);
   static TextStyle receiverName = const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600);
@@ -85,9 +85,9 @@ class Textstyles {
     fontSize: 16,
     decoration: TextDecoration.underline,
   );
-  static TextStyle replied = const TextStyle(
+  static TextStyle replied = TextStyle(
     fontSize: 12,
     fontStyle: .italic,
-    color: Colors.grey,
+    color: MyColors.familyText,
   );
  }
