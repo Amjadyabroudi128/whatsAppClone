@@ -312,11 +312,11 @@ class _messagesAlignState extends State<messagesAlign> {
                                       if (msg.replyTo != null)
                                         Container(
                                           width: double.infinity,
-                                          padding: const EdgeInsets.all(8),
-                                          margin: const EdgeInsets.only(bottom: 4),
+                                          padding: const .all(8),
+                                          margin: const .only(bottom: 4),
                                           decoration: BoxDecoration(
                                             color: isMe ? MyColors.reply : MyColors.message,
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius: .circular(8),
                                             border: Border(
                                               left: BorderSide(
                                                 color: isMe ? MyColors.myBorder : MyColors.otherBorder,
