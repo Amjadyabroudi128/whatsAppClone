@@ -248,10 +248,10 @@ class _messagesAlignState extends State<messagesAlign> {
                   },
                   child: Dismissible(
                     direction: isMe
-                        ? DismissDirection.endToStart
-                        : DismissDirection.startToEnd,
+                        ? .endToStart
+                        : .startToEnd,
                     background: Container(
-                      alignment: isMe ? Alignment.centerLeft : Alignment.centerRight,
+                      alignment: isMe ? .centerLeft : .centerRight,
                       child: icons.reply,
                     ),
                     confirmDismiss: (direction) async {
