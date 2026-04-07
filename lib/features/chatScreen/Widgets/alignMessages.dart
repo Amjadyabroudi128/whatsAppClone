@@ -274,7 +274,7 @@ class _messagesAlignState extends State<messagesAlign> {
                             child: Checkbox(
                               activeColor: MyColors.starColor,
                               side: BorderSide(color: MyColors.labelClr),
-                              visualDensity: VisualDensity.compact,
+                              visualDensity: .compact,
                               checkColor: MyColors.FG,
                               shape: const CircleBorder(),
                               value: widget.selectedMessages.contains(msg.messageId),
@@ -302,7 +302,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                 child: Container(
                                   margin: containermargin,
                                   decoration: containerDecoration(
-                                    color: isMe ? MyColors.myMessage : Colors.grey,
+                                    color: isMe ? MyColors.myMessage : MyColors.familyText,
                                     borderRadius: MyTheme.circularContainer,
                                   ),
                                   child: Column(
