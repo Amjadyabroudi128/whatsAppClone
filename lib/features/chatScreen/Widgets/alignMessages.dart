@@ -345,7 +345,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                     Text("Photo", style: Textstyles.photo),
                                                     const Spacer(),
                                                     ClipRRect(
-                                                      borderRadius: BorderRadius.circular(8),
+                                                      borderRadius: .circular(8),
                                                       child: Image.network(msg.replyTo!.image!, height: 60),
                                                     ),
                                                   ],
@@ -360,21 +360,21 @@ class _messagesAlignState extends State<messagesAlign> {
 
                                       if (msg.image != null && msg.image!.isNotEmpty)
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(12),
+                                          borderRadius: .circular(12),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               if(msg.isViewOnce == true)
                                                 Padding(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
+                                                  padding: const .symmetric(horizontal: 8.0, vertical: 6.0),
                                                   child: Row(
-                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisSize: .min,
                                                     children: [
                                                       Container(
-                                                        padding: const EdgeInsets.all(4),
+                                                        padding: const .all(4),
                                                         decoration: BoxDecoration(
                                                           color: Colors.transparent,
-                                                          border: Border.all(
+                                                          border: .all(
                                                             color: Colors.black,
                                                             width: 1.5,
                                                           ),
@@ -386,7 +386,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                                         ),
                                                         child:  Text(
                                                           '1',
-                                                          textAlign: TextAlign.center,
+                                                          textAlign: .center,
                                                           style: Textstyles.viewOnce,
                                                         ),
                                                       ),
