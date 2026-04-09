@@ -36,6 +36,8 @@ In this read me I will show you some screenshots of this app and other things as
 
 if user has not signed in for a long time, show "Offline" 
 
+if user replies to their own message a "replied to themselves will appear"
+
 4. ### :wrench: Settings screen
 
 <img width="222" height="673" alt="image" src="https://github.com/user-attachments/assets/ad70c75e-d27f-4f9b-a418-02042da25d8b" />
