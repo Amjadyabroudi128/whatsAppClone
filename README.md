@@ -38,6 +38,10 @@ if user has not signed in for a long time, show "Offline"
 
 if user replies to their own message a "replied to themselves will appear"
 
+
+<img width="222" height="159" alt="image" src="https://github.com/user-attachments/assets/30e48422-b194-45ed-be7e-f4e2437b9736" />
+
+
 4. ### :wrench: Settings screen
 
 <img width="222" height="673" alt="image" src="https://github.com/user-attachments/assets/ad70c75e-d27f-4f9b-a418-02042da25d8b" />
