@@ -82,7 +82,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           },
                           label: const Text("Account"),
                           trailing: icons.arrowForward(context),
-                          leading: const Icon(Icons.vpn_key_rounded)
+                          leading: icons.key
                         ),
                         const divider(),
                         const signOut(),
