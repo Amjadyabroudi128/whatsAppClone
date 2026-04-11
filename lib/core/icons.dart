@@ -161,4 +161,5 @@ class icons {
   }
   static Icon onlineStatus =  Icon(Icons.check_circle,color: MyColors.online, size: 25,);
   static Icon reaction = const Icon(Icons.face_2);
+  static Icon key = const Icon(Icons.vpn_key_rounded);
 }
