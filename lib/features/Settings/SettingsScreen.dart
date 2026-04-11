@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -74,10 +75,20 @@ class _SettingScreenState extends State<SettingScreen> {
                   kCard(
                     child: Column(
                       children: [
+                        Options(
+                          context: context,
+                          onTap: (){
+
+                          },
+                          label: const Text("Account"),
+                          trailing: icons.arrowForward(context),
+                          leading: const Icon(Icons.vpn_key_rounded)
+                        ),
+                        const divider(),
                         const signOut(),
                         const divider(),
                         const deleteAccount(),
-                        const divider(),
+
                         ChangeEmail(passwordController: passwordController,
                             email: email,
                             emailController: emailController),
