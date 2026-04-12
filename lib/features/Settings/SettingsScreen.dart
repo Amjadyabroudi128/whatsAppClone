@@ -82,7 +82,10 @@ class _SettingScreenState extends State<SettingScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const AccountScreen()
+                                  builder: (_) => AccountScreen(
+                                      passwordController: passwordController,
+                                      email: email,
+                                      emailController: emailController)
                               ),
                             );
                           },
@@ -94,7 +97,6 @@ class _SettingScreenState extends State<SettingScreen> {
                         const signOut(),
                         const divider(),
                         const deleteAccount(),
-
                         ChangeEmail(passwordController: passwordController,
                             email: email,
                             emailController: emailController),
