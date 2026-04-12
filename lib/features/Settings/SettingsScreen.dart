@@ -7,6 +7,7 @@ import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
+import 'package:whatsappclone/features/Settings/Widget/accountFunctions/accountScreen.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/changeEmail.dart';
 import 'package:whatsappclone/features/Settings/Widget/issueReport/issueReport.dart';
 import '../../Firebase/FirebaseAuth.dart';
@@ -78,7 +79,12 @@ class _SettingScreenState extends State<SettingScreen> {
                         Options(
                           context: context,
                           onTap: (){
-
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const AccountScreen()
+                              ),
+                            );
                           },
                           label: const Text("Account"),
                           trailing: icons.arrowForward(context),
