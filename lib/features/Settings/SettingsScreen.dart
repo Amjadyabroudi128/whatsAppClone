@@ -96,11 +96,6 @@ class _SettingScreenState extends State<SettingScreen> {
                         const divider(),
                         const signOut(),
                         const divider(),
-                        const deleteAccount(),
-                        ChangeEmail(passwordController: passwordController,
-                            email: email,
-                            emailController: emailController),
-                        const divider(),
                         Options(
                           context: context,
                           label: const Text("Report an issue"),
