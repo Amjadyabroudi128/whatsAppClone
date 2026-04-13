@@ -20,7 +20,7 @@ class AccountScreen extends StatelessWidget {
           elevation: 0,
         ),
       body:  SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        padding: const .symmetric(horizontal: 16, vertical: 20),
         child: Column(
           children: [
             const BoxSpacing(myHeight: 16),
