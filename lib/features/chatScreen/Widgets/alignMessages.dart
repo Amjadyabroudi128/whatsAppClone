@@ -449,7 +449,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                           ),
                                         ),
                                       Row(
-                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisSize: .min,
                                         children: [
                                           if (msg.isEdited == true)
                                             Text("Edited", style: Textstyles.edited),
@@ -586,7 +586,7 @@ class _messagesAlignState extends State<messagesAlign> {
                                 position: position,
                                 items: [
                                   PopupMenuItem(
-                                    padding: EdgeInsets.zero,
+                                    padding: .zero,
                                     child: ReactionCard(
                                       onReactionTap: (emoji) {
                                         service.addReaction(
