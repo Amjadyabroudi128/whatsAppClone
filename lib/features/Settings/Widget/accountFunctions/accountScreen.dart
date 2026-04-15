@@ -16,7 +16,6 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Account"),
-          centerTitle: true,
           elevation: 0,
         ),
       body:  SingleChildScrollView(
