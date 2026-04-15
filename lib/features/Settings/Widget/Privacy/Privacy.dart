@@ -20,7 +20,6 @@ class _ActiveStatusState extends State<PrivacyScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Privacy"),
-        centerTitle: true,
         elevation: 0,
       ),
       body: SingleChildScrollView(
