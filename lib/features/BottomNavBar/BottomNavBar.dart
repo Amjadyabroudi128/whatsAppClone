@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/features/BottomNavBar/unreadCount.dart';
 import 'package:whatsappclone/features/contacts/contacts.dart';
 import 'package:whatsappclone/features/recentChats/recentChat.dart';
 
@@ -65,26 +66,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
                     children: [
                       icons.chats,
                       if (unreadCount > 0)
-                        Positioned(
-                          right: -12,
-                          top: -15,
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                            constraints: const BoxConstraints(minWidth: 23, minHeight: 25),
-                            child: Text(
-                              unreadCount.toString(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
+                        unread(unreadCount: unreadCount),
                     ],
                   ),
                   label: 'Chats',
