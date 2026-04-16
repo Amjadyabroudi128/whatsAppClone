@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/MyColors.dart';
 import 'package:whatsappclone/core/TextStyles.dart';
 
 class unread extends StatelessWidget {
@@ -16,8 +17,8 @@ class unread extends StatelessWidget {
       top: -15,
       child: Container(
         padding: const .all(4),
-        decoration: const BoxDecoration(
-          color: Colors.green,
+        decoration:  BoxDecoration(
+          color: MyColors.TC,
           shape: .circle,
         ),
         constraints: const BoxConstraints(minWidth: 23, minHeight: 25),
