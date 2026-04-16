@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 
 class unread extends StatelessWidget {
   const unread({
@@ -22,10 +23,7 @@ class unread extends StatelessWidget {
         constraints: const BoxConstraints(minWidth: 23, minHeight: 25),
         child: Text(
           unreadCount.toString(),
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
+          style: Textstyles.unreadCount,
           textAlign: .center,
         ),
       ),
