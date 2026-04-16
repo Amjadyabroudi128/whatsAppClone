@@ -14,10 +14,10 @@ class unread extends StatelessWidget {
       right: -12,
       top: -15,
       child: Container(
-        padding: const EdgeInsets.all(4),
+        padding: const .all(4),
         decoration: const BoxDecoration(
           color: Colors.green,
-          shape: BoxShape.circle,
+          shape: .circle,
         ),
         constraints: const BoxConstraints(minWidth: 23, minHeight: 25),
         child: Text(
@@ -26,7 +26,7 @@ class unread extends StatelessWidget {
             color: Colors.white,
             fontSize: 16,
           ),
-          textAlign: TextAlign.center,
+          textAlign: .center,
         ),
       ),
     );
