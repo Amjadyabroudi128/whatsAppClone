@@ -62,7 +62,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
                 ),
                 BottomNavigationBarItem(
                   icon: Stack(
-                    clipBehavior: Clip.none,
+                    clipBehavior: .none,
                     children: [
                       icons.chats,
                       if (unreadCount > 0)
