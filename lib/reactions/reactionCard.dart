@@ -13,12 +13,12 @@ class ReactionCard extends StatelessWidget {
       child: kCard(
         elevation: 3,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: .circular(12),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+          padding: const .symmetric(vertical: 4, horizontal: 6),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: reactionList.entries.map((entry) {
               return GestureDetector(
                 onTap: () {
@@ -26,9 +26,9 @@ class ReactionCard extends StatelessWidget {
                   onReactionTap?.call(entry.value);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  padding: const .symmetric(horizontal: 4),
                   child: Container(
-                    padding: const EdgeInsets.all(6),
+                    padding: const .all(6),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
