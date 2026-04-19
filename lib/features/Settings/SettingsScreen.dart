@@ -8,16 +8,13 @@ import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/components/padding.dart';
 import 'package:whatsappclone/components/SizedBox.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/accountScreen.dart';
-import 'package:whatsappclone/features/Settings/Widget/accountFunctions/changeEmail.dart';
 import 'package:whatsappclone/features/Settings/Widget/issueReport/issueReport.dart';
 import '../../Firebase/FirebaseAuth.dart';
 import '../../Firebase/FirebaseCollections.dart';
 import '../../core/icons.dart';
 import 'Widget/Privacy/Privacy.dart';
-import 'Widget/accountFunctions/deleteAccount.dart';
 import '../../components/dividerWidget.dart';
 import 'Widget/ProfileCard/nameCard.dart';
-import 'Widget/accountFunctions/signout.dart';
 import 'Widget/favouriteCard/favouriteOptions.dart';
 import 'Widget/themeCard/themeCard.dart';
 class SettingScreen extends StatefulWidget {
