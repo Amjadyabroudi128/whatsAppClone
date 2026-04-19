@@ -94,8 +94,6 @@ class _SettingScreenState extends State<SettingScreen> {
                           leading: icons.key
                         ),
                         const divider(),
-                        const signOut(),
-                        const divider(),
                         Options(
                           context: context,
                           label: const Text("Report an issue"),
