@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/components/dividerWidget.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/features/Settings/Widget/accountFunctions/deleteAccount.dart';
+import 'package:whatsappclone/features/Settings/Widget/accountFunctions/signout.dart';
 
 import '../../../../components/SizedBox.dart';
 import 'changeEmail.dart';
@@ -30,7 +31,9 @@ class AccountScreen extends StatelessWidget {
                   const divider(),
                   ChangeEmail(passwordController: passwordController,
                       email: email,
-                      emailController: emailController)
+                      emailController: emailController),
+                  const divider(),
+                  const signOut(),
                 ],
               ),
             )
