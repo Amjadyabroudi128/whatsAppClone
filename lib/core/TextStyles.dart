@@ -73,7 +73,7 @@ class Textstyles {
       fontSize: 16,
       fontWeight: FontWeight.w600);
   static TextStyle opened = TextStyle(
-    color: Colors.grey[600],
+    color: MyColors.dividerTheme,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
