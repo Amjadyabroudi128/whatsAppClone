@@ -183,8 +183,8 @@ class _ImagescreenState extends State<Imagescreen> {
         data: Theme.of(context).copyWith(
           // For light theme
           bottomAppBarTheme: Theme.of(context).brightness == Brightness.light
-              ? const BottomAppBarThemeData(
-            color: Colors.white,
+              ? BottomAppBarThemeData(
+            color: MyColors.MIcons,
             shadowColor: Colors.grey,
             elevation: 8,
           )
