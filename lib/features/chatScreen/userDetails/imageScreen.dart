@@ -191,7 +191,7 @@ class _ImagescreenState extends State<Imagescreen> {
           // For dark theme
               : BottomAppBarThemeData(
             color: MyColors.darkCard, // Use your dark card color
-            shadowColor: Colors.black,
+            shadowColor: MyColors.bDialog,
             elevation: 8,
           ),
         ),
