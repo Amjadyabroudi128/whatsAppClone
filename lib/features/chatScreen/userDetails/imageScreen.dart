@@ -185,7 +185,7 @@ class _ImagescreenState extends State<Imagescreen> {
           bottomAppBarTheme: Theme.of(context).brightness == Brightness.light
               ? BottomAppBarThemeData(
             color: MyColors.MIcons,
-            shadowColor: Colors.grey,
+            shadowColor: MyColors.familyText,
             elevation: 8,
           )
           // For dark theme
