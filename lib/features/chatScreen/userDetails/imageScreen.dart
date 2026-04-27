@@ -9,6 +9,7 @@ import 'package:whatsappclone/components/iconButton.dart';
 import 'package:whatsappclone/components/kCard.dart';
 import 'package:whatsappclone/components/listTilesOptions.dart';
 import 'package:whatsappclone/core/MyColors.dart';
+import 'package:whatsappclone/core/TextStyles.dart';
 import 'package:whatsappclone/core/icons.dart';
 import 'package:whatsappclone/Firebase/FirebaseAuth.dart';
 import 'package:whatsappclone/features/chatScreen/Model/MessageModel.dart';
@@ -155,7 +156,7 @@ class _ImagescreenState extends State<Imagescreen> {
           children: [
             Text(
               _isMe ? "You" : (widget.senderName ?? ""),
-              style: const TextStyle(fontSize: 19),
+              style: Textstyles.saveBio,
             ),
             Row(
               mainAxisSize: .min,
